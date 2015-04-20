@@ -18,15 +18,18 @@
   "homepage": "https://github.com/sergiodxa/sergiodxa.github.io",
   "devDependencies": {
     "babel-eslint": "^3.0.1",
+    "babelify": "^6.0.2",
     "glob": "^5.0.5",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
+    "gulp-browserify": "^0.5.1",
     "gulp-eslint": "^0.9.0",
     "gulp-less": "^3.0.2",
     "gulp-minify-css": "^1.0.0",
     "gulp-minify-html": "^1.0.2",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uncss": "^1.0.1",
-    "gulp-watch": "^4.2.4"
+    "gulp-watch": "^4.2.4",
+    "igatajs": "^1.0.0"
   }
 }

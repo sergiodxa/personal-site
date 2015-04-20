@@ -1,4 +1,4 @@
-var babel      = require('gulp-babel');
+var browserify = require('gulp-browserify');
 var eslint     = require('gulp-eslint');
 var glob       = require('glob');
 var gulp       = require('gulp');
@@ -44,15 +44,17 @@ gulp.task('lint', function () {
 
 gulp.task('js', ['lint'], function () {
   gulp
-    .src('./src/es6/**/*.js')
+    .src('./src/es6/main.js')
     .pipe(sourcemaps.init())
-    .pipe(babel())
+    .pipe(browserify({
+      transform: ['babelify']
+    }))
     .pipe(sourcemaps.write('../maps/'))
     .pipe(gulp.dest('./assets/js/'))
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./src/html/**/*.html'], ['html']);
+  gulp.watch(['./src/html/**/*.html'], ['html', 'css']);
   gulp.watch(['./src/less/**/*.less'], ['css']);
   gulp.watch(['./src/es6/**/*.js'], ['js']);
 });

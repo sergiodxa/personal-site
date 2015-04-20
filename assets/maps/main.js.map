@@ -1,1 +1,1 @@
-{"version":3,"sources":["main.js"],"names":[],"mappings":";;AAAA,OAAO,CAAC,GAAG,CAAC,MAAM,CAAC,CAAC","file":"main.js","sourcesContent":["console.log('hola');\n"],"sourceRoot":"/source/"}
+{"version":3,"names":[],"mappings":"","sources":["main.js"],"sourcesContent":["import getRepositories from './repositories.js';\n\nwindow.onload = function () {\n  getRepositories();\n};\n"],"file":"main.js","sourceRoot":"/source/"}
