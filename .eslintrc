@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "ecmaFeatures": {
+    "arrowFunctions": true,
+    "blockBindings": true,
+    "defaultParams": true,
+    "destructuring": true,
+    "forOf": true,
+    "modules": true,
+    "objectLiteralComputedProperties": true,
+    "objectLiteralDuplicateProperties": true,
+    "objectLiteralShorthandMethods": true,
+    "objectLiteralShorthandProperties": true,
+    "spread": true,
+    "templateStrings": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "camelcase": [2, {"properties": "always"}],
+    "comma-spacing": [2, {"before": false, "after": true}],
+    "curly": [2, "all"],
+    "eqeqeq": [2, "smart"],
+    "no-var": true,
+    "quotes": [2, "single"],
+    "strict": 0
+  }
+}
