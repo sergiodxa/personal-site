@@ -5,6 +5,7 @@ var gulp       = require('gulp');
 var less       = require('gulp-less');
 var minifyCSS  = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
+var minifyJS   = require('gulp-jsmin');
 var path       = require('path');
 var sourcemaps = require('gulp-sourcemaps');
 var uncss      = require('gulp-uncss');
@@ -49,6 +50,7 @@ gulp.task('js', ['lint'], function () {
     .pipe(browserify({
       transform: ['babelify']
     }))
+    .pipe(minifyJS())
     .pipe(sourcemaps.write('../maps/'))
     .pipe(gulp.dest('./assets/js/'))
 });
