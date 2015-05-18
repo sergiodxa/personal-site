@@ -16,6 +16,7 @@
     "url": "https://github.com/sergiodxa/sergiodxa.github.io/issues"
   },
   "homepage": "https://github.com/sergiodxa/sergiodxa.github.io",
+  "dependencies": {},
   "devDependencies": {
     "babel-eslint": "^3.0.1",
     "babelify": "^6.0.2",
@@ -30,7 +31,6 @@
     "gulp-minify-html": "^1.0.2",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uncss": "^1.0.1",
-    "gulp-watch": "^4.2.4",
-    "igatajs": "^1.0.0"
+    "gulp-watch": "^4.2.4"
   }
 }

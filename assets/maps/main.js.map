@@ -1,1 +1,1 @@
-{"version":3,"names":[],"mappings":"","sources":["main.js"],"sourcesContent":["import getRepositories from './repositories.js';\n\nwindow.onload = function () {\n  getRepositories();\n};\n"],"file":"main.js","sourceRoot":"/source/"}
+{"version":3,"names":[],"mappings":"","sources":["main.js"],"sourcesContent":["window.onload = function () {\n\n};\n"],"file":"main.js","sourceRoot":"/source/"}

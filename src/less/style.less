@@ -27,9 +27,9 @@ a {
 .header {
   background: #111;
   color: #fdfdfd;
+  margin-bottom: .5rem;
   padding-bottom: 1rem;
   padding-top: 1rem;
-  margin-bottom: .5rem;
   text-align: center;
 
   &__title,
@@ -137,8 +137,8 @@ a {
 
   h3 {
     border-bottom: 1px solid #111;
-    margin: 0;
     font-size: 2em;
+    margin: 0;
   }
 
   p {
@@ -148,18 +148,16 @@ a {
   @media (max-width: 900px) { flex-basis: 100%; }
 }
 
-.jobs,
-.repos {
+.jobs {
   display: flex;
   flex-wrap: wrap;
   &__title { flex-basis: 100%; }
 }
 
-.job,
-.repo {
-  flex-basis: 25%;
-  text-align: center;
+.job {
+  flex-basis: 33%;
   padding: 1em 0;
+  text-align: center;
 
   &__title {
     font-size: 1.25em;
@@ -167,8 +165,8 @@ a {
   }
 
   &__screenshot {
-    border: 1px solid #ddd;
     border-radius: 4px;
+    border: 1px solid #ddd;
     padding: 4px;
     img {
       max-width: 100%;
@@ -192,16 +190,8 @@ a {
       color: #fdfdfd;
       text-decoration: none;
     }
-    &:active { box-shadow: inset 0 3px #2a6496; }
+    &:active { box-shadow: 0 3px #2a6496; }
   }
-
-  @media (max-width: 1188px) { flex-basis: 33%; }
-  @media (max-width: 660px) { flex-basis: 50%; }
-  @media (max-width: 500px) { flex-basis: 100%; }
-}
-
-.job {
-  flex-basis: 33%;
   @media (max-width: 1100px) { flex-basis: 50%; }
   @media (max-width: 600px) { flex-basis: 100%; }
 }
