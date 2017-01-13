@@ -1,0 +1,19 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiodxa/sergiodxa.github.io.git"
+  },
+  "keywords": [],
+  "author": "Sergio Daniel Xalambrí <sergio@xalambri.xyz> (http://sergio.xalambri.xyz/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergiodxa/sergiodxa.github.io/issues"
+  },
+  "homepage": "https://github.com/sergiodxa/sergiodxa.github.io#readme"
+}
