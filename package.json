@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "next",
+    "build": "next build && next export",
+    "start": "serve out",
+    "predeploy": "npm run build",
+    "deploy": "now deploy out"
   },
   "repository": {
     "type": "git",
@@ -15,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/sergiodxa/sergiodxa.github.io/issues"
   },
-  "homepage": "https://github.com/sergiodxa/sergiodxa.github.io#readme"
+  "homepage": "https://github.com/sergiodxa/sergiodxa.github.io#readme",
+  "dependencies": {
+    "next": "beta",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
 }
