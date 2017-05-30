@@ -1,26 +1,28 @@
 {
-  "name": "portfolio",
+  "name": "personal-site",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sergio Xalambrí personal website",
   "main": "index.js",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export",
-    "start": "serve out",
-    "predeploy": "npm run build",
-    "deploy": "now deploy out"
+    "build": "next build",
+    "preexport": "npm run build",
+    "export": "next export -o portfolio",
+    "predeploy": "npm run export",
+    "deploy": "now deploy portfolio"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sergiodxa/sergiodxa.github.io.git"
+    "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
   "keywords": [],
-  "author": "Sergio Daniel Xalambrí <sergio@xalambri.xyz> (http://sergio.xalambri.xyz/)",
+  "author": "Sergio Daniel Xalambrí <sergiodxa@gmail.com> (http://sergio.xalambri.xyz/)",
   "license": "MIT",
+  "private": true,
   "bugs": {
-    "url": "https://github.com/sergiodxa/sergiodxa.github.io/issues"
+    "url": "https://github.com/sergiodxa/personal-site/issues"
   },
-  "homepage": "https://github.com/sergiodxa/sergiodxa.github.io#readme",
+  "homepage": "https://sergio.xalambri.xyz",
   "dependencies": {
     "next": "beta",
     "react": "^15.5.4",
