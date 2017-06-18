@@ -1,6 +1,15 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-export default () => (
+const URL = {
+  essays: 'https://medium.com/@sergiodxa/',
+  opinion: 'https://twitter.com/@sergiodxa',
+  code: 'https://github.com/sergiodxa',
+  slides: 'https://slides.com/sergiodxa',
+  cv: 'https://co.linkedin.com/in/sergiodxa',
+  ama: 'https://github.com/sergiodxa/personal-site/issues/new',
+};
+
+export default () =>
   <main>
     <Head>
       <title>Sergio Xalambrí</title>
@@ -12,7 +21,7 @@ export default () => (
       <meta name="language" content="en" />
       <meta name="author" content="Sergio Xalambrí, sergio@xalambri.xyz" />
       <meta name="subject" content="Personal website" />
-      <meta name="pagename" content="Sergio Xalambrí - JavaScript Developer" />
+      <meta name="pagename" content="Sergio Xalambrí" />
       <meta name="HandheldFriendly" content="True" />
       <meta name="MobileOptimized" content="320" />
       <meta name="date" content="Sep. 29, 2016" />
@@ -23,7 +32,7 @@ export default () => (
       <meta name="twitter:card" value="summary" />
       <meta name="twitter:site" value="@sergiodxa" />
       <meta name="twitter:creator" value="@sergiodxa" />
-      <meta name="twitter:url" value="http://sergio.xalambri.xyz/" />
+      <meta name="twitter:url" value="https://sergio.xalambri.xyz/" />
       <meta name="twitter:title" value="Sergio Xalambrí" />
       <meta name="twitter:description" value="JavaScript Developer" />
       <meta name="twitter:image" value="" />
@@ -33,68 +42,41 @@ export default () => (
       <meta property="og:title" content="Sergio Xalambrí" />
       <meta property="og:description" content="JavaScript Developer" />
       <meta property="og:image" content="" />
-      <meta property="og:url" content="http://sergio.xalambri.xyz/" />
+      <meta property="og:url" content="https://sergio.xalambri.xyz/" />
       <meta property="og:site_name" content="Sergio Xalambrí" />
       <meta property="og:locale" content="en" />
     </Head>
+
     <header>
       <h1>Sergio Xalambrí</h1>
       <h2>
         JavaScript Developer at
         {' '}
-        <a
-          target="_blank"
-          rel="external"
-          title="Platzi: Cursos online profesionales de tecnología"
-          href="https://platzi.com"
-        >
+        <a title="Platzi" href="https://platzi.com">
           Platzi
         </a>
       </h2>
     </header>
 
     <nav>
-      <a
-        target="_blank"
-        rel="author"
-        href="https://medium.com/@sergiodxa/"
-        title="Essays and Articles"
-      >
-        Essays
-      </a>
-      <a target="_blank" rel="author" href="https://twitter.com/@sergiodxa" title="Opinion">
-        Opinion
-      </a>
-      <a target="_blank" rel="author" href="https://github.com/sergiodxa" title="Code repositories">
-        Code
-      </a>
-      <a target="_blank" rel="author" href="https://platzi.com/@sergiodxa" title="Education">
-        Education
-      </a>
-      <a target="_blank" rel="author" href="https://slides.com/sergiodxa" title="Slides">Slides</a>
-      <a
-        target="_blank"
-        rel="author"
-        href="https://co.linkedin.com/in/sergiodxa"
-        title="Curriculum Vitae"
-      >
-        CV
-      </a>
+      <a href={URL.essays} title="Essays and Articles">Essays</a>
+      <a href={URL.opinion} title="Opinion">Opinion</a>
+      <a href={URL.code} title="Code repositories">Code</a>
     </nav>
 
     <style jsx global>{`
       body {
         font-family: Arial, sans-serif;
         margin: 0;
+        font-size: 18px;
       }
     `}</style>
 
     <style jsx>{`
       a {
-        color: #97c93e;
+        color: black;
         text-decoration: none;
       }
-
       header {
         display: flex;
         flex-direction: column;
@@ -106,20 +88,12 @@ export default () => (
         right: 0;
         transform: translateY(-50%);
       }
-      h1,
-      h2 {
+      h1, h2 {
+        font-size: 1em;
         font-weight: normal;
         padding: .25em 0;
-      }
-      h1 {
-        font-size: 1.25em;
         margin: 0;
       }
-      h2 {
-        font-size: 1.125em;
-        margin: 0;
-      }
-
       nav {
         display: flex;
         flex-wrap: wrap;
@@ -133,11 +107,10 @@ export default () => (
         text-align: center;
       }
       nav a {
-        padding: .25em .75em;
+        padding: .25em .5em;
       }
       nav a:hover {
         text-decoration: underline;
       }
     `}</style>
-  </main>
-)
+  </main>;
