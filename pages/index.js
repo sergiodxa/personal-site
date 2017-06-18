@@ -4,9 +4,6 @@ const URL = {
   essays: 'https://medium.com/@sergiodxa/',
   opinion: 'https://twitter.com/@sergiodxa',
   code: 'https://github.com/sergiodxa',
-  slides: 'https://slides.com/sergiodxa',
-  cv: 'https://co.linkedin.com/in/sergiodxa',
-  ama: 'https://github.com/sergiodxa/personal-site/issues/new',
 };
 
 export default () =>
