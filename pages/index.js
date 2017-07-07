@@ -14,7 +14,7 @@ export default () =>
         name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
       />
-      <meta name="description" content="JavaScript Developer" />
+      <meta name="description" content="Support Engineer" />
       <meta name="language" content="en" />
       <meta name="author" content="Sergio Xalambrí, sergio@xalambri.xyz" />
       <meta name="subject" content="Personal website" />
@@ -31,13 +31,13 @@ export default () =>
       <meta name="twitter:creator" value="@sergiodxa" />
       <meta name="twitter:url" value="https://sergio.xalambri.xyz/" />
       <meta name="twitter:title" value="Sergio Xalambrí" />
-      <meta name="twitter:description" value="JavaScript Developer" />
+      <meta name="twitter:description" value="Support Engineer" />
       <meta name="twitter:image" value="" />
       <meta name="twitter:summary" value="Sergio Xalambrí's personal website'" />
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Sergio Xalambrí" />
-      <meta property="og:description" content="JavaScript Developer" />
+      <meta property="og:description" content="Support Engineer" />
       <meta property="og:image" content="" />
       <meta property="og:url" content="https://sergio.xalambri.xyz/" />
       <meta property="og:site_name" content="Sergio Xalambrí" />
@@ -47,10 +47,10 @@ export default () =>
     <header>
       <h1>Sergio Xalambrí</h1>
       <h2>
-        JavaScript Developer at
+        Support Engineer at
         {' '}
-        <a title="Platzi" href="https://platzi.com">
-          Platzi
+        <a title="▲ ZEIT" href="https://zeit.co">
+          ▲ ZEIT
         </a>
       </h2>
     </header>
