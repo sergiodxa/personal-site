@@ -22,6 +22,7 @@ export default () =>
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
       <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+      <meta name="google-site-verification" content="3PfJjCEzV8NouEEvD7xJNMZS3Me4yUjcuDpOIInt-Pw" />
 
       <meta name="twitter:card" value="summary" />
       <meta name="twitter:site" value="@sergiodxa" />
