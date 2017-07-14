@@ -30,13 +30,13 @@ export default () =>
       <meta name="twitter:url" value="https://sergio.xalambri.xyz/" />
       <meta name="twitter:title" value="Sergio Xalambrí" />
       <meta name="twitter:description" value="Lead Support Engineer" />
-      <meta name="twitter:image" value="" />
+      <meta name="twitter:image" value="/static/avatar.jpg" />
       <meta name="twitter:summary" value="Sergio Xalambrí's personal website'" />
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Sergio Xalambrí" />
       <meta property="og:description" content="Lead Support Engineer" />
-      <meta property="og:image" content="" />
+      <meta property="og:image" content="/static/avatar.jpg" />
       <meta property="og:url" content="https://sergio.xalambri.xyz/" />
       <meta property="og:site_name" content="Sergio Xalambrí" />
       <meta property="og:locale" content="en" />
@@ -47,7 +47,7 @@ export default () =>
             "@context": "http://schema.org",
             "@type": "Person",
             "name": "Sergio Xalambrí",
-            "image": "https://pbs.twimg.com/profile_images/799759613243559938/x5fpmbfE_400x400.jpg",
+            "image": "https://sergio.xalambri.xyz/static/avatar.jpg",
             "birthDate": "1992-09-29",
             "email": "sergiodxa@gmail.com",
             "gender": "Male",
