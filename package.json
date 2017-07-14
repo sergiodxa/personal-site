@@ -1,8 +1,6 @@
 {
   "name": "personal-site",
-  "version": "1.0.0",
   "description": "Sergio Xalambrí personal website",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",

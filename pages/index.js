@@ -1,27 +1,24 @@
 import Head from 'next/head';
 
-const URL = {
-  essays: 'https://medium.com/@sergiodxa/',
-  opinion: 'https://twitter.com/@sergiodxa',
-  code: 'https://github.com/sergiodxa',
-};
+const minify = string => string.replace(/\n\s{0,}/g, '').replace(/\:\s/g, '');
 
 export default () =>
   <main>
     <Head>
       <title>Sergio Xalambrí</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
       />
-      <meta name="description" content="Support Engineer" />
+      <meta name="description" content="Lead Support Engineer" />
       <meta name="language" content="en" />
-      <meta name="author" content="Sergio Xalambrí, sergio@xalambri.xyz" />
+      <meta name="author" content="Sergio Xalambrí" />
       <meta name="subject" content="Personal website" />
       <meta name="pagename" content="Sergio Xalambrí" />
       <meta name="HandheldFriendly" content="True" />
       <meta name="MobileOptimized" content="320" />
-      <meta name="date" content="Sep. 29, 2016" />
+      <meta name="robots" content="index, follow" />
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
       <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
@@ -31,24 +28,43 @@ export default () =>
       <meta name="twitter:creator" value="@sergiodxa" />
       <meta name="twitter:url" value="https://sergio.xalambri.xyz/" />
       <meta name="twitter:title" value="Sergio Xalambrí" />
-      <meta name="twitter:description" value="Support Engineer" />
+      <meta name="twitter:description" value="Lead Support Engineer" />
       <meta name="twitter:image" value="" />
       <meta name="twitter:summary" value="Sergio Xalambrí's personal website'" />
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Sergio Xalambrí" />
-      <meta property="og:description" content="Support Engineer" />
+      <meta property="og:description" content="Lead Support Engineer" />
       <meta property="og:image" content="" />
       <meta property="og:url" content="https://sergio.xalambri.xyz/" />
       <meta property="og:site_name" content="Sergio Xalambrí" />
       <meta property="og:locale" content="en" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: minify(`{
+            "@context": "http://schema.org",
+            "@type": "Person",
+            "name": "Sergio Xalambrí",
+            "image": "https://pbs.twimg.com/profile_images/799759613243559938/x5fpmbfE_400x400.jpg",
+            "birthDate": "1992-09-29",
+            "email": "sergiodxa@gmail.com",
+            "gender": "Male",
+            "givenName": "Sergio",
+            "familyName": "Xalambrí",
+            "jobTitle": "Lead Support Engineer",
+            "worksFor": {
+              "name": "ZEIT"
+            }
+          }`)
+        }}
+      />
     </Head>
 
     <header>
       <h1>Sergio Xalambrí</h1>
       <h2>
-        Support Engineer at
-        {' '}
+        Lead Support Engineer at{' '}
         <a title="▲ ZEIT" href="https://zeit.co">
           ▲ ZEIT
         </a>
@@ -56,9 +72,15 @@ export default () =>
     </header>
 
     <nav>
-      <a href={URL.essays} title="Essays and Articles">Essays</a>
-      <a href={URL.opinion} title="Opinion">Opinion</a>
-      <a href={URL.code} title="Code repositories">Code</a>
+      <a href="https://medium.com/@sergiodxa/" title="Essays and Articles">
+        Essays
+      </a>
+      <a href="https://twitter.com/@sergiodxa" title="Opinion">
+        Opinion
+      </a>
+      <a href="https://github.com/sergiodxa" title="Code repositories">
+        Code
+      </a>
     </nav>
 
     <style jsx global>{`
@@ -85,7 +107,8 @@ export default () =>
         right: 0;
         transform: translateY(-50%);
       }
-      h1, h2 {
+      h1,
+      h2 {
         font-size: 1em;
         font-weight: normal;
         padding: .25em 0;
