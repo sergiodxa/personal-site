@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const minify = string => string.replace(/\n\s{0,}/g, '').replace(/\:\s/g, '');
+const minify = string => string.replace(/\n\s{0,}/g, '').replace(/\:\s/g, ':');
 
 export default () =>
   <main>
