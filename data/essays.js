@@ -5,6 +5,11 @@ function createEssay(title, link, date, extra = {}) {
 export default [
   createEssay(
     'Introducing Grial',
+    'https://dev.to/sergiodxa/introducing-grial',
+    '2017-07-28T00:00:00Z'
+  ),
+  createEssay(
+    'Introducing Grial',
     'https://medium.com/@sergiodxa/introducing-grial-js-6c414d6dc947',
     '2017-07-25T00:00:00Z',
     { highlighted: true }
