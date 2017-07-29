@@ -6,6 +6,8 @@ module.exports = {
       new SWPrecacheWebpackPlugin({
         verbose: true,
         staticFileGlobsIgnorePatterns: [/\.next\//],
+        minify: !dev,
+        cacheId: 'sergio.now.sh',
         runtimeCaching: [
           {
             handler: 'networkFirst',
@@ -27,7 +29,8 @@ module.exports = {
 
   exportPathMap() {
     return {
-      '/': { page: '/' }
+      '/': { page: '/' },
+      '/essays': { page: '/essays' }
     }
   }
 }
