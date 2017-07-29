@@ -13,7 +13,7 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
     </time>
 
     <h2 className="title">
-      <a href={link} rel="author" target="_blank" className="link">
+      <a href={link} rel="noopener" target="_blank" className="link">
         {title}
       </a>{' '}
       <Site link={link} isSelf={parseUrl(link).hostname === 'sergio.now.sh'} />
