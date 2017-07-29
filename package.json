@@ -2,12 +2,18 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí personal website",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export -o portfolio",
+    "postexport": "CP .next/service-worker.js portfolio",
+    "alias": "now alias",
+    "clean": "now rm portfolio --safe --yes",
+    "prestart": "npm run export",
+    "start": "serve portfolio",
     "predeploy": "npm run export",
-    "deploy": "now deploy portfolio"
+    "deploy": "now deploy portfolio",
+    "postdeploy": "npm run alias && npm run clean"
   },
   "repository": {
     "type": "git",
@@ -22,8 +28,14 @@
   },
   "homepage": "https://sergio.xalambri.xyz",
   "dependencies": {
+    "module-alias": "^2.0.1",
     "next": "beta",
+    "preact": "^8.2.1",
+    "preact-compat": "^3.16.0",
     "react": "15.6.1",
     "react-dom": "15.6.1"
+  },
+  "devDependencies": {
+    "sw-precache-webpack-plugin": "^0.11.4"
   }
 }

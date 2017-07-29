@@ -1,0 +1,22 @@
+{
+  "dir": "ltr",
+  "lang": "en",
+  "name": "Sergio Xalambrí",
+  "scope": "/",
+  "display": "standalone",
+  "start_url": "https://sergio.now.sh/",
+  "short_name": "Sergiodxa",
+  "theme_color": "#000000",
+  "description": "Lead Support Engineer",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/static/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
