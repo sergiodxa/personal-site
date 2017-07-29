@@ -6,7 +6,7 @@
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export -o portfolio",
-    "postexport": "CP .next/service-worker.js portfolio",
+    "postexport": "cp .next/service-worker.js portfolio",
     "alias": "now alias",
     "clean": "now rm portfolio --safe --yes",
     "prestart": "npm run export",
@@ -20,14 +20,16 @@
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
   "keywords": [],
-  "author": "Sergio Daniel Xalambrí <sergiodxa@gmail.com> (http://sergio.xalambri.xyz/)",
+  "author": "Sergio Daniel Xalambrí <sergiodxa@gmail.com> (https://sergio.now.sh/)",
   "license": "MIT",
   "private": true,
   "bugs": {
     "url": "https://github.com/sergiodxa/personal-site/issues"
   },
-  "homepage": "https://sergio.xalambri.xyz",
+  "homepage": "https://sergio.now.sh",
   "dependencies": {
+    "date-fns": "^1.28.5",
+    "lodash.memoize": "^4.1.2",
     "module-alias": "^2.0.1",
     "next": "beta",
     "preact": "^8.2.1",
@@ -36,6 +38,7 @@
     "react-dom": "15.6.1"
   },
   "devDependencies": {
+    "serve": "^6.0.3",
     "sw-precache-webpack-plugin": "^0.11.4"
   }
 }
