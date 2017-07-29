@@ -16,7 +16,7 @@ const sort = (a, b) => {
   if (timeA < timeB) return 1
   return 0
 }
-const map = essay => <Essay key={essay.title} {...essay} />
+const map = essay => <Essay key={essay.url} {...essay} />
 
 export default withSW(() =>
   <main>
