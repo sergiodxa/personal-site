@@ -7,7 +7,7 @@ export default ({ link, isSelf }) =>
       className="site-url"
       href={format({ hostname: parseUrl(link).hostname, protocol: parseUrl(link).protocol })}
       target="_blank"
-      rel="nofollow"
+      rel="noopener"
     >
       [{isSelf ? 'self' : parseUrl(link).hostname}]
     </a>
