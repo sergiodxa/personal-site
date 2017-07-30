@@ -30,7 +30,6 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
         flex: 1;
         color: black;
         text-decoration: none;
-        padding: 0 .5em;
       }
       .link:hover {
         text-decoration: underline;
@@ -56,10 +55,14 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
         font-size: 1em;
         font-weight: 400;
         margin: 0;
+        padding: 0 .5em;
       }
 
-      .essay.is-highlighted .link {
+      .essay.is-highlighted .title {
         background-color: black;
+      }
+
+      .essay.is-highlighted .title :global(*) {
         color: white;
       }
 

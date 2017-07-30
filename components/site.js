@@ -13,7 +13,7 @@ export default ({ link, isSelf }) =>
     </a>
     <style jsx>{`
       .site {
-        display: none;
+        font-size: 0.7em;
       }
 
       .site-url {
@@ -24,12 +24,6 @@ export default ({ link, isSelf }) =>
 
       .site-url:hover {
         text-decoration: underline;
-      }
-
-      @media (min-width: 720px) {
-        .site {
-          display: inline;
-        }
       }
     `}</style>
   </small>
