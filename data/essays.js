@@ -338,7 +338,7 @@ export default [
   createEssay(
     'El módulo Flexbox de CSS3',
     'http://www.cristalab.com/tutoriales/el-modulo-flexbox-de-css3-c112091l/',
-    '2013-12-15:00:00:00Z',
+    '2013-12-15T00:00:00Z',
   ),
   createEssay(
     'Javascript orientado a objetos',
