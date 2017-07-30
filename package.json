@@ -33,11 +33,11 @@
     "module-alias": "^2.0.1",
     "next": "beta",
     "preact": "^8.2.1",
-    "preact-compat": "^3.16.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "preact-compat": "^3.16.0"
   },
   "devDependencies": {
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
     "serve": "^6.0.3",
     "sw-precache-webpack-plugin": "^0.11.4"
   }
