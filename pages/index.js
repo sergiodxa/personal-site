@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Header from '../components/header.js'
+import Header from '../components/shared/header.js'
 
 import withSW from '../lib/with-sw.js'
 
@@ -22,14 +22,6 @@ export default withSW(() =>
         AMA
       </a>
     </nav>
-
-    <style jsx global>{`
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        font-size: 18px;
-      }
-    `}</style>
 
     <style jsx>{`
       nav {

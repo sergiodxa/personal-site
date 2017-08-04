@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import Essay from '../components/essay.js'
-import Header from '../components/header.js'
+import Essay from '../components/essays/essay.js'
+import Header from '../components/shared/header.js'
 
 import essays from '../data/essays.js'
 
@@ -33,14 +33,6 @@ export default withSW(() =>
     <section>
       {essays.sort(sort).map(map)}
     </section>
-
-    <style jsx global>{`
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        font-size: 18px;
-      }
-    `}</style>
 
     <style jsx>{`
       main {

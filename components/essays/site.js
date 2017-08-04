@@ -1,5 +1,5 @@
 import { format } from 'url'
-import parseUrl from '../lib/parse-url.js'
+import parseUrl from '../../lib/parse-url.js'
 
 export default ({ link, isSelf }) =>
   <small className="site">

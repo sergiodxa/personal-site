@@ -5,9 +5,11 @@ export default ({ centered }) =>
     {centered &&
       <h2>
         Lead Support Engineer at{' '}
-        <a title="▲ ZEIT" href="https://zeit.co">
-          ▲ ZEIT
-        </a>
+        <strong>
+          <a title="▲ ZEIT" href="https://zeit.co" target="_blank" rel="noopener">
+            ▲ ZEIT
+          </a>
+        </strong>
       </h2>}
 
     <style jsx>{`
@@ -23,10 +25,18 @@ export default ({ centered }) =>
         box-sizing: border-box;
       }
 
+      header:not(.centered) {
+        background: white;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
       h1,
       h2 {
         font-size: 1em;
-        font-weight: normal;
+        font-weight: 200;
         padding: .25em 0;
         margin: 0;
       }
@@ -40,6 +50,10 @@ export default ({ centered }) =>
         right: 0;
         transform: translateY(-50%);
         padding: 0;
+      }
+
+      .centered h1 {
+        font-size: 2em;
       }
 
       @media (max-width: 720px) {

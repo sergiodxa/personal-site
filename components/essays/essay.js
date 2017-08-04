@@ -2,7 +2,7 @@ import format from 'date-fns/format'
 
 import Site from './site.js'
 
-import parseUrl from '../lib/parse-url.js'
+import parseUrl from '../../lib/parse-url.js'
 
 export default ({ title, link, date, highlighted = false, deprecated = false } = {}) =>
   <article
@@ -55,7 +55,7 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
         font-size: 1em;
         font-weight: 400;
         margin: 0;
-        padding: 0 .5em;
+        padding: .5em .5em;
       }
 
       .essay.is-highlighted .title {
@@ -68,12 +68,14 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
 
       .essay.is-deprecated {
         opacity: .5;
+        z-index: 1;
       }
 
       @media (min-width: 720px) {
         .essay {
+          align-items: center;
           flex-direction: row;
-          margin: .5em 0;
+          margin: 1em 0;
         }
         .date {
           font-size: 1em;
