@@ -6,6 +6,7 @@ import Header from '../components/shared/header.js'
 
 import essays from '../data/essays.js'
 
+import withGA from '../lib/with-ga.js'
 import withSW from '../lib/with-sw.js'
 
 const sort = (a, b) => {
@@ -18,41 +19,43 @@ const sort = (a, b) => {
 }
 const map = essay => <Essay key={essay.url} {...essay} />
 
-export default withSW(() =>
-  <main>
-    <Head>
-      <title>Essays and Articles by Sergio Xalambrí</title>
-    </Head>
+export default withGA(
+  withSW(() =>
+    <main>
+      <Head>
+        <title>Essays and Articles by Sergio Xalambrí</title>
+      </Head>
 
-    <Link href="/" prefetch>
-      <a title="Sergio Xalambrí">
-        <Header />
-      </a>
-    </Link>
+      <Link href="/" prefetch>
+        <a title="Sergio Xalambrí">
+          <Header />
+        </a>
+      </Link>
 
-    <section>
-      {essays.sort(sort).map(map)}
-    </section>
+      <section>
+        {essays.sort(sort).map(map)}
+      </section>
 
-    <style jsx>{`
-      main {
-        margin-bottom: 2em;
-      }
-
-      a {
-        color: black;
-        text-decoration: none;
-      }
-
-      section {
-        padding: .5em;
-      }
-
-      @media (min-width: 720px) {
-        section {
-          padding: 1em;
+      <style jsx>{`
+        main {
+          margin-bottom: 2em;
         }
-      }
-    `}</style>
-  </main>
+
+        a {
+          color: black;
+          text-decoration: none;
+        }
+
+        section {
+          padding: .5em;
+        }
+
+        @media (min-width: 720px) {
+          section {
+            padding: 1em;
+          }
+        }
+      `}</style>
+    </main>
+  )
 )

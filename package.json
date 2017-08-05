@@ -33,7 +33,8 @@
     "module-alias": "^2.0.1",
     "next": "beta",
     "preact": "^8.2.1",
-    "preact-compat": "^3.16.0"
+    "preact-compat": "^3.16.0",
+    "react-ga": "^2.2.0"
   },
   "devDependencies": {
     "react": "15.6.1",
