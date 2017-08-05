@@ -36,13 +36,23 @@ export default withSW(() =>
         right: 0;
         text-align: center;
       }
-      nav a {
+      a {
         color: black;
         padding: .25em .5em;
         text-decoration: none;
       }
-      nav a:hover {
+      a:hover {
         text-decoration: underline;
+      }
+      @media (min-width: 720px) {
+        nav {
+          top: 0;
+          bottom: auto;
+        }
+        a {
+          font-size: 1.25em;
+          padding: 1em;
+        }
       }
     `}</style>
   </main>
