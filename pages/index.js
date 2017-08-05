@@ -2,8 +2,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 
 import Header from '../components/shared/header.js'
-import withGA from '../lib/with-ga.js'
 
+import withGA from '../lib/with-ga.js'
 import withSW from '../lib/with-sw.js'
 
 export default withGA(
