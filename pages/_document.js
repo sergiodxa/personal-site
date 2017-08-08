@@ -79,6 +79,10 @@ export default class MyDocument extends Document {
               font-size: 18px;
               font-weight: 200;
             }
+            ::selection {
+              background-color: black;
+              color: white;
+            }
           `}</style>
         </Head>
         <body>
