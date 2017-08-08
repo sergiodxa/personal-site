@@ -13,7 +13,8 @@
     "start": "serve portfolio",
     "predeploy": "npm run export",
     "deploy": "now deploy portfolio",
-    "postdeploy": "npm run alias && npm run clean"
+    "postdeploy": "npm run alias && npm run clean",
+    "set:rules": "now alias sergio.now.sh -r rules.json"
   },
   "repository": {
     "type": "git",
