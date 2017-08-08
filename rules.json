@@ -1,0 +1,7 @@
+{
+  "rules": [
+    { "pathname": "/es6/**", "dest": "https://sergiodxa.github.io" },
+    { "pathname": "/css4/**", "dest": "https://sergiodxa.github.io" },
+    { "dest": "portfolio.now.sh" }
+  ]
+}
