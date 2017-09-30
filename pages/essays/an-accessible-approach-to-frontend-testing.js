@@ -52,7 +52,7 @@ And since they aren’t that easy to write beside being slow they end up being a
 As with other tests there’re many possible tools to do this, [Selenium](http://www.seleniumhq.org/), [TestCafe](https://devexpress.github.io/testcafe/), [PhantomJS](http://phantomjs.org/), [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome), [Puppeteer](https://github.com/GoogleChrome/puppeteer) and many more tools.
 
 ### Gradual implementation
-While starting an new application is easy to start with test and do everything right from the beginning, but in most cases the projects already exists and have a lot of legacy code. So how implement all of this? Doing it gradually.
+While starting a new application is easy to start with test and do everything right from the beginning, but in most cases the projects already exists and have a lot of legacy code. So how implement all of this? Doing it gradually.
 
 Trying to get a 100% of coverage in already existent codebase is harder than doing it from zero. Instead of creating a big pull request with all the tests implement them gradually.
 
