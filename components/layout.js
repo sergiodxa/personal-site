@@ -7,7 +7,7 @@ export default ({ children }) => (
   <main>
     <Head>
       <title>Sergio Xalambrí - Lead Support Engineer</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content="Lead Support Engineer" />
       <meta name="language" content="en" />
@@ -23,7 +23,7 @@ export default ({ children }) => (
       <link rel="shortcut icon" href="/static/favicon.ico" />
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
-      <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+      <meta content="IE=edge,chrome=1" httpEquiv="X-UA-Compatible" />
 
       {/* Google WebMaster Tools Verification */}
       <meta
