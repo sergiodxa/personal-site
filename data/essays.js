@@ -1,8 +1,14 @@
 function createEssay(title, link, date, extra = {}) {
-  return { title, link, date, ...extra }
+  return { title, link, date, ...extra };
 }
 
 export default [
+  createEssay(
+    'An accessible approach to Frontend testing',
+    '/essays/an-accessible-approach-to-frontend-testing',
+    '2017-09-30T00:00:00Z',
+    { highlighted: true }
+  ),
   createEssay(
     'How to keep updated with the JavaScript ecosystem?',
     'https://medium.com/@sergiodxa/how-to-keep-updated-with-the-javascript-ecosystem-97c8e36c2c3f',
@@ -352,4 +358,4 @@ export default [
     '2013-08-23T00:00:00Z',
     { deprecated: true }
   )
-]
+];
