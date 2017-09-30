@@ -42,17 +42,17 @@ export default withGA(
 
       {/* <time>{distanceInWordsToNow(date)} ago</time> */}
 
-      <Markdown tagName="section" content={content} />
+      <section>
+        <Markdown tagName="article" content={content} />
+      </section>
 
       <style jsx>{`
         a {
           color: black;
           text-decoration: none;
         }
-      `}</style>
 
-      <style jsx global>{`
-        section {
+        section :global(article) {
           outline: 0;
           word-break: break-word;
           word-wrap: break-word;
@@ -64,18 +64,18 @@ export default withGA(
           box-sizing: border-box;
         }
 
-        h2,
-        h3 {
+        section :global(h2),
+        section :global(h3) {
           font-weight: bold;
         }
 
-        h2 {
+        section :global(h2) {
           font-size: 2.5em;
           letter-spacing: -0.028em;
           margin: 0;
         }
 
-        h3 {
+        section :global(h3) {
           font-size: 2em;
           letter-spacing: -0.02em;
           margin: 0;
@@ -83,11 +83,11 @@ export default withGA(
           margin-top: 3.5rem;
         }
 
-        section a {
+        section :global(a) {
           color: black;
         }
 
-        blockquote {
+        section :global(blockquote) {
           border-left: 3px solid rgba(0, 0, 0, 0.84);
           padding-left: 20px;
           margin-left: -23px;
@@ -102,11 +102,11 @@ export default withGA(
           letter-spacing: -0.003em;
         }
 
-        blockquote > p {
+        section :global(blockquote > p) {
           margin: 0;
         }
 
-        p {
+        section :global(p) {
           font-weight: lighter;
           margin: 1em 0;
           --x-height-multiplier: 0.35;
@@ -120,19 +120,19 @@ export default withGA(
         }
 
         @media (max-width: 767px) {
-          h2 {
+          section :global(h2) {
             font-size: 2rem;
             margin-left: -2px;
             line-height: 1.04;
             letter-spacing: -0.028em;
           }
 
-          h3 {
+          section :global(h3) {
             font-size: 1.75rem;
             margin-top: 1.75rem;
           }
 
-          blockquote {
+          section :global(blockquote) {
             font-size: 1.125rem;
             line-height: 1.58;
             letter-spacing: -0.004em;
@@ -140,7 +140,7 @@ export default withGA(
             margin-left: -20px;
           }
 
-          p {
+          section :global(p) {
             font-size: 1.125rem;
             line-height: 1.58;
             letter-spacing: -0.004em;
