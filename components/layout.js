@@ -82,24 +82,24 @@ export default ({ children }) => (
           )
         }}
       />
-
-      {/* Basic styles */}
-      <style jsx global>{`
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-          margin: 0;
-          font-size: 18px;
-          font-weight: 200;
-        }
-        ::selection {
-          background-color: black;
-          color: white;
-        }
-      `}</style>
     </Head>
 
     {children}
+
+    {/* Basic styles */}
+    <style jsx global>{`
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+        sans-serif;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 200;
+      }
+      ::selection {
+        background-color: black;
+        color: white;
+      }
+      `}</style>
   </main>
 );
