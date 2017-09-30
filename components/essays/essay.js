@@ -19,11 +19,13 @@ export default (
 
     <h2 className="title">
       <Link href={link}>
-        <a rel="noopener" target="_blank" className="link">
+        <a
+          target={parseUrl(link).hostname === null ? '_blank' : '_self'}
+          className="link"
+        >
           {title}
         </a>
-      </Link>
-      {' '}
+      </Link>{' '}
       <Site link={link} isSelf={parseUrl(link).hostname === null} />
     </h2>
 
