@@ -32,17 +32,14 @@
     "@platzi/react-markdown": "^1.0.4",
     "date-fns": "^1.28.5",
     "lodash.memoize": "^4.1.2",
-    "module-alias": "^2.0.1",
     "next": "^4.0.0-beta.2",
-    "preact": "^8.2.1",
-    "preact-compat": "^3.16.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-ga": "^2.2.0",
     "slugify": "^1.2.1"
   },
   "devDependencies": {
     "babili-webpack-plugin": "^0.1.2",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
     "serve": "^6.0.3",
     "sw-precache-webpack-plugin": "^0.11.4"
   }
