@@ -40,6 +40,7 @@
     "slugify": "^1.2.1"
   },
   "devDependencies": {
+    "babili-webpack-plugin": "^0.1.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "serve": "^6.0.3",

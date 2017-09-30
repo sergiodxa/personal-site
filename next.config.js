@@ -1,4 +1,5 @@
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 
 module.exports = {
   webpack(config, { dev }) {
@@ -15,22 +16,27 @@ module.exports = {
           }
         ]
       })
-    )
+    );
+
+    config.plugins = config.plugins.filter(plugin => {
+      return plugin.constructor.name !== 'UglifyJsPlugin'
+    })
 
     if (!dev) {
       config.resolve.alias = {
         react: 'preact-compat/dist/preact-compat',
         'react-dom': 'preact-compat/dist/preact-compat'
-      }
+      };
+      config.plugins.push(new BabiliPlugin())
     }
 
-    return config
+    return config;
   },
 
   exportPathMap() {
     return {
       '/': { page: '/' },
       '/essays': { page: '/essays' }
-    }
+    };
   }
-}
+};
