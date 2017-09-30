@@ -1,22 +1,30 @@
-import format from 'date-fns/format'
+import Link from 'next/link';
+import format from 'date-fns/format';
 
-import Site from './site.js'
+import Site from './site.js';
 
-import parseUrl from '../../lib/parse-url.js'
+import parseUrl from '../../lib/parse-url.js';
 
-export default ({ title, link, date, highlighted = false, deprecated = false } = {}) =>
-  <article
-    className={`essay ${highlighted ? 'is-highlighted' : ''} ${deprecated ? 'is-deprecated' : ''}`}
-  >
-    <time className="date">
-      {format(date, 'MMMM DD, YYYY')}
-    </time>
+function className({ highlighted, deprecated }) {
+  return `essay ${highlighted ? 'is-highlighted' : ''} ${deprecated
+    ? 'is-deprecated'
+    : ''}`;
+}
+
+export default (
+  { title, link, date, highlighted = false, deprecated = false } = {}
+) => (
+  <article className={className({ highlighted, deprecated })}>
+    <time className="date">{format(date, 'MMMM DD, YYYY')}</time>
 
     <h2 className="title">
-      <a href={link} rel="noopener" target="_blank" className="link">
-        {title}
-      </a>{' '}
-      <Site link={link} isSelf={parseUrl(link).hostname === 'sergio.now.sh'} />
+      <Link href={link}>
+        <a rel="noopener" target="_blank" className="link">
+          {title}
+        </a>
+      </Link>
+      {' '}
+      <Site link={link} isSelf={parseUrl(link).hostname === null} />
     </h2>
 
     <style jsx>{`
@@ -44,7 +52,7 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
 
       .date {
         box-sizing: border-box;
-        font-size: .7em;
+        font-size: 0.7em;
         text-align: left;
         padding-right: none;
         width: 100%;
@@ -55,7 +63,7 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
         font-size: 1em;
         font-weight: 400;
         margin: 0;
-        padding: .5em .5em;
+        padding: 0.5em 0.5em;
       }
 
       .essay.is-highlighted .title {
@@ -67,7 +75,7 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
       }
 
       .essay.is-deprecated {
-        opacity: .5;
+        opacity: 0.5;
         z-index: 1;
       }
 
@@ -89,3 +97,4 @@ export default ({ title, link, date, highlighted = false, deprecated = false } =
       }
     `}</style>
   </article>
+);

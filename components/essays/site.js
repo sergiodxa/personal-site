@@ -1,16 +1,26 @@
-import { format } from 'url'
-import parseUrl from '../../lib/parse-url.js'
+import { format } from 'url';
+import Link from 'next/link';
+import parseUrl from '../../lib/parse-url.js';
 
-export default ({ link, isSelf }) =>
+export default ({ link, isSelf }) => (
   <small className="site">
-    <a
-      className="site-url"
-      href={format({ hostname: parseUrl(link).hostname, protocol: parseUrl(link).protocol })}
-      target="_blank"
-      rel="noopener"
-    >
-      [{isSelf ? 'self' : parseUrl(link).hostname}]
-    </a>
+    {isSelf ? (
+      <Link href="/" prefetch>
+        <a className="site-url">[self]</a>
+      </Link>
+    ) : (
+      <a
+        className="site-url"
+        href={format({
+          hostname: parseUrl(link).hostname,
+          protocol: parseUrl(link).protocol
+        })}
+        target="_blank"
+        rel="noopener"
+      >
+        [{parseUrl(link).hostname}]
+      </a>
+    )}
     <style jsx>{`
       .site {
         font-size: 0.7em;
@@ -19,7 +29,7 @@ export default ({ link, isSelf }) =>
       .site-url {
         flex: 1;
         text-decoration: none;
-        color: rgba(0, 0, 0, .7);
+        color: rgba(0, 0, 0, 0.7);
       }
 
       .site-url:hover {
@@ -27,3 +37,4 @@ export default ({ link, isSelf }) =>
       }
     `}</style>
   </small>
+);
