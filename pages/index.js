@@ -1,14 +1,15 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
-import Header from '../components/shared/header.js'
+import Header from '../components/header.js';
+import Layout from '../components/layout.js';
 
-import withGA from '../lib/with-ga.js'
-import withSW from '../lib/with-sw.js'
+import withGA from '../lib/with-ga.js';
+import withSW from '../lib/with-sw.js';
 
 export default withGA(
-  withSW(() =>
-    <main>
+  withSW(() => (
+    <Layout>
       <Head>
         <title>Sergio Xalambrí</title>
       </Head>
@@ -16,7 +17,7 @@ export default withGA(
       <Header centered />
 
       <nav>
-        <Link href="/essays" prefetch>
+        <Link href="/essays/" prefetch>
           <a title="Essays and Articles">Essays</a>
         </Link>
         <a href="https://twitter.com/@sergiodxa" title="Opinion">
@@ -25,7 +26,10 @@ export default withGA(
         <a href="https://github.com/sergiodxa" title="Code repositories">
           Code
         </a>
-        <a href="https://github.com/sergiodxa/personal-site/issues/new" title="Ask Me Anything">
+        <a
+          href="https://github.com/sergiodxa/personal-site/issues/new"
+          title="Ask Me Anything"
+        >
           AMA
         </a>
       </nav>
@@ -35,7 +39,7 @@ export default withGA(
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          font-size: .9em;
+          font-size: 0.9em;
           position: fixed;
           padding-bottom: 1em;
           bottom: 0;
@@ -45,7 +49,7 @@ export default withGA(
         }
         a {
           color: black;
-          padding: .25em .5em;
+          padding: 0.25em 0.5em;
           text-decoration: none;
         }
         a:hover {
@@ -62,6 +66,6 @@ export default withGA(
           }
         }
       `}</style>
-    </main>
-  )
-)
+    </Layout>
+  ))
+);
