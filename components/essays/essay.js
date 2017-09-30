@@ -20,7 +20,7 @@ export default (
     <h2 className="title">
       <Link href={link}>
         <a
-          target={parseUrl(link).hostname === null ? '_blank' : '_self'}
+          target={parseUrl(link).hostname !== null ? '_blank' : '_self'}
           className="link"
         >
           {title}
