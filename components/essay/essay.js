@@ -52,6 +52,10 @@ export default withGA(
           text-decoration: none;
         }
 
+        section {
+          margin-bottom: 10vh;
+        }
+
         section :global(article) {
           outline: 0;
           word-break: break-word;
