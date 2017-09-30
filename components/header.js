@@ -1,16 +1,26 @@
-export default ({ centered }) =>
-  <header className={centered ? 'centered' : ''}>
+function className({ centered, sticky }) {
+  return `${centered ? 'centered' : ''} ${sticky ? 'sticky' : ''}`.trim();
+}
+
+export default ({ centered, sticky = true }) => (
+  <header className={className({ centered, sticky })}>
     <h1>Sergio Xalambrí</h1>
 
-    {centered &&
+    {centered && (
       <h2>
         Lead Support Engineer at{' '}
         <strong>
-          <a title="▲ ZEIT" href="https://zeit.co" target="_blank" rel="noopener">
+          <a
+            title="▲ ZEIT"
+            href="https://zeit.co"
+            target="_blank"
+            rel="noopener"
+          >
             ▲ ZEIT
           </a>
         </strong>
-      </h2>}
+      </h2>
+    )}
 
     <style jsx>{`
       a {
@@ -27,17 +37,20 @@ export default ({ centered }) =>
 
       header:not(.centered) {
         background: white;
-        position: -webkit-sticky;
-        position: sticky;
         top: 0;
         z-index: 2;
+      }
+
+      header:not(.centered).sticky {
+        position: -webkit-sticky;
+        position: sticky;
       }
 
       h1,
       h2 {
         font-size: 1em;
         font-weight: 200;
-        padding: .25em 0;
+        padding: 0.25em 0;
         margin: 0;
       }
 
@@ -66,3 +79,4 @@ export default ({ centered }) =>
       }
     `}</style>
   </header>
+);
