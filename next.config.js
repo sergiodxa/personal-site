@@ -33,8 +33,8 @@ module.exports = {
     return {
       '/': { page: '/' },
       '/essays': { page: '/essays/' },
-      '/essays/an-accessible-approach-to-frontend-testing/': {
-        page: '/essays/an-accessible-approach-to-frontend-testing/'
+      '/essays/an-accessible-approach-to-frontend-testing': {
+        page: '/essays/an-accessible-approach-to-frontend-testing'
       }
     };
   }
