@@ -19,15 +19,15 @@ module.exports = {
     );
 
     config.plugins = config.plugins.filter(plugin => {
-      return plugin.constructor.name !== 'UglifyJsPlugin'
-    })
+      return plugin.constructor.name !== 'UglifyJsPlugin';
+    });
 
     if (!dev) {
       config.resolve.alias = {
         react: 'preact-compat/dist/preact-compat',
         'react-dom': 'preact-compat/dist/preact-compat'
       };
-      config.plugins.push(new BabiliPlugin())
+      config.plugins.push(new BabiliPlugin());
     }
 
     return config;
@@ -36,7 +36,10 @@ module.exports = {
   exportPathMap() {
     return {
       '/': { page: '/' },
-      '/essays': { page: '/essays' }
+      '/essays': { page: '/essays' },
+      '/essays/an-accessible-approach-to-frontend-testing/': {
+        page: '/essays/an-accessible-approach-to-frontend-testing/'
+      }
     };
   }
 };
