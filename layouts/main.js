@@ -19,6 +19,12 @@ export default ({ children }) => (
       <meta name="robots" content="index, follow" />
       <meta name="theme-color" content="#000000" />
 
+      <link
+        href="/atom"
+        type="application/atom+xml"
+        rel="alternate"
+        title="Sergio Xalambrí"
+      />
       <link rel="manifest" href="/static/manifest.json" />
       <link rel="shortcut icon" href="/static/favicon.ico" />
 
