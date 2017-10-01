@@ -1,4 +1,4 @@
-import Essay from '../../components/essay/essay.js';
+import Essay from '../../layouts/essay.js';
 
 export default () => (
   <Essay

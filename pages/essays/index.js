@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Essay from '../../components/essays/essay.js';
 import Header from '../../components/header.js';
-import Layout from '../../components/layout.js';
+import Layout from '../../layouts/main.js';
 
 import essays from '../../data/essays.js';
 

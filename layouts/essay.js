@@ -4,15 +4,15 @@ import Markdown from '@platzi/react-markdown';
 import { distanceInWordsToNow } from 'date-fns';
 import slugify from 'slugify';
 
-import Header from '../header.js';
-import Layout from '../layout.js';
+import Header from '../components/header.js';
+import Main from './main.js';
 
-import withGA from '../../lib/with-ga.js';
-import withSW from '../../lib/with-sw.js';
+import withGA from '../lib/with-ga.js';
+import withSW from '../lib/with-sw.js';
 
 export default withGA(
   withSW(({ title, content, date, slug, description }) => (
-    <Layout>
+    <Main>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -96,8 +96,6 @@ export default withGA(
           padding-left: 20px;
           margin-left: -23px;
           padding-bottom: 2px;
-          --x-height-multiplier: 0.35;
-          --baseline-multiplier: 0.179;
           letter-spacing: 0.01rem;
           font-weight: 400;
           font-style: italic;
@@ -113,8 +111,6 @@ export default withGA(
         section :global(p) {
           font-weight: lighter;
           margin: 1em 0;
-          --x-height-multiplier: 0.35;
-          --baseline-multiplier: 0.179;
           letter-spacing: 0.01rem;
           font-weight: 400;
           font-style: normal;
@@ -151,6 +147,6 @@ export default withGA(
           }
         }
       `}</style>
-    </Layout>
+    </Main>
   ))
 );

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 import Header from '../components/header.js';
-import Layout from '../components/layout.js';
+import Layout from '../layouts/main.js';
 
 import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';

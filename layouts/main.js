@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Header from './header';
+import Header from '../components/header.js';
 
 import minify from '../lib/minify.js';
 
@@ -89,9 +89,8 @@ export default ({ children }) => (
     {/* Basic styles */}
     <style jsx global>{`
       body {
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-        Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-        sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         margin: 0;
         font-size: 18px;
         font-weight: 200;
@@ -100,6 +99,6 @@ export default ({ children }) => (
         background-color: black;
         color: white;
       }
-      `}</style>
+    `}</style>
   </main>
 );
