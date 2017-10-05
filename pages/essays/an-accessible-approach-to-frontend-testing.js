@@ -1,6 +1,12 @@
 import Essay from '../../layouts/essay.js';
 
-export default () => (
+import compose from '../../lib/compose.js';
+
+import withError from '../../lib/with-error.js';
+import withGA from '../../lib/with-ga.js';
+import withSW from '../../lib/with-sw.js';
+
+export default compose(withError, withGA, withSW)(() => (
   <Essay
     title="An accessible approach to Frontend testing"
     date="2017-09-30T00:00:00Z"
@@ -70,4 +76,4 @@ To conclude testing is important and if implemented gradually is not going to be
 This can guarantee the stability of an application and security to deploy without thinking the whole app is going to break in production.
     `}
   />
-);
+));
