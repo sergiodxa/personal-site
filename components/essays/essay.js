@@ -1,20 +1,15 @@
 import Link from 'next/link';
 import format from 'date-fns/format';
+import classNames from 'classnames/dedupe';
 
 import Site from './site.js';
 
 import parseUrl from '../../lib/parse-url.js';
 
-function className({ highlighted, deprecated }) {
-  return `essay ${highlighted ? 'is-highlighted' : ''} ${deprecated
-    ? 'is-deprecated'
-    : ''}`;
-}
-
 export default (
   { title, link, date, highlighted = false, deprecated = false } = {}
 ) => (
-  <article className={className({ highlighted, deprecated })}>
+  <article className={classNames('essay', { highlighted, deprecated })}>
     <time className="date">{format(date, 'MMMM DD, YYYY')}</time>
 
     <h2 className="title">
@@ -68,15 +63,15 @@ export default (
         padding: 0.5em 0.5em;
       }
 
-      .essay.is-highlighted .title {
+      .essay.highlighted .title {
         background-color: black;
       }
 
-      .essay.is-highlighted .title :global(*) {
+      .essay.highlighted .title :global(*) {
         color: white;
       }
 
-      .essay.is-deprecated {
+      .essay.deprecated {
         opacity: 0.5;
         z-index: 1;
       }
