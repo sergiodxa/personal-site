@@ -28,12 +28,6 @@ export default compose(withError, withGA, withSW)(() => (
       <a href="https://github.com/sergiodxa" title="Code repositories">
         Code
       </a>
-      <a
-        href="https://github.com/sergiodxa/personal-site/issues/new"
-        title="Ask Me Anything"
-      >
-        AMA
-      </a>
     </nav>
 
     <style jsx>{`
