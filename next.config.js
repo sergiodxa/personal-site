@@ -32,7 +32,7 @@ module.exports = {
   exportPathMap() {
     return {
       '/': { page: '/' },
-      '/essays': { page: '/essays/' },
+      '/essays': { page: '/essays' },
       '/essays/an-accessible-approach-to-frontend-testing': {
         page: '/essays/an-accessible-approach-to-frontend-testing'
       }

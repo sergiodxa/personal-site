@@ -19,7 +19,7 @@ export default compose(withError, withGA, withSW)(() => (
     <Header centered />
 
     <nav>
-      <Link href="/essays/" prefetch>
+      <Link href="/essays" prefetch>
         <a title="Essays and Articles">Essays</a>
       </Link>
       <a href="https://twitter.com/@sergiodxa" title="Opinion">
