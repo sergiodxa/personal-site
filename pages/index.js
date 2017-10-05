@@ -4,68 +4,69 @@ import Link from 'next/link';
 import Header from '../components/header.js';
 import Layout from '../layouts/main.js';
 
+import compose from '../lib/compose.js';
+
 import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
+import withError from '../lib/with-error.js';
 
-export default withGA(
-  withSW(() => (
-    <Layout>
-      <Head>
-        <title>Sergio Xalambrí</title>
-      </Head>
+export default compose(withError, withGA, withSW)(() => (
+  <Layout>
+    <Head>
+      <title>Sergio Xalambrí</title>
+    </Head>
 
-      <Header centered />
+    <Header centered />
 
-      <nav>
-        <Link href="/essays/" prefetch>
-          <a title="Essays and Articles">Essays</a>
-        </Link>
-        <a href="https://twitter.com/@sergiodxa" title="Opinion">
-          Opinion
-        </a>
-        <a href="https://github.com/sergiodxa" title="Code repositories">
-          Code
-        </a>
-        <a
-          href="https://github.com/sergiodxa/personal-site/issues/new"
-          title="Ask Me Anything"
-        >
-          AMA
-        </a>
-      </nav>
+    <nav>
+      <Link href="/essays/" prefetch>
+        <a title="Essays and Articles">Essays</a>
+      </Link>
+      <a href="https://twitter.com/@sergiodxa" title="Opinion">
+        Opinion
+      </a>
+      <a href="https://github.com/sergiodxa" title="Code repositories">
+        Code
+      </a>
+      <a
+        href="https://github.com/sergiodxa/personal-site/issues/new"
+        title="Ask Me Anything"
+      >
+        AMA
+      </a>
+    </nav>
 
-      <style jsx>{`
+    <style jsx>{`
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 0.9em;
+        position: fixed;
+        padding-bottom: 1em;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+      a {
+        color: black;
+        padding: 0.25em 0.5em;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      @media (min-width: 720px) {
         nav {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          font-size: 0.9em;
-          position: fixed;
-          padding-bottom: 1em;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          text-align: center;
+          top: 0;
+          bottom: auto;
         }
         a {
-          color: black;
-          padding: 0.25em 0.5em;
-          text-decoration: none;
+          font-size: 1.25em;
+          padding: 1em;
         }
-        a:hover {
-          text-decoration: underline;
-        }
-        @media (min-width: 720px) {
-          nav {
-            top: 0;
-            bottom: auto;
-          }
-          a {
-            font-size: 1.25em;
-            padding: 1em;
-          }
-        }
-      `}</style>
-    </Layout>
-  ))
-);
+      }
+    `}</style>
+  </Layout>
+));
