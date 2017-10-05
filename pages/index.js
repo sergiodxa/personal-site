@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Header from '../components/header.js';
 import Layout from '../layouts/main.js';
 
-import compose from '../lib/compose.js';
+import compose from 'recompose/compose';
 
 import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';

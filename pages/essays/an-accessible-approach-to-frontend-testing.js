@@ -1,6 +1,6 @@
 import Essay from '../../layouts/essay.js';
 
-import compose from '../../lib/compose.js';
+import compose from 'recompose/compose';
 
 import withError from '../../lib/with-error.js';
 import withGA from '../../lib/with-ga.js';
