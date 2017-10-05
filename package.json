@@ -2,7 +2,7 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí personal website",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next",
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export -o portfolio",
