@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import Header from '../components/header.js';
+import TwitterCard from '../components/twitter-card.js';
+import OpenGraph from '../components/open-graph.js';
 
 import minify from '../lib/minify.js';
 
@@ -37,34 +39,6 @@ export default ({ children }) => (
         content="X2JScoEw_7GYGeczFqsSI1Xm5h_z5Vn2PqtwWKnoNuI"
       />
 
-      {/* Twitter Card */}
-      <meta name="twitter:card" value="summary" />
-      <meta name="twitter:site" value="@sergiodxa" />
-      <meta name="twitter:creator" value="@sergiodxa" />
-      <meta name="twitter:url" value="https://sergio.now.sh/" />
-      <meta name="twitter:title" value="Sergio Xalambrí" />
-      <meta name="twitter:description" value="Lead Support Engineer" />
-      <meta
-        name="twitter:image"
-        value="https://sergio.now.sh/static/avatar.jpg"
-      />
-      <meta
-        name="twitter:summary"
-        value="Sergio Xalambrí's personal website'"
-      />
-
-      {/* OpenGraph */}
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content="Sergio Xalambrí" />
-      <meta property="og:description" content="Lead Support Engineer" />
-      <meta
-        property="og:image"
-        content="https://sergio.now.sh/static/avatar.jpg"
-      />
-      <meta property="og:url" content="https://sergio.now.sh/" />
-      <meta property="og:site_name" content="Sergio Xalambrí" />
-      <meta property="og:locale" content="en" />
-
       {/* Schema JSON */}
       <script
         type="application/ld+json"
@@ -89,6 +63,10 @@ export default ({ children }) => (
         }}
       />
     </Head>
+
+    <TwitterCard />
+
+    <OpenGraph />
 
     {children}
 
