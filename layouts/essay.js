@@ -131,6 +131,7 @@ export default ({ title, content, date, slug, description }) => (
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
           serif;
+        font-size: 0.8em;
         white-space: pre-wrap;
       }
 
@@ -158,25 +159,27 @@ export default ({ title, content, date, slug, description }) => (
         font-size: 1rem;
       }
 
-      .content :global(pre code[class="language-javascript"]),
-      .content :global(pre code[class="language-js"]),
-      .content :global(pre code[class="language-html"]),
-      .content :global(pre code[class="language-css"]),
-      .content :global(pre code[class="language-styl"]),
-      .content :global(pre code[class="language-saas"]),
-      .content :global(pre code[class="language-less"]),
-      .content :global(pre code[class="language-ruby"] ){
+      /* identation sizes */
+      .content :global(pre code[class~="language-javascript"]),
+      .content :global(pre code[class~="language-js"]),
+      .content :global(pre code[class~="language-html"]),
+      .content :global(pre code[class~="language-css"]),
+      .content :global(pre code[class~="language-styl"]),
+      .content :global(pre code[class~="language-saas"]),
+      .content :global(pre code[class~="language-less"]),
+      .content :global(pre code[class~="language-ruby"] ){
         tab-size: 2;
       }
-      .content :global(pre code[class="language-java"]),
-      .content :global(pre code[class="language-python"]),
-      .content :global(pre code[class="language-php"]) {
+      .content :global(pre code[class~="language-java"]),
+      .content :global(pre code[class~="language-python"]),
+      .content :global(pre code[class~="language-php"]) {
         tab-size: 4;
       }
-      .content :global(pre code[class="language-go"]) {
+      .content :global(pre code[class~="language-go"]) {
         tab-size: 8;
       }
 
+      /* table */
       .content :global(table) {
         font-size: 0.9rem;
         width: 100%;
@@ -200,8 +203,11 @@ export default ({ title, content, date, slug, description }) => (
         padding: 0.125em 0.2em;
       }
 
+      /* lists */
       .content :global(ul),
       .content :global(ol) {
+        font-size: 1.3em;
+        font-weight: normal;
         margin-left: -2rem;
         padding-left: 2rem;
       }
