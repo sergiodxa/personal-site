@@ -1,6 +1,6 @@
-import Essay from '../../layouts/essay.js';
-
 import compose from 'recompose/compose';
+
+import Essay from '../../layouts/essay.js';
 
 import withError from '../../lib/with-error.js';
 import withGA from '../../lib/with-ga.js';
@@ -22,7 +22,7 @@ The problem here is that doing tests is important and avoiding them is just irre
 Here I’m going to list and review some useful techniques when testing Frontend code that can be gradually implemented.
 
 ### Linter
-The first most simple way to “test” a code is using a code linter. A linter can be used to detect common issues, they can be simple typos like missing a comma, semicolon or bracket, bad practices like using a variable instead of a constant or a style guideline issue (you can also use [Prettier](https://github.com/prettier/prettier) for style guidelines).
+The first most simple way to "test" a code is using a code linter. A linter can be used to detect common issues, they can be simple typos like missing a comma, semicolon or bracket, bad practices like using a variable instead of a constant or a style guideline issue (you can also use [Prettier](https://github.com/prettier/prettier) for style guidelines).
 
 A linter statically analyze the code to check if it follows the configured rules, they can also be used in the bundling process and, thanks to IDE integrations, can even detect issues while the code is being written and before it reaches the browser.
 
@@ -35,7 +35,7 @@ When talking about automated code testing the usual is to  think about a unit te
 
 But a Frontend codebase is not only UI, it usually  has business logic independent of the UI code. And that business logic can be unit tested.
 
-To provide an example in a [React](https://reactjs.org/) [+](https://github.com/reactjs/react-redux) [Redux](http://redux.js.org/	) application the reducers can be unit tested, also something like [Redux Sagas](https://redux-saga.js.org/) that allow to  unit test the async related code easier.
+To provide an example in a [React](https://reactjs.org/) [+](https://github.com/reactjs/react-redux) [Redux](http://redux.js.org/) application the reducers can be unit tested, also something like [Redux Sagas](https://redux-saga.js.org/) that allow to  unit test the async related code easier.
 
 ### Snapshot tests for UI
 So far I mentioned linters to check common bugs and unit tests for business logic, but what about the UI? The whole Frontend idea is about UI.
