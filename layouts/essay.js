@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Markdown from '@platzi/react-markdown';
-import { distanceInWordsToNow } from 'date-fns';
 import slugify from 'slugify';
 
 import Header from '../components/header.js';
@@ -9,6 +7,8 @@ import OpenGraph from '../components/open-graph.js';
 import TwitterCard from '../components/twitter-card.js';
 
 import Main from './main.js';
+
+import parser from '../lib/md-parser.js';
 
 export default ({ title, content, date, slug, description }) => (
   <Main>
@@ -37,10 +37,12 @@ export default ({ title, content, date, slug, description }) => (
       </a>
     </Link>
 
-    {/* <time>{distanceInWordsToNow(date)} ago</time> */}
-
-    <section>
-      <Markdown tagName="article" content={content} />
+    <section className="content">
+      <article
+        dangerouslySetInnerHTML={{
+          __html: parser(content)
+        }}
+      />
     </section>
 
     <style jsx>{`
