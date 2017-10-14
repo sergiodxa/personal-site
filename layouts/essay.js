@@ -75,6 +75,7 @@ export default ({ title, content, date, slug, description }) => (
         font-weight: normal;
         margin: 0 auto;
         max-width: 36em;
+        line-height: 1.4;
         outline: 0;
         padding-left: 1em;
         padding-right: 1em;
