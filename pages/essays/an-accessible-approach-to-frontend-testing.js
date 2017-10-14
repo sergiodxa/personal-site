@@ -12,7 +12,7 @@ export default compose(withError, withGA, withSW)(() => (
     date="2017-09-30T00:00:00Z"
     description="Testing is hard. Testing Frontend is harder. But you should do it anyways."
     content={`
-## An accessible approach to Frontend testing
+# An accessible approach to Frontend testing
 > Testing is hard. Testing Frontend is harder. But you should do it anyways.
 
 Being realistic tests are usually avoided and this happens even often in Frontend codebases because testing a UI is harder than just doing a unit test or a HTTP request to check the response of an API (_I’m not saying testing backend is easy_).
@@ -21,7 +21,7 @@ The problem here is that doing tests is important and avoiding them is just irre
 
 Here I’m going to list and review some useful techniques when testing Frontend code that can be gradually implemented.
 
-### Linter
+## Linter
 The first most simple way to "test" a code is using a code linter. A linter can be used to detect common issues, they can be simple typos like missing a comma, semicolon or bracket, bad practices like using a variable instead of a constant or a style guideline issue (you can also use [Prettier](https://github.com/prettier/prettier) for style guidelines).
 
 A linter statically analyze the code to check if it follows the configured rules, they can also be used in the bundling process and, thanks to IDE integrations, can even detect issues while the code is being written and before it reaches the browser.
@@ -30,14 +30,14 @@ In the JS world there are a lot of possible linters, [ESLint](https://eslint.org
 
 But configuring tools is not amusing, so there are other linters like [Standard](https://standardjs.com/) or [xo](https://github.com/sindresorhus/xo) which don’t require any configuration. Internally they use ESLint (and can be used as configurations for ESLint) so they can be extended using his rules if it’s required for the project.
 
-### Unit tests for business logic
+## Unit tests for business logic
 When talking about automated code testing the usual is to  think about a unit test. In Frontend unit testing code is hard because testing a UI with a simple unit test is no that easy (and useful).
 
 But a Frontend codebase is not only UI, it usually  has business logic independent of the UI code. And that business logic can be unit tested.
 
 To provide an example in a [React](https://reactjs.org/) [+](https://github.com/reactjs/react-redux) [Redux](http://redux.js.org/) application the reducers can be unit tested, also something like [Redux Sagas](https://redux-saga.js.org/) that allow to  unit test the async related code easier.
 
-### Snapshot tests for UI
+## Snapshot tests for UI
 So far I mentioned linters to check common bugs and unit tests for business logic, but what about the UI? The whole Frontend idea is about UI.
 
 [Snapshot](https://medium.com/@dschmidt1992/jest-snapshot-testing-3ef9fa1222bb) testing is a kind of regression test. It means first the code is written, it’s tested to work (either with a unit test or just running it) and then the tests are written, in the future if the code is changed the tests validate if everything still work.
@@ -48,7 +48,7 @@ Because this tests validate the code still work as expected when a change is mad
 
 This could also be used for non-UI code of course to add some regression test to that code.
 
-### End to End tests for complex workflows
+## End to End tests for complex workflows
 Complex workflow are common in many WebApps and snapshots or unit tests don’t mean the workflows are going to work as expected. End to end or **e2e** tests can be used to test this workflows.
 
 In an e2e test a browser is opened and the user workflow runs automatically. That mean this kind of tests are usually slow because they need to open a new browser, load the website and interact with it.
@@ -57,7 +57,7 @@ And since they aren’t that easy to write beside being slow they end up being a
 
 As with other tests there’re many possible tools to do this, [Selenium](http://www.seleniumhq.org/), [TestCafe](https://devexpress.github.io/testcafe/), [PhantomJS](http://phantomjs.org/), [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome), [Puppeteer](https://github.com/GoogleChrome/puppeteer) and many more tools.
 
-### Gradual implementation
+## Gradual implementation
 While starting a new application is easy to start with test and do everything right from the beginning, but in most cases the projects already exists and have a lot of legacy code. So how implement all of this? Doing it gradually.
 
 Trying to get a 100% of coverage in already existent codebase is harder than doing it from zero. Instead of creating a big pull request with all the tests implement them gradually.
@@ -70,7 +70,7 @@ After unit tests start with the UI, is easier to snapshot the UI components with
 
 Complex workflows is something that should be tested while implementing the other tests, it’s not required to test every user flow, but the more user flows are tested the more secure it is to deploy.
 
-### Final words
+## Final words
 To conclude testing is important and if implemented gradually is not going to become a burden, eventually the whole code will be tested and the deployment could also be automated to happens after each test.
 
 This can guarantee the stability of an application and security to deploy without thinking the whole app is going to break in production.
