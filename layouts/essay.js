@@ -33,9 +33,13 @@ export default ({ title, content, date, slug, description }) => (
 
     <Link href="/" prefetch>
       <a title="Sergio Xalambrí">
-        <Header sticky={false} />
+        <Header sticky={false} secondary />
       </a>
     </Link>
+
+    <a href="https://github.com/sergiodxa/personal-site" className="src">
+      &lt;src&gt;
+    </a>
 
     <section className="content">
       <article
@@ -51,63 +55,87 @@ export default ({ title, content, date, slug, description }) => (
         text-decoration: none;
       }
 
+      .src {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 1rem;
+      }
+      .src:hover {
+        text-decoration: underline;
+      }
+
       .content {
         margin-bottom: 10vh;
       }
 
-      .content :global(*:not(iframe):empty) {
-        display: none;
-      }
-
       .content :global(article) {
+        box-sizing: border-box;
+        font-size: 20px;
+        font-weight: normal;
+        margin: 0 auto;
+        max-width: 36em;
         outline: 0;
+        padding-left: 1em;
+        padding-right: 1em;
+        width: 100%;
         word-break: break-word;
         word-wrap: break-word;
-        max-width: 740px;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        width: 100%;
-        margin: 0 auto;
-        box-sizing: border-box;
       }
+      .content :global(h1),
       .content :global(h2),
       .content :global(h3),
       .content :global(h4),
       .content :global(h5),
       .content :global(h6) {
         font-weight: bold;
+        letter-spacing: -0.02em;
+        margin: 1em 0 0;
       }
 
-      .content :global(h2) {
+      .content :global(h1) {
         font-size: 2.5em;
         letter-spacing: -0.028em;
         margin: 0;
       }
 
-      .content :global(h3) {
+      .content :global(h2) {
         font-size: 2em;
-        letter-spacing: -0.02em;
-        margin: 0;
-        margin-left: -2px;
-        margin-top: 3.5rem;
+        border-bottom: 1px solid black;
+        margin-left: -1em;
+        margin-right: -1em;
+        padding: 0 1em 0.25em;
+      }
+
+      .content :global(h3) {
+        font-size: 1.75em;
+      }
+
+      .content :global(h4) {
+        font-size: 1.5em;
+      }
+
+      .content :global(h5) {
+        font-size: 1.25em;
+      }
+
+      .content :global(h6) {
+        font-size: 1.125em;
       }
 
       .content :global(a) {
-        color: black;
+        color: #067df7;
       }
 
       .content :global(blockquote) {
         border-left: 3px solid rgba(0, 0, 0, 0.84);
         box-sizing: border-box;
-        padding-left: calc(2rem - 3px);
-        margin-left: -2rem;
-        padding-bottom: 2px;
-        letter-spacing: 0.01rem;
+        padding-left: calc(2em - 3px);
+        margin-left: -2em;
+        margin-right: 0;
         font-weight: 400;
         font-style: italic;
-        font-size: 1.3rem;
-        line-height: 1.58;
-        letter-spacing: -0.003em;
+        font-size: 1em;
       }
 
       .content :global(blockquote > p) {
@@ -115,14 +143,8 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       .content :global(p) {
-        font-weight: lighter;
-        margin: 1rem 0;
-        letter-spacing: 0.01rem;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 1.3em;
-        line-height: 1.58;
-        letter-spacing: -0.003em;
+        margin: .5em 0;
+        font-size: 1.25em;
       }
 
       /* inline code */
@@ -160,22 +182,22 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       /* identation sizes */
-      .content :global(pre code[class~="language-javascript"]),
-      .content :global(pre code[class~="language-js"]),
-      .content :global(pre code[class~="language-html"]),
-      .content :global(pre code[class~="language-css"]),
-      .content :global(pre code[class~="language-styl"]),
-      .content :global(pre code[class~="language-saas"]),
-      .content :global(pre code[class~="language-less"]),
-      .content :global(pre code[class~="language-ruby"] ){
+      .content :global(pre code[class~='language-javascript']),
+      .content :global(pre code[class~='language-js']),
+      .content :global(pre code[class~='language-html']),
+      .content :global(pre code[class~='language-css']),
+      .content :global(pre code[class~='language-styl']),
+      .content :global(pre code[class~='language-saas']),
+      .content :global(pre code[class~='language-less']),
+      .content :global(pre code[class~='language-ruby']) {
         tab-size: 2;
       }
-      .content :global(pre code[class~="language-java"]),
-      .content :global(pre code[class~="language-python"]),
-      .content :global(pre code[class~="language-php"]) {
+      .content :global(pre code[class~='language-java']),
+      .content :global(pre code[class~='language-python']),
+      .content :global(pre code[class~='language-php']) {
         tab-size: 4;
       }
-      .content :global(pre code[class~="language-go"]) {
+      .content :global(pre code[class~='language-go']) {
         tab-size: 8;
       }
 
@@ -224,13 +246,22 @@ export default ({ title, content, date, slug, description }) => (
         line-height: 1.5;
       }
 
+      .content :global(dt) {
+        font-weight: bold;
+      }
+
+      /* abbreviatures */
       .content :global(abbr) {
         cursor: help;
         text-decoration-style: dashed;
       }
 
+      /* images */
       .content :global(figure) {
+        background-color: black;
+        font-size: 0;
         text-align: center;
+        margin: 0;
         width: 100%;
       }
 
@@ -238,13 +269,10 @@ export default ({ title, content, date, slug, description }) => (
         max-width: 100%;
       }
 
-      .content :global(dt) {
-        font-weight: bold;
-      }
-
+      /* videos */
       .content :global(.embed-responsive) {
         position: relative;
-        padding-bottom: 56.25% /* 16:9 */;
+        padding-bottom: 56.25%;
         height: 0;
         margin: 0 -2rem;
       }
@@ -295,7 +323,7 @@ export default ({ title, content, date, slug, description }) => (
       /* yellow */
       .content :global(.hljs-string),
       .content :global(.hljs-regexp) {
-        color: #FFBD2F;
+        color: #ffbd2f;
       }
       /* cyan */
       .content :global(.hljs-attribute) {
@@ -325,14 +353,14 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       @media (max-width: 767px) {
-        .content :global(h2) {
+        .content :global(h1) {
           font-size: 2rem;
           margin-left: -2px;
           line-height: 1.04;
           letter-spacing: -0.028em;
         }
 
-        .content :global(h3) {
+        .content :global(h2) {
           font-size: 1.75rem;
           margin-top: 1.75rem;
         }
