@@ -2,9 +2,12 @@ function className({ centered, sticky }) {
   return `${centered ? 'centered' : ''} ${sticky ? 'sticky' : ''}`.trim();
 }
 
-export default ({ centered, sticky = true }) => (
+export default ({ centered, sticky = true, secondary }) => (
   <header className={className({ centered, sticky })}>
-    <h1>Sergio Xalambrí</h1>
+    {!secondary
+      ? <h1>Sergio Xalambrí</h1>
+      : <h2>Sergio Xalambrí</h2>
+    }
 
     {centered && (
       <h2>
