@@ -38,7 +38,7 @@ export default ({ title, content, date, slug, description }) => (
     </Link>
 
     <a href="https://github.com/sergiodxa/personal-site" className="src">
-      &lt;src&gt;
+      {'<src />'}
     </a>
 
     <section className="content">
