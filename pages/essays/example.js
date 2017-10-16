@@ -15,7 +15,7 @@ export default compose(withError, withGA, withSW)(() => (
 *[HTML]: HyperText Markup Language
 
 # This is an example
-This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML ++element++ ==parsed from Markdown==.
+This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML ++element++ ==parsed from Markdown== by @sergiodxa
 
 # Heading 1
 ## Heading 2
@@ -49,6 +49,11 @@ export default () => (
 1. Item 4
 
 ~[This is my photo](/static/now-black.png)
+
+| Header | Header 2 | Header 3 |
+| ------ | -------- | -------- |
+| Value  | Value 2  | Value 3  |
+
     `}
   />
 ));
