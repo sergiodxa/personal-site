@@ -3418,6 +3418,12 @@ markdown-it-mark@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/markdown-it-mark/-/markdown-it-mark-2.0.0.tgz#46a1aa947105aed8188978e0a016179e404f42c7"
 
+markdown-it-mentions@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-mentions/-/markdown-it-mentions-1.0.0.tgz#2dc6a06d0604bfbf57ac22efb3558f338098990a"
+  dependencies:
+    markdown-it-regexp "^0.4.0"
+
 markdown-it-podcast@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/markdown-it-podcast/-/markdown-it-podcast-0.1.0.tgz#634e47a73ca738d657df7186e82e1569ee0ecc92"

@@ -37,6 +37,7 @@
     "markdown-it-codesandbox": "^1.0.0",
     "markdown-it-headinganchor": "^1.3.0",
     "markdown-it-highlightjs": "^3.0.0",
+    "markdown-it-mentions": "^1.0.0",
     "markdown-it-regexp": "^0.4.0",
     "next": "^4.0.0-beta.4",
     "react": "^16.0.0",
