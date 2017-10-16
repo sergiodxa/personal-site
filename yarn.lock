@@ -3377,6 +3377,12 @@ markdown-it-abbr@1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/markdown-it-abbr/-/markdown-it-abbr-1.0.4.tgz#d66b5364521cbb3dd8aa59dadfba2fb6865c8fd8"
 
+markdown-it-codesandbox@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-codesandbox/-/markdown-it-codesandbox-1.0.0.tgz#3317fa8ef92093fdff9fae06af3bfee9dbaf8933"
+  dependencies:
+    markdown-it-regexp "^0.4.0"
+
 markdown-it-deflist@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/markdown-it-deflist/-/markdown-it-deflist-2.0.2.tgz#33253190400dfa5398bef9d0adacac0d0676bc58"
