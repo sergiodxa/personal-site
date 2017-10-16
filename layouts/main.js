@@ -4,6 +4,7 @@ import TwitterCard from '../components/twitter-card.js';
 import OpenGraph from '../components/open-graph.js';
 
 import minify from '../lib/minify.js';
+import * as colors from '../lib/colors.js';
 
 export default ({ children }) => (
   <main>
@@ -19,7 +20,7 @@ export default ({ children }) => (
       <meta name="HandheldFriendly" content="True" />
       <meta name="MobileOptimized" content="320" />
       <meta name="robots" content="index, follow" />
-      <meta name="theme-color" content="#000000" />
+      <meta name="theme-color" content={colors.black} />
 
       <link
         href="/atom"
@@ -80,8 +81,8 @@ export default ({ children }) => (
         font-weight: 200;
       }
       ::selection {
-        background-color: black;
-        color: white;
+        background-color: ${colors.black};
+        color: ${colors.white};
       }
     `}</style>
   </main>

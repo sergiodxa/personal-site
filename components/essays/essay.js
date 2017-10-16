@@ -5,6 +5,7 @@ import classNames from 'classnames/dedupe';
 import Site from './site.js';
 
 import parseUrl from '../../lib/parse-url.js';
+import * as colors from '../../lib/colors.js';
 
 export default (
   { title, link, date, highlighted = false, deprecated = false } = {}
@@ -33,7 +34,7 @@ export default (
 
       .link {
         flex: 1;
-        color: black;
+        color: ${colors.black};
         text-decoration: none;
       }
       .link:hover {
@@ -64,11 +65,11 @@ export default (
       }
 
       .essay.highlighted .title {
-        background-color: black;
+        background-color: ${colors.black};
       }
 
       .essay.highlighted .title :global(*) {
-        color: white;
+        color: ${colors.white};
       }
 
       .essay.deprecated {

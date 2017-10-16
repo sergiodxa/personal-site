@@ -1,6 +1,8 @@
 import { format } from 'url';
 import Link from 'next/link';
+
 import parseUrl from '../../lib/parse-url.js';
+import * as colors from '../../lib/colors.js';
 
 export default ({ link, isSelf }) => (
   <small className="site">
@@ -29,7 +31,7 @@ export default ({ link, isSelf }) => (
       .site-url {
         flex: 1;
         text-decoration: none;
-        color: rgba(0, 0, 0, 0.7);
+        color: ${colors.grey};
       }
 
       .site-url:hover {

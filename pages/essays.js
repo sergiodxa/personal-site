@@ -12,6 +12,7 @@ import compose from 'recompose/compose';
 import withError from '../lib/with-error.js';
 import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
+import * as colors from '../lib/colors.js';
 
 const byDate = (a, b) => {
   const timeA = new Date(a.date).getTime();
@@ -44,7 +45,7 @@ export default compose(withError, withGA, withSW)(() => (
     `}</style>
     <style jsx>{`
       a {
-        color: black;
+        color: ${colors.black};
         text-decoration: none;
       }
 

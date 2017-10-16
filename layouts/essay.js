@@ -9,6 +9,7 @@ import TwitterCard from '../components/twitter-card.js';
 import Main from './main.js';
 
 import parser from '../lib/md-parser.js';
+import * as colors from '../lib/colors.js';
 
 export default ({ title, content, date, slug, description }) => (
   <Main>
@@ -51,7 +52,7 @@ export default ({ title, content, date, slug, description }) => (
 
     <style jsx>{`
       a {
-        color: black;
+        color: ${colors.black};
         text-decoration: none;
       }
 
@@ -102,7 +103,7 @@ export default ({ title, content, date, slug, description }) => (
 
       .content :global(h2) {
         font-size: 2em;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid ${colors.black};
         margin-left: -1em;
         margin-right: -1em;
         padding: 0 1em 0.25em;
@@ -125,7 +126,7 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       .content :global(a) {
-        color: #067df7;
+        color: ${colors.blue};
       }
 
       .content :global(blockquote) {
@@ -150,7 +151,7 @@ export default ({ title, content, date, slug, description }) => (
 
       /* inline code */
       .content :global(p code) {
-        color: #f81ce5;
+        color: ${colors.pink};
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
           serif;
@@ -168,14 +169,14 @@ export default ({ title, content, date, slug, description }) => (
 
       /* code blocks */
       .content :global(pre) {
-        border: 1px solid black;
+        border: 1px solid ${colors.black};
         padding: 1rem calc(2rem - 1px);
         margin: 1rem -2rem;
         overflow: scroll;
       }
 
       .content :global(pre code) {
-        color: black;
+        color: ${colors.black};
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
           serif;
@@ -221,7 +222,7 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       .content :global(mark) {
-        background-color: #f81ce5;
+        background-color: ${colors.pink};
         color: white;
         padding: 0.125em 0.2em;
       }
@@ -259,11 +260,15 @@ export default ({ title, content, date, slug, description }) => (
 
       /* images */
       .content :global(figure) {
-        background-color: black;
         font-size: 0;
         text-align: center;
         margin: 0;
         width: 100%;
+      }
+
+      .content :global(figcaption) {
+        color: ${colors.grey};
+        font-size: .9rem;
       }
 
       .content :global(img) {
@@ -294,13 +299,13 @@ export default ({ title, content, date, slug, description }) => (
       .content :global(.hljs-attribute),
       .content :global(.hljs-symbol),
       .content :global(.hljs-link) {
-        color: #f81ce5;
+        color: ${colors.pink};
       }
       /* red */
       .content :global(.hljs-code),
       .content :global(.hljs-deletion),
       .content :global(.hljs-name) {
-        color: #ff5f56;
+        color: ${colors.red};
       }
       /* green */
       .content :global(.hljs-bullet),
@@ -319,27 +324,27 @@ export default ({ title, content, date, slug, description }) => (
       .content :global(.hljs-template-variable),
       .content :global(.hljs-function),
       .content :global(.hljs-attr) {
-        color: #27c93f;
+        color: ${colors.green};
       }
       /* yellow */
       .content :global(.hljs-string),
       .content :global(.hljs-regexp) {
-        color: #ffbd2f;
+        color: ${colors.yellow};
       }
-      /* cyan */
+      /* blue */
       .content :global(.hljs-attribute) {
-        color: #067df7;
+        color: ${colors.blue};
       }
       /* grey */
       .content :global(.hljs-comment),
       .content :global(.hljs-quote),
       .content :global(.hljs-meta) {
-        color: #9b9b9b;
+        color: ${colors.grey};
       }
       /* black */
       .content :global(.hljs-params),
       .content :global(.hljs-tag) {
-        color: black;
+        color: ${colors.black};
       }
       /* bold */
       .content :global(.hljs-keyword),

@@ -1,3 +1,5 @@
+import * as colors from '../../lib/colors.js';
+
 function className({ centered, sticky }) {
   return `${centered ? 'centered' : ''} ${sticky ? 'sticky' : ''}`.trim();
 }
@@ -27,7 +29,7 @@ export default ({ centered, sticky = true, secondary }) => (
 
     <style jsx>{`
       a {
-        color: black;
+        color: ${colors.black};
         text-decoration: none;
       }
 
@@ -39,7 +41,7 @@ export default ({ centered, sticky = true, secondary }) => (
       }
 
       header:not(.centered) {
-        background: white;
+        background: ${colors.white};
         top: 0;
         z-index: 2;
       }
