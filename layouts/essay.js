@@ -115,8 +115,9 @@ export default ({ title, content, date, slug, description }) => (
       .content :global(h2) {
         font-size: 2em;
         border-bottom: 1px solid ${colors.black};
-        margin-left: -1em;
-        margin-right: -1em;
+        box-sizing: border-box;
+        margin-left: calc(-1em + 2px);
+        margin-right: calc(-1em + 2px);
         padding: 0 1em 0.25em;
       }
 
@@ -380,16 +381,23 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       @media (max-width: 767px) {
+        .publishedAt {
+          padding-right: 1em;
+        }
+
         .content :global(h1) {
-          font-size: 2rem;
           margin-left: -2px;
           line-height: 1.04;
           letter-spacing: -0.028em;
         }
 
         .content :global(h2) {
-          font-size: 1.75rem;
           margin-top: 1.75rem;
+          box-sizing: border-box;
+          padding-left: .5em;
+          padding-right: .5em;
+          margin-left: calc(-.5em + 2px);
+          margin-right: calc(-.5em + 2px);
         }
 
         .content :global(blockquote) {
