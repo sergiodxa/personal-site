@@ -17,6 +17,9 @@ export default ({ title, content, date, slug, description }) => (
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="twitter:widgets:theme" content="light" />
+      <meta name="twitter:widgets:link-color" content={colors.blue} />
+      <meta name="twitter:widgets:border-color" content={colors.blue} />
     </Head>
 
     <TwitterCard
@@ -297,6 +300,16 @@ export default ({ title, content, date, slug, description }) => (
         left: 0 !important;
         width: 100% !important;
         height: 100% !important;
+      }
+
+      /* tweets */
+      .content :global(.twitter-tweet) {
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .content :global(.twitter-tweet:not(.twitter-tweet-rendered)) {
+        display: none;
       }
 
       /* pink */

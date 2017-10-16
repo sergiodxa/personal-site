@@ -17,6 +17,8 @@ export default compose(withError, withGA, withSW)(() => (
 # This is an example
 This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML ++element++ ==parsed from Markdown== by @sergiodxa
 
+@[twitter](https://twitter.com/sergiodxa/status/914228079391903744)
+
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -53,7 +55,6 @@ export default () => (
 | Header | Header 2 | Header 3 |
 | ------ | -------- | -------- |
 | Value  | Value 2  | Value 3  |
-
     `}
   />
 ));
