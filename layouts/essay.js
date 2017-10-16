@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import slugify from 'slugify';
 import format from 'date-fns/format';
+import isValid from 'date-fns/is_valid';
+import mapProps from 'recompose/mapProps';
 
 import Header from '../components/header.js';
 import OpenGraph from '../components/open-graph.js';
@@ -12,7 +14,11 @@ import Main from './main.js';
 import parser from '../lib/md-parser.js';
 import * as colors from '../lib/colors.js';
 
-export default ({ title, content, date, slug, description }) => (
+export default mapProps(({ date, ...props }) => ({
+  ...props,
+  date: new Date(date),
+  dateString: date
+}))(({ title, content, date, dateString, slug, description }) => (
   <Main>
     <Head>
       <title>{title}</title>
@@ -47,9 +53,11 @@ export default ({ title, content, date, slug, description }) => (
     </a>
 
     <section className="content">
-      <time className="publishedAt" dateTime={date}>
-        Posted on <b>{format(date, 'MMMM DD, YYYY')}</b>
-      </time>
+      {isValid(date) && (
+        <time className="publishedAt" dateTime={dateString}>
+          Posted on <b>{format(date, 'MMMM DD, YYYY')}</b>
+        </time>
+      )}
       <article
         dangerouslySetInnerHTML={{
           __html: parser(content)
@@ -396,10 +404,10 @@ export default ({ title, content, date, slug, description }) => (
           font-size: 1.75em;
           margin-top: 1.75rem;
           box-sizing: border-box;
-          padding-left: .5em;
-          padding-right: .5em;
-          margin-left: calc(-.5em + 2px);
-          margin-right: calc(-.5em + 2px);
+          padding-left: 0.5em;
+          padding-right: 0.5em;
+          margin-left: calc(-0.5em + 2px);
+          margin-right: calc(-0.5em + 2px);
         }
 
         .content :global(h3) {
@@ -451,4 +459,4 @@ export default ({ title, content, date, slug, description }) => (
       }
     `}</style>
   </Main>
-);
+));
