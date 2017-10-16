@@ -48,7 +48,7 @@ export default () => (
 1. Item 3
 1. Item 4
 
-![This is my photo](/static/now-black.png)
+~[This is my photo](/static/now-black.png)
     `}
   />
 ));
