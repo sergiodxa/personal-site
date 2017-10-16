@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import slugify from 'slugify';
+import format from 'date-fns/format';
 
 import Header from '../components/header.js';
 import OpenGraph from '../components/open-graph.js';
@@ -43,6 +44,9 @@ export default ({ title, content, date, slug, description }) => (
     </a>
 
     <section className="content">
+      <time className="publishedAt" dateTime={date}>
+        Posted on <b>{format(date, 'MMMM DD, YYYY')}</b>
+      </time>
       <article
         dangerouslySetInnerHTML={{
           __html: parser(content)
@@ -67,20 +71,24 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       .content {
-        margin-bottom: 10vh;
+        font-size: 20px;
+        margin: 0 auto 10vh;
+        max-width: 36em;
+        width: 100%;
+      }
+
+      .publishedAt {
+        display: block;
+        text-align: right;
       }
 
       .content :global(article) {
         box-sizing: border-box;
-        font-size: 20px;
         font-weight: normal;
-        margin: 0 auto;
-        max-width: 36em;
         line-height: 1.4;
         outline: 0;
         padding-left: 1em;
         padding-right: 1em;
-        width: 100%;
         word-break: break-word;
         word-wrap: break-word;
       }
@@ -145,7 +153,7 @@ export default ({ title, content, date, slug, description }) => (
       }
 
       .content :global(p) {
-        margin: .5em 0;
+        margin: 0.5em 0;
         font-size: 1.25em;
       }
 
@@ -268,7 +276,7 @@ export default ({ title, content, date, slug, description }) => (
 
       .content :global(figcaption) {
         color: ${colors.grey};
-        font-size: .9rem;
+        font-size: 0.9rem;
       }
 
       .content :global(img) {

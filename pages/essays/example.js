@@ -9,7 +9,7 @@ import withSW from '../../lib/with-sw.js';
 export default compose(withError, withGA, withSW)(() => (
   <Essay
     title="This is an example"
-    date="2017-09-30T00:00:00Z"
+    date="2017-10-15T00:00:00Z"
     description=""
     content={`
 *[HTML]: HyperText Markup Language
