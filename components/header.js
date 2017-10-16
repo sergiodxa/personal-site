@@ -1,4 +1,4 @@
-import * as colors from '../../lib/colors.js';
+import * as colors from '../lib/colors.js';
 
 function className({ centered, sticky }) {
   return `${centered ? 'centered' : ''} ${sticky ? 'sticky' : ''}`.trim();

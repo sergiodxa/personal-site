@@ -3416,7 +3416,7 @@ markdown-it-podcast@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/markdown-it-podcast/-/markdown-it-podcast-0.1.0.tgz#634e47a73ca738d657df7186e82e1569ee0ecc92"
 
-markdown-it-regexp@0.4.*:
+markdown-it-regexp@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/markdown-it-regexp/-/markdown-it-regexp-0.4.0.tgz#d64d713eecec55ce4cfdeb321750ecc099e2c2dc"
 
@@ -3448,12 +3448,6 @@ md5-file@3.2.3:
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.2.3.tgz#f9bceb941eca2214a4c0727f5e700314e770f06f"
   dependencies:
     buffer-alloc "^1.1.0"
-
-mdfigcaption@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/mdfigcaption/-/mdfigcaption-0.1.1.tgz#d666527e79a4759581606624b038e1aa8481e1db"
-  dependencies:
-    markdown-it-regexp "0.4.*"
 
 mdurl@^1.0.1:
   version "1.0.1"
