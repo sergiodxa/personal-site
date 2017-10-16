@@ -386,18 +386,36 @@ export default ({ title, content, date, slug, description }) => (
         }
 
         .content :global(h1) {
+          font-size: 2em;
           margin-left: -2px;
           line-height: 1.04;
           letter-spacing: -0.028em;
         }
 
         .content :global(h2) {
+          font-size: 1.75em;
           margin-top: 1.75rem;
           box-sizing: border-box;
           padding-left: .5em;
           padding-right: .5em;
           margin-left: calc(-.5em + 2px);
           margin-right: calc(-.5em + 2px);
+        }
+
+        .content :global(h3) {
+          font-size: 1.5em;
+        }
+
+        .content :global(h4) {
+          font-size: 1.25em;
+        }
+
+        .content :global(h5) {
+          font-size: 1.125em;
+        }
+
+        .content :global(h6) {
+          font-size: 1em;
         }
 
         .content :global(blockquote) {
