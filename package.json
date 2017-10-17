@@ -21,8 +21,12 @@
     "type": "git",
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
-  "keywords": [],
-  "author": "Sergio Daniel Xalambrí <sergiodxa@gmail.com> (https://sergio.now.sh/)",
+  "keywords": ["nextjs", "blog", "personal-website", "personal-site"],
+  "author": {
+    "name": "Sergio Daniel Xalambrí",
+    "email": "sergiodxa@gmail.com",
+    "url": "https://sergio.now.sh/"
+  },
   "license": "MIT",
   "private": true,
   "bugs": {
