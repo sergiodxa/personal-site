@@ -9,12 +9,12 @@
     "postexport": "cp .next/service-worker.js portfolio && npm run build:rss",
     "build:rss": "node scripts/build-rss.js",
     "alias": "now alias",
-    "clean": "now rm portfolio --safe --yes",
+    "clean": "now rm portfolio --safe --yes --token $TOKEN",
     "prestart": "npm run build",
     "start": "next start",
     "predeploy": "npm run export",
-    "deploy": "now deploy portfolio",
-    "postdeploy": "npm run alias && npm run clean",
+    "deploy": "now deploy portfolio --token $TOKEN",
+    "postdeploy": "npm run alias --token $TOKEN && npm run clean",
     "set:rules": "now alias sergio.now.sh -r rules.json"
   },
   "repository": {
