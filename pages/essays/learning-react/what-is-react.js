@@ -8,11 +8,11 @@ import withSW from '../../../lib/with-sw.js';
 
 export default compose(withError, withGA, withSW)(() => (
   <Essay
-    title="Learning React: What is React.js?"
+    title="Learning React: What is React?"
     date="2017-10-17T00:00:00Z"
     description="So, you have decided to learning React, that’s great, but what is React actually?"
     content={`
-# Learning React: What is React.js?
+# Learning React: What is React?
 So, you have decided to learn React, that’s great, but what is React actually?
 
 You may have heard that React is a library, and yes, that’s true, React is a JavaScript library created by Facebook and published as Open Source in 2013 that allow you to easily create user interfaces for Web, Mobile, CLI, Desktop, etc. using reusable components.
