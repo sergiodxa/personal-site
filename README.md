@@ -1,6 +1,8 @@
 # Personal site
 This is the code behind `sergio.now.sh`.
 
+[![Build Status](https://travis-ci.org/sergiodxa/personal-site.svg?branch=master)](https://travis-ci.org/sergiodxa/personal-site)
+
 ## Stack
 - Next.js
 - React
