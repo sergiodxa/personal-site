@@ -3,11 +3,6 @@ This is the code behind `sergio.now.sh`.
 
 [![Build Status](https://travis-ci.org/sergiodxa/personal-site.svg?branch=master)](https://travis-ci.org/sergiodxa/personal-site)
 
-## Stack
-- Next.js
-- React
-- Now.sh
-
 ## How to run
 ### Development
 All that's needed to run this blog is:
@@ -21,13 +16,15 @@ Then head to http://localhost:3000. Changes you make to components will hencefor
 
 ### Deployment
 
+> The deployment is automatic via Travis CI after each commit.
+
 All that's needed to deploy this site to the cloud is to execute a single command
 
 ```
 yarn deploy
 ```
 
-This will build and export to HTML files the site, deploy it to [Now.sh](https://now.sh) and then alias it automatically.
+This will build and export to HTML files the site, generate the RSS feed, deploy it to [Now](https://now.sh) and then alias it automatically.
 
 ## Scripts
 - `dev` -> run the development server
