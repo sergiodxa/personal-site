@@ -31,16 +31,16 @@ This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML 
 > This is a quote
 > by _Sergio Xalambrí_
 
-\`\`\`diff
+~~~diff
 + New code
 - Old code
-\`\`\`
+~~~
 
-\`\`\`js
+~~~js
 export default () => (
   <h1>Heading 1</h1>
 )
-\`\`\`
+~~~
 
 - this
 - is
@@ -57,8 +57,6 @@ export default () => (
 | Header | Header 2 | Header 3 |
 | ------ | -------- | -------- |
 | Value  | Value 2  | Value 3  |
-
-@[gist](https://gist.github.com/sergiodxa/467414d29a2ed8021299892541f8f4aa)
     `}
   />
 ));
