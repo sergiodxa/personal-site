@@ -82,7 +82,7 @@ export default mapProps(({ date, ...props }) => ({
       }
 
       .content {
-        font-size: 20px;
+        font-size: 1.25rem;
         margin: 0 auto 10vh;
         max-width: 36em;
         width: 100%;
