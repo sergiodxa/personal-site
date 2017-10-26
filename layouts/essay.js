@@ -192,7 +192,7 @@ export default mapProps(({ date, ...props }) => ({
         border: 1px solid ${colors.black};
         padding: 1rem calc(2rem - 1px);
         margin: 1rem -2rem;
-        overflow: scroll;
+        overflow-x: scroll;
       }
 
       .content :global(pre code) {
