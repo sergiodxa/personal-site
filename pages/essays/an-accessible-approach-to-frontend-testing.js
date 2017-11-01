@@ -12,7 +12,6 @@ export default compose(withError, withGA, withSW)(() => (
     date="2017-09-30T00:00:00Z"
     description="Testing is hard. Testing Frontend is harder. But you should do it anyways."
     content={`
-# An accessible approach to Frontend testing
 > Testing is hard. Testing Frontend is harder. But you should do it anyways.
 
 Being realistic tests are usually avoided and this happens even often in Frontend codebases because testing a UI is harder than just doing a unit test or a HTTP request to check the response of an API (_I’m not saying testing backend is easy_).

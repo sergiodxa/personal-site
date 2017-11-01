@@ -53,6 +53,7 @@ export default mapProps(({ date, ...props }) => ({
     </a>
 
     <section className="content">
+      <h1 className="main-title">{title}</h1>
       {isValid(date) && (
         <time className="publishedAt" dateTime={dateString}>
           Posted on <b>{format(date, 'MMMM DD, YYYY')}</b>
@@ -88,6 +89,16 @@ export default mapProps(({ date, ...props }) => ({
         width: 100%;
       }
 
+      .main-title {
+        font-size: 2em;
+        font-weight: lighter;
+        letter-spacing: -0.028em;
+        margin: 1em 0;
+        text-align: center;
+        padding-left: .5em;
+        padding-right: .5em;
+      }
+
       .publishedAt {
         display: block;
         text-align: right;
@@ -103,7 +114,6 @@ export default mapProps(({ date, ...props }) => ({
         word-break: break-word;
         word-wrap: break-word;
       }
-      .content :global(h1),
       .content :global(h2),
       .content :global(h3),
       .content :global(h4),
@@ -112,12 +122,6 @@ export default mapProps(({ date, ...props }) => ({
         font-weight: bold;
         letter-spacing: -0.02em;
         margin: 1em 0 0;
-      }
-
-      .content :global(h1) {
-        font-size: 2.5em;
-        letter-spacing: -0.028em;
-        margin: 0;
       }
 
       .content :global(h2) {
@@ -391,23 +395,25 @@ export default mapProps(({ date, ...props }) => ({
       @media (max-width: 767px) {
         .publishedAt {
           padding-right: 1em;
+          padding-left: 1em;
         }
 
-        .content :global(h1) {
+        .main-title {
           font-size: 2em;
           margin-left: -2px;
           line-height: 1.04;
           letter-spacing: -0.028em;
+          text-align: left;
         }
 
         .content :global(h2) {
           font-size: 1.75em;
           margin-top: 1.75rem;
           box-sizing: border-box;
-          padding-left: 0.5em;
-          padding-right: 0.5em;
-          margin-left: calc(-0.5em + 2px);
-          margin-right: calc(-0.5em + 2px);
+          padding-left: 0.5714285714em;
+          padding-right: 0.5714285714em;
+          margin-left: -0.5714285714em;
+          margin-right: -0.5714285714em;
         }
 
         .content :global(h3) {
