@@ -36,10 +36,10 @@ export default compose(withError, withGA, withSW)(() => (
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        font-size: 0.9em;
+        font-size: 1em;
         position: fixed;
-        padding-bottom: 1em;
-        bottom: 0;
+        padding-top: 1em;
+        top: 0;
         left: 0;
         right: 0;
         text-align: center;
@@ -54,8 +54,7 @@ export default compose(withError, withGA, withSW)(() => (
       }
       @media (min-width: 720px) {
         nav {
-          top: 0;
-          bottom: auto;
+          padding-top: 0;
         }
         a {
           font-size: 1.25em;
