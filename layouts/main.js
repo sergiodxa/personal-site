@@ -29,7 +29,7 @@ export default ({ children }) => (
         title="Sergio Xalambrí"
       />
       <link rel="manifest" href="/static/manifest.json" />
-      <link rel="shortcut icon" href="/static/favicon.ico" />
+      {/* <link rel="shortcut icon" href="/static/favicon.ico" /> */}
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
       <meta content="IE=edge,chrome=1" httpEquiv="X-UA-Compatible" />
