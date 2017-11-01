@@ -14,6 +14,25 @@ import Main from './main.js';
 import parser from '../lib/md-parser.js';
 import * as colors from '../lib/colors.js';
 
+const abbreviatures = `
+*[ipc]: Inter-process communication
+*[IPC]: Inter-process communication
+*[GQL]: GraphQL
+*[HTML]: HyperText Markup Language
+*[CSS]: Cascading Style Sheets
+*[JS]: JavaScript
+*[HTTP]: Hypertext Transfer Protocol
+*[UI]: User interface
+*[UX]: User eXperience
+*[DX]: Developer eXperience
+*[API]: Application programming interface
+*[E2E]: End-to-End
+*[e2e]: End-to-End
+*[IDE]: Integrated development environment
+*[REST]: Representational state transfer
+*[SQL]: Structured Query Language
+`
+
 export default mapProps(({ date, ...props }) => ({
   ...props,
   date: new Date(date),
@@ -61,7 +80,7 @@ export default mapProps(({ date, ...props }) => ({
       )}
       <article
         dangerouslySetInnerHTML={{
-          __html: parser(content)
+          __html: parser(abbreviatures + content)
         }}
       />
     </section>
