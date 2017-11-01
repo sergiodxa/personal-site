@@ -3,7 +3,11 @@ import Link from 'next/link';
 import slugify from 'slugify';
 import format from 'date-fns/format';
 import isValid from 'date-fns/is_valid';
+import compose from 'recompose/compose';
 import mapProps from 'recompose/mapProps';
+import setPropTypes from 'recompose/setPropTypes';
+import setStatic from 'recompose/setStatic';
+import PropTypes from 'prop-types';
 
 import Header from '../components/header.js';
 import OpenGraph from '../components/open-graph.js';
@@ -13,6 +17,7 @@ import Main from './main.js';
 
 import parser from '../lib/md-parser.js';
 import * as colors from '../lib/colors.js';
+import * as CustomTypes from '../lib/types.js';
 
 const abbreviatures = `
 *[ipc]: Inter-process communication
@@ -31,13 +36,25 @@ const abbreviatures = `
 *[IDE]: Integrated development environment
 *[REST]: Representational state transfer
 *[SQL]: Structured Query Language
-`
+*[DB]: Database
+`;
 
-export default mapProps(({ date, ...props }) => ({
-  ...props,
-  date: new Date(date),
-  dateString: date
-}))(({ title, content, date, dateString, slug, description }) => (
+export default compose(
+  mapProps(({ date, ...props }) => ({
+    ...props,
+    date: new Date(date),
+    dateString: date
+  })),
+  setStatic('displayName', 'Essay'),
+  setPropTypes({
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    dateString: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date),
+    slug: PropTypes.string,
+    description: CustomTypes.stringMax140
+  })
+)(({ title, content, date, dateString, slug, description }) => (
   <Main>
     <Head>
       <title>{title}</title>
@@ -114,8 +131,8 @@ export default mapProps(({ date, ...props }) => ({
         letter-spacing: -0.028em;
         margin: 1em 0;
         text-align: center;
-        padding-left: .5em;
-        padding-right: .5em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
       }
 
       .publishedAt {
@@ -138,7 +155,7 @@ export default mapProps(({ date, ...props }) => ({
       .content :global(h4),
       .content :global(h5),
       .content :global(h6) {
-        font-weight: bold;
+        font-weight: lighter;
         letter-spacing: -0.02em;
         margin: 1em 0 0;
       }
@@ -192,6 +209,11 @@ export default mapProps(({ date, ...props }) => ({
         font-size: 1.25em;
       }
 
+      .content :global(hr) {
+        margin: 2em auto;
+        width: 33%;
+      }
+
       /* inline code */
       .content :global(p code) {
         color: ${colors.pink};
@@ -223,7 +245,7 @@ export default mapProps(({ date, ...props }) => ({
         font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
           DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
           serif;
-        font-size: 1rem;
+        font-size: 0.8em;
       }
 
       /* identation sizes */
@@ -299,6 +321,7 @@ export default mapProps(({ date, ...props }) => ({
       .content :global(abbr) {
         cursor: help;
         text-decoration-style: dashed;
+        text-decoration-color: ${colors.grey};
       }
 
       /* images */

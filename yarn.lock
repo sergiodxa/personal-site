@@ -3715,9 +3715,9 @@ normalize-path@^2.0.0, normalize-path@^2.0.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
-now@^8.3.10:
-  version "8.3.10"
-  resolved "https://registry.yarnpkg.com/now/-/now-8.3.10.tgz#13b0dc1b8651284d5c345bc969d664d11c7885e8"
+now@^8.0.0:
+  version "8.3.11"
+  resolved "https://registry.yarnpkg.com/now/-/now-8.3.11.tgz#bca2043bc4485b1b24ea656d652e448ae27fe0bb"
 
 "npm-package-arg@^3.0.0 || ^4.0.0 || ^5.0.0":
   version "5.1.2"
@@ -4664,9 +4664,9 @@ send@0.16.1:
     range-parser "~1.2.0"
     statuses "~1.3.1"
 
-serve@^6.0.3:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/serve/-/serve-6.3.1.tgz#904ab7eed8faba422fa89ae716271d0376a00b7f"
+serve@^6.0.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/serve/-/serve-6.4.0.tgz#397d7c97c8b9ff728a41d9bd4a75db0d7ddad43e"
   dependencies:
     args "3.0.7"
     basic-auth "2.0.0"
