@@ -11,7 +11,7 @@ export default compose(withError, withGA, withSW)(() => (
     title="This is an example"
     date="2017-10-15T00:00:00Z"
     description=""
-    content={`
+    content={/*markdown*/`
 *[HTML]: HyperText Markup Language
 
 # This is an example

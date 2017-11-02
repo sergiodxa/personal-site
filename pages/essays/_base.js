@@ -11,7 +11,7 @@ export default compose(withError, withGA, withSW)(() => (
     title="Title"
     date="YYYY-MM-DDT00:00:00Z"
     description=""
-    content={`
+    content={/*markdown*/`
 # Title
     `}
   />
