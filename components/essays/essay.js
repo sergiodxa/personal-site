@@ -1,15 +1,32 @@
 import Link from 'next/link';
 import format from 'date-fns/format';
 import classNames from 'classnames/dedupe';
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import setDisplayName from 'recompose/setDisplayName';
+import setPropTypes from 'recompose/setPropTypes';
+import setStatic from 'recompose/setStatic';
 
 import Site from './site.js';
 
 import parseUrl from '../../lib/parse-url.js';
 import * as colors from '../../lib/colors.js';
+import * as CustomTypes from '../../lib/types.js';
 
-export default (
-  { title, link, date, highlighted = false, deprecated = false } = {}
-) => (
+export default compose(
+  setDisplayName('Essay'),
+  setPropTypes({
+    title: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    highlighted: PropTypes.bool,
+    deprecated: PropTypes.bool
+  }),
+  setStatic('defaultProps', {
+    highlighted: false,
+    deprecated: false
+  })
+)(({ title, link, date, highlighted, deprecated }) => (
   <article className={classNames('essay', { highlighted, deprecated })}>
     <time className="date">{format(date, 'MMMM DD, YYYY')}</time>
 
@@ -95,4 +112,4 @@ export default (
       }
     `}</style>
   </article>
-);
+));

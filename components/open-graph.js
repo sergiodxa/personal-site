@@ -1,24 +1,31 @@
 import Head from 'next/head';
+import compose from 'recompose/compose';
+import setDisplayName from 'recompose/setDisplayName';
+import setPropTypes from 'recompose/setPropTypes';
+import setStatic from 'recompose/setStatic';
+import PropTypes from 'prop-types';
 
-const defaultProps = {
-  type: 'website',
-  title: 'Sergio Xalambrí',
-  description: 'Lead Support Engineer',
-  image: 'https://sergio.now.sh/static/avatar.jpg',
-  url: 'https://sergio.now.sh/',
-  siteName: 'Sergio Xalambrí',
-  locale: 'en'
-};
-
-const OpenGraph = ({
-  type,
-  title,
-  description,
-  image,
-  url,
-  siteName,
-  locale
-}) => (
+export default compose(
+  setDisplayName('OpenGraph'),
+  setPropTypes({
+    type: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    url: PropTypes.string,
+    siteName: PropTypes.string,
+    locale: PropTypes.string
+  }),
+  setStatic('defaultProps', {
+    type: 'website',
+    title: 'Sergio Xalambrí',
+    description: 'Lead Support Engineer',
+    image: 'https://sergio.now.sh/static/avatar.jpg',
+    url: 'https://sergio.now.sh/',
+    siteName: 'Sergio Xalambrí',
+    locale: 'en'
+  })
+)(({ type, title, description, image, url, siteName, locale }) => (
   <Head>
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
@@ -28,8 +35,4 @@ const OpenGraph = ({
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={locale} />
   </Head>
-);
-
-OpenGraph.defaultProps = defaultProps;
-
-export default OpenGraph;
+));

@@ -1,26 +1,33 @@
 import Head from 'next/head';
+import compose from 'recompose/compose';
+import setDisplayName from 'recompose/setDisplayName';
+import setPropTypes from 'recompose/setPropTypes';
+import setStatic from 'recompose/setStatic';
+import PropTypes from 'prop-types';
 
-const defaultProps = {
-  type: 'summary',
-  site: '@sergiodxa',
-  creator: '@sergiodxa',
-  url: 'https://sergio.now.sh/',
-  title: 'Sergio Xalambrí',
-  description: 'Lead Support Engineer',
-  image: 'https://sergio.now.sh/static/avatar.jpg',
-  summary: "Sergio Xalambrí's personal website"
-};
-
-const TwitterCard = ({
-  type,
-  site,
-  creator,
-  url,
-  title,
-  description,
-  image,
-  summary
-}) => (
+export default compose(
+  setDisplayName('TwitterCard'),
+  setPropTypes({
+    type: PropTypes.string,
+    site: PropTypes.string,
+    creator: PropTypes.string,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    summary: PropTypes.string
+  }),
+  setStatic('defaultProps', {
+    type: 'summary',
+    site: '@sergiodxa',
+    creator: '@sergiodxa',
+    url: 'https://sergio.now.sh/',
+    title: 'Sergio Xalambrí',
+    description: 'Lead Support Engineer',
+    image: 'https://sergio.now.sh/static/avatar.jpg',
+    summary: "Sergio Xalambrí's personal website"
+  })
+)(({ type, site, creator, url, title, description, image, summary }) => (
   <Head>
     <meta name="twitter:card" value={type} key="type" />
     <meta name="twitter:site" value={site} key="site" />
@@ -31,8 +38,4 @@ const TwitterCard = ({
     <meta name="twitter:image" value={image} key="image" />
     <meta name="twitter:summary" value={summary} key="summary" />
   </Head>
-);
-
-TwitterCard.defaultProps = defaultProps;
-
-export default TwitterCard;
+));

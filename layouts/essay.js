@@ -6,7 +6,7 @@ import isValid from 'date-fns/is_valid';
 import compose from 'recompose/compose';
 import mapProps from 'recompose/mapProps';
 import setPropTypes from 'recompose/setPropTypes';
-import setStatic from 'recompose/setStatic';
+import setDisplayName from 'recompose/setDisplayName';
 import PropTypes from 'prop-types';
 
 import Header from '../components/header.js';
@@ -45,7 +45,7 @@ export default compose(
     date: new Date(date),
     dateString: date
   })),
-  setStatic('displayName', 'Essay'),
+  setDisplayName('Essay'),
   setPropTypes({
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,

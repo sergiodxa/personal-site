@@ -1,15 +1,27 @@
+import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import setDisplayName from 'recompose/setDisplayName';
+import setPropTypes from 'recompose/setPropTypes';
+import setStatic from 'recompose/setStatic';
+import classnames from 'classnames/dedupe';
+
 import * as colors from '../lib/colors.js';
 
-function className({ centered, sticky }) {
-  return `${centered ? 'centered' : ''} ${sticky ? 'sticky' : ''}`.trim();
-}
-
-export default ({ centered, sticky = true, secondary }) => (
-  <header className={className({ centered, sticky })}>
-    {!secondary
-      ? <h1>Sergio Xalambrí</h1>
-      : <h2>Sergio Xalambrí</h2>
-    }
+export default compose(
+  setDisplayName('Header'),
+  setPropTypes({
+    centered: PropTypes.bool,
+    sticky: PropTypes.bool,
+    secondary: PropTypes.bool
+  }),
+  setStatic('defaultProps', {
+    centered: false,
+    sticky: false,
+    secondary: false
+  })
+)(({ centered, sticky, secondary }) => (
+  <header className={classnames({ centered, sticky })}>
+    {!secondary ? <h1>Sergio Xalambrí</h1> : <h2>Sergio Xalambrí</h2>}
 
     {centered && (
       <h2>
@@ -84,4 +96,4 @@ export default ({ centered, sticky = true, secondary }) => (
       }
     `}</style>
   </header>
-);
+));

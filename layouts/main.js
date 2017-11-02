@@ -1,4 +1,9 @@
 import Head from 'next/head';
+import setDisplayName from 'recompose/setDisplayName';
+import setPropTypes from 'recompose/setPropTypes';
+import compose from 'recompose/compose';
+import PropTypes from 'prop-types';
+
 import Header from '../components/header.js';
 import TwitterCard from '../components/twitter-card.js';
 import OpenGraph from '../components/open-graph.js';
@@ -6,7 +11,12 @@ import OpenGraph from '../components/open-graph.js';
 import minify from '../lib/minify.js';
 import * as colors from '../lib/colors.js';
 
-export default ({ children }) => (
+export default compose(
+  setDisplayName('Main'),
+  setPropTypes({
+    children: PropTypes.node.isRequired
+  })
+)(({ children }) => (
   <main>
     <Head>
       <title>Sergio Xalambrí - Lead Support Engineer</title>
@@ -86,4 +96,4 @@ export default ({ children }) => (
       }
     `}</style>
   </main>
-);
+));
