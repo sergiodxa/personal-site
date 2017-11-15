@@ -12,7 +12,7 @@ export default compose(withError, withGA, withSW)(() => (
     date="YYYY-MM-DDT00:00:00Z"
     description=""
     content={/*markdown*/`
-# Title
+Content here!
     `}
   />
 ));
