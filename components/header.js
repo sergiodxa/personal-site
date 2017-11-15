@@ -65,7 +65,7 @@ export default compose(
 
       h1,
       h2 {
-        font-size: 1em;
+        font-size: 1.5em;
         font-weight: 200;
         padding: 0.25em 0;
         margin: 0;
