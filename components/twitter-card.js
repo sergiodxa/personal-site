@@ -18,7 +18,7 @@ export default compose(
     summary: PropTypes.string
   }),
   setStatic('defaultProps', {
-    type: 'summary',
+    type: 'summary_large_image',
     site: '@sergiodxa',
     creator: '@sergiodxa',
     url: 'https://sergio.now.sh/',
