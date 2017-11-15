@@ -31,6 +31,11 @@ export default compose(
     <time className="date">{format(date, 'MMMM DD, YYYY')}</time>
 
     <h2 className="title">
+      {deprecated && (
+        <em title="This essay teachs an old (version of a) technology or is about something that already changed.">
+          *
+        </em>
+      )}{' '}
       <Link href={link}>
         <a
           target={parseUrl(link).hostname !== null ? '_blank' : '_self'}
@@ -47,6 +52,7 @@ export default compose(
         display: flex;
         flex-direction: column;
         margin: 1em 0;
+        font-size: 1.25em;
       }
 
       .link {
@@ -81,17 +87,23 @@ export default compose(
         padding: 0.5em 0.5em;
       }
 
-      .essay.highlighted .title {
+      /*.essay.highlighted .title {
         background-color: ${colors.black};
       }
 
       .essay.highlighted .title :global(*) {
         color: ${colors.white};
-      }
+      }*/
 
       .essay.deprecated {
         opacity: 0.5;
         z-index: 1;
+      }
+
+      em {
+        cursor: help;
+        text-decoration: none;
+        font-style: normal;
       }
 
       @media (min-width: 720px) {
