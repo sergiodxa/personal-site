@@ -21,16 +21,18 @@ export default compose(
     title: 'Sergio Xalambrí',
     description: 'Lead Support Engineer',
     image: 'https://sergio.now.sh/static/open-graph.png',
+    imageAlt: 'Sergio Xalambrí - Lead Support Engineer at ▲ZEIT',
     url: 'https://sergio.now.sh/',
     siteName: 'Sergio Xalambrí',
     locale: 'en'
   })
-)(({ type, title, description, image, url, siteName, locale }) => (
+)(({ type, title, description, image, imageAlt, url, siteName, locale }) => (
   <Head>
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:url" content={url} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={locale} />
