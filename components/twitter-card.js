@@ -24,7 +24,7 @@ export default compose(
     url: 'https://sergio.now.sh/',
     title: 'Sergio Xalambrí',
     description: 'Lead Support Engineer',
-    image: 'https://sergio.now.sh/static/avatar.jpg',
+    image: 'https://sergio.now.sh/static/open-graph.png',
     summary: "Sergio Xalambrí's personal website"
   })
 )(({ type, site, creator, url, title, description, image, summary }) => (

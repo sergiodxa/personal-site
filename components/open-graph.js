@@ -20,7 +20,7 @@ export default compose(
     type: 'website',
     title: 'Sergio Xalambrí',
     description: 'Lead Support Engineer',
-    image: 'https://sergio.now.sh/static/avatar.jpg',
+    image: 'https://sergio.now.sh/static/open-graph.png',
     url: 'https://sergio.now.sh/',
     siteName: 'Sergio Xalambrí',
     locale: 'en'
