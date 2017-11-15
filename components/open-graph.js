@@ -19,7 +19,7 @@ export default compose(
   setStatic('defaultProps', {
     type: 'website',
     title: 'Sergio Xalambrí',
-    description: 'Lead Support Engineer',
+    description: 'Lead Support Engineer at ▲ZEIT',
     image: 'https://sergio.now.sh/static/open-graph.png',
     imageAlt: 'Sergio Xalambrí - Lead Support Engineer at ▲ZEIT',
     url: 'https://sergio.now.sh/',

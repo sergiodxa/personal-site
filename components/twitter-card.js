@@ -23,7 +23,7 @@ export default compose(
     creator: '@sergiodxa',
     url: 'https://sergio.now.sh/',
     title: 'Sergio Xalambrí',
-    description: 'Lead Support Engineer',
+    description: 'Lead Support Engineer at ▲ZEIT',
     image: 'https://sergio.now.sh/static/open-graph.png',
     summary: "Sergio Xalambrí's personal website"
   })
