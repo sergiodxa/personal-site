@@ -67,7 +67,7 @@ export default compose(
     <TwitterCard
       title={title}
       url={`https://sergio.now.sh/essays/${slug ||
-        slugify(title, { lower: true })}`}
+        slugify(title, { lower: true })}/`}
       description={description}
     />
 
@@ -75,7 +75,7 @@ export default compose(
       title={title}
       description={description}
       url={`https://sergio.now.sh/essays/${slug ||
-        slugify(title, { lower: true })}`}
+        slugify(title, { lower: true })}/`}
     />
 
     <Link href="/" prefetch>
