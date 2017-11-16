@@ -12,6 +12,7 @@
     "clean": "now rm portfolio --safe --yes --token $TOKEN",
     "prestart": "npm run build",
     "start": "next start",
+    "start:static": "serve portfolio",
     "predeploy": "npm run export",
     "deploy": "now deploy portfolio --token $TOKEN",
     "postdeploy": "npm run alias && npm run clean",
