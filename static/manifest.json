@@ -7,16 +7,21 @@
   "start_url": "https://sergio.now.sh/",
   "short_name": "Sergiodxa",
   "theme_color": "#000000",
-  "description": "Lead Support Engineer",
+  "description": "Lead Support Engineer at ▲ZEIt",
   "orientation": "any",
   "background_color": "#ffffff",
   "related_applications": [],
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/static/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
+      "src": "/static/favicon@1x.png",
+      "sizes": "48",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicon@2x.png",
+      "sizes": "96",
+      "type": "image/png"
     }
   ]
 }
