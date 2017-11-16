@@ -14,7 +14,6 @@ export default compose(withError, withGA, withSW)(() => (
     content={/*markdown*/`
 *[HTML]: HyperText Markup Language
 
-# This is an example
 This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML ++element++ ==parsed from Markdown== by @sergiodxa
 
 Term 1
