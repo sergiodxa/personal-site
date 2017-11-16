@@ -17,6 +17,9 @@ export default compose(withError, withGA, withSW)(() => (
 # This is an example
 This is [used](https://zeit.co) to \`display\` **every** _possible_ styled HTML ++element++ ==parsed from Markdown== by @sergiodxa
 
+Term 1
+  ~ Definition 1
+
 @[twitter](https://twitter.com/sergiodxa/status/914228079391903744)
 
 @[codesandbox](vn1k4rrml7)

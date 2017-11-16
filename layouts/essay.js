@@ -195,7 +195,7 @@ export default compose(
         padding-left: calc(2em - 3px);
         margin-left: -2em;
         margin-right: 0;
-        font-weight: 400;
+        font-weight: normal;
         font-style: italic;
         font-size: 1em;
       }
@@ -313,8 +313,18 @@ export default compose(
         line-height: 1.5;
       }
 
+      .content :global(dl) {
+        border: 1px solid ${colors.grey};
+        padding: .75em;
+      }
+
       .content :global(dt) {
-        font-weight: bold;
+        font-size: 1.25em;
+        font-weight: lighter;
+      }
+
+      .content :global(dd) {
+        margin-left: 0;
       }
 
       /* abbreviatures */
