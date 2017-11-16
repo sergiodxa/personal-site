@@ -14,13 +14,23 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/static/favicon@1x.png",
+      "src": "/static/favicon@48.png",
       "sizes": "48",
       "type": "image/png"
     },
     {
-      "src": "/static/favicon@2x.png",
+      "src": "/static/favicon@96.png",
       "sizes": "96",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicon@192.png",
+      "sizes": "192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicon@512.png",
+      "sizes": "512",
       "type": "image/png"
     }
   ]
