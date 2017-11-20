@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import format from 'date-fns/format';
+import isValid from 'date-fns/is_valid';
 import classNames from 'classnames/dedupe';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
+import mapProps from 'recompose/mapProps';
 import setDisplayName from 'recompose/setDisplayName';
 import setPropTypes from 'recompose/setPropTypes';
 import setStatic from 'recompose/setStatic';
@@ -14,6 +16,11 @@ import * as colors from '../../lib/colors.js';
 import * as CustomTypes from '../../lib/types.js';
 
 export default compose(
+  mapProps(({ date, ...props }) => ({
+    ...props,
+    date: new Date(date),
+    dateString: date
+  })),
   setDisplayName('Essay'),
   setPropTypes({
     title: PropTypes.string.isRequired,
@@ -28,7 +35,9 @@ export default compose(
   })
 )(({ title, link, date, highlighted, deprecated }) => (
   <article className={classNames('essay', { highlighted, deprecated })}>
-    <time className="date">{format(date, 'MMMM DD, YYYY')}</time>
+    <time className="date">
+      {isValid(date) && format(date, 'MMMM DD, YYYY')}
+    </time>
 
     <h2 className="title">
       {deprecated && (
