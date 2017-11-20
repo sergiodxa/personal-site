@@ -158,6 +158,20 @@ export default compose(
         font-weight: lighter;
         letter-spacing: -0.02em;
         margin: 1em 0 0;
+        position: relative;
+      }
+
+      .content :global(h2:hover > .anchor::before) {
+        margin-right: -1em;
+      }
+
+      .content :global(*:hover > .anchor::before) {
+        content: '#';
+        color: ${colors.black};
+        text-decoration: none;
+        position: absolute;
+        right: 100%;
+        padding: 0 .25em;
       }
 
       .content :global(h2) {
@@ -456,6 +470,10 @@ export default compose(
           line-height: 1.04;
           letter-spacing: -0.028em;
           text-align: left;
+        }
+
+        .content :global(*:hover > .anchor::before) {
+          display: none;
         }
 
         .content :global(h2) {
