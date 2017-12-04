@@ -16,6 +16,7 @@ import TwitterCard from '../components/twitter-card.js';
 import Main from './main.js';
 
 import parser from '../lib/md-parser.js';
+import extractMeta from '../lib/extract-meta.js';
 import * as colors from '../lib/colors.js';
 import * as CustomTypes from '../lib/types.js';
 
@@ -40,11 +41,20 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, ...props }) => ({
-    ...props,
-    date: new Date(date),
-    dateString: date
-  })),
+  mapProps(({ content: rawContent, ...props }) => {
+    const { meta, content } = extractMeta(rawContent);
+    const parsedContent = parser(abbreviatures + content);
+    return {
+      ...props,
+      date: new Date(meta.date),
+      dateString: meta.date,
+      title: meta.title,
+      description: meta.description,
+      slug: meta.slug,
+      content: rawContent,
+      parsedContent
+    };
+  }),
   setDisplayName('Essay'),
   setPropTypes({
     title: PropTypes.string.isRequired,
@@ -52,9 +62,9 @@ export default compose(
     dateString: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date),
     slug: PropTypes.string,
-    description: CustomTypes.stringMax140
+    description: CustomTypes.stringMax140,
   })
-)(({ title, content, date, dateString, slug, description }) => (
+)(({ title, content, meta, parsedContent, date, dateString, slug, description }) => (
   <Main>
     <Head>
       <title>{title}</title>
@@ -97,7 +107,7 @@ export default compose(
       )}
       <article
         dangerouslySetInnerHTML={{
-          __html: parser(abbreviatures + content)
+          __html: parsedContent
         }}
       />
     </section>
@@ -171,7 +181,7 @@ export default compose(
         text-decoration: none;
         position: absolute;
         right: 100%;
-        padding: 0 .25em;
+        padding: 0 0.25em;
       }
 
       .content :global(h2) {
@@ -329,7 +339,7 @@ export default compose(
 
       .content :global(dl) {
         border: 1px solid ${colors.grey};
-        padding: .75em;
+        padding: 0.75em;
       }
 
       .content :global(dt) {
