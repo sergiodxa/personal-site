@@ -53,6 +53,7 @@ export default compose(
             : { pathname: 'essay', query: { slug } }
         }
         as={link}
+        prefetch={parseUrl(link).hostname === null}
       >
         <a
           href={link}
