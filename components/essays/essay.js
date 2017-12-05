@@ -27,13 +27,14 @@ export default compose(
     link: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     highlighted: PropTypes.bool,
-    deprecated: PropTypes.bool
+    deprecated: PropTypes.bool,
+    slug: PropTypes.string
   }),
   setStatic('defaultProps', {
     highlighted: false,
     deprecated: false
   })
-)(({ title, link, date, highlighted, deprecated }) => (
+)(({ title, link, date, highlighted, deprecated, slug }) => (
   <article className={classNames('essay', { highlighted, deprecated })}>
     <time className="date">
       {isValid(date) && format(date, 'MMMM DD, YYYY')}
@@ -45,8 +46,16 @@ export default compose(
           *
         </em>
       )}{' '}
-      <Link href={link}>
+      <Link
+        href={
+          parseUrl(link).hostname !== null
+            ? link
+            : { pathname: 'essay', query: { slug } }
+        }
+        as={link}
+      >
         <a
+          href={link}
           target={parseUrl(link).hostname !== null ? '_blank' : '_self'}
           className="link"
         >
