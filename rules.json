@@ -2,6 +2,11 @@
   "rules": [
     { "pathname": "/es6/**", "dest": "https://sergiodxa.github.io" },
     { "pathname": "/css4/**", "dest": "https://sergiodxa.github.io" },
+    {
+      "pathname": "/graphql",
+      "method": ["POST"],
+      "dest": "sergio-api.now.sh"
+    },
     { "dest": "portfolio.now.sh" }
   ]
 }
