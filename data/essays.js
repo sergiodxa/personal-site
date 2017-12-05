@@ -8,7 +8,7 @@ module.exports = [
     'An accessible approach to Frontend testing',
     '/essays/an-accessible-approach-to-frontend-testing',
     '2017-09-30T00:00:00Z',
-    { highlighted: true }
+    { highlighted: true, slug: 'an-accessible-approach-to-frontend-testing' }
   ),
   createEssay(
     65,
