@@ -1,6 +1,8 @@
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 
+const routes = require('./server/routes');
+
 module.exports = {
   webpack(config, { dev }) {
     config.plugins = config.plugins.filter(plugin => {
@@ -29,12 +31,6 @@ module.exports = {
   },
 
   exportPathMap() {
-    return {
-      '/': { page: '/' },
-      '/essays': { page: '/essays' },
-      '/essays/an-accessible-approach-to-frontend-testing': {
-        page: '/essays/an-accessible-approach-to-frontend-testing'
-      }
-    };
+    return routes;
   }
 };
