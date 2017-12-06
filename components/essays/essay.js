@@ -50,9 +50,13 @@ export default compose(
         href={
           parseUrl(link).hostname !== null
             ? link
-            : { pathname: 'essay', query: { slug } }
+            : { pathname: '/essay', query: { slug } }
         }
-        as={link}
+        as={
+          parseUrl(link).hostname !== null
+            ? undefined
+            : link
+        }
         prefetch={parseUrl(link).hostname === null}
       >
         <a
