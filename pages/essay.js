@@ -15,7 +15,7 @@ import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
 
 async function getInitialProps(ctx) {
-  if (ctx.isVirtualCall) {
+  if (!ctx.req) {
     const props = sessionStorage.getItem(
       format({ pathname: ctx.pathname, query: ctx.query })
     );
