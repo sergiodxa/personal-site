@@ -28,7 +28,6 @@ export default class LinkWithData extends Link {
 
     if (this.props.withData && Component && Component.getInitialProps) {
       const ctx = { pathname: href, query, isVirtualCall: true };
-      console.log(ctx);
       const props = await Component.getInitialProps(ctx);
       sessionStorage.setItem(url, JSON.stringify(props));
     }
