@@ -12,7 +12,7 @@ export default class LinkWithData extends Link {
     shallow: PropTypes.bool,
     passHref: PropTypes.bool,
     scroll: PropTypes.bool,
-    withData: PropTypes.bool
+    withData: PropTypes.bool,
     children: PropTypes.oneOfType([
       PropTypes.element,
       (props, propName) => {
