@@ -1,4 +1,4 @@
-import Link from 'next/link';
+
 import format from 'date-fns/format';
 import isValid from 'date-fns/is_valid';
 import classNames from 'classnames/dedupe';
@@ -10,6 +10,7 @@ import setPropTypes from 'recompose/setPropTypes';
 import setStatic from 'recompose/setStatic';
 
 import Site from './site.js';
+import Link from '../link';
 
 import parseUrl from '../../lib/parse-url.js';
 import * as colors from '../../lib/colors.js';
@@ -25,7 +26,8 @@ export default compose(
   setPropTypes({
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.object.isRequired,
+    dateString: PropTypes.string.isRequired,
     highlighted: PropTypes.bool,
     deprecated: PropTypes.bool,
     slug: PropTypes.string
@@ -58,6 +60,7 @@ export default compose(
             : link
         }
         prefetch={parseUrl(link).hostname === null}
+        withData={parseUrl(link).hostname === null}
       >
         <a
           href={link}

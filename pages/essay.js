@@ -1,4 +1,5 @@
 import Error from 'next/error';
+import { format } from 'url';
 
 import compose from 'recompose/compose';
 import setStatic from 'recompose/setStatic';
@@ -14,6 +15,15 @@ import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
 
 async function getInitialProps(ctx) {
+  if (!ctx.req) {
+    const props = sessionStorage.getItem(
+      format({ pathname: ctx.pathname, query: ctx.query })
+    );
+    if (props) {
+      return JSON.parse(props);
+    }
+  }
+
   const query = `
     query getEssay($slug: String!) {
       getEssay(slug: $slug) {
