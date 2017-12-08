@@ -9,11 +9,6 @@ export default class LinkWithData extends Link {
     withData: bool
   };
 
-  static defaultProps = {
-    ...(Link.defaultProps || {}),
-    withData: false
-  };
-
   async prefetch() {
     if (!this.props.prefetch) return;
     if (typeof window === 'undefined') return;
