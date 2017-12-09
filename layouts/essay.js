@@ -40,11 +40,12 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, ...props }) => ({
+  mapProps(({ date, content, tags = '', ...props }) => ({
     ...props,
     date: new Date(date),
     dateString: date,
-    content: parser(abbreviatures + content)
+    content: parser(abbreviatures + content),
+    tags: tags.split(', ')
   })),
   setDisplayName('Essay'),
   setPropTypes({
@@ -53,7 +54,9 @@ export default compose(
     dateString: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date),
     slug: PropTypes.string,
-    description: CustomTypes.stringMax140
+    description: CustomTypes.stringMax140,
+    canonicalUrl: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string)
   })
 )(
   ({
@@ -64,7 +67,8 @@ export default compose(
     date,
     dateString,
     slug,
-    description
+    description,
+    canonicalUrl
   }) => (
     <Main>
       <Head>
@@ -73,6 +77,7 @@ export default compose(
         <meta name="twitter:widgets:theme" content="light" />
         <meta name="twitter:widgets:link-color" content={colors.blue} />
         <meta name="twitter:widgets:border-color" content={colors.blue} />
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       </Head>
 
       <TwitterCard
