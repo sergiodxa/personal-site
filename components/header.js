@@ -94,6 +94,15 @@ export default compose(
           width: 100%;
         }
       }
+
+      @media (min-width: 720px) {
+        h2 {
+          font-size: 2.5em;
+        }
+        .centered h1 {
+          font-size: 2.5em;
+        }
+      }
     `}</style>
   </header>
 ));
