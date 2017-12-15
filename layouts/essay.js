@@ -84,7 +84,7 @@ export default compose(
     />
 
     <Link href="/" prefetch>
-      <a title="Sergio Xalambrí">
+      <a title="Sergio Xalambrí" rel="home">
         <Header sticky={false} secondary />
       </a>
     </Link>
@@ -100,6 +100,16 @@ export default compose(
           Posted on <b>{format(props.date, 'MMMM DD, YYYY')}</b>
         </time>
       )}
+
+      {props.canonicalUrl && (
+        <div className="canonicalUrl">
+          Originally published at{' '}
+          <a href={props.canonicalUrl} target="_blank" rel="external">
+            {props.canonicalUrl}
+          </a>
+        </div>
+      )}
+
       <article
         dangerouslySetInnerHTML={{
           __html: props.content
@@ -143,6 +153,12 @@ export default compose(
       .publishedAt {
         display: block;
         text-align: right;
+      }
+
+      .canonicalUrl {
+        border: 1px solid ${colors.grey};
+        padding: 0.75em;
+        margin: 0.75em;
       }
 
       .content :global(article) {
