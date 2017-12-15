@@ -1,5 +1,6 @@
 import Head from 'next/head';
 
+import Codepen from './icons/codepen';
 import Email from './icons/email';
 import Essays from './icons/essays';
 import GitHub from './icons/github';
@@ -8,6 +9,7 @@ import LinkedIn from './icons/linkedin';
 import Medium from './icons/medium';
 import Meetup from './icons/meetup';
 import NPM from './icons/npm';
+import RSS from './icons/rss';
 import Spotify from './icons/spotify';
 import Steam from './icons/steam';
 import Twitter from './icons/twitter';
@@ -18,10 +20,12 @@ export default ({ name }) => {
     <i alt={name}>
       {(() => {
         switch (name.toLowerCase()) {
-          case 'essays':
-            return <Essays />;
+          case 'codepen':
+            return <Codepen />;
           case 'email':
             return <Email />;
+          case 'essays':
+            return <Essays />;
           case 'essay':
             return <Essay />;
           case 'github':
@@ -36,6 +40,8 @@ export default ({ name }) => {
             return <Meetup />;
           case 'npm':
             return <NPM />;
+          case 'rss':
+            return <RSS />;
           case 'spotify':
             return <Spotify />;
           case 'steam':

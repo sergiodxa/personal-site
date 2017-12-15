@@ -111,6 +111,16 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
           <li>
+            <a href="https://codepen.io/sergiodxa/" rel="me" title="Codepen">
+              <Icon name="codepen" />
+            </a>
+          </li>
+          <li>
+            <a href="/atom" rel="me" title="Feed RSS">
+              <Icon name="RSS" />
+            </a>
+          </li>
+          <li>
             <a href="mailto:sergiodxa@gmail.com" rel="me" title="Email">
               <Icon name="Email" />
             </a>
