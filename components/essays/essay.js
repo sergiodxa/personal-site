@@ -1,4 +1,3 @@
-
 import format from 'date-fns/format';
 import isValid from 'date-fns/is_valid';
 import classNames from 'classnames/dedupe';
@@ -37,12 +36,12 @@ export default compose(
     deprecated: false
   })
 )(({ title, link, date, highlighted, deprecated, slug }) => (
-  <article className={classNames('essay', { highlighted, deprecated })}>
-    <time className="date">
+  <article className={classNames('essay h-entry', { highlighted, deprecated })}>
+    <time className="date dt-published">
       {isValid(date) && format(date, 'MMMM DD, YYYY')}
     </time>
 
-    <h2 className="title">
+    <h2 className="title h-name">
       {deprecated && (
         <em title="This essay teachs an old (version of a) technology or is about something that already changed.">
           *
@@ -54,18 +53,14 @@ export default compose(
             ? link
             : { pathname: '/essay', query: { slug } }
         }
-        as={
-          parseUrl(link).hostname !== null
-            ? undefined
-            : link
-        }
+        as={parseUrl(link).hostname !== null ? undefined : link}
         prefetch={parseUrl(link).hostname === null}
         withData={parseUrl(link).hostname === null}
       >
         <a
           href={link}
           target={parseUrl(link).hostname !== null ? '_blank' : '_self'}
-          className="link"
+          className="link u-url"
         >
           {title}
         </a>

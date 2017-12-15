@@ -20,7 +20,7 @@ export default compose(
     secondary: false
   })
 )(({ centered, sticky, secondary }) => (
-  <header className={classnames({ centered, sticky })}>
+  <header className={classnames('h-card', { centered, sticky })}>
     {!secondary ? <h1>Sergio Xalambrí</h1> : <h2>Sergio Xalambrí</h2>}
 
     {centered && (
