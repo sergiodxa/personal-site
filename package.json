@@ -17,7 +17,7 @@
     "predeploy": "npm run export",
     "deploy": "now deploy portfolio --token $TOKEN",
     "postdeploy": "npm run alias && npm run clean",
-    "set:rules": "now alias sergio.now.sh -r rules.json"
+    "set:rules": "now alias sergio.now.sh -r now.json"
   },
   "repository": {
     "type": "git",
