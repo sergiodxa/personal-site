@@ -1,18 +1,18 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Essay from '../components/essays/essay.js';
-import Header from '../components/header.js';
-import Layout from '../layouts/main.js';
+import Essay from '../components/essays/essay';
+import Header from '../components/header';
+import Layout from '../layouts/main';
 
-import essays from '../data/essays.js';
+import essays from '../data/essays';
 
 import compose from 'recompose/compose';
 
-import withError from '../lib/with-error.js';
-import withGA from '../lib/with-ga.js';
-import withSW from '../lib/with-sw.js';
-import * as colors from '../lib/colors.js';
+import withError from '../lib/with-error';
+import withGA from '../lib/with-ga';
+import withSW from '../lib/with-sw';
+import * as colors from '../lib/colors';
 
 const byDate = (a, b) => {
   const timeA = new Date(a.date).getTime();
