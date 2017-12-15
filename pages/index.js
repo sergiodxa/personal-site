@@ -26,11 +26,8 @@ export default compose(withError, withGA, withSW)(() => (
       <Link href="/essays" prefetch>
         <a title="Essays and Articles">Essays</a>
       </Link>
-      <a href="https://twitter.com/@sergiodxa" title="Opinion" rel="me">
-        Opinion
-      </a>
-      <a href="https://github.com/sergiodxa" title="Code repositories" rel="me">
-        Code
+      <a href="https://twitter.com/@sergiodxa" title="Thoughts" rel="me">
+        Thoughts
       </a>
     </nav>
 
