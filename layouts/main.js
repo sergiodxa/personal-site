@@ -1,8 +1,10 @@
 import Head from 'next/head';
+import Router from 'next/router';
 import setDisplayName from 'recompose/setDisplayName';
 import setPropTypes from 'recompose/setPropTypes';
 import compose from 'recompose/compose';
 import PropTypes from 'prop-types';
+import NProgress from 'nprogress';
 
 import Header from '../components/header.js';
 import TwitterCard from '../components/twitter-card.js';
@@ -10,6 +12,10 @@ import OpenGraph from '../components/open-graph.js';
 
 import minify from '../lib/minify.js';
 import * as colors from '../lib/colors.js';
+
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete = () => NProgress.done();
+Router.onRouteChangeError = () => NProgress.done();
 
 export default compose(
   setDisplayName('Main'),
@@ -40,6 +46,7 @@ export default compose(
       />
       <link rel="manifest" href="/static/manifest.json" />
       <link rel="shortcut icon" href="/static/favicon.png" />
+      <link rel="stylesheet" href="/static/nprogress.css" />
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
       <meta content="IE=edge,chrome=1" httpEquiv="X-UA-Compatible" />
