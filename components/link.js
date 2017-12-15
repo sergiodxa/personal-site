@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Router from 'next/router';
-import exact from 'prop-types-exact'
+import exact from 'prop-types-exact';
 import { format, resolve, parse } from 'url';
 
 export default class LinkWithData extends Link {
@@ -17,13 +17,15 @@ export default class LinkWithData extends Link {
     children: PropTypes.oneOfType([
       PropTypes.element,
       (props, propName) => {
-        const value = props[propName]
+        const value = props[propName];
 
         if (typeof value === 'string') {
-          warnLink(`Warning: You're using a string directly inside <Link>. This usage has been deprecated. Please add an <a> tag as child of <Link>`)
+          warnLink(
+            `Warning: You're using a string directly inside <Link>. This usage has been deprecated. Please add an <a> tag as child of <Link>`
+          );
         }
 
-        return null
+        return null;
       }
     ]).isRequired
   });
@@ -38,18 +40,17 @@ export default class LinkWithData extends Link {
         : this.props.href;
 
     const { pathname } = window.location;
+
     const href = resolve(pathname, url);
+
     const { query } =
-      typeof this.props.href !== 'string'
-        ? this.props.href
-        : parse(url, true);
+      typeof this.props.href !== 'string' ? this.props.href : parse(url, true);
+
     const Component = await Router.prefetch(href);
 
     if (this.props.withData && Component && Component.getInitialProps) {
-      if (sessionStorage.getItem(url)) return;
       const ctx = { pathname: href, query, isVirtualCall: true };
-      const props = await Component.getInitialProps(ctx);
-      sessionStorage.setItem(url, JSON.stringify(props));
+      await Component.getInitialProps(ctx);
     }
   }
 }

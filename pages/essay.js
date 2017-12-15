@@ -16,7 +16,7 @@ import withSW from '../lib/with-sw.js';
 
 async function getInitialProps(ctx) {
   if (!ctx.req) {
-    const props = sessionStorage.getItem(
+    const props = localStorage.getItem(
       format({ pathname: ctx.pathname, query: ctx.query })
     );
     if (props) {
@@ -46,7 +46,11 @@ async function getInitialProps(ctx) {
     return { errors };
   }
 
-  return { ...data.getEssay };
+  const props = { ...data.getEssay };
+
+  if (ctx.isVirtualCall) localStorage.setItem(url, JSON.stringify(props));
+
+  return props;
 }
 
 export default compose(
