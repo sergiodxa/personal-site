@@ -104,7 +104,7 @@ export default compose(
       {props.canonicalUrl && (
         <div className="canonicalUrl">
           Originally published at{' '}
-          <a href={props.canonicalUrl} target="_blank" rel="external">
+          <a href={props.canonicalUrl} target="_blank" rel="canonical">
             {props.canonicalUrl}
           </a>
         </div>
