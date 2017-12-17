@@ -2,5 +2,6 @@ language: node_js
 node_js:
   - "node"
 cache: yarn
-before_script: npm i -g now
+before_install: sudo npm install --global now
+install: npm install
 script: yarn deploy
