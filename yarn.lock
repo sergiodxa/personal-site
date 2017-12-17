@@ -2821,6 +2821,10 @@ highlight.js@^9.9.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
+himalaya@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/himalaya/-/himalaya-1.0.0.tgz#c995587480775b6a9608f5049f02d0edcd303197"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"

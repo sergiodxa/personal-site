@@ -50,7 +50,7 @@ export default compose(
   setDisplayName('Essay'),
   setPropTypes({
     title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.array.isRequired,
     dateString: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date),
     slug: PropTypes.string,
@@ -110,11 +110,7 @@ export default compose(
         </div>
       )}
 
-      <article
-        dangerouslySetInnerHTML={{
-          __html: props.content
-        }}
-      />
+      <article>{props.content}</article>
     </section>
 
     <style jsx>{`
