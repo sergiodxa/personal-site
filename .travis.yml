@@ -1,8 +1,7 @@
-sudo: required
 language: node_js
 node_js:
   - "node"
 cache: yarn
-before_install: sudo npm install --global now
+before_install: npm install now
 install: npm install
 script: yarn deploy

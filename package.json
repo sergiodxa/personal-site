@@ -23,12 +23,7 @@
     "type": "git",
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
-  "keywords": [
-    "nextjs",
-    "blog",
-    "personal-website",
-    "personal-site"
-  ],
+  "keywords": ["nextjs", "blog", "personal-website", "personal-site"],
   "author": {
     "name": "Sergio Daniel Xalambrí",
     "email": "sergiodxa@gmail.com",
