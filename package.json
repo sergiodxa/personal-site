@@ -60,7 +60,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-ga": "^2.2.0",
-    "react-icons": "^2.2.7",
     "recompose": "^0.26.0",
     "slugify": "^1.2.1"
   },
