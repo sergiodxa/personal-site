@@ -21,7 +21,11 @@ export default compose(
   })
 )(({ centered, sticky, secondary }) => (
   <header className={classnames('h-card', { centered, sticky })}>
-    {!secondary ? <h1>Sergio Xalambrí</h1> : <h2>Sergio Xalambrí</h2>}
+    {!secondary ? (
+      <h1>Sergio Xalambrí</h1>
+    ) : (
+      <h2 className="secondary">Sergio Xalambrí</h2>
+    )}
 
     {centered && (
       <h2>
@@ -96,7 +100,7 @@ export default compose(
       }
 
       @media (min-width: 720px) {
-        h2 {
+        h2:not(.secondary) {
           font-size: 2.5em;
         }
         .centered h1 {
