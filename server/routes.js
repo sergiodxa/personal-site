@@ -8,6 +8,12 @@ module.exports = {
       slug: 'an-accessible-approach-to-frontend-testing'
     }
   },
+  '/essays/bye-platzi-hi-zeit': {
+    page: '/essay',
+    query: {
+      slug: 'bye-platzi-hi-zeit'
+    }
+  },
   '/essays/documentation': {
     page: '/essay',
     query: {
