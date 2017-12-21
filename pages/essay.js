@@ -15,10 +15,10 @@ import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
 
 async function getInitialProps(ctx) {
+  const url = format({ pathname: ctx.pathname, query: ctx.query });
+
   if (!ctx.req) {
-    const props = localStorage.getItem(
-      format({ pathname: ctx.pathname, query: ctx.query })
-    );
+    const props = localStorage.getItem(url);
     if (props) {
       return JSON.parse(props);
     }
