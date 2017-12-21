@@ -8,6 +8,12 @@ module.exports = {
       slug: 'an-accessible-approach-to-frontend-testing'
     }
   },
+  '/essays/how-to-keep-updated-with-the-javascript-ecosystem': {
+    page: '/essay',
+    query: {
+      slug: 'how-to-keep-updated-with-the-javascript-ecosystem'
+    }
+  },
   '/essays/bye-platzi-hi-zeit': {
     page: '/essay',
     query: {
