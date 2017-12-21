@@ -32,6 +32,7 @@ async function getInitialProps(ctx) {
         content
         date
         description
+        canonicalUrl
       }
     }
   `;
