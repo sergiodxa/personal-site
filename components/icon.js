@@ -2,7 +2,6 @@ import Head from 'next/head';
 
 import Codepen from './icons/codepen';
 import Email from './icons/email';
-import Essays from './icons/essays';
 import GitHub from './icons/github';
 import Instagram from './icons/instagram';
 import LinkedIn from './icons/linkedin';
@@ -24,8 +23,6 @@ export default ({ name }) => {
             return <Codepen />;
           case 'email':
             return <Email />;
-          case 'essays':
-            return <Essays />;
           case 'essay':
             return <Essay />;
           case 'github':
