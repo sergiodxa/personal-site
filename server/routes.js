@@ -16,7 +16,7 @@ module.exports = {
   },
   '/essays/sobre-el-ecosistema-y-la-fatiga-de-javascript': {
     page: '/essay',
-    query {
+    query: {
       slug: 'sobre-el-ecosistema-y-la-fatiga-de-javascript'
     }
   },
