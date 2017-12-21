@@ -14,6 +14,12 @@ module.exports = {
       slug: 'bye-platzi-hi-zeit'
     }
   },
+  '/essays/sobre-el-ecosistema-y-la-fatiga-de-javascript': {
+    page: '/essay',
+    query {
+      slug: 'sobre-el-ecosistema-y-la-fatiga-de-javascript'
+    }
+  },
   '/essays/documentation': {
     page: '/essay',
     query: {
