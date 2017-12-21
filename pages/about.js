@@ -39,13 +39,6 @@ export default compose(withError, withGA, withSW)(() => (
       <section id="social">
         <ul>
           <li>
-            <Link href="/essays">
-              <a rel="me" title="Essays">
-                <Icon name="Essays" />
-              </a>
-            </Link>
-          </li>
-          <li>
             <a href="https://twitter.com/@sergiodxa" rel="me" title="Twitter">
               <Icon name="Twitter" />
             </a>
@@ -140,6 +133,10 @@ export default compose(withError, withGA, withSW)(() => (
         max-width: 800px;
       }
 
+      p {
+        margin: 0.5em;
+      }
+
       #bio {
         margin: 0 auto;
         font-size: 2em;
@@ -167,7 +164,7 @@ export default compose(withError, withGA, withSW)(() => (
       }
 
       #about {
-        height: calc(100vh - 72px);
+        min-height: calc(100vh - 72px);
         display: flex;
         flex-direction: column;
         justify-content: center;
