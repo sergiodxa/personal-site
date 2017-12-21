@@ -18,6 +18,7 @@ import Main from './main.js';
 import parser from '../lib/md-parser.js';
 import * as colors from '../lib/colors.js';
 import * as CustomTypes from '../lib/types.js';
+import parseUrl from '../lib/parse-url.js';
 
 const abbreviatures = `
 *[ipc]: Inter-process communication
@@ -45,7 +46,8 @@ export default compose(
     date: new Date(date),
     dateString: date,
     content: parser(abbreviatures + content),
-    tags: tags.split(', ')
+    tags: tags.split(', '),
+    hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : ''
   })),
   setDisplayName('Essay'),
   setPropTypes({
@@ -56,7 +58,8 @@ export default compose(
     slug: PropTypes.string,
     description: CustomTypes.stringMax140,
     canonicalUrl: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string)
+    tags: PropTypes.arrayOf(PropTypes.string),
+    hostname: PropTypes.string
   })
 )(props => (
   <Main>
@@ -105,7 +108,7 @@ export default compose(
         <div className="canonicalUrl">
           Originally published at{' '}
           <a href={props.canonicalUrl} target="_blank" rel="canonical">
-            {props.canonicalUrl}
+            {props.hostname}
           </a>
         </div>
       )}
