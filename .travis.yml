@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "node"
 cache: yarn
-before_install: npm install now
+before_install: npm install now --no-save
 install: npm install
 script: yarn deploy
