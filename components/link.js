@@ -45,7 +45,7 @@ export default class LinkWithData extends Link {
 
     if (this.props.withData && Component && Component.getInitialProps) {
       const ctx = { pathname: href, query, isVirtualCall: true };
-      await Component.getInitialProps(ctx);
+      await Router.getInitialProps(Component, ctx);
     }
   }
 }
