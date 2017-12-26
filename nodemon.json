@@ -1,0 +1,6 @@
+{
+  "watch": [
+    "server/**/*.js",
+    "now.json"
+  ]
+}

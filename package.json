@@ -1,8 +1,9 @@
 {
   "name": "personal-site",
   "description": "Sergio Xalambrí personal website",
+  "main": "server/index.js",
   "scripts": {
-    "dev": "node server/index.js",
+    "dev": "nodemon .",
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export -o portfolio",
@@ -12,7 +13,7 @@
     "clean": "now rm portfolio --safe --yes --token $TOKEN",
     "prestart": "npm run build",
     "prestart:static": "npm run export",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "NODE_ENV=production node .",
     "start:static": "serve portfolio",
     "predeploy": "npm run export",
     "deploy": "now deploy portfolio --token $TOKEN",
@@ -60,6 +61,7 @@
   },
   "devDependencies": {
     "babili-webpack-plugin": "^0.1.2",
+    "nodemon": "^1.14.1",
     "serve": "^6.0.0",
     "sw-precache-webpack-plugin": "^0.11.4"
   }
