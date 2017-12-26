@@ -1,4 +1,4 @@
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
   render() {
@@ -7,9 +7,10 @@ export default class MyDocument extends Document {
         <Head />
         <body>
           <Main />
+          <script async src="//platform.twitter.com/widgets.js" />
           <NextScript />
         </body>
       </html>
-    )
+    );
   }
 }
