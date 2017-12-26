@@ -28,9 +28,9 @@ async function getInitialProps(ctx) {
     if (!isServer) {
       console.info('Getting info from localStorage');
       const props = localStorage.getItem(url);
-      console.debug('Retrieved info:' props);
-      if (props) {
+      console.debug('Retrieved info:', props);
 
+      if (props) {
         return JSON.parse(props);
       }
     }
