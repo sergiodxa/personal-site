@@ -1,5 +1,4 @@
 import Error from 'next/error';
-import { format } from 'url';
 
 import compose from 'recompose/compose';
 import setStatic from 'recompose/setStatic';
@@ -18,7 +17,7 @@ const gql = String.raw;
 
 async function getInitialProps(ctx) {
   console.debug('Context', JSON.stringify(ctx, null, 2));
-  const url = format({ pathname: ctx.pathname });
+  const url = ctx.pathname;
   console.debug('URL:', url);
 
   const isServer = Boolean(ctx.req);
