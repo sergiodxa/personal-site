@@ -41,11 +41,11 @@ export default class LinkWithData extends Link {
     const { query } =
       typeof this.props.href !== 'string' ? this.props.href : parse(url, true);
 
-      const Component = await Router.prefetch(href);
+    const Component = await Router.prefetch(href);
 
     if (this.props.withData && Component && Component.getInitialProps) {
       const ctx = { pathname: href, query, isVirtualCall: true };
-      await Router.getInitialProps(Component, ctx);
+      await Component.getInitialProps(ctx);
     }
   }
 }
