@@ -1,5 +1,5 @@
 import Error from 'next/error';
-import { parse } from 'url';
+import { format } from 'url';
 
 import compose from 'recompose/compose';
 import setStatic from 'recompose/setStatic';
