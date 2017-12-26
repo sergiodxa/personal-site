@@ -17,7 +17,7 @@ import withSW from '../lib/with-sw.js';
 const gql = String.raw;
 
 async function getInitialProps(ctx) {
-  console.time('getInitialProps');
+  console.group('getInitialProps');
   try {
     const url = ctx.asPath || format({ pathname: ctx.pathname });
     console.debug('URL:', url);
@@ -71,7 +71,7 @@ async function getInitialProps(ctx) {
   
     return props;
   } finally {
-    console.timeEnd('getInitialProps');
+    console.groupEnd('getInitialProps');
   }
 }
 

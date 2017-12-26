@@ -34,14 +34,9 @@ export default class LinkWithData extends Link {
     if (!this.props.prefetch) return;
     if (typeof window === 'undefined') return;
 
-    const url =
-      typeof this.props.href !== 'string'
-        ? format(this.props.href)
-        : this.props.href;
-
     const { pathname } = window.location;
 
-    const href = resolve(pathname, url);
+    const href = resolve(pathname, this.href);
 
     const { query } =
       typeof this.props.href !== 'string' ? this.props.href : parse(url, true);
