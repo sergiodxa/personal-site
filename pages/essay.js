@@ -14,17 +14,20 @@ import withError from '../lib/with-error.js';
 import withGA from '../lib/with-ga.js';
 import withSW from '../lib/with-sw.js';
 
+const gql = String.raw;
+
 async function getInitialProps(ctx) {
   const url = format({ pathname: ctx.pathname, query: ctx.query });
+  const isServer = Boolean(ctx.req);
 
-  if (!ctx.req) {
+  if (!isServer) {
     const props = localStorage.getItem(url);
     if (props) {
       return JSON.parse(props);
     }
   }
 
-  const query = `
+  const query = gql`
     query getEssay($slug: String!) {
       getEssay(slug: $slug) {
         title
