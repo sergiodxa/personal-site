@@ -17,7 +17,8 @@ import withSW from '../lib/with-sw.js';
 const gql = String.raw;
 
 async function getInitialProps(ctx) {
-  const url = ctx.asPath || format({ pathname: ctx.pathname });
+  console.debug('Context', JSON.stringify(ctx, null, 2));
+  const url = format({ pathname: ctx.pathname });
   console.debug('URL:', url);
 
   const isServer = Boolean(ctx.req);

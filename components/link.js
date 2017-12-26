@@ -35,17 +35,16 @@ export default class LinkWithData extends Link {
     if (typeof window === 'undefined') return;
 
     const { pathname } = window.location;
-    console.log('Pathname', pathname);
+
     const href = resolve(pathname, this.href);
-    console.log('HREF', href);
+
     const { query } =
       typeof this.props.href !== 'string' ? this.props.href : parse(url, true);
-    console.log('query', query);
-    const Component = await Router.prefetch(href);
+
+      const Component = await Router.prefetch(href);
 
     if (this.props.withData && Component && Component.getInitialProps) {
       const ctx = { pathname: href, query, isVirtualCall: true };
-      console.log('Context', JSON.stringify(ctx, null, 2));
       await Component.getInitialProps(ctx);
     }
   }
