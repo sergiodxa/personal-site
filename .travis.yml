@@ -1,6 +1,6 @@
 language: node_js
 node_js:
   - "node"
-cache: yarn
+cache: npm
 install: npm install --production && npm install now --no-save
-script: yarn deploy
+script: npm run deploy
