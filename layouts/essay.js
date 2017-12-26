@@ -86,7 +86,7 @@ export default compose(
         slugify(title, { lower: true })}/`}
     />
 
-    <Link href="/" prefetch>
+    <Link href="/essays" prefetch>
       <a title="Sergio Xalambrí" rel="home">
         <Header sticky={false} secondary />
       </a>
