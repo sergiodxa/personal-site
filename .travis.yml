@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "node"
 cache: yarn
-before_install: npm install now --no-save
-install: yarn --prod --frozen-lockfile --no-progress
+install:
+  yarn --prod --frozen-lockfile --no-progress && npm install now --no-save
 script: yarn deploy
