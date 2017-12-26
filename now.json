@@ -3,7 +3,7 @@
   "alias": "portfolio.now.sh",
   "type": "static",
   "env": {
-    "NODE_ENV": "@environment"
+    "NODE_ENV": "@env"
   },
   "rules": [
     { "pathname": "/es6/**", "dest": "https://sergiodxa.github.io" },
