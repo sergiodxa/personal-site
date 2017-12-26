@@ -2,6 +2,9 @@
   "name": "portfolio",
   "alias": "portfolio.now.sh",
   "type": "static",
+  "env": {
+    "NODE_ENV": "@environment"
+  },
   "rules": [
     { "pathname": "/es6/**", "dest": "https://sergiodxa.github.io" },
     { "pathname": "/css4/**", "dest": "https://sergiodxa.github.io" },
