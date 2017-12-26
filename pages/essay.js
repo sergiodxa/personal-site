@@ -1,4 +1,5 @@
 import Error from 'next/error';
+import { parse } from 'url';
 
 import compose from 'recompose/compose';
 import setStatic from 'recompose/setStatic';
@@ -16,9 +17,11 @@ import withSW from '../lib/with-sw.js';
 const gql = String.raw;
 
 async function getInitialProps(ctx) {
-  const url = ctx.pathname;
-
   const isServer = Boolean(ctx.req);
+
+  const url = ctx.isVirtualCall
+    ? ctx.pathname
+    : format({ pathname: ctx.pathname, query: ctx.query });
 
   if (!isServer) {
     console.info('Getting info from localStorage');
