@@ -1,6 +1,15 @@
 language: node_js
 node_js:
-  - "node"
-cache: npm
-install: npm install --production && npm install now --no-save
-script: npm run deploy
+  - "8"
+cache:
+  directories:
+      - "node_modules"
+install: npm install --production
+script: npm run export
+before_deploy: npm install now --no-save
+deploy:
+  provider: script
+  script: npm run deploy
+  skip_cleanup: true
+  on:
+    branch: master
