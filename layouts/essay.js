@@ -9,16 +9,18 @@ import setPropTypes from 'recompose/setPropTypes';
 import setDisplayName from 'recompose/setDisplayName';
 import PropTypes from 'prop-types';
 
-import Header from '../components/header.js';
-import OpenGraph from '../components/open-graph.js';
-import TwitterCard from '../components/twitter-card.js';
+import { H1 } from '../components/ui/heading';
 
-import Main from './main.js';
+import Header from '../components/header';
+import OpenGraph from '../components/open-graph';
+import TwitterCard from '../components/twitter-card';
 
-import parser from '../lib/md-parser.js';
-import * as colors from '../lib/colors.js';
-import * as CustomTypes from '../lib/types.js';
-import parseUrl from '../lib/parse-url.js';
+import Main from './main';
+
+import parser from '../lib/markdown';
+import * as colors from '../lib/colors';
+import * as CustomTypes from '../lib/types';
+import parseUrl from '../lib/parse-url';
 
 const abbreviatures = `
 *[ipc]: Inter-process communication
@@ -97,7 +99,7 @@ export default compose(
     </a>
 
     <section className="content">
-      <h1 className="main-title">{props.title}</h1>
+      <H1 className="main-title">{props.title}</H1>
       {isValid(props.date) && (
         <time className="publishedAt" dateTime={props.dateString}>
           Posted on <b>{format(props.date, 'MMMM DD, YYYY')}</b>
@@ -139,11 +141,7 @@ export default compose(
         width: 100%;
       }
 
-      .main-title {
-        font-size: 2em;
-        font-weight: lighter;
-        letter-spacing: -0.028em;
-        margin: 1em 0;
+      .content :global(.main-title) {
         text-align: center;
         padding-left: 0.5em;
         padding-right: 0.5em;
@@ -160,7 +158,7 @@ export default compose(
         margin: 0.75em;
       }
 
-      .content :global(article) {
+      .content article {
         box-sizing: border-box;
         font-weight: normal;
         line-height: 1.4;
@@ -195,7 +193,6 @@ export default compose(
       }
 
       .content :global(h2) {
-        font-size: 2em;
         border-bottom: 1px solid ${colors.black};
         box-sizing: border-box;
         margin-left: calc(-1em + 2px);
@@ -203,187 +200,30 @@ export default compose(
         padding: 0 1em 0.25em;
       }
 
-      .content :global(h3) {
-        font-size: 1.75em;
-      }
-
-      .content :global(h4) {
-        font-size: 1.5em;
-      }
-
-      .content :global(h5) {
-        font-size: 1.25em;
-      }
-
-      .content :global(h6) {
-        font-size: 1.125em;
-      }
-
-      .content :global(a) {
-        color: ${colors.blue};
-      }
-
-      .content :global(blockquote) {
-        border-left: 3px solid rgba(0, 0, 0, 0.84);
-        box-sizing: border-box;
-        padding-left: calc(2em - 3px);
-        margin-left: -2em;
-        margin-right: 0;
-        font-weight: normal;
-        font-style: italic;
-        font-size: 1em;
-      }
-
-      .content :global(blockquote > p) {
-        margin: 0;
-      }
-
-      .content :global(p) {
-        margin: 0.5em 0;
-        font-size: 1.25em;
-      }
-
       .content :global(hr) {
         margin: 2em auto;
         width: 33%;
       }
 
-      /* inline code */
-      .content :global(p code) {
-        color: ${colors.pink};
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-          serif;
-        font-size: 0.8em;
-        white-space: pre-wrap;
-      }
-
-      .content :global(p code:before) {
-        content: '\`';
-      }
-
-      .content :global(p code:after) {
-        content: '\`';
-      }
-
-      /* code blocks */
-      .content :global(pre) {
-        border: 1px solid ${colors.black};
-        padding: 1rem calc(2rem - 1px);
-        margin: 1rem -2rem;
-        overflow-x: scroll;
-      }
-
-      .content :global(pre code) {
-        color: ${colors.black};
-        font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
-          serif;
-        font-size: 0.8em;
-      }
-
       /* identation sizes */
-      .content :global(pre code[class~='language-javascript']),
-      .content :global(pre code[class~='language-js']),
-      .content :global(pre code[class~='language-html']),
-      .content :global(pre code[class~='language-css']),
-      .content :global(pre code[class~='language-styl']),
-      .content :global(pre code[class~='language-saas']),
-      .content :global(pre code[class~='language-less']),
-      .content :global(pre code[class~='language-ruby']) {
-        tab-size: 2;
-      }
-      .content :global(pre code[class~='language-java']),
-      .content :global(pre code[class~='language-python']),
-      .content :global(pre code[class~='language-php']) {
-        tab-size: 4;
-      }
-      .content :global(pre code[class~='language-go']) {
-        tab-size: 8;
-      }
-
-      /* table */
-      .content :global(table) {
-        font-size: 0.9rem;
-        width: 100%;
-      }
-
-      .content :global(th) {
-        padding: 5px;
-        color: #9b9b9b;
-        font-style: oblique;
-        font-weight: normal;
-        text-align: left;
-      }
-
-      .content :global(td) {
-        padding: 5px;
-      }
-
-      .content :global(mark) {
-        background-color: ${colors.pink};
-        color: white;
-        padding: 0.125em 0.2em;
-      }
-
-      /* lists */
-      .content :global(ul),
-      .content :global(ol) {
-        font-size: 1.3em;
-        font-weight: normal;
-        margin-left: -2rem;
-        padding-left: 2rem;
-      }
-
-      .content :global(ul) {
-        list-style-type: square;
-      }
-
-      .content :global(ol) {
-        list-style-type: lower-roman;
-      }
-
-      .content :global(li) {
-        line-height: 1.5;
-      }
-
-      .content :global(dl) {
-        border: 1px solid ${colors.grey};
-        padding: 0.75em;
-      }
-
-      .content :global(dt) {
-        font-size: 1.25em;
-        font-weight: lighter;
-      }
-
-      .content :global(dd) {
-        margin-left: 0;
-      }
-
-      /* abbreviatures */
-      .content :global(abbr) {
-        cursor: help;
-        text-decoration-style: dashed;
-        text-decoration-color: ${colors.grey};
-      }
-
-      /* images */
-      .content :global(figure) {
-        font-size: 0;
-        text-align: center;
-        margin: 0;
-        width: 100%;
-      }
-
-      .content :global(figcaption) {
-        color: ${colors.grey};
-        font-size: 0.9rem;
-      }
-
-      .content :global(img) {
-        max-width: 100%;
-      }
+      // .content :global(pre code[class~='language-javascript']),
+      // .content :global(pre code[class~='language-js']),
+      // .content :global(pre code[class~='language-html']),
+      // .content :global(pre code[class~='language-css']),
+      // .content :global(pre code[class~='language-styl']),
+      // .content :global(pre code[class~='language-saas']),
+      // .content :global(pre code[class~='language-less']),
+      // .content :global(pre code[class~='language-ruby']) {
+      //   tab-size: 2;
+      // }
+      // .content :global(pre code[class~='language-java']),
+      // .content :global(pre code[class~='language-python']),
+      // .content :global(pre code[class~='language-php']) {
+      //   tab-size: 4;
+      // }
+      // .content :global(pre code[class~='language-go']) {
+      //   tab-size: 8;
+      // }
 
       /* videos */
       .content :global(.embed-responsive) {
@@ -399,16 +239,6 @@ export default compose(
         left: 0 !important;
         width: 100% !important;
         height: 100% !important;
-      }
-
-      /* tweets */
-      .content :global(.twitter-tweet) {
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .content :global(.twitter-tweet:not(.twitter-tweet-rendered)) {
-        display: none;
       }
 
       /* pink */

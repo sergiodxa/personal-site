@@ -7,7 +7,6 @@ export default class extends Document {
         <Head />
         <body>
           <Main />
-          <script async src="//platform.twitter.com/widgets.js" />
           <NextScript />
         </body>
       </html>

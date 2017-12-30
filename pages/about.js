@@ -20,7 +20,7 @@ export default compose(withError, withGA, withSW)(() => (
 
     <Link href="/" prefetch>
       <a title="Sergio Xalambrí">
-        <Header />
+        <Header secondary />
       </a>
     </Link>
 

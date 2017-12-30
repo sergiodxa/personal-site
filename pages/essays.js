@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { H1 } from '../components/ui/heading';
 import Essay from '../components/essays/essay';
 import Header from '../components/header';
 import Layout from '../layouts/main';
@@ -32,11 +33,14 @@ export default compose(withError, withGA, withSW)(() => (
 
     <Link href="/" prefetch>
       <a title="Sergio Xalambrí">
-        <Header />
+        <Header secondary />
       </a>
     </Link>
 
-    <section>{essays.sort(byDate).map(toComponent)}</section>
+    <section>
+      <H1>Essays and Articles</H1>
+      {essays.sort(byDate).map(toComponent)}
+    </section>
 
     <style jsx global>{`
       main {
