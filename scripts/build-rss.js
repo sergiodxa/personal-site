@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { promisify } = require('util');
 
-const atom = require('../lib/atom.js');
+const atom = require('./lib/atom.js');
 
 const writeFile = promisify(fs.writeFile);
 

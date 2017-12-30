@@ -1,5 +1,5 @@
 const { parse } = require('url');
-const essays = require('../data/essays');
+const essays = require('../../data/essays.json');
 
 // constants
 const MAX = 100;
