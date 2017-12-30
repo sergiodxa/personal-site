@@ -7,6 +7,9 @@ import classnames from 'classnames/dedupe';
 
 import * as colors from '../lib/colors.js';
 
+import { H1, H2, H3 } from './ui/heading';
+import { A } from './ui/text';
+
 export default compose(
   setDisplayName('Header'),
   setPropTypes({
@@ -22,33 +25,28 @@ export default compose(
 )(({ centered, sticky, secondary }) => (
   <header className={classnames('h-card', { centered, sticky })}>
     {!secondary ? (
-      <h1>Sergio Xalambrí</h1>
+      <H1>Sergio Xalambrí</H1>
     ) : (
-      <h2 className="secondary">Sergio Xalambrí</h2>
+      <H3 className="secondary">Sergio Xalambrí</H3>
     )}
 
     {centered && (
-      <h2>
+      <H2>
         Lead Support Engineer at{' '}
         <strong>
-          <a
+          <A
             title="▲ ZEIT"
             href="https://zeit.co"
             target="_blank"
             rel="noopener"
           >
             ▲ ZEIT
-          </a>
+          </A>
         </strong>
-      </h2>
+      </H2>
     )}
 
     <style jsx>{`
-      a {
-        color: ${colors.black};
-        text-decoration: none;
-      }
-
       header {
         display: flex;
         text-align: center;
@@ -67,14 +65,6 @@ export default compose(
         position: sticky;
       }
 
-      h1,
-      h2 {
-        font-size: 1.5em;
-        font-weight: 200;
-        padding: 0.25em 0;
-        margin: 0;
-      }
-
       .centered {
         flex-direction: column;
         justify-content: space-between;
@@ -86,7 +76,7 @@ export default compose(
         padding: 0;
       }
 
-      .centered h1 {
+      .centered :global(h1) {
         font-size: 2em;
       }
 
@@ -94,7 +84,7 @@ export default compose(
         header:not(.centered) {
           display: block;
         }
-        header:not(.centered) h1 {
+        header:not(.centered) :global(h1) {
           width: 100%;
         }
       }
@@ -103,7 +93,7 @@ export default compose(
         h2:not(.secondary) {
           font-size: 2.5em;
         }
-        .centered h1 {
+        .centered :global(h1) {
           font-size: 2.5em;
         }
       }
