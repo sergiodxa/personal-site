@@ -1,15 +1,16 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import Header from '../components/header.js';
-import Layout from '../layouts/main.js';
+import Header from '../components/header';
+import Navigation from '../components/navigation';
+import Layout from '../layouts/main';
 
 import compose from 'recompose/compose';
 
-import withGA from '../lib/hoc/with-ga.js';
-import withSW from '../lib/hoc/with-sw.js';
-import withError from '../lib/hoc/with-error.js';
-import * as colors from '../lib/colors.js';
+import withGA from '../lib/hoc/with-ga';
+import withSW from '../lib/hoc/with-sw';
+import withError from '../lib/hoc/with-error';
+import * as colors from '../lib/colors';
 
 export default compose(withError, withGA, withSW)(() => (
   <Layout>
@@ -19,48 +20,6 @@ export default compose(withError, withGA, withSW)(() => (
 
     <Header centered />
 
-    <nav>
-      <Link href="/about" prefetch>
-        <a title="About Sergio Xalambrí">About me</a>
-      </Link>
-      <Link href="/essays" prefetch>
-        <a title="Essays and Articles">Essays</a>
-      </Link>
-      <a href="https://twitter.com/@sergiodxa" title="Thoughts" rel="me">
-        Thoughts
-      </a>
-    </nav>
-
-    <style jsx>{`
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        font-size: 1em;
-        position: fixed;
-        padding-top: 1em;
-        top: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-      }
-      a {
-        color: ${colors.black};
-        padding: 0.25em 0.5em;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      @media (min-width: 720px) {
-        nav {
-          padding-top: 0;
-        }
-        a {
-          font-size: 1.25em;
-          padding: 1em;
-        }
-      }
-    `}</style>
+    <Navigation />
   </Layout>
 ));
