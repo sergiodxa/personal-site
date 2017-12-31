@@ -16,7 +16,7 @@
     "start": "NODE_ENV=production node .",
     "start:static": "serve portfolio",
     "deploy": "now deploy portfolio --token $TOKEN -A ../now.json",
-    "postdeploy": "npm run alias && npm run clean",
+    "postdeploy": "npm run alias",
     "set:rules": "now alias sergio.now.sh -r now.json"
   },
   "repository": {
