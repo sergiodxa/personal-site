@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 import compose from 'recompose/compose';
 
-import Header from '../components/header.js';
-import Icon from '../components/icon.js';
-import Layout from '../layouts/main.js';
+import Header from '../components/header';
+import Icon from '../components/icon';
+import Layout from '../layouts/main';
 
-import withGA from '../lib/hoc/with-ga.js';
-import withSW from '../lib/hoc/with-sw.js';
-import withError from '../lib/hoc/with-error.js';
-import * as colors from '../lib/colors.js';
+import withGA from '../lib/hoc/with-ga';
+import withSW from '../lib/hoc/with-sw';
+import withError from '../lib/hoc/with-error';
+import * as colors from '../lib/colors';
 
 export default compose(withError, withGA, withSW)(() => (
   <Layout>
@@ -27,7 +27,7 @@ export default compose(withError, withGA, withSW)(() => (
     <section id="about">
       <section id="bio" className="h-card">
         <article>
-          <p>
+          <p className="p-note">
             I'm <strong className="p-name">Sergio Xalambrí</strong>,{' '}
             <em>JavaScript and Frontend developer</em> currently working as{' '}
             <span className="p-job-title">Lead Support Engineer</span> at{' '}
@@ -39,22 +39,42 @@ export default compose(withError, withGA, withSW)(() => (
       <section id="social">
         <ul>
           <li>
-            <a href="https://twitter.com/@sergiodxa" rel="me" title="Twitter">
+            <a
+              href="https://twitter.com/@sergiodxa"
+              rel="me"
+              title="Twitter"
+              className="u-url"
+            >
               <Icon name="Twitter" />
             </a>
           </li>
           <li>
-            <a href="https://medium.com/@sergiodxa" rel="me" title="Medium">
+            <a
+              href="https://medium.com/@sergiodxa"
+              rel="me"
+              title="Medium"
+              className="u-url"
+            >
               <Icon name="Medium" />
             </a>
           </li>
           <li>
-            <a href="https://github.com/sergiodxa" rel="me" title="GitHub">
+            <a
+              href="https://github.com/sergiodxa"
+              rel="me"
+              title="GitHub"
+              className="u-url"
+            >
               <Icon name="GitHub" />
             </a>
           </li>
           <li>
-            <a href="https://www.npmjs.com/~sergiodxa" rel="me" title="npm">
+            <a
+              href="https://www.npmjs.com/~sergiodxa"
+              rel="me"
+              title="npm"
+              className="u-url"
+            >
               <Icon name="npm" />
             </a>
           </li>
@@ -63,6 +83,7 @@ export default compose(withError, withGA, withSW)(() => (
               href="https://www.linkedin.com/in/sergiodxa"
               rel="me"
               title="LinkedIn"
+              className="u-url"
             >
               <Icon name="LinkedIn" />
             </a>
@@ -72,6 +93,7 @@ export default compose(withError, withGA, withSW)(() => (
               href="https://www.instagram.com/sergiodxa/"
               rel="me"
               title="Instagram"
+              className="u-url"
             >
               <Icon name="Instagram" />
             </a>
@@ -81,6 +103,7 @@ export default compose(withError, withGA, withSW)(() => (
               href="https://steamcommunity.com/id/sergiodxa/"
               rel="me"
               title="Steam"
+              className="u-url"
             >
               <Icon name="Steam" />
             </a>
@@ -90,6 +113,7 @@ export default compose(withError, withGA, withSW)(() => (
               href="https://www.youtube.com/channel/UCot5kKrWMufGtRohOli6T6g"
               rel="me"
               title="YouTube"
+              className="u-url"
             >
               <Icon name="YouTube" />
             </a>
@@ -99,22 +123,33 @@ export default compose(withError, withGA, withSW)(() => (
               href="https://www.meetup.com/members/182915204/"
               rel="me"
               title="Meetup"
+              className="u-url"
             >
               <Icon name="Meetup" />
             </a>
           </li>
           <li>
-            <a href="https://codepen.io/sergiodxa/" rel="me" title="Codepen">
+            <a
+              href="https://codepen.io/sergiodxa/"
+              rel="me"
+              title="Codepen"
+              className="u-url"
+            >
               <Icon name="codepen" />
             </a>
           </li>
           <li>
-            <a href="/atom" rel="me" title="Feed RSS">
+            <a href="/atom" rel="me" title="Feed RSS" className="u-url">
               <Icon name="RSS" />
             </a>
           </li>
           <li>
-            <a href="mailto:hello@sergiodxa.com" rel="me" title="Email">
+            <a
+              href="mailto:hello@sergiodxa.com"
+              rel="me"
+              title="Email"
+              className="u-email"
+            >
               <Icon name="Email" />
             </a>
           </li>
