@@ -10,7 +10,7 @@ function transform(essay) {
   const link =
     url.hostname !== null
       ? essay.link
-      : `https://sergio.now.sh${essay.link}`;
+      : `https://sergiodxa.com${essay.link}`;
 
   return `
     <entry>
@@ -44,10 +44,10 @@ module.exports = () => {
   <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Sergio Xalambrí</title>
     <subtitle>Essays</subtitle>
-    <link href="https://sergio.now.sh/atom" rel="self"/>
-    <link href="https://sergio.now.sh/"/>
+    <link href="https://sergiodxa.com/atom" rel="self"/>
+    <link href="https://sergiodxa.com/"/>
     <updated>${NOW}</updated>
-    <id>https://sergio.now.sh/</id>
+    <id>https://sergiodxa.com/</id>
     <author>
       <name>Sergio Xalambrí</name>
       <email>sergiodxa@gmail.com</email>
