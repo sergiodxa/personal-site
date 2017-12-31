@@ -1,6 +1,6 @@
 {
-  "name": "portfolio",
-  "alias": "portfolio.now.sh",
+  "name": "personal-site",
+  "alias": "site.sergiodxa.com",
   "type": "static",
   "env": {
     "NODE_ENV": "@env"
