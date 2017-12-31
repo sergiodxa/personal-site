@@ -114,7 +114,7 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
           <li>
-            <a href="mailto:sergiodxa@gmail.com" rel="me" title="Email">
+            <a href="mailto:hello@sergiodxa.com" rel="me" title="Email">
               <Icon name="Email" />
             </a>
           </li>
