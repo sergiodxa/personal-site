@@ -15,7 +15,7 @@ module.exports = {
           verbose: true,
           staticFileGlobsIgnorePatterns: [/\.next\//],
           minify: !dev,
-          cacheId: 'sergio.now.sh',
+          cacheId: 'sergiodxa.com',
           runtimeCaching: [
             {
               handler: 'networkFirst',
