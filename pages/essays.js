@@ -43,11 +43,6 @@ export default compose(withError, withGA, withSW)(() => (
     `}</style>
 
     <style jsx>{`
-      a {
-        color: ${colors.black};
-        text-decoration: none;
-      }
-
       section {
         margin: 0.5em;
       }
