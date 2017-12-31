@@ -10,9 +10,9 @@ import essays from '../data/essays';
 
 import compose from 'recompose/compose';
 
-import withError from '../lib/with-error';
-import withGA from '../lib/with-ga';
-import withSW from '../lib/with-sw';
+import withError from '../lib/hoc/with-error';
+import withGA from '../lib/hoc/with-ga';
+import withSW from '../lib/hoc/with-sw';
 import * as colors from '../lib/colors';
 
 const byDate = (a, b) => {
@@ -31,12 +31,6 @@ export default compose(withError, withGA, withSW)(() => (
       <title>Essays and Articles by Sergio Xalambrí</title>
     </Head>
 
-    <Link href="/" prefetch>
-      <a title="Sergio Xalambrí">
-        <Header secondary />
-      </a>
-    </Link>
-
     <section>
       <H1>Essays and Articles</H1>
       {essays.sort(byDate).map(toComponent)}
@@ -47,6 +41,7 @@ export default compose(withError, withGA, withSW)(() => (
         margin-bottom: 2em;
       }
     `}</style>
+
     <style jsx>{`
       a {
         color: ${colors.black};
@@ -54,12 +49,12 @@ export default compose(withError, withGA, withSW)(() => (
       }
 
       section {
-        padding: 0.5em;
+        margin: 0.5em;
       }
 
       @media (min-width: 720px) {
         section {
-          padding: 1em;
+          margin: 1em;
         }
       }
     `}</style>

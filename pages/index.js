@@ -6,9 +6,9 @@ import Layout from '../layouts/main.js';
 
 import compose from 'recompose/compose';
 
-import withGA from '../lib/with-ga.js';
-import withSW from '../lib/with-sw.js';
-import withError from '../lib/with-error.js';
+import withGA from '../lib/hoc/with-ga.js';
+import withSW from '../lib/hoc/with-sw.js';
+import withError from '../lib/hoc/with-error.js';
 import * as colors from '../lib/colors.js';
 
 export default compose(withError, withGA, withSW)(() => (
