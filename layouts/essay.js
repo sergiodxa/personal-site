@@ -14,6 +14,7 @@ import { H1 } from '../components/ui/heading';
 import Header from '../components/header';
 import OpenGraph from '../components/open-graph';
 import TwitterCard from '../components/twitter-card';
+import SubscribeForm from '../components/subscribe-form';
 
 import Main from './main';
 
@@ -116,6 +117,8 @@ export default compose(
       )}
 
       <article>{props.content}</article>
+
+      <SubscribeForm />
     </section>
 
     <style jsx>{`
