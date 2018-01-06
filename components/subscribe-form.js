@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { P } from './ui/text';
 import Case from './case';
 
+import { hasInitialized, logEvent } from '../lib/analytics.js';
 import * as colors from '../lib/colors';
 import fetch from '../lib/fetch';
 
@@ -22,9 +23,11 @@ class SubscribeForm extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
+    const { email } = this.state;
+
     this.setState({ status: 'loading' });
 
-    const variables = { email: this.state.email };
+    const variables = { email };
 
     const { errors = [], data } = await fetch({ query, variables });
 
@@ -33,6 +36,10 @@ class SubscribeForm extends Component {
     }
 
     this.setState({ email: '', status: 'success', message: data.subscribe });
+
+    if (hasInitialized()) {
+      logEvent('Subscription form', `User ${email} subscribed to email list`);
+    }
   };
 
   render() {
