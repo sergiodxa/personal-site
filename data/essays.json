@@ -318,14 +318,14 @@
   {
     "id": 20,
     "title": "Combinando React.js y Redux.js",
-    "link": "https://sergiodxa.com/essays/combinando-react-y-redux",
+    "link": "/essays/combinando-react-y-redux",
     "date": "2016-03-28T07:18:42.542Z",
     "slug": "combinando-react-y-redux"
   },
   {
     "id": 19,
     "title": "Introducción a Redux.js",
-    "link": "https://sergiodxa.com/essays/introduccion-a-redux",
+    "link": "/essays/introduccion-a-redux",
     "date": "2016-03-23T15:52:14.733Z",
     "highlighted": true,
     "slug": "introduccion-a-redux"
@@ -436,7 +436,7 @@
     "id": 5,
     "title": "Definiendo conceptos: Closure y Scope en JavaScript",
     "link":
-      "https://sergiodxa.com/essays/definiendo-conceptos-closures-y-scope",
+      "/essays/definiendo-conceptos-closures-y-scope",
     "date": "2014-07-31T00:19:09.428Z",
     "slug": "definiendo-conceptos-closures-y-scope"
   },
