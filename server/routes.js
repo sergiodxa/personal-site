@@ -31,5 +31,11 @@ module.exports = {
     query: {
       slug: 'documentation'
     }
+  },
+  '/essays/markdown-react': {
+    page: '/essay',
+    query: {
+      slug: 'markdown-react'
+    }
   }
 };
