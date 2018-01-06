@@ -76,7 +76,7 @@ export default compose(
 
     <TwitterCard
       title={props.title}
-      url={`https://sergio.now.sh/essays/${props.slug ||
+      url={`https://sergiodxa.com/essays/${props.slug ||
         slugify(title, { lower: true })}/`}
       description={props.description}
     />
@@ -84,7 +84,7 @@ export default compose(
     <OpenGraph
       title={props.title}
       description={props.description}
-      url={`https://sergio.now.sh/essays/${props.slug ||
+      url={`https://sergiodxa.com/essays/${props.slug ||
         slugify(title, { lower: true })}/`}
     />
 

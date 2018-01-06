@@ -8,9 +8,7 @@ const NOW = new Date().toJSON();
 function transform(essay) {
   const url = parse(essay.link);
   const link =
-    url.hostname !== null
-      ? essay.link
-      : `https://sergiodxa.com${essay.link}`;
+    url.hostname !== null ? essay.link : `https://sergiodxa.com${essay.link}`;
 
   return `
     <entry>
@@ -25,13 +23,13 @@ function transform(essay) {
       </content>
       <author>
         <name>Sergio Xalambrí</name>
-        <email>sergiodxa@gmail.com</email>
+        <email>hello@sergiodxa.com</email>
       </author>
     </entry>`;
 }
 
 function concat(total, item) {
-  return total + item
+  return total + item;
 }
 
 module.exports = () => {
@@ -49,7 +47,7 @@ module.exports = () => {
     <id>https://sergiodxa.com/</id>
     <author>
       <name>Sergio Xalambrí</name>
-      <email>sergiodxa@gmail.com</email>
+      <email>hello@sergiodxa.com</email>
     </author>${essayString}
   </feed>`;
 };
