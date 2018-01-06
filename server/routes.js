@@ -37,5 +37,23 @@ module.exports = {
     query: {
       slug: 'markdown-react'
     }
+  },
+  '/essays/definiendo-conceptos-closures-y-scope': {
+    page: '/essay',
+    query: {
+      slug: 'definiendo-conceptos-closures-y-scope'
+    }
+  },
+  '/essays/combinando-react-y-redux': {
+    page: '/essay',
+    query: {
+      slug: 'combinando-react-y-redux'
+    }
+  },
+  '/essays/introduccion-a-redux': {
+    page: '/essay',
+    query: {
+      slug: 'introduccion-a-redux'
+    }
   }
 };
