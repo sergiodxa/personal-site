@@ -21,10 +21,10 @@ export default compose(
     type: 'summary_large_image',
     site: '@sergiodxa',
     creator: '@sergiodxa',
-    url: 'https://sergio.now.sh/',
+    url: 'https://sergiodxa.com/',
     title: 'Sergio Xalambrí',
     description: 'Lead Support Engineer at ▲ZEIT',
-    image: 'https://sergio.now.sh/static/open-graph.png',
+    image: 'https://sergiodxa.com/static/open-graph.png',
     summary: "Sergio Xalambrí's personal website"
   })
 )(({ type, site, creator, url, title, description, image, summary }) => (

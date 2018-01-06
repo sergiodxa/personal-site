@@ -1,5 +1,5 @@
 # Personal site
-This is the code behind `sergio.now.sh`.
+This is the code behind `sergiodxa.com`.
 
 [![Build Status](https://travis-ci.org/sergiodxa/personal-site.svg?branch=master)](https://travis-ci.org/sergiodxa/personal-site)
 
@@ -12,7 +12,7 @@ yarn
 yarn dev
 ```
 
-Then head to http://localhost:3000. Changes you make to components will henceforth be reflected there in realtime.
+Then head to http://localhost:3001. Changes you make to components will henceforth be reflected there in realtime.
 
 ### Deployment
 
@@ -40,4 +40,3 @@ This will build and export to HTML files the site, generate the RSS feed, deploy
   - `predeploy` -> run `export`
 - `deploy` -> deploy to Now the statically exported site
   - `postdeploy` -> run `alias` and run `clean`
-- `set:rules` -> set the rules.json aliases for `sergio.now.sh`

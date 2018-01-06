@@ -16,8 +16,7 @@
     "start": "NODE_ENV=production node .",
     "start:static": "serve portfolio",
     "deploy": "now deploy portfolio --token $TOKEN -A ../now.json",
-    "postdeploy": "npm run alias",
-    "set:rules": "now alias sergio.now.sh -r now.json"
+    "postdeploy": "npm run alias"
   },
   "repository": {
     "type": "git",
@@ -27,14 +26,14 @@
   "author": {
     "name": "Sergio Daniel Xalambrí",
     "email": "sergiodxa@gmail.com",
-    "url": "https://sergio.now.sh/"
+    "url": "https://sergiodxa.com/"
   },
   "license": "MIT",
   "private": true,
   "bugs": {
     "url": "https://github.com/sergiodxa/personal-site/issues"
   },
-  "homepage": "https://sergio.now.sh",
+  "homepage": "https://sergiodxa.com",
   "dependencies": {
     "@platzi/markdown": "^1.3.3",
     "apollo-fetch": "^0.7.0",
