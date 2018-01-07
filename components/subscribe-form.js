@@ -94,7 +94,7 @@ class SubscribeForm extends Component {
             text-align: center;
             transition: all 0.3s;
             padding: 0.5em;
-            width: 62.5%;
+            width: 100%;
           }
 
           input:hover {
@@ -116,6 +116,12 @@ class SubscribeForm extends Component {
 
           :global(.success) {
             color: ${colors.green};
+          }
+
+          @media (min-width: 720px) {
+            input {
+              width: 62.5%;
+            }
           }
         `}</style>
       </form>
