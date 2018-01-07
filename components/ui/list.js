@@ -12,6 +12,14 @@ export function UL({ children, ...props }) {
           padding-left: 2rem;
           list-style-type: square;
         }
+
+        @media (max-width: 767px) {
+          ul {
+            font-size: 1em;
+            margin-left: 0;
+            padding-left: 2rem;
+          }
+        }
       `}</style>
     </ul>
   );
@@ -28,6 +36,14 @@ export function OL({ children, ...props }) {
           margin-left: -2rem;
           padding-left: 2rem;
           list-style-type: lower-roman;
+        }
+
+        @media (max-width: 767px) {
+          ol {
+            font-size: 1em;
+            margin-left: 0;
+            padding-left: 2rem;
+          }
         }
       `}</style>
     </ol>
