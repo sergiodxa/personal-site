@@ -131,7 +131,7 @@ export default compose(
         position: absolute;
         top: 0;
         right: 0;
-        padding: 1rem;
+        padding: 1.5rem 3em;
       }
       .src:hover {
         text-decoration: underline;
@@ -312,6 +312,10 @@ export default compose(
       }
 
       @media (max-width: 767px) {
+        .src {
+          display: none;
+        }
+
         .publishedAt {
           padding-right: 1em;
           padding-left: 1em;
