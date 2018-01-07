@@ -1,4 +1,5 @@
 import * as colors from '../../lib/colors';
+import parseUrl from '../../lib/parse-url';
 
 export function A({
   color = 'black',
@@ -6,8 +7,11 @@ export function A({
   children,
   ...props
 }) {
+  const { hostname } = parseUrl(props.href);
+  const self = hostname === 'sergiodxa.com';
+
   return (
-    <a {...props}>
+    <a {...props} target={!self ? '_blank' : '_self'}>
       {children}
       <style jsx>{`
         a {
@@ -25,7 +29,7 @@ export function P({ children, ...props }) {
       {children}
       <style jsx>{`
         p {
-          margin: 0.5em 0;
+          margin: 1em 0;
           font-size: 1.25em;
         }
       `}</style>
