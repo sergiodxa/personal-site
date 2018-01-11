@@ -1,6 +1,16 @@
+import { Children } from 'react';
+import { safeLoad } from 'js-yaml';
+
 import * as colors from '../../lib/colors';
 
+import Request from './request';
+
 export function Code({ children, ...props }) {
+  if (props.className && props.className.indexOf('request') >= 0) {
+    const data = safeLoad(Children.toArray(children)[0]);
+    return <Request {...data} />;
+  }
+
   return (
     <code {...props}>
       {children}
