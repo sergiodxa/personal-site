@@ -45,7 +45,7 @@ function formatHTTP({ url, method = 'GET', headers, body }) {
 const supportedLangs = {
   HTTP: formatHTTP,
   cURL: formatCurl,
-  JavaScript: formatJS,
+  JavaScript: formatJS
 };
 
 const emitter = new EventEmitter();
