@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { parse as parseURL } from 'url';
 import { EventEmitter } from 'events';
 
-import { Code } from './code';
+import { Pre, Code } from './code';
 import Case from '../case';
 
 import * as colors from '../../lib/colors';
@@ -115,36 +115,40 @@ class Request extends Component {
         <Case
           value={state.type}
           onJavascript={
-            <Code className="hljs language-javascript">{formatJS(props)}</Code>
+            <Pre>
+              <Code className="hljs language-javascript">
+                {formatJS(props)}
+              </Code>
+            </Pre>
           }
           onHttp={
-            <Code className="hljs language-plain">{formatHTTP(props)}</Code>
+            <Pre>
+              <Code className="hljs language-plain">{formatHTTP(props)}</Code>
+            </Pre>
           }
           onCurl={
-            <Code className="hljs language-shell">{formatCurl(props)}</Code>
+            <Pre>
+              <Code className="hljs language-shell">{formatCurl(props)}</Code>
+            </Pre>
           }
         />
 
         <style jsx>{`
           .request {
-            position: relative;
-            padding-top: 1em;
+            margin-top: 1rem;
           }
           .buttons {
             display: flex;
-            position: absolute;
-            top: -1em;
-            left: 0;
-            right: 0;
+            margin-bottom: -1rem;
           }
           button {
             background-color: ${colors.white};
             border: 1px solid ${colors.black};
-            border-radius: 0 0 0.25em 0.25em;
-            border-top: none;
+            border-radius: 0.25em 0.25em 0 0;
+            border-bottom: none;
             font-size: 1em;
             outline: none;
-            margin: 0 0.5em;
+            margin: 0 0.25em;
             transition: all 0.2s;
           }
           button:first-of-type {
