@@ -18,7 +18,7 @@ import * as colors from '../lib/colors';
 export default compose(withError, withGA, withSW)(() => (
   <Layout>
     <Head>
-      <title>Subscribe to Sergio Xalambrí's essaya</title>
+      <title>Subscribe to Sergio Xalambrí's essays</title>
     </Head>
 
     <Link href="/" prefetch>
