@@ -87,6 +87,8 @@ class SubscribeForm extends Component {
           input {
             border: none;
             border-bottom: 2px solid ${colors.grey};
+            box-sizing: border-box;
+            border-radius: 0;
             display: block;
             font-size: 1em;
             margin: 1em auto;
