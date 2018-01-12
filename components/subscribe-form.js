@@ -47,8 +47,8 @@ class SubscribeForm extends Component {
       <form onSubmit={this.handleSubmit} action="#">
         <label htmlFor="email">
           <P>
-            Do you want to know when I publish new essays? Subscribe below and
-            keep updated.
+            Do you want to know when I publish new essays?<br />
+            Subscribe below and keep updated.
           </P>
         </label>
 
