@@ -10,6 +10,7 @@ import setDisplayName from 'recompose/setDisplayName';
 import PropTypes from 'prop-types';
 
 import { H1 } from '../components/ui/heading';
+import { A } from '../components/ui/text';
 
 import Header from '../components/header';
 import OpenGraph from '../components/open-graph';
@@ -73,6 +74,13 @@ export default compose(
       <meta name="twitter:widgets:link-color" content={colors.blue} />
       <meta name="twitter:widgets:border-color" content={colors.blue} />
       {props.canonicalUrl && <link rel="canonical" href={props.canonicalUrl} />}
+      {props.translateFrom && (
+        <link
+          rel="alternate"
+          hreflang={props.translateFrom.lang}
+          href={props.translateFrom.url}
+        />
+      )}
     </Head>
 
     <TwitterCard
@@ -100,7 +108,9 @@ export default compose(
     </a>
 
     <section className="content">
-      <H1 className="main-title">{props.title}</H1>
+      <H1 className="main-title" lang={props.lang || 'en'}>
+        {props.title}
+      </H1>
       {isValid(props.date) && (
         <time className="publishedAt" dateTime={props.dateString}>
           Posted on <b>{format(props.date, 'MMMM DD, YYYY')}</b>
@@ -110,13 +120,24 @@ export default compose(
       {props.canonicalUrl && (
         <div className="canonicalUrl">
           Originally published at{' '}
-          <a href={props.canonicalUrl} target="_blank" rel="canonical">
-            {props.hostname}
-          </a>
+          <A href={props.canonicalUrl} target="_blank" rel="canonical">
+            <strong>{props.hostname}</strong>
+          </A>
         </div>
       )}
 
-      <article>{props.content}</article>
+      {props.translateFrom && (
+        <div className="canonicalUrl">
+          Translated from{' '}
+          <A href={props.translateFrom.url} target="_blank" rel="canonical">
+            <strong lang={props.translateFrom.lang}>
+              {props.translateFrom.title}
+            </strong>
+          </A>
+        </div>
+      )}
+
+      <article lang={props.lang || 'en'}>{props.content}</article>
 
       <SubscribeForm />
     </section>
