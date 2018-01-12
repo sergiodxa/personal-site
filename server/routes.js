@@ -55,5 +55,11 @@ module.exports = {
     query: {
       slug: 'introduccion-a-redux'
     }
+  },
+  '/essays/como-mantenerse-actualizado-con-el-ecosistema-de-javascript': {
+    page: '/essay',
+    query: {
+      slug: 'como-mantenerse-actualizado-con-el-ecosistema-de-javascript'
+    }
   }
 };

@@ -1,5 +1,14 @@
 [
   {
+    "id": 67,
+    "title": "¿Cómo mantenerse actualizado con el ecosistema de JavaScript?",
+    "link":
+      "/essays/como-mantenerse-actualizado-con-el-ecosistema-de-javascript",
+    "date": "2018-01-12T17:53:42.064Z",
+    "highlighted": false,
+    "slug": "como-mantenerse-actualizado-con-el-ecosistema-de-javascript"
+  },
+  {
     "id": 66,
     "title": "Renderizando Markdown en React.js",
     "link": "/essays/markdown-react",
@@ -435,8 +444,7 @@
   {
     "id": 5,
     "title": "Definiendo conceptos: Closure y Scope en JavaScript",
-    "link":
-      "/essays/definiendo-conceptos-closures-y-scope",
+    "link": "/essays/definiendo-conceptos-closures-y-scope",
     "date": "2014-07-31T00:19:09.428Z",
     "slug": "definiendo-conceptos-closures-y-scope"
   },
