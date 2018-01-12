@@ -56,40 +56,44 @@ class Request extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('storage', this.updateStorage);
-    emitter.addListener('request-default-type', this.updateStorage);
+    window.addEventListener('storage', this.handleStorage);
+    emitter.addListener('request-default-type', this.changeType);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('storage', this.updateStorage);
-    emitter.removeListener('request-default-type', this.updateStorage);
+    window.removeEventListener('storage', this.handleStorage);
+    emitter.removeListener('request-default-type', this.changeType);
   }
 
-  updateStorage = ({ key, newValue, oldValue }) => {
+  changeType = ({ key, newValue, oldValue }) => {
+    const { type: current } = this.state;
     if (key !== 'request-default-type') return;
     if (newValue === oldValue) return;
-    if (this.state.type === newValue) return;
-    if (this.noUpdate) return;
-    this.changeType(newValue);
-  };
-
-  changeType = type => {
-    const current = this.state.type;
-    this.noUpdate = true;
-    emitter.emit('request-default-type', {
-      key: 'request-default-type',
-      newValue: type,
-      oldValue: current
-    });
-    this.setState({ type }, () => {
-      localStorage.setItem('request-default-type', type);
-      this.noUpdate = false;
+    if (current === newValue) return;
+    this.setState({ type: newValue }, () => {
+      if (localStorage.getItem('request-default-type') !== newValue) {
+        localStorage.setItem('request-default-type', newValue);
+      }
     });
   };
 
   handleClick = event => {
     const type = event.target.dataset.type;
-    this.changeType(type);
+    const current = this.state.type;
+    emitter.emit('request-default-type', {
+      key: 'request-default-type',
+      newValue: type,
+      oldValue: current
+    });
+  };
+
+  handleStorage = ({ key, newValue, oldValue }) => {
+    if (key !== 'request-default-type') return;
+    emitter.emit('request-default-type', {
+      key: 'request-default-type',
+      newValue: type,
+      oldValue: current
+    });
   };
 
   render() {
