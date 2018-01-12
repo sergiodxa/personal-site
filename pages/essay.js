@@ -40,6 +40,12 @@ async function getInitialProps(ctx) {
         date
         description
         canonicalUrl
+        lang
+        translateFrom {
+          url
+          lang
+          title
+        }
       }
     }
   `;
@@ -58,7 +64,7 @@ async function getInitialProps(ctx) {
   const props = { ...data.getEssay };
 
   if (ctx.isVirtualCall) {
-    console.info('Is a virtual call');
+    console.info('Saving data in cache');
     localStorage.setItem(url, JSON.stringify(props));
   }
 
