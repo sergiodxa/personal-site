@@ -111,6 +111,7 @@ export default compose(
       <H1 className="main-title" lang={props.lang || 'en'}>
         {props.title}
       </H1>
+
       {isValid(props.date) && (
         <time className="publishedAt" dateTime={props.dateString}>
           Posted on <b>{format(props.date, 'MMMM DD, YYYY')}</b>
