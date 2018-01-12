@@ -1,6 +1,7 @@
 module.exports = {
   '/': { page: '/' },
   '/about': { page: '/about' },
+  '/subscribe': { page: '/subscribe' },
   '/essays': { page: '/essays' },
   '/essays/an-accessible-approach-to-frontend-testing': {
     page: '/essay',
