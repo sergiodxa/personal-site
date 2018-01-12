@@ -29,7 +29,7 @@ export default compose(withError, withGA, withSW)(() => (
         <article>
           <p className="p-note">
             I'm <strong className="p-name">Sergio Xalambrí</strong>,{' '}
-            <em>JavaScript and Frontend developer</em> currently working as{' '}
+            <em>Software Developer</em> currently working as{' '}
             <span className="p-job-title">Lead Support Engineer</span> at{' '}
             <strong className="p-org h-card">▲ZEIT</strong>
           </p>
