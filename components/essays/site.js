@@ -1,21 +1,21 @@
-import { format } from 'url';
-import Link from 'next/link';
-import PropTypes from 'prop-types';
-import compose from 'recompose/compose';
-import setDisplayName from 'recompose/setDisplayName';
-import setPropTypes from 'recompose/setPropTypes';
-import setStatic from 'recompose/setStatic';
+import { format } from "url";
+import Link from "next/link";
+import PropTypes from "prop-types";
+import compose from "recompose/compose";
+import setDisplayName from "recompose/setDisplayName";
+import setPropTypes from "recompose/setPropTypes";
+import setStatic from "recompose/setStatic";
 
-import parseUrl from '../../lib/parse-url.js';
-import * as colors from '../../lib/colors.js';
+import parseUrl from "../../lib/parse-url.js";
+import * as colors from "../../lib/colors.js";
 
 export default compose(
-  setDisplayName('Site'),
+  setDisplayName("Site"),
   setPropTypes({
     link: PropTypes.string.isRequired,
     isSelf: PropTypes.bool
   }),
-  setStatic('defaultProps', {
+  setStatic("defaultProps", {
     isSelf: false
   })
 )(({ link, isSelf }) => (

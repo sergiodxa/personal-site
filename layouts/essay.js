@@ -1,28 +1,28 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import slugify from 'slugify';
-import format from 'date-fns/format';
-import isValid from 'date-fns/is_valid';
-import compose from 'recompose/compose';
-import mapProps from 'recompose/mapProps';
-import setPropTypes from 'recompose/setPropTypes';
-import setDisplayName from 'recompose/setDisplayName';
-import PropTypes from 'prop-types';
+import Head from "next/head";
+import Link from "next/link";
+import slugify from "slugify";
+import format from "date-fns/format";
+import isValid from "date-fns/is_valid";
+import compose from "recompose/compose";
+import mapProps from "recompose/mapProps";
+import setPropTypes from "recompose/setPropTypes";
+import setDisplayName from "recompose/setDisplayName";
+import PropTypes from "prop-types";
 
-import { H1 } from '../components/ui/heading';
-import { A } from '../components/ui/text';
+import { H1 } from "../components/ui/heading";
+import { A } from "../components/ui/text";
 
-import Header from '../components/header';
-import OpenGraph from '../components/open-graph';
-import TwitterCard from '../components/twitter-card';
-import SubscribeForm from '../components/subscribe-form';
+import { LinkedHeader } from "../components/header";
+import OpenGraph from "../components/open-graph";
+import TwitterCard from "../components/twitter-card";
+import SubscribeForm from "../components/subscribe-form";
 
-import Main from './main';
+import Main from "./main";
 
-import parser from '../lib/markdown';
-import * as colors from '../lib/colors';
-import * as CustomTypes from '../lib/types';
-import parseUrl from '../lib/parse-url';
+import parser from "../lib/markdown";
+import * as colors from "../lib/colors";
+import * as CustomTypes from "../lib/types";
+import parseUrl from "../lib/parse-url";
 
 const abbreviatures = `
 *[ipc]: Inter-process communication
@@ -45,15 +45,15 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, tags = '', ...props }) => ({
+  mapProps(({ date, content, tags = "", ...props }) => ({
     ...props,
     date: new Date(date),
     dateString: date,
     content: parser(abbreviatures + content),
-    tags: tags.split(', '),
-    hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : ''
+    tags: tags.split(", "),
+    hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : ""
   })),
-  setDisplayName('Essay'),
+  setDisplayName("Essay"),
   setPropTypes({
     title: PropTypes.string.isRequired,
     content: PropTypes.array.isRequired,
@@ -97,30 +97,26 @@ export default compose(
         slugify(title, { lower: true })}/`}
     />
 
-    <Link href="/essays" prefetch>
-      <a title="Sergio Xalambrí" rel="home">
-        <Header sticky={false} secondary />
-      </a>
-    </Link>
+    <LinkedHeader href="/essays" sticky={false} />
 
     <a href="https://github.com/sergiodxa/personal-site" className="src">
-      {'<source />'}
+      {"<source />"}
     </a>
 
     <section className="content">
-      <H1 className="main-title" lang={props.lang || 'en'}>
+      <H1 className="main-title" lang={props.lang || "en"}>
         {props.title}
       </H1>
 
       {isValid(props.date) && (
         <time className="publishedAt" dateTime={props.dateString}>
-          Posted on <b>{format(props.date, 'MMMM DD, YYYY')}</b>
+          Posted on <b>{format(props.date, "MMMM DD, YYYY")}</b>
         </time>
       )}
 
       {props.canonicalUrl && (
         <div className="canonicalUrl">
-          Originally published at{' '}
+          Originally published at{" "}
           <A href={props.canonicalUrl} target="_blank" rel="canonical">
             <strong>{props.hostname}</strong>
           </A>
@@ -129,7 +125,7 @@ export default compose(
 
       {props.translateFrom && (
         <div className="canonicalUrl">
-          Translated from{' '}
+          Translated from{" "}
           <A href={props.translateFrom.url} target="_blank" rel="canonical">
             <strong lang={props.translateFrom.lang}>
               {props.translateFrom.title}
@@ -138,7 +134,7 @@ export default compose(
         </div>
       )}
 
-      <article lang={props.lang || 'en'}>{props.content}</article>
+      <article lang={props.lang || "en"}>{props.content}</article>
 
       <SubscribeForm />
     </section>
@@ -209,7 +205,7 @@ export default compose(
       }
 
       .content :global(*:hover > .anchor::before) {
-        content: '#';
+        content: "#";
         color: ${colors.black};
         text-decoration: none;
         position: absolute;

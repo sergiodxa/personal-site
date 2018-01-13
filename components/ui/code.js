@@ -1,7 +1,7 @@
-import { Children } from 'react';
-import { safeLoad } from 'js-yaml';
+import { Children } from "react";
+import { safeLoad } from "js-yaml";
 
-import * as colors from '../../lib/colors';
+import * as colors from "../../lib/colors";
 
 export function Code({ children, ...props }) {
   return (
@@ -18,29 +18,29 @@ export function Code({ children, ...props }) {
         }
 
         code:before {
-          content: '\`';
+          content: "\`";
         }
 
         code:after {
-          content: '\`';
+          content: "\`";
         }
 
-        code[class~='language-javascript'],
-        code[class~='language-js'],
-        code[class~='language-html'],
-        code[class~='language-css'],
-        code[class~='language-styl'],
-        code[class~='language-saas'],
-        code[class~='language-less'],
-        code[class~='language-ruby']) {
+        code[class~="language-javascript"],
+        code[class~="language-js"],
+        code[class~="language-html"],
+        code[class~="language-css"],
+        code[class~="language-styl"],
+        code[class~="language-saas"],
+        code[class~="language-less"],
+        code[class~="language-ruby"]) {
           tab-size: 8;
         }
-        code[class~='language-java'],
-        code[class~='language-python'],
-        code[class~='language-php']) {
+        code[class~="language-java"],
+        code[class~="language-python"],
+        code[class~="language-php"]) {
           tab-size: 4;
         }
-        code[class~='language-go']) {
+        code[class~="language-go"]) {
           tab-size: 8;
         }
       `}</style>
@@ -69,7 +69,7 @@ export function Pre({ children, ...props }) {
         }
         pre :global(code:after),
         pre :global(code:before) {
-          content: '';
+          content: "";
         }
       `}</style>
     </pre>

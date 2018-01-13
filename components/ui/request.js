@@ -1,14 +1,14 @@
-import { Component } from 'react';
-import { parse as parseURL } from 'url';
-import { EventEmitter } from 'events';
+import { Component } from "react";
+import { parse as parseURL } from "url";
+import { EventEmitter } from "events";
 
-import { Pre, Code } from './code';
-import Case from '../case';
+import { Pre, Code } from "./code";
+import Case from "../case";
 
-import * as colors from '../../lib/colors';
+import * as colors from "../../lib/colors";
 
-function formatCurl({ url, method = 'GET', headers, body }) {
-  let request = `curl ${method !== 'GET' ? `-X ${method} ` : ''}${url}`;
+function formatCurl({ url, method = "GET", headers, body }) {
+  let request = `curl ${method !== "GET" ? `-X ${method} ` : ""}${url}`;
 
   if (headers && Object.keys(headers).length > 0) {
     request = Object.entries(headers).reduce((req, [key, value]) => {
@@ -17,7 +17,7 @@ function formatCurl({ url, method = 'GET', headers, body }) {
   }
 
   if (body) {
-    if (typeof body !== 'string') {
+    if (typeof body !== "string") {
       request = `${request} \\\n  -d '${JSON.stringify(body, null, 2)}'`;
     } else {
       request = `${request} \\\n  -d '${body}'`;
@@ -31,7 +31,7 @@ function formatJS({ url, ...opts }) {
   return `await fetch("${url}", ${JSON.stringify(opts, null, 2)})`;
 }
 
-function formatHTTP({ url, method = 'GET', headers, body }) {
+function formatHTTP({ url, method = "GET", headers, body }) {
   const { path, host } = parseURL(url);
 
   return [
@@ -39,7 +39,7 @@ function formatHTTP({ url, method = 'GET', headers, body }) {
     `Host: ${host}`,
     ...Object.entries(headers).map(([key, value]) => `${key}: ${value}`),
     JSON.stringify(body, null, 2)
-  ].join('\n');
+  ].join("\n");
 }
 
 const supportedLangs = {
@@ -52,27 +52,27 @@ const emitter = new EventEmitter();
 
 class Request extends Component {
   state = {
-    type: 'http'
+    type: "http"
   };
 
   componentDidMount() {
-    window.addEventListener('storage', this.handleStorage);
-    emitter.addListener('request-default-type', this.changeType);
+    window.addEventListener("storage", this.handleStorage);
+    emitter.addListener("request-default-type", this.changeType);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('storage', this.handleStorage);
-    emitter.removeListener('request-default-type', this.changeType);
+    window.removeEventListener("storage", this.handleStorage);
+    emitter.removeListener("request-default-type", this.changeType);
   }
 
   changeType = ({ key, newValue, oldValue }) => {
     const { type: current } = this.state;
-    if (key !== 'request-default-type') return;
+    if (key !== "request-default-type") return;
     if (newValue === oldValue) return;
     if (current === newValue) return;
     this.setState({ type: newValue }, () => {
-      if (localStorage.getItem('request-default-type') !== newValue) {
-        localStorage.setItem('request-default-type', newValue);
+      if (localStorage.getItem("request-default-type") !== newValue) {
+        localStorage.setItem("request-default-type", newValue);
       }
     });
   };
@@ -80,17 +80,17 @@ class Request extends Component {
   handleClick = event => {
     const type = event.target.dataset.type;
     const current = this.state.type;
-    emitter.emit('request-default-type', {
-      key: 'request-default-type',
+    emitter.emit("request-default-type", {
+      key: "request-default-type",
       newValue: type,
       oldValue: current
     });
   };
 
   handleStorage = ({ key, newValue, oldValue }) => {
-    if (key !== 'request-default-type') return;
-    emitter.emit('request-default-type', {
-      key: 'request-default-type',
+    if (key !== "request-default-type") return;
+    emitter.emit("request-default-type", {
+      key: "request-default-type",
       newValue: type,
       oldValue: current
     });
@@ -105,7 +105,7 @@ class Request extends Component {
           {Object.keys(supportedLangs).map(lang => (
             <button
               className={
-                state.type === lang.toLowerCase() ? 'active' : 'inactive'
+                state.type === lang.toLowerCase() ? "active" : "inactive"
               }
               type="button"
               data-type={lang.toLowerCase()}

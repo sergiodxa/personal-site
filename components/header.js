@@ -1,29 +1,30 @@
-import PropTypes from 'prop-types';
-import compose from 'recompose/compose';
-import setDisplayName from 'recompose/setDisplayName';
-import setPropTypes from 'recompose/setPropTypes';
-import setStatic from 'recompose/setStatic';
-import classnames from 'classnames/dedupe';
+import Link from "next/link";
+import PropTypes from "prop-types";
+import compose from "recompose/compose";
+import setDisplayName from "recompose/setDisplayName";
+import setPropTypes from "recompose/setPropTypes";
+import setStatic from "recompose/setStatic";
+import classnames from "classnames/dedupe";
 
-import * as colors from '../lib/colors.js';
+import * as colors from "../lib/colors.js";
 
-import { H1, H2, H3 } from './ui/heading';
-import { A } from './ui/text';
+import { H1, H2, H3 } from "./ui/heading";
+import { A } from "./ui/text";
 
-export default compose(
-  setDisplayName('Header'),
+const Header = compose(
+  setDisplayName("Header"),
   setPropTypes({
     centered: PropTypes.bool,
     sticky: PropTypes.bool,
     secondary: PropTypes.bool
   }),
-  setStatic('defaultProps', {
+  setStatic("defaultProps", {
     centered: false,
     sticky: false,
     secondary: false
   })
 )(({ centered, sticky, secondary }) => (
-  <header className={classnames('h-card', { centered, sticky })}>
+  <header className={classnames("h-card", { centered, sticky })}>
     {!secondary ? (
       <H1>Sergio Xalambrí</H1>
     ) : (
@@ -32,7 +33,7 @@ export default compose(
 
     {centered && (
       <H2>
-        Lead Support Engineer at{' '}
+        Lead Support Engineer at{" "}
         <strong>
           <A
             title="▲ ZEIT"
@@ -100,3 +101,19 @@ export default compose(
     `}</style>
   </header>
 ));
+
+export const LinkedHeader = ({ href = "/", sticky = true }) => (
+  <Link href={href} prefetch>
+    <a title="Sergio Xalambrí" rel="home">
+      <Header sticky={sticky} secondary />
+      <style jsx>{`
+        a {
+          color: ${colors.black};
+          text-decoration: none;
+        }
+      `}</style>
+    </a>
+  </Link>
+);
+
+export default Header;

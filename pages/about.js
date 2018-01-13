@@ -1,16 +1,16 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from "next/head";
+import Link from "next/link";
 
-import compose from 'recompose/compose';
+import compose from "recompose/compose";
 
-import Header from '../components/header';
-import Icon from '../components/icon';
-import Layout from '../layouts/main';
+import { LinkedHeader } from "../components/header";
+import Icon from "../components/icon";
+import Layout from "../layouts/main";
 
-import withGA from '../lib/hoc/with-ga';
-import withSW from '../lib/hoc/with-sw';
-import withError from '../lib/hoc/with-error';
-import * as colors from '../lib/colors';
+import withGA from "../lib/hoc/with-ga";
+import withSW from "../lib/hoc/with-sw";
+import withError from "../lib/hoc/with-error";
+import * as colors from "../lib/colors";
 
 export default compose(withError, withGA, withSW)(() => (
   <Layout>
@@ -18,19 +18,15 @@ export default compose(withError, withGA, withSW)(() => (
       <title>About Sergio Xalambrí</title>
     </Head>
 
-    <Link href="/" prefetch>
-      <a title="Sergio Xalambrí">
-        <Header secondary />
-      </a>
-    </Link>
+    <LinkedHeader />
 
     <section id="about">
       <section id="bio" className="h-card">
         <article>
           <p className="p-note">
-            I'm <strong className="p-name">Sergio Xalambrí</strong>,{' '}
-            <em>Software Developer</em> currently working as{' '}
-            <span className="p-job-title">Lead Support Engineer</span> at{' '}
+            I'm <strong className="p-name">Sergio Xalambrí</strong>,{" "}
+            <em>Software Developer</em> currently working as{" "}
+            <span className="p-job-title">Lead Support Engineer</span> at{" "}
             <strong className="p-org h-card">▲ZEIT</strong>
           </p>
         </article>
@@ -158,11 +154,6 @@ export default compose(withError, withGA, withSW)(() => (
     </section>
 
     <style jsx>{`
-      a {
-        color: ${colors.black};
-        text-decoration: none;
-      }
-
       section {
         margin: 0 auto;
         max-width: 800px;

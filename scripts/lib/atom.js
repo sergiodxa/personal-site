@@ -1,5 +1,5 @@
-const { parse } = require('url');
-const essays = require('../../data/essays.json');
+const { parse } = require("url");
+const essays = require("../../data/essays.json");
 
 // constants
 const MAX = 100;
@@ -36,7 +36,7 @@ module.exports = () => {
   const essayString = essays
     .slice(0, MAX)
     .map(transform)
-    .reduce(concat, '');
+    .reduce(concat, "");
 
   return `<?xml version="1.0" encoding="utf-8"?>
   <feed xmlns="http://www.w3.org/2005/Atom">

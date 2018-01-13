@@ -1,10 +1,10 @@
-import { Component } from 'react';
-import Head from 'next/head';
-import classnames from 'classnames';
+import { Component } from "react";
+import Head from "next/head";
+import classnames from "classnames";
 
 class Tweet extends Component {
   state = { rendered: false };
-  
+
   async componentDidMount() {
     await twttr.widgets.createTweet(this.props.id, this.element);
     this.setState({ rendered: true });
@@ -17,7 +17,7 @@ class Tweet extends Component {
   render() {
     return (
       <span
-        className={classnames('twitter-tweet', {
+        className={classnames("twitter-tweet", {
           rendered: this.state.rendered
         })}
         ref={this.setRef}

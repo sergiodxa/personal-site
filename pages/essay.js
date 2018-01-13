@@ -1,18 +1,18 @@
-import Error from 'next/error';
-import { format } from 'url';
+import Error from "next/error";
+import { format } from "url";
 
-import compose from 'recompose/compose';
-import setStatic from 'recompose/setStatic';
-import branch from 'recompose/branch';
-import renderComponent from 'recompose/renderComponent';
+import compose from "recompose/compose";
+import setStatic from "recompose/setStatic";
+import branch from "recompose/branch";
+import renderComponent from "recompose/renderComponent";
 
-import Essay from '../layouts/essay.js';
+import Essay from "../layouts/essay.js";
 
-import fetch from '../lib/fetch.js';
+import fetch from "../lib/fetch.js";
 
-import withError from '../lib/hoc/with-error.js';
-import withGA from '../lib/hoc/with-ga.js';
-import withSW from '../lib/hoc/with-sw.js';
+import withError from "../lib/hoc/with-error.js";
+import withGA from "../lib/hoc/with-ga.js";
+import withSW from "../lib/hoc/with-sw.js";
 
 const gql = String.raw;
 
@@ -24,7 +24,7 @@ async function getInitialProps(ctx) {
     : format({ pathname: ctx.pathname, query: ctx.query });
 
   if (!isServer) {
-    console.info('Getting info from localStorage');
+    console.info("Getting info from localStorage");
     const props = localStorage.getItem(url);
     if (props) {
       return JSON.parse(props);
@@ -54,7 +54,7 @@ async function getInitialProps(ctx) {
     slug: ctx.query.slug
   };
 
-  console.info('Fetching data from GraphQL API');
+  console.info("Fetching data from GraphQL API");
   const { data, errors } = await fetch({ query, variables });
 
   if (errors) {
@@ -64,7 +64,7 @@ async function getInitialProps(ctx) {
   const props = { ...data.getEssay };
 
   if (ctx.isVirtualCall) {
-    console.info('Saving data in cache');
+    console.info("Saving data in cache");
     localStorage.setItem(url, JSON.stringify(props));
   }
 
@@ -72,7 +72,7 @@ async function getInitialProps(ctx) {
 }
 
 export default compose(
-  setStatic('getInitialProps', getInitialProps),
+  setStatic("getInitialProps", getInitialProps),
   withError,
   withGA,
   withSW,

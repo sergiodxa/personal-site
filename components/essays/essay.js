@@ -1,19 +1,19 @@
-import format from 'date-fns/format';
-import isValid from 'date-fns/is_valid';
-import classNames from 'classnames/dedupe';
-import PropTypes from 'prop-types';
-import compose from 'recompose/compose';
-import mapProps from 'recompose/mapProps';
-import setDisplayName from 'recompose/setDisplayName';
-import setPropTypes from 'recompose/setPropTypes';
-import setStatic from 'recompose/setStatic';
+import format from "date-fns/format";
+import isValid from "date-fns/is_valid";
+import classNames from "classnames/dedupe";
+import PropTypes from "prop-types";
+import compose from "recompose/compose";
+import mapProps from "recompose/mapProps";
+import setDisplayName from "recompose/setDisplayName";
+import setPropTypes from "recompose/setPropTypes";
+import setStatic from "recompose/setStatic";
 
-import Site from './site.js';
-import Link from '../link';
+import Site from "./site.js";
+import Link from "../link";
 
-import parseUrl from '../../lib/parse-url.js';
-import * as colors from '../../lib/colors.js';
-import * as CustomTypes from '../../lib/types.js';
+import parseUrl from "../../lib/parse-url.js";
+import * as colors from "../../lib/colors.js";
+import * as CustomTypes from "../../lib/types.js";
 
 export default compose(
   mapProps(({ date, ...props }) => ({
@@ -21,7 +21,7 @@ export default compose(
     date: new Date(date),
     dateString: date
   })),
-  setDisplayName('Essay'),
+  setDisplayName("Essay"),
   setPropTypes({
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
@@ -31,14 +31,14 @@ export default compose(
     deprecated: PropTypes.bool,
     slug: PropTypes.string
   }),
-  setStatic('defaultProps', {
+  setStatic("defaultProps", {
     highlighted: false,
     deprecated: false
   })
 )(({ title, link, date, highlighted, deprecated, slug }) => (
-  <article className={classNames('essay h-entry', { highlighted, deprecated })}>
+  <article className={classNames("essay h-entry", { highlighted, deprecated })}>
     <time className="date dt-published">
-      {isValid(date) && format(date, 'MMMM DD, YYYY')}
+      {isValid(date) && format(date, "MMMM DD, YYYY")}
     </time>
 
     <h2 className="title h-name">
@@ -46,12 +46,12 @@ export default compose(
         <em title="This essay teachs an old (version of a) technology or is about something that already changed.">
           *
         </em>
-      )}{' '}
+      )}{" "}
       <Link
         href={
           parseUrl(link).hostname !== null
             ? link
-            : { pathname: '/essay', query: { slug } }
+            : { pathname: "/essay", query: { slug } }
         }
         as={parseUrl(link).hostname !== null ? undefined : link}
         prefetch={parseUrl(link).hostname === null}
@@ -59,12 +59,12 @@ export default compose(
       >
         <a
           href={link}
-          target={parseUrl(link).hostname !== null ? '_blank' : '_self'}
+          target={parseUrl(link).hostname !== null ? "_blank" : "_self"}
           className="link u-url"
         >
           {title}
         </a>
-      </Link>{' '}
+      </Link>{" "}
       <Site link={link} isSelf={parseUrl(link).hostname === null} />
     </h2>
 

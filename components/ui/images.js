@@ -1,4 +1,4 @@
-import * as colors from '../../lib/colors';
+import * as colors from "../../lib/colors";
 
 export function Figure({ children, ...props }) {
   return (

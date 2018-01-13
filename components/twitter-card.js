@@ -1,12 +1,12 @@
-import Head from 'next/head';
-import compose from 'recompose/compose';
-import setDisplayName from 'recompose/setDisplayName';
-import setPropTypes from 'recompose/setPropTypes';
-import setStatic from 'recompose/setStatic';
-import PropTypes from 'prop-types';
+import Head from "next/head";
+import compose from "recompose/compose";
+import setDisplayName from "recompose/setDisplayName";
+import setPropTypes from "recompose/setPropTypes";
+import setStatic from "recompose/setStatic";
+import PropTypes from "prop-types";
 
 export default compose(
-  setDisplayName('TwitterCard'),
+  setDisplayName("TwitterCard"),
   setPropTypes({
     type: PropTypes.string,
     site: PropTypes.string,
@@ -17,14 +17,14 @@ export default compose(
     image: PropTypes.string,
     summary: PropTypes.string
   }),
-  setStatic('defaultProps', {
-    type: 'summary_large_image',
-    site: '@sergiodxa',
-    creator: '@sergiodxa',
-    url: 'https://sergiodxa.com/',
-    title: 'Sergio Xalambrí',
-    description: 'Lead Support Engineer at ▲ZEIT',
-    image: 'https://sergiodxa.com/static/open-graph.png',
+  setStatic("defaultProps", {
+    type: "summary_large_image",
+    site: "@sergiodxa",
+    creator: "@sergiodxa",
+    url: "https://sergiodxa.com/",
+    title: "Sergio Xalambrí",
+    description: "Lead Support Engineer at ▲ZEIT",
+    image: "https://sergiodxa.com/static/open-graph.png",
     summary: "Sergio Xalambrí's personal website"
   })
 )(({ type, site, creator, url, title, description, image, summary }) => (

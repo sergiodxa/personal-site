@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { A } from './ui/text';
+import Link from "next/link";
+import { A } from "./ui/text";
 
 function Navigation() {
   return (

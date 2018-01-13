@@ -1,6 +1,6 @@
-import { Component } from 'react';
-import Head from 'next/head';
-import classnames from 'classnames';
+import { Component } from "react";
+import Head from "next/head";
+import classnames from "classnames";
 
 class Gist extends Component {
   render() {

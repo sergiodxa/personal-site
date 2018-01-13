@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import Link from 'next/link';
-import Router from 'next/router';
-import exact from 'prop-types-exact';
-import { format, resolve, parse } from 'url';
+import PropTypes from "prop-types";
+import Link from "next/link";
+import Router from "next/router";
+import exact from "prop-types-exact";
+import { format, resolve, parse } from "url";
 
 export default class LinkWithData extends Link {
   static propTypes = exact({
@@ -19,7 +19,7 @@ export default class LinkWithData extends Link {
       (props, propName) => {
         const value = props[propName];
 
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
           warnLink(
             `Warning: You're using a string directly inside <Link>. This usage has been deprecated. Please add an <a> tag as child of <Link>`
           );
@@ -32,14 +32,14 @@ export default class LinkWithData extends Link {
 
   async prefetch() {
     if (!this.props.prefetch) return;
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const { pathname } = window.location;
 
     const href = resolve(pathname, this.href);
 
     const { query } =
-      typeof this.props.href !== 'string' ? this.props.href : parse(url, true);
+      typeof this.props.href !== "string" ? this.props.href : parse(url, true);
 
     const Component = await Router.prefetch(href);
 

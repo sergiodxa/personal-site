@@ -1,24 +1,24 @@
-import Head from 'next/head';
-import Router from 'next/router';
-import setDisplayName from 'recompose/setDisplayName';
-import setPropTypes from 'recompose/setPropTypes';
-import compose from 'recompose/compose';
-import PropTypes from 'prop-types';
-import NProgress from 'nprogress';
+import Head from "next/head";
+import Router from "next/router";
+import setDisplayName from "recompose/setDisplayName";
+import setPropTypes from "recompose/setPropTypes";
+import compose from "recompose/compose";
+import PropTypes from "prop-types";
+import NProgress from "nprogress";
 
-import Header from '../components/header.js';
-import TwitterCard from '../components/twitter-card.js';
-import OpenGraph from '../components/open-graph.js';
+import Header from "../components/header.js";
+import TwitterCard from "../components/twitter-card.js";
+import OpenGraph from "../components/open-graph.js";
 
-import minify from '../lib/minify.js';
-import * as colors from '../lib/colors.js';
+import minify from "../lib/minify.js";
+import * as colors from "../lib/colors.js";
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 export default compose(
-  setDisplayName('Main'),
+  setDisplayName("Main"),
   setPropTypes({
     children: PropTypes.node.isRequired
   })
@@ -63,18 +63,18 @@ export default compose(
         dangerouslySetInnerHTML={{
           __html: minify(
             JSON.stringify({
-              '@context': 'http://schema.org',
-              '@type': 'Person',
-              name: 'Sergio Xalambrí',
-              image: 'https://sergiodxa.com/static/avatar.jpg',
-              birthDate: '1992-09-29',
-              email: 'hello@sergiodxa.com',
-              gender: 'Male',
-              givenName: 'Sergio',
-              familyName: 'Xalambrí',
-              jobTitle: 'Lead Support Engineer',
+              "@context": "http://schema.org",
+              "@type": "Person",
+              name: "Sergio Xalambrí",
+              image: "https://sergiodxa.com/static/avatar.jpg",
+              birthDate: "1992-09-29",
+              email: "hello@sergiodxa.com",
+              gender: "Male",
+              givenName: "Sergio",
+              familyName: "Xalambrí",
+              jobTitle: "Lead Support Engineer",
               worksFor: {
-                name: 'ZEIT'
+                name: "ZEIT"
               }
             })
           )

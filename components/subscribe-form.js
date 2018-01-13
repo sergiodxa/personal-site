@@ -1,11 +1,11 @@
-import { Component } from 'react';
+import { Component } from "react";
 
-import { P } from './ui/text';
-import Case from './case';
+import { P } from "./ui/text";
+import Case from "./case";
 
-import { hasInitialized, logEvent } from '../lib/analytics.js';
-import * as colors from '../lib/colors';
-import fetch from '../lib/fetch';
+import { hasInitialized, logEvent } from "../lib/analytics.js";
+import * as colors from "../lib/colors";
+import fetch from "../lib/fetch";
 
 const gql = String.raw;
 
@@ -16,7 +16,7 @@ const query = gql`
 `;
 
 class SubscribeForm extends Component {
-  state = { email: '', status: 'idle', errors: [], message: '' };
+  state = { email: "", status: "idle", errors: [], message: "" };
 
   handleChange = event => this.setState({ email: event.target.value });
 
@@ -25,20 +25,20 @@ class SubscribeForm extends Component {
 
     const { email } = this.state;
 
-    this.setState({ status: 'loading' });
+    this.setState({ status: "loading" });
 
     const variables = { email };
 
     const { errors = [], data } = await fetch({ query, variables });
 
     if (errors.length > 0) {
-      return this.setState({ errors, status: 'failed' });
+      return this.setState({ errors, status: "failed" });
     }
 
-    this.setState({ email: '', status: 'success', message: data.subscribe });
+    this.setState({ email: "", status: "success", message: data.subscribe });
 
     if (hasInitialized()) {
-      logEvent('Subscription form', `User ${email} subscribed to email list`);
+      logEvent("Subscription form", `User ${email} subscribed to email list`);
     }
   };
 
@@ -60,7 +60,7 @@ class SubscribeForm extends Component {
           value={this.state.email}
           onChange={this.handleChange}
           placeholder="your@email.com"
-          disabled={this.state.status === 'loading'}
+          disabled={this.state.status === "loading"}
         />
 
         <Case
@@ -68,7 +68,7 @@ class SubscribeForm extends Component {
           onLoading={<P className="loading">Loading...</P>}
           onFailed={
             <P className="error">
-              Error:{' '}
+              Error:{" "}
               {this.state.errors.map(error => (
                 <span key={error.message}>{error.message}</span>
               ))}

@@ -1,12 +1,12 @@
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const BabiliPlugin = require('babili-webpack-plugin');
+const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
+const BabiliPlugin = require("babili-webpack-plugin");
 
-const routes = require('./server/routes');
+const routes = require("./server/routes");
 
 module.exports = {
   webpack(config, { dev }) {
     config.plugins = config.plugins.filter(plugin => {
-      return plugin.constructor.name !== 'UglifyJsPlugin';
+      return plugin.constructor.name !== "UglifyJsPlugin";
     });
 
     if (!dev) {
@@ -15,10 +15,10 @@ module.exports = {
           verbose: true,
           staticFileGlobsIgnorePatterns: [/\.next\//],
           minify: !dev,
-          cacheId: 'sergiodxa.com',
+          cacheId: "sergiodxa.com",
           runtimeCaching: [
             {
-              handler: 'networkFirst',
+              handler: "networkFirst",
               urlPattern: /^https?.*/
             }
           ]

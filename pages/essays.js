@@ -1,19 +1,19 @@
-import Head from 'next/head';
-import Link from 'next/link';
+import Head from "next/head";
+import Link from "next/link";
 
-import { H1 } from '../components/ui/heading';
-import Essay from '../components/essays/essay';
-import Header from '../components/header';
-import Layout from '../layouts/main';
+import { H1 } from "../components/ui/heading";
+import Essay from "../components/essays/essay";
+import Header from "../components/header";
+import Layout from "../layouts/main";
 
-import essays from '../data/essays';
+import essays from "../data/essays";
 
-import compose from 'recompose/compose';
+import compose from "recompose/compose";
 
-import withError from '../lib/hoc/with-error';
-import withGA from '../lib/hoc/with-ga';
-import withSW from '../lib/hoc/with-sw';
-import * as colors from '../lib/colors';
+import withError from "../lib/hoc/with-error";
+import withGA from "../lib/hoc/with-ga";
+import withSW from "../lib/hoc/with-sw";
+import * as colors from "../lib/colors";
 
 const byDate = (a, b) => {
   const timeA = new Date(a.date).getTime();
