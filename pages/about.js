@@ -36,7 +36,7 @@ export default compose(withError, withGA, withSW)(() => (
         <ul>
           <li>
             <a
-              href="https://twitter.com/@sergiodxa"
+              href="https://sdx.im/twitter"
               rel="me"
               title="Twitter"
               className="u-url"
@@ -46,7 +46,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://medium.com/@sergiodxa"
+              href="https://sdx.im/medium"
               rel="me"
               title="Medium"
               className="u-url"
@@ -56,7 +56,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://github.com/sergiodxa"
+              href="https://sdx.im/gh"
               rel="me"
               title="GitHub"
               className="u-url"
@@ -65,18 +65,13 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
           <li>
-            <a
-              href="https://www.npmjs.com/~sergiodxa"
-              rel="me"
-              title="npm"
-              className="u-url"
-            >
+            <a href="https://sdx.im/npm" rel="me" title="npm" className="u-url">
               <Icon name="npm" />
             </a>
           </li>
           <li>
             <a
-              href="https://www.linkedin.com/in/sergiodxa"
+              href="https://sdx.im/cv"
               rel="me"
               title="LinkedIn"
               className="u-url"
@@ -86,7 +81,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://www.instagram.com/sergiodxa/"
+              href="https://sdx.im/instagram"
               rel="me"
               title="Instagram"
               className="u-url"
@@ -96,7 +91,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://steamcommunity.com/id/sergiodxa/"
+              href="https://sdx.im/steam"
               rel="me"
               title="Steam"
               className="u-url"
@@ -106,7 +101,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://www.youtube.com/channel/UCot5kKrWMufGtRohOli6T6g"
+              href="https://sdx.im/yt"
               rel="me"
               title="YouTube"
               className="u-url"
@@ -116,7 +111,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://www.meetup.com/members/182915204/"
+              href="https://sdx.im/meetup"
               rel="me"
               title="Meetup"
               className="u-url"
@@ -126,7 +121,7 @@ export default compose(withError, withGA, withSW)(() => (
           </li>
           <li>
             <a
-              href="https://codepen.io/sergiodxa/"
+              href="https://sdx.im/codepen"
               rel="me"
               title="Codepen"
               className="u-url"
