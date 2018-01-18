@@ -62,5 +62,17 @@ module.exports = {
     query: {
       slug: "como-mantenerse-actualizado-con-el-ecosistema-de-javascript"
     }
+  },
+  "/essays/documentation": {
+    page: "/essay",
+    query: {
+      slug: "documentation"
+    }
+  },
+  "/essays/documentacion": {
+    page: "/essay",
+    query: {
+      slug: "documentacion"
+    }
   }
 };
