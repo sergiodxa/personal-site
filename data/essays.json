@@ -1,5 +1,19 @@
 [
   {
+    "id": 69,
+    "title": "Documentación, Lecciones Aprendidas",
+    "link": "/essays/documentacion",
+    "date": "2018-01-17T21:18:58.320Z",
+    "slug": "documentacion"
+  },
+  {
+    "id": 68,
+    "title": "Documentation, Lessons Learned",
+    "link": "/essays/documentation",
+    "date": "2018-01-17T21:18:58.320Z",
+    "slug": "documentation"
+  },
+  {
     "id": 67,
     "title": "¿Cómo mantenerse actualizado con el ecosistema de JavaScript?",
     "link":
