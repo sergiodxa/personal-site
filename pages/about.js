@@ -144,6 +144,16 @@ export default compose(withError, withGA, withSW)(() => (
               <Icon name="Email" />
             </a>
           </li>
+          <li>
+            <a
+              href="/static/gpg.asc"
+              rel="me"
+              title="GPG"
+              className="u-gpg"
+            >
+              GPG
+            </a>
+          </li>
         </ul>
       </section>
     </section>
