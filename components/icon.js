@@ -9,44 +9,49 @@ import Medium from "./icons/medium";
 import Meetup from "./icons/meetup";
 import NPM from "./icons/npm";
 import RSS from "./icons/rss";
+import Spinner from "./icons/spinner";
 import Spotify from "./icons/spotify";
 import Steam from "./icons/steam";
 import Twitter from "./icons/twitter";
 import YouTube from "./icons/youtube";
 
-export default ({ name }) => {
+export default ({ name, extraLarge, large, small, extraSmall }) => {
+  const size = extraLarge ? 128 : large ? 64 : small ? 16 : extraSmall ? 8 : 32;
+
   return (
     <i alt={name}>
       {(() => {
         switch (name.toLowerCase()) {
           case "codepen":
-            return <Codepen />;
+            return <Codepen size={size} />;
           case "email":
-            return <Email />;
+            return <Email size={size} />;
           case "essay":
-            return <Essay />;
+            return <Essay size={size} />;
           case "github":
-            return <GitHub />;
+            return <GitHub size={size} />;
           case "instagram":
-            return <Instagram />;
+            return <Instagram size={size} />;
           case "linkedin":
-            return <LinkedIn />;
+            return <LinkedIn size={size} />;
           case "medium":
-            return <Medium />;
+            return <Medium size={size} />;
           case "meetup":
-            return <Meetup />;
+            return <Meetup size={size} />;
           case "npm":
-            return <NPM />;
+            return <NPM size={size} />;
           case "rss":
-            return <RSS />;
+            return <RSS size={size} />;
+          case "spinner":
+            return <Spinner size={size} />;
           case "spotify":
-            return <Spotify />;
+            return <Spotify size={size} />;
           case "steam":
-            return <Steam />;
+            return <Steam size={size} />;
           case "twitter":
-            return <Twitter />;
+            return <Twitter size={size} />;
           case "youtube":
-            return <YouTube />;
+            return <YouTube size={size} />;
         }
       })()}
     </i>
