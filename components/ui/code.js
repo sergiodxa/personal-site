@@ -1,6 +1,3 @@
-import { Children } from "react";
-import { safeLoad } from "js-yaml";
-
 import * as colors from "../../lib/colors";
 
 export function Code({ children, ...props }) {
