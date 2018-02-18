@@ -1,5 +1,6 @@
 import Error from "next/error";
 import { format } from "url";
+import gql from 'graphql-tag';
 
 import compose from "recompose/compose";
 import setStatic from "recompose/setStatic";
@@ -14,22 +15,8 @@ import withError from "../lib/hoc/with-error.js";
 import withGA from "../lib/hoc/with-ga.js";
 import withSW from "../lib/hoc/with-sw.js";
 
-const gql = String.raw;
-
 async function getInitialProps(ctx) {
-  const isServer = Boolean(ctx.req);
-
-  const url = ctx.isVirtualCall
-    ? ctx.pathname
-    : format({ pathname: ctx.pathname, query: ctx.query });
-
-  if (!isServer) {
-    console.info("Getting info from localStorage");
-    const props = localStorage.getItem(url);
-    if (props) {
-      return JSON.parse(props);
-    }
-  }
+  if (ctx.isVirtualCall) console.log("Is virtual call");
 
   const query = gql`
     query getEssay($slug: String!) {
@@ -55,18 +42,13 @@ async function getInitialProps(ctx) {
   };
 
   console.info("Fetching data from GraphQL API");
-  const { data, errors } = await fetch({ query, variables });
+  const { data, errors } = await fetch.query({ query, variables });
 
   if (errors) {
     return { errors };
   }
 
   const props = { ...data.getEssay };
-
-  if (ctx.isVirtualCall) {
-    console.info("Saving data in cache");
-    localStorage.setItem(url, JSON.stringify(props));
-  }
 
   return props;
 }
