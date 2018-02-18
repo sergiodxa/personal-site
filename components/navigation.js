@@ -42,6 +42,7 @@ function Navigation() {
         ul {
           list-style: none;
           padding-top: 1em;
+          padding-left: 0;
         }
 
         li {
