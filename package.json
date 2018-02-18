@@ -47,6 +47,7 @@
     "babel-plugin-transform-define": "^1.3.0",
     "babili-webpack-plugin": "^0.1.2",
     "classnames": "^2.2.5",
+    "data-prefetch-link": "^1.1.2",
     "date-fns": "^1.28.5",
     "express": "^4.16.2",
     "graphql": "^0.13.1",

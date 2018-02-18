@@ -9,7 +9,7 @@ import setPropTypes from "recompose/setPropTypes";
 import setStatic from "recompose/setStatic";
 
 import Site from "./site.js";
-import Link from "../link";
+import Link from "data-prefetch-link";
 
 import parseUrl from "../../lib/parse-url.js";
 import * as colors from "../../lib/colors.js";
