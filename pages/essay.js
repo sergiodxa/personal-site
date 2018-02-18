@@ -16,8 +16,6 @@ import withGA from "../lib/hoc/with-ga.js";
 import withSW from "../lib/hoc/with-sw.js";
 
 async function getInitialProps(ctx) {
-  if (ctx.isVirtualCall) console.log("Is virtual call");
-
   const query = gql`
     query getEssay($slug: String!) {
       getEssay(slug: $slug) {
@@ -41,7 +39,6 @@ async function getInitialProps(ctx) {
     slug: ctx.query.slug
   };
 
-  console.info("Fetching data from GraphQL API");
   const { data, errors } = await fetch.query({ query, variables });
 
   if (errors) {
