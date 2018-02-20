@@ -19,6 +19,7 @@ import SubscribeForm from "../components/subscribe-form";
 
 import Main from "./main";
 
+import minify from "../lib/minify.js";
 import parser from "../lib/markdown";
 import * as colors from "../lib/colors";
 import * as CustomTypes from "../lib/types";
@@ -51,7 +52,9 @@ export default compose(
     dateString: date,
     content: parser(abbreviatures + content),
     tags: tags.split(", "),
-    hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : ""
+    hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : "",
+    url: `https://sergiodxa.com/essays/${props.slug ||
+      slugify(title, { lower: true })}/`
   })),
   setDisplayName("Essay"),
   setPropTypes({
@@ -63,7 +66,8 @@ export default compose(
     description: CustomTypes.stringMax140,
     canonicalUrl: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
-    hostname: PropTypes.string
+    hostname: PropTypes.string,
+    url: PropTypes.string.isRequired
   })
 )(props => (
   <Main>
@@ -81,6 +85,35 @@ export default compose(
           href={props.translateFrom.url}
         />
       )}
+      {/* Schema JSON */}
+      <script
+        id="schema"
+        key="schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: minify(
+            JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              author: {
+                "@type": "Person",
+                name: "Sergio Daniel Xalambrí",
+                url: "https://sergiodxa.com",
+              },
+              inLanguage: props.lang,
+              keywords: props.tags.join(", "),
+              headline: props.title,
+              url: props.url,
+              datePublished: props.dateString,
+              description: props.description,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": "https://sergiodxa.com"
+              }
+            }),
+          )
+        }}
+      />
     </Head>
 
     <TwitterCard
@@ -99,9 +132,9 @@ export default compose(
 
     <LinkedHeader href="/essays" sticky={false} />
 
-    <a href="https://github.com/sergiodxa/personal-site" className="src">
-      {"<source />"}
-    </a>
+    <div className="src">
+      <a href="https://github.com/sergiodxa/personal-site">{"<source />"}</a>
+    </div>
 
     <section className="content">
       <H1 className="main-title" lang={props.lang || "en"}>
@@ -140,11 +173,6 @@ export default compose(
     </section>
 
     <style jsx>{`
-      a {
-        color: ${colors.black};
-        text-decoration: none;
-      }
-
       .src {
         position: absolute;
         top: 0;

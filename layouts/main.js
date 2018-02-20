@@ -59,6 +59,8 @@ export default compose(
 
       {/* Schema JSON */}
       <script
+        id="schema"
+        key="schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: minify(
