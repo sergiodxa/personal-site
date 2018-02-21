@@ -19,7 +19,7 @@ export default compose(withError, withGA, withSW)(() => (
 
       <article>
         <P>
-        I give <strong>consultancy</strong> and <strong>workshop</strong> for your company or startup.
+        I give <strong>consultancy</strong> and <strong>workshops</strong> for your company or startup.
         </P>
 
         <P>The following is a list of technologies I can help with:</P>
