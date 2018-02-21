@@ -23,4 +23,5 @@ module.exports = {
   ...essay("documentation"),
   ...essay("documentacion"),
   ...essay("introduccion-a-graphql"),
+  ...essay("ciclo-de-vida-de-un-componente-de-reactjs")
 };
