@@ -19,11 +19,10 @@ export default compose(withError, withGA, withSW)(() => (
 
       <article>
         <P>
-          I could give <strong>consultancy</strong> for your company or project
-          or give a workshop at your company (or any event).
+        I give <strong>consultancy</strong> and <strong>workshop</strong> for your company or startup.
         </P>
 
-        <P>The following is a list of technologies I can help you with:</P>
+        <P>The following is a list of technologies I can help with:</P>
 
         <UL>
           <LI>
@@ -38,12 +37,18 @@ export default compose(withError, withGA, withSW)(() => (
           <LI>
             <A href="https://now.sh">Now.sh</A>
           </LI>
-          <LI>Microservices</LI>
+          <LI>
+            <A href="https://github.com/zeit/micro">Micro</A>
+          </LI>
+          <LI>
+            <A href="http://graphql.org/">GraphQL</A>
+          </LI>
+          <LI>Frontend Architecture</LI>
         </UL>
+
         <P>
-          If your company is in Perú or Buenos Aires, Argentina I can go to your
-          office. Outside those places I should do an online streaming or charge
-          your the travel costs to the final price.
+          If your company is in <strong>Perú or Buenos Aires, Argentina</strong>{" "}
+          I can go physically to your office. Outside those places I should do an online streaming or charge you the travel costs in the final price.
         </P>
 
         <P>
