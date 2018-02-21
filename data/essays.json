@@ -129,8 +129,9 @@
   {
     "id": 51,
     "title": "Introducción a GraphQL",
-    "link": "https://platzi.com/blog/introduccion-a-graphql/",
-    "date": "2017-05-29T00:42:30.912340Z"
+    "link": "/essays/introduccion-a-graphql",
+    "date": "2017-05-29T00:42:30.912340Z",
+    "slug": "introduccion-a-graphql"
   },
   {
     "id": 50,

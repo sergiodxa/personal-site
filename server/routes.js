@@ -74,5 +74,11 @@ module.exports = {
     query: {
       slug: "documentacion"
     }
+  },
+  "/essays/introduccion-a-graphql": {
+    page: "/essay",
+    query: {
+      slug: "introduccion-a-graphql"
+    }
   }
 };
