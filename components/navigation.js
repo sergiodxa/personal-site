@@ -20,6 +20,13 @@ function Navigation() {
           </Link>
         </li>
         <li>
+          <Link href="/services" prefetch>
+            <A href="/services" title="The services I offer">
+              Services
+            </A>
+          </Link>
+        </li>
+        <li>
           <A href="https://sdx.im/twitter" title="Thoughts" rel="me">
             Thoughts
           </A>
