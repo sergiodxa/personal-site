@@ -20,9 +20,10 @@ Router.onRouteChangeError = () => NProgress.done();
 export default compose(
   setDisplayName("Main"),
   setPropTypes({
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    noSchema: PropTypes.bool,
   })
-)(({ children }) => (
+)(({ children, noSchema }) => (
   <main>
     <Head>
       <title>Sergio Xalambrí - Lead Support Engineer</title>
@@ -58,30 +59,32 @@ export default compose(
       />
 
       {/* Schema JSON */}
-      <script
-        id="schema"
-        key="schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: minify(
-            JSON.stringify({
-              "@context": "http://schema.org",
-              "@type": "Person",
-              name: "Sergio Xalambrí",
-              image: "https://sergiodxa.com/static/avatar.jpg",
-              birthDate: "1992-09-29",
-              email: "hello@sergiodxa.com",
-              gender: "Male",
-              givenName: "Sergio",
-              familyName: "Xalambrí",
-              jobTitle: "Lead Support Engineer",
-              worksFor: {
-                name: "ZEIT"
-              }
-            })
-          )
-        }}
-      />
+      {!noSchema && (
+        <script
+          id="schema"
+          key="schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: minify(
+              JSON.stringify({
+                "@context": "http://schema.org",
+                "@type": "Person",
+                name: "Sergio Xalambrí",
+                image: "https://sergiodxa.com/static/avatar.jpg",
+                birthDate: "1992-09-29",
+                email: "hello@sergiodxa.com",
+                gender: "Male",
+                givenName: "Sergio",
+                familyName: "Xalambrí",
+                jobTitle: "Lead Support Engineer",
+                worksFor: {
+                  name: "ZEIT"
+                }
+              })
+            )
+          }}
+        />
+      )}
     </Head>
 
     <TwitterCard />

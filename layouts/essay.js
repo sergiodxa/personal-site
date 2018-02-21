@@ -70,7 +70,7 @@ export default compose(
     url: PropTypes.string.isRequired
   })
 )(props => (
-  <Main>
+  <Main noSchema>
     <Head>
       <title>{props.title}</title>
       <meta name="description" content={props.description} />
