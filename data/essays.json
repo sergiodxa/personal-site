@@ -70,14 +70,14 @@
   {
     "id": 60,
     "title": "Implementando un servidor de GraphQL",
-    "link": "https://platzi.com/blog/implementando-un-servidor-de-graphql/",
-    "date": "2017-07-07T15:42:42.778208Z"
+    "link": "/essays/implementando-un-servidor-de-graphql/",
+    "date": "2017-07-07T15:42:42.778208Z",
+    "slug": "implementando-un-servidor-de-graphql"
   },
   {
     "id": 59,
     "title": "Ciclo de vida de un componente de React.js",
-    "link":
-      "/essays/ciclo-de-vida-de-un-componente-de-reactjs",
+    "link": "/essays/ciclo-de-vida-de-un-componente-de-reactjs",
     "date": "2017-07-06T15:31:07.735183Z",
     "slug": "ciclo-de-vida-de-un-componente-de-reactjs"
   },
@@ -99,8 +99,9 @@
     "id": 56,
     "title":
       "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
-    "link": "https://platzi.com/blog/mezclando-flujos-sincronos-y-asincronos/",
-    "date": "2017-06-23T22:39:48.419988Z"
+    "link": "/essays/mezclando-flujos-sincronos-y-asincronos/",
+    "date": "2017-06-23T22:39:48.419988Z",
+    "slug": "mezclando-flujos-sincronos-y-asincronos"
   },
   {
     "id": 55,
@@ -191,10 +192,10 @@
   {
     "id": 42,
     "title": "Qué son y cómo funcionan las promesas en JavaScript",
-    "link":
-      "https://platzi.com/blog/que-es-y-como-funcionan-las-promesas-en-javascript/",
+    "link": "/essay/que-son-y-como-funcionan-las-promesas-en-javascript",
     "date": "2017-03-06T00:00:00Z",
-    "highlighted": true
+    "highlighted": true,
+    "slug": "que-son-y-como-funcionan-las-promesas-en-javascript"
   },
   {
     "id": 41,
