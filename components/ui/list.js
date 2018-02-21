@@ -15,7 +15,6 @@ export function UL({ children, ...props }) {
 
         @media (max-width: 767px) {
           ul {
-            font-size: 1em;
             margin-left: 0;
             padding-left: 2rem;
           }
@@ -40,7 +39,6 @@ export function OL({ children, ...props }) {
 
         @media (max-width: 767px) {
           ol {
-            font-size: 1em;
             margin-left: 0;
             padding-left: 2rem;
           }
