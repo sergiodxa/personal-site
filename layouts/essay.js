@@ -43,6 +43,7 @@ const abbreviatures = `
 *[REST]: Representational state transfer
 *[SQL]: Structured Query Language
 *[DB]: Database
+*[NoSQL]: Not Only SQL
 `;
 
 export default compose(
@@ -98,7 +99,7 @@ export default compose(
               author: {
                 "@type": "Person",
                 name: "Sergio Daniel Xalambrí",
-                url: "https://sergiodxa.com",
+                url: "https://sergiodxa.com"
               },
               inLanguage: props.lang,
               keywords: props.tags.join(", "),
@@ -110,7 +111,7 @@ export default compose(
                 "@type": "WebPage",
                 "@id": "https://sergiodxa.com"
               }
-            }),
+            })
           )
         }}
       />
