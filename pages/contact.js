@@ -19,7 +19,7 @@ export default compose(withError, withGA, withSW)(() => (
 
       <P>
         You can send me a tweet to{" "}
-        <A color="blue" href="https://twitter.com">
+        <A color="blue" href="https://twitter.com/sergiodxa">
           @sergiodxa
         </A>{" "}
         or an email to{" "}
