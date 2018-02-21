@@ -9,6 +9,7 @@ module.exports = {
   "/": { page: "/" },
   "/about": { page: "/about" },
   "/subscribe": { page: "/subscribe" },
+  "/contact": { page: "/contact" },
   "/essays": { page: "/essays" },
   ...essay("an-accessible-approach-to-frontend-testing"),
   ...essay("how-to-keep-updated-with-the-javascript-ecosystem"),
