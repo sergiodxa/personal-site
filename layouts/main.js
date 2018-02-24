@@ -46,7 +46,7 @@ export default compose(
         title="Sergio Xalambrí"
       />
       <link rel="manifest" href="/static/manifest.json" />
-      <link rel="shortcut icon" href="/static/favicon.png" />
+      <link rel="shortcut icon" href="/static/favicon@128.jpg" />
       <link rel="stylesheet" href="/static/nprogress.css" />
 
       <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
