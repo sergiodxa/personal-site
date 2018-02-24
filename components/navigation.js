@@ -27,7 +27,7 @@ function Navigation() {
           </Link>
         </li>
         <li>
-          <A href="https://sdx.im/twitter" title="Thoughts" rel="me">
+          <A href="https://sdx.im/twitter" title="Thoughts" rel="me noopener">
             Thoughts
           </A>
         </li>
