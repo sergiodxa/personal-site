@@ -29,8 +29,8 @@
       "type": "image/jpeg"
     },
     {
-      "src": "/static/favicon@512.jpg",
-      "sizes": "512x512",
+      "src": "/static/favicon@400.jpg",
+      "sizes": "400x400",
       "type": "image/jpeg"
     }
   ]
