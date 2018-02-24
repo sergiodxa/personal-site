@@ -1,7 +1,8 @@
 {
   "name": "personal-site",
   "alias": "site.sergiodxa.com",
-  "type": "static",
+  "type": "npm",
+  "files": ["./site", "./package.json", "./yarn.lock"],
   "env": {
     "NODE_ENV": "@env"
   }
