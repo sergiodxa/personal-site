@@ -30,7 +30,7 @@
     },
     {
       "src": "/static/favicon@400.jpg",
-      "sizes": "400x400",
+      "sizes": "512x512",
       "type": "image/jpeg"
     }
   ]
