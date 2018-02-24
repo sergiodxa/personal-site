@@ -3,7 +3,7 @@ const BabiliPlugin = require("babili-webpack-plugin");
 
 const routes = require("./server/routes");
 
-const { NOW_URL } = process.env;
+const { NODE_ENV } = process.env;
 const { alias } = require("./now.json");
 
 module.exports = withOffline({
@@ -19,7 +19,8 @@ module.exports = withOffline({
     return config;
   },
 
-  assetPrefix: NOW_URL ? `https://${alias}` : "http://localhost:3001",
+  assetPrefix:
+    NODE_ENV === "production" ? `https://${alias}` : "http://localhost:3001",
 
   exportPathMap() {
     return routes;
