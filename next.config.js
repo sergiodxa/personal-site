@@ -6,23 +6,35 @@ const routes = require("./server/routes");
 const { NODE_ENV } = process.env;
 const { alias } = require("./now.json");
 
-module.exports = withOffline({
-  webpack(config, { dev }) {
-    config.plugins = config.plugins.filter(plugin => {
-      return plugin.constructor.name !== "UglifyJsPlugin";
-    });
+const withBabili = (nextConfig = {}) => {
+  return Object.assign({}, nextConfig, {
+    webpack(config, options) {
+      if (!options.defaultLoaders) {
+        throw new Error(
+          "This plugin is not compatible with Next.js versions below 5.0.0 https://err.sh/next-plugins/upgrade"
+        );
+      }
 
-    if (!dev) {
-      config.plugins.push(new BabiliPlugin());
+      config.plugins = config.plugins.filter(plugin => {
+        return plugin.constructor.name !== "UglifyJsPlugin";
+      });
+
+      if (!options.dev) {
+        config.plugins.push(new BabiliPlugin());
+      }
+
+      return config;
     }
+  });
+};
 
-    return config;
-  },
+module.exports = withOffline(
+  withBabili({
+    assetPrefix:
+      NODE_ENV === "production" ? `https://${alias}` : "http://localhost:3001",
 
-  assetPrefix:
-    NODE_ENV === "production" ? `https://${alias}` : "http://localhost:3001",
-
-  exportPathMap() {
-    return routes;
-  }
-});
+    exportPathMap() {
+      return routes;
+    }
+  })
+);
