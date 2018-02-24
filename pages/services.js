@@ -19,36 +19,50 @@ export default compose(withError, withGA, withSW)(() => (
 
       <article>
         <P>
-        I give <strong>consultancy</strong> and <strong>workshops</strong> for your company or startup.
+          I give <strong>consultancy</strong> and <strong>workshops</strong> for
+          your company or startup.
         </P>
 
         <P>The following is a list of technologies I can help with:</P>
 
         <UL>
           <LI>
-            <A href="https://www.javascript.com/">JavaScript</A>
+            <A href="https://www.javascript.com/" rel="nofollow">
+              JavaScript
+            </A>
           </LI>
           <LI>
-            <A href="https://reactjs.org">React.js</A>
+            <A href="https://reactjs.org" rel="nofollow">
+              React.js
+            </A>
           </LI>
           <LI>
-            <A href="https://github.com/zeit/next.js">Next.js</A>
+            <A href="https://github.com/zeit/next.js" rel="nofollow">
+              Next.js
+            </A>
           </LI>
           <LI>
-            <A href="https://now.sh">Now.sh</A>
+            <A href="https://now.sh" rel="nofollow">
+              Now.sh
+            </A>
           </LI>
           <LI>
-            <A href="https://github.com/zeit/micro">Micro</A>
+            <A href="https://github.com/zeit/micro" rel="nofollow">
+              Micro
+            </A>
           </LI>
           <LI>
-            <A href="http://graphql.org/">GraphQL</A>
+            <A href="http://graphql.org/" rel="nofollow">
+              GraphQL
+            </A>
           </LI>
           <LI>Frontend Architecture</LI>
         </UL>
 
         <P>
           If your company is in <strong>Perú or Buenos Aires, Argentina</strong>{" "}
-          I can go physically to your office. Outside those places I should do an online streaming or charge you the travel costs in the final price.
+          I can go physically to your office. Outside those places I should do
+          an online streaming or charge you the travel costs in the final price.
         </P>
 
         <P>
