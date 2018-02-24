@@ -9,7 +9,7 @@
     "build:rss": "node scripts/build-rss.js",
     "dist": "pkg index.js --output ./site --target linux",
     "start": "NODE_ENV=production node .",
-    "deploy": "now deploy portfolio --token $TOKEN -A ../now.json",
+    "deploy": "now deploy --token $TOKEN",
     "alias": "now alias --token $TOKEN",
     "now-build": "echo 'Built on CI'",
     "now-start": "./site"
