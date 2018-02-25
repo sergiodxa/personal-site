@@ -1,6 +1,6 @@
 .next
 node_modules
 portfolio
+dist
 logs
 *.log
-pages/essays/draft/
