@@ -4,12 +4,12 @@ node_js:
 cache:
   directories:
       - "node_modules"
-install: npm install
-script: npm run build && npm run build:rss && npm run dist
+install: npm install --production
+script: npm run export
 before_deploy: npm install now --no-save
 deploy:
   provider: script
-  script: npm run deploy && npm run alias
+  script: npm run deploy
   skip_cleanup: true
   on:
     branch: master
