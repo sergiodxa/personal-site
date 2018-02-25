@@ -30,7 +30,7 @@
     "url": "https://github.com/sergiodxa/personal-site/issues"
   },
   "homepage": "https://sergiodxa.com",
-  "dependencies": {
+  "devDependencies": {
     "@platzi/markdown": "^1.3.3",
     "apollo-cache-inmemory": "^1.1.9",
     "apollo-cache-persist": "^0.1.1",
