@@ -6,7 +6,7 @@ const atom = require("./lib/atom.js");
 const writeFile = promisify(fs.writeFile);
 
 async function main() {
-  await writeFile("./portfolio/atom", atom());
+  await writeFile("./dist/atom", atom());
   return true;
 }
 
