@@ -110,6 +110,10 @@ export default compose(
         --color: #000000;
       }
 
+      a:active {
+        background: url("https://analytics.sergiodxa.com?action=link-clicked")
+      }
+
       #nprogress {
         pointer-events: none;
       }
