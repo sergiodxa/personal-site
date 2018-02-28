@@ -3,7 +3,7 @@ import { Component } from "react";
 import { P } from "./ui/text";
 import Case from "./case";
 
-import { hasInitialized, logEvent } from "../lib/analytics.js";
+import { event } from "../lib/analytics.js";
 import * as colors from "../lib/colors";
 import fetch from "../lib/fetch";
 
@@ -37,9 +37,10 @@ class SubscribeForm extends Component {
 
     this.setState({ email: "", status: "success", message: data.subscribe });
 
-    if (hasInitialized()) {
-      logEvent("Subscription form", `User ${email} subscribed to email list`);
-    }
+    event({
+      action: "Subscription form",
+      description: `User ${email} subscribed to email list`
+    });
   };
 
   render() {
