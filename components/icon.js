@@ -1,6 +1,7 @@
 import Head from "next/head";
 
 import Codepen from "./icons/codepen";
+import Dev from "./icons/dev";
 import Email from "./icons/email";
 import GitHub from "./icons/github";
 import Instagram from "./icons/instagram";
@@ -24,6 +25,8 @@ export default ({ name, extraLarge, large, small, extraSmall }) => {
         switch (name.toLowerCase()) {
           case "codepen":
             return <Codepen size={size} />;
+          case "dev":
+            return <Dev size={size} />;
           case "email":
             return <Email size={size} />;
           case "essay":

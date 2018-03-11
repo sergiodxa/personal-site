@@ -130,6 +130,16 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
           <li>
+            <a
+              href="https://sdx.im/devto"
+              rel="me"
+              title="DevTo"
+              className="u-url"
+            >
+              <Icon name="dev" />
+            </a>
+          </li>
+          <li>
             <a href="/atom" rel="me" title="Feed RSS" className="u-url">
               <Icon name="RSS" />
             </a>
@@ -145,12 +155,7 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
           <li>
-            <a
-              href="/static/gpg.asc"
-              rel="me"
-              title="GPG"
-              className="u-gpg"
-            >
+            <a href="/static/gpg.asc" rel="me" title="GPG" className="u-gpg">
               GPG
             </a>
           </li>
