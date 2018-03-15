@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { H1 } from "../components/ui/heading";
+import { A } from "../components/ui/text";
 import Essay from "../components/essays/essay";
 import Header from "../components/header";
 import Layout from "../layouts/main";
@@ -32,7 +33,11 @@ export default compose(withError, withGA, withSW)(() => (
     </Head>
 
     <section>
-      <H1>Essays and Articles</H1>
+      <Link href="/">
+        <A href="/">
+          <H1>Essays and Articles</H1>
+        </A>
+      </Link>
       {essays.sort(byDate).map(toComponent)}
     </section>
 
