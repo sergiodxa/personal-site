@@ -79,7 +79,7 @@ export function TBody({ children, ...props }) {
   );
 }
 
-export function TFooter({ children, ...props }) {
+export function TFoot({ children, ...props }) {
   return (
     <tfoot {...props}>
       {children}
