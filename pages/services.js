@@ -5,10 +5,29 @@ import { LinkedHeader } from "../components/header";
 import { H1 } from "../components/ui/heading";
 import { A, P } from "../components/ui/text";
 import { UL, LI } from "../components/ui/list";
+import markdown from "../lib/markdown";
 
 import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
+
+const content = markdown(`
+I can give **consultancy** and **workshops** for your company or startup.
+
+The following is a list of technologies I can help with:
+
+* [JavaScript](https://www.javascript.com)
+* [React.js](https://reactjs.org)
+* [Next.js](https://github.com/zeit/next.js)
+* [Now.sh](https://now.sh)
+* [Micro](https://github.com/zeit/micro)
+* [GraphQL](http://graphql.org)
+* Frontend Architecture
+
+If your company is based on **Perú** or **Buenos Aires, Argentina** I can go physically to your office. Outside those places I should do an online streaming or charge you the travel costs in the final price.
+
+If you are interested send me an email to [hello@sergiodxa.com](mailto:hello@sergiodxa.com?subject=Services)
+`)
 
 export default compose(withError, withGA, withSW)(() => (
   <Main>
@@ -17,70 +36,20 @@ export default compose(withError, withGA, withSW)(() => (
     <section>
       <H1>Do you want my help?</H1>
 
-      <article>
-        <P>
-          I give <strong>consultancy</strong> and <strong>workshops</strong> for
-          your company or startup.
-        </P>
-
-        <P>The following is a list of technologies I can help with:</P>
-
-        <UL>
-          <LI>
-            <A href="https://www.javascript.com/" rel="nofollow">
-              JavaScript
-            </A>
-          </LI>
-          <LI>
-            <A href="https://reactjs.org" rel="nofollow">
-              React.js
-            </A>
-          </LI>
-          <LI>
-            <A href="https://github.com/zeit/next.js" rel="nofollow">
-              Next.js
-            </A>
-          </LI>
-          <LI>
-            <A href="https://now.sh" rel="nofollow">
-              Now.sh
-            </A>
-          </LI>
-          <LI>
-            <A href="https://github.com/zeit/micro" rel="nofollow">
-              Micro
-            </A>
-          </LI>
-          <LI>
-            <A href="http://graphql.org/" rel="nofollow">
-              GraphQL
-            </A>
-          </LI>
-          <LI>Frontend Architecture</LI>
-        </UL>
-
-        <P>
-          If your company is in <strong>Perú or Buenos Aires, Argentina</strong>{" "}
-          I can go physically to your office. Outside those places I should do
-          an online streaming or charge you the travel costs in the final price.
-        </P>
-
-        <P>
-          If you are interested send me an email to{" "}
-          <A color="blue" href="mailto:hello@sergiodxa.com?subject=Services">
-            hello@sergiodxa.com
-          </A>
-        </P>
-      </article>
+      <article>{content}</article>
     </section>
 
     <style jsx>{`
       section {
-        max-width: 1000px;
+        max-width: 720px;
         margin: 0 1em;
       }
       article {
         font-size: 1.25em;
+      }
+      article :global(li > a) {
+        color: black;
+        text-decoration: none;
       }
       @media (min-width: 720px) {
         section {
