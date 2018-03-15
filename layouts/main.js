@@ -13,9 +13,18 @@ import OpenGraph from "../components/open-graph.js";
 import minify from "../lib/minify.js";
 import * as colors from "../lib/colors.js";
 
-Router.onRouteChangeStart = url => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
+let progressTimer = null;
+Router.onRouteChangeStart = () => {
+  progressTimer = setTimeout(NProgress.start, 300);
+};
+Router.onRouteChangeComplete = () => {
+  NProgress.done();
+  clearTimeout(progressTimer);
+};
+Router.onRouteChangeError = () => {
+  NProgress.done();
+  clearTimeout(progressTimer);
+};
 
 export default compose(
   setDisplayName("Main"),
@@ -111,10 +120,10 @@ export default compose(
       }
 
       a:active {
-        background: url("https://analytics.sergiodxa.com?action=link-clicked")
+        background: url("https://analytics.sergiodxa.com?action=link-clicked");
       }
       a:hover {
-        background: url("https://analytics.sergiodxa.com?action=link-hovered")
+        background: url("https://analytics.sergiodxa.com?action=link-hovered");
       }
 
       #nprogress {
