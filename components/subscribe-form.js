@@ -101,13 +101,11 @@ class SubscribeForm extends Component {
           }
 
           input:hover {
-            background: url("https://analytics.sergiodxa.com?action=Subscription form&description=Input hovered");
             background-color: white;
             border-bottom-color: ${colors.black};
           }
 
           input:disabled {
-            background: url("https://analytics.sergiodxa.com?action=Subscription form"&description=Form sent);
             background-color: ${colors.grey};
             color: ${colors.white};
           }
