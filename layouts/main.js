@@ -63,7 +63,7 @@ export default compose(
       {/* Google WebMaster Tools Verification */}
       <meta
         name="google-site-verification"
-        content="X2JScoEw_7GYGeczFqsSI1Xm5h_z5Vn2PqtwWKnoNuI"
+        content="9AkcEK4Ofz3GhKILelFPvJALYzt8KfvX8SqVyqeSL90"
       />
 
       {/* Schema JSON */}
