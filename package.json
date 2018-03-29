@@ -7,8 +7,10 @@
     "build": "next build",
     "preexport": "npm run build",
     "export": "next export -o dist",
-    "postexport": "cp .next/service-worker.js dist && npm run build:rss",
+    "postexport":
+      "cp .next/service-worker.js dist && cp static/robots.txt dist && npm run build:rss && npm run build:sitemap",
     "build:rss": "node scripts/build-rss.js",
+    "build:sitemap": "node scripts/build-sitemap.js",
     "alias": "now alias --token $TOKEN",
     "clean": "now rm personal-site --safe --yes --token $TOKEN",
     "prestart": "npm run build",
@@ -22,12 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
-  "keywords": [
-    "nextjs",
-    "blog",
-    "personal-website",
-    "personal-site"
-  ],
+  "keywords": ["nextjs", "blog", "personal-website", "personal-site"],
   "author": {
     "name": "Sergio Daniel Xalambrí",
     "email": "hello@sergiodxa.com",
