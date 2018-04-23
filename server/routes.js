@@ -11,6 +11,7 @@ module.exports = {
   "/subscribe": { page: "/subscribe" },
   "/contact": { page: "/contact" },
   "/services": { page: "/services" },
+  "/books": { page: "/books" },
   "/uses": { page: "/uses" },
   "/essays": { page: "/essays" },
   ...essay("an-accessible-approach-to-frontend-testing"),

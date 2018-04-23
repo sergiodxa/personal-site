@@ -3,8 +3,6 @@ import compose from "recompose/compose";
 import Main from "../layouts/main";
 import { LinkedHeader } from "../components/header";
 import { H1 } from "../components/ui/heading";
-import { A, P } from "../components/ui/text";
-import { UL, LI } from "../components/ui/list";
 import markdown from "../lib/markdown";
 
 import withGA from "../lib/hoc/with-ga";

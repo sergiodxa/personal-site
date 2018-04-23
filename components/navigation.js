@@ -31,6 +31,13 @@ function Navigation() {
             Thoughts
           </A>
         </li>
+        <li>
+          <Link href="/books" prefetch>
+            <A href="/books" title="Books I wrote">
+              Books
+            </A>
+          </Link>
+        </li>
       </ul>
 
       <style jsx>{`
