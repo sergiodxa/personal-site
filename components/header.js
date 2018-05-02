@@ -53,6 +53,7 @@ const Header = compose(
         text-align: center;
         padding: 1em;
         box-sizing: border-box;
+        margin: 0 1em;
       }
 
       header:not(.centered) {

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import compose from "recompose/compose";
 
+import { A, P } from "../components/ui/text";
 import { LinkedHeader } from "../components/header";
 import Icon from "../components/icon";
 import Layout from "../layouts/main";
@@ -160,6 +161,13 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
         </ul>
+
+      </section>
+
+      <section id="paypal">
+        <P>
+          Do you like my articles? <A href="https://paypal.me/sergiodxa/5" color="blue">Buy me a coffee</A> and help me continue writing!
+        </P>
       </section>
     </section>
 
@@ -204,6 +212,11 @@ export default compose(withError, withGA, withSW)(() => (
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      #paypal {
+        margin: 0 1em;
+        text-align: center;
       }
 
       @media (min-width: 720px) {
