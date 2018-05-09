@@ -1,0 +1,227 @@
+export const title = "Introducción a MDX";
+export const description = "MDX es un formato de archivo que permite extender Markdown con código JS y JSX (Componentes de React)";
+export const slug = "introduccion-a-mdx";
+export const date = "2018-05-09T05:03:59.757Z"
+export const lang = "es"
+export const published = false
+
+![](/static/essays/mdx.png)
+
+MDX es un formato de archivo que permite extender Markdown con código JS y JSX (Componentes de React). Gracias a esto permite usar componentes personalizados de React o cualquier componente descargado de npm para agregar más contenido que normalmente no sería posible con simple Markdown.
+
+## Casos de Uso
+
+El mayor caso de uso de MDX es la creación de contenido para un blog, ya que simplemente creando un archivo `.mdx` sería posible agregar un nuevo post y de ser necesario hacer `import` de un componente de React.
+
+Incluso agregar metadata haciendo `export` de esta. Un ejemplo de blogs usándolo son el [blog de ZEIT](https://zeit.co/blog) o este mismo blog que si bien originalmente [usaba otra forma de parsear Markdown extendido](/essays/markdown-react "/essay?slug=markdown-react") este y futuros artículos (y eventualmente viejos) usan MDX.
+
+Hay obviamente más casos de uso, ya que al poder usar JS es posible extender Markdown como se necesite, por ejemplo haciendo que crees todo un sitio solo usando Markdown y componente propios de React.
+
+Por ejemplo mi sistema de slides que se puede ver funcionando en [From Local to Global
+with a Single Command](https://sergiodxa.com/slides/local-to-global) (una charla que dí en el FliSol de mi ciudad) están hechos usando MDX, cada slide es un archivo `.mdx` que usa Markdown común y corriento y en algunos slides especiales como [Global Regions
+](https://sergiodxa.com/slides/local-to-global/regions) se usan componentes de React para renderizar el mapa mundi, un sistema de archivos, una terminal, etc.
+
+## Instalación y Configuración
+
+Ahora que ya entendemos por qué sirve MDX vamos a ver como usarlo, lo primero es instalarlo
+
+```bash
+yarn add -D @mdx-js/loader @mdx-js/mdx
+```
+
+Eso nos instala MDX y el loader de webpack. Ahora solo necesitamos agregarlo a nuestra configuración de webpack junto a `babel-loader` (necesario para soportar código de JS y React).
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.mdx?$/,
+        use: ["babel-loader", "@mdx-js/loader"]
+      }
+    ]
+  }
+};
+```
+
+¡Eso es todo! Ahora podemos empezar a escribir archivos `.md` o `.mdx` que usen nuestro nuevo loader.
+
+## Ejemplos
+
+Veamos un ejemplo de un archivo `.mdx` y como se usaría.
+
+```md
+# Hola, Mundo!
+```
+
+Un archivo muy simple, solo renderiza un `<h1 />` con el texto _Hola, Mundo!_. Ahora vamos a nuestro `index.js` y agregamos esto.
+
+```js
+import React from "react";
+import { render } from "react-dom";
+
+import Hola from "./essay/hola.mdx";
+
+render(<Hola />, document.getElementById("app"));
+```
+
+Y otra vez ¡Eso es todo! Importamos nuestro archivo `.mdx` y lo renderizamos como un componente normal de React sin tener que hacer nada adicional.
+
+### Importando Componentes Propios
+
+Extendamos nuestro ejemplo, vamos a suponer que tenemos un archivo `./components/graph.js` que muestra un gráfico hecho con React. Para poder incluirlo en nuestro post solo artículo solo tenemos que hacer un simple `import`.
+
+```md
+import Graph from "../components/graph";
+
+# Hola, Mundo!
+
+<Graph />
+```
+
+Eso va a renderizar ahora nuestro componente `<Graph />` dentro del artículo.
+
+#### Importar Otro Markdown
+
+Ya que cada archivo `.md` o `.mdx` es importando como un componente de React es posible importar un archivo de MDX desde otro archivo y renderizarlo dentro, permitiendo componentizar nuestro Markdown.
+
+```md
+import Graph from "../components/graph";
+import Contributing from "../CONTRIBUTING.md";
+
+# Hola, Mundo!
+
+<Graph />
+
+---
+
+<Contributing />
+```
+
+### Exportando datos extras
+
+Ya que podemos usar código JavaScript común y corriente también es posible exportar datos extras para que puedan ser consumidos mediante JS al importar el `.mdx`.
+
+```md
+import Graph from "../components/graph";
+import Contributing from "../CONTRIBUTING.md";
+import { sergio } from "../data/authors";
+import Layout from "../components/layout";
+
+# Hola, Mundo!
+
+<Graph />
+
+---
+
+<Contributing />
+
+export const authors = [sergio];
+export const layout = Layout;
+```
+
+Ahora desde nuestro JS podemos obtener más información.
+
+```js
+import React from "react";
+import { render } from "react-dom";
+
+import Hola, { authors, layout as Layout } from "./essay/hola.mdx";
+
+render(
+  <Layout authors={authors}>
+    <Hola />
+  </Layout>,
+  document.getElementById("app")
+);
+```
+
+### Personalizar componentes
+
+MDX también nos permite personalizar que componentes de React se deberían usar para cada etiqueta HTML que pueda ser parseada desde el Markdown.
+
+```js
+import React from "react";
+import { render } from "react-dom";
+
+import { Text, Heading, Code, InlineCode } from "./components/ui";
+
+import Hola, { authors, layout as Layout } from "./essay/hola.mdx";
+
+render(
+  <Layout authors={authors}>
+    <Hola
+      components={{
+        h1: Heading,
+        p: Text,
+        code: Code,
+        inlineCode: InlineCode
+      }}
+    />
+  </Layout>,
+  document.getElementById("app")
+);
+```
+
+Y ahora al momento de hacer render se van a usar los componentes indicados en lugar de simplemente hacer render de la etiqueta HTML. Esto permite usar librerías como [styled-jsx](https://github.com/zeit/styled-jsx), [styled-components](https://github.com/styled-components/styled-components) o simplemente definir clases para cada etiqueta que luego se usen en CSS.
+
+## Plugins
+
+Ya que MDX usa [remark](https://github.com/remarkjs/remark)/[rehype](https://github.com/rehypejs/rehype) es posible extender el loader de MDX para usar cualquier plugin compatible.
+
+Para esto hay que cambiar un poco la configuración de webpack.
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.mdx?$/,
+        use: [
+          "babel-loader",
+          {
+            loader: "@mdx-js/loader",
+            options: {
+              mdPlugins: [require("remark-highlight.js")]
+            }
+          }
+        ]
+      }
+    ]
+  }
+};
+```
+
+Esto agrega a nuestro Markdown capacidad de colorear código dependiendo del lenguaje indicado en el bloque de código.
+
+## Uso con Next.js
+
+MDX y Next.js se llevan perfecto, por lo que existe un plugin oficial para MDX que se puede usar con Next.js.
+
+```bash
+yarn add @zeit/next-mdx @mdx-js/mdx
+```
+
+Una vez instalados es cuestión de ir a nuestro `next.config.js` y agregar lo siguiente.
+
+```js
+const withMDX = require('@zeit/next-mdx')()
+module.exports = withMDX()
+```
+
+O personalizando MDX.
+
+```js
+const withMDX = require('@zeit/next-mdx')({
+  options: {
+    mdPlugins: [ ],
+    hastPlugins: [ ]
+  }
+})
+
+module.exports = withMDX()
+```
+
+Con esto ya es suficiente para tener MDX incorporado en nuestra aplicación de Next.js, ahora es solo cuestión de importar nuestro archivos y Next.js se va a encargar de hacer render en el servidor.
+
+Combinándolo esto con la función de `export`ar un sitio estático es posible crear un blog (como este mismo de hecho) usando MDX y Next.js y después alojarlo gratis en [Now](https://now.sh), GitHub Pages y otros.

@@ -1,4 +1,3 @@
 {
-  "presets": ["next/babel"],
-  "plugins": [["transform-define", "./env.js"]]
+  "presets": ["next/babel"]
 }

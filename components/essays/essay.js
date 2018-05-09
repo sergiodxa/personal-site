@@ -35,7 +35,7 @@ export default compose(
     highlighted: false,
     deprecated: false
   })
-)(({ title, link, date, highlighted, deprecated, slug }) => (
+)(({ title, link, date, highlighted, deprecated, slug, isStatic }) => (
   <article className={classNames("essay h-entry", { highlighted, deprecated })}>
     <time className="date dt-published">
       {isValid(date) && format(date, "MMMM DD, YYYY")}
@@ -49,9 +49,11 @@ export default compose(
       )}{" "}
       <Link
         href={
-          parseUrl(link).hostname !== null
+          isStatic
             ? link
-            : { pathname: "/essay", query: { slug } }
+            : parseUrl(link).hostname !== null
+              ? link
+              : { pathname: "/essay", query: { slug } }
         }
         as={parseUrl(link).hostname !== null ? undefined : link}
         prefetch={parseUrl(link).hostname === null}

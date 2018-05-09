@@ -47,15 +47,15 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, tags = "", ...props }) => ({
+  mapProps(({ date, content, tags = "", noParse = false, ...props }) => ({
     ...props,
     date: new Date(date),
     dateString: date,
-    content: parser(abbreviatures + content),
+    content: noParse ? content : parser(abbreviatures + content),
     tags: tags.split(", "),
     hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : "",
     url: `https://sergiodxa.com/essays/${props.slug ||
-      slugify(title, { lower: true })}/`
+      slugify(props.title, { lower: true })}/`
   })),
   setDisplayName("Essay"),
   setPropTypes({
@@ -134,7 +134,7 @@ export default compose(
     <LinkedHeader href="/essays" sticky={false} />
 
     <div className="src">
-      <a href="https://github.com/sergiodxa/personal-site">{"<source />"}</a>
+      <A href="https://github.com/sergiodxa/personal-site">{"<source />"}</A>
     </div>
 
     <section className="content">

@@ -8,7 +8,7 @@ export function A({
   ...props
 }) {
   const { hostname } = parseUrl(props.href);
-  const self = hostname === "sergiodxa.com";
+  const self = hostname === "sergiodxa.com" || hostname === null;
 
   return (
     <a {...props} target={!self ? "_blank" : "_self"}>

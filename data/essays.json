@@ -1,5 +1,12 @@
 [
   {
+    "id": 70,
+    "title": "Introducción a MDX",
+    "link": "/essays/introduccion-a-mdx",
+    "date": "2018-05-09T05:03:59.757Z",
+    "isStatic": true
+  },
+  {
     "id": 69,
     "title": "Documentación, Lecciones Aprendidas",
     "link": "/essays/documentacion",

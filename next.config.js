@@ -1,4 +1,13 @@
+const compose = require("compose-function");
 const withOffline = require("next-offline");
+const withMDX = require("@zeit/next-mdx")({
+  options: {
+    mdPlugins: [
+      require("remark-abbr"),
+      require("remark-emoji")
+    ]
+  }
+});
 const BabiliPlugin = require("babili-webpack-plugin");
 
 const routes = require("./server/routes");
@@ -28,13 +37,17 @@ const withBabili = (nextConfig = {}) => {
   });
 };
 
-module.exports = withOffline(
-  withBabili({
-    assetPrefix:
-      NODE_ENV === "production" ? `https://${alias}` : "http://localhost:3001",
+const withExportPathMap = {
+  exportPathMap() {
+    return routes;
+  }
+}
 
-    exportPathMap() {
-      return routes;
-    }
-  })
-);
+const config = {
+  assetPrefix:
+    NODE_ENV === "production" ? `https://${alias}` : "http://localhost:3001",
+}
+
+if (NODE_ENV === "production") Object.assign(config, withExportPathMap);
+
+module.exports = compose(withMDX, withOffline, withBabili)(config);

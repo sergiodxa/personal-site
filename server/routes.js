@@ -14,6 +14,7 @@ module.exports = {
   "/books": { page: "/books" },
   "/uses": { page: "/uses" },
   "/essays": { page: "/essays" },
+  "/essays/introduccion-a-mdx": { page: "/essays/introduccion-a-mdx" },
   ...essay("an-accessible-approach-to-frontend-testing"),
   ...essay("how-to-keep-updated-with-the-javascript-ecosystem"),
   ...essay("bye-platzi-hi-zeit"),
