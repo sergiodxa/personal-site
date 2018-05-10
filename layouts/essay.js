@@ -68,7 +68,11 @@ export default compose(
     canonicalUrl: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
     hostname: PropTypes.string,
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
+    translateFrom: PropTypes.shape({
+      lang: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
   })
 )(props => (
   <Main noSchema>
