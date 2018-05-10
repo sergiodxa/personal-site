@@ -1,6 +1,7 @@
-.next
-node_modules
-portfolio
-dist
-logs
+/.next
+/node_modules
+/portfolio
+/dist
+/logs
 *.log
+/out
