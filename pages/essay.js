@@ -1,6 +1,6 @@
 import Error from "next/error";
 import { format } from "url";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 import compose from "recompose/compose";
 import setStatic from "recompose/setStatic";
