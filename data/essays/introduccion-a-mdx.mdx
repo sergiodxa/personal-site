@@ -7,18 +7,18 @@ export const published = false
 
 ![](/static/essays/mdx.png)
 
-MDX es un formato de archivo que permite extender Markdown con código JS y JSX (Componentes de React). Gracias a esto permite usar componentes personalizados de React o cualquier componente descargado de npm para agregar más contenido que normalmente no sería posible con simple Markdown.
+MDX es un formato de archivos que permite extender Markdown con código JS y JSX (Componentes de React). Gracias a esto permite usar componentes personalizados de React o cualquier componente descargado de npm para agregar más contenido que normalmente no sería posible con simple Markdown.
 
 ## Casos de Uso
 
-El mayor caso de uso de MDX es la creación de contenido para un blog, ya que simplemente creando un archivo `.mdx` sería posible agregar un nuevo post y de ser necesario hacer `import` de un componente de React.
+El primer caso de uso de MDX es la creación de contenido para un blog, ya que simplemente creando un archivo `.mdx` sería posible agregar un nuevo post y de ser necesario hacer `import` de un componente de React.
 
 Incluso agregar metadata haciendo `export` de esta. Un ejemplo de blogs usándolo son el [blog de ZEIT](https://zeit.co/blog) o este mismo blog que si bien originalmente [usaba otra forma de parsear Markdown extendido](/essays/markdown-react "/essay?slug=markdown-react") este y futuros artículos (y eventualmente viejos) usan MDX.
 
 Hay obviamente más casos de uso, ya que al poder usar JS es posible extender Markdown como se necesite, por ejemplo haciendo que crees todo un sitio solo usando Markdown y componente propios de React.
 
 Por ejemplo mi sistema de slides que se puede ver funcionando en [From Local to Global
-with a Single Command](https://sergiodxa.com/slides/local-to-global) (una charla que dí en el FliSol de mi ciudad) están hechos usando MDX, cada slide es un archivo `.mdx` que usa Markdown común y corriente y en algunos slides especiales como [Global Regions
+with a Single Command](https://sergiodxa.com/slides/local-to-global) (una charla que dí en el FliSol de mi ciudad) está hecho usando MDX, cada slide es un archivo `.mdx` que usa Markdown común y corriente y en algunos slides especiales como [Global Regions
 ](https://sergiodxa.com/slides/local-to-global/regions) se usan componentes de React para renderizar el mapa mundi, un sistema de archivos, una terminal, etc.
 
 ## Instalación y Configuración
@@ -44,7 +44,7 @@ module.exports = {
 };
 ```
 
-¡Eso es todo! Ahora podemos empezar a escribir archivos `.md` o `.mdx` que usen nuestro nuevo loader.
+¡Eso es todo! Ya podemos empezar a escribir archivos `.md` o `.mdx` que usen nuestro nuevo loader.
 
 ## Ejemplos
 
@@ -69,7 +69,7 @@ Y otra vez ¡Eso es todo! Importamos nuestro archivo `.mdx` y lo renderizamos co
 
 ### Importando Componentes Propios
 
-Extendamos nuestro ejemplo, vamos a suponer que tenemos un archivo `./components/graph.js` que muestra un gráfico hecho con React. Para poder incluirlo en nuestro post solo artículo solo tenemos que hacer un simple `import`.
+Extendamos nuestro ejemplo, vamos a suponer que tenemos un archivo `./components/graph.js` que muestra un gráfico hecho con React. Para poder incluirlo en nuestro artículo solo tenemos que hacer un simple `import`.
 
 ```md
 import Graph from "../components/graph";
@@ -79,11 +79,11 @@ import Graph from "../components/graph";
 <Graph />
 ```
 
-Eso va a renderizar ahora nuestro componente `<Graph />` dentro del artículo.
+Eso va a renderizar nuestro componente `<Graph />` dentro del artículo.
 
 #### Importar Otro Markdown
 
-Ya que cada archivo `.md` o `.mdx` es importando como un componente de React es posible importar un archivo de MDX desde otro archivo y renderizarlo dentro, permitiendo componentizar nuestro Markdown.
+Ya que cada archivo `.md` o `.mdx` es importado como un componente de React es posible importar un archivo de MDX desde otro archivo y renderizarlo dentro, permitiendo componentizar nuestro Markdown.
 
 ```md
 import Graph from "../components/graph";
@@ -222,9 +222,9 @@ const withMDX = require('@zeit/next-mdx')({
 module.exports = withMDX()
 ```
 
-Con esto ya es suficiente para tener MDX incorporado en nuestra aplicación de Next.js, ahora es solo cuestión de importar nuestro archivos y Next.js se va a encargar de hacer render en el servidor.
+Con esto ya es suficiente para tener MDX incorporado en nuestra aplicación de Next.js, ahora es solo cuestión de importar nuestros archivos y Next.js se va a encargar de hacer render en el servidor.
 
-Combinándolo esto con la función de `export`ar un sitio estático es posible crear un blog (como este mismo de hecho) usando MDX y Next.js y después alojarlo gratis en [Now](https://now.sh), GitHub Pages y otros.
+Combinándolo con la función de exportar un sitio estático es posible crear un blog (como este mismo de hecho) usando MDX y Next.js y después alojarlo gratis en [Now](https://now.sh), GitHub Pages y otros.
 
 ## Palabras Finales
 
