@@ -53,6 +53,14 @@ export default ({ title, slug, children, url, free, price }) => (
         padding: 0 0.5em;
       }
 
+      .description :global(:first-child) {
+        margin-top: 0;
+      }
+
+      .description :global(:last-child) {
+        margin-bottom: 0;
+      }
+
       .meta {
         grid-area: meta;
         text-align: center;
