@@ -3,7 +3,7 @@ import { A } from "@sergiodxa/ui/lib/text";
 
 import { blue } from "@sergiodxa/palette";
 
-export default ({ title, slug, description, url, free, price }) => (
+export default ({ title, slug, children, url, free, price }) => (
   <article className="grid">
     <div className="title">
       <H2>{title}</H2>
@@ -16,15 +16,12 @@ export default ({ title, slug, description, url, free, price }) => (
     <div className="meta">
       <div className="link">
         <A href={url} color="green">
-          Purchase it for {free ? "Free" : `$${price}`}
+          Purchase it for {free ? "Free" : `US$${price}`}
         </A>
       </div>
     </div>
 
-    <div
-      className="description"
-      dangerouslySetInnerHTML={{ __html: description }}
-    />
+    <div className="description">{children}</div>
 
     <style jsx>{`
       .grid {
@@ -53,12 +50,7 @@ export default ({ title, slug, description, url, free, price }) => (
 
       .description {
         grid-area: description;
-        padding: 0 .5em;
-      }
-
-      .description :global(a) {
-        color: ${blue};
-        text-decoration: none;
+        padding: 0 0.5em;
       }
 
       .meta {

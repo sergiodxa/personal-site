@@ -2,7 +2,9 @@ import { Component } from "react";
 import fetch from "isomorphic-fetch";
 import compose from "recompose/compose";
 
+import { blue } from "@sergiodxa/palette";
 import { H1 } from "@sergiodxa/ui/lib/headings";
+import { A, P } from "@sergiodxa/ui/lib/text";
 import withAnalytics from "@sergiodxa/analytics/lib/react";
 
 import Main from "../layouts/main";
@@ -12,32 +14,8 @@ import Book from "../components/books/book";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
 
-const isServer = typeof window === "undefined";
-
 class BooksPage extends Component {
-  static async getInitialProps() {
-    let reactRedux = undefined;
-
-    if (!isServer) {
-      reactRedux = localStorage.getItem("book-reactredux") || undefined;
-      if (reactRedux) JSON.parse(reactRedux);
-    }
-
-    if (!reactRedux) {
-      reactRedux = await fetch("https://leanpub.com/react-redux.json").then(
-        res => res.json()
-      );
-
-      if (!isServer) {
-        localStorage.setItem("book-reactredux", JSON.stringify(reactRedux));
-      }
-    }
-
-    return { reactRedux };
-  }
   render() {
-    const { reactRedux } = this.props;
-
     return (
       <Main>
         <LinkedHeader />
@@ -46,24 +24,48 @@ class BooksPage extends Component {
           <H1>Books</H1>
 
           <Book
-            {...reactRedux}
-            description={reactRedux.about_the_book}
-            free={reactRedux.minimum_price === "0.0"}
-            price={reactRedux.suggested_price}
-          />
+            title="Desarrollo de Aplicaciones Web con React.js y Redux.js"
+            price="5.0"
+            slug="react-redux"
+            url="http://leanpub.com/react-redux"
+            free
+          >
+            <P>
+              Redux es una de las librerías de más crecimiento en popularidad en
+              la comunidad de React y JavaScript en general. A pesar de ser
+              pequeña por si misma su uso puede ser volverse complejo al
+              juntarse con las librerías derivadas que han sido creadas por su
+              comunidad.
+            </P>
+            <P>
+              Bien usada, puede ayudar en desarrollo al facilitar el desarrollo
+              de nuestra aplicación y en producción al simplificar la depuración
+              de nuestra aplicación gracias a sus herramientas de desarrollo y
+              su arquitectura basada en una serie de acciones puras que permiten
+              tanto la reproducibilidad del flujo de un usuario como deshacer
+              acciones que terminaron en error.
+            </P>
+            <P>
+              Ante cualquier pregunta no dudes en contactarme a{" "}
+              <A
+                href="mailto:hello@sergiodxa.com?subject=Libro%20de%20React%20y%20Redux"
+                color={blue}
+              >
+                hello@sergiodxa.com
+              </A>{" "}
+              o por Twitter como{" "}
+              <A href="https://twitter.com/@sergiodxa" color={blue}>
+                @sergiodxa
+              </A>
+            </P>
+          </Book>
         </section>
 
         <style jsx>{`
           section {
             max-width: 720px;
             margin: 0 1em;
-          }
-          article {
-            font-size: 1.25em;
-          }
-          article :global(li > a) {
-            color: black;
-            text-decoration: none;
+            padding-bottom: 6em;
           }
           @media (min-width: 720px) {
             section {
