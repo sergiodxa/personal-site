@@ -192,7 +192,7 @@ export default compose(
         </div>
       )}
 
-      {props.tags.indexOf("Redux") >= 0 && <BookBanner />}
+      <BookBanner tags={props.tags} />
 
       <article lang={props.lang || "en"}>{props.content}</article>
 
