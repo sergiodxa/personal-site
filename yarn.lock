@@ -724,8 +724,8 @@
     title "^3.2.0"
 
 "@sergiodxa/ui@^1.0.1":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.0.5.tgz#88b3a9b228361edb332c89e10ec91d9dbb5f2dc7"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.1.0.tgz#2198955cf35de55711b7c6851de149f02b6bbc8a"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
     babel-runtime "^6.26.0"
