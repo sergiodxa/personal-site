@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { A } from "./ui/text";
+import { A } from "@sergiodxa/ui/lib/text";
+import { primary } from "@sergiodxa/palette";
 
 function Navigation() {
   return (
@@ -7,33 +8,38 @@ function Navigation() {
       <ul>
         <li>
           <Link href="/about" prefetch>
-            <A href="/about" title="About Sergio Xalambrí">
+            <A href="/about" title="About Sergio Xalambrí" color={primary}>
               About me
             </A>
           </Link>
         </li>
         <li>
           <Link href="/essays" prefetch>
-            <A href="/essays" title="Essays and Articles">
+            <A href="/essays" title="Essays and Articles" color={primary}>
               Essays
             </A>
           </Link>
         </li>
         <li>
           <Link href="/services" prefetch>
-            <A href="/services" title="The services I offer">
+            <A href="/services" title="The services I offer" color={primary}>
               Services
             </A>
           </Link>
         </li>
         <li>
-          <A href="https://sdx.im/twitter" title="Thoughts" rel="me noopener">
+          <A
+            href="https://sdx.im/twitter"
+            title="Thoughts"
+            rel="me noopener"
+            color={primary}
+          >
             Thoughts
           </A>
         </li>
         <li>
           <Link href="/books" prefetch>
-            <A href="/books" title="Books I wrote">
+            <A href="/books" title="Books I wrote" color={primary}>
               Books
             </A>
           </Link>

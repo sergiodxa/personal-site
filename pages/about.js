@@ -3,17 +3,18 @@ import Link from "next/link";
 
 import compose from "recompose/compose";
 
-import { A, P } from "../components/ui/text";
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+import { dark } from "@sergiodxa/palette";
+import { A, P } from "@sergiodxa/ui/lib/text";
+
 import { LinkedHeader } from "../components/header";
 import Icon from "../components/icon";
 import Layout from "../layouts/main";
 
-import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
-import * as colors from "../lib/colors";
 
-export default compose(withError, withGA, withSW)(() => (
+export default compose(withError, withAnalytics, withSW)(() => (
   <Layout>
     <Head>
       <title>About Sergio Xalambrí</title>
@@ -161,12 +162,15 @@ export default compose(withError, withGA, withSW)(() => (
             </a>
           </li>
         </ul>
-
       </section>
 
       <section id="paypal">
         <P>
-          Do you like my articles? <A href="https://paypal.me/sergiodxa/5" color="blue">Buy me a coffee</A> and help me continue writing!
+          Do you like my articles?{" "}
+          <A href="https://paypal.me/sergiodxa/5" color={dark}>
+            Buy me a coffee
+          </A>{" "}
+          and help me continue writing!
         </P>
       </section>
     </section>
@@ -201,7 +205,7 @@ export default compose(withError, withGA, withSW)(() => (
       }
 
       #social > ul > li > a {
-        color: ${colors.black};
+        color: ${dark};
         text-decoration: none;
         margin: 0.5em;
         display: block;

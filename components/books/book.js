@@ -1,7 +1,7 @@
-import { H2 } from "../ui/heading";
-import { A } from "../ui/text";
+import { H2 } from "@sergiodxa/ui/lib/headings";
+import { A } from "@sergiodxa/ui/lib/text";
 
-import { blue } from "../../lib/colors";
+import { blue } from "@sergiodxa/palette";
 
 export default ({ title, slug, description, url, free, price }) => (
   <article className="grid">
@@ -10,7 +10,7 @@ export default ({ title, slug, description, url, free, price }) => (
     </div>
 
     <figure className="cover">
-      <img src={`/static/books/${slug}.png`} height="416" width="320" />
+      <img src={`/static/books/${slug}-kindle.png`} width="300" />
     </figure>
 
     <div className="meta">

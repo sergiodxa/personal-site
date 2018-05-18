@@ -1,10 +1,10 @@
 import { Component } from "react";
 
-import { P } from "./ui/text";
-import Case from "./case";
+import { P } from "@sergiodxa/ui/lib/text";
+import { Case } from "@sergiodxa/case";
 
-import { event } from "../lib/analytics.js";
-import * as colors from "../lib/colors";
+import { event } from "@sergiodxa/analytics";
+import { grey, dark, light, danger, success, info } from "@sergiodxa/palette";
 import fetch from "../lib/fetch";
 
 const gql = String.raw;
@@ -37,10 +37,13 @@ class SubscribeForm extends Component {
 
     this.setState({ email: "", status: "success", message: data.subscribe });
 
-    event({
-      action: "Subscription form",
-      description: `User ${email} subscribed to email list`
-    });
+    event(
+      {
+        action: "Subscription form",
+        description: `User ${email} subscribed to email list`
+      },
+      process.env.NODE_ENV === "production"
+    );
   };
 
   render() {
@@ -87,7 +90,7 @@ class SubscribeForm extends Component {
 
           input {
             border: none;
-            border-bottom: 2px solid ${colors.grey};
+            border-bottom: 2px solid ${grey};
             box-sizing: border-box;
             border-radius: 0;
             display: block;
@@ -102,24 +105,24 @@ class SubscribeForm extends Component {
 
           input:hover {
             background-color: white;
-            border-bottom-color: ${colors.black};
+            border-bottom-color: ${dark};
           }
 
           input:disabled {
-            background-color: ${colors.grey};
-            color: ${colors.white};
+            background-color: ${grey};
+            color: ${light};
           }
 
           :global(.loading) {
-            color: ${colors.blue};
+            color: ${info};
           }
 
           :global(.error) {
-            color: ${colors.red};
+            color: ${danger};
           }
 
           :global(.success) {
-            color: ${colors.green};
+            color: ${success};
           }
 
           @media (min-width: 720px) {

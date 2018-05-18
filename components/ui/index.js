@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { H1, H2, H3, H4, H5, H6 } from "../../components/ui/heading";
-import { Image, Figure, FigCaption } from "../../components/ui/images";
-import { UL, OL, LI, DL, DT, DD } from "../../components/ui/list";
-import { Pre, Code } from "../../components/ui/code";
-import { A, P, BlockQuote, Abbr, Mark } from "../../components/ui/text";
+import { blue } from "@sergiodxa/palette";
+import { H1, H2, H3, H4, H5, H6 } from "@sergiodxa/ui/lib/headings";
+import { Image, Figure, FigCaption } from "@sergiodxa/ui/lib/images";
+import { UL, OL, LI, DL, DT, DD } from "@sergiodxa/ui/lib/list";
+import { Pre, Code } from "@sergiodxa/ui/lib/code";
+import { A, P, BlockQuote, Abbr, Mark } from "@sergiodxa/ui/lib/text";
 import {
   Table,
   TH,
@@ -13,8 +14,7 @@ import {
   THead,
   TBody,
   TFoot
-} from "../../components/ui/table";
-import { printIntrospectionSchema } from "graphql/utilities";
+} from "@sergiodxa/ui/lib/table";
 
 export default {
   h1: H1,
@@ -39,11 +39,11 @@ export default {
     if ((props.href.startsWith("/") && !props.href.startsWith("//")) || title) {
       return (
         <Link href={title} as={props.href} prefetch>
-          <A {...props} color="blue" decoration="underline" />
+          <A {...props} color={blue} decoration="underline" />
         </Link>
       );
     }
-    return <A {...props} color="blue" decoration="underline" />;
+    return <A {...props} color={blue} decoration="underline" />;
   },
   p: P,
   blockquote: BlockQuote,

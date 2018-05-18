@@ -1,20 +1,20 @@
 import Head from "next/head";
 
-import Codepen from "./icons/codepen";
-import Dev from "./icons/dev";
-import Email from "./icons/email";
-import GitHub from "./icons/github";
-import Instagram from "./icons/instagram";
-import LinkedIn from "./icons/linkedin";
-import Medium from "./icons/medium";
-import Meetup from "./icons/meetup";
-import NPM from "./icons/npm";
-import RSS from "./icons/rss";
-import Spinner from "./icons/spinner";
-import Spotify from "./icons/spotify";
-import Steam from "./icons/steam";
-import Twitter from "./icons/twitter";
-import YouTube from "./icons/youtube";
+import Codepen from "@sergiodxa/icons/lib/codepen";
+import Dev from "@sergiodxa/icons/lib/dev";
+import Email from "@sergiodxa/icons/lib/email";
+import GitHub from "@sergiodxa/icons/lib/github";
+import Instagram from "@sergiodxa/icons/lib/instagram";
+import LinkedIn from "@sergiodxa/icons/lib/linkedin";
+import Medium from "@sergiodxa/icons/lib/medium";
+import Meetup from "@sergiodxa/icons/lib/meetup";
+import NPM from "@sergiodxa/icons/lib/npm";
+import RSS from "@sergiodxa/icons/lib/rss";
+import Spinner from "@sergiodxa/icons/lib/spinner";
+import Spotify from "@sergiodxa/icons/lib/spotify";
+import Steam from "@sergiodxa/icons/lib/steam";
+import Twitter from "@sergiodxa/icons/lib/twitter";
+import YouTube from "@sergiodxa/icons/lib/youtube";
 
 export default ({ name, extraLarge, large, small, extraSmall }) => {
   const size = extraLarge ? 128 : large ? 64 : small ? 16 : extraSmall ? 8 : 32;

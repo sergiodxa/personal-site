@@ -1,16 +1,17 @@
 import compose from "recompose/compose";
 
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+
 import Main from "../layouts/main";
 import { LinkedHeader } from "../components/header";
 
-import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
 
 import components from "../components/ui/index";
 import Content from "../data/pages/uses.mdx";
 
-export default compose(withError, withGA, withSW)(() => (
+export default compose(withError, withAnalytics, withSW)(() => (
   <Main>
     <LinkedHeader />
     <section>

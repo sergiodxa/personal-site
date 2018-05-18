@@ -6,12 +6,13 @@ import compose from "recompose/compose";
 import PropTypes from "prop-types";
 import NProgress from "nprogress";
 
+import {dark, light} from "@sergiodxa/palette";
+
 import Header from "../components/header.js";
 import TwitterCard from "../components/twitter-card.js";
 import OpenGraph from "../components/open-graph.js";
 
 import minify from "../lib/minify.js";
-import * as colors from "../lib/colors.js";
 
 let progressTimer = null;
 Router.onRouteChangeStart = () => {
@@ -46,7 +47,7 @@ export default compose(
       <meta name="HandheldFriendly" content="True" />
       <meta name="MobileOptimized" content="320" />
       <meta name="robots" content="index, follow" />
-      <meta name="theme-color" content={colors.black} />
+      <meta name="theme-color" content={dark} />
 
       <link
         href="/atom"
@@ -111,12 +112,12 @@ export default compose(
         font-weight: 200;
       }
       ::selection {
-        background-color: ${colors.black};
-        color: ${colors.white};
+        background-color: ${dark};
+        color: ${light};
       }
 
       :root {
-        --color: #000000;
+        --color: ${dark};
       }
 
       a:active {

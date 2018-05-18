@@ -12,8 +12,7 @@ import Site from "./site.js";
 import Link from "data-prefetch-link";
 
 import parseUrl from "../../lib/parse-url.js";
-import * as colors from "../../lib/colors.js";
-import * as CustomTypes from "../../lib/types.js";
+import { dark } from "@sergiodxa/palette";
 
 export default compose(
   mapProps(({ date, ...props }) => ({
@@ -80,7 +79,7 @@ export default compose(
 
       .link {
         flex: 1;
-        color: ${colors.black};
+        color: ${dark};
         text-decoration: none;
       }
       .link:hover {
@@ -109,14 +108,6 @@ export default compose(
         margin: 0;
         padding: 0.5em 0.5em;
       }
-
-      /*.essay.highlighted .title {
-        background-color: ${colors.black};
-      }
-
-      .essay.highlighted .title :global(*) {
-        color: ${colors.white};
-      }*/
 
       .essay.deprecated {
         opacity: 0.5;

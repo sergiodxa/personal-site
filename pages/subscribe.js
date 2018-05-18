@@ -1,21 +1,22 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+import { primary } from "@sergiodxa/palette";
+import { A } from "@sergiodxa/ui/lib/text";
+import { H1 } from "@sergiodxa/ui/lib/headings";
+
 import Layout from "../layouts/main";
 
 import Header from "../components/header";
-import { A } from "../components/ui/text";
-import { H1 } from "../components/ui/heading";
 import SubscribeForm from "../components/subscribe-form";
 
 import compose from "recompose/compose";
 
-import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
-import * as colors from "../lib/colors";
 
-export default compose(withError, withGA, withSW)(() => (
+export default compose(withError, withAnalytics, withSW)(() => (
   <Layout>
     <Head>
       <title>Subscribe to Sergio Xalambrí's essays</title>
@@ -45,7 +46,7 @@ export default compose(withError, withGA, withSW)(() => (
       }
 
       a {
-        color: ${colors.black};
+        color: ${primary};
         text-decoration: none;
       }
     `}</style>

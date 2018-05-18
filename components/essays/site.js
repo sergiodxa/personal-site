@@ -7,7 +7,7 @@ import setPropTypes from "recompose/setPropTypes";
 import setStatic from "recompose/setStatic";
 
 import parseUrl from "../../lib/parse-url.js";
-import * as colors from "../../lib/colors.js";
+import { grey } from "@sergiodxa/palette";
 
 export default compose(
   setDisplayName("Site"),
@@ -45,7 +45,7 @@ export default compose(
       .site-url {
         flex: 1;
         text-decoration: none;
-        color: ${colors.grey};
+        color: ${grey};
       }
 
       .site-url:hover {

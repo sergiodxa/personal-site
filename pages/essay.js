@@ -7,12 +7,13 @@ import setStatic from "recompose/setStatic";
 import branch from "recompose/branch";
 import renderComponent from "recompose/renderComponent";
 
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+
 import Essay from "../layouts/essay.js";
 
 import fetch from "../lib/fetch.js";
 
 import withError from "../lib/hoc/with-error.js";
-import withGA from "../lib/hoc/with-ga.js";
 import withSW from "../lib/hoc/with-sw.js";
 
 async function getInitialProps(ctx) {
@@ -26,6 +27,7 @@ async function getInitialProps(ctx) {
         description
         canonicalUrl
         lang
+        tags
         translateFrom {
           url
           lang
@@ -53,7 +55,7 @@ async function getInitialProps(ctx) {
 export default compose(
   setStatic("getInitialProps", getInitialProps),
   withError,
-  withGA,
+  withAnalytics,
   withSW,
   branch(props => props.errors, renderComponent(Error), renderComponent(Essay))
 )();

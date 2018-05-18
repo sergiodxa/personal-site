@@ -1,20 +1,21 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { H1 } from "../components/ui/heading";
-import { A } from "../components/ui/text";
+import compose from "recompose/compose";
+
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+import { dark } from "@sergiodxa/palette";
+import { H1 } from "@sergiodxa/ui/lib/headings";
+import { A } from "@sergiodxa/ui/lib/text";
+
 import Essay from "../components/essays/essay";
 import Header from "../components/header";
 import Layout from "../layouts/main";
 
 import essays from "../data/essays";
 
-import compose from "recompose/compose";
-
 import withError from "../lib/hoc/with-error";
-import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
-import * as colors from "../lib/colors";
 
 const byDate = (a, b) => {
   const timeA = new Date(a.date).getTime();
@@ -26,7 +27,7 @@ const byDate = (a, b) => {
 };
 const toComponent = essay => <Essay key={essay.link} {...essay} />;
 
-export default compose(withError, withGA, withSW)(() => (
+export default compose(withError, withAnalytics, withSW)(() => (
   <Layout>
     <Head>
       <title>Essays and Articles by Sergio Xalambrí</title>
@@ -34,7 +35,7 @@ export default compose(withError, withGA, withSW)(() => (
 
     <section>
       <Link href="/">
-        <A href="/">
+        <A href="/" color={dark}>
           <H1>Essays and Articles</H1>
         </A>
       </Link>

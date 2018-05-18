@@ -2,12 +2,13 @@ import { Component } from "react";
 import fetch from "isomorphic-fetch";
 import compose from "recompose/compose";
 
+import { H1 } from "@sergiodxa/ui/lib/headings";
+import withAnalytics from "@sergiodxa/analytics/lib/react";
+
 import Main from "../layouts/main";
 import { LinkedHeader } from "../components/header";
-import { H1 } from "../components/ui/heading";
 import Book from "../components/books/book";
 
-import withGA from "../lib/hoc/with-ga";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
 
@@ -75,4 +76,4 @@ class BooksPage extends Component {
   }
 }
 
-export default compose(withError, withGA, withSW)(BooksPage);
+export default compose(withError, withAnalytics, withSW)(BooksPage);

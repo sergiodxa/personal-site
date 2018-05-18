@@ -9,20 +9,29 @@ import setPropTypes from "recompose/setPropTypes";
 import setDisplayName from "recompose/setDisplayName";
 import PropTypes from "prop-types";
 
-import { H1 } from "../components/ui/heading";
-import { A } from "../components/ui/text";
+import { H1 } from "@sergiodxa/ui/lib/headings";
+import { A } from "@sergiodxa/ui/lib/text";
+import {
+  blue,
+  grey,
+  black,
+  pink,
+  red,
+  green,
+  yellow
+} from "@sergiodxa/palette";
 
 import { LinkedHeader } from "../components/header";
 import OpenGraph from "../components/open-graph";
 import TwitterCard from "../components/twitter-card";
 import SubscribeForm from "../components/subscribe-form";
+import BookBanner from "../components/book-banner";
+import * as CustomTypes from "@sergiodxa/types";
 
 import Main from "./main";
 
 import minify from "../lib/minify.js";
 import parser from "../lib/markdown";
-import * as colors from "../lib/colors";
-import * as CustomTypes from "../lib/types";
 import parseUrl from "../lib/parse-url";
 
 const abbreviatures = `
@@ -47,12 +56,11 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, tags = "", noParse = false, ...props }) => ({
+  mapProps(({ date, content, noParse = false, ...props }) => ({
     ...props,
     date: new Date(date),
     dateString: date,
     content: noParse ? content : parser(abbreviatures + content),
-    tags: tags.split(", "),
     hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : "",
     url: `https://sergiodxa.com/essays/${props.slug ||
       slugify(props.title, { lower: true })}/`
@@ -80,8 +88,8 @@ export default compose(
       <title>{props.title}</title>
       <meta name="description" content={props.description} />
       <meta name="twitter:widgets:theme" content="light" />
-      <meta name="twitter:widgets:link-color" content={colors.blue} />
-      <meta name="twitter:widgets:border-color" content={colors.blue} />
+      <meta name="twitter:widgets:link-color" content={blue} />
+      <meta name="twitter:widgets:border-color" content={blue} />
       {props.canonicalUrl && <link rel="canonical" href={props.canonicalUrl} />}
       {props.translateFrom && (
         <link
@@ -138,7 +146,9 @@ export default compose(
     <LinkedHeader href="/essays" sticky={false} />
 
     <div className="src">
-      <A href="https://github.com/sergiodxa/personal-site">{"<source />"}</A>
+      <A href="https://github.com/sergiodxa/personal-site" color={black}>
+        {"<source />"}
+      </A>
     </div>
 
     <section className="content">
@@ -155,7 +165,12 @@ export default compose(
       {props.canonicalUrl && (
         <div className="canonicalUrl">
           Originally published at{" "}
-          <A href={props.canonicalUrl} target="_blank" rel="canonical">
+          <A
+            href={props.canonicalUrl}
+            target="_blank"
+            rel="canonical"
+            color={black}
+          >
             <strong>{props.hostname}</strong>
           </A>
         </div>
@@ -164,13 +179,20 @@ export default compose(
       {props.translateFrom && (
         <div className="canonicalUrl">
           Translated from{" "}
-          <A href={props.translateFrom.url} target="_blank" rel="canonical">
+          <A
+            href={props.translateFrom.url}
+            target="_blank"
+            rel="canonical"
+            color={black}
+          >
             <strong lang={props.translateFrom.lang}>
               {props.translateFrom.title}
             </strong>
           </A>
         </div>
       )}
+
+      {props.tags.indexOf("Redux") >= 0 && <BookBanner />}
 
       <article lang={props.lang || "en"}>{props.content}</article>
 
@@ -207,7 +229,7 @@ export default compose(
       }
 
       .canonicalUrl {
-        border: 1px solid ${colors.grey};
+        border: 1px solid ${grey};
         padding: 0.75em;
         margin: 0.75em;
       }
@@ -239,7 +261,7 @@ export default compose(
 
       .content :global(*:hover > .anchor::before) {
         content: "#";
-        color: ${colors.black};
+        color: ${black};
         text-decoration: none;
         position: absolute;
         right: 100%;
@@ -247,7 +269,7 @@ export default compose(
       }
 
       .content :global(h2) {
-        border-bottom: 1px solid ${colors.black};
+        border-bottom: 1px solid ${black};
         box-sizing: border-box;
         margin-left: calc(-1em + 2px);
         margin-right: calc(-1em + 2px);
@@ -303,13 +325,13 @@ export default compose(
       .content :global(.hljs-attribute),
       .content :global(.hljs-symbol),
       .content :global(.hljs-link) {
-        color: ${colors.pink};
+        color: ${pink};
       }
       /* red */
       .content :global(.hljs-code),
       .content :global(.hljs-deletion),
       .content :global(.hljs-name) {
-        color: ${colors.red};
+        color: ${red};
       }
       /* green */
       .content :global(.hljs-bullet),
@@ -328,27 +350,27 @@ export default compose(
       .content :global(.hljs-template-variable),
       .content :global(.hljs-function),
       .content :global(.hljs-attr) {
-        color: ${colors.green};
+        color: ${green};
       }
       /* yellow */
       .content :global(.hljs-string),
       .content :global(.hljs-regexp) {
-        color: ${colors.yellow};
+        color: ${yellow};
       }
       /* blue */
       .content :global(.hljs-attribute) {
-        color: ${colors.blue};
+        color: ${blue};
       }
       /* grey */
       .content :global(.hljs-comment),
       .content :global(.hljs-quote),
       .content :global(.hljs-meta) {
-        color: ${colors.grey};
+        color: ${grey};
       }
       /* black */
       .content :global(.hljs-params),
       .content :global(.hljs-tag) {
-        color: ${colors.black};
+        color: ${black};
       }
       /* bold */
       .content :global(.hljs-keyword),

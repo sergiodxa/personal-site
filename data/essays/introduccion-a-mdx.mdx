@@ -1,9 +1,11 @@
-export const title = "Introducción a MDX";
-export const description = "MDX es un formato de archivos que permite extender Markdown con código JS y JSX (Componentes de React)";
-export const slug = "introduccion-a-mdx";
-export const date = "2018-05-09T05:03:59.757Z"
-export const lang = "es"
-export const published = false
+export const meta = {
+  title: "Introducción a MDX",
+  description: "MDX es un formato de archivos que permite extender Markdown con código JS y JSX (Componentes de React)",
+  slug: "introduccion-a-mdx",
+  date: "2018-05-09T05:03:59.757Z",
+  lang: "es",
+  published: false
+};
 
 ![](/static/essays/mdx.png)
 
@@ -205,21 +207,21 @@ yarn add @zeit/next-mdx @mdx-js/mdx
 Una vez instalados es cuestión de ir a nuestro `next.config.js` y agregar lo siguiente.
 
 ```js
-const withMDX = require('@zeit/next-mdx')()
-module.exports = withMDX()
+const withMDX = require("@zeit/next-mdx")();
+module.exports = withMDX();
 ```
 
 O personalizando MDX.
 
 ```js
-const withMDX = require('@zeit/next-mdx')({
+const withMDX = require("@zeit/next-mdx")({
   options: {
-    mdPlugins: [ ],
-    hastPlugins: [ ]
+    mdPlugins: [],
+    hastPlugins: []
   }
-})
+});
 
-module.exports = withMDX()
+module.exports = withMDX();
 ```
 
 Con esto ya es suficiente para tener MDX incorporado en nuestra aplicación de Next.js, ahora es solo cuestión de importar nuestros archivos y Next.js se va a encargar de hacer render en el servidor.

@@ -6,10 +6,10 @@ import setPropTypes from "recompose/setPropTypes";
 import setStatic from "recompose/setStatic";
 import classnames from "classnames/dedupe";
 
-import * as colors from "../lib/colors.js";
+import { dark, light } from "@sergiodxa/palette";
 
-import { H1, H2, H3 } from "./ui/heading";
-import { A } from "./ui/text";
+import { H1, H2, H3 } from "@sergiodxa/ui/lib/headings";
+import { A } from "@sergiodxa/ui/lib/text";
 
 const Header = compose(
   setDisplayName("Header"),
@@ -40,6 +40,7 @@ const Header = compose(
             href="https://zeit.co"
             target="_blank"
             rel="noopener"
+            color={dark}
           >
             ▲ ZEIT
           </A>
@@ -57,7 +58,7 @@ const Header = compose(
       }
 
       header:not(.centered) {
-        background: ${colors.white};
+        background: ${light};
         top: 0;
         z-index: 2;
       }
@@ -109,7 +110,7 @@ export const LinkedHeader = ({ href = "/", sticky = true }) => (
       <Header sticky={sticky} secondary />
       <style jsx>{`
         a {
-          color: ${colors.black};
+          color: ${dark};
           text-decoration: none;
         }
       `}</style>
