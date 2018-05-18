@@ -18,7 +18,7 @@ import withSW from "../../lib/hoc/with-sw.js";
 
 export default compose(
   withError,
-  withAnalytics,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
   withSW,
   branch(
     props => props.errors,

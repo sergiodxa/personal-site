@@ -14,7 +14,11 @@ import Layout from "../layouts/main";
 import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
 
-export default compose(withError, withAnalytics, withSW)(() => (
+export default compose(
+  withError,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
+  withSW
+)(() => (
   <Layout>
     <Head>
       <title>About Sergio Xalambrí</title>

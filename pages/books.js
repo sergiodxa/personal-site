@@ -24,9 +24,9 @@ class BooksPage extends Component {
     }
 
     if (!reactRedux) {
-      reactRedux = await fetch(
-        "https://leanpub.com/react-redux.json"
-      ).then(res => res.json());
+      reactRedux = await fetch("https://leanpub.com/react-redux.json").then(
+        res => res.json()
+      );
 
       if (!isServer) {
         localStorage.setItem("book-reactredux", JSON.stringify(reactRedux));
@@ -76,4 +76,8 @@ class BooksPage extends Component {
   }
 }
 
-export default compose(withError, withAnalytics, withSW)(BooksPage);
+export default compose(
+  withError,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
+  withSW
+)(BooksPage);

@@ -27,7 +27,11 @@ const byDate = (a, b) => {
 };
 const toComponent = essay => <Essay key={essay.link} {...essay} />;
 
-export default compose(withError, withAnalytics, withSW)(() => (
+export default compose(
+  withError,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
+  withSW
+)(() => (
   <Layout>
     <Head>
       <title>Essays and Articles by Sergio Xalambrí</title>

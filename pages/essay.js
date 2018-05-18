@@ -55,7 +55,7 @@ async function getInitialProps(ctx) {
 export default compose(
   setStatic("getInitialProps", getInitialProps),
   withError,
-  withAnalytics,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
   withSW,
   branch(props => props.errors, renderComponent(Error), renderComponent(Essay))
 )();

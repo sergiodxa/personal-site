@@ -11,7 +11,11 @@ import withError from "../lib/hoc/with-error";
 import components from "../components/ui/index";
 import Content from "../data/pages/services.mdx";
 
-export default compose(withError, withAnalytics, withSW)(() => (
+export default compose(
+  withError,
+  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
+  withSW
+)(() => (
   <Main>
     <LinkedHeader />
 
