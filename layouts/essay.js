@@ -56,8 +56,9 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, noParse = false, ...props }) => ({
+  mapProps(({ date, content, tags = [], noParse = false, ...props }) => ({
     ...props,
+    tags,
     date: new Date(date),
     dateString: date,
     content: noParse ? content : parser(abbreviatures + content),
