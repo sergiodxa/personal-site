@@ -1,6 +1,8 @@
 import Essay from "../../layouts/essay";
 
-import Article, { meta } from "../../data/essays/introduccion-a-mdx.mdx";
+import Article, {
+  meta
+} from "../../data/essays/how-to-keep-updated-with-the-javascript-ecosystem.mdx";
 
 import components from "../../components/ui/index";
 

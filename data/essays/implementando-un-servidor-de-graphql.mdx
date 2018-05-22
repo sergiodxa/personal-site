@@ -1,0 +1,549 @@
+export const meta = {
+  title: "Introducción a GraphQL",
+  date: "2017-07-07T15:42:42.778208Z",
+  description: "Explicación paso a paso de como implementar un servidor GraphQL desde cero en Node.js.",
+  slug: "implementando-un-servidor-de-graphql",
+  published: true,
+  lang: "es",
+  canonicalUrl: "https://platzi.com/blog/implementando-un-servidor-de-graphql/",
+  tags: [
+    "GraphQL",
+    "API",
+    "JavaScript"
+  ]
+}
+
+
+En un artículo anterior vimos una [introducción a GraphQL](https://sergiodxa.com/essays/introduccion-a-graphql), ahora vamos a ver como montar un servidor de GraphQL simple. En este ejemplo vamos a usar [JavaScript](https://platzi.com/clases/fundamentos-javascript/) (con [Node.js](https://platzi.com/clases/nodejs/)) por simplicidad, pero es importante entender que podemos usar [cualquier](https://platzi.com/clases/python/) [tecnología](https://platzi.com/clases/ruby-basico/) [de](https://platzi.com/clases/php/) [backend](https://platzi.com/clases/java-basico/) para crear servidores de GraphQL.
+
+## Iniciar proyecto y dependencias
+
+Como en todo proyecto de JavaScript vamos a iniciarlo e instalar dependencias.
+
+```bash
+npm init --yes
+# o con yarn
+yarn init --yes
+```
+
+Luego de iniciar el proyecto instalamos las dependencias.
+
+```bash
+npm i body-parser compression cors express graphql graphql-server-express graphql-subscriptions graphql-tools morgan pg sequelize subscriptions-transport-ws uuid
+npm i -D nodemon
+# o con yarn
+yarn add body-parser compression cors express graphql graphql-server-express graphql-subscriptions graphql-tools morgan pg sequelize subscriptions-transport-ws uuid
+yarn add -D nodemon
+```
+
+Vamos a listar todas las dependencias y para explicar que hace cada una:
+
+* `body-parser` => middleware de Express para leer fácilmente el body de peticiones POST
+* `compression` => middleware de Express para comprimir con GZIP nuestras respuestas
+* `cors` => middleware de Express para manejar CORS
+* `express` => librería para crear un servidor HTTP y manejar rutas
+* `graphql` => implementación de GraphQL en JavaScript
+* `graphql-server-express` => librería para conectar Express con GraphQL
+* `graphql-subscriptions` => librería para activar suscripciones en GraphQL para cosas en tiempo real
+* `graphql-tools` => herramientas que nos ayudan a crear servidores de GraphQL más fácil
+* `morgan` => middleware de Express para tener logs en consola de nuestras peticiones
+* `pg` => driver de PostgreSQL para usarlo como base de datos
+* `sequelize` => ORM de bases de datos SQL como PostgreSQL
+* `subscriptions-transport-ws` => librería para que nuestras suscripciones funcionen mediante WebSockets
+* `uuid` => librería para generar ID únicos
+* `nodemon` => nos va a servir para correr nuestra aplicación en desarrollo
+
+Como vemos nuestra aplicación va a usar Express para el servidor HTTP y vamos a usar PG como base de datos.
+
+## Base de datos
+
+Vamos a crear la conexión a la base de datos y nuestros modelos, nuestra aplicación va a ser de TODO, entonces vamos a tener un solo modelo, por esa razón vamos a tener todo en un único archivo que vamos a llamar `db.js`.
+
+```js
+// importamos sequelize
+const Sequelize = require("sequelize");
+
+// definimos en constantes nuestras variables de entorno con los datos de conexión de la base de datos
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
+const DB_HOST = process.env.DB_HOST;
+const DB_NAME = process.env.DB_NAME;
+const DB_PORT = process.env.DB_PORT || 5432;
+
+// creamos una nueva conexión de Sequelize
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+  host: DB_HOST,
+  dialect: "postgres",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
+
+// definimos nuestro modelo Todo que va a tener 3 campos
+// un campo ID que va a ser un UUID
+// un campo content que va a ser un string
+// un campo status que puede ser `active`, `completed` y `deleted`
+const Todo = sequelize.define(
+  "todo",
+  {
+    id: {
+      type: Sequelize.UUID,
+      primaryKey: true,
+      unique: true
+    },
+    content: {
+      type: Sequelize.STRING
+    },
+    status: {
+      type: Sequelize.ENUM,
+      values: ["active", "completed", "deleted"]
+    }
+  },
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: ["id"]
+      }
+    ]
+  }
+);
+
+// exportamos nuestra conexión a la base de datos y nuestro modelo
+module.exports = {
+  db: sequelize,
+  Todo
+};
+```
+
+Con eso ya tenemos nuestra conexión a la BD y nuestro modelo. Deben además tener una base de datos PG a la que pueda conectarse, para eso pueden instalar PG en local (o usando [Docker](https://platzi.com/clases/docker/)) o pueden usar un servicio externo como [ElephantSQL](https://www.elephantsql.com/) que nos provee de una base de datos PostgreSQL as a Service.
+
+### Definir esquemas de datos
+
+Luego de tener nuestra BD, vamos a definir nuestros esquemas de GQL. La forma en la que el cliente va a poder interactuar con nuestra API. Para eso creamos un archivo `schema.js` con este contenido:
+
+```js
+// exportamos un template literal con nuestro esquema, esto podría estar dividido en varias partes
+// y podríamos luego combinarlos, por simplicidad vamos a usar solo un archivo con todo el esquema
+module.exports = `
+  # Una tarea pendiente
+  type Todo {
+    # El ID único de nuestro TODO
+    id: String!
+    # El contenido de nuestro TODO
+    content: String!
+    # El estado actual de nuestro TODO
+    status: String!
+  }
+
+  # Nuestra query principal que define la forma de consumir datos
+  type Query {
+    # Obtener un único TODO mediante el ID
+    todo(id: String!): Todo
+    # Obtener una lista de todos los TODO
+    allTodos: [Todo]
+    # Obtener una lista de los TODO activos
+    activeTodos: [Todo]
+    # Obtener una lista de los TODO completados
+    completedTodos: [Todo]
+  }
+
+  # Nuestras mutaciones que definen como interactuar con los datos
+  type Mutation {
+    # Crear un nuevo TODO pasando el contenido
+    createTodo(content: String!): Todo
+    # Borrar un TODO existente mediante el ID
+    deleteTodo(id: String!): Todo
+    # Marcar como completo un TODO existente mediante el ID
+    completeTodo(id: String!): Todo
+  }
+
+  # Nuestras suscripciones que definen a que datos suscribirse
+  type Subscription {
+    # Suscribirse a los nuevos TODOs creados
+    todoCreated(status: String!): Todo
+    # Suscribirse a las actualizaciones de un TODO mediante el ID
+    todoUpdated(id: String!): Todo
+  }
+
+  # Nuestro esquema principal que define la query, mutation y subscription
+  type Schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+  }
+`;
+```
+
+Ese es nuestro esquema de GQL. Como vemos vamos a utilizar queries, mutaciones y suscripciones en nuestro API, para refrescar que es cada una:
+
+* **Query**: las formas de pedir datos a nuestro API.
+* **Mutation**: las formas de interactuar para crear, modificar o borrar datos, son similares a funciones.
+* **Subscriptions**: las formas de suscribirse a cambios en el API y enterarse en tiempo real cuando hay un cambio
+
+## Definiendo resolvers
+
+Ahora vamos a definir nuestros **resolvers**. Básicamente son funciones que se encargan de que cuando un cliente ejecuta una query, se pidan los datos necesarios para esa query. Igualmente con la mutaciones deben encargarse de crear o modificar nuestros datos y responder con lo esperado.
+
+```js
+// importamos uuid para crear nuestros ID únicos
+const uuid = require("uuid/v4");
+// nos traemos nuestro modelo Todo
+const { Todo } = require("./db");
+// imporatmos el módulo pubsub usado para suscripciones (luego lo creamos)
+const pubsub = require("./pubsub");
+
+// este objeto contiene todos nuestros resolvers
+const resolvers = {
+  // acá definimos como resolver cada query de nuestro esquema
+  Query: {
+    // nuestra query de obtener todos los TODOs
+    allTodos() {
+      // devolvemos todos los TODOs usando nuestro modelo
+      return Todo.findAll();
+    },
+    // nuestra query de obtener solo los TODOs activos
+    activeTodos() {
+      // buscamos los TODO donde el estado es `active`
+      return Todo.findAll({ where: { status: "active" } });
+    },
+    // nuestra query para obtener solo los TODOs completados
+    completedTodos() {
+      // buscamos los TODO donde el estado es `completed`
+      return Todo.findAll({ where: { status: "completed" } });
+    },
+    // nuestra query para obtener un único ID
+    todo(_, { id }) {
+      // el segundo parámetro que recibimos es un objeto con los parámetros
+      // que pasamos a nuestra query, en este caso `id`
+      // luego obtenemos un único TODO usando el ID que recibimos
+      return Todo.findById(id);
+    }
+  },
+  // acá definimos como resolver cada mutación de nuestro esquema
+  Mutation: {
+    // la mutación para crear un nuevo todo
+    async createTodo(_, { content }) {
+      // creamos un nuevo TODO usando `uudi` para generar el ID y definiendo status como `active`
+      const todo = await Todo.create({ id: uuid(), content, status: "active" });
+      // enviamos el TODO a nuestro PubSub en el canal `todoCreated`
+      pubsub.publish("todoCreated", todo);
+      // devolvemos el TODO que creamos
+      return todo;
+    },
+    // la mutación para borrar un TODO
+    async deleteTodo(_, { id }) {
+      // actualizamos el estado a `deleted` en el TODO con el ID que recibimos
+      await Todo.update({ status: "deleted" }, { where: { id } });
+      // obtenemos el TODO que creamos (el ORM no nos devuelve el TODO al hacer update)
+      const todo = await Todo.findById(id);
+      // enviamos ese TODO a nuestro PubSub en el canal `todoUpdated`
+      pubsub.publish("todoUpdated", todo);
+      // devolvemos el TODO que actualizamos
+      return todo;
+    },
+    // la mutación para completar un TODO
+    async completeTodo(_, { id }) {
+      // actualizamos el estado a `completed` en el TODO con el ID que recibimos
+      await Todo.update({ status: "completed" }, { where: { id } });
+      // obtenemos el TODO que creamos (el ORM no nos devuelve el TODO al hacer update)
+      const todo = await Todo.findById(id);
+      // enviamos ese TODO a nuestro PubSub en el canal `todoUpdated`
+      pubsub.publish("todoUpdated", todo);
+      // devolvemos el TODO que actualizamos
+      return todo;
+    }
+  },
+  // acá definimos como resolver cada suscripción de nuestro esquema
+  Subscription: {
+    // cuando se crea un TODO recibimos ese TODO y lo enviamos a los clientes
+    todoCreated(todo) {
+      return todo;
+    },
+    // cuando se actualiza un TODO recibimos ese TODO y lo enviamos a los clientes
+    todoUpdated(todo) {
+      return todo;
+    }
+  }
+};
+
+module.exports = resolvers;
+```
+
+Y esos son los resolvers de nuestro API GQL. Como vemos son funciones bastante simples individualmente, hay una parte que todavía no implementamos que es el módulo `./pubsub.js`, este módulo nos sirve para nuestra suscripciones y es lo siguiente que vamos a crear.
+
+## Creando el PubSub
+
+Este módulo es parte fundamental de las suscripciones. Nos permite tener canales por los cuales podemos enviar mensajes, esos canales llevan como nombre las suscripciones que definimos en nuestro esquema de GQL.
+
+En proyectos del mundo real deberíamos usar algo como [Redis](https://platzi.com/clases/mongodb-redis/) o [RabbitMQ](https://www.rabbitmq.com/) para que podamos escalar nuestra aplicación horizontalmente (agregar más instancias del servidor) sin preocuparnos de que si un cliente está conectado a la instancia 1 no se entere de mutaciones que ocurran en la instancia 2.
+
+Para nuestro ejemplo vamos a usar `graphql-subscriptions` que nos da un sistema de PubSub en memoria (solo sirve para una instancia).
+
+```js
+const { PubSub } = require("graphql-subscriptions");
+module.exports = new PubSub();
+```
+
+Extremadamente simple, importamos PubSub de nuestro módulo, lo instanciamos y exportamos. Luego como vimos en los resolvers usamos `pubsub.publish` para enviar mensajes desde las mutaciones.
+
+## Creando el servidor
+
+Ahora es momento de combinar todo lo anterior para crear un servidor HTTP para nuestro API GQL.
+
+```js
+// importamos la función de crear un servidor del módulo nativo HTTP
+const { createServer } = require("http");
+// importamos express
+const express = require("express");
+// imporatmos los middlewares body-parser, cors, compression y morgan
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const compression = require("compression");
+const morgan = require("morgan");
+// imporatmos nuestro middleware para combinar express con GraphQL y GraphiQL para tener el IDE
+const { graphqlExpress, graphiqlExpress } = require("graphql-server-express");
+// importamos una de las herramientas que nos provee `graphql-tools`, ya vamos a ver que hace
+const { makeExecutableSchema } = require("graphql-tools");
+// importamos el manejador de suscripciones de `graphql-subscriptions`
+const { SubscriptionManager } = require("graphql-subscriptions");
+// importamos el servidor de suscripciones que funciona mediante WS
+// también hay opciones con socket.io por ejemplo
+const { SubscriptionServer } = require("subscriptions-transport-ws");
+
+// imporatmos nuestro modelo
+const { Todo } = require("./db");
+// nuestro cliente de Pubsub
+const pubsub = require("./pubsub");
+// nuestro esquema
+const typeDefs = require("./schema");
+// nuestros resolvers
+const resolvers = require("./resolvers");
+
+// definimos en constantes nuestras variables de entorno
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "localhost";
+const NODE_ENV = process.env.NODE_ENV || "development";
+
+// creamos una función asíncrona autoejecutable para poder usar Async/Await
+(async () => {
+  try {
+    // intentamos sincronizar nuestro modelo con la BD
+    // si estamos en desarollo forzamos el sincronizado
+    // borrando los datos viejos
+    await Todo.sync({ force: NODE_ENV !== "production" });
+  } catch (error) {
+    // si ocurre un error mostramos el error y matamos el proceso
+    console.log(error);
+    process.exit(0);
+  }
+
+  // creamos una aplicación de express y un servidor HTTP apartir de esta
+  const app = express();
+  const server = createServer(app);
+
+  // usamos 3 los middlewares que importamos
+  app.use(cors());
+  app.use(compression());
+  app.use(morgan("common"));
+
+  // combinamos nuestro esquema (`typeDefs`) y nuestros resolvers para crear un schema ejecutable
+  const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+  // creamos nuestro administrador de suscripciones usando nuestro esquema ejecutable
+  // y nuestro módulo de PubSub y definimos como manejar cada suscripción
+  const subscriptionManager = new SubscriptionManager({
+    schema,
+    pubsub,
+    setupFunctions: {
+      // cuando alguien se suscribe a `todoUpdated` solo mandamos las del ID al que se suscribe
+      todoUpdated(options, args) {
+        return {
+          todoUpdated: {
+            filter: todo => todo.id === args.id
+          }
+        };
+      },
+      // cuando alguien se suscribe a `todoCreated` solo enviamos las del status
+      // al que el cliente se suscribe
+      todoCreated(options, args) {
+        return {
+          todoCreated: {
+            filter: todo => todo.status === args.status
+          }
+        };
+      }
+    }
+  });
+
+  // definimos la URL `/graphql` que usa los middlewares `body-parser` y el `graphqlExpress`
+  // usando el esquema ejecutable que creamos
+  app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
+
+  // si no estamos en producción
+  if (NODE_ENV !== "production") {
+    // usamos el middleware `graphiqlExpress` para crear la URL `/ide` donde cargamos GraphiQL
+    // este IDE va a consumir datos de la URL `/graphql` que creamos antes y `/subscriptions`
+    app.use(
+      "/ide",
+      graphiqlExpress({
+        endpointURL: "/graphql",
+        subscriptionsEndpoint: `ws://${HOST}:${PORT}/subscriptions`
+      })
+    );
+  }
+
+  // iniciamos el servidor en el puerto y host que obtuvimos por variables de entorno
+  server.listen(PORT, HOST, error => {
+    // creamos el servidor de suscripciones usando el administrador de suscripciones
+    // combinando el servidor HTTTP y definiendo la ruta `/subscriptions`
+    new SubscriptionServer(
+      { subscriptionManager },
+      { server, path: "/subscriptions" }
+    );
+    // luego mostramos un simple log indicando la URL donde corre el servidor
+    console.log("> Server running on http://%s:%d", HOST, PORT);
+  });
+})();
+```
+
+Y ese es nuestro servidor, como vemos es mucha configuración e inicializar todo. Lo bueno es que una vez tenemos esto montado agregar más funcionalidades a nuestro API es solo definir más esquemas y resolvers y listo, este archivo no hay que tocarlo casi nunca.
+
+## Scripts del package.json
+
+Ahora vamos a configurar nuestros script del `package.json` para correr nuestra aplicación en desarrollo y producción.
+
+```json
+{
+  ...
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon server.js",
+    "start": "node server.js"
+  }
+  ...
+}
+```
+
+Luego vamos a iniciar el proyecto con el siguiente comando en desarrollo:
+
+```bash
+npm run dev
+# o con yarn
+yarn dev
+```
+
+Y en producción con:
+
+```bash
+npm start
+# o con yarn
+yarn start
+```
+
+## Variables de entorno
+
+Cuando tratemos de correr el servidor nos va a dar un error ya que no definimos las variables de entorno. Para eso tenemos muchas formas, podríamos definir nuestras variables en el script `dev` antes de correr `nodemon`, podemos crear un archivo `.env` con las variables de entorno y usar el módulo `dotenv` o usar un archivo `now.json` con la propiedad `env` y usar [now-env](https://www.npmjs.com/package/now-env) para correrlos en local.
+
+Ya que luego vamos a hacer [deploy](https://platzi.com/clases/deploy-now/) a [Now](https://platzi.com/blog/deploy-microservicios/) vamos a usar now-env, para eso lo instalamos con:
+
+```bash
+npm i now-env
+# o con yarn
+yarn add now-env
+```
+
+Luego creamos nuestro `now.json`:
+
+```json
+{
+  "env": {
+    "NODE_ENV": "production",
+    "HOST": "localhost",
+    "PORT": 3000,
+    "DB_USER": "@db_user",
+    "DB_PASS": "@db_pass",
+    "DB_HOST": "@db_host",
+    "DB_NAME": "@db_name",
+    "DB_PORT": "@db_port"
+  }
+}
+```
+
+Luego creamos un archivo `now-secrets.json` que vamos a ignorar en nuestros repositorios en los que vamos a colocar los valores de los secrets de la base de datos, algo similar a esto:
+
+```json
+{
+  "@db_user": "user",
+  "@db_pass": "pass",
+  "@db_host": "host",
+  "@db_name": "name",
+  "@db_port": "port"
+}
+```
+
+Estos deben ser los correctos para su base de datos, ya sea que la hayan instalado en local, usando ElephantSQL o algún otro servicio. Por último, vamos a nuestro código de server.js y agregamos esta línea:
+
+```js
+require("now-env");
+```
+
+Al principio del código, con eso ya tenemos las variables de entorno configuradas 😃
+
+## Correr la aplicación
+
+Ahora sí, si corremos nuestra aplicación con el script que definimos antes va a funcionar todo sin problema.
+
+Al entrar a `localhost:3000/ide` vamos a ver un GraphiQL conectado a nuestro API, ahí podemos probar nuestro API GQL haciendo queries, mutations o subscriptions, también podemos ver la documentación de nuestra API que se genera automáticamente gracias a los comentarios de nuestro esquema.
+
+## Deploy a producción
+
+Por último para hacer deploy a producción debemos usar `now secrets` para definir nuestros secrets de producción para la base de datos y luego hacer deploy. Para definir estos secrets es un simple comando.
+
+```bash
+now secret add db_user my-db-user
+now secret add db_pass my-db-pass
+now secret add db_host my-db-host
+now secret add db_name my-db-name
+now secret add db_port my-db-port
+```
+
+Donde deben colocar los datos de acceso a su base de datos de producción. Luego vamos a hacer deploy. Vamos a primero modificar nuestro `now.json` para agregar el nombre de nuestra aplicación y el alias que vamos a usar.
+
+```json
+{
+  "name": "platzi-now-api",
+  "alias": "platzi-now-api.now.sh",
+  "env": {
+    "NODE_ENV": "production",
+    "HOST": "localhost",
+    "PORT": 3000,
+    "DB_USER": "@db_user",
+    "DB_PASS": "@db_pass",
+    "DB_HOST": "@db_host",
+    "DB_NAME": "@db_name",
+    "DB_PORT": "@db_port"
+  }
+}
+```
+
+Por último vamos a correr el comando para hacer deploy.
+
+```bash
+now
+```
+
+Con ese simple comando ya tenemos nuestra aplicación en producción con una URL única, le asignamos un alias para poder compartirlo con el mundo.
+
+```bash
+now alias
+```
+
+Y ahora ya vamos a tener `platzi-now-api.now.sh` donde nuestra aplicación va a estar funcionando y puede ser consumida por un cliente de GrahpQL como [Apollo](https://dev.apollodata.com/) simplemente haciendo queries, mutaciones o suscribiéndonos.
+
+## Conclusiones
+
+Parecen muchos pasos los que hay que hacer, pero si revisan es bastante fácil y una vez montado el servidor agregar funcionalidad solo requiere agregar más esquemas y sus respectivos resolvers, eso es todo.
+
+Lo genial entonces es que **usando GraphQL los frontend pueden crear nuevas funcionalidades** muy fácil, simplemente haciendo queries diferentes y los backend pueden extender el API agregando más esquemas y pensando como escalar y optimizar nuestra aplicación para que no se caiga y funcione rápido.

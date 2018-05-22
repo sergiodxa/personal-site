@@ -1,3 +1,4 @@
+import Link from "next/link";
 import format from "date-fns/format";
 import isValid from "date-fns/is_valid";
 import classNames from "classnames/dedupe";
@@ -9,7 +10,6 @@ import setPropTypes from "recompose/setPropTypes";
 import setStatic from "recompose/setStatic";
 
 import Site from "./site.js";
-import Link from "data-prefetch-link";
 
 import parseUrl from "../../lib/parse-url.js";
 import { dark } from "@sergiodxa/palette";
@@ -47,24 +47,29 @@ export default compose(
         </em>
       )}{" "}
       <Link
-        href={
-          isStatic
-            ? link
-            : parseUrl(link).hostname !== null
-              ? link
-              : { pathname: "/essay", query: { slug } }
-        }
+        href={link}
         as={parseUrl(link).hostname !== null ? undefined : link}
         prefetch={parseUrl(link).hostname === null}
-        withData={parseUrl(link).hostname === null}
       >
-        <a
-          href={link}
-          target={parseUrl(link).hostname !== null ? "_blank" : "_self"}
-          className="link u-url"
-        >
-          {title}
-        </a>
+        {highlighted ? (
+          <strong>
+            <a
+              href={link}
+              target={parseUrl(link).hostname !== null ? "_blank" : "_self"}
+              className="link u-url"
+            >
+              {title}
+            </a>
+          </strong>
+        ) : (
+          <a
+            href={link}
+            target={parseUrl(link).hostname !== null ? "_blank" : "_self"}
+            className="link u-url"
+          >
+            {title}
+          </a>
+        )}
       </Link>{" "}
       <Site link={link} isSelf={parseUrl(link).hostname === null} />
     </h2>

@@ -4,21 +4,19 @@
     "title": "Introducción a MDX",
     "link": "/essays/introduccion-a-mdx",
     "date": "2018-05-09T05:03:59.757Z",
-    "isStatic": true
+    "highlighted": true
   },
   {
     "id": 69,
     "title": "Documentación, Lecciones Aprendidas",
     "link": "/essays/documentacion",
-    "date": "2018-01-17T21:18:58.320Z",
-    "slug": "documentacion"
+    "date": "2018-01-17T21:18:58.320Z"
   },
   {
     "id": 68,
     "title": "Documentation, Lessons Learned",
     "link": "/essays/documentation",
-    "date": "2018-01-17T21:18:58.320Z",
-    "slug": "documentation"
+    "date": "2018-01-17T21:18:58.320Z"
   },
   {
     "id": 67,
@@ -26,23 +24,20 @@
     "link":
       "/essays/como-mantenerse-actualizado-con-el-ecosistema-de-javascript",
     "date": "2018-01-12T17:53:42.064Z",
-    "highlighted": false,
-    "slug": "como-mantenerse-actualizado-con-el-ecosistema-de-javascript"
+    "highlighted": false
   },
   {
     "id": 66,
     "title": "Renderizando Markdown en React.js",
     "link": "/essays/markdown-react",
-    "date": "2018-01-06T05:43:35.609Z",
-    "slug": "markdown-react"
+    "date": "2018-01-06T05:43:35.609Z"
   },
   {
     "id": 65,
     "title": "An accessible approach to Frontend testing",
     "link": "/essays/an-accessible-approach-to-frontend-testing",
     "date": "2017-09-30T00:00:00Z",
-    "highlighted": true,
-    "slug": "an-accessible-approach-to-frontend-testing"
+    "highlighted": true
   },
   {
     "id": 64,
@@ -71,8 +66,7 @@
     "title": "Bye Platzi, hi ▲ZEIT",
     "link": "/essays/bye-platzi-hi-zeit",
     "date": "2017-07-07T00:00:00Z",
-    "highlighted": true,
-    "slug": "bye-platzi-hi-zeit"
+    "highlighted": true
   },
   {
     "id": 60,
@@ -85,8 +79,7 @@
     "id": 59,
     "title": "Ciclo de vida de un componente de React.js",
     "link": "/essays/ciclo-de-vida-de-un-componente-de-reactjs",
-    "date": "2017-07-06T15:31:07.735183Z",
-    "slug": "ciclo-de-vida-de-un-componente-de-reactjs"
+    "date": "2017-07-06T15:31:07.735183Z"
   },
   {
     "id": 58,
@@ -107,8 +100,7 @@
     "title":
       "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
     "link": "/essays/mezclando-flujos-sincronos-y-asincronos/",
-    "date": "2017-06-23T22:39:48.419988Z",
-    "slug": "mezclando-flujos-sincronos-y-asincronos"
+    "date": "2017-06-23T22:39:48.419988Z"
   },
   {
     "id": 55,
@@ -201,8 +193,7 @@
     "title": "Qué son y cómo funcionan las promesas en JavaScript",
     "link": "/essay/que-son-y-como-funcionan-las-promesas-en-javascript",
     "date": "2017-03-06T00:00:00Z",
-    "highlighted": true,
-    "slug": "que-son-y-como-funcionan-las-promesas-en-javascript"
+    "highlighted": true
   },
   {
     "id": 41,
@@ -228,8 +219,7 @@
     "title": "Sobre el ecosistema y la fatiga de JavaScript",
     "link": "/essays/sobre-el-ecosistema-y-la-fatiga-de-javascript",
     "date": "2016-10-10T14:01:02.185Z",
-    "highlighted": true,
-    "slug": "sobre-el-ecosistema-y-la-fatiga-de-javascript"
+    "highlighted": true
   },
   {
     "id": 37,
@@ -352,16 +342,14 @@
     "id": 20,
     "title": "Combinando React.js y Redux.js",
     "link": "/essays/combinando-react-y-redux",
-    "date": "2016-03-28T07:18:42.542Z",
-    "slug": "combinando-react-y-redux"
+    "date": "2016-03-28T07:18:42.542Z"
   },
   {
     "id": 19,
     "title": "Introducción a Redux.js",
     "link": "/essays/introduccion-a-redux",
     "date": "2016-03-23T15:52:14.733Z",
-    "highlighted": true,
-    "slug": "introduccion-a-redux"
+    "highlighted": true
   },
   {
     "id": 18,
@@ -470,7 +458,7 @@
     "title": "Definiendo conceptos: Closure y Scope en JavaScript",
     "link": "/essays/definiendo-conceptos-closures-y-scope",
     "date": "2014-07-31T00:19:09.428Z",
-    "slug": "definiendo-conceptos-closures-y-scope"
+    "highlighted": true
   },
   {
     "id": 4,

@@ -1,6 +1,8 @@
 import Essay from "../../layouts/essay";
 
-import Article, { meta } from "../../data/essays/introduccion-a-mdx.mdx";
+import Article, {
+  meta
+} from "../../data/essays/mezclando-flujos-sincronos-y-asincronos.mdx";
 
 import components from "../../components/ui/index";
 

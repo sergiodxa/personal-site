@@ -35,10 +35,10 @@ export default {
   code: Code,
   pre: Pre,
   inlineCode: Code,
-  a: ({ title, ...props }) => {
-    if ((props.href.startsWith("/") && !props.href.startsWith("//")) || title) {
+  a: props => {
+    if (props.href.startsWith("/") && !props.href.startsWith("//")) {
       return (
-        <Link href={title} as={props.href} prefetch>
+        <Link href={props.href} prefetch>
           <A {...props} color={blue} decoration="underline" />
         </Link>
       );

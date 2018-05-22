@@ -1,0 +1,61 @@
+export const meta = {
+  title: "Sobre el ecosistema y la fatiga de JavaScript",
+  slug: "sobre-el-ecosistema-y-la-fatiga-de-javascript",
+  date: "2016-10-10T14:01:02.185Z",
+  published: true,
+  description: "Desde hace ya un tiempo han ido saliendo un montón de artículos sobre JS Fatigue, tantos que hasta hay artículos sobre la fatiga de esta.",
+  canonicalUrl: "https://medium.com/@sergiodxa/73027048413f",
+  lang: "es",
+  tags: [
+    "JavaScript",
+    "Frontend",
+    "Fatigue",
+    "Programming"
+  ]
+}
+
+Desde hace ya un tiempo han ido saliendo [un montón de](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f) [artículos](http://thefullstack.xyz/javascript-fatigue/) [sobre](https://segment.com/blog/the-deep-roots-of-js-fatigue/) [JavaScript Fatigue](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4#.elafgu3z8), tantos que hasta hay artículos sobre la [fatiga de](http://www.2ality.com/2016/02/js-fatigue-fatigue.html) [JavaScript Fatigue](https://medium.freecodecamp.com/javascript-fatigue-fatigue-66ffb619f6ce#.yiv2p54ox).
+
+En general son todas quejas sobre el ecosistema de JavaScript, principalmente debido a que este está cambiando tan rápido que es difícil mantenerse al día.
+
+La verdad es que en parte es cierto, JS y su ecosistema de librerías, frameworks y herramientas cambia tan rápido que es casi imposible mantenerse al día con todas estas.
+
+> React, Webpack, Browserify, Angular 1, Babel, TypeScript, ECMAScript 2015/6/7, Ember, Express, Node.js, npm, Grunt, Gulp, Redux, Flux, React Native, CSS Modules, Stylus, SASS, Angular 2, Rx.js, JSX, CommonJS, VueJS, npm scripts, SystemJS, FlowType, ElmLang, Fetch, Promises, Async/Await, Require.js, PostCSS
+
+Muchas, muchas cosas que aprender… Pero **¿de verdad es necesario aprenderlas todas?**
+
+Para ser sincero el mayor problema del ecosistema de JavaScript no es el ecosistema per-se, son los desarrolladores que creen que es necesario usar todas estas herramientas y los que al escribir artículos enseñan a usarlas (y hacen parecer que son necesarias).
+
+Cuantas veces no han salido [artículos](https://medium.com/@zacharykuhn/a-gentle-intro-to-react-part-1-82ef6b16973c#.826p51mo2) que para usar React enseñan que se necesita _Webpack+Babel+ECMAScript 2015/2016/2017+Redux+CSS Modules+etc_. y la verdad es que estas herramientas son completamente innecesarias al empezar con React, simplemente es cuestión de cargarlo desde un CDN y ya podemos empezar a usarlo, luego cuando nuestra aplicación crece podemos (y tiene sentido) empezar a integrar estas herramientas en nuestro stack.
+
+Y la verdad es que si vamos simplemente crear un _CRUD_ probablemente ni siquiera necesitemos usar JavaScript en el navegador.
+
+Hay muchas aplicaciones muy simples que no requieren código del lado del client, o ¿a caso es necesario usar sí o sí _AJAX_ para enviar cambios u obtener cambios desde un servidor? ¿No podemos simplemente enviar un formulario normal de toda la vida por _POST_ y que el servidor haga lo que tenga que hacer?
+
+El que el ecosistema este cambiando tanto y tan rápido no es para nada malo, al contrario, es algo increíble, es una muestra de lo viva y activa que es la comunidad de desarrolladores JavaScript y FrontEnd en general y de la velocidad con la que esta madurando el ecosistema en su totalidad.
+
+Hay una frase que aparece en uno de los artículos que enlacé al principio y que dijo el creado de la metodología **eXtreme Programming** que describe perfectamente que ocurre con el ecosistema.
+
+> “Make it work, make it right, make it fast.” — Kent Beck
+
+**Hacelo funcionar, hacelo bien, hacelo rápido**, JavaScript esta siguiendo exactamente este camino, ya hicimos que funcione, JavaScript es fácil, es rápido y es poderoso, ahora estamos en la segunda parte, **hacerlo bien**, estamos definiendo como hacer buen JavaScript.
+
+Es por esto que salen tantos frameworks, librerías y herramientas, cuando salga un framework, una colección de librerías y una serie de herramientas ganadores, unas que todos usemos, que sean **LA** forma de hacer JavaScript entonces, y solo entonces, vamos a poder concentrarnos en la tercera parte, **hacerlo rápido**.
+
+Hacerlo rápido es que vamos a necesitar una forma de iniciar y desarrollar aplicaciones tanto simples como complejas de forma rápida y eficiente siguiendo las mejores prácticas. Y de hecho Facebook ya esta tratando de hacer esto con [create-react-app](https://github.com/facebookincubator/create-react-app), esta herramienta para hacer fácil y rápidamente aplicaciones con React, Webpack, Babel, ECMAScript en todas sus versiones, JSX, etc. sin necesidad de configurar nada.
+
+Ahora, la razón de que recién ahora estemos definiendo todo esto es que simplemente nunca existieron las necesidades que tenemos ahora, JavaScript nació como un lenguaje de scripting para páginas web, no era muy fácil de usar, era lento y casi no se usaba en general.
+
+jQuery logro hacer a JavaScript fácil de usar y de una forma compatible entre los distintos navegadores. Gracias a esto JavaScript se pudo volver más fácil por si solo y los motores de los navegadores se encargaron de que fuese más rápido de ejecutarse.
+
+Desde que salieron Node.js y npm la comunidad y el ecosistema empezó a crecer a pasos agigantados, cada día hay más y más propuestas de como crear aplicaciones y como manejar distintas tareas que tenemos que hacer durante desarrollo y al mandar a producción una aplicación.
+
+Pienso que todavía JavaScript y su ecosistema están madurando, estamos en el momento en que nazcan un Django o un Rails dentro de JavaScript, de que definamos la forma de hacer JavaScript y esto en vez de ser algo malo como lo hacen ver los artículos sobre JavaScript Fatigue es algo increíble.
+
+---
+
+Como mensaje final usen lo que tengan que usar para su proyecto, no traten de usar todo desde el principio, si no necesitan módulos no usen npm ni un module bundler, si no van a soportar navegadores viejos no usen Babel, si van a usar un preprocesador de CSS no necesitan Webpack o Gulp, pueden simplemente correrlos con un comando en consola.
+
+Apunten siempre al stack más simple que puedan para el proyecto que estén haciendo y vayan creciendo su stack mientras su proyecto crece y lo va requiriendo.
+
+Y si desde el principio saben que lo van a necesitar entonces solo ahí empiecen desde el principio con varias herramientas para facilitarles el trabajo desde el comienzo.

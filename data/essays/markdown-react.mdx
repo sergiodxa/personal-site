@@ -1,0 +1,234 @@
+export const meta = {
+  title: "Renderizando Markdown en React.js",
+  date: "2018-01-06T05:43:35.609Z",
+  description: "Crea un parser que transforme Markdown a componentes de React.js",
+  slug: "markdown-react",
+  published: true,
+  lang: "es",
+  tags: [
+    "JavaScript",
+    "React",
+    "React Native",
+    "Markdown"
+  ]
+}
+
+Markdown es una tecnología genial para poder escribir fácilmente contenido de texto, una de las mejores cosas es que si bien está pensado para ser transformado en HTML es posible usarlo para transformarlo en cualquier otra tecnología, por ejemplo componentes de React.
+
+En este artículo vamos a ver como se puede crear un parser que transforme Markdown en componentes de React, pasando por HTML y JSON en el proceso
+
+## Markdown a HTML
+
+Lo primero es tener un parser de Markdown que nos devuelva HTML, para esto podemos usar uno de los muchos que existen en npm, en nuestro caso vamos a usar [markdown-it](https://github.com/markdown-it/markdown-it) que no solo es rápido si no que nos permite extenderlo mediante plugins para agregar nuevas capacidades.
+
+Para usarlo necesitamos instalarlo desde npm:
+
+```bash
+yarn add markdown-it
+```
+
+Luego debemos importarlo e instanciarlo en nuestro código:
+
+```js
+import MarkdownIt from 'markdown-it';
+
+const parser = new MarkdownIt({
+  html: false, // desactivamos el uso de HTML dentro del markdown
+  breaks: true, // transforma los saltos de línea a un <br />
+  linkify: true, // detecta enlaces y los vuelve enlaces
+  xhtmlOut: true, // devuelve XHTML válido (por ejemplo <br /> en vez de <br>)
+  typographer: true, // reemplaza ciertas palabras para mejorar el texto
+  langPrefix: 'language-' // agrega una clase `language-[lang]` a los bloques de código
+});
+```
+
+Con eso ya creamos nuestra instancia, luego podríamos agregar plugins, por ejemplo podríamos crear un plugin para embeber tweets:
+
+```js
+import regexp from 'markdown-it-regexp';
+
+// custom plugin for twitter cards
+const tweet = regexp(/@\[twitter\]\(([^\)]*)\)/, match => {
+  const id = match[1];
+  return `<twitter-card id="${id}"></twitter-card>`;
+});
+
+export default tweet;
+```
+
+Ese plugin va a detectar `@[twitter](id)`, donde `id` es el ID de un tweet que se ve en su URL, y en su lugar va a agregar `<twitter-card id={id}></twitter-card>`, podríamos crear un WebComponent que se encargue de renderizar el tweet o podemos luego detectar esa etiqueta y renderizar un componente de React personalizado.
+
+Por último le decimos al parser que agregue use nuestro plugin con la siguiente línea:
+
+```js
+parser.use(tweet);
+```
+
+Por último para convertir a HTML usamos la siguiente línea:
+
+```js
+const html = parser.render(markdown);
+```
+
+## HTML a JSON
+
+Una vez tenemos nuestro HTML podemos hacer lo que queramos, por ejemplo insertarlo dentro de cualquier página web. Si usamos React.js la forma de usar el HTML sería con `dangerouslySetInnerHTML`.
+
+```js
+return (
+  <div
+    dangerouslySetInnerHTML={{
+      __html: parser.render(markdown))
+    }}
+  />
+):
+```
+
+El problema de esto es que no podemos renderizar componentes personalizados en lugar de etiquetas HTML normales, por ejemplo para reemplazar `<twitter-card>`, además de eso tendríamos que agregar una clase al `<div />` y para poder estilizar todas las etiquetas internamente mediante selectores anidados como `.content h2`.
+
+Para solucionar esto vamos a convertir el HTML a un objecto de JavaScript (JSON), esto es posible usando una librería llamada [himalaya](https://github.com/andrejewski/himalaya). Simplemente debemos instalarla en nuestro proyecto como siempre:
+
+```bash
+yarn add himalaya
+```
+
+Y luego vamos a importar su parser de HTML a JSON.
+
+```js
+import { parser } from 'himalaya';
+```
+
+Ya que tenemos importardo himalaya podemos usarlo pasando el HTML que obtuvimos con nuestro parser de Markdown.
+
+```js
+const json = parser(html);
+```
+
+El resultado va a ser un array con objetos por cada etiqueta HTML, algo similar a esto:
+
+```json
+[
+  {
+    "type": "element",
+    "tagName": "p",
+    "attributes": {},
+    "children": [
+      {
+        "type": "element",
+        "tagName": "a",
+        "attributes": {
+          "href": "https://sergiodxa.com"
+        },
+        "children": [
+          {
+            "type": "text",
+            "content": "HTML a JSON"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
+Como podemos ver tenemos las siguientes propiedades:
+
+* `type` define si el objeto representa un `element`, `text` o `comment`
+* `tagName` si es un `element` indica el nombre de la etiqueta HTML
+* `attributes` es un objeto con todos los atributes de la etiqueta HTML
+* `children` es una lista de más objetos, por ejemplo el contenido de texto o elementos internos
+* `content` si es un `text` o `comment` define el contenido de text
+
+Este JSON podemos luego recorrerlos para convertir cada elementos o texto en un componente de React.
+
+## JSON a React
+
+Como dijimos, vamos a convertir nuestro JSON a etiquetas de React, para eso vamos a crear una función que nos permita definir que hacer con cada objeto dependiendo de su `type`, antes que todo vamos instalar React, ReactDOM y [html-entities](https://www.npmjs.com/package/html-entities), este último nos va a servir para decodificar entidades HTML (como `<` y `>`) que sean parte del contenido y no etiquetas reales.
+
+```js
+import { AllHtmlEntities } from 'html-entities';
+const entities = new AllHtmlEntities();
+
+function mapElement(element, index) {
+  switch (element.type) {
+    case 'text': {
+      // si es un nodo de texto decodificamos el contenido y lo devolvemos
+      return entities.decode(element.content);
+    }
+    case 'element': {
+      // si es un elemento lo pasamos (junto a su posición en el array) a matchElement
+      return matchElement(element, index);
+    }
+    default: {
+      // en cualquier otro caso (como que sea `comment`) devolvemos null
+      return null;
+    }
+  }
+}
+```
+
+Ahora podemos transformar los elementos de `json` con esta función.
+
+```js
+const jsx = json.map(mapElement);
+```
+
+Si ejecutamos eso ahora mismo vamos a obtener un error debido a que nos falta definir `matchElement`. Esta función debe convertir los nodos de elementos a elementos de React.
+
+```js
+// esta función va a convertir el atributo `class` a className` y combinar
+// los atributos de con los props base
+function mergeProps(baseProps, element) {
+  return (element.attributes || [])
+    .map(
+      ({ key, value }) =>
+        key === 'class' ? { key: 'className', value } : { key, value }
+    )
+    .reduce(
+      (attributes, { key, value }) => ({ ...attributes, [key]: value }),
+      baseProps
+    );
+}
+
+function matchElement({ tagName children, attributes }, index) {
+  // este objeto son todos los props que queramos incluir a todos los elementos
+  // en este caso solo vamos a definir el prop especial `key` con el valor de `index`
+  const baseProps = { key: index };
+
+  const props = mergeProps(baseProps, { attributes });
+
+  switch (tagName) {
+    case 'br':
+    case 'img':
+    case 'hr': {
+      // estas etiquetas no pueden tener elementos hijos por esa razón
+      // solo creamos la etiqueta con props
+      return React.createElement(tagName, props);
+    }
+    case 'twitter-card': {
+      // como dijimos antes usamos un componente propio (Twitter)
+      // para reemplazar la etiquieta <twitter-card>
+      return React.createElement(Twitter, props);
+    }
+    default: {
+      // para cualquier caso no manejado simplemente creamos un element
+      // con el nombre de etiqueta, props y elementos hijos
+      return React.createElement(tagName, props, children.map(mapElement));
+    }
+  }
+}
+```
+
+Gracias a esta función vamos a convertir cualquier etiqueta HTML que generemos desde nuestro Markdown a elementos de React, incluso como vimos con `<twitter-card>` podemos renderizar cualquier componente para manejar casos especiales y únicos.
+
+El resultado que obtuvimos en la constante `jsx` podemos ahora insertarlo dentro de un componente normal de React o simplemente renderizarlo con ReactDOM.
+
+```js
+return <div>{jsx}</div>;
+```
+
+## Palabras finales
+
+Gracias a esto podemos mostrar contenido Markdown dentro de una aplicación de React usando elementos reales de React.
+
+Esta misma técnica se podría usar para transformar Markdown a componentes de React Native y así usar elementos nativos de la UI en vez de mostrar un `<WebView />` con el contenido y aplicar estilos mediante una hoja de estilos CSS embebida.

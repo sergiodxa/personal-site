@@ -31,7 +31,6 @@ import * as CustomTypes from "@sergiodxa/types";
 import Main from "./main";
 
 import minify from "../lib/minify.js";
-import parser from "../lib/markdown";
 import parseUrl from "../lib/parse-url";
 
 const abbreviatures = `
@@ -56,12 +55,11 @@ const abbreviatures = `
 `;
 
 export default compose(
-  mapProps(({ date, content, tags = [], noParse = false, ...props }) => ({
+  mapProps(({ date, tags = [], ...props }) => ({
     ...props,
     tags,
     date: new Date(date),
     dateString: date,
-    content: noParse ? content : parser(abbreviatures + content),
     hostname: props.canonicalUrl ? parseUrl(props.canonicalUrl).hostname : "",
     url: `https://sergiodxa.com/essays/${props.slug ||
       slugify(props.title, { lower: true })}/`
@@ -69,7 +67,7 @@ export default compose(
   setDisplayName("Essay"),
   setPropTypes({
     title: PropTypes.string.isRequired,
-    content: PropTypes.array.isRequired,
+    children: PropTypes.node.isRequired,
     dateString: PropTypes.string.isRequired,
     date: PropTypes.instanceOf(Date),
     slug: PropTypes.string,
@@ -195,7 +193,7 @@ export default compose(
 
       <BookBanner tags={props.tags} />
 
-      <article lang={props.lang || "en"}>{props.content}</article>
+      <article lang={props.lang || "en"}>{props.children}</article>
 
       <SubscribeForm />
     </section>

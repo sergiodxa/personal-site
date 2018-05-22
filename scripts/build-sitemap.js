@@ -1,20 +1,28 @@
 const fs = require("fs");
 const { promisify } = require("util");
-
-const routes = require("../server/routes");
+const glob = require("globby");
+const { resolve } = require("path");
 
 const writeFile = promisify(fs.writeFile);
 
 const BASE_URL = "https://sergiodxa.com";
 
 async function main() {
-  const urls = Object.entries(routes)
-    .map(([route]) => route)
+  const routes = await glob(["./pages/**/*.js", "!./pages/_*"]);
+
+  const urls = routes
+    .map(route => route.substring(7, route.length - 3))
+    .map(route => (route === "/index" ? "/" : route))
     .map(route => {
       const priority =
         (100 - route.split("/").filter(section => section !== "").length * 15) /
         100;
       return { route, priority };
+    })
+    .sort((a, b) => {
+      if (a.priority > b.priority) return -1;
+      if (a.priority < b.priority) return 1;
+      return 0;
     })
     .map(
       ({ route, priority }) => `<url>
@@ -23,7 +31,7 @@ async function main() {
   <priority>${priority}</priority>
 </url>`
     )
-    .join('\n');
+    .join("\n");
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset
