@@ -647,9 +647,9 @@
     prop-types "^15.6.1"
     react "^16.3.2"
 
-"@sergiodxa/fs@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/fs/-/fs-1.1.1.tgz#3e36d5c22f648c5a9a1ca44624edc975b79ea542"
+"@sergiodxa/fs@1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/fs/-/fs-1.1.6.tgz#0b86fb6c01b05857c6234354a378b4f050a19e6c"
   dependencies:
     "@sergiodxa/case" "^1.0.0"
     "@sergiodxa/palette" "^1.0.0"
@@ -660,6 +660,7 @@
     polished "^1.9.2"
     prop-types "^15.6.1"
     react "^16.3.2"
+    styled-jsx "^2.2.6"
 
 "@sergiodxa/icons@1.0.1":
   version "1.0.1"
@@ -5206,7 +5207,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-styled-jsx@2.2.6:
+styled-jsx@2.2.6, styled-jsx@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.6.tgz#7e826279e1ef718213ef9cc42ac7370b5008449d"
   dependencies:
