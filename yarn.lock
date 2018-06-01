@@ -668,11 +668,12 @@
     babel-runtime "^6.26.0"
     react "^16.3.2"
 
-"@sergiodxa/map@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/map/-/map-1.0.1.tgz#ce200912281ee695c40d11821a737bc235926723"
+"@sergiodxa/map@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/map/-/map-1.0.4.tgz#8e4f2ba32256406958fb158c0d482a3ee15e5179"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
+    "@sergiodxa/ui" "^1.0.0"
     babel-runtime "^6.26.0"
     react "^16.3.2"
 
