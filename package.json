@@ -79,7 +79,7 @@
   },
   "devDependencies": {
     "express": "4.16.3",
-    "nodemon": "1.17.4",
+    "nodemon": "1.17.5",
     "serve": "6.5.7"
   }
 }
