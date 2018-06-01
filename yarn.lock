@@ -590,7 +590,7 @@
   dependencies:
     "@mdx-js/tag" "^0.7.2"
 
-"@mdx-js/mdx@^0.8.1":
+"@mdx-js/mdx@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.8.1.tgz#911cb6359525245a4305dfb3cc993b040ad854c8"
   dependencies:
@@ -624,7 +624,7 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.0.2.tgz#d056b68999769728a1cff8d643bc59eb6f0be436"
 
-"@sergiodxa/analytics@^1.0.0":
+"@sergiodxa/analytics@1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@sergiodxa/analytics/-/analytics-1.0.3.tgz#673f0eaad59926299362e4757011afcd00ecd8bf"
   dependencies:
@@ -632,13 +632,13 @@
     isomorphic-fetch "^2.2.1"
     react "^16.3.2"
 
-"@sergiodxa/case@^1.0.0":
+"@sergiodxa/case@1.0.1", "@sergiodxa/case@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/case/-/case-1.0.1.tgz#6e5a8eacbe1af0526d74b3a13635b5542a313043"
   dependencies:
     babel-runtime "^6.26.0"
 
-"@sergiodxa/clipboard@^1.0.0":
+"@sergiodxa/clipboard@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/clipboard/-/clipboard-1.0.1.tgz#04135fd54ab878ed160d7c1f257a55046bbabe1b"
   dependencies:
@@ -647,7 +647,7 @@
     prop-types "^15.6.1"
     react "^16.3.2"
 
-"@sergiodxa/fs@^1.1.0":
+"@sergiodxa/fs@1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/fs/-/fs-1.1.1.tgz#3e36d5c22f648c5a9a1ca44624edc975b79ea542"
   dependencies:
@@ -661,14 +661,14 @@
     prop-types "^15.6.1"
     react "^16.3.2"
 
-"@sergiodxa/icons@^1.0.0":
+"@sergiodxa/icons@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/icons/-/icons-1.0.1.tgz#bffa315d8506b959341d6d2bd264eef6400cebb1"
   dependencies:
     babel-runtime "^6.26.0"
     react "^16.3.2"
 
-"@sergiodxa/map@^1.0.0":
+"@sergiodxa/map@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/map/-/map-1.0.1.tgz#ce200912281ee695c40d11821a737bc235926723"
   dependencies:
@@ -676,13 +676,13 @@
     babel-runtime "^6.26.0"
     react "^16.3.2"
 
-"@sergiodxa/palette@^1.0.0":
+"@sergiodxa/palette@1.0.1", "@sergiodxa/palette@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/palette/-/palette-1.0.1.tgz#f32ad85dd4a6053c7ce84f0bb102b678da92df24"
   dependencies:
     babel-runtime "^6.26.0"
 
-"@sergiodxa/request@^1.0.0":
+"@sergiodxa/request@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/request/-/request-1.0.1.tgz#2f8de3cca7828762c59016c3b4b268ebb1a051ba"
   dependencies:
@@ -692,7 +692,7 @@
     babel-runtime "^6.26.0"
     react "^16.3.2"
 
-"@sergiodxa/terminal@^1.0.0":
+"@sergiodxa/terminal@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/terminal/-/terminal-1.0.1.tgz#0ce82fb680b685f2a2bebdc5c2ae3da2171888a1"
   dependencies:
@@ -703,15 +703,15 @@
     prop-types "^15.6.1"
     react "^16.3.2"
 
-"@sergiodxa/types@^1.0.0":
+"@sergiodxa/types@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@sergiodxa/types/-/types-1.0.1.tgz#fe57ab8ba38c9755ce8494c955651236b1ae851d"
   dependencies:
     babel-runtime "^6.26.0"
 
-"@sergiodxa/ui@^1.0.0":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.0.3.tgz#6642deee14340e4bb43d1cd75e767c6161402950"
+"@sergiodxa/ui@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.1.0.tgz#2198955cf35de55711b7c6851de149f02b6bbc8a"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
     babel-runtime "^6.26.0"
@@ -719,9 +719,9 @@
     react "^16.3.2"
     title "^3.2.0"
 
-"@sergiodxa/ui@^1.0.1":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.1.0.tgz#2198955cf35de55711b7c6851de149f02b6bbc8a"
+"@sergiodxa/ui@^1.0.0":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.0.3.tgz#6642deee14340e4bb43d1cd75e767c6161402950"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
     babel-runtime "^6.26.0"
@@ -741,7 +741,7 @@
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.5.3.tgz#91b728599544efbb7386d8b6633693a3c2e7ade5"
 
-"@zeit/next-mdx@^1.0.0":
+"@zeit/next-mdx@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@zeit/next-mdx/-/next-mdx-1.1.0.tgz#32753243504e475b110e1ad07ff92c9b31366b04"
   dependencies:
@@ -853,7 +853,7 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
-apollo-cache-inmemory@^1.1.9:
+apollo-cache-inmemory@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/apollo-cache-inmemory/-/apollo-cache-inmemory-1.2.1.tgz#1f8222270aa7983eb9d2ac30057196378ab3bb01"
   dependencies:
@@ -861,7 +861,7 @@ apollo-cache-inmemory@^1.1.9:
     apollo-utilities "^1.0.12"
     graphql-anywhere "^4.1.10"
 
-apollo-cache-persist@^0.1.1:
+apollo-cache-persist@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/apollo-cache-persist/-/apollo-cache-persist-0.1.1.tgz#e6cfe1983b998982a679aaf05241d3ed395edb1e"
 
@@ -871,7 +871,7 @@ apollo-cache@^1.1.8:
   dependencies:
     apollo-utilities "^1.0.12"
 
-apollo-client@^2.2.5:
+apollo-client@2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-2.3.1.tgz#64b204779b7e8b21f901529527a9a9c973eb7fd4"
   dependencies:
@@ -897,7 +897,7 @@ apollo-link-http-common@^0.2.4:
   dependencies:
     apollo-link "^1.2.2"
 
-apollo-link-http@^1.3.3:
+apollo-link-http@1.5.4:
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/apollo-link-http/-/apollo-link-http-1.5.4.tgz#b80b7b4b342c655b6a5614624b076a36be368f43"
   dependencies:
@@ -1332,7 +1332,7 @@ babel-types@6.26.0, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
-babili-webpack-plugin@^0.1.2:
+babili-webpack-plugin@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/babili-webpack-plugin/-/babili-webpack-plugin-0.1.2.tgz#164ac03d5932f6a52143e7ffc06f2711c651b6f2"
   dependencies:
@@ -1709,7 +1709,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
+classnames@2.2.5, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1973,7 +1973,7 @@ dargs@5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/dargs/-/dargs-5.1.0.tgz#ec7ea50c78564cd36c9d5ec18f66329fade27829"
 
-date-fns@^1.28.5:
+date-fns@1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
 
@@ -2387,7 +2387,7 @@ expand-range@^1.8.1:
   dependencies:
     fill-range "^2.1.0"
 
-express@^4.16.2:
+express@4.16.3:
   version "4.16.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.16.3.tgz#6af8a502350db3246ecc4becf6b5a34d22f7ed53"
   dependencies:
@@ -2735,6 +2735,18 @@ globals@^9.18.0:
   version "9.18.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
 
+globby@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-8.0.1.tgz#b5ad48b8aa80b35b814fc1281ecc851f1d2b5b50"
+  dependencies:
+    array-union "^1.0.1"
+    dir-glob "^2.0.0"
+    fast-glob "^2.0.2"
+    glob "^7.1.2"
+    ignore "^3.3.5"
+    pify "^3.0.0"
+    slash "^1.0.0"
+
 globby@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-5.0.0.tgz#ebd84667ca0dbb330b99bcfc68eac2bc54370e0d"
@@ -2755,18 +2767,6 @@ globby@^6.1.0:
     object-assign "^4.0.1"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
-
-globby@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-8.0.1.tgz#b5ad48b8aa80b35b814fc1281ecc851f1d2b5b50"
-  dependencies:
-    array-union "^1.0.1"
-    dir-glob "^2.0.0"
-    fast-glob "^2.0.2"
-    glob "^7.1.2"
-    ignore "^3.3.5"
-    pify "^3.0.0"
-    slash "^1.0.0"
 
 got@^6.7.1:
   version "6.7.1"
@@ -2794,11 +2794,11 @@ graphql-anywhere@^4.1.10:
   dependencies:
     apollo-utilities "^1.0.12"
 
-graphql-tag@^2.7.3:
+graphql-tag@2.9.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.9.2.tgz#2f60a5a981375f430bf1e6e95992427dc18af686"
 
-graphql@^0.13.1:
+graphql@0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
   dependencies:
@@ -3303,7 +3303,7 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
-isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
+isomorphic-fetch@2.2.1, isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
   dependencies:
@@ -3446,7 +3446,7 @@ lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
 
-lodash.memoize@^4.1.2:
+lodash.memoize@4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
@@ -3825,7 +3825,7 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-next-offline@^2.1.1:
+next-offline@2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/next-offline/-/next-offline-2.7.0.tgz#5a221523956393ffd067495eb4be96fad89d8f4d"
   dependencies:
@@ -3838,7 +3838,7 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-next@^6.0.1-canary.1:
+next@6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/next/-/next-6.0.3.tgz#b759fde2ec4864f92116cee4fcd805aaf285136c"
   dependencies:
@@ -3956,7 +3956,7 @@ node-version@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/node-version/-/node-version-1.1.3.tgz#1081c87cce6d2dbbd61d0e51e28c287782678496"
 
-nodemon@^1.14.1:
+nodemon@1.17.4:
   version "1.17.4"
   resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.4.tgz#243ff9c69ffbf1175f2460f9b023f35a072c15e9"
   dependencies:
@@ -3999,7 +3999,7 @@ normalize-path@^2.0.1, normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
-now-env@^3.0.4:
+now-env@3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/now-env/-/now-env-3.0.4.tgz#f9ed88884bff8d208ad3eaf39cc3437dd1a591ad"
 
@@ -4029,7 +4029,7 @@ npmlog@^4.0.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nprogress@^0.2.0:
+nprogress@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
 
@@ -4375,7 +4375,7 @@ prop-types-exact@1.1.1:
     has "^1.0.1"
     object.assign "^4.0.4"
 
-prop-types-exact@^1.1.1:
+prop-types-exact@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prop-types-exact/-/prop-types-exact-1.1.2.tgz#0b5addd8ff3ea10823fe1d94f030f4b4296b513f"
   dependencies:
@@ -4390,7 +4390,7 @@ prop-types@15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@15.6.1, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -4517,7 +4517,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^16.0.0:
+react-dom@16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.2.tgz#cb90f107e09536d683d84ed5d4888e9640e0e4df"
   dependencies:
@@ -4541,7 +4541,7 @@ react-lifecycles-compat@^3.0.2:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
-react@^16.0.0, react@^16.3.2:
+react@16.3.2, react@^16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
   dependencies:
@@ -4679,13 +4679,13 @@ regjsparser@^0.3.0:
   dependencies:
     jsesc "~0.5.0"
 
-remark-abbr@^1.1.2:
+remark-abbr@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/remark-abbr/-/remark-abbr-1.1.2.tgz#12b5cf725693dde9d72cf6405cfca37c3acddac5"
   dependencies:
     unist-util-visit "^1.1.3"
 
-remark-emoji@^2.0.1:
+remark-emoji@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/remark-emoji/-/remark-emoji-2.0.1.tgz#6de4be7acb05b8534b6bad679d56eab24fba5e06"
   dependencies:
@@ -4881,7 +4881,7 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
-serve@^6.0.0:
+serve@6.5.7:
   version "6.5.7"
   resolved "https://registry.yarnpkg.com/serve/-/serve-6.5.7.tgz#2b3709a3db1ef8a1e7f017d1c074b0d7e7ed18db"
   dependencies:
@@ -4976,7 +4976,7 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-slugify@^1.2.1:
+slugify@1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.3.0.tgz#787919259d28c825fbcae6da2e01c77a109793f6"
 
