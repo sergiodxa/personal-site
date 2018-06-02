@@ -27,4 +27,4 @@ All that's needed to deploy this site to the cloud is to execute a single comman
 yarn deploy
 ```
 
-This will build and export to HTML files the site, generate the RSS feed, deploy it to [Now](https://now.sh) and then alias it automatically.
+This will build and export to HTML files the site, generate the RSS feed and sitemap, deploy it to [Now](https://now.sh) and then alias it automatically.
