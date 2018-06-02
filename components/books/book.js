@@ -1,7 +1,8 @@
+import { LinkButton } from "@sergiodxa/ui/lib/button";
 import { H2 } from "@sergiodxa/ui/lib/headings";
 import { A } from "@sergiodxa/ui/lib/text";
 
-import { blue } from "@sergiodxa/palette";
+import { blue, green } from "@sergiodxa/palette";
 
 export default ({ title, slug, children, url, free, price }) => (
   <article className="grid">
@@ -10,14 +11,18 @@ export default ({ title, slug, children, url, free, price }) => (
     </div>
 
     <figure className="cover">
-      <img src={`/static/books/${slug}-kindle.png`} width="300" />
+      <img
+        src={`/static/books/${slug}-kindle.png`}
+        width="300"
+        role="presentational"
+      />
     </figure>
 
     <div className="meta">
       <div className="link">
-        <A href={url} color="green">
+        <LinkButton href={url}>
           Purchase it for {free ? "Free" : `US$${price}`}
-        </A>
+        </LinkButton>
       </div>
     </div>
 
@@ -68,10 +73,6 @@ export default ({ title, slug, children, url, free, price }) => (
 
       .link {
         user-select: none;
-      }
-
-      .link :global(a) {
-        padding: 1em;
       }
 
       .description :global(a:hover),
