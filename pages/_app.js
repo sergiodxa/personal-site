@@ -27,6 +27,6 @@ class PersonalSite extends App {
 
 export default compose(
   withError,
-  Page => withAnalytics(Page, process.env.NODE_ENV === "production"),
+  withAnalytics(process.env.NODE_ENV === "production"),
   withSW
 )(PersonalSite);
