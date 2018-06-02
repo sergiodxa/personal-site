@@ -624,9 +624,9 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.0.2.tgz#d056b68999769728a1cff8d643bc59eb6f0be436"
 
-"@sergiodxa/analytics@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/analytics/-/analytics-1.0.3.tgz#673f0eaad59926299362e4757011afcd00ecd8bf"
+"@sergiodxa/analytics@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/analytics/-/analytics-1.1.0.tgz#861634a58c77e4b8e10579d4511a69769be53971"
   dependencies:
     babel-runtime "^6.26.0"
     isomorphic-fetch "^2.2.1"
