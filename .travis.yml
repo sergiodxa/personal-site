@@ -3,8 +3,10 @@ node_js:
   - "8"
 cache:
   directories:
-      - "node_modules"
-install: npm install
+      - node_modules
+      - ~/.npm
+      - ~/.cache
+yarn: true
 before_script: npm run export
 script: npm test
 deploy:
