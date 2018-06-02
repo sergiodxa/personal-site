@@ -120,13 +120,6 @@ export default compose(
         --color: ${dark};
       }
 
-      a:active {
-        background: url("https://analytics.sergiodxa.com?action=link-clicked");
-      }
-      a:hover {
-        background: url("https://analytics.sergiodxa.com?action=link-hovered");
-      }
-
       #nprogress {
         pointer-events: none;
       }
