@@ -11,5 +11,5 @@ async function main() {
 }
 
 main()
-  .then(() => console.log("File generated!"))
+  .then(() => console.log("RSS generated!"))
   .catch(error => console.error(error));
