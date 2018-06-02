@@ -72,7 +72,6 @@ if (NODE_ENV === "production") {
         "/essays/sobre-el-ecosistema-y-la-fatiga-de-javascript": {
           page: "/essays/sobre-el-ecosistema-y-la-fatiga-de-javascript"
         },
-        "/essays/documentation": { page: "/essays/documentation" },
         "/essays/markdown-react": { page: "/essays/markdown-react" },
         "/essays/definiendo-conceptos-closures-y-scope": {
           page: "/essays/definiendo-conceptos-closures-y-scope"
