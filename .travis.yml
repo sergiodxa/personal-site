@@ -11,12 +11,12 @@ before_script: npm run export
 script: npm test
 deploy:
   - provider: script
-    script: npx now dist -A ../now.json --token $NOW_TOKEN
+    script: npx now dist -A ../now.json --token $TOKEN
     skip_cleanup: true
     on:
       all_branches: true
   - provider: script
-    script:  npx now alias --token $NOW_TOKEN
+    script:  npx now alias --token $TOKEN
     skip_cleanup: true
     on:
       branch: master
