@@ -8,7 +8,7 @@ cache:
       - ~/.cache # cache .cache
 yarn: true # use yarn to install dependencies
 before_script: npm run export # export the site
-script: npm test # run tests
+script: npm run ci # run tests
 deploy:
   - provider: script
     script: npx now dist -A ../now.json --token $TOKEN # deploy exported files
