@@ -1,22 +1,22 @@
-language: node_js
+language: node_js # run Node.js
 node_js:
-  - "8"
+  - "8" # Use Node.js v8 (current LTS)
 cache:
   directories:
-      - node_modules
-      - ~/.npm
-      - ~/.cache
-yarn: true
-before_script: npm run export
-script: npm test
+      - node_modules # cache node_modules
+      - ~/.npm # cache .npm
+      - ~/.cache # cache .cache
+yarn: true # use yarn to install dependencies
+before_script: npm run export # export the site
+script: npm test # run tests
 deploy:
   - provider: script
-    script: npx now dist -A ../now.json --token $TOKEN
+    script: npx now dist -A ../now.json --token $TOKEN # deploy exported files
     skip_cleanup: true
     on:
-      all_branches: true
+      all_branches: true # in all branches
   - provider: script
-    script:  npx now alias --token $TOKEN
+    script:  npx now alias --token $TOKEN # alias lastest deployment
     skip_cleanup: true
     on:
-      branch: master
+      branch: master # only in master
