@@ -7,7 +7,7 @@ cache:
       - ~/.npm # cache .npm
       - ~/.cache # cache .cache
 yarn: true # use yarn to install dependencies
-before_script: npm run export # export the site
+before_script: npm run build && npm run export # export the site
 script: npm run ci # run tests
 deploy:
   - provider: script

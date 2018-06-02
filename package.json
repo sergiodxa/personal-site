@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "preexport": "npm run build",
     "export": "next export -o dist",
     "postexport": "cp .next/service-worker.js dist && cp static/robots.txt dist && npm run build:rss && npm run build:sitemap",
     "build:rss": "node scripts/build-rss.js",
@@ -16,9 +15,9 @@
     "start:static": "serve dist",
     "deploy": "now deploy dist -A ../now.json",
     "postdeploy": "npm run alias",
-    "test:server": "npx serve dist",
     "test": "npx cypress run --record",
-    "ci": "start-server-and-test test:server 3000"
+    "ci:server": "npx serve dist",
+    "ci": "npx start-server-and-test ci:server 3000"
   },
   "repository": {
     "type": "git",
