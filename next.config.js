@@ -36,7 +36,7 @@ const withBabili = (nextConfig = {}) => {
 
 const withEnv = (...envKeys) => (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
-    webpack(config, options) {
+    webpack(config) {
       config.plugins.push(new EnvironmentPlugin(envKeys));
       return config;
     }
