@@ -16,8 +16,8 @@
     "start:static": "serve dist",
     "deploy": "now deploy dist -A ../now.json",
     "postdeploy": "npm run alias",
-    "test:server": "serve dist",
-    "test": "cypress run --record",
+    "test:server": "npx serve dist",
+    "test": "npx cypress run --record",
     "ci": "start-server-and-test test:server 3000"
   },
   "repository": {
