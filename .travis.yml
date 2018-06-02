@@ -4,12 +4,17 @@ node_js:
 cache:
   directories:
       - "node_modules"
-install: npm install --production
-script: npm run export
-before_deploy: npm install now --no-save
+install: npm install
+before_script: npm run export
+script: npm test
 deploy:
-  provider: script
-  script: npm run deploy && curl https://analytics.sergiodxa.com?action=Deploying&type=info&description=$TRAVIS_COMMIT
-  skip_cleanup: true
-  on:
-    branch: master
+  - provider: script
+    script: npx now dist -A ../now.json --token $NOW_TOKEN
+    skip_cleanup: true
+    on:
+      all_branches: true
+  - provider: script
+    script:  npx now alias --token $NOW_TOKEN
+    skip_cleanup: true
+    on:
+      branch: master

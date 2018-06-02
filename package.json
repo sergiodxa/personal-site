@@ -15,7 +15,9 @@
     "start": "next start -p 3001",
     "start:static": "serve dist",
     "deploy": "now deploy dist -A ../now.json",
-    "postdeploy": "npm run alias"
+    "postdeploy": "npm run alias",
+    "pretest": "serve dist",
+    "test": "cypress run"
   },
   "repository": {
     "type": "git",
