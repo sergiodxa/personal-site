@@ -59,7 +59,7 @@
     "apollo-client": "2.3.2",
     "apollo-link-http": "1.5.4",
     "babili-webpack-plugin": "0.1.2",
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "date-fns": "1.29.0",
     "globby": "8.0.1",
     "graphql": "0.13.2",
