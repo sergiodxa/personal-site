@@ -606,9 +606,9 @@
   dependencies:
     "@mdx-js/tag" "^0.7.2"
 
-"@mdx-js/mdx@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.10.0.tgz#f24012e7fe1a8dbe3505399b0b07dda09ca48212"
+"@mdx-js/mdx@0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.10.1.tgz#5c24679cf90fc80e16a8164de4fc9274a5657d78"
   dependencies:
     "@mdx-js/mdxast" "^0.10.0"
     mdast-util-to-hast "^3.0.0"
