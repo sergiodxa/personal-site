@@ -6,7 +6,7 @@ describe("Homepage", () => {
   
   it("should render my job title", () => {
     cy.visit("/");
-    cy.contains("Lead Support Engineer at ▲ ZEIT");
+    cy.contains("Lead Support Engineer");
   });
   
   it("should render the navigation", () => {
