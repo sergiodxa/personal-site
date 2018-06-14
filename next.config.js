@@ -57,6 +57,7 @@ if (NODE_ENV === "production") {
         "/subscribe": { page: "/subscribe" },
         "/contact": { page: "/contact" },
         "/services": { page: "/services" },
+        "/links": { page: "/links" },
         "/books": { page: "/books" },
         "/uses": { page: "/uses" },
         "/essays": { page: "/essays" },
@@ -107,6 +108,9 @@ if (NODE_ENV === "production") {
   });
 }
 
-module.exports = compose(withMDX, withOffline, withBabili, withEnv("NODE_ENV"))(
-  config
-);
+module.exports = compose(
+  withMDX,
+  withOffline,
+  withBabili,
+  withEnv("NODE_ENV")
+)(config);
