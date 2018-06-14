@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 
 import { dark } from "@sergiodxa/palette";
 import { A, P } from "@sergiodxa/ui/lib/text";
