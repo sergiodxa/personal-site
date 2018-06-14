@@ -8,7 +8,6 @@ import NProgress from "nprogress";
 
 import {dark, light} from "@sergiodxa/palette";
 
-import Header from "../components/header.js";
 import TwitterCard from "../components/twitter-card.js";
 import OpenGraph from "../components/open-graph.js";
 

@@ -1,8 +1,5 @@
 import { LinkButton } from "@sergiodxa/ui/lib/button";
 import { H2 } from "@sergiodxa/ui/lib/headings";
-import { A } from "@sergiodxa/ui/lib/text";
-
-import { blue, green } from "@sergiodxa/palette";
 
 export default ({ title, slug, children, url, free, price }) => (
   <article className="grid">

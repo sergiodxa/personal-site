@@ -3,7 +3,6 @@ import { Component } from "react";
 import { P } from "@sergiodxa/ui/lib/text";
 import { Case } from "@sergiodxa/case";
 
-import { event } from "@sergiodxa/analytics";
 import { grey, dark, light, danger, success, info } from "@sergiodxa/palette";
 import fetch from "../lib/fetch";
 

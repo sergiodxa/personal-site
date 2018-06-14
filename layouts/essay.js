@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 import slugify from "slugify";
 import format from "date-fns/format";
 import isValid from "date-fns/is_valid";
@@ -33,26 +32,26 @@ import Main from "./main";
 import minify from "../lib/minify.js";
 import parseUrl from "../lib/parse-url";
 
-const abbreviatures = `
-*[ipc]: Inter-process communication
-*[IPC]: Inter-process communication
-*[GQL]: GraphQL
-*[HTML]: HyperText Markup Language
-*[CSS]: Cascading Style Sheets
-*[JS]: JavaScript
-*[HTTP]: Hypertext Transfer Protocol
-*[UI]: User interface
-*[UX]: User eXperience
-*[DX]: Developer eXperience
-*[API]: Application programming interface
-*[E2E]: End-to-End
-*[e2e]: End-to-End
-*[IDE]: Integrated development environment
-*[REST]: Representational state transfer
-*[SQL]: Structured Query Language
-*[DB]: Database
-*[NoSQL]: Not Only SQL
-`;
+// const abbreviatures = `
+// *[ipc]: Inter-process communication
+// *[IPC]: Inter-process communication
+// *[GQL]: GraphQL
+// *[HTML]: HyperText Markup Language
+// *[CSS]: Cascading Style Sheets
+// *[JS]: JavaScript
+// *[HTTP]: Hypertext Transfer Protocol
+// *[UI]: User interface
+// *[UX]: User eXperience
+// *[DX]: Developer eXperience
+// *[API]: Application programming interface
+// *[E2E]: End-to-End
+// *[e2e]: End-to-End
+// *[IDE]: Integrated development environment
+// *[REST]: Representational state transfer
+// *[SQL]: Structured Query Language
+// *[DB]: Database
+// *[NoSQL]: Not Only SQL
+// `;
 
 export default compose(
   mapProps(({ date, tags = [], ...props }) => ({
