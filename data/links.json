@@ -1,5 +1,10 @@
 [
   {
+    "url": "https://arkwright.github.io/scaling-react-server-side-rendering.html",
+    "title": "Scaling React Server-Side Rendering",
+    "comment": "A comprehensive guide on how to scale a React SSR application"
+  },
+  {
     "url": "https://zeit.co/blog/new-static-deployments",
     "title": "ZEIT - New Static Deployments",
     "comment":
