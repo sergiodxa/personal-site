@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import { dark } from "@sergiodxa/palette";
 import { A } from "@sergiodxa/ui/lib/text";
+import { H1 } from "@sergiodxa/ui/lib/headings";
 import { DL, DD, DT } from "@sergiodxa/ui/lib/list";
 
 import { LinkedHeader } from "../components/header";
@@ -19,12 +20,13 @@ function LinksPage() {
   return (
     <Layout>
       <Head>
-        <title>Links</title>
+        <title>Sergio Xalambrí - Shared Links</title>
       </Head>
 
       <LinkedHeader />
 
       <section>
+        <H1>Shared Links</H1>
         {links.map(({ url, title, comment }) => (
           <DL key={url}>
             <DT>
