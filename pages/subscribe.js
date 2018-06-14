@@ -2,8 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 
 import { primary } from "@sergiodxa/palette";
-import { A } from "@sergiodxa/ui/lib/text";
-import { H1 } from "@sergiodxa/ui/lib/headings";
 
 import Layout from "../layouts/main";
 

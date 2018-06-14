@@ -6,7 +6,6 @@ import { H1 } from "@sergiodxa/ui/lib/headings";
 import { A } from "@sergiodxa/ui/lib/text";
 
 import Essay from "../components/essays/essay";
-import Header from "../components/header";
 import Layout from "../layouts/main";
 
 import essays from "../data/essays";

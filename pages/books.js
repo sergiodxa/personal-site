@@ -1,6 +1,3 @@
-import { Component } from "react";
-import fetch from "isomorphic-fetch";
-
 import { blue } from "@sergiodxa/palette";
 import { H1 } from "@sergiodxa/ui/lib/headings";
 import { A, P } from "@sergiodxa/ui/lib/text";
