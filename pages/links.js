@@ -47,7 +47,7 @@ function LinksPage() {
 
       <style jsx>{`
         section {
-          margin: 0 auto;
+          margin: 0 20px;
           max-width: 720px;
         }
 
@@ -60,6 +60,12 @@ function LinksPage() {
           vertical-align: bottom;
           height: 1em;
           width: 1em;
+        }
+
+        @media (min-width: 720px) {
+          section {
+            margin: 0 auto;
+          }
         }
       `}</style>
     </Layout>
