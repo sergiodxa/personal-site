@@ -727,9 +727,9 @@
   dependencies:
     babel-runtime "^6.26.0"
 
-"@sergiodxa/ui@^1.0.0":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.0.3.tgz#6642deee14340e4bb43d1cd75e767c6161402950"
+"@sergiodxa/ui@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.1.2.tgz#18a5d94ed6af1d86ac536c342515c4fbe3ff308f"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
     babel-runtime "^6.26.0"
@@ -737,9 +737,9 @@
     react "^16.3.2"
     title "^3.2.0"
 
-"@sergiodxa/ui@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.1.2.tgz#18a5d94ed6af1d86ac536c342515c4fbe3ff308f"
+"@sergiodxa/ui@^1.0.0":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@sergiodxa/ui/-/ui-1.0.3.tgz#6642deee14340e4bb43d1cd75e767c6161402950"
   dependencies:
     "@sergiodxa/palette" "^1.0.0"
     babel-runtime "^6.26.0"
