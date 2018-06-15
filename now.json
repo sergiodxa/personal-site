@@ -9,17 +9,21 @@
     "headers": [
       {
         "source": "**/*.@(jpg|jpeg|gif|png|js)",
-        "headers": [{
-          "key": "Cache-Control",
-          "value" : "public, immutable, max-age=31536000"
-        }]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, immutable, max-age=31536000"
+          }
+        ]
       },
       {
         "source": "**/*.html",
-        "headers": [{
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ],
     "directoryListing": false
