@@ -43,7 +43,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@mdx-js/mdx": "0.10.0",
+    "@mdx-js/mdx": "0.10.1",
     "@sergiodxa/analytics": "1.1.0",
     "@sergiodxa/case": "1.0.1",
     "@sergiodxa/clipboard": "1.0.1",
