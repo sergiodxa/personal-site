@@ -8,7 +8,7 @@
   "static": {
     "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|js|)",
+        "source": "**/*.@(jpg|jpeg|gif|png|js)",
         "headers": [{
           "key": "Cache-Control",
           "value" : "public, immutable, max-age=31536000"
