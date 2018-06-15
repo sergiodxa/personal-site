@@ -2,7 +2,7 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "export": "next export -o dist",
     "postexport": "cp .next/service-worker.js dist && cp static/robots.txt dist && npm run build:rss && npm run build:sitemap",
@@ -13,7 +13,7 @@
     "alias": "now alias",
     "prestart": "npm run build",
     "prestart:static": "npm run export",
-    "start": "next start -p 3001",
+    "start": "next start",
     "start:static": "serve dist",
     "deploy": "now deploy dist -A ../now.json",
     "postdeploy": "npm run alias",
