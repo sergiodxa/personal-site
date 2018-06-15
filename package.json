@@ -54,7 +54,7 @@
     "@sergiodxa/request": "1.0.1",
     "@sergiodxa/terminal": "1.0.1",
     "@sergiodxa/types": "1.0.1",
-    "@sergiodxa/ui": "^1.1.2",
+    "@sergiodxa/ui": "1.1.2",
     "@zeit/next-mdx": "1.1.0",
     "apollo-cache-inmemory": "1.2.3",
     "apollo-cache-persist": "0.1.1",
