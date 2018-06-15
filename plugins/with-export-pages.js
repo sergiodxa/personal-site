@@ -2,7 +2,8 @@ const glob = require("globby");
 
 const { NODE_ENV = "development" } = process.env;
 
-const stripFSData = route => route.slice(7, route.length - 3);
+const stripFSData = route =>
+  route.slice("./pages".length, route.length - ".js".length);
 const changeIndexPath = route => (route === "/index" ? "/" : route);
 const mergePages = (routes, route) => ({
   ...routes,
