@@ -1,12 +1,12 @@
 const fs = require("fs");
 const { promisify } = require("util");
 
-const atom = require("./lib/atom.js");
+const feed = require("./lib/links.js");
 
 const writeFile = promisify(fs.writeFile);
 
 async function main() {
-  await writeFile("./dist/atom", atom());
+  await writeFile("./dist/links/atom", feed());
   return true;
 }
 

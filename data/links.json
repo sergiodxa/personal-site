@@ -2,18 +2,21 @@
   {
     "url": "https://arkwright.github.io/scaling-react-server-side-rendering.html",
     "title": "Scaling React Server-Side Rendering",
-    "comment": "A comprehensive guide on how to scale a React SSR application"
+    "comment": "A comprehensive guide on how to scale a React SSR application",
+    "date": "2018-06-15T04:07:33.284Z"
   },
   {
     "url": "https://zeit.co/blog/new-static-deployments",
     "title": "ZEIT - New Static Deployments",
     "comment":
-      "At ZEIT we lunched a new version of the static deployments which enable custom configuration (aka native support for SPAs)."
+      "At ZEIT we lunched a new version of the static deployments which enable custom configuration (aka native support for SPAs).",
+      "date": "2018-06-14T04:07:33.284Z"
   },
   {
     "url": "https://inclusive-components.design/cards/",
     "title": "Cards",
     "comment":
-      "An interesting (and long) article explaining how to code good cards UI components."
+      "An interesting (and long) article explaining how to code good cards UI components.",
+      "date": "2018-06-14T04:07:33.284Z"
   }
 ]

@@ -40,7 +40,7 @@ module.exports = () => {
 
   return `<?xml version="1.0" encoding="utf-8"?>
   <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Sergio Xalambrí's essays</title>
+    <title>Sergio Xalambrí - Essays</title>
     <link href="https://sergiodxa.com/atom" rel="self"/>
     <link href="https://sergiodxa.com/"/>
     <updated>${NOW}</updated>

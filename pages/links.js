@@ -21,6 +21,12 @@ function LinksPage() {
     <Layout>
       <Head>
         <title>Sergio Xalambrí - Shared Links</title>
+        <link
+        href="/links/atom"
+        type="application/atom+xml"
+        rel="alternate"
+        title="Sergio Xalambrí - Shared Links"
+      />
       </Head>
 
       <LinkedHeader />
