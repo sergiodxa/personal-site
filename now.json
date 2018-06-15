@@ -4,5 +4,17 @@
   "type": "static",
   "env": {
     "NODE_ENV": "@env"
+  },
+  "static": {
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|js|)",
+        "headers": [{
+          "key": "Cache-Control",
+          "value" : "max-age=31536000, immutable"
+        }]
+      }
+    ],
+    "directoryListing": false
   }
 }
