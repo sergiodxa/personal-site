@@ -5,7 +5,11 @@
   "env": {
     "NODE_ENV": "@env"
   },
+  "files": [
+    "dist"
+  ],
   "static": {
+    "public": "dist",
     "headers": [
       {
         "source": "**/*.@(jpg|jpeg|gif|png|js)",

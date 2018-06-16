@@ -15,7 +15,7 @@
     "prestart:static": "npm run export",
     "start": "next start",
     "start:static": "serve dist",
-    "deploy": "now deploy dist -A ../now.json",
+    "deploy": "now",
     "postdeploy": "npm run alias",
     "test": "npx cypress run --record",
     "ci:server": "npx serve dist",

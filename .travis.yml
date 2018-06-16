@@ -11,7 +11,7 @@ before_script: npm run build && npm run export # export the site
 script: npm run ci # run tests
 deploy:
   - provider: script
-    script: npx now dist -A ../now.json --token $TOKEN # deploy exported files
+    script: npx now  --token $TOKEN # deploy exported files
     skip_cleanup: true
     on:
       all_branches: true # in all branches
