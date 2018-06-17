@@ -1,21 +1,11 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import { string } from "prop-types";
 
 import { P } from "@sergiodxa/ui/lib/text";
-import { Case } from "@sergiodxa/case";
 
-import { grey, dark, light, danger, success, info } from "@sergiodxa/palette";
-import fetch from "../lib/fetch";
+import { grey, dark, light, success } from "@sergiodxa/palette";
 
-const gql = String.raw;
-
-const query = gql`
-  mutation subscribe($email: String!) {
-    subscribe(email: $email)
-  }
-`;
-
-class SubscribeForm extends Component {
+class SubscribeForm extends PureComponent {
   static propTypes = {
     copy: string
   };
@@ -24,48 +14,39 @@ class SubscribeForm extends Component {
     copy: "Do you want to receive this essays before anyone else?"
   };
 
-  state = { email: "", status: "idle", errors: [], message: "" };
+  state = { email: "", sent: false };
 
   handleChange = event => this.setState({ email: event.target.value });
 
   handleSubmit = async event => {
-    event.preventDefault();
-
-    const { email } = this.state;
-
-    this.setState({ status: "loading" });
-
-    const variables = { email };
-
-    const { errors = [], data } = await fetch({ query, variables });
-
-    if (errors.length > 0) {
-      return this.setState({ errors, status: "failed" });
-    }
-
-    this.setState({ email: "", status: "success", message: data.subscribe });
-
-    event(
-      {
-        action: "Subscription form",
-        description: `User ${email} subscribed to email list`
-      },
-      process.env.NODE_ENV === "production"
-    );
+    this.setState({
+      email: "",
+      sent: true,
+    }, () => {
+      setTimeout(() => {
+        this.setState({ sent: false });
+      }, 10000);
+    });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} action="#">
+      <form
+        action="https://tinyletter.com/sergiodxa"
+        method="POST"
+        target="popupwindow"
+        onSubmit={this.handleSubmit}
+      >
         <label htmlFor="email">
           <P>
-            {this.props.copy}<br />
+            {this.props.copy}
+            <br />
             Subscribe below and keep updated.
           </P>
         </label>
 
         <input
-          id="email"
+          id="tlemail"
           type="email"
           required
           name="email"
@@ -75,19 +56,9 @@ class SubscribeForm extends Component {
           disabled={this.state.status === "loading"}
         />
 
-        <Case
-          value={this.state.status}
-          onLoading={<P className="loading">Loading...</P>}
-          onFailed={
-            <P className="error">
-              Error:{" "}
-              {this.state.errors.map(error => (
-                <span key={error.message}>{error.message}</span>
-              ))}
-            </P>
-          }
-          onSuccess={<P className="success">{this.state.message}</P>}
-        />
+        {this.state.sent && (
+          <P className="success">Thanks for subscribing!</P>
+        )}
 
         <style jsx>{`
           form {
@@ -119,14 +90,6 @@ class SubscribeForm extends Component {
           input:disabled {
             background-color: ${grey};
             color: ${light};
-          }
-
-          :global(.loading) {
-            color: ${info};
-          }
-
-          :global(.error) {
-            color: ${danger};
           }
 
           :global(.success) {
