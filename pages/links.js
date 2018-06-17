@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Head from "next/head";
 
 import { dark, red, blue } from "@sergiodxa/palette";
@@ -6,6 +7,8 @@ import { H1 } from "@sergiodxa/ui/lib/headings";
 import { DL, DD, DT } from "@sergiodxa/ui/lib/list";
 
 import { LinkedHeader } from "../components/header";
+import Subscribe from "../components/subscribe-form";
+
 import Layout from "../layouts/main";
 
 import Twitter from "@sergiodxa/icons/lib/twitter";
@@ -14,6 +17,14 @@ import links from "../data/links.json";
 
 function formatTweet({ url, title, comment }) {
   return `https://twitter.com/intent/tweet?text=https://sdx.im/link/${url}?source=twitter -> ${title}, ${comment}`;
+}
+
+function isMultipleOfFiveteen(number) {
+  return (number + 1) % 15 === 0;
+}
+
+function hasAnExtraGroup(list, position) {
+  return list.length - position > 15;
 }
 
 function LinksPage() {
@@ -34,38 +45,30 @@ function LinksPage() {
       <section>
         <H1>Shared Links</H1>
 
-        <BlockQuote>
-          Subscribe to shared links{" "}
-          <A href="/links/atom" color={red} decoration="underline">
-            RSS feed
-          </A>{" "}
-          or{" "}
-          <A
-            href="https://twitter.com/sergiodxa"
-            color={blue}
-            decoration="underline"
-          >
-            follow me on Twitter
-          </A>{" "}
-          to get new links periodically!
-        </BlockQuote>
-
-        {links.map(({ url, title, comment }) => (
-          <DL key={url}>
-            <DT>
-              <A color={dark} href={`https://sdx.im/link/${url}`}>
-                {title}
-              </A>
-            </DT>
-            <br />
-            <DD>{comment}</DD>
-            <div>
-              <A color={dark} href={formatTweet({ url, title, comment })}>
-                Tweet it! <Twitter />
-              </A>
-            </div>
-          </DL>
+        {links.map(({ url, title, comment }, index) => (
+          <Fragment key={url}>
+            <DL>
+              <DT>
+                <A color={dark} href={`https://sdx.im/link/${url}`}>
+                  {title}
+                </A>
+              </DT>
+              <br />
+              <DD>{comment}</DD>
+              <div>
+                <A color={dark} href={formatTweet({ url, title, comment })}>
+                  Tweet it! <Twitter />
+                </A>
+              </div>
+            </DL>
+            {isMultipleOfFiveteen(index) &&
+              hasAnExtraGroup(links, index) && (
+                <Subscribe copy="Do you want to get more interesting links about JS and React.js weekly?" />
+              )}
+          </Fragment>
         ))}
+
+        <Subscribe copy="Do you want to get more interesting links about JS and React.js weekly?" />
       </section>
 
       <style jsx>{`
