@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { string } from "prop-types";
 
 import { P } from "@sergiodxa/ui/lib/text";
 import { Case } from "@sergiodxa/case";
@@ -15,6 +16,14 @@ const query = gql`
 `;
 
 class SubscribeForm extends Component {
+  static propTypes = {
+    copy: string
+  };
+
+  static defaultProps = {
+    copy: "Do you want to receive this essays before anyone else?"
+  };
+
   state = { email: "", status: "idle", errors: [], message: "" };
 
   handleChange = event => this.setState({ email: event.target.value });
@@ -50,7 +59,7 @@ class SubscribeForm extends Component {
       <form onSubmit={this.handleSubmit} action="#">
         <label htmlFor="email">
           <P>
-            Do you want to receive this essays before anyone else?<br />
+            {this.props.copy}<br />
             Subscribe below and keep updated.
           </P>
         </label>
