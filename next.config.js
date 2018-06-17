@@ -18,7 +18,7 @@ module.exports = compose(
   withMDX,
   withOffline,
   withBabili,
-  withEnv("NODE_ENV", "TEST"),
+  withEnv("NODE_ENV"),
   withExportedPages(),
   asZone(alias)
 )();

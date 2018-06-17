@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import { dark } from "@sergiodxa/palette";
-import { A } from "@sergiodxa/ui/lib/text";
+import { dark, red, blue } from "@sergiodxa/palette";
+import { A, BlockQuote } from "@sergiodxa/ui/lib/text";
 import { H1 } from "@sergiodxa/ui/lib/headings";
 import { DL, DD, DT } from "@sergiodxa/ui/lib/list";
 
@@ -22,17 +22,34 @@ function LinksPage() {
       <Head>
         <title>Sergio Xalambrí - Shared Links</title>
         <link
-        href="/links/atom"
-        type="application/atom+xml"
-        rel="alternate"
-        title="Sergio Xalambrí - Shared Links"
-      />
+          href="/links/atom"
+          type="application/atom+xml"
+          rel="alternate"
+          title="Sergio Xalambrí - Shared Links"
+        />
       </Head>
 
       <LinkedHeader />
 
       <section>
         <H1>Shared Links</H1>
+
+        <BlockQuote>
+          Subscribe to shared links{" "}
+          <A href="/links/atom" color={red} decoration="underline">
+            RSS feed
+          </A>{" "}
+          or{" "}
+          <A
+            href="https://twitter.com/sergiodxa"
+            color={blue}
+            decoration="underline"
+          >
+            follow me on Twitter
+          </A>{" "}
+          to get new links periodically!
+        </BlockQuote>
+
         {links.map(({ url, title, comment }) => (
           <DL key={url}>
             <DT>
@@ -66,6 +83,10 @@ function LinksPage() {
           vertical-align: bottom;
           height: 1em;
           width: 1em;
+        }
+
+        article {
+          margin-bottom: 2em;
         }
 
         @media (min-width: 720px) {
