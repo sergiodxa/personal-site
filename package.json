@@ -75,7 +75,7 @@
     "nodemon": "1.17.5",
     "now-env": "3.0.4",
     "nprogress": "0.2.0",
-    "prop-types": "15.6.1",
+    "prop-types": "15.6.2",
     "prop-types-exact": "1.2.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
