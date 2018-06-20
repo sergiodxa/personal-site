@@ -1,10 +1,10 @@
 import React from "react";
 import App, { Container } from "next/app";
 import compose from "recompose/compose";
-import withAnalytics from "@sergiodxa/analytics/lib/react";
+import withGA from "next-ga";
 
-import withSW from "../lib/hoc/with-sw";
 import withError from "../lib/hoc/with-error";
+import withSW from "../lib/hoc/with-sw";
 
 class PersonalSite extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -27,6 +27,6 @@ class PersonalSite extends App {
 
 export default compose(
   withError,
-  withAnalytics(process.env.NODE_ENV === "production"),
+  withGA("UA-48432002-3"),
   withSW
 )(PersonalSite);
