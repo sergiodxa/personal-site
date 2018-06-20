@@ -19,7 +19,7 @@
     "postdeploy": "npm run alias",
     "test": "npx cypress run --record",
     "ci:server": "npx serve dist",
-    "ci": "npx start-server-and-test ci:server 3000"
+    "ci": "npx start-server-and-test ci:server 5000"
   },
   "repository": {
     "type": "git",
