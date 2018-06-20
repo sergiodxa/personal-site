@@ -4267,7 +4267,7 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-next-ga@^1.0.0:
+next-ga@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-ga/-/next-ga-1.0.0.tgz#68848a2b3e8ad3f5a906275a279c1661a59aca1b"
   dependencies:
