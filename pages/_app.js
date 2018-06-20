@@ -3,7 +3,6 @@ import App, { Container } from "next/app";
 import compose from "recompose/compose";
 import withGA from "next-ga";
 
-import withError from "../lib/hoc/with-error";
 import withSW from "../lib/hoc/with-sw";
 
 class PersonalSite extends App {
@@ -26,7 +25,6 @@ class PersonalSite extends App {
 }
 
 export default compose(
-  withError,
   withGA("UA-48432002-3"),
   withSW
 )(PersonalSite);
