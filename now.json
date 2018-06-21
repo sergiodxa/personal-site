@@ -38,6 +38,6 @@
       }
     ],
     "directoryListing": false,
-    "trailingSlash": true
+    "trailingSlash": false
   }
 }
