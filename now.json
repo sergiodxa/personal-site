@@ -5,9 +5,7 @@
   "env": {
     "NODE_ENV": "@env"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "static": {
     "public": "dist",
     "headers": [
@@ -17,6 +15,15 @@
           {
             "key": "Cache-Control",
             "value": "public, immutable, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "service-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
           }
         ]
       },
