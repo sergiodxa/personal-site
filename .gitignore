@@ -6,4 +6,5 @@
 *.log
 /out
 /cypress/videos
+/cypress/screenshots
 now-secrets.json
