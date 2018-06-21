@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Documentation, Lessons Learned",
   date: "2018-01-17T21:18:58.320Z",
@@ -12,6 +14,8 @@ export const meta = {
     "Lesson learned"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 At ▲ZEIT [we are launching](https://zeit.co/blog/api-2) our newly renewed [API documentation](https://zeit.co/api), I've been working on that project since the ZDB in charge of writing the documentation plus some code related to it. Documenting our whole public API help me learn and understand more about our infrastructure and how Now works internally.
 

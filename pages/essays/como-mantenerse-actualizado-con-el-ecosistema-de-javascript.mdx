@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "¿Cómo mantenerse actualizado con el ecosistema de JavaScript?",
   date: "2018-01-12T17:53:42.064Z",
@@ -17,6 +19,8 @@ export const meta = {
     "Tech"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 Muchas personas me han preguntado como me mantengo actualizado con todo lo nuevo de JavaScript, cómo se que aprender y donde encontrar información. Esta pregunta es muy común entre personas que están aprendiendo a programar, Frontend o JavaScript. Básicamente personas empezando en la industria.
 

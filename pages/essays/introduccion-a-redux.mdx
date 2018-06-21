@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Introducción a Redux.js",
   date: "2016-03-23T15:52:14.733Z",
@@ -13,6 +15,8 @@ export const meta = {
     "JavaScript"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 Redux es una librería para controlar el estado de nuestras aplicaciones web fácilmente, de una forma consistente entre cliente y servidor, testeable y con una gran experiencia de desarrollo.
 

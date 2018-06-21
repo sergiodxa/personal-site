@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Definiendo conceptos - Closure y Scope en JavaScript",
   date: "2014-07-31T00:19:09.428Z",
@@ -11,6 +13,8 @@ export const meta = {
     "ES6"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 ## Qué es el Scope
 

@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Introducción a MDX",
   description: "MDX es un formato de archivos que permite extender Markdown con código JS y JSX (Componentes de React)",
@@ -12,6 +14,8 @@ export const meta = {
     "React"
   ]
 };
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 ![](/static/essays/mdx.png)
 

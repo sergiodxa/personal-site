@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Sobre el ecosistema y la fatiga de JavaScript",
   slug: "sobre-el-ecosistema-y-la-fatiga-de-javascript",
@@ -13,6 +15,8 @@ export const meta = {
     "Programming"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 Desde hace ya un tiempo han ido saliendo [un montón de](https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f) [artículos](http://thefullstack.xyz/javascript-fatigue/) [sobre](https://segment.com/blog/the-deep-roots-of-js-fatigue/) [JavaScript Fatigue](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4#.elafgu3z8), tantos que hasta hay artículos sobre la [fatiga de](http://www.2ality.com/2016/02/js-fatigue-fatigue.html) [JavaScript Fatigue](https://medium.freecodecamp.com/javascript-fatigue-fatigue-66ffb619f6ce#.yiv2p54ox).
 

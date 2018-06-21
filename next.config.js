@@ -21,4 +21,6 @@ module.exports = compose(
   withEnv("NODE_ENV"),
   withExportedPages(),
   asZone(alias)
-)();
+)({
+  pageExtensions: ["js", "mdx"]
+});

@@ -1,18 +1,15 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "An accessible approach to Frontend testing",
   date: "2017-09-30T00:00:00Z",
   description: "Testing is hard. Testing Frontend is harder. But you should do it anyways.",
   slug: "an-accessible-approach-to-frontend-testing",
-  published: true,
   lang: "en",
-  tags: [
-    "Frontend",
-    "Testing",
-    "E2E",
-    "Linter",
-    "Snapshot"
-  ]
+  tags: ["Frontend", "Testing", "E2E", "Linter", "Snapshot"]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 > Testing is hard. Testing Frontend is harder. But you should do it anyways.
 
@@ -81,5 +78,3 @@ Complex workflows is something that should be tested while implementing the othe
 To conclude testing is important and if implemented gradually is not going to become a burden, eventually the whole code will be tested and the deployment could also be automated to happens after each test.
 
 This can guarantee the stability of an application and security to deploy without thinking the whole app is going to break in production.
-
-@[twitter](895831530773381120)

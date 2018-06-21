@@ -7,6 +7,7 @@ import mapProps from "recompose/mapProps";
 import setPropTypes from "recompose/setPropTypes";
 import setDisplayName from "recompose/setDisplayName";
 import PropTypes from "prop-types";
+import { MDXProvider } from '@mdx-js/tag'
 
 import { H1 } from "@sergiodxa/ui/lib/headings";
 import { A } from "@sergiodxa/ui/lib/text";
@@ -19,6 +20,8 @@ import {
   green,
   yellow
 } from "@sergiodxa/palette";
+
+import components from "../components/ui/index";
 
 import { LinkedHeader } from "../components/header";
 import OpenGraph from "../components/open-graph";
@@ -192,7 +195,9 @@ export default compose(
 
       <BookBanner tags={props.tags} />
 
-      <article lang={props.lang || "en"}>{props.children}</article>
+      <MDXProvider components={components}>
+        <article lang={props.lang || "en"}>{props.children}</article>
+      </MDXProvider>
 
       <SubscribeForm />
     </section>

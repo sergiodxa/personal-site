@@ -1,3 +1,5 @@
+import Essay from "../../layouts/essay.js";
+
 export const meta = {
   title: "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
   date: "2017-06-23T22:39:48.419988Z",
@@ -14,6 +16,8 @@ export const meta = {
     "ES6"
   ]
 }
+
+export default ({ children }) => <Essay {...meta}>{children}</Essay>
 
 Manejar flujos de datos síncronos es fácil, con Async/Await también es fácil hacerlos asíncronos. Pero qué pasa si tenemos una función que debe realizar cierta lógica síncrona y luego asíncrona y devolver una promesa. Si esta lógica síncrona falla, ¿qué ocurriría?
 
