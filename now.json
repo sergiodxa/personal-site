@@ -30,6 +30,7 @@
         ]
       }
     ],
-    "directoryListing": false
+    "directoryListing": false,
+    "trailingSlash": true
   }
 }
