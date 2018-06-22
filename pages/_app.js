@@ -29,7 +29,7 @@ class PersonalSite extends App {
 }
 
 export default compose(
-  withAnalytics({ ga: "UA-48432002-3", fbq: 'test' }),
+  withAnalytics({ ga: "UA-48432002-3" }),
   withNProgress(),
   withSW
 )(PersonalSite);
