@@ -3343,7 +3343,7 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-next-analytics@^1.0.0:
+next-analytics@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-analytics/-/next-analytics-1.0.0.tgz#fbb242ddcfb49401d4ffc57cfd0e670eab8b70a8"
   dependencies:
@@ -3362,12 +3362,11 @@ next-ga@^1.0.3:
   dependencies:
     react-ga "^2.5.3"
 
-next-nprogress@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.0.1.tgz#6f195ff2dc28b1e3984e836a7e5df36c6006f270"
+next-nprogress@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.0.2.tgz#23b1ac1cb62f1fb015b88301b7b551fd9923b827"
   dependencies:
     nprogress "^0.2.0"
-    styled-jsx "^2.0.0"
 
 next-offline@2.7.2:
   version "2.7.2"
@@ -4570,7 +4569,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-styled-jsx@2.2.6, styled-jsx@^2.0.0, styled-jsx@^2.2.6:
+styled-jsx@2.2.6, styled-jsx@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.6.tgz#7e826279e1ef718213ef9cc42ac7370b5008449d"
   dependencies:
