@@ -3349,6 +3349,13 @@ next-ga@1.0.3:
   dependencies:
     react-ga "^2.5.3"
 
+next-nprogress@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.0.1.tgz#6f195ff2dc28b1e3984e836a7e5df36c6006f270"
+  dependencies:
+    nprogress "^0.2.0"
+    styled-jsx "^2.0.0"
+
 next-offline@2.7.2:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/next-offline/-/next-offline-2.7.2.tgz#6c3b520a4662d4e88a806357f6f6ea06609bc711"
@@ -3534,7 +3541,7 @@ npmlog@^4.0.2:
     gauge "~2.7.3"
     set-blocking "~2.0.0"
 
-nprogress@0.2.0:
+nprogress@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
 
@@ -4546,7 +4553,7 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
-styled-jsx@2.2.6, styled-jsx@^2.2.6:
+styled-jsx@2.2.6, styled-jsx@^2.0.0, styled-jsx@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-2.2.6.tgz#7e826279e1ef718213ef9cc42ac7370b5008449d"
   dependencies:

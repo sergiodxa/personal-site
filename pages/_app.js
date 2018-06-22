@@ -2,6 +2,9 @@ import React from "react";
 import App, { Container } from "next/app";
 import compose from "recompose/compose";
 import withGA from "next-ga";
+import withNProgress from "next-nprogress";
+import NProgressStyles from "next-nprogress/styles";
+import { dark } from "@sergiodxa/palette";
 
 import withSW from "../lib/hoc/with-sw";
 
@@ -19,6 +22,7 @@ class PersonalSite extends App {
     return (
       <Container>
         <Component {...pageProps} />
+        <NProgressStyles color={dark} />
       </Container>
     );
   }
@@ -26,5 +30,6 @@ class PersonalSite extends App {
 
 export default compose(
   withGA("UA-48432002-3"),
+  withNProgress(),
   withSW
 )(PersonalSite);
