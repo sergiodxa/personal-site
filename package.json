@@ -62,7 +62,7 @@
     "lodash.memoize": "4.1.2",
     "next": "6.0.3",
     "next-analytics": "1.0.0",
-    "next-nprogress": "1.0.1",
+    "next-nprogress": "1.0.2",
     "next-offline": "2.7.2",
     "now-env": "3.1.0",
     "prop-types": "15.6.2",
