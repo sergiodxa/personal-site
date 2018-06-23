@@ -8,7 +8,6 @@ const withMDX = require("@zeit/next-mdx")({
   }
 });
 const asZone = require("./plugins/as-zone");
-const withBabili = require("./plugins/with-babili");
 const withEnv = require("./plugins/with-env");
 const withExportedPages = require("./plugins/with-export-pages");
 
@@ -17,7 +16,6 @@ const { alias } = require("./now.json");
 module.exports = compose(
   withMDX,
   withOffline,
-  withBabili,
   withEnv("NODE_ENV"),
   withExportedPages(),
   asZone(alias)
