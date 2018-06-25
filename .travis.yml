@@ -9,14 +9,9 @@ cache:
 yarn: true # use yarn to install dependencies
 before_script: npm run build && npm run export # export the site
 script: npm run ci # run tests
-deploy:
+deploy: # deploy and alias when a commit goes to master
   - provider: script
-    script: npx now  --token $TOKEN # deploy exported files
-    skip_cleanup: true
-    on:
-      all_branches: true # in all branches
-  - provider: script
-    script:  npx now alias --token $TOKEN # alias lastest deployment
+    script:  npx now  --token $TOKEN && npx now alias --token $TOKEN
     skip_cleanup: true
     on:
       branch: master # only in master
