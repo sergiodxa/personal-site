@@ -2,5 +2,20 @@
   "name": "personal-site-pr",
   "env": {
     "NODE_ENV": "@env"
-  }
+  },
+  "files": [
+    "components",
+    "data",
+    "layouts",
+    "lib",
+    "pages",
+    "plugins",
+    "scripts",
+    "static",
+    "env.js",
+    "next.config.js",
+    "now.json",
+    "package.json",
+    "yarn.lock"
+  ]
 }
