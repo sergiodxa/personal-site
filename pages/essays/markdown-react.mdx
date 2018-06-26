@@ -1,4 +1,4 @@
-import Essay from "../../layouts/essay.js";
+import withLayout from "../../lib/with-layout.js";
 
 export const meta = {
   title: "Renderizando Markdown en React.js",
@@ -15,7 +15,7 @@ export const meta = {
   ]
 }
 
-export default ({ children }) => <Essay {...meta}>{children}</Essay>
+export default withLayout("essay")(meta)
 
 Markdown es una tecnología genial para poder escribir fácilmente contenido de texto, una de las mejores cosas es que si bien está pensado para ser transformado en HTML es posible usarlo para transformarlo en cualquier otra tecnología, por ejemplo componentes de React.
 

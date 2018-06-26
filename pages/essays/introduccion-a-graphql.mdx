@@ -1,4 +1,4 @@
-import Essay from "../../layouts/essay.js";
+import withLayout from "../../lib/with-layout.js";
 
 export const meta = {
   title: "Introducción a GraphQL",
@@ -14,7 +14,7 @@ export const meta = {
   ]
 }
 
-export default ({ children }) => <Essay {...meta}>{children}</Essay>
+export default withLayout("essay")(meta)
 
 En 2015 Facebook anunció [GraphQL](http://graphql.org/), una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?
 

@@ -1,4 +1,4 @@
-import Essay from "../../layouts/essay.js";
+import withLayout from "../../lib/with-layout.js";
 
 export const meta = {
   title: "Documentation, Lessons Learned",
@@ -15,7 +15,7 @@ export const meta = {
   ]
 }
 
-export default ({ children }) => <Essay {...meta}>{children}</Essay>
+export default withLayout("essay")(meta)
 
 At ▲ZEIT [we are launching](https://zeit.co/blog/api-2) our newly renewed [API documentation](https://zeit.co/api), I've been working on that project since the ZDB in charge of writing the documentation plus some code related to it. Documenting our whole public API help me learn and understand more about our infrastructure and how Now works internally.
 
