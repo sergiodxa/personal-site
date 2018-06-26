@@ -13,7 +13,7 @@ const withExportedPages = require("./plugins/with-export-pages");
 let alias = process.env.NOW_URL;
 try {
   const now = require("./now.prod.json");
-  alias = now.alias;
+  alias = `https://${now.alias}`;
 } catch(error) {
   // do nothing 🙃
 }
