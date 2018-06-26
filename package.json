@@ -51,7 +51,7 @@
     "@sergiodxa/ui": "1.1.2",
     "@zeit/next-mdx": "1.1.0",
     "classnames": "2.2.6",
-    "compose-function": "^3.0.3",
+    "compose-function": "3.0.3",
     "date-fns": "1.29.0",
     "globby": "8.0.1",
     "lodash.memoize": "4.1.2",
