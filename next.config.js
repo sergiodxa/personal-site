@@ -1,7 +1,6 @@
 require("now-env");
-const compose = require("recompose/compose").default;
+const compose = require("compose-function");
 
-const withOffline = require("next-offline");
 const withMDX = require("@zeit/next-mdx")({
   options: {
     mdPlugins: [require("remark-abbr"), require("remark-emoji")]
@@ -11,11 +10,16 @@ const asZone = require("./plugins/as-zone");
 const withEnv = require("./plugins/with-env");
 const withExportedPages = require("./plugins/with-export-pages");
 
-const { alias } = require("./now.prod.json");
+let alias = process.env.NOW_URL;
+try {
+  const now = require("./now.prod.json");
+  alias = `https://${now.alias}`;
+} catch(error) {
+  // do nothing 🙃
+}
 
 module.exports = compose(
   withMDX,
-  withOffline,
   withEnv("NODE_ENV"),
   withExportedPages(),
   asZone(alias)

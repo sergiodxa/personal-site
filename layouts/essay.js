@@ -1,14 +1,12 @@
 import { Component } from "react";
 import Head from "next/head";
 import slugify from "slugify";
-import format from "date-fns/format";
-import isValid from "date-fns/is_valid";
 import PropTypes from "prop-types";
 import { MDXProvider } from "@mdx-js/tag";
 
 import { H1 } from "@sergiodxa/ui/lib/headings";
 import { A } from "@sergiodxa/ui/lib/text";
-import { blue, grey, black } from "@sergiodxa/palette";
+import { blue, black } from "@sergiodxa/palette";
 import * as CustomTypes from "@sergiodxa/types";
 
 import components from "../components/ui/index";

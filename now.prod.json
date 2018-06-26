@@ -19,16 +19,7 @@
         ]
       },
       {
-        "source": "_next/static/commons/*.js",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "proxy-revalidate, must-revalidate, max-age=86400"
-          }
-        ]
-      },
-      {
-        "source": "static/**/*.@(jpg|png|asc|json)",
+        "source": "static/**/*",
         "headers": [
           {
             "key": "Cache-Control",
@@ -37,7 +28,7 @@
         ]
       },
       {
-        "source": "service-worker.js",
+        "source": "sw.js",
         "headers": [
           {
             "key": "Cache-Control",

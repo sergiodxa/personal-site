@@ -1,5 +1,3 @@
-import compose from "recompose/compose";
-
 import Main from "../layouts/main";
 import { LinkedHeader } from "../components/header";
 
