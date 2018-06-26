@@ -15,7 +15,7 @@
     "start:static": "serve -p 3000",
     "deploy": "now",
     "postdeploy": "npm run alias",
-    "test": "npx cypress run --record",
+    "test": "npx cypress run --record --config fileServerFolder=dist",
     "ci:server": "npx serve dist",
     "ci": "npx start-server-and-test ci:server 5000"
   },
