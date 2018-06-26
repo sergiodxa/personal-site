@@ -5,6 +5,14 @@ importScripts(
 if (!workbox) {
   console.error("ServiceWorker failed to load workbox");
 } else {
+  // cache HTML
+  workbox.routing.registerRoute(
+    new RegExp(".*\.html"),
+    workbox.strategies.staleWhileRevalidate({
+      cacheName: "html-content"
+    })
+  );
+
   // cache bundles
   workbox.routing.registerRoute(
     new RegExp("/_next/(.*)"),
