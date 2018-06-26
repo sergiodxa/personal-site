@@ -10,11 +10,12 @@ const asZone = require("./plugins/as-zone");
 const withEnv = require("./plugins/with-env");
 const withExportedPages = require("./plugins/with-export-pages");
 
-let alias;
+let alias = process.env.NOW_URL;
 try {
   const now = require("./now.prod.json");
   alias = now.alias;
-} finally {
+} catch(error) {
+  // do nothing 🙃
 }
 
 module.exports = compose(
