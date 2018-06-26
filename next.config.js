@@ -10,7 +10,12 @@ const asZone = require("./plugins/as-zone");
 const withEnv = require("./plugins/with-env");
 const withExportedPages = require("./plugins/with-export-pages");
 
-const { alias } = require("./now.prod.json");
+let alias;
+try {
+  const now = require("./now.prod.json");
+  alias = now.alias;
+} finally {
+}
 
 module.exports = compose(
   withMDX,
