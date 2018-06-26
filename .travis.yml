@@ -11,9 +11,7 @@ before_script: npm run build && npm run export # export the site
 script: npm run ci # run tests
 deploy: # deploy and alias when a commit goes to master
   - provider: script
-    script:
-      - npx now -A ./now.prod.json -t $TOKEN
-      - npx now alias -A ./now.prod.json -t $TOKEN
+    script: npx now -A ./now.prod.json -t $TOKEN && npx now alias -A ./now.prod.json -t $TOKEN
     skip_cleanup: true
     on:
       branch: master # only in master
