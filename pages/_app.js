@@ -6,7 +6,7 @@ import withNProgress from "next-nprogress";
 import NProgressStyles from "next-nprogress/styles";
 import { dark } from "@sergiodxa/palette";
 
-import withSW from "../lib/hoc/with-sw";
+import withSW from "../lib/with-sw";
 
 class PersonalSite extends App {
   static async getInitialProps({ Component, ctx }) {
