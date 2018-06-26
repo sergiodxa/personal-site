@@ -1,7 +1,6 @@
 require("now-env");
 const compose = require("compose-function");
 
-const withOffline = require("next-offline");
 const withMDX = require("@zeit/next-mdx")({
   options: {
     mdPlugins: [require("remark-abbr"), require("remark-emoji")]
@@ -15,7 +14,6 @@ const { alias } = require("./now.prod.json");
 
 module.exports = compose(
   withMDX,
-  withOffline,
   withEnv("NODE_ENV"),
   withExportedPages(),
   asZone(alias)
