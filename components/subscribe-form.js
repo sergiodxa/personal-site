@@ -18,7 +18,7 @@ class SubscribeForm extends PureComponent {
 
   handleChange = event => this.setState({ email: event.target.value });
 
-  handleSubmit = async event => {
+  handleSubmit = async () => {
     this.setState({
       email: "",
       sent: true,

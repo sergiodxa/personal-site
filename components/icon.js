@@ -1,5 +1,3 @@
-import Head from "next/head";
-
 import Codepen from "@sergiodxa/icons/lib/codepen";
 import Dev from "@sergiodxa/icons/lib/dev";
 import Email from "@sergiodxa/icons/lib/email";

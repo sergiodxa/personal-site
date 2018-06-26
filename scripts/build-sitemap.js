@@ -1,7 +1,6 @@
 const fs = require("fs");
 const { promisify } = require("util");
 const glob = require("globby");
-const { resolve } = require("path");
 
 const writeFile = promisify(fs.writeFile);
 
