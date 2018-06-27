@@ -55,7 +55,7 @@
     "date-fns": "1.29.0",
     "globby": "8.0.1",
     "lodash.memoize": "4.1.2",
-    "next": "6.0.3",
+    "next": "6.1.0",
     "next-analytics": "1.0.0",
     "next-nprogress": "1.0.2",
     "now-env": "3.1.0",
