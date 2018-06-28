@@ -15,9 +15,7 @@
     "start:static": "serve -p 3000",
     "deploy": "now",
     "postdeploy": "npm run alias",
-    "test": "npx cypress run --record --config fileServerFolder=dist",
-    "ci:server": "npx serve dist",
-    "ci": "npx start-server-and-test ci:server 5000"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -66,5 +64,16 @@
     "remark-abbr": "1.1.2",
     "remark-emoji": "2.0.1",
     "slugify": "1.3.0"
+  },
+  "devDependencies": {
+    "jest": "^23.2.0",
+    "jest-puppeteer": "^3.2.1",
+    "puppeteer": "^1.5.0",
+    "serve": "^9.1.0"
+  },
+  "jest": {
+    "notify": true,
+    "notifyMode": "failure",
+    "preset": "jest-puppeteer"
   }
 }
