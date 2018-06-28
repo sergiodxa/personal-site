@@ -72,6 +72,8 @@
     "serve": "^9.1.0"
   },
   "jest": {
+    "notify": true,
+    "notifyMode": "failure",
     "preset": "jest-puppeteer"
   }
 }
