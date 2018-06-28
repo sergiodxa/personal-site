@@ -1,4 +1,3 @@
-// jest-puppeteer.config.js
 module.exports = {
   lunch: {
     args: ["--no-sandbox"]
