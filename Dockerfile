@@ -4,22 +4,12 @@ FROM mhart/alpine-node:8
 RUN mkdir /app
 WORKDIR /app
 
-# Copy code to workdir
-COPY . .
+COPY package.json yarn.lock ./
+RUN yarn --production
 
 # Build process
-RUN echo 'Installing dependencies'
-RUN yarn install --production
-RUN echo 'Building Next.js application'
-RUN yarn build
-RUN echo 'Statically exporting site'
-RUN yarn export
-
-RUN ls /app
-
-# # Test process
-# RUN echo 'Running tests'
-# RUN yarn test
+COPY . .
+RUN yarn build && yarn export
 
 # Move files to production
 RUN mv /app/dist /public

@@ -6222,10 +6222,6 @@ update-check@1.5.2:
     registry-auth-token "3.3.2"
     registry-url "3.1.0"
 
-upgrade@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/upgrade/-/upgrade-1.1.0.tgz#4a50875ec5c715d19379799f0590a0e796958f61"
-
 uri-js@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.2.1.tgz#4595a80a51f356164e22970df64c7abd6ade9850"
