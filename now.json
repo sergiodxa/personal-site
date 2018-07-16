@@ -1,8 +1,7 @@
 {
-  "name": "personal-site-pr",
-  "env": {
-    "NODE_ENV": "@env"
-  },
+  "name": "personal-site",
+  "alias": "site.sergiodxa.com",
+  "type": "static",
   "files": [
     "components",
     "data",
@@ -12,10 +11,61 @@
     "plugins",
     "scripts",
     "static",
-    "env.js",
+    "Dockerfile",
     "next.config.js",
     "now.json",
     "package.json",
     "yarn.lock"
-  ]
+  ],
+  "static": {
+    "headers": [
+      {
+        "source": "_next/**/*.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, immutable, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "static/**/*",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, immutable, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "sw.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "atom",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "proxy-revalidate, must-revalidate, max-age=3600"
+          }
+        ]
+      },
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "proxy-revalidate, must-revalidate, max-age=3600"
+          }
+        ]
+      }
+    ],
+    "directoryListing": false,
+    "trailingSlash": false
+  }
 }
