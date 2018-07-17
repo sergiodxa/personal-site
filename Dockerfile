@@ -1,8 +1,7 @@
 FROM mhart/alpine-node:8
 
-# Create workdir
-RUN mkdir /app
-WORKDIR /app
+# Define workdir
+WORKDIR /usr/src
 
 COPY package.json yarn.lock ./
 RUN yarn --production
@@ -12,4 +11,4 @@ COPY . .
 RUN yarn build && yarn export
 
 # Move files to production
-RUN mv /app/dist /public
+RUN mv /usr/src/dist /public
