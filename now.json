@@ -42,7 +42,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache"
+            "value": "no-cache, no-store"
           }
         ]
       },
@@ -51,7 +51,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "proxy-revalidate, must-revalidate, max-age=3600"
+            "value": "max-age=0, stale-while-revalidate=3600"
           }
         ]
       },
@@ -60,7 +60,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "proxy-revalidate, must-revalidate, max-age=3600"
+            "value": "max-age=0, stale-while-revalidate=3600"
           }
         ]
       }
