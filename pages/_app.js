@@ -1,7 +1,7 @@
 import React from "react";
 import App, { Container } from "next/app";
 import compose from "compose-function";
-import withAnalytics from "next-analytics";
+import withAnalytics from "next-ga";
 import withNProgress from "next-nprogress";
 import NProgressStyles from "next-nprogress/styles";
 import { dark } from "@sergiodxa/palette";
@@ -29,7 +29,7 @@ class PersonalSite extends App {
 }
 
 export default compose(
-  withAnalytics({ ga: "UA-48432002-3" }),
+  withAnalytics("UA-48432002-3"),
   withNProgress(),
   withSW
 )(PersonalSite);
