@@ -4240,9 +4240,9 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-next-ga@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/next-ga/-/next-ga-1.2.1.tgz#a35663a3048508ef1eb81fd6449e9e234bbc69a9"
+next-ga@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/next-ga/-/next-ga-1.2.2.tgz#41361e86c7f036b612f565963f091b6e33e20a66"
   dependencies:
     react-ga "^2.5.3"
 
