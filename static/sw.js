@@ -7,7 +7,7 @@ if (!workbox) {
 } else {
   // cache HTML
   workbox.routing.registerRoute(
-    new RegExp("*\.html"),
+    new RegExp("(.*)\.html"),
     workbox.strategies.staleWhileRevalidate({
       cacheName: "html-content"
     })
