@@ -14,24 +14,24 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/static/favicon@48.jpg",
+      "src": "/static/favicon@48.png",
       "sizes": "48x48",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "/static/favicon@96.jpg",
+      "src": "/static/favicon@96.png",
       "sizes": "96x96",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "/static/favicon@192.jpg",
+      "src": "/static/favicon@192.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
-      "src": "/static/favicon@400.jpg",
+      "src": "/static/favicon@400.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
