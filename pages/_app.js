@@ -1,5 +1,6 @@
 import React from "react";
 import App, { Container } from "next/app";
+import Router from "next/router";
 import compose from "compose-function";
 import withAnalytics from "next-ga";
 import withNProgress from "next-nprogress";
@@ -29,7 +30,7 @@ class PersonalSite extends App {
 }
 
 export default compose(
-  withAnalytics("UA-48432002-3"),
+  withAnalytics("UA-48432002-3", Router),
   withNProgress(),
   withSW
 )(PersonalSite);
