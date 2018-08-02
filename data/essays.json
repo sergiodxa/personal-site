@@ -71,7 +71,7 @@
   {
     "id": 60,
     "title": "Implementando un servidor de GraphQL",
-    "link": "/essays/implementando-un-servidor-de-graphql/",
+    "link": "/essays/implementando-un-servidor-de-graphql",
     "date": "2017-07-07T15:42:42.778208Z",
     "slug": "implementando-un-servidor-de-graphql"
   },
@@ -99,7 +99,7 @@
     "id": 56,
     "title":
       "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
-    "link": "/essays/mezclando-flujos-sincronos-y-asincronos/",
+    "link": "/essays/mezclando-flujos-sincronos-y-asincronos",
     "date": "2017-06-23T22:39:48.419988Z"
   },
   {
