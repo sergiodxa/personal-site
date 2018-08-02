@@ -166,7 +166,11 @@ function AboutPage() {
         <section id="paypal">
           <P>
             Do you like my articles?{" "}
-            <A href="https://paypal.me/sergiodxa/5" color={dark}>
+            <A
+              href="https://paypal.me/sergiodxa/5"
+              color={dark}
+              decoration="underline"
+            >
               Buy me a coffee
             </A>{" "}
             and help me continue writing!
