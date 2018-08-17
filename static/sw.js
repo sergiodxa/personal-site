@@ -7,7 +7,7 @@ if (!workbox) {
 } else {
   // cache HTML
   workbox.routing.registerRoute(
-    new RegExp("(.*)\.html"),
+    new RegExp("(.*).html"),
     workbox.strategies.staleWhileRevalidate({
       cacheName: "html-content"
     })
@@ -15,17 +15,17 @@ if (!workbox) {
 
   // cache bundles
   workbox.routing.registerRoute(
-    new RegExp("/_next/(.*)"),
-    workbox.strategies.staleWhileRevalidate({
+    new RegExp("/_next/**/page/(.*)"),
+    workbox.strategies.cacheFirst({
       cacheName: "bundled-content"
     })
   );
-  
-  // cache images
+
+  // cache static files
   workbox.routing.registerRoute(
     new RegExp("/static/(.*)"),
     workbox.strategies.cacheFirst({
-      cacheName: "images",
+      cacheName: "static",
       plugins: [
         new workbox.expiration.Plugin({
           maxEntries: 60,
@@ -34,8 +34,7 @@ if (!workbox) {
       ]
     })
   );
-  
+
   // offline analytics
   workbox.googleAnalytics.initialize();
 }
-
