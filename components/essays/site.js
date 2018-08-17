@@ -3,7 +3,7 @@ import Link from "next/link";
 import PropTypes from "prop-types";
 
 import parseUrl from "../../lib/parse-url.js";
-import { grey } from "@sergiodxa/palette";
+import { dark } from "@sergiodxa/palette";
 
 function Site({ link, isSelf }) {
   return (
@@ -33,7 +33,8 @@ function Site({ link, isSelf }) {
         .site-url {
           flex: 1;
           text-decoration: none;
-          color: ${grey};
+          color: ${dark};
+          font-weight: lighter;
         }
 
         .site-url:hover {
