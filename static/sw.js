@@ -15,7 +15,7 @@ if (!workbox) {
 
   // cache bundles
   workbox.routing.registerRoute(
-    new RegExp("/_next/**/page/(.*)"),
+    new RegExp("/_next/(.*)"),
     workbox.strategies.cacheFirst({
       cacheName: "bundled-content"
     })
