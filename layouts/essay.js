@@ -14,7 +14,7 @@ import components from "../components/ui/index";
 import { LinkedHeader } from "../components/header";
 import OpenGraph from "../components/open-graph";
 import TwitterCard from "../components/twitter-card";
-import SubscribeForm from "../components/subscribe-form";
+import * as Patreon from "../components/patreon";
 import BookBanner from "../components/book-banner";
 import CanonicalURL from "../components/canonical-url";
 import TranslatedFrom from "../components/translated-from";
@@ -140,11 +140,13 @@ class EssayLayout extends Component {
 
           <BookBanner tags={meta.tags} />
 
+          <Patreon.Before />
+
           <MDXProvider components={components}>
             <article lang={meta.lang || "en"}>{children}</article>
           </MDXProvider>
 
-          <SubscribeForm />
+          <Patreon.After />
         </section>
 
         <style jsx>{`
