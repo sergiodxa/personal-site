@@ -165,15 +165,24 @@ function AboutPage() {
 
         <section id="paypal">
           <P>
-            Do you like my articles?{" "}
+            Do you like my content?{" "}
+            <A
+              href="https://sdx.im/patreon"
+              color={dark}
+              decoration="underline"
+            >
+              Become a Patreon and get some benefits!
+            </A>{" "}
+          </P>
+          <P>
+            Or just help me{" "}
             <A
               href="https://paypal.me/sergiodxa/5"
               color={dark}
               decoration="underline"
             >
-              Buy me a coffee
-            </A>{" "}
-            and help me continue writing!
+              buy a coffee
+            </A>
           </P>
         </section>
       </section>

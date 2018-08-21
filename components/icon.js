@@ -53,6 +53,17 @@ export default ({ name, extraLarge, large, small, extraSmall }) => {
             return <Twitter size={size} />;
           case "youtube":
             return <YouTube size={size} />;
+          case "patreon":
+            return (
+              <svg version="1.1" width={32} height={32}>
+                <path
+                  fill="#f96854"
+                  d="M20.515.699c-6.352 0-11.52 5.168-11.52 11.52 0 6.333 5.168 11.484 11.52 11.484C26.848 23.703 32 18.551 32 12.219 32 5.867 26.848.699 20.515.699zM.004 31.383h5.627V.699H.004z"
+                />
+              </svg>
+            );
+          default:
+            return null;
         }
       })()}
     </i>
