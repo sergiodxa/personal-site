@@ -17,7 +17,7 @@ describe("Page /", () => {
 
   it("should render the buy me a coffee suggestion", async () => {
     await expect(page).toMatch(
-      "Do you like my articles? Buy me a coffee and help me continue writing!"
+      "Do you like my content? Become a Patreon and get some benefits!"
     );
   });
 });
