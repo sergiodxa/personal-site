@@ -121,12 +121,6 @@ class EssayLayout extends Component {
 
         <LinkedHeader href="/essays" sticky={false} />
 
-        <div className="src">
-          <A href="https://github.com/sergiodxa/personal-site" color={black}>
-            {"<source />"}
-          </A>
-        </div>
-
         <section className="content">
           <H1 className="main-title" lang={meta.lang || "en"}>
             {meta.title}
@@ -150,16 +144,6 @@ class EssayLayout extends Component {
         </section>
 
         <style jsx>{`
-          .src {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 1.5rem 3em;
-          }
-          .src:hover {
-            text-decoration: underline;
-          }
-
           .content {
             font-size: 1.25rem;
             margin: 0 auto 10vh;
@@ -209,10 +193,6 @@ class EssayLayout extends Component {
           }
 
           @media (max-width: 767px) {
-            .src {
-              display: none;
-            }
-
             .main-title {
               font-size: 2em;
               margin-left: -2px;
