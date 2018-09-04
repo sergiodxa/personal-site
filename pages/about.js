@@ -21,9 +21,8 @@ function AboutPage() {
           <article>
             <p className="p-note">
               I'm <strong className="p-name">Sergio Xalambrí</strong>,{" "}
-              <em>Software Developer</em> currently working as{" "}
-              <span className="p-job-title">Lead Support Engineer</span> at{" "}
-              <strong className="p-org h-card">▲ZEIT</strong>
+              <em className="p-job-title">Software Engineer</em> currently
+              working at <strong className="p-org h-card">▲ZEIT</strong>
             </p>
           </article>
         </section>

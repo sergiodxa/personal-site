@@ -18,7 +18,7 @@ function Header({ centered, sticky, secondary }) {
   
       {centered && (
         <H2>
-          Lead Support Engineer at{" "}
+          Software Engineer at{" "}
           <strong>
             <A
               title="▲ ZEIT"
