@@ -8,11 +8,7 @@ describe("Page /", () => {
   });
 
   it("should render my title", async () => {
-    await expect(page).toMatch("Software Developer");
-  });
-
-  it("should render my job title", async () => {
-    await expect(page).toMatch("Lead Support Engineer");
+    await expect(page).toMatch("Software Engineer");
   });
 
   it("should render the buy me a coffee suggestion", async () => {
