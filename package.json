@@ -39,7 +39,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@mdx-js/mdx": "0.15.0",
+    "@mdx-js/mdx": "0.15.2",
     "@mdx-js/tag": "0.15.0",
     "@sergiodxa/fs": "1.1.6",
     "@sergiodxa/icons": "1.0.1",
