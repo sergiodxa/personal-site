@@ -1,0 +1,62 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Componente Personalizables usando Props",
+  day: 4,
+  description: "",
+  slug: "/react/dia-4",
+  lang: "es",
+  tags: ["Frontend", "React", "JavaScript"]
+}
+
+export default withLayout("react-daily")(meta)
+
+[Ya cargamos React y ReactDOM](/react/dia-1), [renderizamos un elemento](/react/dia-2) y [lo encapsulamos en un componente](/react/dia-3). Es hora volver personalizable nuestro componente para que sea útil en varios casos.
+
+Para estamos vamos a aprender que son los _props_ ¿Te acuerdas que en el [día 2](/react/dia-2) vimos como pasarte atributos a una etiqueta del DOM al usar `React.createElement`?
+
+Vamos a usar eso mismo para pasarle parámetros a nuestro componente y usarlos para personalizar el resultado.
+
+```js
+function Hello() {
+  return React.createElement('h1', null, "Hola Mundo!");
+}
+```
+
+Ese es nuestro componente hasta ahora, vamos a hacer que el `Mundo` sea personalizable usandos _props_ para así poder escribir un `Hola, X!`, primero cualquier _props_ que reciba nuestro componente va a ser parte de un objeto que recibimos como primer argumento de nuestro componente.
+
+```js
+function Hello(props = {}) {
+  return React.createElement('h1', null, "Hola Mundo!");
+}
+```
+
+Con esto definimos este argumento `props` que por defecto es un objeto vacío. Luego necesitamos usar el prop que vamos a recibir, el nombre lo podemos definir nosostros, en este caso vamos a usar `name`.
+
+```js
+function Hello(props = {}) {
+  return React.createElement('h1', null, `Hola ${props.name || "Mundo"}!`);
+}
+```
+
+Con esto nuestro `<h1>` va a tener Hola y lo que pasemos como name o en caso de no pasar nada usamos _Mundo_ como estaba antes.
+
+Ahora que ya esta listo nuestro componente es hora de usarlo.
+
+```js
+function Hello(props = {}) {
+  return React.createElement('h1', null, `Hola ${props.name || "Mundo"}!`);
+}
+
+const element = React.createElement(Hello, { name: "Sergio" });
+const node = document.getElementById("app");
+
+ReactDOM.render(
+  element,
+  node
+);
+```
+
+Lo que hicimos es, en vez de pasar `null` como segundo argumento de `React.createElement` pasamos un objeto con la propiedad `name` con el valor que vamos a usar.
+
+Ahora ya tenemos nuestro componente personalizable siendo renderizado. Con esto terminamos el día 4.
