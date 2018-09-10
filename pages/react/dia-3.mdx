@@ -1,0 +1,61 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Componentes con React",
+  day: 3,
+  description: "",
+  slug: "/react/dia-3",
+  lang: "es",
+  tags: ["Frontend", "React", "JavaScript"]
+}
+
+export default withLayout("react-daily")(meta)
+
+[Ya renderizaste tu primer _Hola Mundo!_ en React](/react/dia-2), es hora de crear tu primer componente de React como tal.
+
+Un componente se puede crear de hasta tres formas diferentes, esta vez vamos a ver la primera de estas.
+
+La idea de los componentes es que sean reusable, no solo en diferentes partes de una aplicación, un objeto de una lista que se repite se puede guardar en un componente para re usarle por cada elemento de la lista.
+
+Entonces, ¿cómo se crea un componente? La forma más simples es con una función.
+
+```js
+function Hello() {
+  return React.createElement('h1', null, "Hola Mundo!");
+}
+```
+
+Los nombres de los componentes **siempre** deben empezar con mayúscula, normalmente en PascalCase (la primera letra de cada palabra en mayúscula, incluyendo la primera a diferencia de camelCase).
+
+Además de eso debe devolver como resultado un elemento creador con `React.createElement`, un string de texto, un número (va a ser tratado como un string de texto), null (para no renderizar nada) o un array de todos los anteriores.
+
+> **Nota**: Estos mismos son los valores válidos como hijos al usar `React.createElement`.
+
+Ahora que tenemos nuestro componente definido necesitamos renderizarlo. La primera forma de hacerlo es ejecutar `Hello` como una función normal y pasar el resultado a `ReactDOM.render`, aunque esto funciona no es la forma correcta ya que no serviría con las otras formas de definir un componente que vamos a ver más adelante.
+
+La forma correcta es pasar el componente como el primer argumento de `React.createElement`.
+
+```js
+React.createElement(
+  Hello,
+  null
+)
+```
+
+Ahora podemos reemplazar nuestro Hola Mundo! de ayer por el componente Hello.
+
+```js
+function Hello() {
+  return React.createElement('h1', null, "Hola Mundo!");
+}
+
+const element = React.createElement(Hello, null);
+const node = document.getElementById("app");
+
+ReactDOM.render(
+  element,
+  node
+);
+```
+
+¡Y con esto acabas de crear y renderizar tu primer componente de React!
