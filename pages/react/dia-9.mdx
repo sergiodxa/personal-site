@@ -1,0 +1,69 @@
+import ReactDOM from "react-dom";
+import Inspector from "react-inspector";
+import DevTools from "../../components/devtools.js";
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Uso del prop especial children",
+  day: 9,
+  description: "",
+  slug: "/react/dia-9",
+  lang: "es",
+  tags: ["Frontend", "React", "JavaScript"]
+}
+
+export default withLayout("react-daily")(meta)
+
+[Ayer hicimos que Header tenga su contenido personalizable](/react/dia-9) mediante un prop que llamamos `children`. Resulta que hay una razón especial para nombrar así a este prop.
+
+React considera `children` un prop especial internamente, si [recordamos de cuando creamos nuestro primer elemento](/react/dia-2) la sintaxis de `React.createElement` es la siguiente:
+
+```js
+React.createElement(
+  type,
+  [props],
+  [...children]
+)
+```
+
+El primer argumento es el tipo de etiqueta que vamos a crear o el componente que vamos a usar, el segundo es un objeto con los props -atributos de la etiqueta- y desde el tercero en adelante es el contenido en forma de elementos de React.
+
+Resulta que todo lo que pasemos desde el tercer argumento en adelante React lo considera el prop especial `children` por lo que en vez de pasar `{ children }` como `prop` normal podemos simplemente pasarlo como el tercer argumento.
+
+Esto nos permite actualizar esto:
+
+```js
+React.createElement(Header, {
+  children: React.createElement(Hello, { name: "Sergio" })
+});
+```
+
+Para que use esto:
+
+```js
+React.createElement(
+  Header,
+  null, 
+  React.createElement(Hello, { name: "Sergio" })
+);
+```
+
+Y la forma en que usamos `props.children` dentro de `Header` quedaría intacta. ¿Por qué es importante esto? En principio porque podemos pasar cualquier cantidad de elementos hijos por los que en vez de usar `children` como un array podemos simplemente pasar más y más argumentos a `createElement`.
+
+En segundo porque la idea es que nuestros componentes funcionen muy similar a HTML, usando `{ children }` terminaríamos con un HTML similar a esto:
+
+```html
+<Header children="<Hello name='Sergio' />" />
+```
+
+Mientras que usando `children` como tercer argumento sería más similar al uso normal en HTML.
+
+```html
+<Header>
+  <Hello name="Sergio" />
+</Header>
+```
+
+Básicamente acabamos de convertir `Header` de una etiqueta autoconclusiva como `<img />` a una etiqueta que posee inicio y cierre como lo es `<header>`.
+
+[Mañana veremos como dejar de usar React.createElement y escribir código similar a HTML directo en nuestro JS para facilitar la legibilidad de nuestros componentes.](/react/dia-10).
