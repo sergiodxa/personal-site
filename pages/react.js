@@ -3,12 +3,11 @@ import Link from "next/link";
 import { H1 } from "@sergiodxa/ui/lib/headings";
 import { A as Anchor, P } from "@sergiodxa/ui/lib/text";
 import { Code } from "@sergiodxa/ui/lib/code";
-import { OL, LI } from "@sergiodxa/ui/lib/list";
 import { blue } from "@sergiodxa/palette";
 import { Table, THead, TBody, TR, TD } from "@sergiodxa/ui/lib/table";
 
-import { LinkedHeader } from "../../components/header";
-import Layout from "../../layouts/main";
+import { LinkedHeader } from "../components/header";
+import Layout from "../layouts/main";
 
 const A = props => <Anchor color={blue} {...props} />
 
