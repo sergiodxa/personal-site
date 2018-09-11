@@ -1,11 +1,5 @@
 [
   {
-    "url": "https://leanpub.com/react-redux",
-    "title": "Desarrollo de Aplicaciones Web con React.js y Redux.js",
-    "comment": "A book I wrote about how to use React & Redux to create Web Applications",
-    "date": "2018-09-11T00:08:37.428Z"
-  },
-  {
     "url": "https://blog.marvelapp.com/body-text-small/",
     "title": "Your Body Text Is Too Small",
     "comment": "An excelent article on why you should use a bigger body text in order to provide a better readability experience.",
