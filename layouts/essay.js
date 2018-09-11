@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { MDXProvider } from "@mdx-js/tag";
 
 import { H1 } from "@sergiodxa/ui/lib/headings";
-import { A } from "@sergiodxa/ui/lib/text";
 import { blue, black } from "@sergiodxa/palette";
 import * as CustomTypes from "@sergiodxa/types";
 
