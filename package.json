@@ -39,7 +39,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@mdx-js/mdx": "0.15.0",
+    "@mdx-js/mdx": "0.15.2",
     "@mdx-js/tag": "0.15.0",
     "@sergiodxa/fs": "1.1.6",
     "@sergiodxa/icons": "1.0.1",
@@ -53,21 +53,21 @@
     "date-fns": "1.29.0",
     "globby": "8.0.1",
     "lodash.memoize": "4.1.2",
-    "next": "6.1.1",
+    "next": "6.1.2",
     "next-ga": "2.3.1",
     "next-nprogress": "1.1.0",
     "prop-types": "15.6.2",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
     "react-inspector": "2.3.0",
     "react-syntax-highlighter": "8.0.1",
     "remark-emoji": "2.0.1",
     "slugify": "1.3.1"
   },
   "devDependencies": {
-    "jest": "23.5.0",
+    "jest": "23.6.0",
     "jest-puppeteer": "3.3.1",
-    "puppeteer": "1.7.0",
+    "puppeteer": "1.8.0",
     "serve": "10.0.0"
   },
   "jest": {

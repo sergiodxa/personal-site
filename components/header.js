@@ -5,7 +5,6 @@ import classnames from "classnames/dedupe";
 import { dark, light } from "@sergiodxa/palette";
 
 import { H1, H2, H3 } from "@sergiodxa/ui/lib/headings";
-import { A } from "@sergiodxa/ui/lib/text";
 
 function Header({ centered, sticky, secondary }) {
   return (
@@ -18,18 +17,7 @@ function Header({ centered, sticky, secondary }) {
   
       {centered && (
         <H2>
-          Software Engineer at{" "}
-          <strong>
-            <A
-              title="▲ ZEIT"
-              href="https://zeit.co"
-              target="_blank"
-              rel="noopener"
-              color={dark}
-            >
-              ▲ ZEIT
-            </A>
-          </strong>
+          Software Engineer
         </H2>
       )}
   

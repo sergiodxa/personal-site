@@ -1,4 +1,3 @@
-const { parse } = require("url");
 const links = require("../../data/links.json");
 
 // constants

@@ -20,9 +20,8 @@ function AboutPage() {
         <section id="bio" className="h-card">
           <article>
             <p className="p-note">
-              I'm <strong className="p-name">Sergio Xalambrí</strong>,{" "}
-              <em className="p-job-title">Software Engineer</em> currently
-              working at <strong className="p-org h-card">▲ZEIT</strong>
+              I'm <strong className="p-name">Sergio Xalambrí</strong> and I'm{" "}
+              <em className="p-job-title">Software Engineer</em>
             </p>
           </article>
         </section>
