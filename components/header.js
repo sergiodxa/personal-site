@@ -10,17 +10,15 @@ function Header({ centered, sticky, secondary }) {
   return (
     <header className={classnames("h-card", { centered, sticky })}>
       {!secondary ? (
-        <H1>Sergio Xalambrí</H1>
+        <H1><strong>Sergio Xalambrí</strong></H1>
       ) : (
         <H3 className="secondary">Sergio Xalambrí</H3>
       )}
-  
+
       {centered && (
-        <H2>
-          Software Engineer
-        </H2>
+        <H2>Software Engineer & Technical Writer</H2>
       )}
-  
+
       <style jsx>{`
         header {
           display: flex;
