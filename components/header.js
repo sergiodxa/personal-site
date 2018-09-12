@@ -1,26 +1,18 @@
 import Link from "next/link";
-import PropTypes from "prop-types";
-import classnames from "classnames/dedupe";
 
 import { dark, light } from "@sergiodxa/palette";
 
-import { H1, H2, H3 } from "@sergiodxa/ui/lib/headings";
+import { H3 } from "@sergiodxa/ui/lib/headings";
 
-function Header({ centered, sticky, secondary }) {
+function Header() {
   return (
-    <header className={classnames("h-card", { centered, sticky })}>
-      {!secondary ? (
-        <H1><strong>Sergio Xalambrí</strong></H1>
-      ) : (
-        <H3 className="secondary">Sergio Xalambrí</H3>
-      )}
-
-      {centered && (
-        <H2>Software Engineer & Technical Writer</H2>
-      )}
-
+    <header className="h-card">
+      <H3 className="secondary">Sergio Xalambrí</H3>
       <style jsx>{`
         header {
+          background: ${light};
+          top: 0;
+          z-index: 2;
           display: flex;
           text-align: center;
           padding: 1em;
@@ -28,47 +20,12 @@ function Header({ centered, sticky, secondary }) {
           margin: 0 1em;
         }
   
-        header:not(.centered) {
-          background: ${light};
-          top: 0;
-          z-index: 2;
-        }
-  
-        header:not(.centered).sticky {
-          position: -webkit-sticky;
-          position: sticky;
-        }
-  
-        .centered {
-          flex-direction: column;
-          justify-content: space-between;
-          position: fixed;
-          top: 50%;
-          left: 0;
-          right: 0;
-          transform: translateY(-50%);
-          padding: 0;
-        }
-  
-        .centered :global(h1) {
-          font-size: 2em;
-        }
-  
         @media (max-width: 720px) {
-          header:not(.centered) {
+          header {
             display: block;
           }
-          header:not(.centered) :global(h1) {
+          header :global(h1) {
             width: 100%;
-          }
-        }
-  
-        @media (min-width: 720px) {
-          h2:not(.secondary) {
-            font-size: 2.5em;
-          }
-          .centered :global(h1) {
-            font-size: 2.5em;
           }
         }
       `}</style>
@@ -76,22 +33,10 @@ function Header({ centered, sticky, secondary }) {
   );
 }
 
-Header.propTypes = {
-  centered: PropTypes.bool,
-  sticky: PropTypes.bool,
-  secondary: PropTypes.bool
-};
-
-Header.defaultProps = {
-  centered: false,
-  sticky: false,
-  secondary: false
-};
-
-export const LinkedHeader = ({ href = "/", sticky = true }) => (
+export const LinkedHeader = ({ href = "/" }) => (
   <Link href={href} prefetch>
     <a title="Sergio Xalambrí" rel="home">
-      <Header sticky={sticky} secondary />
+      <Header />
       <style jsx>{`
         a {
           color: ${dark};
