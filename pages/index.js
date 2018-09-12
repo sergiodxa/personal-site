@@ -90,16 +90,6 @@ function AboutPage() {
             </li>
             <li>
               <a
-                href="https://sdx.im/steam"
-                rel="me"
-                title="Steam"
-                className="u-url"
-              >
-                <Icon name="Steam" />
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://sdx.im/yt"
                 rel="me"
                 title="YouTube"
@@ -116,16 +106,6 @@ function AboutPage() {
                 className="u-url"
               >
                 <Icon name="Meetup" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://sdx.im/codepen"
-                rel="me"
-                title="Codepen"
-                className="u-url"
-              >
-                <Icon name="codepen" />
               </a>
             </li>
             <li>
@@ -151,11 +131,6 @@ function AboutPage() {
                 className="u-email"
               >
                 <Icon name="Email" />
-              </a>
-            </li>
-            <li>
-              <a href="/static/gpg.asc" rel="me" title="GPG" className="u-gpg">
-                GPG
               </a>
             </li>
           </ul>
