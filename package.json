@@ -68,7 +68,7 @@
     "jest": "23.6.0",
     "jest-puppeteer": "3.3.1",
     "puppeteer": "1.8.0",
-    "serve": "10.0.0"
+    "serve": "10.0.1"
   },
   "jest": {
     "notify": true,
