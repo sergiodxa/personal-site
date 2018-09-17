@@ -15,7 +15,8 @@
     "start:static": "serve -p 3000",
     "deploy": "now",
     "postdeploy": "npm run alias",
-    "test": "jest"
+    "test": "jest",
+    "check:mean:words": "node scripts/check-mean-words.js"
   },
   "repository": {
     "type": "git",
