@@ -7,13 +7,6 @@ function Navigation() {
     <nav>
       <ul>
         <li>
-          <Link href="/about" prefetch>
-            <A href="/about" title="About Sergio Xalambrí" color={primary}>
-              About me
-            </A>
-          </Link>
-        </li>
-        <li>
           <Link href="/essays" prefetch>
             <A href="/essays" title="Essays and Articles" color={primary}>
               Essays

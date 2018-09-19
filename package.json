@@ -15,7 +15,8 @@
     "start:static": "serve -p 3000",
     "deploy": "now",
     "postdeploy": "npm run alias",
-    "test": "jest"
+    "test": "jest",
+    "check:mean:words": "node scripts/check-mean-words.js"
   },
   "repository": {
     "type": "git",
@@ -57,8 +58,8 @@
     "next-ga": "2.3.1",
     "next-nprogress": "1.1.0",
     "prop-types": "15.6.2",
-    "react": "16.5.0",
-    "react-dom": "16.5.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
     "react-inspector": "2.3.0",
     "react-syntax-highlighter": "8.0.1",
     "remark-emoji": "2.0.1",
@@ -68,7 +69,7 @@
     "jest": "23.6.0",
     "jest-puppeteer": "3.3.1",
     "puppeteer": "1.8.0",
-    "serve": "10.0.0"
+    "serve": "10.0.1"
   },
   "jest": {
     "notify": true,

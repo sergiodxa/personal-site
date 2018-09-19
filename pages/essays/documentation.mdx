@@ -23,7 +23,7 @@ And after months working on it I want to share some thinks I learned.
 
 ## Document Your Code
 
-This is really important, you need to document your code as completely as possible. I'm not saying you need to add a comment for each line of code but if you're doing an HTTP microservice just add a README to your repository with a simple description of each endpoint, what it receives as request and how it looks the response.
+This is really important, you need to document your code as completely as possible. I'm not saying you need to add a comment for each line of code but if you're doing an HTTP microservice add a README to your repository with a simple description of each endpoint, what it receives as request and how it looks the response.
 
 ```markdown
 ## GET /teams/:id/members
@@ -48,7 +48,7 @@ Nobody likes errors, but we all have them. No one can't expect the users of an A
 
 This could make a big difference because if you do it you're giving the user the power to easily search any error and get the solution, that means less headaches for the user and less support work for the company.
 
-This also means you need to define a standard way to send errors to the user, you can't just send status code for some errors and a JSON for others. It **must** be standardized in order to simply explain how to read an error.
+This also means you need to define a standard way to send errors to the user, you can't only send status code for some errors and a JSON for others. It **must** be standardized in order to explain how to read an error.
 
 ### [Addressable Errors](https://rauchg.com/2016/addressable-errors)
 
@@ -56,17 +56,17 @@ In a single error message, doesn't matter the format, there's always a limit on 
 
 Help you and your users and attach a single unique URL to each error and explain as much as possible what the error means, the reasons to see it and possible solution.
 
-Bonus point, make it open source, that way people can just improve it overtime, if you ever wrote PHP you may see his docs are full of useful comments from other developers which most of the time help you understand some feature faster.
+Bonus point, make it open source, that way people could improve it overtime, if you ever wrote PHP you may see his docs are full of useful comments from other developers which most of the time help you understand some feature faster.
 
 ## Try, Everything
 
-You may be tempted to just write the docs without testing it, in most cases it could just work and everyone is happy, in other cases it will not work, you may have a typo on your docs, the README could be outdated or maybe you just misunderstood the code.
+You may be tempted to write the docs without testing it, in most cases it could work and everyone will be happy, in other cases it will not work, you may have a typo on your docs, the README could be outdated or maybe you misunderstood the code.
 
-That's why you need a way to try every possible case for the API, in an HTTP based API you can just send a request to each endpoint and check the response.
+That's why you need a way to try every possible case for the API, in an HTTP based API you can send a request to each endpoint and check the response.
 
 ## Let the User Try It
 
-The same way you need to try every piece of documentation your users will want to. Give them an easy way to do it. Here you have many options to choose from.
+The same way you need to try every piece of documentation your users will want to. Give them an way to do it. Here you have many options to choose from.
 
 ### REPL
 
@@ -76,13 +76,13 @@ This editor let you write the code of a `package.json` and `index.js` file, see 
 
 ### Copy-Past Ready Code
 
-Another option is to write ready to use code the user could just copy-paste it. This way the user can just go to the terminal, code editor or IDE and run the example code to check the results and if it works.
+Another option is to write ready to use code the user could copy-paste it. This way the user can go to the terminal, code editor or IDE and run the example code to check the results and if it works.
 
 In our case [we wrote an internal component](https://github.com/zeit/docs/blob/master/components/api/request.js) to send the HTTP request data and generate a cURL code, but that same component could generate a [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) code for JS or any other possible code and let the user define his favourite language of choice to see the example.
 
 ## Write as Much as You Can and as Less as Possible
 
-The API documentation should be as completd as possible and that mean you need to write a lot of example codes and text. But at the same time there's not a single person who want to read a book just to understand a single API endpoint.
+The API documentation should be as completd as possible and that mean you need to write a lot of example codes and text. But at the same time there's not a single person who want to read a book to understand a single API endpoint.
 
 This led us to try to write as less as possible and make the documentation super simple. The simpler and completed the docs most possible the users will understand the API and use it.
 
@@ -96,13 +96,13 @@ Yes, text organization is part of a good design and could be the difference betw
 
 ## Get a Second Opinion
 
-Is easy to just write the documentation and ship it, but must possible something you can think is easy to read and understand could be actually harder. It's always (not just for documentation) a good idea to get a second opinion.
+Is could be easy to write the documentation and ship it, but must possible something you can think is easy to read and understand could be actually harder. It's always (not only for documentation) a good idea to get a second opinion.
 
-It could be a co-worker not really working on the API docs or an external (but trusty) person who can just read it and give a valuable opinion and feedback. Don't just show it to everyone, pick the people you think will help you improve the documentation.
+It could be a co-worker not really working on the API docs or an external (but trusty) person who can read it and give a valuable opinion and feedback. Don't show it to everyone, pick the people you think will help you improve the documentation.
 
 ## Give Hints and Tips
 
-A simple and bored docs just tell you how each endpoints works. A good documentation give you hints and tips on how to use it better. This could be really simple like a note or it could also explain common use cases.
+A simple and bored docs tell you how each endpoints works. A good documentation give you hints and tips on how to use it better. This could be really simple like a note or it could also explain common use cases.
 
 This way the user will not only learn how to use your API but also what's the best and recommended way to use it. Similar to why [errors are important](#errors-are-important) this hints and tips could become on less support work required for the users of your API because you're already teaching them how to use it.
 
