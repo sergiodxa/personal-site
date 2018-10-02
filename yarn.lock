@@ -641,9 +641,9 @@
   dependencies:
     "@mdx-js/tag" "^0.15.0"
 
-"@mdx-js/mdx@0.15.4":
-  version "0.15.4"
-  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.4.tgz#fb1799158e63eacd0dbdecb649b13cea55377ee8"
+"@mdx-js/mdx@0.15.5":
+  version "0.15.5"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.5.tgz#a3821a1e0e460ee993437ef3f922482fb67c31d0"
   dependencies:
     change-case "^3.0.2"
     mdast-util-to-hast "^3.0.0"
