@@ -5386,9 +5386,9 @@ react-inspector@2.3.0:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
-react-syntax-highlighter@8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-8.0.1.tgz#88f7833e3a2d3c718799f2e7776266486c82c566"
+react-syntax-highlighter@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-9.0.0.tgz#746717ce7f98171a833344e47a5191da6e689167"
   dependencies:
     babel-runtime "^6.18.0"
     highlight.js "~9.12.0"
