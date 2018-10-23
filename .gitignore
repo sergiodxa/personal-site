@@ -6,3 +6,4 @@
 *.log
 /out
 now-secrets.json
+.DS_Store
