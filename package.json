@@ -58,8 +58,8 @@
     "next-ga": "2.3.1",
     "next-nprogress": "1.1.0",
     "prop-types": "15.6.2",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
+    "react": "16.6.0",
+    "react-dom": "16.6.0",
     "react-inspector": "2.3.0",
     "remark-emoji": "2.0.2",
     "slugify": "1.3.1"
