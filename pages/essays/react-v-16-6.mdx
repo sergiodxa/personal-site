@@ -52,14 +52,13 @@ En este caso `React.memo` solo va a dejar que `Logo` se vuelva a renderizar si e
 
 ## `React.lazy`: Code Split con Suspense
 
-Esta nueva función que se incorpora al core de React permite hacer code split y lazy load de componente de React. Algo que hasta ahora era posible usando librerías como `react-loadable` o `next/dynamic` (de Next.js).
+Esta nueva función, que se incorpora al core de React, permite hacer code split y lazy load de componente de React. Algo que hasta ahora era posible usando librerías como `react-loadable` o `next/dynamic` (de Next.js).
 
-Esta función es simple de usar, recibe como argumento una función asíncrona que devuelva como resultado final una promesa de importar un archivo que exporte un componente de React. Dentro de esta función es posible agregar más lógica.
+Este función es simple de usar, recibe como único argumento una función asíncrona que devuelve una promesa de importar un componente de React. Dentro de esta función es posible agregar más lógica.
 
 ```js
 import { lazy } from "react";
-
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+import sleep from "sleep";
 
 const Logo = lazy(async () => {
   await sleep(1000);
@@ -69,7 +68,7 @@ const Logo = lazy(async () => {
 
 En este caso el componente `Logo` que devuelve `lazy` va a esperar un segundo y recién entonces hacer `import` de nuestro componente `./logo.js`. El `sleep` en este caso nos permite finjir una carga lenta para probar que efectivamente el componente esta siendo cargando de forma asíncrona.
 
-El `import` funciona gracias al module bundler que uses, ya sea webpack, Parcel, Rollup o cualquier otro, estos van a crear un split point donde se use esta función y van a encargarse de que se cargue asíncronamente el módulo `./logo.js` cuando se ejecute la función.
+El `import` funciona gracias al module bundler que uses, ya sea webpack, Parcel, Rollup o cualquier otro, estos van a crear un split point donde se use esta función y van a encargarse de que se cargue asíncronamente el módulo `./logo.js` cuando se ejecute dicha función.
 
 > _Nota_: Este método **todavía** no funciona en el servidor, en futuras versiones va a estar disponible. Esto significa que no es posible usarlo con Next.js o SSR en general.
 
@@ -101,11 +100,11 @@ class App extends Component {
 
 Ahora cuando `App` sea renderizado este va a pasar su estado a `LazyLogo` y por consiguiente al componente de `Logo`, mientras el logo este siendo importado `Suspense` va a renderizar el componente `Placeholder` que pasamos con el prop `fallback`, este componente puede ser tanto algo genérico como un spinner o algo único para nuestro componente lazy.
 
-Por último el prop `maxDuration` nos permite indicar que tanto debe esperar `Suspense` antes de renderizar el fallback, esto nos sirve para que si un componente carga lo suficientemente rápido no rendericemos el fallback y evitemos que este se vea durante menos de un segundo.
+Por último, el prop `maxDuration` nos permite indicar cuanto debe esperar `Suspense` antes de renderizar el fallback, esto nos sirve para que si un componente carga lo suficientemente rápido no rendericemos el fallback y evitemos que este se vea durante menos de un segundo.
 
 > _Nota_: el prop `maxDuration` solo funciona cuando el modo concurrente, antes llamado async, de React está habilitado, actualmente este modo no es estable por lo que `maxDuration` es simplemente ignorado.
 
-## `static contextType`: Usando Contexto más fácil
+## `static contextType`: Accediendo al contexto más fácil
 
 Con React 16.3 se introdujo el API estable para usar contexto, usando `React.createContext`.
 
@@ -114,9 +113,9 @@ import { createContext } from "react";
 export default createContext();
 ```
 
-Este API, aunque práctica, solo permite usar el contexto en el método render de un componente. Lo que en componentes que son funciones no causa problemas, pero en clases que extienden `Component` o `PureComponent` impide su en uso del ciclo de vida.
+Esta API, aunque práctica, solo permite usar el contexto en el método render de un componente. Lo que en componentes que son funciones no causa problemas, pero en clases que extienden `Component` o `PureComponent` impide su uso en el ciclo de vida.
 
-Desde ahora hay otra forma de usar el contexto usando `static propTypes` en una clase.
+Desde ahora hay otra forma de usar el contexto mediante `static propTypes` en una clase.
 
 ```js
 import { Component } from "react";
@@ -146,7 +145,9 @@ class MyComponent extends React.Component {
 export default MyComponent;
 ```
 
-Como vemos con pasar el contexto que devuelve `React.createContext` es suficiente para empezar a usarlo en cualquier parte del ciclo de vida de un componente.
+Como vemos, con pasar el contexto que devuelve `React.createContext` es suficiente para empezar a usarlo en cualquier parte del ciclo de vida de un componente.
+
+> _Nota_: Usando este método solo es posible suscribirse a un contexto a la vez, para usar varios contextos se debería envolver a nuestro componente de clase en una función que use el API actual para pasar el contexto como prop.
 
 ## `static getDerivedStateFromError()`: Reaccionando a los errores antes del render
 
