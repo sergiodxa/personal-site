@@ -482,9 +482,8 @@
   },
   {
     "id": 1,
-    "title": "Javascript orientado a objetos",
-    "link":
-      "http://www.cristalab.com/tutoriales/javascript-orientado-a-objetos-c111760l/",
+    "title": "JavaScript orientado a objetos",
+    "link": "/essays/cristalab/javascript-orientado-a-objetos",
     "date": "2013-08-23T00:00:00Z",
     "deprecated": true
   }
