@@ -467,3 +467,23 @@ function Counter() {
 
 Con esto extrajimos la lógica de nuestro componente en un hook personalizado el cual a su vez está compuesto de otros dos hooks personalizados.
 
+## Aún. Más. Hooks.
+
+Hay más hooks a parte de los mencionados arriba que son más secundarios.
+
+### `useContext`
+
+Este hook nos permite obtener un valor por contexto, para usarlo hay que pasar un contexto creado con `React.createContext`.
+
+```js
+import React, { useContext } from "react";
+import context from "./context";
+
+function Counter() {
+  const count = useContext(context);
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
