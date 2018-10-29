@@ -567,3 +567,34 @@ function Counter({ initialCount }) {
 
 Con eso cuando se inicie el estado su count va a ser igual a initialCount.
 
+### `useCallback`
+
+Este método nos permite obtener una versión memoizada de un callback que solo va a ser regenerada si ciertos argumentos indicados al hook cambian. Esto es útil cuando necesitamos pasar una función a un componente hijo para que este actualice el estado de su padre, de esta forma el componente no va a tener problemas de doble renders.
+
+```js
+import React, { useCallback, useState, memo } from "react";
+
+const Button = memo(({ onClick, children }) => {
+  return <button onClick={onClick}>{children}</button>;
+});
+
+function Counter() {
+  const [count, setCount] = useState("");
+  
+  const handleClick = useCallback(event => {
+    setCount(count + 1);
+  }, [setCount]);
+  
+  return (
+    <>
+      Clicks: {count}
+      <Button onClick={handleClick}>Click me!</Button>
+    </>
+  );
+}
+```
+
+Sin usar `useCallback` cada vez que se vuelva a renderizar `Counter` se generaría una nueva función `handleClick` lo que forzaría que se vuelva a renderizar `Button` innecesariamente, gracias a este hook solo se va a generar un nuevo `handleClick` cuando `setCount` cambie, lo que no debería pasar nunca. 
+
+Así el HOC `memo` que agregamos a `Button` puede correctamente validar si `onClick` o `children` cambian.
+
