@@ -45,11 +45,9 @@ function Navigation() {
           </Link>
         </li>
         <li>
-          <Link href="/slides" prefetch>
-            <A href="/slides" title="Talks I did" color={primary}>
-              Talks
-            </A>
-          </Link>
+          <A href="/slides" title="Talks I did" color={primary}>
+            Talks
+          </A>
         </li>
       </ul>
 
