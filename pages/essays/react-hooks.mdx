@@ -333,3 +333,137 @@ No se pueden usar hooks en funciones regulares, solo dentro de una función de R
 - Componentes de React
 - Hooks personalizados
 
+## Creando un hook personalizado
+
+Recién dijimos que es posible ejecutar un hook dentro de otro hook personalizado. Vamos a ver como extraer la lógica de nuestros hooks anteriores usando hooks personalizados.
+
+```js
+useEffect(() => {
+  document.title = `Clicks: ${count}`;
+}, [count]);
+```
+
+Vamos a empezar con este efecto, para esto tenemos creamos una función llamada `useTitle` y dentro ejecutar nuestro hook, recibiendo `message` como argumento.
+
+> _Nota_: Todos los hooks deben empezar con `use` y algo más.
+
+```js
+import { useEffect } from "react";
+
+function useTitle(message) {
+  useEffect(() => {
+  document.title = message
+}, [message]);
+}
+```
+
+Ahora podemos cambiar nuestro componente para usar nuestro nuevo hook.
+
+```js
+import React, { useState, useEffect } from "react";
+import useTitle from "./use-title";
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  // listen clicks
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
+  // update title
+  useTitle(`Clicks: ${count}`);
+
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Veamos ahora como extraer nuestro otro efecto.
+
+```js
+import { useEffect } from "react";
+
+function useListener(event, handler) {
+  useEffect(() => {
+    window.addEventListener(event, handler);
+    return () => window.removeEventListener(event, handler);
+  }, []);
+}
+```
+
+Ahora podemos actualizar nuestro componente para usar este segundo hook personalizado.
+
+```js
+import React, { useState } from "react";
+import useTitle from "./use-title";
+import useListener from "./use-listener";
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  // listen clicks
+  useListener("click", handleClick);
+
+  // update title
+  useTitle(`Clicks: ${count}`);
+
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Como vemos a `useListener` le pasamos tanto el evento como el handler, esto es para poder usar nuestro hook para varios tipos de eventos globales, no solo click, y para que la función que usemos para manejar los eventos tengo dentro de su scope `setCount` y `count` y ser capaz de actualizar el estado.
+
+Podríamos llevar esto un paso más allá y crear otro hook que envuelva a nuestro dos hooks personalizados y a useState.
+
+```js
+import { useState } from "react";
+import useListener from "./use-listener";
+import useTitle from "./use-title";
+
+function useCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  // listen clicks
+  useListener("click", handleClick);
+
+  // update title
+  useTitle(`Clicks: ${count}`);
+
+  // return current counter
+  return count;
+}
+```
+
+Y para usarlo.
+
+```js
+import React from "react";
+import useCounter from "./use-counter";
+
+function Counter() {
+  const count = useCounter();
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Con esto extrajimos la lógica de nuestro componente en un hook personalizado el cual a su vez está compuesto de otros dos hooks personalizados.
+
