@@ -598,3 +598,25 @@ Sin usar `useCallback` cada vez que se vuelva a renderizar `Counter` se generar�
 
 Así el HOC `memo` que agregamos a `Button` puede correctamente validar si `onClick` o `children` cambian.
 
+### `useMemo`
+
+Este hook nos permite memoizar un valor generado como resultado de una función, ideal para cuando necesitamos ejecutar una función pesada y necesitamos solo volver a ejecutarla si ciertos valores cambiaron.
+
+Digamos que tenemos un string, muy grande, que nos llega como `props` y necesitamos convertirlo en un objeto usando `JSON.parse`, dependiendo del tamaño del JSON esto puede tardar por lo que vamos a memoizarlo.
+
+```js
+import React, { useMemo } from "react";
+import Item from "./item";
+
+function List({ raw }) {
+  const data = useMemo(() => JSON.parse(raw), [raw]);
+  return (
+    <>
+      {data.map(datum => <Item key={datum.id} {...datum} />)}
+    </>
+  )
+}
+```
+
+Con esto solo volveríamos a parsear `raw` cuando este cambia. De la misma forma se podrían optimizar para muchos otros casos, aunque esto es especialmente útil cuando tenemos uno de muchos props que necesita usarse para algún cálculo pesado mientras que el resto no, de esta forma evitamos el cálculo si los demás props no cambiaron.
+
