@@ -112,3 +112,184 @@ function handleClick() {
 
 > _Nota_: El órden en el que se ejecutan los `useState` es importante, si este cambiara React podría pasar el valor de count a value y viceversa. Es _muy raro_ que cambie el orden, pero es importante tenerlo en cuenta por si pasa.
 
+## Usando hooks: `useEffect`
+
+Ya vimos como reemplazar el uso del estado con hooks, ahora veamos como reemplazar el uso de los métodos del ciclo de vida con estos. Para eso tenemos un hooks llamado `useEffect` que nos permite realizar efectos o más específicamente efectos secundarios.
+
+Este hook se ejecuta **después** de cada render del componente lo que lo hace similar a `componentDidMount` y `componentDidUpdate`. Veamos un ejemplo con clases y con el hook.
+
+```js
+import React, { Component } from "react";
+
+class Count extends Component {
+  state = {
+    count: 0,
+  }
+  componentDidMount() {
+    document.title = `Clicks: ${this.state.count}`;
+  }
+  componentDidUpdate() {
+    document.title = `Clicks: ${this.state.count}`;
+  }
+  handleClick = () => {
+    this.setState(state => ({ count: state.count + 1 }));
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>Clicks: {this.state.count};
+    )
+  }
+}
+```
+
+Nuestro componente `Count` cuenta los clicks y actualiza el título de la página para indicar la cantidad de clicks realizados. Veamos ahora como hacerlo con hooks.
+
+```js
+import React, { useState, useEffect } from "react";
+
+function Count() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Clicks: ${count}`;
+  });
+
+  return (
+    <button onClick={() => setCount(state.count + 1)}>Clicks: {count};
+  );
+}
+```
+
+Como vemos `useEffect` recibe una función y la ejecuta después de cada render lo que lo vuelve un reemplazo no solo de `componentDidMount` sino también de `componentDidUpdate`. Como extra las funciones que se ejecutan en `useEffect` no impiden que el navegador actualize la pantalla por lo que proveen un mejor rendimiento.
+
+### Limpieza de efectos
+
+En algunos casos es posible que necesitemos hacer una limpieza al desmontar el componente. Digamos que queremos escuchar todos los clicks de la página ahora en vez de un solo botón, para esto con clases usaríamos `componentDidMount` para agregar un event listener y `componentWillUnmount` para eliminarlo.
+
+```js
+import React, { Component } from "react";
+
+class ClickCounter extends Component {
+  state = {
+    count: 0
+  };
+
+  componentDidMount() {
+    window.addEventListener('click', this.handleClick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleClick);
+  }
+
+  handleClick = () => {
+    this.setState(state => ({ count: state.count + 1 }));
+  };
+
+  render() {
+    return (
+      <p>Clicks: {this.state.count}</p>
+    )
+  }
+}
+```
+
+Estos se puede lograr usando hooks. Veamos como.
+
+```js
+import React, { useState, useEffect } from "react";
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  });
+
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Movemos la función que actualiza nuestro estado por fuera de `useEffect` y realizamos el `addEventListener` dentro de esto. Adicionalmente devolvemos una función que ejecuta `removeEventListener`. React va a ejecutar esta función después de desmontar y antes de actualizar el componente por lo que entre cada render se va a eliminar el listener anterior y agregar uno nuevo, cuando no haya un nuevo render simplemente va a eliminar el último listener.
+
+Con esto podemos ejecutar código después del montado, después de una actualización y antes de desmontar.
+
+> _Nota_: La razón de que se ejecute `removeEventListener` antes del update es debido a que si nuestro efecto se basa en datos que llegan por `props` y estos cambian es necesario en `componentDidUpdate` volver a agregar nuestros listener. Esto se puede evitar como veremos más adelante.
+
+### Múltiples efectos
+
+En caso de que necesitemos realizar varios efectos dentro de un mismo componente es posible usar un solo `useEffect` para ejecutarlos a todos o lo que es mejor y recomendado usar este hooks una vez por cada efecto para tener una mejor separación de responsabilidades.
+
+```js
+import React, { useState, useEffect } from "react";
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  // listen clicks
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  });
+
+  // update title
+  useEffect(() => {
+    document.title = `Clicks: ${count}`;
+  });
+
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Con esto podemos mantener más separados los efectos según su uso.
+
+### Obviando efectos
+
+Antes dijimos que nuestros efectos se ejecutan y se limpian después de cada render. En caso de que no necesitemos que esto pase en `componentDidUpdate` teníamos acceso a los props y el estado anterior y nos permitía condicionar si se debería volver a agregar a realizar un efecto.
+
+Usando hooks esto es posible pasando un segundo argumento a `useEffect`.
+
+```js
+import React, { useState, useEffect } from "react";
+
+function ClickCounter() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  // listen clicks
+  useEffect(() => {
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
+  // update title
+  useEffect(() => {
+    document.title = `Clicks: ${count}`;
+  }, [count]);
+
+  return (
+    <p>Clicks: {count}</p>
+  );
+}
+```
+
+Agregando este segundo argumento `[count]` podemos indicar que si `count` o cualquier valor ya sea estado o props no cambia entonces el efecto no debe ejecutarse.
+
+En el caso de actualizar el título simplemente el título no se va a cambiar si la cantidad de clicks no cambian. En el caso de suscribirnos a los click de la ventana al pasar este array vacío se evitar eliminar y volver a agregar el listener de eventos en cada update, solo agregándose en el montado y eliminándose en el desmontado.
+
