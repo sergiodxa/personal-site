@@ -44,6 +44,13 @@ function Navigation() {
             </A>
           </Link>
         </li>
+        <li>
+          <Link href="/slides" prefetch>
+            <A href="/slides" title="Talks I did" color={primary}>
+              Talks
+            </A>
+          </Link>
+        </li>
       </ul>
 
       <style jsx>{`
