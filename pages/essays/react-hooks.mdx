@@ -293,3 +293,43 @@ Agregando este segundo argumento `[count]` podemos indicar que si `count` o cual
 
 En el caso de actualizar el título simplemente el título no se va a cambiar si la cantidad de clicks no cambian. En el caso de suscribirnos a los click de la ventana al pasar este array vacío se evitar eliminar y volver a agregar el listener de eventos en cada update, solo agregándose en el montado y eliminándose en el desmontado.
 
+## Reglas de los Hooks
+
+Para poder usar hooks hay ciertas reglas que se deben tener en cuenta. El equipo de React liberó un plugin de ESLint para detectar si alguna de estas reglas no se cumple.
+
+Lo pueden descargar como `eslint-plugin-react-hooks` usando yarn o npm y agregar a su configuración usando:
+
+```json
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error"
+  }
+}
+```
+
+### Solo usarlos en el nivel superior del componente
+
+Los hooks solo puede ser usados directo en el component y no dentro de ciclos, condiciones u otras funciones.
+
+```js
+function Component(props) {
+  if (props.condition) {
+    const [state, setState] = useState();
+  }
+}
+```
+
+El código de arriba es inválido ya que `useState` no puede ejecutarse en una condición. Si queremos ejecutar un hook como `useEffect` dentro de una condición debemos poner la condición dentro del hook.
+
+### Solo ejecutar hooks en funciones de React
+
+No se pueden usar hooks en funciones regulares, solo dentro de una función de React, estos son:
+
+- Componentes de React
+- Hooks personalizados
+
