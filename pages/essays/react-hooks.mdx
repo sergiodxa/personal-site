@@ -620,3 +620,28 @@ function List({ raw }) {
 
 Con esto solo volveríamos a parsear `raw` cuando este cambia. De la misma forma se podrían optimizar para muchos otros casos, aunque esto es especialmente útil cuando tenemos uno de muchos props que necesita usarse para algún cálculo pesado mientras que el resto no, de esta forma evitamos el cálculo si los demás props no cambiaron.
 
+### `useRef`
+
+Este hook nos devuelve un valor modificable cuya propiedad `.current` es igual al valor inicial que le pasamos al hook.
+
+Este `ref` nos permite tanto obtener elementos del DOM para usarlos luego como guardar cualquier valor que necesitemos mantener entre renders.
+
+```js
+import React, { useRef } from "react";
+
+function FocusInput() {
+  const $input = useRef(null);
+  const handleClick = () => {
+    $input.current.focus();
+  };
+  return (
+    <>
+      <input ref={$input} />
+      <button onClick={handleClick}>Focus</button>
+    </>
+  );
+}
+```
+
+Con esto `$input.current` va a ser igual al elemento del DOM de nuestro input y podemos usarlo para ejecutar métodos como `.focus()`.
+
