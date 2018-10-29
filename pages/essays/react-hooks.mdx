@@ -487,3 +487,83 @@ function Counter() {
 }
 ```
 
+### `useReducer`
+
+Este hook es similar a `useState` con la diferencia de que funciona similar a Redux, el primer argument es un reducer que recibe `state` y `action` y el segundo es el estado inicial.
+
+```js
+import React, { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case "increment": {
+      return { count: state.count + 1 };
+    }
+    case "decrement": {
+      return { count: state.count - 1 };
+    }
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'reset'})}>
+        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+    </>
+  );
+}
+```
+
+#### Dispatch inicial
+
+Este hook recibe un tercer argumento que es una acción que va a ser automaticamente despachada antes de iniciar el reducer, esto nos permite inicializar el estado con valores derivados de los props del componente.
+
+```js
+import React, { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case "reset": {
+      return { count: action.payload };
+    }
+    case "increment": {
+      return { count: state.count + 1 };
+    }
+    case "decrement": {
+      return { count: state.count - 1 };
+    }
+  }
+}
+
+function Counter({ initialCount }) {
+  const [state, dispatch] = useReducer(reducer, initialState, {
+    type: "reset",
+    payload: initialCount
+  });
+
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'reset'})}>
+        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+    </>
+  );
+}
+```
+
+Con eso cuando se inicie el estado su count va a ser igual a initialCount.
+
