@@ -26,3 +26,89 @@ Los hooks vienen con la idea de ser una solución para varios problemas al usar 
 
 Algo importante es que los Hooks son _**completamente opcionales**_ y no es necesario usarlos, se puede y se va a poder seguir usando y actualizando React sin problemas mientras se usan clases en vez de hooks.
 
+## Usando hooks: `useState`
+
+Veamos como usar un hooks, para esto vamos a comparar clases y hooks haciendo el mismo código, una componente que mantiene el estado de un input y lo actualiza cuando se escribe en el.
+
+```js
+import React, { Component } from "react";
+
+class Input extends Component {
+  state = {
+    value: this.props.defaultValue,
+  };
+
+  handleChange = event => {
+    this.setState({
+      value: event.target.value
+    });
+  }
+
+  render() {
+    const { value } = this.state;
+    return (
+      <input value={value} onChange={this.handleChange} />
+    );
+  }
+}
+```
+
+Así es como se vería nuestro componente. Ahora veamos como se haría usando Hooks.
+
+```js
+import React, { useState } from "react";
+
+function Input({ defaultValue }) {
+  const [value, setValue] = useState(defaultValue);
+  function handleChange(event) {
+    setValue(event.target.value);
+  }
+  return (
+    <input value={value} onChange={handleChange} />
+  );
+}
+```
+
+¿Cómo funciona? El hook `useState` nos permite pasar un valor por inicial a nuestro estado y nos devuelve un array, el primer elemento de dicho array es el valor actual y el segundo es la función para actualizar, como `this.setState`, este array lo descomponemos en `value` y `setValue`, el nombre puede ser el que quieras para ambos.
+
+> _Nota_: Se usa un array y no un objeto debido a que el objeto tendría nombres para sus propiedades haciendo más largo ponerles cualquier nombre al necesitar hacer `{ state: value, setState: setValue } = useState(defaultValue)`, especialmente al usar múltiples `useState`.
+
+Después creamos la función para manejar el evento `change` que usa `setValue` y devolvemos el input usando `value` y nuestro `handleChange`. Con esto React va a crear el estado de nuestro componente y actualizarlo cada vez que `handleChange` se ejecute, al actualizarse el estado se va a volver a renderizar `Input`.
+
+Exactamente igual que como funcionan las clases, pero sin el overhead de hacer `extend`, un método `render` y el uso de `this`, cosa que quizás para un desarrollador con experiencia en React sea fácil mas para un desarrollador que está aprendiendo React y capaz que hasta JavaScript puede ser más complicado.
+
+### Múltiples estados
+
+Ya vimos como funciona, que ocurre queremos usar un estado más complejo y con varias propiedades? Una opción es pasar un objeto como estado inicial y después encargarse de actualizar solo ciertas propiedades, de forma similar a como funciona `this.setState`.
+
+```js
+const [state, setState] = useState({ value: '', count: 0 });
+function handleChange(event) {
+  setState({
+    ...state,
+    value: event.target.value
+  });
+}
+function handleClick() {
+  setState({
+    ...state,
+    count: state.count + 1
+  });
+}
+```
+
+Y aunque esto funciona no es ideal, lo mejor en este caso es simplemente usar `useState` dos veces para tener dos estado.
+
+```js
+const [count, setCount] = useState(0);
+const [value, setValue] = useState('');
+function handleChange(event) {
+  setValue(event.target.value);
+}
+function handleClick() {
+  setCount(count + 1);
+}
+```
+
+> _Nota_: El órden en el que se ejecutan los `useState` es importante, si este cambiara React podría pasar el valor de count a value y viceversa. Es _muy raro_ que cambie el orden, pero es importante tenerlo en cuenta por si pasa.
+
