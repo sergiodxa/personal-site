@@ -1,0 +1,245 @@
+import withLayout from "../../../lib/with-layout.js";
+
+export const meta = {
+  title: "Usando ECMAScript 6/2015 con Babel",
+  slug: "medium/usando-ecmascript-6-2015-con-babel",
+  date: "2015-06-09T00:00:00Z",
+  description: "",
+  published: true,
+  lang: "es",
+  canonicalUrl: "https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636841",
+  tags: [
+  ]
+}
+
+export default withLayout("essay")(meta)
+
+ECMAScript 2015, comunmente conocido como ECMAScript 6 o ES6, es la nueva versión del lenguaje estandarizado ECMAScript del cual sale JavaScript. Esta nueva versión trae [una gran cantidad de mejoras](https://sergiodxa.com/es6/) al lenguaje que nos ayudan al momento programar nuestras aplicaciones web.
+
+Sin embargo ES6 todavía no tiene un gran soporte por los navegadores modernos, ni hablar de las versiones viejas de IE. Aunque esto esta de a poco mejorando y cada vez más características de ES6 son soportadas por los navegadores, e incluso Microsoft Edge va a tener soporte a gran parte de estas, todavía no es posible y hasta que los usuario actualicen sus navegadores va a pasar tiempo.
+
+Esto hace que parezca imposible usarlo actualmente, sin embargo para poder hacer esto existe una herramientas llamada Babel, este es lo que se conoce como un transpiler, un compilador de código a código, que en este caso nos permite programar usando todas estas mejoras de ES6 y luego generar un código en ECMAScript 5 (ES5) compatible con los navegadores actuales.
+
+> **Aviso**: Este artículo esta desactualizado, desde la versión 6 de Babel este se separo en múltiples módulos y es necesario configurar más cosas de las que explico acá.
+
+## Instalación y uso básico
+
+Para poder usar Babel es necesario tener instalado Node.js o io.js. Una vez que tengamos alguno de los dos instalado necesitamos descargar e instalar Babel usando NPM con el comando:
+
+```bash
+[sudo] npm i -g babel
+```
+
+Cuando termine de instalar Babel podemos empezar a usarlo usando los dos comandos que trae, el primero es el comando `babel`, este recibe el archivo escrito con ES6 y la ruta donde va a dejar el archivo generado en ES5.
+
+```bash
+babel source/app.js build/app.js
+```
+
+De esta forma babel va a leer el archivo app.js en la carpeta source y va a guardar el código generado en el archivo app.js en la carpeta build.
+
+El segundo comando que nos trae Babel es `babel-node`, este nos permite iniciar una aplicación en Node.js escrita en ES6. Para usarlo es simplemente pasarle el archivo de nuestra aplicación luego del comando.
+
+```bash
+babel-node app.js
+```
+
+## Usandolo con Browserify
+
+Estas formas que vimos de usarlo son las más básicas, usando todo desde la consola. Sin embargo Babel también se puede usar en combinación con otras herramientas.
+
+Una de estas posibles herramientas es [Browserify](http://browserify.org/), este nos permite escribír nuestro código usando require(‘modulo’) para tener módulos como si fuese Node.js y luego generar un único archivo final que enviamos al navegador y funciona sin problemas.
+
+Browserify además nos permite incluir diversos plugins, uno de esto es [Babelify](https://github.com/babel/babelify), este nos permite escribír nuestro código usando ES6 e incluso usando el sistema de módulos de ES6 y que Browserify lo convierta a ES5 y genere el archivo final.
+
+Para poder usarlos hay que primero instalarlos, para esto usamos el comando:
+
+```bash
+npm i -D browserify babelify
+```
+
+Esto nos va a descargar e instalar Browserify y Babelify como dependencias de desarrollo del proyecto en el que vayamos a usarlo, luego podemos usarlo con el comando:
+
+```bash
+browserify -t babelify -i source/app.js -o build/app.js
+```
+
+De esta forma le decimos a Browserify que use Babelify para convertír el código de ES6 a ES5, que lea el archivo source/app.js y genere build/app.js.
+
+## Automatizándolo con Gulp
+
+Además de poder usar Babel con Browserify también nos es posible usarlo con [Gulp](http://gulpjs.com/). Esto nos permite agregar Babel como parte de nuestras tareas de Gulp para generar nuestro archivo JS final. La forma más simple sería usar el plugin de Gulp llamado gulp-babel, para esto lo bajamos con NPM con el comando:
+
+```bash
+npm i -D gulp gulp-babel
+```
+
+Luego en nuestro archivo de tareas gulpfile.js creamos una tarea para convertír de ES6 a ES5 usando:
+
+```js
+var gulp  = require('gulp');
+var babel = require('gulp-babel');
+gulp.task('build:js', function () {
+  gulp.src('source/app.js')
+    .pipe(babel())
+    .pipe(gulp.dest('build/');
+});
+```
+
+Con esta tarea podemos automatizar usando Gulp el proceso de generar nuestro código en ES5 con Babel. El único problema es que no tenemos acceso al sistema de módulos de ES6 ya que no estamos incorporando Browserify.
+
+Para solucionar esto podemos agregar Browserify a nuestra tarea de Gulp, para esto necesitamos descargar tanto Browserify como Babelify como hicimos antes y además hay que descargar e instalar los módulo [vinyl-buffer](https://www.npmjs.com/package/vinyl-buffer) y [vinyl-source-stream](https://www.npmjs.com/package/vinyl-source-stream) usando NPM.
+
+```bash
+npm i -D gulp browserify babelify vinyl-buffer vinyl-source-stream
+```
+
+Luego en nuestro archivo gulpfile.js necesitamos cargar todos estos archivo y crear una tarea para usarlos.
+
+```js
+var babelify   = require('babelify');
+var browserify = require('browserify');
+var buffer     = require('vinyl-buffer');
+var source     = require('vinyl-source-stream');
+gulp.task('build:js', function () {
+  return browserify({
+    entries: ['source/app.js'],
+    transform: [babelify]
+  }).bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('build/'));
+});
+```
+
+Con esto ya tenemos nuestra tarea de Gulp para usar Browserify con Babel para generar nuestro archivo final de JS, si quisieramos agregar algún plugin de Gulp al proceso tendríamos que hacer luego de la línea donde ejecutamos buffer() y antes de gulp.dest().
+
+## Usando ECMAScript 7/2016 con Babel
+
+Aunque ES6 todavía no esta totalmente soportado por los navegadores ya esta en desarrollo la siguiente versión del estandar desde el año pasado. Esta nueva versión, que incluso [Google Chrome soporta una de sus nuevas características](http://www.html5rocks.com/en/tutorials/es7/observe/), va a incorporar varias nuevas características y algunas de estas son soportadas de forma experimental por Babel.
+
+Estas características experimentales están desactivadas por defecto, pero es posible activarlas agregando un parámetro llamado optional al momento de ejecutar Babel e indicarle que características soportar.
+
+Si suponemos que queremos dar soporte a [Async/Await](https://github.com/lukehoban/ecmascript-asyncawait#async-functions-for--ecmascript) simplemente habría que ejecutar Babel con el comando:
+
+```bash
+babel --optional runtime es7.asyncFunctions source/app.js build/app.js
+```
+
+Ó si queremos ejecutar una aplicación en Node.js con el comando:
+
+```bash
+babel-node --optional runtime es7.asyncFunctions app.js
+```
+
+De esta forma ahora podemos usar Async/Await de ES7 en nuestro código y que Babel nos genere el código en ES5 para mandar a los navegadores o para iniciar nuestra aplicación en Node.js
+
+Vemos además en ambos comandos que agregamos algo llamado runtime, este es un transform de Babel que nos sirve para usar algunas opciones experimentales, para poder usarlo a hay que descargarlo en nuestro proyecto usando NPM:
+
+```bash
+npm i -D babel-runtime
+```
+
+Tenemos otra forma de activar ES7 y es con el comando stage, por defecto este comando toma el valor 2, pero si lo reducimos a 1 vamos a habilitar Async/Await, [decorators](https://github.com/wycats/javascript-decorators), [export extensions](https://github.com/leebyron/ecmascript-more-export-from), [Reast/Spread](https://github.com/sebmarkbage/ecmascript-rest-spread) y [trailing commas](https://github.com/jeffmo/es-trailing-function-commas), si lo reducimos a 0 vamos a habilitar también [comprehensions](https://babeljs.io/docs/learn-es2015/#comprehensions), [class props](https://gist.github.com/jeffmo/054df782c05639da2adb) y [Bind Syntax](https://github.com/zenparsing/es-function-bind).
+
+```bash
+babel --stage 0 --optional runtime source/app.js build/app.js
+babel --stage 1 --optional runtime source/app.js build/app.js
+node-babel --stage 0 --optional runtime app.js
+node-babel --stage 1 --optional runtime app.js
+```
+
+## Usandolo con nuestra tarea de Gulp
+
+Sin embargo antes habíamos visto como usar Babel con Browserify y Gulp. Si queremos seguír usando Babel de esta forma y usar características de ES7 también es posible, para esto hay que cambiar una línea de nuestra tarea de Gulp.
+
+```js
+gulp.task('build:js', function () {
+  return browserify({
+    entries: ['source/app.js'],
+    transform: [babelify.configure({
+      optional: ['runtime', 'es7.asyncFunctions']
+    })]
+  }).bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('build/'));
+});
+```
+
+Acá estamos configurando Babelify para que use el parámetro optional, igual que en el comando de Babel, y le estamos pasando los dos valores que habiamos visto en el comando anterior. Con esto ya tenemos nuestra tarea de Gulp que convierte de ES6 y ES7 (solo Async/Await) a ES5 usando Browserify para generar el archivo final y separar todo en módulos.
+
+También podríamos usar stage para activar varias características al mismo tiempo, simplemente al objeto que le pasamos al método configure de Babelify hay que agregarle la propiedad stage con el valor de stage que queramos activar.
+
+## Usando JSX y React con Babel
+
+Si estamos usando React en nuestra aplicación seguramente vamos a querer usar JSX para definir el contenido de nuestros componentes usando la sintaxis de HTML (XML en realidad). Si usamos Babel la buena noticia es que este ya trae soporte por defecto a JSX por lo que podemos usarlo sin tener que modificar nada.
+
+En el caso de que estemos usando Browserify con Gulp habría que agregar una pequeña línea en nuestra tarea para definir que las extensiones de los archivos van a ser .jsx.
+
+```js
+gulp.task('build:js', function () {
+  return browserify({
+    entries: ['source/app.js'],
+    extensions: ['.jsx'],
+    transform: [babelify.configure({
+      optional: ['runtime', 'es7.asyncFunctions']
+    })]
+  }).bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('build/'));
+});
+```
+
+Con solo agregar esa línea Browserify ya va a leer sin problemas nuestros archivos .jsx y luego gracias a Babelify los va a convertír a ES5.
+
+## Reiniciando nuestra aplicación con Nodemon
+
+Si deciden usar Babel para iniciar sus aplicaciones de Node.js usando ES6 y ES7 es posible hacer que en caso de error o de cambios en los archivos la aplicación se reinicie usando [Nodemon](http://nodemon.io/). Para esto hay que usar el comando:
+
+```bash
+nodemon --exec babel-node -- app.js
+```
+
+Si quisieramos agregar soporte a ES7 solo habría que agregar el parámetro optional luego de babel-node.
+
+```bash
+nodemon --exec babel-node --optional runtime es7.asyncFunctions-- app.js
+```
+
+Con esto ya podemos usar babel-node con ES7 y que si hay un error o si modificamos algún archivo de nuestra aplicación gracias a Nodemon nuestra aplicación se reinicie automaticamente.
+
+## Escribiendo nuestras pruebas con Mocha y Babel
+
+También es posible usar Babel junto a [Mocha](http://mochajs.org/) usando un comando de Mocha llamado compilers. Este comando nos permite decirle a Mocha que use alguna herramienta para compilar no solo el código a testear sino también el código de las pruebas, por lo que podemos ahora probar nuestro código de ES6 escribiendo nuestras pruebas en ES6.
+
+Para usarlo necesitamos entonces ejecutar el siguiente comando:
+
+```bash
+mocha --compilers js:babel/register
+```
+
+En donde dice js podríamos colocar jsx si el formato de nuestros archivo es jsx. Hay un detalle y es que como no podemos pasarle parámetros a Babel no es posible activar ES7 si decidimos usarlo, para poder hacer esto necesitamos crear un archivo llamado `.babelrc` en la carpeta de nuestro proyecto con el código.
+
+## Configurando Babel con .babelrc
+
+Al momento de configurar Babel vimos varias formas dependiendo de donde lo estabamos usando, hay otra forma que configurar Babel y es creando un archivo `.babelrc`, al usar este archivo podemos configurar Babel de la misma forma siempre.
+
+El contenido de este archivo es un JSON con la configuración, en este JSON podemos acceder a todas las opciones de configuración de Babel que se podrían usar mediante la consola. A continuación un ejemplo de configuración:
+
+```json
+{
+  "optional": ["runtime"],
+  "stage": 0
+}
+```
+
+De esta forma podríamos configurarlo en un solo lugar y que funcione siempre igual en nuestro proyecto, sin tener que preocuparnos por tener configuraciones diferentes en Babelify, Nodemon y Mocha.
+
+---
+
+Si quieren seguír investigando más sobre Babel pueden ir al [sitio oficial](http://babeljs.io/) donde pueden ver formas de [usarlo con otras herramientas](http://babeljs.io/docs/setup/) como Grunt, Webpack, Require.js, Meteor, Rails, Sails, Ember, WebStorm, etc.
+
+Tienen además información sobre como usarlo más a fondo, como hacer un uso más avanzado y hasta una página donde pueden [probarlo en vivo](http://babeljs.io/repl/#?experimental=true&evaluate=true&loose=true&spec=false&playground=false&code=) incluso con las características de ES7.
+
