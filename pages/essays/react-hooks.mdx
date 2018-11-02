@@ -1,3 +1,4 @@
+import Video from "../../components/video.js";
 import withLayout from "../../lib/with-layout.js";
 
 export const meta = {
@@ -18,7 +19,14 @@ export const meta = {
 
 export default withLayout("essay")(meta)
 
-Hooks es una propuesta de un nuevo feature para React que está disponible para usar ya mismo instalando `react@next` y `react-dom@next` o `@v16.7.0-alpha` que es la versión exacta y en caso de ser aceptada va a ser liberada en la versiǿn `16.7`.
+Hooks es una **propuesta de un nuevo feature** para React que está disponible para usar ya mismo instalando `react@next` y `react-dom@next` o `@v16.7.0-alpha` que es la versión exacta y en caso de ser aceptada va a ser liberada en la versión `16.7`.
+
+> Documentación oficial: https://reactjs.org/docs/hooks-intro.html
+> RFC: https://github.com/reactjs/rfcs/pull/68
+
+## Charla en la React Conf 2018
+
+<Video src="https://www.youtube.com/embed/dpw9EHDh2bM" />
 
 Los hooks vienen con la idea de ser una solución para varios problemas al usar React como son la dificultad de reusar lógica entre componente, componentes complejos que se vuelven difíciles de entender y el simple hecho de que usar clases hace más difícil que usar funciones directamente.
 
