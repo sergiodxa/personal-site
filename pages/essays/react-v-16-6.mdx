@@ -54,7 +54,7 @@ En este caso `React.memo` solo va a dejar que `Logo` se vuelva a renderizar si e
 
 Esta nueva función, que se incorpora al core de React, permite hacer code split y lazy load de componente de React. Algo que hasta ahora era posible usando librerías como `react-loadable` o `next/dynamic` (de Next.js).
 
-Este función es simple de usar, recibe como único argumento una función asíncrona que devuelve una promesa de importar un componente de React. Dentro de esta función es posible agregar más lógica.
+Esta función es simple de usar, recibe como único argumento una función asíncrona que devuelve una promesa de importar un componente de React. Dentro de esta función es posible agregar más lógica.
 
 ```js
 import { lazy } from "react";

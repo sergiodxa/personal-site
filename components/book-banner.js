@@ -1,3 +1,4 @@
+import css from "styled-jsx/css";
 import { A, P } from "@sergiodxa/ui/lib/text";
 import { Image } from "@sergiodxa/ui/lib/images";
 
@@ -5,44 +6,32 @@ import { gray, success } from "@sergiodxa/palette";
 
 import resolveScopedStyles from "../lib/scoped-styles";
 
-const scopedImage = resolveScopedStyles(
-  <scope>
-    <style jsx>{`
-      img {
-        display: none;
-        flex: 1;
-        margin-right: 1em;
-        grid-area: cover;
-      }
-      @media (min-width: 720px) {
-        img {
-          display: inherit;
-        }
-      }
-    `}</style>
-  </scope>
-);
+const scopedImage = css.resolve`
+  img {
+    display: none;
+    flex: 1;
+    margin-right: 1em;
+    grid-area: cover;
+  }
+  @media (min-width: 720px) {
+    img {
+      display: inherit;
+    }
+  }
+`;
 
-const scopedText = resolveScopedStyles(
-  <scope>
-    <style jsx>{`
-      p {
-        grid-area: text;
-      }
-    `}</style>
-  </scope>
-);
+const scopedText = css.resolve`
+  p {
+    grid-area: text;
+  }
+`;
 
-const scopedLink = resolveScopedStyles(
-  <scope>
-    <style jsx>{`
-      a {
-        grid-area: link;
-        text-align: right;
-      }
-    `}</style>
-  </scope>
-);
+const scopedLink = css.resolve`
+  a {
+    grid-area: link;
+    text-align: right;
+  }
+`;
 
 function Banner({ src, children, href }) {
   return (
