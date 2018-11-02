@@ -391,7 +391,7 @@
   {
     "id": 11,
     "title": "Renderizando React.js en el server con Express.js y react-engine",
-    "link": "https://medium.com/@sergiodxa/renderizando-react-js-en-el-server-con-express-js-y-react-engine-903de08c3df6",
+    "link": "/essays/medium/renderizando-react-js-en-el-server-con-express-js-y-react-engine",
     "date": "2015-06-01T00:00:00Z",
     "deprecated": true
   },
