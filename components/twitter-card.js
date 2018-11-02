@@ -33,7 +33,7 @@ TwitterCard.defaultProps = {
   creator: "@sergiodxa",
   url: "https://sergiodxa.com/",
   title: "Sergio Xalambrí",
-  description: "Lead Support Engineer at ▲ZEIT",
+  description: "Software Engineer & Technical Writer",
   image: "https://sergiodxa.com/static/open-graph.png",
   summary: "Sergio Xalambrí's personal website"
 }
