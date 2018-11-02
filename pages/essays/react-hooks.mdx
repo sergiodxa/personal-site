@@ -653,3 +653,29 @@ function FocusInput() {
 
 Con esto `$input.current` va a ser igual al elemento del DOM de nuestro input y podemos usarlo para ejecutar métodos como `.focus()`.
 
+### `useImperativeMethods`
+
+Este hook nos permite definir métodos que el padre de nuestro componente podría usar mediante `refs` para interactuar con nuestro componente o con sus hijos.
+
+```js
+import React, { forwardRef, useImperativeMethods } from "react";
+
+
+const FocusInput = forwardRef(FocusInput() {
+  const $input = useRef(null);
+
+  const handleClick = () => {
+    $input.current.focus();
+  };
+
+  useImperativeMethods(ref, () => ({
+    focus() {
+      $input.current.current.focus();
+    }
+  }));
+
+  return (
+    <input ref={$input} />
+  );
+});
+```
