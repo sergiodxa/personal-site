@@ -2,7 +2,7 @@ import { A, P } from "@sergiodxa/ui/lib/text";
 
 import { dark } from "@sergiodxa/palette";
 
-export function After({ copy }) {
+export function After() {
   return (
     <div>
       <P>

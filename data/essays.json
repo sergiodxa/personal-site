@@ -1,5 +1,11 @@
 [
   {
+    "id": 72,
+    "title": "React v16.6: lazy, memo y más",
+    "link": "/essays/react-v-16-6",
+    "date": "2018-10-24T17:32:04.452Z"
+  },
+  {
     "id": 71,
     "title": "Introducción a MDX",
     "link": "/essays/introduccion-a-mdx",
