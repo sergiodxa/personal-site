@@ -9,3 +9,4 @@ jest-puppeteer.config.jest
 LICENSE
 README.md
 renovate.json
+!now.json
