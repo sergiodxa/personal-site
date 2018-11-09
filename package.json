@@ -16,7 +16,8 @@
     "deploy": "now",
     "postdeploy": "npm run alias",
     "test": "jest",
-    "check:mean:words": "node scripts/check-mean-words.js"
+    "check:mean:words": "node scripts/check-mean-words.js",
+    "now-build": "yarn build && yarn export"
   },
   "repository": {
     "type": "git",
