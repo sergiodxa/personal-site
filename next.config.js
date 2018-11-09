@@ -15,7 +15,7 @@ module.exports = compose(
   withMDX,
   withEnv("NODE_ENV"),
   withExportedPages(),
-  asZone(`https://${alias}`)
+  asZone("https://sergiodxa.com")
 )({
   pageExtensions: ["js", "mdx"]
 });
