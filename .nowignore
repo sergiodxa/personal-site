@@ -5,7 +5,7 @@ node_modules
 .gitignore
 .npmrc
 .travis.yml
-jest-puppeteer.config.jest
+jest-puppeteer.config.js
 LICENSE
 README.md
 renovate.json
