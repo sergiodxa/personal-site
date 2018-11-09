@@ -4,7 +4,7 @@
   "public": true,
   "version": 2,
   "builds": [
-    { "src": "package.json", "use": "@now/next" }
+    { "src": "package.json", "use": "@now/static-build" }
   ],
   "static": {
     "headers": [
