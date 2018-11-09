@@ -641,25 +641,23 @@
   dependencies:
     "@mdx-js/tag" "^0.15.0"
 
-"@mdx-js/mdx@0.15.6":
-  version "0.15.6"
-  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.6.tgz#b6644c3d674b9e94a1ad933ef1a76944917e2963"
+"@mdx-js/mdx@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.16.0.tgz#eb5b908d4903dc657c1921090bae1173166553a2"
   dependencies:
     change-case "^3.0.2"
+    detab "^2.0.0"
     mdast-util-to-hast "^3.0.0"
     remark-parse "^5.0.0"
     remark-squeeze-paragraphs "^3.0.1"
     to-style "^1.3.3"
     unified "^6.1.6"
+    unist-builder "^1.0.1"
     unist-util-visit "^1.3.0"
 
-"@mdx-js/tag@0.15.6":
-  version "0.15.6"
-  resolved "https://registry.yarnpkg.com/@mdx-js/tag/-/tag-0.15.6.tgz#1a0aa575d5c9ac2b082631ca3e733034272114c1"
-  dependencies:
-    create-react-context "^0.2.2"
-    hoist-non-react-statics "^2.5.5"
-    prop-types "^15.6.1"
+"@mdx-js/tag@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@mdx-js/tag/-/tag-0.16.0.tgz#a676132203a484b575c8837cd24dea5e02e91beb"
 
 "@mdx-js/tag@^0.15.0":
   version "0.15.0"
@@ -1828,6 +1826,16 @@ cliui@^4.0.0:
     strip-ansi "^4.0.0"
     wrap-ansi "^2.0.0"
 
+clone-deep@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-0.2.4.tgz#4e73dd09e9fb971cc38670c5dced9c1896481cc6"
+  dependencies:
+    for-own "^0.1.3"
+    is-plain-object "^2.0.1"
+    kind-of "^3.0.2"
+    lazy-cache "^1.0.3"
+    shallow-clone "^0.1.2"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -2710,13 +2718,14 @@ find-pkg@^0.1.2:
   dependencies:
     find-file-up "^0.1.2"
 
-find-process@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.1.3.tgz#c05ade57d29dd80ca4023a7db50684cfb3d75b11"
+find-process@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.2.0.tgz#237279863ab912e6465e45ec14da756770e50ec3"
   dependencies:
     chalk "^2.0.1"
     commander "^2.11.0"
     debug "^2.6.8"
+    lodash "^4.17.11"
 
 find-up@2.1.0, find-up@^2.1.0:
   version "2.1.0"
@@ -2744,11 +2753,15 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
+for-in@^0.1.3:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
+
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
 
-for-own@^0.1.4:
+for-own@^0.1.3, for-own@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/for-own/-/for-own-0.1.5.tgz#5265c681a4f294dabbf17c9509b6763aa84510ce"
   dependencies:
@@ -3284,7 +3297,7 @@ is-binary-path@^1.0.0:
   dependencies:
     binary-extensions "^1.0.0"
 
-is-buffer@^1.1.4, is-buffer@^1.1.5:
+is-buffer@^1.0.2, is-buffer@^1.1.4, is-buffer@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
 
@@ -3683,13 +3696,13 @@ jest-config@^23.6.0:
     micromatch "^2.3.11"
     pretty-format "^23.6.0"
 
-jest-dev-server@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-3.4.0.tgz#3893e8a7adc5dafcbd88a4d997f12986a275e1d2"
+jest-dev-server@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-3.5.0.tgz#95be05085afb24e270849c0ef72f74a3f3f0ee78"
   dependencies:
     chalk "^2.4.1"
     cwd "^0.10.0"
-    find-process "^1.1.3"
+    find-process "^1.2.0"
     inquirer "^6.2.0"
     spawnd "^3.4.0"
     terminate "^2.1.0"
@@ -3732,14 +3745,14 @@ jest-environment-node@^23.4.0:
     jest-mock "^23.2.0"
     jest-util "^23.4.0"
 
-jest-environment-puppeteer@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-3.4.0.tgz#c1bd71d01842a66b3dd0e61dd1df905655e97d02"
+jest-environment-puppeteer@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-3.5.0.tgz#fb09fd572a036c116505ae463b8f9b036b80fcc3"
   dependencies:
     chalk "^2.4.1"
     cwd "^0.10.0"
-    jest-dev-server "^3.4.0"
-    lodash "^4.17.11"
+    jest-dev-server "^3.5.0"
+    merge-deep "^3.0.2"
 
 jest-get-type@^22.1.0:
   version "22.4.3"
@@ -3803,12 +3816,12 @@ jest-mock@^23.2.0:
   version "23.2.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-23.2.0.tgz#ad1c60f29e8719d47c26e1138098b6d18b261134"
 
-jest-puppeteer@3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-3.4.0.tgz#30d35fc12fac3315b8731e7054adb330ed2453d6"
+jest-puppeteer@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-3.5.0.tgz#c144ed95dd339a9acf80670f8908d13dcdbaecc8"
   dependencies:
     expect-puppeteer "^3.4.0"
-    jest-environment-puppeteer "^3.4.0"
+    jest-environment-puppeteer "^3.5.0"
 
 jest-regex-util@^23.3.0:
   version "23.3.0"
@@ -4042,6 +4055,12 @@ junk@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/junk/-/junk-1.0.3.tgz#87be63488649cbdca6f53ab39bec9ccd2347f592"
 
+kind-of@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npmjs.org/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
+  dependencies:
+    is-buffer "^1.0.2"
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -4072,6 +4091,10 @@ launch-editor@2.2.1:
   dependencies:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
+
+lazy-cache@^0.2.3:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -4297,6 +4320,14 @@ memory-fs@^0.4.0, memory-fs@^0.4.1, memory-fs@~0.4.1:
     errno "^0.1.3"
     readable-stream "^2.0.1"
 
+merge-deep@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/merge-deep/-/merge-deep-3.0.2.tgz#f39fa100a4f1bd34ff29f7d2bf4508fbb8d83ad2"
+  dependencies:
+    arr-union "^3.1.0"
+    clone-deep "^0.2.4"
+    kind-of "^3.0.2"
+
 merge-stream@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-1.0.1.tgz#4041202d508a342ba00174008df0c251b8c135e1"
@@ -4462,6 +4493,13 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mixin-object@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
+  dependencies:
+    for-in "^0.1.3"
+    is-extendable "^0.1.1"
+
 mkdirp-then@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mkdirp-then/-/mkdirp-then-1.2.0.tgz#a492c879ca4d873f5ee45008f8f55fd0150de3c5"
@@ -4542,9 +4580,9 @@ neo-async@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.1.tgz#acb909e327b1e87ec9ef15f41b8a269512ad41ee"
 
-next-ga@2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/next-ga/-/next-ga-2.3.3.tgz#3459e48070ce7a9551bfe30b82d51e561abe0d2a"
+next-ga@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/next-ga/-/next-ga-2.3.4.tgz#0bec23e7c2eea35485af0b342e7794bbbdb61d04"
   dependencies:
     debug "^4.0.0"
     react-ga "^2.5.3"
@@ -5311,14 +5349,14 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@16.6.0:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.0.tgz#6375b8391e019a632a89a0988bce85f0cc87a92f"
+react-dom@16.6.1:
+  version "16.6.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.1.tgz#5476e08694ae504ae385a28b62ecc4fe3a29add9"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0"
 
 react-error-overlay@4.0.0:
   version "4.0.0"
@@ -5338,14 +5376,14 @@ react-inspector@2.3.0:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
-react@16.6.0:
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.6.0.tgz#b34761cfaf3e30f5508bc732fb4736730b7da246"
+react@16.6.1:
+  version "16.6.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.6.1.tgz#ee2aef4f0a09e494594882029821049772f915fe"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.10.0"
+    scheduler "^0.11.0"
 
 "react@^15.6.2 || ^16.0", react@^16.3.2:
   version "16.4.1"
@@ -5720,9 +5758,9 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scheduler@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.10.0.tgz#7988de90fe7edccc774ea175a783e69c40c521e1"
+scheduler@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.0.tgz#def1f1bfa6550cc57981a87106e65e8aea41a6b5"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -5846,6 +5884,15 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+shallow-clone@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
+  dependencies:
+    is-extendable "^0.1.1"
+    kind-of "^2.0.1"
+    lazy-cache "^0.2.3"
+    mixin-object "^2.0.1"
 
 shebang-command@^1.2.0:
   version "1.2.0"
