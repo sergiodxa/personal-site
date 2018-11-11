@@ -2512,9 +2512,9 @@ expand-tilde@^1.2.2:
   dependencies:
     os-homedir "^1.0.1"
 
-expect-puppeteer@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/expect-puppeteer/-/expect-puppeteer-3.4.0.tgz#554115c429d8eca041613758d8e8c28d15bee925"
+expect-puppeteer@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/expect-puppeteer/-/expect-puppeteer-3.5.1.tgz#28a26be1357387390b55b49045ec533895172c5a"
 
 expect@^23.6.0:
   version "23.6.0"
@@ -3696,9 +3696,9 @@ jest-config@^23.6.0:
     micromatch "^2.3.11"
     pretty-format "^23.6.0"
 
-jest-dev-server@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-3.5.0.tgz#95be05085afb24e270849c0ef72f74a3f3f0ee78"
+jest-dev-server@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jest-dev-server/-/jest-dev-server-3.5.1.tgz#07bfb2c6877af73d324652f3e586cb0e7fe589b5"
   dependencies:
     chalk "^2.4.1"
     cwd "^0.10.0"
@@ -3745,13 +3745,13 @@ jest-environment-node@^23.4.0:
     jest-mock "^23.2.0"
     jest-util "^23.4.0"
 
-jest-environment-puppeteer@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-3.5.0.tgz#fb09fd572a036c116505ae463b8f9b036b80fcc3"
+jest-environment-puppeteer@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jest-environment-puppeteer/-/jest-environment-puppeteer-3.5.1.tgz#0d22ae46c9fa8b199ff97d865727640e0246f495"
   dependencies:
     chalk "^2.4.1"
     cwd "^0.10.0"
-    jest-dev-server "^3.5.0"
+    jest-dev-server "^3.5.1"
     merge-deep "^3.0.2"
 
 jest-get-type@^22.1.0:
@@ -3816,12 +3816,12 @@ jest-mock@^23.2.0:
   version "23.2.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-23.2.0.tgz#ad1c60f29e8719d47c26e1138098b6d18b261134"
 
-jest-puppeteer@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-3.5.0.tgz#c144ed95dd339a9acf80670f8908d13dcdbaecc8"
+jest-puppeteer@3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-3.5.1.tgz#92d033af977554473a34f1cc887e70aa8abcf619"
   dependencies:
-    expect-puppeteer "^3.4.0"
-    jest-environment-puppeteer "^3.5.0"
+    expect-puppeteer "^3.5.1"
+    jest-environment-puppeteer "^3.5.1"
 
 jest-regex-util@^23.3.0:
   version "23.3.0"
