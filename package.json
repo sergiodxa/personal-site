@@ -63,7 +63,7 @@
     "react-dom": "16.6.1",
     "react-inspector": "2.3.0",
     "remark-emoji": "2.0.2",
-    "slugify": "1.3.2"
+    "slugify": "1.3.3"
   },
   "devDependencies": {
     "jest": "23.6.0",
