@@ -4587,9 +4587,9 @@ next-ga@2.3.4:
     debug "^4.0.0"
     react-ga "^2.5.3"
 
-next-nprogress@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.3.0.tgz#9763724d6b867e29b8f4cb3b24587275050c1c00"
+next-nprogress@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/next-nprogress/-/next-nprogress-1.4.0.tgz#508058dc15fd2aee406da3cc6ffc8cdf3ebabb75"
   dependencies:
     nprogress "^0.2.0"
 
