@@ -1,0 +1,12 @@
+*
+!components
+!data
+!layouts
+!lib
+!pages
+!plugins
+!scripts
+!static
+!next.config.js
+!package.json
+!yarn.lock
