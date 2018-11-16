@@ -1,16 +1,23 @@
 {
   "name": "personal-site",
   "alias": "site.sergiodxa.com",
+  "type": "static",
   "public": true,
-  "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@now/static-build" }
+  "files": [
+    "components",
+    "data",
+    "layouts",
+    "lib",
+    "pages",
+    "plugins",
+    "scripts",
+    "static",
+    "Dockerfile",
+    "next.config.js",
+    "now.json",
+    "package.json",
+    "yarn.lock"
   ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
   "static": {
     "headers": [
       {
