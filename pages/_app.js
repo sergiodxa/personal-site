@@ -3,8 +3,7 @@ import App, { Container } from "next/app";
 import Router from "next/router";
 import compose from "compose-function";
 import withAnalytics from "next-ga";
-import withNProgress from "next-nprogress";
-import NProgressStyles from "next-nprogress/styles";
+import NProgress from "next-nprogress/component";
 import { dark } from "@sergiodxa/palette";
 
 import withSW from "../lib/with-sw";
@@ -23,7 +22,7 @@ class PersonalSite extends App {
     return (
       <Container>
         <Component {...pageProps} />
-        <NProgressStyles color={dark} />
+        <NProgress color={dark} />
       </Container>
     );
   }
@@ -31,6 +30,5 @@ class PersonalSite extends App {
 
 export default compose(
   withAnalytics("UA-48432002-3", Router),
-  withNProgress(),
   withSW
 )(PersonalSite);
