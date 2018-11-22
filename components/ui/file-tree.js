@@ -1,3 +1,6 @@
+import { memo } from "react";
+import { Code } from "@sergiodxa/ui/lib/code";
+
 import FolderIcon from "../icons/folder";
 import FileIcon from "../icons/file";
 
@@ -21,7 +24,26 @@ function sortByType(a, b) {
   return 0;
 }
 
-function Name(props) {
+function mapChildren(children, level = 0) {
+  return children
+    .sort(sortByName)
+    .sort(sortByType)
+    .map(item => {
+      if (item.type === "file") {
+        return <File level={level} key={item.name + item.type} {...item} />;
+      }
+      if (item.type === "directory" || item.type === "folder") {
+        return <Folder level={level} key={item.name + item.type} {...item} />;
+      }
+      return null;
+    });
+}
+
+function calcIdents(level) {
+  return Array.from(Array(level), (_, i) => <Ident key={i} />);
+}
+
+const Name = memo(props => {
   return (
     <span>
       {props.children}
@@ -32,9 +54,9 @@ function Name(props) {
       `}</style>
     </span>
   );
-}
+});
 
-function Ident() {
+const Ident = memo(() => {
   return (
     <span>
       <style jsx>{`
@@ -55,9 +77,9 @@ function Ident() {
       `}</style>
     </span>
   );
-}
+});
 
-function Icon({ kind }) {
+const Icon = memo(({ kind }) => {
   const icon = kind === "file" ? <FileIcon /> : <FolderIcon />;
   return (
     <i>
@@ -70,28 +92,12 @@ function Icon({ kind }) {
       `}</style>
     </i>
   );
-}
+});
 
-function mapChildren(children, level = 0) {
-  return children
-    .sort(sortByName)
-    .sort(sortByType)
-    .map(item => {
-      if (item.type === "file") {
-        return <File level={level} key={item.name + item.type} {...item} />;
-      }
-      if (item.type === "directory" || item.type === "folder") {
-        return <Folder level={level} key={item.name + item.type} {...item} />;
-      }
-      return null;
-    });
-}
-
-function File(props) {
-  const ident = Array.from(Array(props.level), (_, i) => <Ident key={i} />);
+const File = memo(props => {
   return (
     <li>
-      {ident}
+      {calcIdents(props.level)}
       <div>
         <Icon kind={props.type} />
         <Name>{props.name}</Name>
@@ -109,13 +115,13 @@ function File(props) {
       `}</style>
     </li>
   );
-}
+});
 
-function Folder(props) {
+const Folder = memo(props => {
   return (
     <li>
       <div>
-        {props.level > 0 && <Ident />}
+        {calcIdents(props.level)}
         <Icon kind={props.type} />
         <Name>{props.name}</Name>
       </div>
@@ -132,9 +138,9 @@ function Folder(props) {
       `}</style>
     </li>
   );
-}
+});
 
-function FileTree(props) {
+const FileTree = memo(props => {
   if (typeof props.children !== "string") return <Code {...props} />;
   return (
     <div>
@@ -158,12 +164,12 @@ function FileTree(props) {
             box-shadow: none;
             border-radius: 0;
             margin: 0;
-            padding: 1em .5em;
+            padding: 1em 0.5em;
           }
         }
       `}</style>
     </div>
   );
-}
+});
 
 export default FileTree;
