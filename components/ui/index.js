@@ -16,6 +16,8 @@ import {
   TFoot
 } from "@sergiodxa/ui/lib/table";
 
+import FileTree from "./file-tree";
+
 export default {
   h1: H1,
   h2: H2,
@@ -32,8 +34,21 @@ export default {
   dl: DL,
   dt: DT,
   dd: DD,
-  code: Code,
-  pre: Pre,
+  code: props => {
+    switch (props.className) {
+      case "language-file-tree": {
+        return <FileTree {...props} />;
+      }
+      default: {
+        return <Code {...props} />;
+      }
+    }
+  },
+  pre: props => {
+    if (props.children.props.props.className === "language-file-tree")
+      return props.children;
+    return <Pre {...props} />;
+  },
   inlineCode: Code,
   a: props => {
     if (props.href.startsWith("/") && !props.href.startsWith("//")) {
