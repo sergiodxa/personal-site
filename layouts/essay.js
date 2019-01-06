@@ -127,9 +127,10 @@ function EssayLayout({ meta, children }) {
         }
 
         .content :global(.main-title) {
-          text-align: center;
+          text-align: left;
           padding-left: 0.5em;
           padding-right: 0.5em;
+          font-weight: 600;
         }
 
         article {
