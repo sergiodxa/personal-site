@@ -1,0 +1,52 @@
+{
+  "public": "dist",
+  "headers": [
+    {
+      "source": "_next/**/*.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "static/**/*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store"
+        }
+      ]
+    },
+    {
+      "source": "atom",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=0, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "**/*.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "max-age=0, stale-while-revalidate=3600"
+        }
+      ]
+    }
+  ],
+  "directoryListing": true,
+  "trailingSlash": false
+}
