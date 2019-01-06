@@ -127,9 +127,10 @@ function EssayLayout({ meta, children }) {
         }
 
         .content :global(.main-title) {
-          text-align: center;
+          text-align: left;
           padding-left: 0.5em;
           padding-right: 0.5em;
+          font-weight: 600;
         }
 
         article {
@@ -141,6 +142,8 @@ function EssayLayout({ meta, children }) {
           padding-right: 1em;
           word-break: break-word;
           word-wrap: break-word;
+          text-align: justify;
+          hyphens: auto;
         }
 
         .content :global(h2),
@@ -148,7 +151,7 @@ function EssayLayout({ meta, children }) {
         .content :global(h4),
         .content :global(h5),
         .content :global(h6) {
-          font-weight: lighter;
+          font-weight: normal;
           letter-spacing: -0.02em;
           margin: 1em 0 0;
           position: relative;

@@ -1,0 +1,68 @@
+import withLayout from "../../../lib/with-layout.js";
+
+export const meta = {
+  title: "React Hook: usePermissions",
+  description: "React hook for Permissions API.",
+  slug: "libs/react-use-permissions",
+  lang: "en",
+  tags: ["react", "hooks", "permissions"]
+};
+
+export default withLayout("essay")(meta);
+
+React hook for [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions).
+
+> **Note**: This is using the new [React Hooks API Proposal](https://reactjs.org/docs/hooks-intro.html) which is subject to change until React its final release.
+> You'll need to install `react`, `react-dom`, etc at `^16.7.0-alpha.0`
+
+## Installation
+
+Install it using yarn with the command.
+
+```sh
+yarn add react-use-permissions
+```
+
+Or using npm with the command.
+
+```sh
+npm install react-use-permissions
+```
+
+## Usage
+
+Import it inside the application.
+
+```js
+import usePermissions from "react-use-permissions";
+```
+
+Then use it inside any functional React component passing any valid name.
+
+> Valid names are `accelerometer`, `accessibility-events`, `ambient-light-sensor`, `background-sync`, `camera`​, `clipboard-read`, `clipboard-write`, `geolocation`, `gyroscope`, `magnetometer`, `microphone`, `midi`, `notifications`, `payment-handler`, `persistent-storage`, and `push`
+
+```js
+const format = function Component() {
+  const hasPermissions = usePermissions("geolocation");
+  const content = (() => {
+    switch (hasPermissions) {
+      // User has granted permissions
+      case true: {
+        return "Permissions granted";
+      }
+      // User has denied permissions
+      case false: {
+        return "Permissions denied";
+      }
+      // User will be prompted for permissions
+      case null: {
+        return "Asking for permissions";
+      }
+    }
+  })();
+  return <h1>{content}</h1>;
+};
+```
+
+When the component is rendered the hook will return `null` initially and then check if the user has already granted or denied the permissions returning a boolean. In case the user hasn't already it will be prompted and then the hook will return the new state.
+
