@@ -151,7 +151,7 @@ function EssayLayout({ meta, children }) {
         .content :global(h4),
         .content :global(h5),
         .content :global(h6) {
-          font-weight: lighter;
+          font-weight: normal;
           letter-spacing: -0.02em;
           margin: 1em 0 0;
           position: relative;
