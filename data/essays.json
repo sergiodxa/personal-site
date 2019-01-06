@@ -1,5 +1,11 @@
 [
   {
+    "id": 73,
+    "title": "Aplicaciones Real-Time de Alta Escala",
+    "link": "/essays/apps-real-time-alta-escala",
+    "date": "2019-01-06T07:20:33.596Z"
+  },
+  {
     "id": 72,
     "title": "React v16.6: lazy, memo y más",
     "link": "/essays/react-v-16-6",
