@@ -5,14 +5,14 @@ export const meta = {
   description: "React hook for Permissions API.",
   slug: "libs/react-use-permissions",
   lang: "en",
-  tags: ["react", "hook", "permissions"]
+  tags: ["react", "hooks", "permissions"]
 };
 
 export default withLayout("essay")(meta);
 
 React hook for [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions).
 
-> **Note**: This is using the new [React Hooks API Proposal](https://reactjs.org/docs/hooks-intro.html) which is subject to change until React 16.7 final.
+> **Note**: This is using the new [React Hooks API Proposal](https://reactjs.org/docs/hooks-intro.html) which is subject to change until React its final release.
 > You'll need to install `react`, `react-dom`, etc at `^16.7.0-alpha.0`
 
 ## Installation
@@ -37,7 +37,7 @@ Import it inside the application.
 import usePermissions from "react-use-permissions";
 ```
 
-Then use it inside a any functional React component passing any valid name.
+Then use it inside any functional React component passing any valid name.
 
 > Valid names are `accelerometer`, `accessibility-events`, `ambient-light-sensor`, `background-sync`, `camera`​, `clipboard-read`, `clipboard-write`, `geolocation`, `gyroscope`, `magnetometer`, `microphone`, `midi`, `notifications`, `payment-handler`, `persistent-storage`, and `push`
 
@@ -64,4 +64,5 @@ const format = function Component() {
 };
 ```
 
-When the component is rendered it will return `null` initially and then check if the user has already granted or denied the permissions returning a boolean. In case the user hasn't already it will be prompted and then the hook will return the new state.
+When the component is rendered the hook will return `null` initially and then check if the user has already granted or denied the permissions returning a boolean. In case the user hasn't already it will be prompted and then the hook will return the new state.
+
