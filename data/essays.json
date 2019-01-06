@@ -33,8 +33,7 @@
   {
     "id": 68,
     "title": "¿Cómo mantenerse actualizado con el ecosistema de JavaScript?",
-    "link":
-      "/essays/como-mantenerse-actualizado-con-el-ecosistema-de-javascript",
+    "link": "/essays/como-mantenerse-actualizado-con-el-ecosistema-de-javascript",
     "date": "2018-01-12T17:53:42.064Z",
     "highlighted": false
   },
@@ -69,8 +68,7 @@
   {
     "id": 63,
     "title": "Aplicando estilos a Pulse Editor con styled-components",
-    "link":
-      "https://platzi.com/blog/aplicando-estilos-a-pulse-editor-con-styled-components/",
+    "link": "https://platzi.com/blog/aplicando-estilos-a-pulse-editor-con-styled-components/",
     "date": "2017-07-12T17:06:55.531181Z"
   },
   {
@@ -96,21 +94,18 @@
   {
     "id": 59,
     "title": "Usando socket.io en aplicaciones de Next.js",
-    "link":
-      "https://platzi.com/blog/usando-socketio-en-aplicaciones-de-nextjs/",
+    "link": "https://platzi.com/blog/usando-socketio-en-aplicaciones-de-nextjs/",
     "date": "2017-06-28T21:25:14.345226Z"
   },
   {
     "id": 58,
     "title": "Personalizando Babel.js en aplicaciones de Next.js",
-    "link":
-      "https://platzi.com/blog/personalizando-babeljs-en-aplicaciones-de-nextjs/",
+    "link": "https://platzi.com/blog/personalizando-babeljs-en-aplicaciones-de-nextjs/",
     "date": "2017-06-27T21:21:46.326799Z"
   },
   {
     "id": 57,
-    "title":
-      "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
+    "title": "Mezclando flujos síncronos y asíncronos usando promesas en JavaScript",
     "link": "/essays/mezclando-flujos-sincronos-y-asincronos",
     "date": "2017-06-23T22:39:48.419988Z"
   },
@@ -129,8 +124,7 @@
   {
     "id": 54,
     "title": "Creando botones propios para Pulse Editor",
-    "link":
-      "https://platzi.com/blog/creando-botones-propios-para-pulse-editor/",
+    "link": "https://platzi.com/blog/creando-botones-propios-para-pulse-editor/",
     "date": "2017-06-20T21:10:25.071920Z"
   },
   {
@@ -174,23 +168,20 @@
   {
     "id": 47,
     "title": "Crea aplicaciones de escritorio con Electron y Next.js",
-    "link":
-      "https://platzi.com/blog/crea-aplicaciones-de-escritorio-con-electron-y-nextjs/",
+    "link": "https://platzi.com/blog/crea-aplicaciones-de-escritorio-con-electron-y-nextjs/",
     "date": "2017-04-05T19:07:07.402370Z",
     "deprecated": true
   },
   {
     "id": 46,
     "title": "Manejo de dependencias JavaScript con Yarn",
-    "link":
-      "https://platzi.com/blog/manejo-de-dependencias-javascript-con-yarn/",
+    "link": "https://platzi.com/blog/manejo-de-dependencias-javascript-con-yarn/",
     "date": "2017-03-29T21:18:26.374241Z"
   },
   {
     "id": 45,
     "title": "Next.js, el futuro de las aplicaciones con React",
-    "link":
-      "https://platzi.com/blog/nextjs-el-futuro-de-las-aplicaciones-con-react/",
+    "link": "https://platzi.com/blog/nextjs-el-futuro-de-las-aplicaciones-con-react/",
     "date": "2017-03-27T15:40:26.780699Z",
     "highlighted": true
   },
@@ -255,50 +246,43 @@
   {
     "id": 35,
     "title": "Estado inmutable con Redux e Immutable.js",
-    "link":
-      "https://medium.com/react-redux/estado-inmutable-con-redux-e-immutable-js-5a3d69ef0451",
+    "link": "https://medium.com/react-redux/estado-inmutable-con-redux-e-immutable-js-5a3d69ef0451",
     "date": "2016-06-27T00:00:00Z"
   },
   {
     "id": 34,
     "title": "Componentes de Alto Orden en React.js",
-    "link":
-      "https://medium.com/react-redux/react-componentes-alto-orden-2498211e933f",
+    "link": "https://medium.com/react-redux/react-componentes-alto-orden-2498211e933f",
     "date": "2016-06-15T00:00:00Z"
   },
   {
     "id": 33,
     "title": "Obteniendo datos en aplicaciones de Redux",
-    "link":
-      "https://medium.com/react-redux/obteniendo-datos-en-aplicaciones-de-redux-1007e8703521",
+    "link": "https://medium.com/react-redux/obteniendo-datos-en-aplicaciones-de-redux-1007e8703521",
     "date": "2016-06-13T00:00:00Z"
   },
   {
     "id": 32,
     "title": "Renderizando aplicaciones de Redux en el servidor",
-    "link":
-      "https://medium.com/react-redux/server-render-react-redux-1f6cb0b557c9",
+    "link": "https://medium.com/react-redux/server-render-react-redux-1f6cb0b557c9",
     "date": "2016-06-10T00:00:00Z"
   },
   {
     "id": 31,
     "title": "Usando Redux en el servidor con Socket.io",
-    "link":
-      "https://medium.com/react-redux/wip-usando-redux-en-el-servidor-con-socket-io-61e31242e366",
+    "link": "https://medium.com/react-redux/wip-usando-redux-en-el-servidor-con-socket-io-61e31242e366",
     "date": "2016-05-20T00:00:00Z"
   },
   {
     "id": 30,
     "title": "Creando código modular con ducks de Redux",
-    "link":
-      "https://medium.com/react-redux/creando-c%C3%B3digo-modular-con-ducks-de-redux-bfd7b67ff8c0",
+    "link": "https://medium.com/react-redux/creando-c%C3%B3digo-modular-con-ducks-de-redux-bfd7b67ff8c0",
     "date": "2016-04-25T00:00:00Z"
   },
   {
     "id": 29,
     "title": "Manejo de errores en Redux.js",
-    "link":
-      "https://medium.com/react-redux/manejo-de-errores-en-redux-js-adf9dfa0129b",
+    "link": "https://medium.com/react-redux/manejo-de-errores-en-redux-js-adf9dfa0129b",
     "date": "2016-04-15T00:00:00Z"
   },
   {
@@ -310,44 +294,38 @@
   {
     "id": 27,
     "title": "Glosario de términos de Redux",
-    "link":
-      "https://medium.com/react-redux/glosario-de-t%C3%A9rminos-de-redux-c2bca005ca69",
+    "link": "https://medium.com/react-redux/glosario-de-t%C3%A9rminos-de-redux-c2bca005ca69",
     "date": "2016-04-11T00:00:00Z"
   },
   {
     "id": 26,
     "title": "Estructura de archivos Ducks para Redux.js",
-    "link":
-      "https://medium.com/react-redux/estructura-de-archivos-ducks-para-redux-js-36bb56a70cb3",
+    "link": "https://medium.com/react-redux/estructura-de-archivos-ducks-para-redux-js-36bb56a70cb3",
     "date": "2016-04-08T00:00:00Z"
   },
   {
     "id": 25,
     "title": "Ruteo en aplicaciones de Redux y React.js",
-    "link":
-      "https://medium.com/react-redux/ruteo-en-aplicaciones-de-redux-y-react-js-d62de452bf1b",
+    "link": "https://medium.com/react-redux/ruteo-en-aplicaciones-de-redux-y-react-js-d62de452bf1b",
     "date": "2016-04-06T00:00:00Z",
     "deprecated": true
   },
   {
     "id": 24,
     "title": "Pruebas unitarias en Redux.js",
-    "link":
-      "https://medium.com/react-redux/pruebas-unitarias-en-redux-js-d7285c013123",
+    "link": "https://medium.com/react-redux/pruebas-unitarias-en-redux-js-d7285c013123",
     "date": "2016-04-04T00:00:00Z"
   },
   {
     "id": 23,
     "title": "Acciones asíncronas en Redux.js",
-    "link":
-      "https://medium.com/react-redux/acciones-as%C3%ADncronas-en-redux-js-d06e2514c4b8",
+    "link": "https://medium.com/react-redux/acciones-as%C3%ADncronas-en-redux-js-d06e2514c4b8",
     "date": "2016-04-01T00:00:00Z"
   },
   {
     "id": 22,
     "title": "Middlewares en Redux.js",
-    "link":
-      "https://medium.com/react-redux/middlewares-en-redux-js-88081fcd6c91",
+    "link": "https://medium.com/react-redux/middlewares-en-redux-js-88081fcd6c91",
     "date": "2016-03-30T00:00:00Z"
   },
   {
@@ -366,32 +344,28 @@
   {
     "id": 19,
     "title": "Compilando el Frontend con webpack",
-    "link":
-      "https://medium.com/@sergiodxa/compilando-el-frontend-con-webpack-d251f7a632ec",
+    "link": "https://medium.com/@sergiodxa/compilando-el-frontend-con-webpack-d251f7a632ec",
     "date": "2015-09-27T00:00:00Z",
     "deprecated": true
   },
   {
     "id": 18,
     "title": "Internacionalización con React.js y FormatJS",
-    "link":
-      "https://medium.com/@sergiodxa/internacionalizaci%C3%B3n-con-react-js-y-formatjs-389957dbc098",
+    "link": "https://medium.com/@sergiodxa/internacionalizaci%C3%B3n-con-react-js-y-formatjs-389957dbc098",
     "date": "2015-09-26T00:00:00Z",
     "deprecated": true
   },
   {
     "id": 17,
     "title": "Introducción a ECMAScript 2016/7",
-    "link":
-      "https://medium.com/@sergiodxa/introducci%C3%B3n-a-ecmascript-2016-7-da73067698cc",
+    "link": "https://medium.com/@sergiodxa/introducci%C3%B3n-a-ecmascript-2016-7-da73067698cc",
     "date": "2015-09-25T00:00:00Z",
     "deprecated": true
   },
   {
     "id": 16,
     "title": "Mi experiencia como estudiante de los cursos de Platzi",
-    "link":
-      "https://medium.com/@sergiodxa/mi-experiencia-como-estudiante-de-los-cursos-de-platzi-d7e54368bdff",
+    "link": "https://medium.com/@sergiodxa/mi-experiencia-como-estudiante-de-los-cursos-de-platzi-d7e54368bdff",
     "date": "2015-09-10T00:00:00Z",
     "highlighted": true
   },
@@ -404,30 +378,26 @@
   {
     "id": 14,
     "title": "Usando ECMAScript 6 en tus tareas de Gulp",
-    "link":
-      "https://medium.com/@sergiodxa/usando-ecmascript-6-en-tus-tareas-de-gulp-a05f83f8bbac",
+    "link": "https://medium.com/@sergiodxa/usando-ecmascript-6-en-tus-tareas-de-gulp-a05f83f8bbac",
     "date": "2015-06-28T00:00:00Z"
   },
   {
     "id": 13,
     "title": "Usando ECMAScript 6/2015 con Babel",
-    "link":
-      "https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636",
+    "link": "https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636",
     "date": "2015-06-09T00:00:00Z",
     "deprecated": true
   },
   {
     "id": 12,
     "title": "Buenas prácticas del desarrollo FrontEnd",
-    "link":
-      "https://medium.com/@sergiodxa/buenas-pr%C3%A1cticas-del-desarrollo-frontend-40f44621841",
+    "link": "https://medium.com/@sergiodxa/buenas-pr%C3%A1cticas-del-desarrollo-frontend-40f44621841",
     "date": "2015-06-08T00:00:00Z"
   },
   {
     "id": 11,
     "title": "Renderizando React.js en el server con Express.js y react-engine",
-    "link":
-      "https://medium.com/@sergiodxa/renderizando-react-js-en-el-server-con-express-js-y-react-engine-903de08c3df6",
+    "link": "https://medium.com/@sergiodxa/renderizando-react-js-en-el-server-con-express-js-y-react-engine-903de08c3df6",
     "date": "2015-06-01T00:00:00Z",
     "deprecated": true
   },
@@ -440,29 +410,25 @@
   {
     "id": 9,
     "title": "Cómo usar la etiqueta template en HTML5",
-    "link":
-      "http://www.cristalab.com/tutoriales/como-usar-la-etiqueta-template-en-html5-c114548l/",
+    "link": "http://www.cristalab.com/tutoriales/como-usar-la-etiqueta-template-en-html5-c114548l/",
     "date": "2015-01-04T00:00:00Z"
   },
   {
     "id": 8,
     "title": "Automatización de tareas de frontend usando Gulp.js",
-    "link":
-      "http://www.cristalab.com/tutoriales/automatizacion-de-tareas-de-frontend-usando-gulp.js-c114514l/",
+    "link": "http://www.cristalab.com/tutoriales/automatizacion-de-tareas-de-frontend-usando-gulp.js-c114514l/",
     "date": "2014-12-22T00:00:00Z"
   },
   {
     "id": 7,
     "title": "Uso de módulos en Javascript con ECMAScript 6",
-    "link":
-      "http://www.cristalab.com/tutoriales/uso-de-modulos-en-javascript-con-ecmascript-6-c114342l/",
+    "link": "http://www.cristalab.com/tutoriales/uso-de-modulos-en-javascript-con-ecmascript-6-c114342l/",
     "date": "2014-11-07T00:00:00Z"
   },
   {
     "id": 6,
     "title": "Escribiendo CSS de la forma correcta",
-    "link":
-      "https://medium.com/@sergiodxa/escribiendo-css-de-la-forma-correcta-b420a498219c",
+    "link": "https://medium.com/@sergiodxa/escribiendo-css-de-la-forma-correcta-b420a498219c",
     "date": "2014-10-31T00:00:00Z"
   },
   {
@@ -475,8 +441,7 @@
   {
     "id": 4,
     "title": "Ventajas y desventajas de los pre-procesadores de CSS",
-    "link":
-      "https://medium.com/@sergiodxa/ventas-y-desventajas-de-los-pre-procesadores-de-css-6528fdac9926",
+    "link": "https://medium.com/@sergiodxa/ventas-y-desventajas-de-los-pre-procesadores-de-css-6528fdac9926",
     "date": "2014-07-08T00:00:00Z"
   },
   {
@@ -488,15 +453,13 @@
   {
     "id": 2,
     "title": "El módulo Flexbox de CSS3",
-    "link":
-      "http://www.cristalab.com/tutoriales/el-modulo-flexbox-de-css3-c112091l/",
+    "link": "http://www.cristalab.com/tutoriales/el-modulo-flexbox-de-css3-c112091l/",
     "date": "2013-12-15T00:00:00Z"
   },
   {
     "id": 1,
     "title": "Javascript orientado a objetos",
-    "link":
-      "http://www.cristalab.com/tutoriales/javascript-orientado-a-objetos-c111760l/",
+    "link": "http://www.cristalab.com/tutoriales/javascript-orientado-a-objetos-c111760l/",
     "date": "2013-08-23T00:00:00Z",
     "deprecated": true
   }
