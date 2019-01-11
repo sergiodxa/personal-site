@@ -29,9 +29,9 @@ Es importante entender que esto se puede hacer con prácticamente cualquier tecn
 
 Dicho eso, la naturaleza asíncrona de Node.js y su simplicidad lo hacen una buena elección para implementar un servidor de WS, combinado con librerías como [socket.io](https://socket.io) se puede tener un servidor funcionando en muy poco tiempo. Es probable que eventualmente sea necesario migrar a otras tecnologías como Go o Rust para soportar mayor cantidad de usuarios por instancia de nuestro servidor, pero esto normalmente ocurre al tener una demanda extremadamente alta.
 
-De todas formas es importante usar una tecnología que conozcamos y nos sintamos cómodos programando, si usan Ruby pueden usar ActionCable para implementarlo sin problemas y eventualmente ver si vale la pena migrar, capaz en este caso a Elixir debido a la similaridad.
+De todas formas es importante usar una tecnología que conocemos y nos sintamos cómodos programando, si usan Ruby pueden usar ActionCable para implementarlo sin problemas y eventualmente ver si vale la pena migrar, capaz en este caso a Elixir debido a la similaridad.
 
-Otra parte importante de un servidor de WS es un sistema de colas o pub/sub que nos permita escalar horizontalmente nuestro servidor sin perder mensajes, de esta forma nuestro servidor simplemente recibirías mensajes desde estos servicios y los enviaría a sus usuarios conectados. Para esto podemos usar Redis como Pub/Sub simple o un sistema más especializado como RabbitMQ o Apache Kafka o usando bases de datos que permitan suscribirse a cambios como RethinkDB.
+Otra parte importante de un servidor de WS es un sistema de colas o Pub/Subsub que nos permita escalar horizontalmente nuestro servidor sin perder mensajes, de esta forma nuestro servidor simplemente recibirías mensajes desde estos servicios y los enviaría a sus usuarios conectados. Para esto podemos usar Redis como Pub/Sub simple o un sistema más especializado como RabbitMQ o Apache Kafka o usando bases de datos que permitan suscribirse a cambios como RethinkDB.
 
 ## Evitar Mutaciones desde WebSocket
 
@@ -39,7 +39,7 @@ Una vez empezamos a usar WS es común pensar en enviar todo por este canal, de e
 
 Para evitar esto lo mejor es mantener un API que, usando HTTP, permita a los clientes de nuestra aplicaciones realizar consultas y mutaciones, al ser un protocolo sin estado es posible escalar este API para recibir más peticiones de forma mucho más fácil que WS.
 
-Luego de que una mutación ocurra el API debería enviar a nuestro sistema de colas una notificación del cmabio, nuestro servidor de WS procesaría entonces el mensaje de la cola y enviaría a todos los clientes **subscriptos** la notificación de que cambió algo, dicha notificación puede ser tanto los datos que cambiaron como un simple aviso de que cambió y el ID para poder luego consultar el cambio mediante HTTP.
+Luego de que una mutación ocurra el API debería enviar a nuestro sistema de colas una notificación del cambio, nuestro servidor de WS procesaría entonces el mensaje de la cola y enviaría a todos los clientes **subscriptos** la notificación de que cambió algo, dicha notificación puede ser tanto los datos que cambiaron como un simple aviso de que cambió y el ID para poder luego consultar el cambio mediante HTTP.
 
 ## Deltas de Información
 
@@ -66,11 +66,11 @@ Supongamos que un nuevo usuario, el `678`, le da like al comentario, podríamos 
 }
 ```
 
-Y nuestro cliente entonces se encargaría de aplicar este like al comentario que ya tiene y actualizar la UI. Hacer resto reduce la cantidad de información enviada por nuestro canal a solo lo esencial.
+Y nuestro cliente entonces se encargaría de aplicar este like al comentario que ya tiene y actualizar la UI. Hacer esto reduce la cantidad de información enviada por nuestro canal a solo lo esencial.
 
-Es importante tener en cuanta que esto puede tener un problema, si el client todavía no tiene el comentario `123` en su estado interno entonces el delta no se va a aplicar y puede que quede desactualizado.
+Es importante tener en cuenta que esto puede tener un problema, si el cliente todavía no tiene el comentario `123` en su estado interno entonces el delta no se va a aplicar y puede que quede desactualizado.
 
-De igual forma es posible que el usuario pierda información durante una desconexión, esto se puede mitigar haciendo consultas cada cierto tiempo o enviando información de cual fue el último delta generado, si el usuario no posee ese delta puede pedirlo al API hasta que recupere todos los deltas perdidos.
+De igual forma es posible que el usuario pierda información durante una desconexión, esto se puede mitigar haciendo consultas cada cierto tiempo o enviando información de cual fue el último delta obtenido, si el usuario está desactualizado el API HTTP puede enviar los nuevos deltas hasta que recupere todos los deltas perdidos.
 
 Otra opción es que si el cliente recibe una actualización para el comentarion `123` y no lo posee en su estado puede pedirlo por HTTP y guardarlo de forma que recupere mensajes perdidos. Todo depende del nivel de consistencia de datos que deseamos en nuestro sistema.
 
@@ -89,7 +89,7 @@ Vamos entonces a ejemplificar el flujo de datos según lo dicho anteriormente.
 - API WS envía a los clientes suscriptos la notificación
 - Cliente actualiza su estado al recibir el mensaje
 
-De esta forma nuestro servidor de WS se mantiene lo más simple posible para reducir su carga de trabajo, permitiéndonos soportar mayor cantidada de usuarios con menos recursos.
+De esta forma nuestro servidor de WS se mantiene lo más simple posible para reducir su carga de trabajo, permitiéndonos soportar mayor cantidad de usuarios con menos recursos.
 
 ## Manejar desconexiones
 
