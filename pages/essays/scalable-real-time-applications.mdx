@@ -36,7 +36,7 @@ That say, the async nature of Node.js and its simplicity make it a good option t
 
 Any way, it's important to use a technology that we know and feel comfortable programming, if you use Ruby you could use ActionCable to create it without issues and eventually see if it's worth migrating, maybe to Elixir due the similarity.
 
-Another importan part of our WS is a queue or Pub/Sub system which let us scale it horizontallly without losing messages, this way the instances would receive message from those services and send them to the connected users. We could use Redis as a simple Pub/Sub or an specialized system like RabbitMQ or Apache Kafka or even user databases which let us subscribe to changes like RethinkDB.
+Another important part of our WS is a queue or Pub/Sub system which let us scale it horizontallly without losing messages, this way the instances would receive message from those services and send them to the connected users. We could use Redis as a simple Pub/Sub or an specialized system like RabbitMQ or Apache Kafka or even user databases which let us subscribe to changes like RethinkDB.
 
 ## Avoid Mutations from the WebSocket
 
