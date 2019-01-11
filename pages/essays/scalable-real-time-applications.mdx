@@ -1,0 +1,130 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Scalable Real-Time Applications",
+  slug: "scalable-real-time-applications",
+  date: "2019-01-11T05:52:01.715Z",
+  description: "Tips and recommendations to build real time applications using WebSockets",
+  published: true,
+  lang: "en",
+  translateFrom: {
+    url: "https://sergiodxa.com/essays/aplicaciones-real-time-alta-escala/",
+    lang: "en",
+    title: "Documentation, Lessons Learned"
+  },
+  tags: [
+    "Platzi",
+    "RealTime",
+    "High Scalability",
+    "Spanish"
+  ]
+}
+
+export default withLayout("essay")(meta)
+
+Build Real-Time applications is hard, really hard, but it could improve the user experience offering immediate content updates.
+
+There are multiple ways to implement them, either using WebSocket, Server Sent Events or Long Polling. In this article I'm going to talk about how to use WebSockets to build a high demand application without killing our servers.
+
+> _Note_: Everything that comes next is based on my experience working with WebSockets (WS) in projects like [Platzi Live](https://platzi.com/live).
+
+## Tech Stack
+
+It's important to understand this kind of application could be done practically with any technology, not only Node.js or Go, but Ruby, PHP, Python, etc. had ways to use WS, at the end of the day it's only a protocol, like HTTP.
+
+That say, the async nature of Node.js and its simplicity make it a good option to create a WS server, combined with libraries like [socket.io](https://socket.io) it's possible to have a working server in a very short time. It's probaly it will be eventually necessary to migrate to another technology like Go or Rust to support a more users per instance of our server, but this usually happens when there is an extremely high demand.
+
+Any way, it's important to use a technology that we know and feel comfortable programming, if you use Ruby you could use ActionCable to create it without issues and eventually see if it's worth migrating, maybe to Elixir due the similarity.
+
+Another importan part of our WS is a queue or Pub/Sub system which let us scale it horizontallly without losing messages, this way the instances would receive message from those services and send them to the connected users. We could use Redis as a simple Pub/Sub or an specialized system like RabbitMQ or Apache Kafka or even user databases which let us subscribe to changes like RethinkDB.
+
+## Avoid Mutations from the WebSocket
+
+Once we have our WS server working it's not unusal to start sending everything using this channel, this way if we need to **query** some data we use WS, if we need to create, update or delete a resource we send the required information using WS. Even though this works at a small scale, when we start to have more and more connected users doing this kind of **mutations** we will start to saturate our WS channel requiring to sping up more instances for fewer people. 
+
+The best way to avoid this is to have an HTTP API and use it to query and mutate data, being an stateless protocol it's easier to scale to support more request compared to WS.
+
+After a mutation happens, the HTTP API should send a notification to our queue system with the change, our WS then will process the queue and send the notification to all the **subscribed** users, said notification could be either the updated resource or just the ID so the client could query the data from the HTTP API.
+
+## Information Deltas
+
+A common error is to send too much information using our WS channel, this cause the same problems as doing queries and mutations over WS, we will saturate our WS channel with extra information. My recommendation here is to send information deltas. What does that mean? Send only what changed and a way to identify the resource, instead of sending the whole resource.
+
+If we have a comment system we may have a object similar to this one in our client state:
+
+```json
+{
+  "id": 123,
+  "author": 456,
+  "message": "Hello, world!",
+  "likes": [6546, 123213, 4678234, 12, 567, 98] // list of users ID
+}
+```
+
+Let's say a new user, the `678`, likes the comment, we could send the whole comment with the new array of likes, or we could just send a little message with the delta.
+
+```json
+{
+  "action": "like",
+  "comment": 123,
+  "user": 678
+}
+```
+
+This way, our client app will update the application state to add the like to the comment already in the state and update the UI. This will reduce the information sent over WS to only the essential.
+
+It's important to consider this could have a problem, if the client doesn't have the comment `123` in its state then the delta could not be applied and the UI could stay stalled if we get it later.
+
+Similarly it's possible the user will lose information during a disconnection, this could be mitigated doing queries every so often or sending the ID of the last delta, if the user is outdated the HTTP API could then send the newer deltas until the client is up to date.
+
+Another option if the user receives an update for the comment `123` and is not already in the state it could fetch it over HTTP and save it after applying the delta. It all depends on the level of data consistency we want in our system
+
+## Data flow
+
+Let's illustrate the data flow as previously stated.
+
+- Client query data to the HTTP API
+- HTTP API reply with the data to the client
+- Client subscribe to the WS API
+- Client send a mutation to the HTTP API to create a new resource
+- HTTP API updates the database to insert the new resource
+- HTTP API enqueue the notification of the new resource
+- WS API process the queue to get the notification
+- WS API send the notification to the subscribed clients
+- Client update its state after receiving the notification
+
+This way our WS API will be as simple as possible to reduce the workload, letting us handle more user with lesser resources.
+
+## Handling Disconnections
+
+Internet connections are not perfect and could fail, actually the faill all the time, it's common to lose packages and many protocols manage that. If we go the the mobile world it's even worse, wether the user move away of its internet router and lose connection while changing to its data plan or it was on a vehicle and lose signal.
+
+Most likely the user will lose connections, and when this happens it will be disconnected from the WS API. This is way it's important to handle disconnections from the client side detecting them and trying to reconnect. Commonly this will be done in incremental intervals, this way the first one is immediate and the second one takes a few seconds and so it grows and can end up waiting minutes beforing trying again.
+
+## Information Recovery
+
+After a disconnection the user will lose information delts, whether they are new or updated resources, depending of the level of consistency we want we could handle it in different ways.
+
+If consistency is not a priority ([Eventual Consistency](https://en.wikipedia.org/wiki/Eventual_consistency)), let's say we have a massive chat where is not an issue to lose some message, we could as mentioned above query the missing data when we receive a delta to update a resource which is not in our state. If we want to be sure we don't lose deltas we could even fetch each resource after is updated, even if it's already on our state, this will let us ensure we always be as up-to date as possible.
+
+If it's required to have consistency ([Strong Consistency](https://en.wikipedia.org/wiki/Strong_consistency)) we could let make the client after recovering from a disconnection send a timestamp of the last delta to the HTTP API to indicate at what moment he stayed, then the API could send the missing delts to the client and let it process it and update its state and UI.
+
+In the case we want to have strong consistency we will need to store every notification with its date in a database to be able to send it later to the user, we could do this using a document based database like MongoDB which will let us create a collection for our deltas and store them all together, without worrying about the schema of the data.
+
+## Horizontal Scaling
+
+Until new we have talked about how to optimize the usage of a single instance, which although idealis not realistic at all if we plan to have many users. And while we can try to scale vertically adding more and more resources to the server hosting our WS API it will eventually be more expensive and it doesn't benefir so much, it's then when we will need to scale horizontallly.
+
+What does that mean? Instead of improving our server we will add more servers running our WS API, to make it works we need to distribute the workload between our servers, in an HTTP API this is relatively easy, in WS since we have a state to keep (the connected clients) we will need to use a load balancer configured with sticky sessions, this means after the first request (the handshake) every connection between client and WS will use the same server.
+
+If the users is disconnected we could then reconnect it to any server. If it's the server which goes down, either because we did it manually or crashed due an error, each client connected to that server will lose connection and will try to reconnect and we will need to distribute the load.
+
+Which bring us to that our load balancer must know the amount of clients connected to each server to ensure the distribution of new users without overburden any server with more users than it could handle, it's possible we will need to reject connection attemps from users until a new server is started or a users is disconnected, note this should be the last resource.
+
+Once configured, our load balance could even automate the spin up of new server if the current ones are reaching their limits of users, something common in rush hours or if our application has a popularity burst, doing this will let the new server receive all the new users until it reachs the other severs, when yet another server could be started automatically.
+
+When the traffic goes down again it could start to shutdown server, even server with low usage and force users reconnect to the rest of the server. This way we could save some money shuting down extra servers and only paying for what we need.
+
+## Final Words
+
+Last, my biggest recommendation will be to try to avoid the usage of WebSockets as much as possible, long-polling and SSE are good alternatives, eaiser to scale and cheaper which in most cases will work as good as WS.
