@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://htmlreference.io/",
+    "title": "HTML Reference",
+    "comment": "An incredible and complete guide of all the HTML tags with visual examples",
+    "date": "2019-01-28T19:44:10.945Z"
+  },
+  {
+    "url": "https://cssreference.io/",
+    "title": "CSS Reference",
+    "comment": "An incredible and complete guide of all the CSS properties with visual examples",
+    "date": "2019-01-28T19:44:10.945Z"
+  },
+  {
     "url": "https://blog.codinghorror.com/the-god-login/",
     "title": "The God Login",
     "comment": "A big collection of tips on how to create a better login for any application.",
