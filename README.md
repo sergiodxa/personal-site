@@ -4,6 +4,10 @@ This is the code behind `sergiodxa.com`.
 
 [![Build Status](https://travis-ci.org/sergiodxa/personal-site.svg?branch=master)](https://travis-ci.org/sergiodxa/personal-site)
 
+<a href="https://www.patreon.com/sergiodxa">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 ## How to run
 
 ### Development
