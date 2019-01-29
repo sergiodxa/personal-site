@@ -1,5 +1,11 @@
 [
   {
+    "id": 75,
+    "title": "Carrusel de elementos dinámicos con React.js",
+    "link": "/essays/carrusel-elementos-dinamicos-react",
+    "date": "2019-01-29T18:44:19.942Z"
+  },
+  {
     "id": 74,
     "title": "Scalable Real-Time Applications",
     "link": "/essays/scalable-real-time-applications",
