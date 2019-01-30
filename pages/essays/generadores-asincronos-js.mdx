@@ -17,7 +17,7 @@ export const meta = {
 
 export default withLayout("essay")(meta)
 
-Async/Await es una de las características de ECMAScript 2017 que más he usado junto a `Object.entries`. Nos permite escribir de forma más simple código asíncrono, se lee como síncrono pero se ejecuta asíncrono. Veamos un ejemplo rápido
+Async/Await es una de las características de ECMAScript 2017 que más he usado junto a `Object.entries`. Nos permite escribir de forma más simple código asíncrono, se lee como sincrónico pero se ejecuta asíncrono. Veamos un ejemplo rápido
 
 ```js
 async function main() {
@@ -56,7 +56,7 @@ function main() {
 
 Aunque casi tan corta como nuestra función asíncrona es un poco más compleja, por ejemplo necesitamos ejecutar `setLoading(false)` en dos lugares para ocultar un posible spinner.
 
-Resulta que Async/Await está construido sobre dos funciónalidades añadidas en ECMAScript 2015, Promesas y Generadores, ya vimos un ejemplo de Promesas, veamos que son Generadores.
+Resulta que Async/Await está construido sobre dos funcionalidades añadidas en ECMAScript 2015, Promesas y Generadores, ya vimos un ejemplo de Promesas, veamos que son Generadores.
 
 ## Generadores
 
@@ -80,9 +80,9 @@ Array.from({ length: 10 }).forEach(() => {
 });
 ```
 
-Como se ve arriba un generador es una función que se define como `function*`, el asterisco la convierte en un generador, dentro de esta función tenemos acceso a la palabra clave `yield` que nos permite devolver un valor (lo que coloquemos a la derecha de `yield`) pero sin terminar la ejecución de nuestro generador, en vez de esto el generadore se pausa hasta que ejecutemos el método `next` que nos va a permitir seguir con el código hasta el siguiente `yield`.
+Como se ve arriba un generador es una función que se define como `function*`, el asterisco la convierte en un generador, dentro de esta función tenemos acceso a la palabra clave `yield` que nos permite devolver un valor (lo que coloquemos a la derecha de `yield`) pero sin terminar la ejecución de nuestro generador, en vez de esto el generador se pausa hasta que ejecutemos el método `next` que nos va a permitir seguir con el código hasta el siguiente `yield`.
 
-Si vemos debajo ejecutamos nuestro generador `fibonacci()` y guardamos el resultado, la constante `fib` es un objeto `Generator` que posee el método `next` con el cual podemos pedirle un valor al generador. Algo importante es que hasta que no ejecutemos este método el generador se mantiene suspendido y no hace absolutamente nada, esto nos permite tener un loop infinito dentro del generador sin problemas.
+Si vemos debajo ejecutamos nuestro generador `fibonacci()` y guardamos el resultado, la constante `fib` es un objeto `Generator` que posee el método `next` con el cual podemos pedirle un valor al generador. Algo importante es que hasta que no ejecutemos este método el generador se mantiene suspendido y no hace absolutamente nada, esto nos permite tener un ciclo infinito dentro del generador sin problemas.
 
 Después vamos a crear un array de 10 elementos y vamos a iterar por este array y hacer un `console.log` del valor que devuelve `fib.next()`, si vemos para acceder al valor usamos la propiedad `value`, esto es porque `next` nos devuelve un objeto con la siguiente sintaxis.
 
@@ -93,7 +93,7 @@ Después vamos a crear un array de 10 elementos y vamos a iterar por este array 
 }
 ```
 
-La propiedad `value` como dijimos es el valor devuelto por nuestro generador al hacer `yield` mientras que la propiedad `done` nos indica si el generador ya terminó de ejecutarse, en nuestro caso nunca va a pasar que se termine pues usa un loop infinito, pero podría pasar que solo se ejecuta una cierta cantidad de `yield` dentro del generador y eventualmente se acabe como una función normal.
+La propiedad `value` como dijimos es el valor devuelto por nuestro generador al hacer `yield` mientras que la propiedad `done` nos indica si el generador ya terminó de ejecutarse, en nuestro caso nunca va a pasar que se termine pues usa un cicle infinito, pero podría pasar que solo se ejecuta una cierta cantidad de `yield` dentro del generador y eventualmente se acabe como una función normal.
 
 ¿Por qué es útil? En ECMAScript 2018 se incluyó a JS los Async Generators. Estos nos permiten crear generadores que sean asíncrono, combinando así Async/Await con yield.
 
@@ -121,7 +121,7 @@ async function* createQueue(callback) {
 }
 ```
 
-La función `createPromise` simplemente nos permite de forma fácil crear una promesa y acceder tanto a esta como a su `resolver` y su `rejecter`. Lo importante acá es nuestro generador asíncrono `createQueue`. Este va a recibir al momento de inicializarse una función que llamamos `callback` y en cada iteración de nuestro ciclo infinito va a crear una promesa y hacer `yield` del resolver de esta, luego vemos que asigna el resultado de `yield` a una constante llamada `data, esto funciona porque si a la función `next` le pasamos un valor este es recibido por un generador (tanto síncrono como asíncrono) como resultado del `yield`, así podemos pasar valores entre el generador y quién usa el generador.
+La función `createPromise` simplemente nos permite de forma fácil crear una promesa y acceder tanto a esta como a su `resolver` y su `rejecter`. Lo importante acá es nuestro generador asíncrono `createQueue`. Este va a recibir al momento de ejecutarse una función que llamamos `callback` y en cada iteración de nuestro ciclo infinito va a crear una promesa y hacer `yield` del resolver de esta, luego vemos que asigna el resultado de `yield` a una constante llamada `data, esto funciona porque si a la función `next` le pasamos un valor este es recibido por un generador (tanto síncrono como asíncrono) como resultado del `yield`, así podemos pasar valores entre el generador y quién usa el generador.
 
 Los siguiente que hacemos una vez tenemos `data` es hacer `await` de ejecutar `callback` pasándole `data` y de la promesa. ¿Cómo sirve esto? Cada vez que le pidamos un valor a nuestra cola este nos va a devolver un `resolver`, nosotros además podemos pasarle información que el generador va a pasar al `callback`, cuando tanto nuestro `callback` complete su ejecución como nosotros ejecutemos el `resolver` recién ahí nuestro generador asíncrono va a ejecutar la siguiente iteración del `while`.
 
@@ -146,13 +146,13 @@ await sleep(2000);
 resolver2();
 ```
 
-Vayamos línea por línea, al principio creamos una pequeña función que recibe un tiempo en milisegundos (`ms`) y devuelve una promesa que se complete solo después de que este tiempo pase.
+Vayamos línea por línea, al principio creamos una pequeña función que recibe un tiempo en mili segundos (`ms`) y devuelve una promesa que se complete solo después de que este tiempo pase.
 
 Luego vamos a crear nuestra cola, el callback va a ser una función asíncrona que cada vez que se ejecute va a dormir por 1 segundo y después va a hacer log de `data`, esto nos sirve en nuestro ejemplo para simular que estamos haciendo lógica.
 
 La siguiente línea es probablemente la más rara, lo que hace es esperar (`await`) a que `queue.next()` devuelva un valor y acceder a este `value` y ejecutarlo (el valor es `resolver`). Esto es necesario porque la primera vez que ejecutamos `next` prendemos nuestro generador y lo ponemos a funcionar, pero simplemente llega hasta el primer `yield` y no hace nada, necesitamos completar una vuelta para que podamos empezar a pasar valores al generador asíncrono usando `next`.
 
-Eso es exactamente lo que hacemos en las siguientes línas, ejecutamos dos veces seguidas `next` pasando diferentes valores y esperando a que nos responda con un `value` los cuales renombramos como `resolver1` y `resolver2`. Luego esperamos 500ms y ejecutamos el primer resolver, dos segundos después ejecutamos el segundo resolver.
+Eso es exactamente lo que hacemos en las siguientes líneas, ejecutamos dos veces seguidas `next` pasando diferentes valores y esperando a que nos responda con un `value` los cuales re nombramos como `resolver1` y `resolver2`. Luego esperamos 500ms y ejecutamos el primer resolver, dos segundos después ejecutamos el segundo resolver.
 
 Si copias y pegas el código de arriba en la consola del navegador se puede observar como aparecen los mensajes Hello y World en diferentes tiempo.
 
@@ -184,14 +184,14 @@ for await (let data of fetchPaginated("https://jsonplaceholder.typicode.com/comm
 
 Si ejecutamos nuestro código en la consola del navegador vamos a ver como de a poco va haciendo log de los comentarios de cada una de las páginas y termina al llegar a la página 50 donde inmediatamente para.
 
-Lo que acabamos de hacer es que al ejecutar `fetchPaginated` le pasamos la URL del recurso a hacer `fetch` y la variable para la página que debemos agregar al querystring de nuestra URL, la página inicial la dejamos usar el valor por defecto que es 1. Esto nos devuelve una instancia de nuestro generador que va a en cada iteración hacer `fetch` de la página, si la respuesta es un error va a hacer `return` de un objeto con el mensaje de error, si no va a obtener la información como JSON y se va a fijar si la `data` (un array de comentarios) está vació para hacer `return` o sino hacer `yield` de `data`, por último suma 1 a la página actual.
+Lo que acabamos de hacer es que al ejecutar `fetchPaginated` le pasamos la URL del recurso a hacer `fetch` y la variable para la página que debemos agregar al query string de nuestra URL, la página inicial la dejamos usar el valor por defecto que es 1. Esto nos devuelve una instancia de nuestro generador que va a en cada iteración hacer `fetch` de la página, si la respuesta es un error va a hacer `return` de un objeto con el mensaje de error, si no va a obtener la información como JSON y se va a fijar si la `data` (un array de comentarios) está vació para hacer `return` o sino hacer `yield` de `data`, por último suma 1 a la página actual.
 
 En un generador `return` funciona al igual que en una función, en el momento en que se ejecuta el generador se termina inmediatamente y ya no sigue procesando valores. Esto nos permite matar el generador cuando hay un error o ya no hay más páginas a las cuales hacerle fetch.
 
-Fuera de nuestro generador hacemos un `for..of` asíncrono, agregando la palabra clave `await`. Esto nos permite iterar sobre un generador asíncrono y guardanos `value` como la variable `data` la cual luego mostramos en consola.
+Fuera de nuestro generador hacemos un `for..of` asíncrono, agregando la palabra clave `await`. Esto nos permite iterar sobre un generador asíncrono y guardamos `value` como la variable `data` la cual luego mostramos en consola.
 
 Podríamos entonces usar nuestro nuevo `fetchPaginated` para traerse la primer página de comentarios y que cuando el usuario llegue al final del scroll o haga click en un botón se le pida la siguiente página usando `next` y así hasta terminar.
 
 ## Palabras finales
 
-Aunque raros de usar, los generadores y más aún los generadores asíncrons pueden ser muy útiles para ejecutar lógica asíncrona repetitiva de forma más simple.
+Aunque raros de usar, los generadores y más aún los generadores asíncronos pueden ser muy útiles para ejecutar lógica asíncrona repetitiva de forma más simple.
