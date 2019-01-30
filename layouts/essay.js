@@ -142,8 +142,6 @@ function EssayLayout({ meta, children }) {
           padding-right: 1em;
           word-break: break-word;
           word-wrap: break-word;
-          text-align: justify;
-          hyphens: auto;
         }
 
         .content :global(h2),
