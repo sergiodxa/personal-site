@@ -1,5 +1,11 @@
 [
   {
+    "id": 76,
+    "title": "Usando Generadores Asíncronos en JavaScript",
+    "link": "/essays/generadores-asincronos-js",
+    "date": "2019-01-30T15:00:00.712Z"
+  },
+  {
     "id": 75,
     "title": "Carrusel de elementos dinámicos con React.js",
     "link": "/essays/carrusel-elementos-dinamicos-react",
