@@ -1,5 +1,11 @@
 [
   {
+    "id": 78,
+    "title": "React Hook: usePermissions",
+    "link": "/essays/libs/react-use-permissions",
+    "date": "2019-02-07T06:54:29.905Z" 
+  },
+  {
     "id": 77,
     "title": "Conceptos Básicos de JS: Array#map",
     "link": "/essays/js-basics/array-prototype-map",
