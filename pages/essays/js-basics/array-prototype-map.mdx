@@ -11,7 +11,7 @@ export const meta = {
 
 export default withLayout("js-basic")(meta)
 
-_Array#map_, o `Array.prototype.map`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para _mapear_ un array para obtener uno nuevo, lo que en palabras más normales significa que vamos a recorrer un array y transformar sus elementos en otra cosa. Veamos un ejemplo:
+_Array#map_, o `Array.prototype.map`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para _mapear_ un array y obtener uno nuevo, lo que en palabras más normales significa que vamos a recorrer un array y transformar sus elementos en otra cosa. Veamos un ejemplo:
 
 ```js
 const numbers = [1,2,3];
@@ -71,7 +71,7 @@ const doubles = map(numbers, number => number * 2);
 console.log(doubles); // [2,4,6]
 ```
 
-¿Qué es lo que hicimos? Nuestra función recibe los tres argumentos que dijimos antes, luego crea un array vacío llamado `result` y una constante llamada `boundCallback` que en caso de que se haya definido `thisArg` es igual a hacer Function#bind the `callback` con el valor de `thisArg` y en caso contrario es igual a `callback`. Después iteramos el array inicial y hacemos `result.push` del valor que devuelve el `callback`, al cual le pasamos el valor actual del array, el índice y el array entero. Por último devolvemos el resultado.
+¿Qué es lo que hicimos? Nuestra función recibe los tres argumentos que dijimos antes, luego crea un array vacío llamado `result` y una constante llamada `boundCallback` que en caso de que se haya definido `thisArg` es igual a hacer Function#bind de `callback` con el valor de `thisArg` y en caso contrario es igual a `callback`. Después iteramos el array inicial y hacemos `result.push` del valor que devuelve el `callback`, al cual le pasamos el valor actual del array, el índice y el array entero. Por último devolvemos el resultado.
 
 ## Casos de uso
 
