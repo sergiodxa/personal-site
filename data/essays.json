@@ -1,5 +1,11 @@
 [
   {
+    "id": 79,
+    "title": "Conceptos Básicos de JS: Array#filter",
+    "link": "/essays/js-basics/array-prototype-filter",
+    "date": "2019-02-08T17:36:16.380Z" 
+  },
+  {
     "id": 78,
     "title": "React Hook: usePermissions",
     "link": "/essays/libs/react-use-permissions",
