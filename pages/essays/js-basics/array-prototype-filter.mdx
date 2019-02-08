@@ -15,7 +15,7 @@ _Array#filter_, o `Array.prototype.filter`, es un método que poseen todos lo ar
 
 ```js
 const numbers = [1,2,3];
-const evens = numbers.filter(number => number %% 2 === 0); // es par
+const evens = numbers.filter(number => number % 2 === 0); // es par
 console.log(evens); // [2]
 ```
 
@@ -30,7 +30,7 @@ const numbers = [1,2,3];
 const evens = [];
 
 for (const number of numbers) {
-  if (number && 2 === 0) evens.push(number);
+  if (number % 2 === 0) evens.push(number);
 }
 
 console.log(evens); // [2,4,6]
@@ -67,7 +67,7 @@ function map(array, callback, thisArg) {
 }
 
 const numbers = [1,2,3];
-const evens = filter(numbers, number => number %% 2 === 0);
+const evens = filter(numbers, number => number % 2 === 0);
 console.log(evens); // [2,4,6]
 ```
 
