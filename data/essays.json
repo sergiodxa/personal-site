@@ -1,21 +1,27 @@
 [
   {
+    "id": 80,
+    "title": "Conceptos Básicos de JS: Array#push",
+    "link": "/essays/js-basics/array-prototype-push",
+    "date": "2019-02-11T15:51:40.696Z"
+  },
+  {
     "id": 79,
     "title": "Conceptos Básicos de JS: Array#filter",
     "link": "/essays/js-basics/array-prototype-filter",
-    "date": "2019-02-08T17:36:16.380Z" 
+    "date": "2019-02-08T17:36:16.380Z"
   },
   {
     "id": 78,
     "title": "React Hook: usePermissions",
     "link": "/essays/libs/react-use-permissions",
-    "date": "2019-02-07T06:54:29.905Z" 
+    "date": "2019-02-07T06:54:29.905Z"
   },
   {
     "id": 77,
     "title": "Conceptos Básicos de JS: Array#map",
     "link": "/essays/js-basics/array-prototype-map",
-    "date": "2019-02-07T05:44:51.745Z" 
+    "date": "2019-02-07T05:44:51.745Z"
   },
   {
     "id": 76,
