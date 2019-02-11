@@ -3,18 +3,16 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Introducción a GraphQL",
   date: "2017-05-29T00:42:30.912340Z",
-  description: "En 2015 Facebook anunció GraphQL, una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?",
+  description:
+    "En 2015 Facebook anunció GraphQL, una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?",
   slug: "introduccion-a-graphql",
   published: true,
   lang: "es",
   canonicalUrl: "https://platzi.com/blog/introduccion-a-graphql/",
-  tags: [
-    "GraphQL",
-    "API"
-  ]
-}
+  tags: ["GraphQL", "API"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 En 2015 Facebook anunció [GraphQL](http://graphql.org/), una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?
 
@@ -30,9 +28,9 @@ Por ejemplo si hacemos una petición `GET /api/careers/` eso nos devuelve la lis
 
 En cambio con GQL tenemos un solo endpoint, normalmente `/graphql`, y solo interactuamos con el mediante el método `POST`. Para decirle que datos queremos obtener, crear o modificar colocamos en el cuerpo de la petición alguna de estas tres cosas:
 
-* Query
-* Mutation
-* Subscription
+- Query
+- Mutation
+- Subscription
 
 Estas son las 3 formas de interactuar con un API GraphQL. Ahora vamos a ver que es cada una.
 
@@ -102,8 +100,7 @@ Esa mutación lo que hace es indicarle a nuestro servidor que queremos agregar a
   "data": {
     "addToLearningPath": {
       "title": "Fundamentos de JavaScript",
-      "badge":
-        "https://static.platzi.com/media/achievements/badge-Fundamentos-js.png",
+      "badge": "https://static.platzi.com/media/achievements/badge-Fundamentos-js.png",
       "approved": false,
       "url": "https://platzi.com/clases/fundamentos-javascript/"
     }
@@ -183,13 +180,13 @@ type Course {
 
 Así estamos definiendo que en nuestra aplicación existe un objeto de tipo `Course` que tiene los siguientes datos:
 
-* `id` un número, obligatorio
-* `title` un string, obligatorio
-* `badge` un string, obligatorio
-* `approved` un booleano, opcional
-* `url` un string, obligatorio
-* `description` un string, opcional
-* `concepts` una lista de objetos de tipo `Concept`, opcional
+- `id` un número, obligatorio
+- `title` un string, obligatorio
+- `badge` un string, obligatorio
+- `approved` un booleano, opcional
+- `url` un string, obligatorio
+- `description` un string, opcional
+- `concepts` una lista de objetos de tipo `Concept`, opcional
 
 La propiedad `concepts` es básicamente una relación que indica que un curso tiene varios conceptos. Luego necesitamos definir las posibles formas de obtener este curso.
 

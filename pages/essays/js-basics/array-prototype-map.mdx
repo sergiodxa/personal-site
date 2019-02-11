@@ -3,18 +3,19 @@ import withLayout from "../../../lib/with-layout.js";
 export const meta = {
   title: "Array#map",
   date: "2019-02-07T05:44:51.745Z",
-  description: "Aprende a usar Array#map, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.",
+  description:
+    "Aprende a usar Array#map, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.",
   slug: "js-basics/array-prototype-map",
   lang: "es",
   tags: ["JavaScript", "Spanish", "Array", "ES5"]
-}
+};
 
-export default withLayout("js-basic")(meta)
+export default withLayout("js-basic")(meta);
 
 _Array#map_, o `Array.prototype.map`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para _mapear_ un array y obtener uno nuevo, lo que en palabras más normales significa que vamos a recorrer un array y transformar sus elementos en otra cosa. Veamos un ejemplo:
 
 ```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const doubles = numbers.map(number => number * 2);
 console.log(doubles); // [2,4,6]
 ```
@@ -26,7 +27,7 @@ Lo que hace Array#map entonces es llamar la función que pasamos como argumento 
 Si queremos hacer lo mismo que Array#map tendríamos que hacer algo similar a esto:
 
 ```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const doubles = [];
 
 for (const number of numbers) {
@@ -66,7 +67,7 @@ function map(array, callback, thisArg) {
   return result;
 }
 
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const doubles = map(numbers, number => number * 2);
 console.log(doubles); // [2,4,6]
 ```
@@ -81,7 +82,9 @@ Array#map es usado un montón en JavaScript, especialmente cuando se trabaja de 
 function List({ list }) {
   return (
     <ul>
-      {list.map(item => <Item key={item.id} {...item} />)}
+      {list.map(item => (
+        <Item key={item.id} {...item} />
+      ))}
     </ul>
   );
 }

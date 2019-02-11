@@ -8,11 +8,10 @@ export const meta = {
   published: true,
   lang: "es",
   canonicalUrl: "https://platzi.com/blog/react-v014/",
-  tags: [
-  ]
-}
+  tags: []
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 **React v0.14** es la nueva beta de la librería de Facebook que fue liberada recientemente. Esta primera versión llegará con dos grandes cambios que harán que **los módulos sean más ligeros y que logremos mejoras en nuestros desarrollos**. En este artículo te contaré en qué consisten y cómo puedes empezar a implementarlos.
 
@@ -23,14 +22,12 @@ El módulo de React.js se va a dividir en dos para la versión 0.14. El primero 
 El segundo módulo va a llamarse **react-dom** y va a contener toda la parte de renderizado. Es decir, los métodos `ReactDOM.render`, `ReactDOM.unmountComponentAtNode` y `ReactDOM.findDOMNode`. Además, dentro de **react-dom** vamos a tener acceso a **react-dom/server** con los métodos para renderizar un componente en el servidor. Estos son `ReactDOMServer.renderToString` y `ReactDOMServer.renderToStaticMarkup`.
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 const MiComponente = React.createClass({
-  render () {
-    return (
-      <div>Hola Platzi!</div>
-    );
+  render() {
+    return <div>Hola Platzi!</div>;
   }
 });
 
@@ -43,11 +40,11 @@ Con estos cambios se optimizará la descarga de los componentes de React.js. Es 
 
 Y esto aumentará las posibilidades de compartir componentes entre Front-end, Backend y Mobile. Por último, esta versión todavía va a contar con los métodos de **react-dom** dentro del módulo **react**.
 
-De esta forma, evitamos que se rompa el código actual y que, al momento de intentar usarlo, la consola nos muestre un _warning_ para dar aviso de que es necesario empezar a usar **react-dom**.  Sin embargo, en la versión 0.15 de React.js el **react-dom** pasará a ser obligatorio. Así se eliminarán tanto el warning, como los métodos de renderizado del módulo react.
+De esta forma, evitamos que se rompa el código actual y que, al momento de intentar usarlo, la consola nos muestre un _warning_ para dar aviso de que es necesario empezar a usar **react-dom**. Sin embargo, en la versión 0.15 de React.js el **react-dom** pasará a ser obligatorio. Así se eliminarán tanto el warning, como los métodos de renderizado del módulo react.
 
 ## Referencia a nodos del DOM
 
-El segundo gran cambio que va a traer React.js en la v0.14 es una modificación en la forma en la que accedemos a los elementos del DOM que posean un atributo `ref`. Actualmente para acceder a un elemento referenciado tendríamos que hacer algo así: 
+El segundo gran cambio que va a traer React.js en la v0.14 es una modificación en la forma en la que accedemos a los elementos del DOM que posean un atributo `ref`. Actualmente para acceder a un elemento referenciado tendríamos que hacer algo así:
 
 ```js
 const nombre = this.refs.nombre.getDOMNode();
@@ -59,7 +56,7 @@ Este método permite obtener el elemento del DOM que es renderizado por MiCompon
 
 ## Cómo empezar a usar la v0.14
 
-Si intentas descargar el módulo react desde npm, vas a obtener la versión actual (0.13.3). Para poder empezar a usar la beta de la nueva versión, es necesario descargar estos dos módulos usando los siguientes comandos: 
+Si intentas descargar el módulo react desde npm, vas a obtener la versión actual (0.13.3). Para poder empezar a usar la beta de la nueva versión, es necesario descargar estos dos módulos usando los siguientes comandos:
 
 ```js
 npm i -S react@0.14.0-beta1 react-dom@0.14.0-beta1

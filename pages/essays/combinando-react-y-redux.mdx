@@ -3,20 +3,16 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Combinando React.js y Redux.js",
   date: "2016-03-28T07:18:42.542Z",
-  description: "Redux es especialmente bueno al usarlo con librerías como React ya que facilita usar React solo para la UI y dejar el estado en Redux.",
+  description:
+    "Redux es especialmente bueno al usarlo con librerías como React ya que facilita usar React solo para la UI y dejar el estado en Redux.",
   slug: "combinando-react-y-redux",
   published: true,
   lang: "es",
   canonicalUrl: "https://medium.com/react-redux/7b45a9dc39ac",
-  tags: [
-    "React",
-    "Redux",
-    "JavaScript",
-    "High Order Component"
-  ]
-}
+  tags: ["React", "Redux", "JavaScript", "High Order Component"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 En un [artículo anterior vimos como funciona Redux.js](https://sergiodxa.com/essays/introduccion-a-redux) y dijimos que era posible usarlo con cualquier framework o librería de JavaScript.
 
@@ -35,18 +31,18 @@ npm i -S react react-dom react-redux redux
 Lo primero que necesitamos es encapsular nuestra aplicación con el componente `Provider` que trae `react-redux`. Este componente recibe un único parámetro llamado store el cual es, como su nombre indica, la instancia del Store que usamos.
 
 ```js
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
 
-import store from './store';
-import App from './components/App';
+import store from "./store";
+import App from "./components/App";
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('app')
+  document.getElementById("app")
 );
 ```
 
@@ -60,9 +56,9 @@ Para hacer eso necesitamos conectar nuestros componentes a Redux, esto se logra 
 
 ```js
 // importamos el decorador @connect de react-redux
-import { connect } from 'react-redux';
-import React from 'react';
-import UserItem from './UserItem';
+import { connect } from "react-redux";
+import React from "react";
+import UserItem from "./UserItem";
 
 // aplicamos el decorador @connect a nuestro componente
 @connect()
@@ -72,7 +68,9 @@ class UserList extends React.Component {
     // recibimos como props del Store
     return (
       <section>
-        {this.props.users.map(user => <UserItem {...user} key={user.id} />)}
+        {this.props.users.map(user => (
+          <UserItem {...user} key={user.id} />
+        ))}
       </section>
     );
   }
@@ -168,7 +166,10 @@ De esta forma podemos mandar a nuestro componente las acciones que necesitamos y
 Aunque `connect` esta pensado como decorador es posible usarlo como una función normal sin necesidad de usar Babel con el plugin [babel-plugin-transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy) para soportar decoradores de la siguiente forma.
 
 ```js
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Component);
 ```
 
 Como siempre `connect` recibe `mapStateToProps` y `mapDispatchToProps` como parámetros, solo que además devuelve una función que recibe el componente a conectar y nos devuelve el componente conectado, el cual simplemente exportamos y listo, conseguimos el mismo resultado que usándolo como un decorador.

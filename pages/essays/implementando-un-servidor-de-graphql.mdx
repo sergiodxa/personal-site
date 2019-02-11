@@ -3,19 +3,16 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Implementando un Servidor de GraphQL",
   date: "2017-07-07T15:42:42.778208Z",
-  description: "Explicación paso a paso de como implementar un servidor GraphQL desde cero en Node.js.",
+  description:
+    "Explicación paso a paso de como implementar un servidor GraphQL desde cero en Node.js.",
   slug: "implementando-un-servidor-de-graphql",
   published: true,
   lang: "es",
   canonicalUrl: "https://platzi.com/blog/implementando-un-servidor-de-graphql/",
-  tags: [
-    "GraphQL",
-    "API",
-    "JavaScript"
-  ]
-}
+  tags: ["GraphQL", "API", "JavaScript"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 En un artículo anterior vimos una [introducción a GraphQL](https://sergiodxa.com/essays/introduccion-a-graphql), ahora vamos a ver como montar un servidor de GraphQL simple. En este ejemplo vamos a usar [JavaScript](https://platzi.com/clases/fundamentos-javascript/) (con [Node.js](https://platzi.com/clases/nodejs/)) por simplicidad, pero es importante entender que podemos usar [cualquier](https://platzi.com/clases/python/) [tecnología](https://platzi.com/clases/ruby/) [de](https://platzi.com/clases/php/) [backend](https://platzi.com/clases/java-basico/) para crear servidores de GraphQL.
 
@@ -41,20 +38,20 @@ yarn add -D nodemon
 
 Vamos a listar todas las dependencias y para explicar que hace cada una:
 
-* `body-parser` => middleware de Express para leer fácilmente el body de peticiones POST
-* `compression` => middleware de Express para comprimir con GZIP nuestras respuestas
-* `cors` => middleware de Express para manejar CORS
-* `express` => librería para crear un servidor HTTP y manejar rutas
-* `graphql` => implementación de GraphQL en JavaScript
-* `graphql-server-express` => librería para conectar Express con GraphQL
-* `graphql-subscriptions` => librería para activar suscripciones en GraphQL para cosas en tiempo real
-* `graphql-tools` => herramientas que nos ayudan a crear servidores de GraphQL más fácil
-* `morgan` => middleware de Express para tener logs en consola de nuestras peticiones
-* `pg` => driver de PostgreSQL para usarlo como base de datos
-* `sequelize` => ORM de bases de datos SQL como PostgreSQL
-* `subscriptions-transport-ws` => librería para que nuestras suscripciones funcionen mediante WebSockets
-* `uuid` => librería para generar ID únicos
-* `nodemon` => nos va a servir para correr nuestra aplicación en desarrollo
+- `body-parser` => middleware de Express para leer fácilmente el body de peticiones POST
+- `compression` => middleware de Express para comprimir con GZIP nuestras respuestas
+- `cors` => middleware de Express para manejar CORS
+- `express` => librería para crear un servidor HTTP y manejar rutas
+- `graphql` => implementación de GraphQL en JavaScript
+- `graphql-server-express` => librería para conectar Express con GraphQL
+- `graphql-subscriptions` => librería para activar suscripciones en GraphQL para cosas en tiempo real
+- `graphql-tools` => herramientas que nos ayudan a crear servidores de GraphQL más fácil
+- `morgan` => middleware de Express para tener logs en consola de nuestras peticiones
+- `pg` => driver de PostgreSQL para usarlo como base de datos
+- `sequelize` => ORM de bases de datos SQL como PostgreSQL
+- `subscriptions-transport-ws` => librería para que nuestras suscripciones funcionen mediante WebSockets
+- `uuid` => librería para generar ID únicos
+- `nodemon` => nos va a servir para correr nuestra aplicación en desarrollo
 
 Como vemos nuestra aplicación va a usar Express para el servidor HTTP y vamos a usar PG como base de datos.
 
@@ -182,9 +179,9 @@ module.exports = `
 
 Ese es nuestro esquema de GQL. Como vemos vamos a utilizar queries, mutaciones y suscripciones en nuestro API, para refrescar que es cada una:
 
-* **Query**: las formas de pedir datos a nuestro API.
-* **Mutation**: las formas de interactuar para crear, modificar o borrar datos, son similares a funciones.
-* **Subscriptions**: las formas de suscribirse a cambios en el API y enterarse en tiempo real cuando hay un cambio
+- **Query**: las formas de pedir datos a nuestro API.
+- **Mutation**: las formas de interactuar para crear, modificar o borrar datos, son similares a funciones.
+- **Subscriptions**: las formas de suscribirse a cambios en el API y enterarse en tiempo real cuando hay un cambio
 
 ## Definiendo resolvers
 

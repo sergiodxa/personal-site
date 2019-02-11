@@ -4,7 +4,8 @@ export const meta = {
   title: "Scalable Real-Time Applications",
   slug: "scalable-real-time-applications",
   date: "2019-01-11T05:52:01.715Z",
-  description: "Tips and recommendations to build real-time applications using WebSockets",
+  description:
+    "Tips and recommendations to build real-time applications using WebSockets",
   published: true,
   lang: "en",
   translateFrom: {
@@ -12,15 +13,10 @@ export const meta = {
     lang: "es",
     title: "Aplicaciones Real-Time de Alta Escala"
   },
-  tags: [
-    "Platzi",
-    "RealTime",
-    "High Scalability",
-    "Translated"
-  ]
-}
+  tags: ["Platzi", "RealTime", "High Scalability", "Translated"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Build Real-Time applications is hard, really hard, but it could improve the user experience by offering immediate content updates.
 
@@ -40,7 +36,7 @@ Another important part of our WS is a queue or Pub/Sub system which let us scale
 
 ## Avoid Mutations from the WebSocket
 
-Once we have our WS server working it's not unusual to start sending everything using this channel, this way if we need to **query** some data we use WS, if we need to create, update or delete a resource we send the required information using WS. Even though this works at a small scale, when we start to have more and more connected users doing this kind of **mutations** we will start to saturate our WS channel requiring to sping up more instances for fewer people. 
+Once we have our WS server working it's not unusual to start sending everything using this channel, this way if we need to **query** some data we use WS, if we need to create, update or delete a resource we send the required information using WS. Even though this works at a small scale, when we start to have more and more connected users doing this kind of **mutations** we will start to saturate our WS channel requiring to sping up more instances for fewer people.
 
 The best way to avoid this is to have an HTTP API and use it to query and mutate data, being a stateless protocol it's easier to scale to support more request compared to WS.
 

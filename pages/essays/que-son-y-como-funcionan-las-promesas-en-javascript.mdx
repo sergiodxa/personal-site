@@ -3,21 +3,17 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Qué son y cómo funcionan las promesas en JavaScript",
   date: "2017-03-06T00:00:00Z",
-  description: "Manejar flujos de datos asíncronos es complejo, pero con Promesas esto se vuelve mucho más fácil",
+  description:
+    "Manejar flujos de datos asíncronos es complejo, pero con Promesas esto se vuelve mucho más fácil",
   slug: "que-son-y-como-funcionan-las-promesas-en-javascript",
   published: true,
   lang: "es",
-  canonicalUrl: "https://platzi.com/blog/que-es-y-como-funcionan-las-promesas-en-javascript/",
-  tags: [
-    "JavaScript",
-    "Promises",
-    "Async",
-    "ES2015",
-    "ES6"
-  ]
-}
+  canonicalUrl:
+    "https://platzi.com/blog/que-es-y-como-funcionan-las-promesas-en-javascript/",
+  tags: ["JavaScript", "Promises", "Async", "ES2015", "ES6"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Manejar flujos de datos asíncronos es complejo, quién no ha terminado con código como este:
 
@@ -99,9 +95,9 @@ Lo que acabamos de hacer es crear una nueva promesa que se va a completar luego 
 
 Esto nos lleva a hablar del estado de una promesa, básicamente existen 3 posibles estados.
 
-* **Pendiente**
-* **Resuelta**
-* **Rechazada**
+- **Pendiente**
+- **Resuelta**
+- **Rechazada**
 
 Una promesa originalmente esta **Pendiente**. Cuando llamamos a `resolve` entonces la promesa pasa a estar **Resuelta**, si llamamos a `reject` pasa a estar **Rechazada**, usualmente cuando es rechazada obtenemos un error que nos va a indicar la razón del rechazo. Cuando una promesa se resuelve entonces se ejecuta la función que pasamos al método `.then`, si la promesa es rechazada entonces se ejecuta la función que pasamos a `.catch`, de esta forma podemos controlar el flujo de datos.
 

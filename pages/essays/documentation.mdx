@@ -3,19 +3,15 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Documentation, Lessons Learned",
   date: "2018-01-17T21:18:58.320Z",
-  description: "After working on the documentation of the ZEIT's API I want to share some insights I learned from it.",
+  description:
+    "After working on the documentation of the ZEIT's API I want to share some insights I learned from it.",
   slug: "documentation",
   published: true,
   lang: "en",
-  tags: [
-    "ZEIT",
-    "Now",
-    "Documentation",
-    "Lesson learned"
-  ]
-}
+  tags: ["ZEIT", "Now", "Documentation", "Lesson learned"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 At ▲ZEIT [we are launching](https://zeit.co/blog/api-2) our newly renewed [API documentation](https://zeit.co/api), I've been working on that project since the ZDB in charge of writing the documentation plus some code related to it. Documenting our whole public API help me learn and understand more about our infrastructure and how Now works internally.
 
@@ -32,10 +28,10 @@ Get the list of members of the team `:id`.
 
 ### Response
 
-* `uid` (`String`) The team member unique identifier
-* `role` (`String`) The role inside the team, it could be OWNER or MEMBER
-* `email` (`String`) The email address of the team member
-* `username` (`String`) The username of the team member
+- `uid` (`String`) The team member unique identifier
+- `role` (`String`) The role inside the team, it could be OWNER or MEMBER
+- `email` (`String`) The email address of the team member
+- `username` (`String`) The username of the team member
 ```
 
 Something simple like that could be enough. As a developer I found that a really good way to start a project like a library or an HTTP service is with the public API, create the README, wrote how the project should be used and then code it, this is what's called [RDD](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).

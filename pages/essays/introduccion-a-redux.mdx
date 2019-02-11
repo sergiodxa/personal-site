@@ -3,20 +3,16 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Introducción a Redux.js",
   date: "2016-03-23T15:52:14.733Z",
-  description: "Redux es una librería para controlar el estado de nuestras WebApps fácilmente, de forma consistente entre cliente y servidor y una gran DX.",
+  description:
+    "Redux es una librería para controlar el estado de nuestras WebApps fácilmente, de forma consistente entre cliente y servidor y una gran DX.",
   slug: "introduccion-a-redux",
   published: true,
   lang: "es",
   canonicalUrl: "https://medium.com/react-redux/8bdf4fe0751e",
-  tags: [
-    "React",
-    "Redux",
-    "Flux",
-    "JavaScript"
-  ]
-}
+  tags: ["React", "Redux", "Flux", "JavaScript"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Redux es una librería para controlar el estado de nuestras aplicaciones web fácilmente, de una forma consistente entre cliente y servidor, testeable y con una gran experiencia de desarrollo.
 
@@ -57,13 +53,13 @@ npm i -S redux
 Luego podemos importarlo como cualquier otro módulo:
 
 ```js
-import redux from 'redux';
+import redux from "redux";
 ```
 
 Internamente va a descargar dos dependencias:
 
-* [loose-envify](https://github.com/zertosh/loose-envify) - Inyecta variables de entorno
-* [lodash](https://github.com/lodash/lodash) - Colección de funciones utilitarias para programación funcional
+- [loose-envify](https://github.com/zertosh/loose-envify) - Inyecta variables de entorno
+- [lodash](https://github.com/lodash/lodash) - Colección de funciones utilitarias para programación funcional
   ## Conceptos básicos
   Redux es bastante fácil de aprender, aunque a simple vista no lo parezca, incluso es tan fácil que la librería es increíblemente pequeña (2kb minificada).
 
@@ -94,7 +90,7 @@ Estos son simplemente funciones que pueden o no recibir parámetros y devuelven 
  */
 function addTodo(text) {
   return {
-    type: 'ADD_TODO',
+    type: "ADD_TODO",
     payload: {
       text
     }
@@ -124,20 +120,20 @@ Ahora que definimos la forma de nuestro store podemos empezar a crear reducers. 
 
 Se llaman reducers porque son el tipo de funciones que pasarías a `Array.prototype.reduce(reducer[, initialValue])`. Es muy importante que se mantengan como funciones puras. Algunas cosas que **nunca** deberías hacer en un reducer:
 
-* Modificar sus argumentos directamente (lo correcto es crear una copia)
-* Realizar acciones con efectos secundarios como llamadas a una API o cambiar rutas
-* Ejecutar funciones no puras como Date.now() o Math.random()
+- Modificar sus argumentos directamente (lo correcto es crear una copia)
+- Realizar acciones con efectos secundarios como llamadas a una API o cambiar rutas
+- Ejecutar funciones no puras como Date.now() o Math.random()
 
 Que se mantengan puros quiere decir que pasandole los mismos parámetros debería siempre devolver el mismo resultado. Ahora vamos a programar un reducer para nuestra acción `ADD_TODO`:
 
 ```js
 // cargamos el método de Redux para
 // poder combinar reducers
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 function todos(state = [], action = {}) {
   switch (action.type) {
-    case 'ADD_TODO':
+    case "ADD_TODO":
       // creamos una copia del estado actual
       const copy = Array.from(state);
       // modificamos lo que necesitamos
@@ -182,9 +178,9 @@ Para crear un store necesitamos una función de Redux y el reducer (o los reduce
 
 ```js
 // cargamos la función para crear un store
-import { createStore } from 'redux';
+import { createStore } from "redux";
 // cargamos nuestros reducers (ya combinados)
-import reducers from './reducers.js';
+import reducers from "./reducers.js";
 // definimos el estado inicial
 const initialState = {
   todos: []
@@ -201,7 +197,7 @@ La función `createStore` simplemente recibe nuestros reducers como primer pará
 Una vez tenemos nuestro store creado podemos acceder al estado que almacena con `store.getState()` desde cualquier parte de nuestra aplicación donde importemos el store.
 
 ```js
-import store from './store.js';
+import store from "./store.js";
 // vemos el estado actual del store
 console.log(store.getState());
 ```
@@ -211,7 +207,7 @@ console.log(store.getState());
 Podemos suscribirnos al store para enterarnos cuando cambia y poder modificar nuestra aplicación en consecuencia usando `store.subscribe(callback)`.
 
 ```js
-import store from './store.js';
+import store from "./store.js";
 // nos suscribimos al store, esto nos devuelve
 // una función que nos sirve para desuscribirnos
 const unsubscribe = store.subscribe(() => {

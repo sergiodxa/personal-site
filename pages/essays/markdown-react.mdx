@@ -3,19 +3,15 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Renderizando Markdown en React.js",
   date: "2018-01-06T05:43:35.609Z",
-  description: "Crea un parser que transforme Markdown a componentes de React.js",
+  description:
+    "Crea un parser que transforme Markdown a componentes de React.js",
   slug: "markdown-react",
   published: true,
   lang: "es",
-  tags: [
-    "JavaScript",
-    "React",
-    "React Native",
-    "Markdown"
-  ]
-}
+  tags: ["JavaScript", "React", "React Native", "Markdown"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Markdown es una tecnología genial para poder escribir fácilmente contenido de texto, una de las mejores cosas es que si bien está pensado para ser transformado en HTML es posible usarlo para transformarlo en cualquier otra tecnología, por ejemplo componentes de React.
 
@@ -34,7 +30,7 @@ yarn add markdown-it
 Luego debemos importarlo e instanciarlo en nuestro código:
 
 ```js
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from "markdown-it";
 
 const parser = new MarkdownIt({
   html: false, // desactivamos el uso de HTML dentro del markdown
@@ -42,14 +38,14 @@ const parser = new MarkdownIt({
   linkify: true, // detecta enlaces y los vuelve enlaces
   xhtmlOut: true, // devuelve XHTML válido (por ejemplo <br /> en vez de <br>)
   typographer: true, // reemplaza ciertas palabras para mejorar el texto
-  langPrefix: 'language-' // agrega una clase `language-[lang]` a los bloques de código
+  langPrefix: "language-" // agrega una clase `language-[lang]` a los bloques de código
 });
 ```
 
 Con eso ya creamos nuestra instancia, luego podríamos agregar plugins, por ejemplo podríamos crear un plugin para embeber tweets:
 
 ```js
-import regexp from 'markdown-it-regexp';
+import regexp from "markdown-it-regexp";
 
 // custom plugin for twitter cards
 const tweet = regexp(/@\[twitter\]\(([^\)]*)\)/, match => {
@@ -99,7 +95,7 @@ yarn add himalaya
 Y luego vamos a importar su parser de HTML a JSON.
 
 ```js
-import { parser } from 'himalaya';
+import { parser } from "himalaya";
 ```
 
 Ya que tenemos importardo himalaya podemos usarlo pasando el HTML que obtuvimos con nuestro parser de Markdown.
@@ -137,11 +133,11 @@ El resultado va a ser un array con objetos por cada etiqueta HTML, algo similar 
 
 Como podemos ver tenemos las siguientes propiedades:
 
-* `type` define si el objeto representa un `element`, `text` o `comment`
-* `tagName` si es un `element` indica el nombre de la etiqueta HTML
-* `attributes` es un objeto con todos los atributes de la etiqueta HTML
-* `children` es una lista de más objetos, por ejemplo el contenido de texto o elementos internos
-* `content` si es un `text` o `comment` define el contenido de text
+- `type` define si el objeto representa un `element`, `text` o `comment`
+- `tagName` si es un `element` indica el nombre de la etiqueta HTML
+- `attributes` es un objeto con todos los atributes de la etiqueta HTML
+- `children` es una lista de más objetos, por ejemplo el contenido de texto o elementos internos
+- `content` si es un `text` o `comment` define el contenido de text
 
 Este JSON podemos luego recorrerlos para convertir cada elementos o texto en un componente de React.
 
@@ -150,16 +146,16 @@ Este JSON podemos luego recorrerlos para convertir cada elementos o texto en un 
 Como dijimos, vamos a convertir nuestro JSON a etiquetas de React, para eso vamos a crear una función que nos permita definir que hacer con cada objeto dependiendo de su `type`, antes que todo vamos instalar React, ReactDOM y [html-entities](https://www.npmjs.com/package/html-entities), este último nos va a servir para decodificar entidades HTML (como `<` y `>`) que sean parte del contenido y no etiquetas reales.
 
 ```js
-import { AllHtmlEntities } from 'html-entities';
+import { AllHtmlEntities } from "html-entities";
 const entities = new AllHtmlEntities();
 
 function mapElement(element, index) {
   switch (element.type) {
-    case 'text': {
+    case "text": {
       // si es un nodo de texto decodificamos el contenido y lo devolvemos
       return entities.decode(element.content);
     }
-    case 'element': {
+    case "element": {
       // si es un elemento lo pasamos (junto a su posición en el array) a matchElement
       return matchElement(element, index);
     }

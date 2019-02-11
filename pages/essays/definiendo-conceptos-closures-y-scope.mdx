@@ -7,14 +7,10 @@ export const meta = {
   published: true,
   canonicalUrl: "https://medium.com/@sergiodxa/9081f1e113e6",
   lang: "es",
-  tags: [
-    "JavaScript",
-    "Programming",
-    "ES6"
-  ]
-}
+  tags: ["JavaScript", "Programming", "ES6"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 ## Qué es el Scope
 
@@ -115,8 +111,8 @@ Ejemplo más práctico:
 ```js
 function changeSize(a) {
   return function() {
-    document.body.style.fontSize = a + 'px';
-  }
+    document.body.style.fontSize = a + "px";
+  };
 }
 var size12 = changeSize(12);
 var size14 = changeSize(14);

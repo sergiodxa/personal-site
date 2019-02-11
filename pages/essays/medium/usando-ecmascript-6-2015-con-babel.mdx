@@ -7,12 +7,12 @@ export const meta = {
   description: "",
   published: true,
   lang: "es",
-  canonicalUrl: "https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636841",
-  tags: [
-  ]
-}
+  canonicalUrl:
+    "https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636841",
+  tags: []
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 ECMAScript 2015, comunmente conocido como ECMAScript 6 o ES6, es la nueva versión del lenguaje estandarizado ECMAScript del cual sale JavaScript. Esta nueva versión trae [una gran cantidad de mejoras](https://sergiodxa.com/es6/) al lenguaje que nos ayudan al momento programar nuestras aplicaciones web.
 
@@ -97,18 +97,19 @@ npm i -D gulp browserify babelify vinyl-buffer vinyl-source-stream
 Luego en nuestro archivo gulpfile.js necesitamos cargar todos estos archivo y crear una tarea para usarlos.
 
 ```js
-var babelify   = require('babelify');
-var browserify = require('browserify');
-var buffer     = require('vinyl-buffer');
-var source     = require('vinyl-source-stream');
-gulp.task('build:js', function () {
+var babelify = require("babelify");
+var browserify = require("browserify");
+var buffer = require("vinyl-buffer");
+var source = require("vinyl-source-stream");
+gulp.task("build:js", function() {
   return browserify({
-    entries: ['source/app.js'],
+    entries: ["source/app.js"],
     transform: [babelify]
-  }).bundle()
-    .pipe(source('app.js'))
+  })
+    .bundle()
+    .pipe(source("app.js"))
     .pipe(buffer())
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest("build/"));
 });
 ```
 
@@ -154,16 +155,19 @@ node-babel --stage 1 --optional runtime app.js
 Sin embargo antes habíamos visto como usar Babel con Browserify y Gulp. Si queremos seguír usando Babel de esta forma y usar características de ES7 también es posible, para esto hay que cambiar una línea de nuestra tarea de Gulp.
 
 ```js
-gulp.task('build:js', function () {
+gulp.task("build:js", function() {
   return browserify({
-    entries: ['source/app.js'],
-    transform: [babelify.configure({
-      optional: ['runtime', 'es7.asyncFunctions']
-    })]
-  }).bundle()
-    .pipe(source('app.js'))
+    entries: ["source/app.js"],
+    transform: [
+      babelify.configure({
+        optional: ["runtime", "es7.asyncFunctions"]
+      })
+    ]
+  })
+    .bundle()
+    .pipe(source("app.js"))
     .pipe(buffer())
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest("build/"));
 });
 ```
 
@@ -178,17 +182,20 @@ Si estamos usando React en nuestra aplicación seguramente vamos a querer usar J
 En el caso de que estemos usando Browserify con Gulp habría que agregar una pequeña línea en nuestra tarea para definir que las extensiones de los archivos van a ser .jsx.
 
 ```js
-gulp.task('build:js', function () {
+gulp.task("build:js", function() {
   return browserify({
-    entries: ['source/app.js'],
-    extensions: ['.jsx'],
-    transform: [babelify.configure({
-      optional: ['runtime', 'es7.asyncFunctions']
-    })]
-  }).bundle()
-    .pipe(source('app.js'))
+    entries: ["source/app.js"],
+    extensions: [".jsx"],
+    transform: [
+      babelify.configure({
+        optional: ["runtime", "es7.asyncFunctions"]
+      })
+    ]
+  })
+    .bundle()
+    .pipe(source("app.js"))
     .pipe(buffer())
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest("build/"));
 });
 ```
 
@@ -242,4 +249,3 @@ De esta forma podríamos configurarlo en un solo lugar y que funcione siempre ig
 Si quieren seguír investigando más sobre Babel pueden ir al [sitio oficial](http://babeljs.io/) donde pueden ver formas de [usarlo con otras herramientas](http://babeljs.io/docs/setup/) como Grunt, Webpack, Require.js, Meteor, Rails, Sails, Ember, WebStorm, etc.
 
 Tienen además información sobre como usarlo más a fondo, como hacer un uso más avanzado y hasta una página donde pueden [probarlo en vivo](http://babeljs.io/repl/#?experimental=true&evaluate=true&loose=true&spec=false&playground=false&code=) incluso con las características de ES7.
-

@@ -4,18 +4,14 @@ export const meta = {
   title: "Carrusel de elementos dinámicos con React.js",
   slug: "carrusel-elementos-dinamicos-react",
   date: "2019-01-29T18:44:19.942Z",
-  description: "Tutorial sobre como implementar un carrusel para elementos de diferentes tamaños usando React.js",
+  description:
+    "Tutorial sobre como implementar un carrusel para elementos de diferentes tamaños usando React.js",
   published: true,
   lang: "en",
-  tags: [
-    "React",
-    "Carousel",
-    "Spanish",
-    "JavaScript"
-  ]
-}
+  tags: ["React", "Carousel", "Spanish", "JavaScript"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Imaginemos el siguiente caso, tenemos una lista de elementos que necesitamos mostrar de forma horizontal, estos no entran en pantalla por lo que queremos poner un carrusel para ir moviéndonos entre ellos, pero ocurre que dichos elementos varián de tamaño, algunos miden 100px de ancho, otros 300px y así.
 
@@ -97,7 +93,7 @@ import React, { Component } from "react";
 
 class Carousel extends Component {
   state = {
-    x: 0,
+    x: 0
   };
 
   componentDidUpdate(prevProps) {
@@ -105,7 +101,7 @@ class Carousel extends Component {
     if (prevProps.focus !== this.props.focus) {
       // movemos el carrusel para la izquierda o derecha (-1 izquierda, 1 derecha)
       // ej. está en 2 y antes estaba en 1 entonces se mueve a la derecha
-      this.move(this.props.focus - prevProps.focus)
+      this.move(this.props.focus - prevProps.focus);
     }
   }
 
@@ -134,7 +130,7 @@ import React, { Component } from "react";
 class Carousel extends Component {
   state = {
     x: 0,
-    currentPage: 1,
+    currentPage: 1
   };
 
   componentDidUpdate(prevProps) {
@@ -142,14 +138,14 @@ class Carousel extends Component {
     if (prevProps.focus !== this.props.focus) {
       // movemos el carrusel para la izquierda o derecha (-1 izquierda, 1 derecha)
       // ej. está en 2 y antes estaba en 1 entonces se mueve a la derecha
-      this.move(this.props.focus - prevProps.focus)
+      this.move(this.props.focus - prevProps.focus);
     }
   }
 
   move = (direction = 0) => {
     // obtenemos los tamaños de todos los elementos la primera vez
     // o los traemos de los que ya calculamos en this.sizes.
-    this.sizes = this.sizes || this.calculateSizes()
+    this.sizes = this.sizes || this.calculateSizes();
     // obtenemos la página a la que pertenece el nuevo elemento
     const { page } = this.sizes[this.props.focus];
     // si la página no cambió no hacemos nada
@@ -196,7 +192,7 @@ import React, { Component, createRef } from "react";
 class Carousel extends Component {
   state = {
     x: 0,
-    currentPage: 1,
+    currentPage: 1
   };
 
   $carousel = createRef();
@@ -206,7 +202,7 @@ class Carousel extends Component {
     if (prevProps.focus !== this.props.focus) {
       // movemos el carrusel para la izquierda o derecha (-1 izquierda, 1 derecha)
       // ej. está en 2 y antes estaba en 1 entonces se mueve a la derecha
-      this.move(this.props.focus - prevProps.focus)
+      this.move(this.props.focus - prevProps.focus);
     }
   }
 
@@ -221,21 +217,26 @@ class Carousel extends Component {
       .map(({ x, width }) => ({
         start: x, // guardamos x como start
         width, // guardamos el width
-        end: x + width, // calculamos donde termina el elemento sumando x y width
+        end: x + width // calculamos donde termina el elemento sumando x y width
       }))
       .reduce(
         (result, { end, start, width }) => {
           // calculamos la paǵina (abajo vamos a ver la explicación)
-          const page = Math.ceil((end + result.rest + this.props.leftPadding) / pageWidth);
+          const page = Math.ceil(
+            (end + result.rest + this.props.leftPadding) / pageWidth
+          );
 
           // devolvemos el resto de la página, la última página calculada y la lista de elementos con su página
           return {
             lastPage: result.lastPage !== page ? page : result.lastPage,
             elements: result.elements.concat({ width, start, end, page }),
-            rest: result.lastPage !== page ? pageWidth * result.lastPage - start : result.rest,
+            rest:
+              result.lastPage !== page
+                ? pageWidth * result.lastPage - start
+                : result.rest
           };
         },
-        { rest: 0, lastPage: 1, elements: [] }, // empezamos el reduce con resto 0, página 1 y sin elementos
+        { rest: 0, lastPage: 1, elements: [] } // empezamos el reduce con resto 0, página 1 y sin elementos
       );
 
     // devolvemos la lista de elementos
@@ -245,7 +246,7 @@ class Carousel extends Component {
   move = (direction = 0) => {
     // obtenemos los tamaños de todos los elementos la primera vez
     // o los traemos de los que ya calculamos en this.sizes.
-    this.sizes = this.sizes || this.calculateSizes()
+    this.sizes = this.sizes || this.calculateSizes();
     // obtenemos la página a la que pertenece el nuevo elemento
     const { page } = this.sizes[this.props.focus];
     // si la página no cambió no hacemos nada
@@ -313,7 +314,7 @@ function Carousel({ children, focus = 0, leftPadding = 0, component = "div" }) {
     move(focus - currentFocus.current);
     // y guardamos el nuevo foco
     currentFocus.current = focus;
-  }, [focus])
+  }, [focus]);
 
   function calculateSizes() {
     // obtenemos la lista de elementos del DOM de los children
@@ -326,7 +327,7 @@ function Carousel({ children, focus = 0, leftPadding = 0, component = "div" }) {
       .map(({ x, width }) => ({
         start: x, // guardamos x como start
         width, // guardamos el width
-        end: x + width, // calculamos donde termina el elemento sumando x y width
+        end: x + width // calculamos donde termina el elemento sumando x y width
       }))
       .reduce(
         (result, { end, start, width }) => {
@@ -337,10 +338,13 @@ function Carousel({ children, focus = 0, leftPadding = 0, component = "div" }) {
           return {
             lastPage: result.lastPage !== page ? page : result.lastPage,
             elements: result.elements.concat({ width, start, end, page }),
-            rest: result.lastPage !== page ? pageWidth * result.lastPage - start : result.rest,
+            rest:
+              result.lastPage !== page
+                ? pageWidth * result.lastPage - start
+                : result.rest
           };
         },
-        { rest: 0, lastPage: 1, elements: [] }, // empezamos el reduce con resto 0, página 1 y sin elementos
+        { rest: 0, lastPage: 1, elements: [] } // empezamos el reduce con resto 0, página 1 y sin elementos
       );
 
     // devolvemos la lista de elementos
@@ -350,7 +354,7 @@ function Carousel({ children, focus = 0, leftPadding = 0, component = "div" }) {
   function move(direction = 0) {
     // obtenemos los tamaños de todos los elementos la primera vez
     // o los traemos de los que ya calculamos en this.sizes.
-    sizes.current = sizes.current || calculateSizes()
+    sizes.current = sizes.current || calculateSizes();
     // obtenemos la página a la que pertenece el nuevo elemento
     const { page } = sizes.current[focus];
     // si la página no cambió no hacemos nada
@@ -387,4 +391,9 @@ Con esto acabamos de implementar nuestro carrusel para hijos de diferentes tama�
 
 Por último acá debajo pueden ver como queda funcionando (la versión con clases).
 
-<iframe src="https://codesandbox.io/embed/93yzmvzw0w?autoresize=1&hidenavigation=1" width="100%" height="500px" style={{ border: 0 }} />
+<iframe
+  src="https://codesandbox.io/embed/93yzmvzw0w?autoresize=1&hidenavigation=1"
+  width="100%"
+  height="500px"
+  style={{ border: 0 }}
+/>

@@ -7,12 +7,12 @@ export const meta = {
   description: "",
   published: true,
   lang: "es",
-  canonicalUrl: "https://medium.com/@sergiodxa/buenas-pr%C3%A1cticas-del-desarrollo-frontend-40f44621841",
-  tags: [
-  ]
-}
+  canonicalUrl:
+    "https://medium.com/@sergiodxa/buenas-pr%C3%A1cticas-del-desarrollo-frontend-40f44621841",
+  tags: []
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 En el desarrollo FrontEnd con el tiempo han ido surgiendo lo que se conoce como buenas prácticas, cosas que normalmente hacemos porque mejora el rendimiento o porque ayuda durante el desarrollo.
 
@@ -48,7 +48,7 @@ El CSS crítico básicamente es el CSS que se utiliza “above the fold”, osea
 
 La carga de archivos JS es una operación bloqueante por lo que detiene el renderizado de la página, si además de esto el JS se ejecuta inmediatamente al ser descargado puede dar errores si se trata de manipular el DOM antes de que se renderice el HTML.
 
-Para evitar estos problemas es mejor siempre colocar las etiquetas` <script>` al final del HTML, justo antes de la etiqueta `</body>`. Esto permite que el usuario pueda interactuar con el resto del sitio mientras el JS se descarga y ejecuta.
+Para evitar estos problemas es mejor siempre colocar las etiquetas`<script>` al final del HTML, justo antes de la etiqueta `</body>`. Esto permite que el usuario pueda interactuar con el resto del sitio mientras el JS se descarga y ejecuta.
 
 ## Cargá cualquier JS no indispensable de forma asíncrona
 

@@ -7,12 +7,12 @@ export const meta = {
   description: "",
   published: true,
   lang: "es",
-  canonicalUrl: "https://medium.com/@sergiodxa/escribiendo-css-de-la-forma-correcta-b420a498219c",
-  tags: [
-  ]
-}
+  canonicalUrl:
+    "https://medium.com/@sergiodxa/escribiendo-css-de-la-forma-correcta-b420a498219c",
+  tags: []
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Como desarrollador **FrontEnd** me encuentro constantemente utilizando **CSS**. Este lenguaje para dar estilos a páginas web tiende a empezar siendo algo simple y volverse muy complicado conforme avanza el desarrollo del sitio (mantener 100 líneas de CSS es fácil, mantener decenas de miles no).
 
@@ -90,29 +90,42 @@ Las clases de utilería también tiene que tener un pequeño comentario explican
 Los nombres de las clases **deben estar en inglés** siempre, y para los nombres de clases la mejor metodología que encontré es usar la siguiente estructura:
 
 ```css
-.moduleName-subElement { }
-.moduleName—modifier { }
-.moduleName.is-state { }
+.moduleName-subElement {
+}
+.moduleName—modifier {
+}
+.moduleName.is-state {
+}
 ```
 
 Para las clases de utiliería quedarían:
 
 ```css
-.u-name { }
-.u-name-xs { }
-.u-name-sm { }
-.u-name-md { }
-.u-name-lg { }
+.u-name {
+}
+.u-name-xs {
+}
+.u-name-sm {
+}
+.u-name-md {
+}
+.u-name-lg {
+}
 ```
 
 Un ejemplo:
 
 ```css
-.btn { }
-.btn—lg { }
-.btn—success { }
-.btn-icon { }
-.btn.is-disabled { }
+.btn {
+}
+.btn—lg {
+}
+.btn—success {
+}
+.btn-icon {
+}
+.btn.is-disabled {
+}
 ```
 
 Como ven en el ejemplo tenemos un botón, que puede estar modificado para ser grande o ser un botón de éxito, dentro puede tener un ícono y también puede estar desactivado.

@@ -3,18 +3,19 @@ import withLayout from "../../../lib/with-layout.js";
 export const meta = {
   title: "Array#filter",
   date: "2019-02-08T17:36:16.380Z",
-  description: "Aprende a usar Array#filter, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.",
+  description:
+    "Aprende a usar Array#filter, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.",
   slug: "js-basics/array-prototype-filter",
   lang: "es",
   tags: ["JavaScript", "Spanish", "Array", "ES5"]
-}
+};
 
-export default withLayout("js-basic")(meta)
+export default withLayout("js-basic")(meta);
 
 _Array#filter_, o `Array.prototype.filter`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para filter un array y obtener uno nuevo, lo que en palabras más normales significa que vamos a recorrer un array y aplicar una condición a cada uno de sus elementos y solo quedarnos con los que pasen. Veamos un ejemplo:
 
 ```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const evens = numbers.filter(number => number % 2 === 0); // es par
 console.log(evens); // [2]
 ```
@@ -26,7 +27,7 @@ Lo que hace Array#filter entonces es llamar la función que pasamos como argumen
 Si queremos hacer lo mismo que Array#filter tendríamos que hacer algo similar a esto:
 
 ```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const evens = [];
 
 for (const number of numbers) {
@@ -66,7 +67,7 @@ function map(array, callback, thisArg) {
   return result;
 }
 
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 const evens = filter(numbers, number => number % 2 === 0);
 console.log(evens); // [2,4,6]
 ```
@@ -103,10 +104,9 @@ Fuera de React puede ser usado también para trabajar con listas de elementos de
 
 ```js
 const $selectList = document.querySelectorAll("select");
-const values = Array
-  .from($selectList)
+const values = Array.from($selectList)
   .map($select => $select.value)
-  .filter(value => value !== "")
+  .filter(value => value !== "");
 ```
 
 Lo que hace el ejemplo es obtener todos los `<select>` de una página lo que devuelve un objeto NodeList, usando `Array.from` lo convertimos a un array y usamos Array#map para obtener una lista (`values`) de los valores de cada `<select>`, por último con Array#filter eliminamos los valores igual a un string vacío, que podría ser considerado la opción por defecto.

@@ -9,12 +9,12 @@ export const meta = {
   description: "",
   published: true,
   lang: "es",
-  canonicalUrl: "https://medium.com/@sergiodxa/introducci%C3%B3n-a-ecmascript-2016-7-da73067698cc",
-  tags: [
-  ]
-}
+  canonicalUrl:
+    "https://medium.com/@sergiodxa/introducci%C3%B3n-a-ecmascript-2016-7-da73067698cc",
+  tags: []
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Desde finales del 2014, incluso antes de que se terminara de definir [ECMAScript 6](http://sergio.xalambri.com.ar/es6/) ya se estaba empezando a trabajar en la siguiente versión de ECMAScript, la versión 7, formalmente conocida como **ECMAScript 2016**, ya que se espera este lista en el 2016.
 
@@ -33,11 +33,11 @@ Para poder crear una función asíncrona necesitamos agregar la palabra clave `a
 Await detiene la ejecución de nuestra función asíncrona hasta que otra función asíncrona se complete, para esto agregamos `await` adelante del nombre de la función a ejecutar, es necesario que la función que esperamos devuelve una promesa.
 
 ```js
-import fetch from 'whatwg-fetch';
+import fetch from "whatwg-fetch";
 
 async function getData() {
   try {
-    const response = await fetch('/api/resource');
+    const response = await fetch("/api/resource");
     return response.body;
   } catch (error) {
     throw error;
@@ -62,7 +62,7 @@ Esta nueva característica consiste en un syntax sugar para la forma en que hace
 Para entenderlo bien veamos un ejemplo de la forma actual:
 
 ```js
-const inputs = document.querySelectorAll('input');
+const inputs = document.querySelectorAll("input");
 const map = Array.prototype.map;
 const values = map.call(inputs, element => element.value);
 ```
@@ -74,19 +74,19 @@ Así que para poder mapear nuestro NodeList y obtener un nuevo Array con los val
 Ahora este mismo código realizado con la nueva sintaxis sería así:
 
 ```js
-const inputs = document.querySelectorAll('input');
+const inputs = document.querySelectorAll("input");
 const map = Array.prototype.map;
 const values = inputs::map(element => element.value);
 ```
 
 Como se puede ver la nueva sintaxis nos permite ejecutar la función `map` de forma similar a un método, solo que en vez de usar `.` estamos usando `::`. Esto ayuda a que sea más fácil entender lo que se esta realizando en el código
 
-## Operador exponencial **
+## Operador exponencial \*\*
 
 Esta es bastante simple, desde ES7 va a ser posible usar `**` para elevar un número X a una potencia Y. Haciendo una comparación con la forma actual:
 
 ```js
-const result = Math.pow(2,3);
+const result = Math.pow(2, 3);
 ```
 
 Forma nueva:
@@ -102,13 +102,13 @@ Esta funcionalidad ya esta soportada por defecto en Babel.js.
 Este nuevo método de los Array es un syntax sugar que nos permite fácilmente saber si un elemento X esta dentro de un array, algo que actualmente haríamos con un indexOf de la siguiente forma:
 
 ```js
-const isInArray = [1,2,3].indexOf(2) !== -1;
+const isInArray = [1, 2, 3].indexOf(2) !== -1;
 ```
 
 Con el nuevo método quedaría más fácil de entender que hace el código:
 
 ```js
-const isInArray = [1,2,3].includes(2);
+const isInArray = [1, 2, 3].includes(2);
 ```
 
 Al igual que con el operador :: esto hace más fácil de entender que hace el código.
@@ -122,14 +122,14 @@ Para poder usar este método es simplemente ejecutarlo pasándole dos parámetro
 ```js
 const persona = {
   nombre: "Freddy",
-  empresa: "Mejorando.la",
+  empresa: "Mejorando.la"
 };
 
 Object.observe(persona, changes => {
   changes.forEach(console.log);
 });
 
-setTimeout(() => persona.empresa = "Platzi", 2500);
+setTimeout(() => (persona.empresa = "Platzi"), 2500);
 ```
 
 En el ejemplo anterior creamos un objeto persona con dos propiedades, luego empezamos a escuchar los cambios que se realicen sobre este objeto y ejecutamos una función que va a recorrer el listado de cambios que recibimos y va a mostrarlos en consola. Por último después de 2.5 segundos modificamos una de las propiedades de nuestro objeto.
@@ -175,7 +175,7 @@ En ES7 se agrega una mejora a estas clase permitiéndonos agregar propiedades di
 
 ```js
 class Persona {
-  nombre = "Sergio"
+  nombre = "Sergio";
   saludar() {
     return `Hola soy ${this.nombre}`;
   }
@@ -183,21 +183,22 @@ class Persona {
 ```
 
 ## Decoradores
+
 Otra mejora relacionada a las clases es la implementación de decoradores que nos permiten extender la funcionalidad de una clase en tiempo de ejecución fácilmente.
 
 Para esto una vez tenemos nuestra clase (como la definida en el punto ejemplo anterior) podemos crear la función decoradora y aplicársela a la definición de la clase agregando @nombre antes de la definición de la clase.
 
 ```js
 function agregarDespedida(target) {
-  target.prototype.despedirse = (persona) => {
+  target.prototype.despedirse = persona => {
     return `Adios ${persona.nombre}!`;
-  }
+  };
   return target;
 }
 
 @agregarDespedida
 class Persona {
-  nombre = "Sergio"
+  nombre = "Sergio";
   saludar() {
     return `Hola soy ${this.nombre}`;
   }
@@ -218,9 +219,8 @@ Para poder activarlo es necesario crear un pequeño archivo llamado .babelrc en 
 
 ```json
 {
- stage: 0
+  "stage": 0
 }
 ```
 
 Con eso activamos el soporte a todas las características de ES7 que Babel.js ya soporta, de las anteriores solamente no incluye soporte a `Object.observe` y `Array.observe`.
-

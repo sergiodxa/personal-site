@@ -3,7 +3,8 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "Documentación, Lecciones Aprendidas",
   date: "2018-01-17T21:18:58.320Z",
-  description: "Después de trabajar en la documentación del API de ZEIT quiero compartir algunas lecciones que aprendí de ello.",
+  description:
+    "Después de trabajar en la documentación del API de ZEIT quiero compartir algunas lecciones que aprendí de ello.",
   slug: "documentacion",
   published: true,
   lang: "es",
@@ -12,15 +13,10 @@ export const meta = {
     lang: "en",
     title: "Documentation, Lessons Learned"
   },
-  tags: [
-    "ZEIT",
-    "Now",
-    "Documentation",
-    "Lesson learned"
-  ]
-}
+  tags: ["ZEIT", "Now", "Documentation", "Lesson learned"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 En ▲ZEIT [lanzamos](https://zeit.co/blog/api-2) nuestra nueva y renovada [documentación del API](https://zeit.co/api), estuve trabajando en ella desde ZDB a cargo de escribir la documentación y código relacionado con la documentación. Documentar nuestra API pública por completo me ayudó a aprender y entender más sobre nuestra infrastructura y cómo funciona Now internamente.
 
@@ -37,10 +33,10 @@ Get the list of members of the team `:id`.
 
 ### Response
 
-* `uid` (`String`) The team member unique identifier
-* `role` (`String`) The role inside the team, it could be OWNER or MEMBER
-* `email` (`String`) The email address of the team member
-* `username` (`String`) The username of the team member
+- `uid` (`String`) The team member unique identifier
+- `role` (`String`) The role inside the team, it could be OWNER or MEMBER
+- `email` (`String`) The email address of the team member
+- `username` (`String`) The username of the team member
 ```
 
 Algo simple como eso es suficiente. Como desarrollador descubrí que una muy buena forma de empezar un proyecto, como puede ser una librería o un servicio HTTP, es con su API pública, crea un README, escribí como se debería usar el proyecto y recién entonces programalo, esto es llamado [RDD](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
@@ -95,7 +91,7 @@ Esto nos lleva a escribir tan poco como sea posible y hacer la documentación su
 
 Los desarrolladores tendemos a subestimar la importancia de un bueno diseño, especialmente para nuestro propios proyectos, pero un bueno diseño es _obligatorio_ para una buena documentación (y cualquier proyecto en general) y ayuda a los usuarios a entenderla más rápido.
 
-El diseñador de ▲ZEIT, [Evil Rabbit](https://twitter.com/evilrabbit_), hizo un increíble trabajo en cada parte de la UI de la documentación e incluso ayudó a decidir como organizar el contenido. 
+El diseñador de ▲ZEIT, [Evil Rabbit](https://twitter.com/evilrabbit_), hizo un increíble trabajo en cada parte de la UI de la documentación e incluso ayudó a decidir como organizar el contenido.
 
 Sí, la organización del contenido es parte de un buen diseño y puede ser la diferencia entre una documentación fácil de entender y un completo desastre.
 
@@ -111,6 +107,5 @@ Una documentación simple y aburrida solamente te dice como funciona cada endpoi
 
 De esta forma el usuario no solo va a aprender como usar el API, también cual es la mejor forma de hacerlo o la más recomendada. Al igual que por qué los [errores son importantes](#los-errores-son-importantes), estos consejos pueden ayudar a reducir el trabajo de soporte necesario para los usuario del API ya que la misma documentación está enseñando como usar bien el API.
 
-*[ZDB]: ZEIT Day Berlin
-*[RDD]: Readme Driven Development
-*[REPL]: Read–Eval–Print Loop
+_[ZDB]: ZEIT Day Berlin
+_[RDD]: Readme Driven Development \*[REPL]: Read–Eval–Print Loop

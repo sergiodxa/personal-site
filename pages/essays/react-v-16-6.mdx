@@ -3,19 +3,15 @@ import withLayout from "../../lib/with-layout.js";
 export const meta = {
   title: "React v16.6: lazy, memo y más",
   date: "2018-10-24T17:32:04.452Z",
-  description: "Aprende a usar los nuevos features de React v16.6, lazy load, memoize, errores, contexto y más",
+  description:
+    "Aprende a usar los nuevos features de React v16.6, lazy load, memoize, errores, contexto y más",
   slug: "react-v-16-6",
   published: true,
   lang: "es",
-  tags: [
-    "JavaScript",
-    "Async",
-    "Memoize",
-    "React"
-  ]
-}
+  tags: ["JavaScript", "Async", "Memoize", "React"]
+};
 
-export default withLayout("essay")(meta)
+export default withLayout("essay")(meta);
 
 Salió React v16.6, y con este vienen varias novedades, entre ellas el lanzamiento de la primera parte de React Suspense mediante una nueva función llamada `lazy` y de otra función para evitar doble renders llamada `memo`.
 
@@ -27,10 +23,10 @@ Esta nueva función entonces nos va a permitir memoizar un componente tanto crea
 
 ```js
 import React, { memo } from "react";
-import logo from './logo.svg';
+import logo from "./logo.svg";
 
 function Logo({ alt }) {
-  return <img src={logo} className="App-logo" alt={alt} />
+  return <img src={logo} className="App-logo" alt={alt} />;
 }
 
 export default memo(Logo);
@@ -86,14 +82,14 @@ import Placeholder from "./placeholder.js"; // un componente que sirva de placeh
 class App extends Component {
   state = {
     alt: "React"
-  }
+  };
 
   render() {
     return (
       <Suspense maxDuration={300} fallback={<Placeholder />}>
         <LazyLogo alt={this.state.alt} />
       </Suspense>
-    )
+    );
   }
 }
 ```
@@ -176,7 +172,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong.</h1>;
     }
     // renderizamos nuestro contenido
-    return this.props.children; 
+    return this.props.children;
   }
 }
 ```
