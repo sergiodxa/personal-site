@@ -65,54 +65,54 @@ La condición se inicia con `if`. Después del `if` va la primer condición entr
 Vamos a crear algunas funciones para ordenar nuestro código. Creemos una función que nos permita mostrarle texto al usuario de distintos colores dependiendo de que ocurrió, vamos a tener entonces `throw`, `warn` y `print` que va a mostrar texto en rojo, amarillo y verde, respectivamente.
 
 ```shell
-NC='\033[0m'
+NC='\\033[0m'
 
 throw()
 {
-  COLOR='\033[0;31m'
-	>&2 echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;31m'
+  >&2 echo -e ${COLOR}$1${NC}
 }
 
 print()
 {
-  COLOR='\033[0;32m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;32m'
+  echo -e ${COLOR}$1${NC}
 }
 
 warn()
 {
-  COLOR='\033[0;33m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;33m'
+  echo -e ${COLOR}$1${NC}
 }
 ```
 
-La forma de definir una función es simplemente poner el nombre de la función seguida por `()`. Luego creamos un bloque de código usando llaves y dentro va el código de la función. En nuestro caso son funciones más o menos similares, en todas creamos una variable llamada `COLOR` con su valor, `'\033[0;31m'` significa rojo, `'\033[0;32m'` significa verde y `'\033[0;33m'` significa amarillo, la variable `NC` que creamos antes de las funciones significa _No Color_ y la vamos a usar para hacer que el texto deje de tener color.
+La forma de definir una función es simplemente poner el nombre de la función seguida por `()`. Luego creamos un bloque de código usando llaves y dentro va el código de la función. En nuestro caso son funciones más o menos similares, en todas creamos una variable llamada `COLOR` con su valor, `'\\033[0;31m'` significa rojo, `'\\033[0;32m'` significa verde y `'\\033[0;33m'` significa amarillo, la variable `NC` que creamos antes de las funciones significa _No Color_ y la vamos a usar para hacer que el texto deje de tener color.
 
-Lo siguiente que hacemos es hacer un `echo` para mostrar texto en pantalla, le pasamos el flag `-e` para soportar `\`, esto es necesario para usar colores, y le pasamos como valor a mostrar en pantalla `${COLOR}$1${NC}` ¿Qué significa esto? Primero ponemos el contenido de nuestra variable de color, después colocamos `$1` que, si recordás, es el primer argumento que le pasamos a nuestro script, resulta que dentro de una función es el primer argumento que le pasemos a la función, en nuestro caso el texto, y por último ponemos `${NC}` que que no tenga color otra vez y no se quede el resto del texto en rojo, verde o amarillo.
+Lo siguiente que hacemos es hacer un `echo` para mostrar texto en pantalla, le pasamos el flag `-e` para soportar `\\`, esto es necesario para usar colores, y le pasamos como valor a mostrar en pantalla `${COLOR}$1${NC}` ¿Qué significa esto? Primero ponemos el contenido de nuestra variable de color, después colocamos `$1` que, si recordás, es el primer argumento que le pasamos a nuestro script, resulta que dentro de una función es el primer argumento que le pasemos a la función, en nuestro caso el texto, y por último ponemos `${NC}` que que no tenga color otra vez y no se quede el resto del texto en rojo, verde o amarillo.
 
 Hay un caso diferente al resto que es la función `throw`, antes del `echo` se agrega `>&2`. Eso significa que el contenido del `echo` lo debe pasar a `stderr` en vez de `stdout` (lo normal). Esto es para que si algún programa usa nuestro script va a poder identificar los `throw` como errores correctamente.
 
 Ahora podríamos empezar a usar estas funciones, por ejemplo agreguemos que en nuestro `else` se muestre un mensaje de error en rojo.
 
 ```shell
-NC='\033[0m'
+NC='\\033[0m'
 
 throw()
 {
-  COLOR='\033[0;31m'
-	>&2 echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;31m'
+  >&2 echo -e ${COLOR}$1${NC}
 }
 
 print()
 {
-  COLOR='\033[0;32m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;32m'
+  echo -e ${COLOR}$1${NC}
 }
 
 warn()
 {
-  COLOR='\033[0;33m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;33m'
+  echo -e ${COLOR}$1${NC}
 }
 
 if [ "$1" = "install" ]
@@ -134,13 +134,13 @@ Creemos una función llamada `install` que nos va a instalar nuestra aplicación
 
 Para esto vamos a necesitar realizar varios pasos:
 
-1. Instalar Homebrew
-2. Instalar Git
-  1. Crear una clave SSH
-  2. Agregarla a GitHub
-3. Instalar Yarn y Node.js
-4. Clonar desde GitHub nuestro repositorio
-5. Instalar dependencias
+- Instalar Homebrew
+- Instalar Git
+- Crear una clave SSH
+- Agregarla a GitHub
+- Instalar Yarn y Node.js
+- Clonar desde GitHub nuestro repositorio
+- Instalar dependencias
 
 En código esto sería algo así
 
@@ -216,41 +216,41 @@ Ahora que ya instalamos todo, vamos a crear la función para iniciar nuestro pro
 run()
 {
   print "Running project"
-	cd ~/website && yarn start ; cd -
+  cd ~/website && yarn dev ; cd -
 }
 ```
 
-Eso es todo, mostramos un mensaje diciendo que vamos a correr el proyecto, nos movemos a la carpeta donde clonamos el repositorio y ejecutamos `yarn start` para iniciarlo. Al terminar va a volver a la carpeta inicial.
+Eso es todo, mostramos un mensaje diciendo que vamos a correr el proyecto, nos movemos a la carpeta donde clonamos el repositorio y ejecutamos `yarn dev` para iniciarlo, este script `dev` lo uso en mi sitio personal para iniciarlo en modo desarrollo. Al terminar va a volver a la carpeta inicial.
 
 ## Poniendo todo junto
 
 Ahora juntemos todo, de forma ordenada y ejecutemos nuestras nuevas funciones en las condiciones correspondientes.
 
 ```shell
-NC='\033[0m'
+NC='\\033[0m'
 
 throw()
 {
-  COLOR='\033[0;31m'
-	>&2 echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;31m'
+  >&2 echo -e ${COLOR}$1${NC}
 }
 
 print()
 {
-  COLOR='\033[0;32m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;32m'
+  echo -e ${COLOR}$1${NC}
 }
 
 warn()
 {
-  COLOR='\033[0;33m'
-	echo -e ${COLOR}$1${NC}
+  COLOR='\\033[0;33m'
+  echo -e ${COLOR}$1${NC}
 }
 
 run()
 {
   print "Running project"
-	cd ~/website && yarn start ; cd -
+  cd ~/website && yarn dev ; cd -
 }
 
 confirm_ssh()
