@@ -1,5 +1,11 @@
 [
   {
+    "id": 81,
+    "title": "Automatización con Shell Scripts",
+    "link": "/essays/automatizacion-shell-scripts",
+    "date": "2019-02-23T04:41:48.576Z"
+  },
+  {
     "id": 80,
     "title": "Conceptos Básicos de JS: Array#push",
     "link": "/essays/js-basics/array-prototype-push",
