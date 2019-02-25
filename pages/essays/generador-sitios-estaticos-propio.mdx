@@ -1,0 +1,59 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Mi Static Site Generator ideal",
+  date: "2019-02-25T18:09:56.443Z",
+  description: "Un artículo con ideas de como sería mi generador de sitios estáticos ideal",
+  slug: "generador-sitios-estaticos-propio",
+  published: true,
+  lang: "es",
+  tags: ["SSG", "React", "MDX", "Spanish"]
+};
+
+export default withLayout("essay")(meta);
+
+Desde hace tiempo vengo pensando en la idea de armarme mi propio generador de sitios estáticos (SSG, _Static Site Generator_), principalmente para reducir el tiempo de compilación de mi propio sitio, el cual usa Next.js en modo export, y eliminar cosas que no necesito.
+
+Entre las varias ideas que tuve me armé una lista de características que espero de un SSG.
+
+## Hacer Prefetch del contenido
+
+El SSG debería poder detectar links a contenido del mismo sitio, ya sean páginas o artículos, y hacer prefetch del HTML para una navegación instantánea usando la etiqueta `<link rel="prefetch" />` para que sea el navegador quien decida cuando hacer prefetch y que se use de forma 100% declarativa, sin necesidad de configurar nada.
+
+## Generar un feed RSS y Sitemap automáticamente
+
+A día de hoy, después de años, sigo usando RSS para leer blogs. De hecho este blog tiene [su propio feed](/atom). Un SSG debería generar un feed RSS automáticamente y, de paso≤ un sitemap para ayudar al SEO con todo el contenido del sitio.
+
+## Usar Frontmatter para la metadata
+
+Aunque preferiría usar MDX para poder usar React para armar la UI y agregar cosas extras, FrontMatter es una forma muy cómoda de definir metadata en un artículo o página. Este SSG debería soportar FrontMatter y extraerla, luego usarla para agregar etiquetas `<meta />` al HTML del artículo o página, por ejemplo usar `published` para saber si hacer build o `lang` para el idioma del HTML, incluso `canonical_url` para publicar artículos de otro sitio sin duplicar contenido.
+
+## Bueno diseño
+
+El diseño es algo súper importante que afecta mucho al momento de leer un sitio, este SSG debería traer un buen diseño apto para leer desde cero, sin posibilidad de personalizarlo o mínima, lo importante es escribir 😁.
+
+## Modo noche automático
+
+El modo noche, o dark mode, ayuda mucho a leer contenido después de mucho tiempo o a ciertas horas del día. Un buen SSG debería traerlo incorporado tanto con la media query `prefers-color-scheme` (solo en Safari por ahora) como usando un JS mínimo para el cambio en otros navegadores.
+
+## Imágenes sociales automáticas
+
+Generar un Open Graph y Twitter Card es tedioso, tanto que “hasta en ZEIT lo automatizaron](https://zeit.co/blog/social-og-image-cards-as-a-service), teniendo el diseño ya definido y fijo crear de forma automática estas imágenes con un diseño acorde debería ocurrir al momento de hacer despliegue del sitio y no ser necesario crearlo cada vez, excepto claro se desee algo personalizado.
+
+## Offline First & PWA
+
+Las Progressive Web App (_PWA_) te permiten entre muchas cosas hacen que un sitio o app funcione offline. Para un sitio de lectura que los lectores puedan acceder en cualquier momento ayuda mucho a volver a revisarlo y a mejorar los tiempos de carga al volver a acceder.
+
+Para esto el SSG debería crear un Service Worker configurado automáticamente para guardar en cache todo el contenido del sitio y así poder soportar la metodología Offline First.
+
+## Crear el sitio de forma incremental
+
+Una de las cosas que más me molesta de cómo funcionan muchas herramientas modernas es que en cada cambio hay que volver a construir todo el sitio, esto en casos como Next o Gatsby significa volver a hacer *todos* los bundles de JS de cada página.
+
+Este SSG debería poder generar de forma incremental los HTML solo de las páginas/artículos nuevos o modificados y borrar los eliminados.
+
+De esta forma es posible acelerar muchísimo el tiempo de despliegue del sitio, esto sería posible usando Git para ver los archivos modificados entre el último commit donde se hizo el despliegue.
+
+## Palabras finales
+
+Estoy trabajando en algo, ya funcionan algunas cosas y de a poco pienso agregar más funcionalidades hasta eventualmente poder migrar mi sitio de Next.js a mi propio SSG.
