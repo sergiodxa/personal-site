@@ -1,0 +1,85 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Props con valores predefinidos en React",
+  date: "2019-02-26T16:09:40.581Z",
+  description: "Es muy común querer tener props con valores por defecto en nuestros componentes de React, veremos varias formas de lograr este objetivo.",
+  slug: "react-props-valores-predefinidos",
+  lang: "es",
+  tags: ["Frontend", "React", "JavaScript", "Spanish"]
+};
+
+export default withLayout("essay")(meta);
+
+[En otro artículo](/essays/componentes-react-personalizables-props) vimos como hacer que nuestro componente sea personalizable usando _props_. Y definimos un valor como _fallback_ en caso de que este prop no tenga valor definido.
+
+Y aunque funcionó la forma en que lo hicimos es propia de JavaScript mas no de React que posee su propia implementación de como definir valores por defecto de los props.
+
+Hoy vamos a ver como hacerlo junto a otras formas propias de JavaScript.
+
+## Forma Actual
+
+```js
+function Hello(props = {}) {
+  return React.createElement("h1", null, `Hola ${props.name || "Mundo"}!`);
+}
+```
+
+Esto es lo que hicimos ayer, la forma en que funciona es que si `props.name` no existe el operador `||` va a hacer que se use `"Mundo"` como valor.
+
+## Argumento por defecto
+
+```js
+function Hello(props = { name: "Mundo" }) {
+  return React.createElement("h1", null, `Hola ${props.name}!`);
+}
+```
+
+Esta es otra forma nativa de JavaScript, en este caso estamos haciendo que `props` por defecto sea un objeto con valores ya definidos en vez de un objeto vacío.
+
+Otra forma similar usando [descomposición de objetos](https://yeisondaza.com/entendiendo-la-asignacion-por-destructuring-en-javascript) es hacer:
+
+```js
+function Hello({ name = "Mundo" } = {}) {
+  return React.createElement("h1", null, `Hola ${name}!`);
+}
+```
+
+En este caso `props` es un objeto vacío del cual obtenemos la propiedad `name` sin el resto de posibles valores y esta propiedad definimos que su valor por defecto sea `"Mundo"`.
+
+## La Forma de React
+
+```js
+function Hello(props) {
+  return React.createElement("h1", null, `Hola ${props.name}!`);
+}
+
+Hello.defaultProps = {
+  name: "Mundo"
+};
+```
+
+Por última la forma propia de React es agregando a nuestro componente una propiedad estática llamada `defaultProps` que es un objeto con todos los props y sus valores por defecto que queramos definir.
+
+De esta forma React al hacer render va a usar estos valores en caso de que estos props no estén definidos.
+
+---
+
+Con esto ya vimos varias formas de definir valores por defecto, si actualizamos nuestro ejemplo quedaría el siguiente código.
+
+```js
+function Hello(props) {
+  return React.createElement("h1", null, `Hola ${props.name}!`);
+}
+
+Hello.defaultProps = {
+  name: "Mundo"
+};
+
+const element = React.createElement(Hello, { name: "Sergio" });
+const node = document.getElementById("app");
+
+ReactDOM.render(element, node);
+```
+
+Listo, ahora estamos listos para [ver los diferentes tipos de datos en React](/essays/tipos-datos-react)

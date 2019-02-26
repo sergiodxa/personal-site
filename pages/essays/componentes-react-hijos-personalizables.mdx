@@ -1,0 +1,96 @@
+import ReactDOM from "react-dom";
+import Inspector from "react-inspector";
+import DevTools from "../../components/devtools.js";
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Componentes con Hijos Personalizables en React",
+  date: "2019-02-26T16:35:48.047Z",
+  description: "Para evitar prop drilling y hacer componentes aún más personalizables vamos a ver como usar un prop para cambiar el contenido de un componentes de React.",
+  slug: "componentes-react-hijos-personalizables",
+  lang: "es",
+  tags: ["Frontend", "React", "JavaScript", "Spanish"]
+};
+
+export default withLayout("essay")(meta);
+
+[En el artículo anterior creamos `Header` e hicimos que renderice `Hello` internamente](/essays/composicion-componentes-react). Hoy vamos a hacer que el contenido de `Header` se pueda personalizar como un _prop_ de forma que podamos decidir si usar `Hello` o no.
+
+Esto además nos va a evitar el uso de _prop drilling_, pero ¿Por qué querríamos evitar esto? En nuestro caso no hay ningún problema con usar prop drilling, pero a medida que agregemos más y más componentes que reciban y pasen props a sus hijos esto se puede llegar a volver un problema debido a que:
+
+- Complicaría refactorizar nuestros datos (props).
+- Terminaríamos pasando más props de los necesarios para evitar problemas de olvidarnos un prop.
+- No pasaríamos props que si son necesarios debido al abuso de `defaultProps`.
+- Dificultaría seguir el flujo de props en nuestra aplicación si terminamos renombrando props a mitad de camino.
+
+Todo esto se puede evitar haciendo lo que vamos a hacer eso.
+
+```js
+function Header(props) {
+  return React.createElement(
+    "header",
+    null,
+    React.createElement(Hello, { name: props.name })
+  );
+}
+
+Header.propTypes = {
+  name: PropTypes.string
+};
+
+Header.defaultProps = {
+  name: "Mundo"
+};
+```
+
+Ese es nuestro `Header`, vamos a hacer que en vez de recibir el prop `name` reciba un prop que vamos a llamar `children` y vamos a hacerlo obligatorio.
+
+```js
+function Header(props) {
+  return React.createElement("header", null, props.children);
+}
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired
+};
+```
+
+Como vemos pasamos `props.children` como tercer elemento de `React.createElement`, esto es porque el contenido, como lo definimos en nuestros propTypes, es un nodo de React por lo que es cualquier cosa que sirva como hijo de un elemento.
+
+Si actualizamos el ejemplo usando nuestro nuevo `Header` quedaría así:
+
+```js
+function Hello(props) {
+  return React.createElement("h1", null, `Hola ${props.name}!`);
+}
+
+Hello.propTypes = {
+  name: PropTypes.string
+};
+
+Hello.defaultProps = {
+  name: "Mundo"
+};
+
+function Header(props) {
+  return React.createElement("header", null, props.children);
+}
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const element = React.createElement(Header, {
+  children: React.createElement(Hello, { name: "Sergio" })
+});
+
+const node = document.getElementById("app");
+
+ReactDOM.render(element, node);
+```
+
+Como vemos ahora `Header` no sabe que `Hello` recibe un prop `name`, el solo recibe el elemento creado a partir de `Hello` como su prop `children` y lo coloca dentro de `<header>`.
+
+Con esto acabamos de mejorar como nuestro componente se combine de otros componentes lo que permitiría que Header reciba cualquier otro componente o elemento de React y lo envuelva en la etiqueta `<header>`.
+
+[En el siguiente artículo vamos a ver más sobre este _prop_ `children`](/essays/react-prop-especial-children)

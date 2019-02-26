@@ -1,5 +1,59 @@
 [
   {
+    "id": 90,
+    "title": "Uso del prop children en React",
+    "link": "/essays/react-prop-especial-children",
+    "date": "2019-02-26T16:42:36.542Z"
+  },
+  {
+    "id": 89,
+    "title": "Componentes con Hijos Personalizables en React",
+    "link": "/essays/componentes-react-hijos-personalizables",
+    "date": "2019-02-26T16:35:48.047Z"
+  },
+  {
+    "id": 88,
+    "title": "Composición de Componentes en React",
+    "link": "/essays/composicion-componentes-react",
+    "date": "2019-02-26T16:27:49.966Z"
+  },
+  {
+    "id": 87,
+    "title": "Tipos de datos en React",
+    "link": "/essays/tipos-datos-react",
+    "date": "2019-02-26T16:14:01.492Z"
+  },
+  {
+    "id": 86,
+    "title": "Props con valores predefinidos en React",
+    "link": "/essays/react-props-valores-predefinidos",
+    "date": "2019-02-26T16:09:40.581Z"
+  },
+  {
+    "id": 85,
+    "title": "Componente de React personalizables usando props",
+    "link": "/essays/componentes-react-personalizables-props",
+    "date": "2019-02-26T16:04:00.252Z"
+  },
+  {
+    "id": 84,
+    "title": "Componentes con React",
+    "link": "/essays/componentes-con-react",
+    "date": "2019-02-26T15:58:06.637Z"
+  },
+  {
+    "id": 83,
+    "title": "Hola Mundo con React",
+    "link": "/essays/hola-mundo-react",
+    "date": "2019-02-26T15:58:06.637Z"
+  },
+  {
+    "id": 82,
+    "title": "Cargando React desde un CDN",
+    "link": "/essays/cargando-react-cdn",
+    "date": "2019-02-26T15:57:55.585Z"
+  },
+  {
     "id": 81,
     "title": "Mi Static Site Generator ideal",
     "link": "/essays/generador-sitios-estaticos-propio",
