@@ -65,7 +65,7 @@
     "slugify": "1.3.4"
   },
   "devDependencies": {
-    "jest": "23.6.0",
+    "jest": "24.1.0",
     "jest-puppeteer": "3.9.0",
     "puppeteer": "1.12.2",
     "serve": "10.1.2"
