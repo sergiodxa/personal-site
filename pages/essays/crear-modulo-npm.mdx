@@ -1,0 +1,173 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Cómo crear y publicar un módulo para npm",
+  date: "",
+  description: "",
+  slug: "crear-modulo-npm",
+  published: true,
+  lang: "es",
+  tags: ["Spanish", "JavaScript", "npm", "Module"]
+};
+
+export default withLayout("essay")(meta);
+
+JavaScript tiene el ecosistema más grande de módulos los cuales se alojan en GitHub y se publican al registro de [npm](https://www.npmjs.com/) para su posterior uso en proyectos.
+
+Usar un módulo desde npm es bastante sencillo, solo necesitamos correr `npm install <module>` o `yarn add <module>` (reemplazando `<module>` por el nombre del módulo a instalar) y listo, el módulo se va a registrar como dependencia de nuestro proyecto y vamos a poder importarlo en nuestro código.
+
+En este tutorial crearemos un módulo, lo más completo posible, y lo publicaremos al registro de npm para que cualquiera lo use.
+
+## Inicia el proyecto
+
+Primero hay que iniciar el proyecto, para esto se puede usar **npx**, una herramienta que viene junto a npm que permite instalar, temporalmente, y ejecutar módulos desde npm. Creá una carpeta para el proyecto con el nombre del proyecto, digamos `my-module`, y dentro ejecutá los siguientes comandos.
+
+```bash
+git init
+echo "# my-module" > README.md
+npx license MIT -o "Sergio Xalambrí" > LICENSE
+npx gitignore node
+npx covgen "hello@sergiodxa.com"
+npm init -y # o yarn init -y
+git add -A
+git commit -m "Initial commit"
+```
+
+Vayamos línea por línea viendo que hace cada comando.
+
+1. Se inicia git en la carpeta de nuestro proyecto
+2. Se crea un archivo README.md con el contenido `# my-module`
+3. Se genera una licencia MIT con nuestro nombre y la guardamos en el archivo LICENSE
+4. Se genera un `.gitignore` genérico para proyectos de Node.js y JavaScript
+5. Se genera un archivo CONTRIBUTING.md con nuestro email siguiente el [Contributor Covenant](https://www.contributor-covenant.org/)
+6. Se inicia el proyecto de Node.js haciendo que se cree un package.json
+7. Se agregan todos los archivos a git
+8. Se crea un commit inicial
+
+Con estos ya está todo listo para empezar el proyecto.
+
+## Manifiesto
+
+El manifiest es el archivo `package.json`, este posee información del módulo como el nombre, versión, autor y dependencias, entre otras. Con el sexto comando que corriste antes se creó uno inicial que debería verse más o menos así
+
+```json
+{
+  "name": "my-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+> _Nota_: Depende de tu configuración de npm puede haber más o menos información inicial, este es uno básico.
+
+Vamos a ver que es cada propiedad.
+
+- `name` es el nombre del módulo, por defecto el nombre de la carpeta, el nombre puede además incluír un namespace en la forma de `@namespace/my-module`, el namespace debe ser o tu nombre de usuario en npm o una organización a la que pertenezcas.
+- `version` es la versión del módulo, siguiente el sistema de versionamiento semático ([semver](https://semver.org/)).
+- `description` es la descripción del proyecto, se usa en el registro de npm para mostrar que hace el proyecto, lo ideal es que sea corta y concisa.
+- `main` es la ubicación u nombre del archivo principal de nuestro código, por defecto es `index.js`, en caso de que decidamos usar otro archivo diferente o con otro nombre vamos a necesitarlo.
+- `scripts` es un objeto que posee listas de scripts con nombres que podemos luego ejecutar haciendo `npm run <script>` o `yarn <script>`, por defecto viene un script `test` que muestra une error (_nota_: `test` es uno de varios scripts especiales que se pueden ejecutar con `npm <script>` sin el run).
+- `keywords` son palabras claves que puede usar el registro para que nuestro módulo salga en ciertas búsquedas
+- `author` es la información del autor, puede ser un string con el formato `name <url> (email)` o un objeto con esas propiedades
+- `license` es la licencia bajo la cual publicas el módulo, en nuestro caso vamos a usar MIT por lo que deberíamos cambiarlo.
+
+## El código
+
+Creá una carpeta `src` con el archivo `index.js` que tenga esto dentro:
+
+```js
+function hello(name = "Sergio") {
+  return `Hello, ${name}`;
+}
+
+export default hello;
+```
+
+Algo super simple, podés poner cualquier contenido en realidad, pero para el ejemplo voy a usar ese.
+
+## Dependencias
+
+El código de este módulo es super simple y no necesita dependencias, en caso de que las necesite se pueden instalar haciendo
+
+```bash
+npm install another-module
+# yarn add another-module
+```
+
+También es importante saber que existen varios tipos de dependencias que en el `package.json` se definen con distintos nombres.
+
+- `dependencies` son las dependencias del código las cuales se usan directamente haciendo `import` en el código del módulo
+- `devDependencies` se usan solo en desarrollo, normalmente son herramientas que se usan al desarrollar el módulo, como pueden ser frameworks de pruebas o herramientas de compilación
+- `peerDependencies` son dependencias que se usan directo en el código, pero que se espera que el usuario del módulo provea, esto es normal para que se pueda usar cualquier versión de estas dependencias.
+
+Hay más, pero estas son las más comunes, en el caso de `my-module` no hay `dependencies` pero si va a haber `devDependencies`, para instalarlas se usa el comando
+
+```bash
+npm install -D another-module
+# yarn add -D another-module
+```
+
+Donde la `-D` indica que es una dependencia de desarrollo. Las que se van a usar en el módulo, y que yo recomiendo son dos.
+
+- [Jest](https://jestjs.io/)
+- [microbundle](https://github.com/developit/microbundle)
+
+El primero es un framework de pruebas creado por Facebook que va a servir para automatizar las pruebas del código.
+
+El segundo es una herramienta del creador de Parcel, y otro muchos módulos pequeños, que sirve para hacer distintas versiones del código compatibles con varios sistemas de módulos que existen, en total soporta 3, un módulo de CommonJS para usar en Node.js, uno de UMD para usar en una etiqueta script en el navegador y uno de ECMAScript que usa `export` e `import` para que herramientas como webpack o Parcel puedan optimizar el código final.
+
+Para instalar ambos el comando final sería
+
+```bash
+npm install -D jest microbundle
+# yarn add -D jest microbundle
+```
+
+> _Nota_: como se ve, se pueden poner varios módulos separados por espacios
+
+## Configurando los scripts
+
+Ya teniendo instaladas las dependencias hay que configurar scripts en el `package.json` para usarlas. Si abrís el archivo debería estar actualizado para verse así.
+
+```json
+{
+  "name": "@sergiodxa/my-module",
+  "version": "1.0.0",
+  "description": "My super cool module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sergio Xalambrí <hello@sergiodxa.com> (https://sergiodxa.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "microbundle": "^0.9.0"
+  }
+}
+```
+
+Ahora el `package.json` tiene la propiedad `devDependencies`, además ya deberías haber cambiando `license` por MIT, poner tu nombre, email y sitio web en `author` y una descripción. El nombre en este caso como ya está usado es necesario ponerle un namespace.
+
+Ya visto eso para configurar los scripts solo hay que actualizar el objeto `scripts` con el siguiente.
+
+```json
+{
+  "test": "jest",
+  "build": "microbundle"
+}
+```
+
+El primero es para ejecutar las pruebas y el segundo para hacer "build" del módulo usanod microbundle.
+
+## Agregando pruebas
+
+Idealmente un módulo siempre debería tener pruebas automatizadas, en este caso las pruebas que se pueden agregar son bastantes simples, usar la función `hello` con y sin valor de `name`.
