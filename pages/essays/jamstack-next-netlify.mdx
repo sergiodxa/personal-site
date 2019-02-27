@@ -1,0 +1,46 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Usando JAMStack con Next.js y Netlify",
+  date: "",
+  description: "",
+  slug: "jamstack-next-netlify",
+  published: true,
+  lang: "es",
+  tags: [
+    "Next.js",
+    "JAMStack",
+    "Netlify",
+    "Spanish"
+  ]
+}
+
+export default withLayout("essay")(meta)
+
+Hace poco empecé a organizar un evento llamado [Tech Talks](https://techtalks.pe), con el patrocinio de [Able](https://able.co), la empresa para la cual trabajo actualmente. Es un sitio relativamente simple pero quería dar la mejor experiencia posible al acceder a este y a sus secciones, en este artículo voy a explicar un poco como lo hice usando el [JAMStack](https://jamstack.org) con [Next.js](https://nextjs.org) y usando [Netlify](https://netlify.com) como proveedor de hosting.
+
+## ¿Qué es el JAMStack?
+
+JAMStack viene de JavaScript, API y Markup, la idea es que un sitio o aplicación consista de un HTML generado al momento de hacer el despliegue de la aplicación y usar JS para agregar dinamismo en el lado del client y APIs para cuando necesitemos algo del lado del servidor. Una aplicación JAMStack no necesariamente es una Single Page Application, pueden ser muchos archivos HTML, con muy poco código JS que sirva para cargar contenido dinámico.
+
+La ventaja de este stack es que es posible dar un mejor rendimiento ya que el sitio son los archivos estáticos que podemos colocar en un CDN, debido a ser estaticos tampoco vamos a tener muchos problemas de seguridad y los costos de mantenerlo corriendo se reducen incluso hasta cero.
+
+En caso de necesitar lógica es donde entra el API, la idea es que tengamos un API que podamos usar desde el código JS en el navegador para traernos datos dinámicos, como pueden ser sesiones de usuario o información de la aplicación.
+
+## ¿Qué es Next.js?
+
+Next.js es un framework de desarrollo web, construido sobre React, que te provee muchas funcionalidades sin tener que configurar nada y se encarga de hacer ServerSide Render de nuestra página o aplicación. Next.js requiere por defecto que tengamos un servidor corriendo de Node.js para poder hacer el SSR y el ruteo cuando llega una petición de un usuario, pero es posible exportar a archivos estáticos nuestra aplicación y obtener archivos HTML y JS que podemos colocar en un CDN lo que nos permite usar el JAMStack con Next.js.
+
+## ¿Qué es Netlify?
+
+Netlify es una empresa de alojamiento orientada a sitios web estáticos, lo que significa que no podemos tener un servidor de Node.js, PHP, Ruby, etc. corriendo, solo archivos HTML, CSS, JS, imágenes, etc. Básicamente la J y la M del JAMSTack.
+
+Adicionalmente ofrece herramientas para ayudarnos a crear sitios más complejos, pero sin necesidad de programarlas por uno mismo, cosas como autenticación de usuarios, manejo de formularios, pruebas A/B y en caso de necesitar algo personalizado nos ofrece integración con AWS Lambda solo agregando nuestras funciones en una carpeta para que Netlify les asigne una URL.
+
+## Creando el sitio de Tech Talks
+
+Cuando empecé a armar el sitio web de Tech Talks decidí que quería usar algo que me resultara familiar y fácil de empezar a usar, Next.js me daba esa familiaridad gracias a React y además no necesita nada de configuración por lo que podía empezar a usarlo rápido, gracias a su funcionalidad de exportar archivos estáticos podía usarlo con Netlify.
+
+La razón de usar Netlify es que es gratis, fácil de usar y gracias a su CDN da un muy buen rendimiento.
+
+El sitio además usa React y ReactDOM en sus versiones Alpha para poder usar desde ya Hooks, esto para evitar usar clases y reducir el código final que se envía al navegador.
