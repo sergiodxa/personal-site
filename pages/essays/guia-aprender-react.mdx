@@ -1,0 +1,282 @@
+import withLayout from "../../lib/with-layout.js";
+
+export const meta = {
+  title: "Camino para aprender React",
+  date: "",
+  description:
+    "Guía completa para aprender React con enlaces a recursos para profundizar en cada tema.",
+  slug: "guia-aprender-react",
+  published: false,
+  lang: "es",
+  tags: ["Spanish", "JavaScript", "React", "Learn"]
+};
+
+export default withLayout("essay")(meta);
+
+Aprender React puede ser un camino largo y con muchas opciones una vez aprendiste lo básico, en esta guía voy a ir mencionando un camino que se puede tomar desde no saber _nada_ hasta ser un experto en React. Es importante entender que toma tiempo aprender todo, pero con paciencia es completamente posible.
+
+> **Nota**: Esta guía esta basada en este fantástico repositorio de GitHub llamado [react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap).
+
+## Conceptos básicos
+
+Primero lo primero, antes de aprender React necesitas aprender conceptos básicos de desarrollo web.
+
+### HTML
+
+HTML es la base de cualquier página web, y toda aplicación web hecha con React genera etiquetas HTML, por eso es necesario [saber que etiquetas HTML existen](https://sdx.im/link/https://htmlreference.io/), sobre [HTML semántico](https://sdx.im/link/https://es.wikipedia.org/wiki/HTML_sem%C3%A1ntico) y como estructurar una página web.
+
+Algo que sirve es hacer unas pocas páginas de ejercicios, para ver como estructurarla, sin necesidad de ponerle diseño.
+
+### CSS
+
+Al igual que HTML, CSS es otra de las bases de una página web, es lo que nos da el diseño, para esto es necesarios saber [las propiedades de CSS](https://sdx.im/link/https://cssreference.io/), especialmente [el modelo de cajas](https://sdx.im/link/https://cssreference.io/box-model/), [flexbox](https://sdx.im/link/https://cssreference.io/flexbox/) y [CSS Grids](https://sdx.im/link/https://cssreference.io/css-grid/), además de aprender [técnicas de Responsive Design](https://sdx.im/link/https://platzi.com/cursos/responsive-design/).
+
+Acá puedes aprovechas para agregar estilos a las páginas que hiciste antes o hacer nuevas páginas y tratar de imitar los diseños de sitios o aplicaciones web que uses a diario.
+
+Un link bueno para esto es [Web Design in 4 minutes](https://sdx.im/link/https://jgthms.com/web-design-in-4-minutes/) que te enseña paso a paso como ir estilizando un sitio web.
+
+### JavaScript
+
+Antes de poder pasar a React necesitas saber bien JavaScript ya que todo en React se hace usando este lenguaje, para esto hay que [aprender la sintaxis y operaciones básicas](https://sdx.im/link/https://jgthms.com/javascript-in-14-minutes/), además de aprender a manipular y trabajar en general con el DOM, conceptos un poco más avanzados como [hoisting](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Glossary/Hoisting), [event bubbling](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture), [prototype](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain), etc. y [patrones de diseño en JavaScript](https://sdx.im/link/https://addyosmani.com/resources/essentialjsdesignpatterns/book/), aprender [AJAX](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started) y [Fetch](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
+
+## Habilidades de desarrollo generales
+
+Una vez sabemos desarrollo web es necesario adquirir habilidades de desarrollo más generales.
+
+### Git y GitHub
+
+[Git](https://sdx.im/link/https://git-scm.com/) es una herramienta de control de versiones, nos permite mantener control sobre nuestro código para poder volver atrás en caso de un error, [GitHub](https://sdx.im/link/https://github.com/) es una plataforma donde alojar el código que estamos versionando usando Git, este además nos da varias funcionalidades de colaboración extra, puede parecer innecesario cuando uno está aprendiendo pero es muy usado en las empresas de tecnología hoy en día.
+
+### El protocolo HTTP/HTTPS
+
+Si vas a trabajar haciendo aplicaciones web es importante saber como funciona la web, [HTTP](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP) y HTTPS son los protocolos sobre los cuales funcionan las páginas web, aunque no es necesario entender a profundidad como funcionan sí tener al menos una idea general y especialmente de los métodos/verbos de HTTP ([GET](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), [POST](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST), [PUT](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT), [PATCH](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH), [DELETE](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) y [OPTIONS](https://sdx.im/link/https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS)).
+
+### Aprender a buscar soluciones
+
+Una de las habilidades más importantes de un programador es aprender a buscar soluciones, no tengas miedo de usar Google, [Stack Overflow](https://sdx.im/link/https://stackoverflow.com/), [GitHub](https://sdx.im/link/https://github.com), [Mozilla Developer Network](https://sdx.im/link/https://developer.mozilla.org/en-US/) y más opciones para buscar información sobre errores o como solucionar problemas específicos. Lo más probable es que alguien más lo haya hecho antes y este la solución ahí fuera escrita en algún sitio.
+
+### Usar la terminal
+
+Muchas herramientas para desarrolladores no cuentan con interfaces gráficas de usuario y es necesario usar la terminal para interactuar con estas, por ejemplo muchas cosas de Git no se pueden hacer con [GitHub Desktop](https://sdx.im/link/http://desktop.github.com/), y esto pasa para muchas herramientas que se usan en desarrollo.
+
+### Depurar código
+
+Probablemente de las habilidades más importantes que puede tener un desarrollador, saber depurar tu código te va a ayudar mucho, saber leer mensajes de error, seguir un stacktrace para encontrar el error y como buscarlo para investigar posibles soluciones.
+
+## React
+
+Ahora sí ya es hora de aprender React, uno de los mejores lugares para estos es su [tutorial oficial](https://sdx.im/link/https://reactjs.org/tutorial/tutorial.html), el resto de la [documentación](https://sdx.im/link/https://reactjs.org/docs/getting-started.html) es muy buena, hay además una cantidad enorme de artículos en internet para aprender React.
+
+## Herramientas de construcción
+
+En el desarrollo web moderno es normal separar el código en módulos, debido a esto es normal tener herramientas que junten estos módulos para crear un único archivo JS optimizado para producción o para nuestro entorno de desarrollo.
+
+Hay varias herramientas, la más popular es webpack, seguida de Parcel y RollUp.
+
+### webpack
+
+Esta herramienta es la más popular, por mucho, de las herramientas para contruir módulos en JavaScript. Es totalmente configurable, lo que la hizo popular, y soporta no solo código JavaScript, también CSS, HTML, imágenes y más permitiéndonos tratar prácticamente cualquier archivo como un módulo
+
+### Parcel
+
+### RollUp
+
+### Administradores de paquetes
+
+#### npm
+
+#### yarn
+
+### Corredor de tareas
+
+#### npm
+
+#### Gulp.js
+
+#### Make
+
+## Estilos
+
+### Preprocesadores de CSS
+
+#### PostCSS
+
+#### SASS/SCSS
+
+#### LESS
+
+#### Stylus
+
+### Frameworks de CSS
+
+#### Bootstrap
+
+#### Materialize
+
+#### MaterialUI
+
+#### Material Design Lite
+
+#### Bulma
+
+#### Semantic UI
+
+### Arquitecturas de CSS
+
+#### CSS Modules
+
+#### BEM
+
+#### Atomic
+
+#### OOCSS
+
+#### SMACSS
+
+#### SUITCSS
+
+### CSS in JS
+
+#### Emotion
+
+#### Styled Components
+
+#### styled-jsx
+
+### Manejo de estados
+
+#### Estado por componente y contexto
+
+#### Redux
+
+##### Tareas asíncronas
+
+###### Redux Thunk
+
+###### Redux Saga
+
+###### Redux Observable
+
+##### Reselect
+
+##### Persistencia de datos
+
+###### Redux Persist
+
+##### Redux Forms
+
+#### MobX
+
+### Tipos de Datos
+
+#### PropTypes
+
+#### JSDocs
+
+#### TypeScript
+
+#### FlowType
+
+### Formularios
+
+#### Formik
+
+#### Redux Forms
+
+#### FormData
+
+### Rutas
+
+#### Reach Router
+
+#### React Router
+
+### Clientes de APIs
+
+#### REST
+
+##### Fetch API
+
+##### axios
+
+#### GraphQL
+
+##### Apollo
+
+##### Relay
+
+##### urql
+
+### Librerías útiles
+
+#### Lodash
+
+#### date-fns
+
+#### classnames
+
+#### RxJS
+
+#### Immutable.js
+
+### Pruebas automatizadas
+
+#### Pruebas unitarias
+
+##### Jest
+
+##### react-testing-library
+
+##### Enzyme
+
+#### Pruebas de integración
+
+##### Karma
+
+#### Pruebas End-to-End
+
+##### Cypress
+
+##### Selenium
+
+##### Puppeteer
+
+### Internacionalización
+
+#### React Intl
+
+#### React i18next
+
+### Server Side Rendering
+
+#### Next.js
+
+#### A mano
+
+### Generadores de sitios estáticos
+
+#### Next.js
+
+#### Gatsby
+
+### Aplicaciones móviles
+
+#### React Native
+
+### Aplicaciones de Escritorio
+
+#### Electron
+
+#### Carlo
+
+### Realidad Virtual
+
+#### React 360
+
+### Otros usos extras
+
+#### React ART (https://github.com/reactjs/react-art/)
+
+#### React Hardware (https://github.com/iamdustan/react-hardware)
+
+#### React PDF (https://github.com/diegomura/react-pdf)
