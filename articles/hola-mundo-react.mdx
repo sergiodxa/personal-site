@@ -1,0 +1,55 @@
+---
+title: Hola Mundo con React
+date: 2019-02-26T15:58:06.637Z
+description: En este tutorial vamos a ver como crear un Hola Mundo en React sin usar JSX
+lang: es
+published: true
+tags: Frontend, React, JavaScript, Spanish
+---
+
+[En otro artículo vimos como cargar React y ReactDOM](/articles/cargando-react-cdn) con una etiqueta `<script >`. Hoy vamos a ver como usar React para renderizar nuestro primer elemento de React.
+
+Lo primero que tenemos que hacer es crear un elemento, eso lo hacemos ejecutando una función.
+
+```js
+React.createElement(type, [props], [...children]);
+```
+
+El primero argumento es un string con la etiqueta HTML que queremos crear.
+
+El segundo es un objeto con los atributos de la etiqueta o `null` en caso de no pasar ninguna.
+
+Desde acá cualquier argumento que pasemos van a ser elementos hijos de nuestra etiqueta o textos, no hay límites para la cantidad de elementos hijos.
+
+Veamos como usarlo creando `<h1>Hola Mundo!</h1>`.
+
+```js
+React.createElement("h1", null, "Hola Mundo!");
+```
+
+Ahora vamos a renderizar nuestro elemento. Para eso necesitamos ReactDOM, este posee un método llamado `render` que nos sirve para justamente hacer render de los elementos.
+
+```js
+ReactDOM.render(element, node);
+```
+
+El primer argumento es el elemento creado con `React.createElement`.
+
+El segundo es un elemento del DOM, normalmente obtenido con `document.getElementById` pero puede ser obtenido con `document.queryElement` o cualquier otro método.
+
+Veamos como usarlos juntos, primero necesitamos un HTML con una etiqueta.
+
+```html
+<main id="app"></main>
+```
+
+Ahora necesitamos obtenerlo y hacer render.
+
+```js
+const element = React.createElement("h1", null, "Hola Mundo!");
+const node = document.getElementById("app");
+
+ReactDOM.render(element, node);
+```
+
+¡Felicidades! Acabas de renderizar tu primer _Hola Mundo!_ usando React.js

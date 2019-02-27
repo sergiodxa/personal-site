@@ -1,0 +1,102 @@
+---
+title: Documentation, Lessons Learned
+date: 2018-01-17T21:18:58.320Z
+description: After working on the documentation of the ZEIT's API I want to share some insights I learned from it.
+published: true
+lang: en
+tags: ZEIT, Now, Documentation, Lesson learned
+---
+
+At ▲ZEIT [we are launching](https://zeit.co/blog/api-2) our newly renewed [API documentation](https://zeit.co/api), I've been working on that project since the ZDB in charge of writing the documentation plus some code related to it. Documenting our whole public API help me learn and understand more about our infrastructure and how Now works internally.
+
+And after months working on it I want to share some thinks I learned.
+
+## Document Your Code
+
+This is really important, you need to document your code as completely as possible. I'm not saying you need to add a comment for each line of code but if you're doing an HTTP microservice add a README to your repository with a simple description of each endpoint, what it receives as request and how it looks the response.
+
+```markdown
+## GET /teams/:id/members
+
+Get the list of members of the team `:id`.
+
+### Response
+
+- `uid` (`String`) The team member unique identifier
+- `role` (`String`) The role inside the team, it could be OWNER or MEMBER
+- `email` (`String`) The email address of the team member
+- `username` (`String`) The username of the team member
+```
+
+Something simple like that could be enough. As a developer I found that a really good way to start a project like a library or an HTTP service is with the public API, create the README, wrote how the project should be used and then code it, this is what's called [RDD](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
+
+If you care about other people and specially about the guy in charge of documenting your code please do this.
+
+## Errors Are Important
+
+Nobody likes errors, but we all have them. No one can't expect the users of an API will always use it fine and never face an error. They'll, most often than you think and is your job while documenting to explain what are the possible errors, how they look like and a possible solution.
+
+This could make a big difference because if you do it you're giving the user the power to easily search any error and get the solution, that means less headaches for the user and less support work for the company.
+
+This also means you need to define a standard way to send errors to the user, you can't only send status code for some errors and a JSON for others. It **must** be standardized in order to explain how to read an error.
+
+### [Addressable Errors](https://rauchg.com/2016/addressable-errors)
+
+In a single error message, doesn't matter the format, there's always a limit on how much is possible to explain, That's the reason we always end up seaching the exact error message on Google again and again.
+
+Help you and your users and attach a single unique URL to each error and explain as much as possible what the error means, the reasons to see it and possible solution.
+
+Bonus point, make it open source, that way people could improve it overtime, if you ever wrote PHP you may see his docs are full of useful comments from other developers which most of the time help you understand some feature faster.
+
+## Try, Everything
+
+You may be tempted to write the docs without testing it, in most cases it could work and everyone will be happy, in other cases it will not work, you may have a typo on your docs, the README could be outdated or maybe you misunderstood the code.
+
+That's why you need a way to try every possible case for the API, in an HTTP based API you can send a request to each endpoint and check the response.
+
+## Let the User Try It
+
+The same way you need to try every piece of documentation your users will want to. Give them an way to do it. Here you have many options to choose from.
+
+### REPL
+
+The first one (and usually harder to implement) is to add a REPL, on the ▲ZEIT docs we decided to put a simple editor to test our most important endpoint, `/v2/now/deployments`, which let you create a new deployment with a single API request.
+
+This editor let you write the code of a `package.json` and `index.js` file, see a cURL example request and a button to deploy it with one click from the docs.
+
+### Copy-Past Ready Code
+
+Another option is to write ready to use code the user could copy-paste it. This way the user can go to the terminal, code editor or IDE and run the example code to check the results and if it works.
+
+In our case [we wrote an internal component](https://github.com/zeit/docs/blob/master/components/api/request.js) to send the HTTP request data and generate a cURL code, but that same component could generate a [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) code for JS or any other possible code and let the user define his favourite language of choice to see the example.
+
+## Write as Much as You Can and as Less as Possible
+
+The API documentation should be as completd as possible and that mean you need to write a lot of example codes and text. But at the same time there's not a single person who want to read a book to understand a single API endpoint.
+
+This led us to try to write as less as possible and make the documentation super simple. The simpler and completed the docs most possible the users will understand the API and use it.
+
+## The Design Matters
+
+Developers tends to understimate the importances of a good design specially for his own developments, but a good design is a _must_ for a good documentation (and any project in general) and helps the users understand it faster.
+
+The ▲ZEIT's designer [Evil Rabbit](https://twitter.com/evilrabbit_) did an awesome job on each single part of the documentation UI and even helped to decide how to organize it.
+
+Yes, text organization is part of a good design and could be the difference between an easy to understand API and a complete mess.
+
+## Get a Second Opinion
+
+Is could be easy to write the documentation and ship it, but must possible something you can think is easy to read and understand could be actually harder. It's always (not only for documentation) a good idea to get a second opinion.
+
+It could be a co-worker not really working on the API docs or an external (but trusty) person who can read it and give a valuable opinion and feedback. Don't show it to everyone, pick the people you think will help you improve the documentation.
+
+## Give Hints and Tips
+
+A simple and bored docs tell you how each endpoints works. A good documentation give you hints and tips on how to use it better. This could be really simple like a note or it could also explain common use cases.
+
+This way the user will not only learn how to use your API but also what's the best and recommended way to use it. Similar to why [errors are important](#errors-are-important) this hints and tips could become on less support work required for the users of your API because you're already teaching them how to use it.
+
+_[ZDB]: ZEIT Day Berlin
+_[RDD]: Readme Driven Development
+_[REPL]: Read–Eval–Print Loop
+_[docs]: Documentation

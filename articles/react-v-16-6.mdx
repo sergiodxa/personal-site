@@ -1,0 +1,191 @@
+---
+title: "React v16.6: lazy, memo y más"
+date: 2018-10-24T17:32:04.452Z
+description: Aprende a usar los nuevos features de React v16.6, lazy load, memoize, errores, contexto y más
+published: true
+lang: es
+tags: JavaScript, Async, Memoize, React
+---
+
+Salió React v16.6, y con este vienen varias novedades, entre ellas el lanzamiento de la primera parte de React Suspense mediante una nueva función llamada `lazy` y de otra función para evitar doble renders llamada `memo`.
+
+## `React.memo`: Evitando doble renders
+
+Esta función nos permite memoizar el render de un componente en base a sus `props` y evitar hacer otro render si estos no cambiaron. Esto ya era posible extendiendo de `PureComponent`, pero hacerlo así significaba crear sí o sí una clase con el consiguiente overhead al rendimiento y dificultar optimizaciones posibles sobre las funciones.
+
+Esta nueva función entonces nos va a permitir memoizar un componente tanto creado como una clase como usando funciones. Incluso se puede hacer memoize del resultado de `React.lazy`.
+
+```js
+import React, { memo } from "react";
+import logo from "./logo.svg";
+
+function Logo({ alt }) {
+  return <img src={logo} className="App-logo" alt={alt} />;
+}
+
+export default memo(Logo);
+```
+
+Como vemos creamos el componente de forma normal y se lo pasamos a `React.memo`, este entonces devuelve el nuevo componente memoizado que podemos exportar.
+
+Adicionalmente es posible pasar un segundo argumento a `React.memo` para personalizar la forma en que valida si cambiaron los props ya que por defecto hace un shallow equal de todos los props.
+
+```js
+export default memo(Logo, (prevProps, nextProps) => {
+  return prevProps.alt === nextProps.alt;
+});
+```
+
+En este caso `React.memo` solo va a dejar que `Logo` se vuelva a renderizar si el prop `alt` cambió, pero si cualquier otro prop cambia se va a ignorar. Esto es similar a usar el [método del ciclo de vida](/articles/ciclo-de-vida-de-un-componente-de-reactjs) `shouldComponentUpdate` con una particularidad de que funciona a la inversa, se debe devolver `true` si el componente va a dar el mismo resultado y `false` si da diferente resultado, lo que significa que nuestra función no debe verificar si el componente debe actualizarse sino si los props son iguales.
+
+> _Nota:_ La razón de llamarse `memo` es por `memoize`, se usa esta forma corta para evitar errores comunes al escribir la palabra `memoize`. No se llama `pure` como fue inicialmente ideado o como `PureComponent` debido a que no asegura la pureza del componente (que no tenga side effects), solamente que memoiza el resultado.
+
+## `React.lazy`: Code Split con Suspense
+
+Esta nueva función, que se incorpora al core de React, permite hacer code split y lazy load de componente de React. Algo que hasta ahora era posible usando librerías como `react-loadable` o `next/dynamic` (de Next.js).
+
+Esta función es simple de usar, recibe como único argumento una función asíncrona que devuelve una promesa de importar un componente de React. Dentro de esta función es posible agregar más lógica.
+
+```js
+import { lazy } from "react";
+import sleep from "sleep";
+
+const Logo = lazy(async () => {
+  await sleep(1000);
+  return import("./logo.js");
+});
+```
+
+En este caso el componente `Logo` que devuelve `lazy` va a esperar un segundo y recién entonces hacer `import` de nuestro componente `./logo.js`. El `sleep` en este caso nos permite finjir una carga lenta para probar que efectivamente el componente esta siendo cargando de forma asíncrona.
+
+El `import` funciona gracias al module bundler que uses, ya sea webpack, Parcel, Rollup o cualquier otro, estos van a crear un split point donde se use esta función y van a encargarse de que se cargue asíncronamente el módulo `./logo.js` cuando se ejecute dicha función.
+
+> _Nota_: Este método **todavía** no funciona en el servidor, en futuras versiones va a estar disponible. Esto significa que no es posible usarlo con Next.js o SSR en general.
+
+### `React.Suspense`
+
+Este componente esta relacionado con `lazy` y es obligatorio usarlo si usamos lazy load, en caso de no usarlo React muestra un error diciendo que es necesario.
+
+Lo que hace `Suspense` es simple, envuelve nuestro componente lazy en otro componente y renderiza un fallback si es que todavía no se terminó de cargar el componente lazy.
+
+```js
+import React, { Component, Suspense } from "react";
+import LazyLogo from "./lazy-logo.js"; // nuestro componente lazy
+import Placeholder from "./placeholder.js"; // un componente que sirva de placeholder
+
+class App extends Component {
+  state = {
+    alt: "React"
+  };
+
+  render() {
+    return (
+      <Suspense maxDuration={300} fallback={<Placeholder />}>
+        <LazyLogo alt={this.state.alt} />
+      </Suspense>
+    );
+  }
+}
+```
+
+Ahora cuando `App` sea renderizado este va a pasar su estado a `LazyLogo` y por consiguiente al componente de `Logo`, mientras el logo este siendo importado `Suspense` va a renderizar el componente `Placeholder` que pasamos con el prop `fallback`, este componente puede ser tanto algo genérico como un spinner o algo único para nuestro componente lazy.
+
+Por último, el prop `maxDuration` nos permite indicar cuanto debe esperar `Suspense` antes de renderizar el fallback, esto nos sirve para que si un componente carga lo suficientemente rápido no rendericemos el fallback y evitemos que este se vea durante menos de un segundo.
+
+> _Nota_: el prop `maxDuration` solo funciona cuando el modo concurrente, antes llamado async, de React está habilitado, actualmente este modo no es estable por lo que `maxDuration` es simplemente ignorado.
+
+## `static contextType`: Accediendo al contexto más fácil
+
+Con React 16.3 se introdujo el API estable para usar contexto, usando `React.createContext`.
+
+```js
+import { createContext } from "react";
+export default createContext();
+```
+
+Esta API, aunque práctica, solo permite usar el contexto en el método render de un componente. Lo que en componentes que son funciones no causa problemas, pero en clases que extienden `Component` o `PureComponent` impide su uso en el ciclo de vida.
+
+Desde ahora hay otra forma de usar el contexto mediante `static propTypes` en una clase.
+
+```js
+import { Component } from "react";
+
+import MyContext from "./context.js"; // el archivo que creamos antes
+
+class MyComponent extends React.Component {
+  static contextType = MyContext;
+  componentDidMount() {
+    const value = this.context;
+    // hacer algo con el contexto acá
+  }
+  componentDidUpdate() {
+    const value = this.context;
+    // hacer algo con el contexto
+  }
+  componentWillUnmount() {
+    const value = this.context;
+    // hacer algo con el contexto
+  }
+  render() {
+    const value = this.context;
+    // user el contexto para hacer render
+  }
+}
+
+export default MyComponent;
+```
+
+Como vemos, con pasar el contexto que devuelve `React.createContext` es suficiente para empezar a usarlo en cualquier parte del ciclo de vida de un componente.
+
+> _Nota_: Usando este método solo es posible suscribirse a un contexto a la vez, para usar varios contextos se debería envolver a nuestro componente de clase en una función que use el API actual para pasar el contexto como prop.
+
+## `static getDerivedStateFromError()`: Reaccionando a los errores antes del render
+
+En React v16 se introdujo también una forma de atrapar errores que ocurren en el render usando el método del ciclo de vida `componentDidCatch`. Este método se ejecuta cuando un render tira un errores y nos permite actualizar el estado reaccionar al error de alguna forma en nuestra UI.
+
+Antes de que se cambie el estado React por defecto renderiza `null`, lo que en algunos casos puede romper al componente padre del que dio error si este no espera que falte alguna ref. Este método tampoco funciona al renderizar en el servidor ya que todos los métodos que se llaman `Did` se ejecutan solo en el navegador.
+
+Desde ahora se puede usar el nuevo método estático `getDerivedStateFromError()` para obtener el error antes del render.
+
+> _Nota_: Este método **todavía** no funciona en el servidor, en futuras versiones va a estar disponible. Esto significa que no es posible usarlo con Next.js o SSR en general.
+
+```js
+class ErrorBoundary extends React.Component {
+  state = {
+    hasError: false
+  };
+
+  static getDerivedStateFromError(error) {
+    // retorna los nuevos cambios al estado
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Renderizamos algo en lugar del contenido si hay un error
+      return <h1>Something went wrong.</h1>;
+    }
+    // renderizamos nuestro contenido
+    return this.props.children;
+  }
+}
+```
+
+El uso es igual que con `componentDidCatch`, se usa `ErrorBoundary` para envolver un componente y todos los errores que ocurran en sus componentes hijos serían atrapados por `getDerivedStateFromError` y nos permitiría reaccionar a este error.
+
+## Nuevas advertencias en StrictMode
+
+En la versión 16.3 se introdujo un modo estricto a React que se puede usar envolviendo nuestra aplicación con [el componente `React.StrictMode`](https://reactjs.org/docs/strict-mode.html).
+
+Esta nueva versión incluye nuevas advertencias de funcionalides que se van a volver obsoletas en el futuro.
+
+- `ReactDOM.findDOMNode()`. Esta API se va a eliminar en el futuro, si nunca lo usaste se puede ignorar, si lo usaste hay una [guía en la documentación explicando como actualizar](https://reactjs.org/docs/strict-mode.html#warning-about-deprecated-finddomnode-usage).
+- **Antíguo API de contexto** usando `contextTypes` y `getChildContext`. El antíguo API de contexto vuelve a React más lento y pesado de lo que debería ser. La recomendación es actualizar al nuevo API para que en el futuro se pueda eliminar el soporte al API viejo.
+
+## Palabras finales
+
+Como se ve esta nueva versión trae muchas cosas interesantes al ecosistema de React que en su mayoría se resolvían mediante librarías externas y ahora va a ser posible hacer solo con React.
+
+Ya sea que evitemos renders innecesarios en un componente de función usando `memo` o carguemos de forma asíncrona usando `lazy` de a poco React nos va dando más y más herramientas para crear una mejor experiencia de usuario de forma más simple para los desarrolladores.
+
+Por último si quieren ver como funciona `lazy` y `memo` pueden ver una demo en https://react-lazy-memo.now.sh y el código fuente en https://github.com/sergiodxa/react-lazy-memo.

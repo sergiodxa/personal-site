@@ -1,0 +1,260 @@
+---
+title: Introducción a GraphQL
+date: 2017-05-29T00:42:30.912340Z
+description: En 2015 Facebook anunció GraphQL, una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?
+published: true
+lang: es
+canonical_url: https://platzi.com/blog/introduccion-a-graphql/
+tags: GraphQL, API
+---
+
+En 2015 Facebook anunció [GraphQL](http://graphql.org/), una tecnología que empezaron a desarrollar y usar internamente en 2012. ¿Pero qué es GraphQL?
+
+Es un lenguaje de queries para definir qué datos queremos pedir a un API. Lo más interesante es que con GraphQL es el cliente, el Frontend, el que decide qué datos pedir y de qué forma al servidor, lo que quiere decir que si mañana necesitamos un dato adicional o dejamos de necesitar un dato no es necesario modificar el Backend, simplemente cambiamos la query de GQL en el cliente y listo.
+
+Algo importante a tener en cuenta es que GraphQL no es una librería o framework. Es una especificación de cómo implementarlo en cualquier lenguaje y a su vez existen implementaciones ya hechas en lenguajes como [JavaScript](http://dev.apollodata.com/tools/), [Ruby](https://github.com/rmosolgo/graphql-ruby), [Python](http://graphene-python.org/), [Scala](http://sangria-graphql.org/), [Java](https://github.com/graphql-java/graphql-java), [Clojure](https://github.com/tendant/graphql-clj), [Go](https://github.com/graphql-go/graphql), [PHP](https://github.com/webonyx/graphql-php), [.NET](https://github.com/graphql-dotnet/graphql-dotnet), etc. También existen clientes para consumir un API GraphQL desde [JS](http://dev.apollodata.com/core/), [iOS](http://dev.apollodata.com/ios/), [Android](http://dev.apollodata.com/android/), [React](http://dev.apollodata.com/react/), [Angular](http://dev.apollodata.com/angular2/), etc.
+
+## Interactuando con GraphQL
+
+Cuando tenemos un API Rest, la forma de interactuar con ella es que hacemos una petición HTTP usando alguno de los métodos, `GET`, `POST`, `PUT` o `DELETE`, a ciertas URL únicas por recurso del API.
+
+Por ejemplo si hacemos una petición `GET /api/careers/` eso nos devuelve la lista de carreras. Si le agregamos `/:id` podemos pedir los datos de una carrera específica. Así con `POST` podemos crear nuevas carreras, con `PUT` y `DELETE` actualizar y borrar carreras.
+
+En cambio con GQL tenemos un solo endpoint, normalmente `/graphql`, y solo interactuamos con el mediante el método `POST`. Para decirle que datos queremos obtener, crear o modificar colocamos en el cuerpo de la petición alguna de estas tres cosas:
+
+- Query
+- Mutation
+- Subscription
+
+Estas son las 3 formas de interactuar con un API GraphQL. Ahora vamos a ver que es cada una.
+
+### Query
+
+El primer concepto importante de GQL es la **Query**. Una query es básicamente una consulta que hacemos a nuestra API.
+
+```graphql
+query {
+  getCourse("id": 1) {
+    id
+    title
+    url
+    concepts {
+      title
+      materials {
+        title
+        url
+      }
+    }
+  }
+}
+```
+
+Ese es un ejemplo de una query para pedir una lista de carreras. De cada carrera pedir el `id`, el `title`, el `badge`, si está `approved` y sus cursos y los mismos datos de la carrera para cada curso más la URL. Y este es el contenido de la respuesta de dicha query.
+
+```json
+{
+  "data": {
+    "getCourse": {
+      "id": 1,
+      "title": "Fundamentos de JavaScript",
+      "url": "https://platzi.com/clases/fundamentos-javascript/",
+      "concepts": [
+        ...
+      ]
+    }
+  }
+}
+```
+
+Como vemos, obtenemos un objeto con nuestros datos y dentro tenemos el curso que pedimos al servidor solamente con las propiedades que solicitamos. De esta forma es nuestro cliente quien define los datos que necesita y el servidor simplemente se encargar de responder con esos datos.
+
+La verdad un curso, concepto y material puede tener muchos más datos, pero estos son los únicos que nosotros necesitamos así que, a diferencia de un API Restful, GQL nos devuelve exactamente lo que necesitamos para nuestra UI, ni más ni menos.
+
+### Mutation
+
+Las queries nos permiten obtener datos, pero toda aplicación necesita una forma de crear, modificar, eliminar o interactura con estos datos. Estas son llamadas **mutaciones**. Una mutación es similar a una función, recibe ciertos parámetros, realiza un cambio y devuelve una respuesta.
+
+```graphql
+mutation {
+  addToLearningPath(
+    "id": 1
+  ) {
+    title
+    badge
+    approved
+    url
+  }
+}
+```
+
+Esa mutación lo que hace es indicarle a nuestro servidor que queremos agregar a nuestro plan de estudios el curso con el ID **1** y le decimos que nos responda con el título, badge, si ya aprobamos y la URL. La respuesta sería algo así:
+
+```json
+{
+  "data": {
+    "addToLearningPath": {
+      "title": "Fundamentos de JavaScript",
+      "badge": "https://static.platzi.com/media/achievements/badge-Fundamentos-js.png",
+      "approved": false,
+      "url": "https://platzi.com/clases/fundamentos-javascript/"
+    }
+  }
+}
+```
+
+La respuesta entonces nos da los datos que pedimos del curso que agregamos al plan de estudios. Luego con esos datos podemos agregar nuestro curso a la UI de un plan de estudios.
+
+### Subscription
+
+Otra parte importante de GQL son las suscripciones. Esto no está implementado por todas las librerías para backend ya que recién [hace poco](https://github.com/facebook/graphql/pull/305#event-1086850767) se volvió parte oficial de la especificación. Lo que nos permiten las suscripciones es, como su nombre dice, suscribirnos a cambios que ocurran en el servidor.
+
+Por ejemplo, es posible suscribirse a nuevas notificaciones y de esa forma enterarse en _tiempo real_ de lo que ocurre en nuestra aplicación. Básicamente es mantener una conexión por WebSockets. Veamos un ejemplo
+
+```graphql
+subscription {
+  notificationOf("type": "answer") {
+    id
+    type
+    data {
+      discussion {
+        id
+        title
+      }
+      answer {
+        author {
+          avatar
+          username
+        }
+        date
+      }
+    }
+  }
+}
+```
+
+Con esta suscripción podemos empezar a enterarnos cuando nos responden una pregunta. De cada notificación vamos a obtener el ID, el tipo (siempre answer gracias al filtro) y datos específicos como el ID y título de la pregunta y el autor (con su nombre y avatar) y la fecha de la respuesta. Cuando llegue una notificación entonces nos devuelve un objeto similar a este:
+
+```json
+{
+  "data": {
+    "id": 123,
+    "type": "answer",
+    "data": {
+      "discussion": {
+        "id": 456,
+        "title": "¿Cómo funciona GraphQL?"
+      },
+      "answer": {
+        "author": {
+          "avatar": "<url>",
+          "username": "sergiodxa"
+        },
+        "date": "2017-05-28T23:48:27.752Z"
+      }
+    }
+  }
+}
+```
+
+## Schema
+
+Cuando desarrollamos un API GQL hay que definir nuestros esquemas (schemas) de datos. Un esquema en GQL es una definición de un tipo de dato o de las formas de obtener e interactuar con estos datos. Por ejemplo podríamos definir un esquema similar a este:
+
+```graphql
+type Course {
+  id: Int!
+  title: String!
+  badge: String!
+  approved: Boolean
+  url: String!
+  description: String
+  concepts: [Concept]
+}
+```
+
+Así estamos definiendo que en nuestra aplicación existe un objeto de tipo `Course` que tiene los siguientes datos:
+
+- `id` un número, obligatorio
+- `title` un string, obligatorio
+- `badge` un string, obligatorio
+- `approved` un booleano, opcional
+- `url` un string, obligatorio
+- `description` un string, opcional
+- `concepts` una lista de objetos de tipo `Concept`, opcional
+
+La propiedad `concepts` es básicamente una relación que indica que un curso tiene varios conceptos. Luego necesitamos definir las posibles formas de obtener este curso.
+
+```graphql
+type Query {
+  getCourse(id: Int!): Courses
+  getCourses(): [Courses]
+}
+```
+
+Esto nos permite ejecutar una query llamada `getCourse` pasándole un `id` obtener un único curso o ejecutar `getCourses` para obtener una lista de todos los cursos. Similar a la query que vimos más arriba. Luego de definir esto necesitamos definir las posibles mutaciones. Las formas de interactuar con nuestra API.
+
+```graphql
+type Mutation {
+  addToLearningPath(id: String!): Course
+  createCourse(
+    title: String!
+    badge: String!
+    url: String
+    description: String
+  ): Course
+  updateCourse(
+    title: String
+    badge: String
+    url: String
+    description: String
+  ): Course
+}
+```
+
+Estas mutaciones que definimos en nuestro esquema son las formas de interactuar con nuestros cursos. Podemos agregarlos a nuestro plan de estudios, crear cursos o modificar cursos. También hay que definir a que datos podemos suscribirnos.
+
+```graphql
+type Subscription {
+  notificationOf(type: String!): Notification
+}
+```
+
+Así definimos las suscripciones, simplemente indicar el nombre, qué parámetros recibo y qué devuelve, igual que las mutaciones. Por último hay que definir nuestro esquema final, que siempre es algo así:
+
+```graphql
+type Schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+```
+
+Simplemente decir que nuestro esquema tiene `query`, `mutation` y `subscription` y que cada uno corresponde con las que definimos antes.
+
+### Resolvers
+
+Los esquemas por si solos no hacen nada, solo definen que se puede hacer en nuestra API. Para eso existen los resolvers, funciones que se encargan de procesar cada posible query, mutación o suscripción de nuestra API y responder con los datos necesarios según la definición de nuestro esquema. Por ejemplo algo así:
+
+```js
+const getCourse = async id => Course.findById(id);
+```
+
+Esta función de una línea se encarga de, usando el modelo `Course` de nuestra base de datos, obtener un curso mediante el ID. En este caso estamos pidiendo todos los posibles campos de nuestra tabla curso de la base de datos. Pero es posible (y de hecho es la idea de GQL) pedir a nuestra BD solo los datos que indicó el cliente. Así optimizamos la lectura y escritura de la BD.
+
+## GraphiQL
+
+GraphQL tiene su propio IDE, creado por Facebook, llamado GraphiQL (pronunciado grafical), este IDE funciona mediante web mostrándose, normalmente, en la URL de nuestro API cuando entramos desde un navegador y se conecta con nuestros esquemas de datos para mostrarnos documentación del API y nos deja probarlo, dando sugerencias de autocomplete y mostrándonos las respuestas a las distintas peticiones, mutaciones y suscripciones.
+
+![](https://github.com/graphql/graphiql/raw/master/resources/graphiql.png)
+
+Ahí vemos un ejemplo de como se vé GraphiQL, en la esquina superior izquierda vemos nuestra petición. Abajo tenemos variables y a la derecha los resultados de correr esa petición.
+
+## GraphQL vs Restful
+
+Un problema común de los API Rest es que requieren muchas peticiones para obtener todos los datos necesarios en una vista de nuestra aplicación. Lo que suele llevar a que o se hacen estas peticiones o se crean URL personalizadas para responder con todos los datos necesarios, ambos casos tienen problemas, ya que o le estamos consumiendo datos a nuestros usuarios y podemos tardanos mucho en obtener todas las respuestas o estamos creando endpoints en nuestro API que nunca más se van a volver a usar debido a lo personalizado que son.
+
+Ambos problemas son resultos por GraphQL dejando al cliente decidir que datos quiere en cada momento y con una sola URL manejar todas las peticiones, así en vez de crear URLs personalizadas simplemente definimos los posibles datos de nuestro API y como interactuar con el y dejamos el resto al frontend.
+
+## Palabras finales
+
+**Rest no está muerto**. Para comunicación entre servicios de backend todavía puede servir, pero para un API de cara al cliente que se use en web, mobile, desktop, lo que sea, GraphQL tiene muchas ventajas. Y gracias a clientes como [Apollo](http://dev.apollodata.com/) o [Relay Modern](https://facebook.github.io/relay/) es muy fácil empezar a usarlo en cualquier tipo de aplicación frontend.

@@ -1,0 +1,104 @@
+---
+title: Documentación, Lecciones Aprendidas
+date: 2018-01-17T21:18:58.320Z
+description: Después de trabajar en la documentación del API de ZEIT quiero compartir algunas lecciones que aprendí de ello.
+published: true
+lang: es
+translate_from:
+  url: https://sergiodxa.com/articles/documentation/
+  lang: en
+  title: Documentation, Lessons Learned
+tags: ZEIT, Now, Documentation, Lesson learned
+---
+
+En ▲ZEIT [lanzamos](https://zeit.co/blog/api-2) nuestra nueva y renovada [documentación del API](https://zeit.co/api), estuve trabajando en ella desde ZDB a cargo de escribir la documentación y código relacionado con la documentación. Documentar nuestra API pública por completo me ayudó a aprender y entender más sobre nuestra infrastructura y cómo funciona Now internamente.
+
+Después de meses de trabajar en eso quiero compartir algunas cosas que aprendí.
+
+## Documenta tu código
+
+Esto es realmente importante, necesitas documentar tu código lo más posible. No digo que agregues comentarios para cada línea de código, pero si estás haciendo un microservicio HTTP simplemente agregá un README al repositorio con una simple descripción de cada endpoint, que recibe en cada petición y la respuesta que envía.
+
+```markdown
+## GET /teams/:id/members
+
+Get the list of members of the team `:id`.
+
+### Response
+
+- `uid` (`String`) The team member unique identifier
+- `role` (`String`) The role inside the team, it could be OWNER or MEMBER
+- `email` (`String`) The email address of the team member
+- `username` (`String`) The username of the team member
+```
+
+Algo simple como eso es suficiente. Como desarrollador descubrí que una muy buena forma de empezar un proyecto, como puede ser una librería o un servicio HTTP, es con su API pública, crea un README, escribí como se debería usar el proyecto y recién entonces programalo, esto es llamado [RDD](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html).
+
+Si te preocupás por otras personas y especialmente de la persona a cargo de documentar tu código por favor hacé esto.
+
+## Los errores son importantes
+
+A nadie le gustan los errores, pero todos los tenemos. No podés esperar que los usuarios del API siempre lo usen bien y no tengan errores. Ellos van a tenerlos, más de lo que creas y es tu trabajo mientras documentás explicar cuales son los posibles errores, como lucen y posibles soluciones.
+
+Esto puede hacer una gran diferencia ya que de hacerlo le estás dando a los usuarios la posibilidad de buscar fácilmente cualquier error y la solución, eso significa menos dolores de cabeza para los usuarios y menos trabajo de soporte para la empresa.
+
+También significa que hay que definir una forma estandarizada de enviar errores a los usuarios. No puedés simplemente enviar un código de estado HTTP para algunos errores y un JSON para otros. **Debe** estar estandarizado de forma que puedas explicar fácilmente como leer los errores.
+
+### [Errores enlazables](https://rauchg.com/2016/addressable-errors)
+
+En un mensaje de error, no importa el formato, siempre hay un límite en cuanto se puede explicar. Esa es la razón por la que siempre terminamos buscando el mismo mensaje de error exacto en Google una y otra vez.
+
+Ayudate a vos mismo y a tus usuarios y agrega una URL única para cada error donde se pueda extender la información del errores, las razones para tenerlo y las posibles soluciones.
+
+Puntos extra si lo hacés de código abierto. De esa forma los usuarios pueden contribuir con mejoras con el tiempo, si alguna vez programaste PHP su documentación está llena de comentarios útiles de otros desarrolladores que normalmente te ayudan a entender algo del lenguaje más fácilmente que la misma documentación.
+
+## Probá todo
+
+Capaz estés tentado a solo escribir la documentación sin probarla, en la mayoría de los casos va a funcionar y todos van a ser felices, en otros casos no va a funcionar, capaz tengas un error, el README del endpoint estaba desactualizado o no entendiste bien algo.
+
+Es por eso que siempre debés probar cada posible caso del API, en las que están basadas en HTTP podés simplemente enviar una petición a cada endpoint y revisar el resultado.
+
+## Dejá que el usuario lo pruebe
+
+De la misma forma que necesitás probar cada parte de la documentación los usuarios también van a querer hacerlo. Dales una forma fácil de hacerlo. Acá hay algunas opciones.
+
+### REPL
+
+La primera (y usualmente más difícil de implementar) es agregar un REPL, en la documentación de ▲ZEIT colocamos un simple editor para probar nuestro endpoint más importante, `/v2/now/deployments`, que te deja crear un nuevo deployment con una simple petición a nuestro API.
+
+Este editor te deja escribír el código de un `package.json` y un `index.js`, ver un ejemplo de una petición usando cURL y agregar un botón para hacer deploy con un click desde la documentación.
+
+### Código listo para copiar y pegar
+
+Otra opción es escribir código listo para usar que el usuario pueda simplemente copiar y pegar. Esto le permite al usuario simplemente ir a la terminal, editor o IDE y ejecutar el código para ver el resultado y que, efectivamente, funciona.
+
+En nuestro caso [creamos un componente interno](https://github.com/zeit/docs/blob/master/components/api/request.js) que le pasamos los datos de la petición HTTP y genera la petición en cURL, el mismo componente puede generar código de JS usando [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) o cualquier otra tecnología y le permite al usuario definir su lenguaje favorito para ver los ejemplos.
+
+## Escribí tanto como puedas y tan poco como sea posible
+
+La documentación del API debería ser tan completa como sea posible y eso significa escribir un montón de ejemplos de código y texto. Pero al mismo tiempo nadie quiere leer un libro solo para entender un endpoint de un API.
+
+Esto nos lleva a escribir tan poco como sea posible y hacer la documentación super simple. Lo más simple y completa que sea la documentación más usuarios van a entenderla y usarla.
+
+## El diseño importa
+
+Los desarrolladores tendemos a subestimar la importancia de un bueno diseño, especialmente para nuestro propios proyectos, pero un bueno diseño es _obligatorio_ para una buena documentación (y cualquier proyecto en general) y ayuda a los usuarios a entenderla más rápido.
+
+El diseñador de ▲ZEIT, [Evil Rabbit](https://twitter.com/evilrabbit_), hizo un increíble trabajo en cada parte de la UI de la documentación e incluso ayudó a decidir como organizar el contenido.
+
+Sí, la organización del contenido es parte de un buen diseño y puede ser la diferencia entre una documentación fácil de entender y un completo desastre.
+
+## Tené una segunda opinión
+
+Es fácil simplemente escribir la documentación y publicarla, pero probablemente algo que creas que es simple de leer y entender puede en realidad ser difícil. Siempre es (no solo para documentación) una buena idea tener una segunda opinión.
+
+Puede ser un compañero de trabajo que no esté trabajando en la documentación directamente o una persona externa (pero confiable) que pueda simplemente leerla y dar una opinión valiosa. No se lo muestres a todo el mundo, elegí a las personas que crees pueden ayudar a mejorar la documentación.
+
+## Da ayudas y consejos
+
+Una documentación simple y aburrida solamente te dice como funciona cada endpoint. Una buena documentación te da ayudas y consejos de como usarla de la mejor manera posible. Esto puede ser tan simple como una nota o explicar casos de uso comunes.
+
+De esta forma el usuario no solo va a aprender como usar el API, también cual es la mejor forma de hacerlo o la más recomendada. Al igual que por qué los [errores son importantes](#los-errores-son-importantes), estos consejos pueden ayudar a reducir el trabajo de soporte necesario para los usuario del API ya que la misma documentación está enseñando como usar bien el API.
+
+_[ZDB]: ZEIT Day Berlin
+_[RDD]: Readme Driven Development \*[REPL]: Read–Eval–Print Loop
