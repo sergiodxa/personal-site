@@ -19,4 +19,4 @@
 # From /essays to /articles
 [[redirects]]
   from = "/essays/*"
-  to = "/articles/*"
+  to = "/articles/:splat"
