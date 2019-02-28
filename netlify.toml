@@ -1,0 +1,22 @@
+[build]
+  publish = "public"
+  command = "yarn build"
+
+# From .dev to .com (maybe temporal)
+[[redirects]]
+  from = "http://sergiodxa.dev/*"
+  to = "http://sergiodxa.com/:splat"
+  status = 307
+  force = true
+
+# Hide Netlify subdomain
+[[redirects]]
+  from = "http://sergiodxa.netlify.com/*"
+  to = "http://sergiodxa.com/:splat"
+  status = 301
+  force = true
+
+# From /essays to /articles
+[[redirects]]
+  from = "/essays/*"
+  to = "/articles/*"
