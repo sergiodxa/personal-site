@@ -28,7 +28,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "contentz": "1.7.0"
+    "contentz": "1.8.0"
   },
   "devDependencies": {
     "serve": "10.1.2"
