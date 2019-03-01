@@ -20,3 +20,9 @@
 [[redirects]]
   from = "/essays/*"
   to = "/articles/:splat"
+
+# Avoid caching the Service Worker
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "nocache, max-age=0, must-revalidate, no-store"
