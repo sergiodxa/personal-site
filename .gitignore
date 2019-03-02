@@ -1,11 +1,7 @@
-/.next
 /node_modules
-/portfolio
-/dist
 /logs
 *.log
-/out
-now-secrets.json
 .DS_Store
 .vscode
 /public
+.cache

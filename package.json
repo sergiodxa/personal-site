@@ -11,7 +11,7 @@
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
   "keywords": [
-    "nextjs",
+    "contentz",
     "blog",
     "personal-website",
     "personal-site"
@@ -28,7 +28,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "contentz": "1.8.0"
+    "contentz": "1.9.1"
   },
   "devDependencies": {
     "serve": "10.1.2"
