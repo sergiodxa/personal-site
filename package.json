@@ -3,7 +3,7 @@
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
     "build:dev": "node ../contentz/src",
-    "build": "node ./node_modules/contentz",
+    "build": "contentz build",
     "start": "serve public -p 3000"
   },
   "repository": {
