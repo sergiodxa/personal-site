@@ -3,7 +3,6 @@ title: Automatización de tareas de frontend usando Gulp.js
 date: 2014-12-22T00:00:00Z
 published: true
 lang: es
-canonical_url: http://www.cristalab.com/tutoriales/automatizacion-de-tareas-de-frontend-usando-gulp.js-c114514l/
 tags: Cristalab
 ---
 
@@ -11,33 +10,33 @@ tags: Cristalab
 
 Como desarrollador Frontend, hay ciertas tareas que se terminan volviendo repetitivas durante el desarrollo, como compilar el CSS desde un pre-procesador, concatenar archivos o minificarlos. Es hasta el ambiente de producción en donde realizamos estas dos ultimas tareas.
 
-Gracias a herramientas como [Gulp.js](http://gulpjs.com/) y [Grunt.js](http://gruntjs.com/) ahora es posible automatizar todas estas tareas repetitivas e inicializarlas con un único comando en la terminal. En este tutorial les voy a explicar como usar una de estas herramientas, **Gulp.js**.
+Gracias a herramientas como [Gulp.js](https://gulpjs.com/) y [Grunt.js](https://gruntjs.com/) ahora es posible automatizar todas estas tareas repetitivas e inicializarlas con un único comando en la terminal. En este tutorial les voy a explicar como usar una de estas herramientas, **Gulp.js**.
 
 ## Descargar e instalar Gulp.js
 
-Lo primero que necesitamos hacer para empezar a usar Gulp.js es descargarlo e instalarlo, para esto necesitamos tener Node.js instalado, si no lo tienen pueden [ir al sitio](http://nodejs.org/), descargarlo e [instalarlo](http://www.cristalab.com/tutoriales/instalar-nodejs-y-paquetes-en-linux-y-windows-c104363l/). Una vez tengan Node.js simplemente abren la consola y escriben el comando para instalar Gulp.js de forma global.
+Lo primero que necesitamos hacer para empezar a usar Gulp.js es descargarlo e instalarlo, para esto necesitamos tener Node.js instalado, si no lo tienen pueden [ir al sitio](https://nodejs.org/), descargarlo e instalarlo. Una vez tengan Node.js simplemente abren la consola y escriben el comando para instalar Gulp.js de forma global.
 
 ```bash
 sudo npm i -g gulp
 ```
 
-Luego de que lo tengan instalado de forma global necesitan instalarlo en cada proyecto donde lo vayan a usar, para eso simplemente van desd la consola a la carpeta del proyecto usando el comando:
+Luego de que lo tengan instalado de forma global necesitan instalarlo en cada proyecto donde lo vayan a usar, para eso simplemente van desde la consola a la carpeta del proyecto usando el comando:
 
 ```bash
 npm i -D gulp
 ```
 
-El -D es para que lo agregue como dependencia de desarrollo en el archivo package.json del proyecto. Es lo mismo que --save-dev.
+El `-D` es para que lo agregue como dependencia de desarrollo en el archivo `package.json` del proyecto. Es lo mismo que `--save-dev`.
 
 ## Instalar plugins
 
-Lo siguiente es buscar los plugins necesarios para nuestro proyecto, para eso pueden ir al [sitio de Gulp.js](http://gulpjs.com/plugins/) y en la sección de plugins tienen la lista completa con un buscador.
+Lo siguiente es buscar los plugins necesarios para nuestro proyecto, para eso pueden ir al [sitio de Gulp.js](https://gulpjs.com/plugins/) y en la sección de plugins tienen la lista completa con un buscador.
 
 ![Resultados de buscar plugins en gulpjs.com](http://l4c.me/uploads/sitio-de-gulpjs-1419221544_full550.png)
 
-O pueden ir directamente a [NPM](http://npmjs.org/) y buscar ahí el plugin agregando la palabra gulp a su búsqueda.
+O pueden ir directamente a [NPM](https://npmjs.org/) y buscar ahí el plugin agregando la palabra gulp a su búsqueda.
 
-Para este ejemplo vamos a compilar del pre-procesador [LESS](http://lesscss.org/) a CSS, además de minificar el CSS resultante y por último que si se cambian los archivos de LESS vuelva a compilar.
+Para este ejemplo vamos a compilar del pre-procesador [LESS](https://lesscss.org/) a CSS, además de minificar el CSS resultante y por último que si se cambian los archivos de LESS vuelva a compilar.
 
 Para esto buscamos y descargamos los plugins [gulp-less](https://www.npmjs.com/packages/gulp-less), [gulp-minify-css](https://www.npmjs.com/packages/gulp-minify-css) y [gulp-watch](https://www.npmjs.com/packages/gulp-watch), podemos instalarlos en nuestro proyecto con el comando:
 
@@ -116,7 +115,7 @@ gulp css
 
 Cuando se termine de ejecutar la tarea (mientras más pipe agregues más tarda) vamos a tener un archivo main.css en la carpeta css ubicada en la raíz de nuestro proyecto.
 
-Ahora nos falta poder vigilar todos los cambios de los archivos de la carpeta less y volver a ejecutar automaticamente la tarea css, para eso creamos otra tarea llamada watch y programamos la tarea de esta forma:
+Ahora nos falta poder vigilar todos los cambios de los archivos de la carpeta less y volver a ejecutar automáticamente la tarea css, para eso creamos otra tarea llamada watch y programamos la tarea de esta forma:
 
 ```js
 gulp.task('watch', function () {
@@ -132,9 +131,9 @@ Ahora para poder ejecutar esta tarea tenemos que usar el comando
 gulp watch
 ```
 
-Con esto ya estaría escuchando los cambios, sin embargo actualmente tendriamos que ejecutar dos comandos para hacer que todo funcione pefectamente, primero compilar una vez el CSS y luego escuchar los cambios.
+Con esto ya estaría escuchando los cambios, sin embargo actualmente tendríamos que ejecutar dos comandos para hacer que todo funcione perfectamente, primero compilar una vez el CSS y luego escuchar los cambios.
 
-Como esto es molesto también podemos automatizarlo, para eso creamos una nueva tarea y la llamos `default`, a esta tarea no le pasamos una función como hicimos antes, sino que le pasamos un array con cada una de las tareas que queremos que se ejecuten, en nuestro caso css y watch.
+Como esto es molesto también podemos automatizarlo, para eso creamos una nueva tarea y la llamamos `default`, a esta tarea no le pasamos una función como hicimos antes, sino que le pasamos un array con cada una de las tareas que queremos que se ejecuten, en nuestro caso css y watch.
 
 ```js
 gulp.task('default', ['css', 'watch']);
