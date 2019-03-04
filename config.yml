@@ -18,3 +18,4 @@ navigation:
   - name: Services
     path: /services/
 incremental: false
+socialImage: false
