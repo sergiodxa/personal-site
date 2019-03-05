@@ -1,0 +1,104 @@
+---
+title: "Conceptos básicos de JS: Array#map"
+date: 2019-02-07T05:44:51.745Z
+description: Aprende a usar Array#map, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.
+lang: es
+tags: JavaScript, Spanish, Array, ES5
+---
+
+_Array#map_, o `Array.prototype.map`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para _mapear_ un array y obtener uno nuevo, lo que en palabras más normales significa que vamos a recorrer un array y transformar sus elementos en otra cosa. Veamos un ejemplo:
+
+```js
+const numbers = [1, 2, 3];
+const doubles = numbers.map(number => number * 2);
+console.log(doubles); // [2,4,6]
+```
+
+Lo que hace Array#map entonces es llamar la función que pasamos como argumento una vez por cada elemento del array.
+
+> _Nota_: Ya que Array#map devuelve un nuevo array, es una mala práctica usarlo para modificar manualmente el array inicial o hacer algún otro efecto al recorrer el array, para eso es mejor usar Array#forEach.
+
+Si queremos hacer lo mismo que Array#map tendríamos que hacer algo similar a esto:
+
+```js
+const numbers = [1, 2, 3];
+const doubles = [];
+
+for (const number of numbers) {
+  doubles.push(number * 2);
+}
+
+console.log(doubles); // [2,4,6]
+```
+
+Tendríamos que crear un nuevo array vacío, recorrer el primero e ir haciendo Array#push de cada valor multiplicado por dos.
+
+## Sintaxis
+
+La sintaxis completa de la función es la siguiente
+
+```js
+const result = initial.map(function callback(currentValue, index, array) {
+  // Devuelve un nuevo elemento
+}, thisArg);
+```
+
+Array#map recibe dos argumentos, una función `callback` y un valor, cualquiera, que va a ser asignado como `this` del callback, en caso de usar _arrow functions_ este valor no hace nada. El callback a su vez recibe tres argumentos, la mayoría de las veces se suele usar solo el primero y algunas veces el segundo, el primero es el valor actual por el que estamos pasando en la iteración, el segundo es el índice dentro de nuestro array y el tercero es el mismo array que estamos iterando.
+
+Por último, la función devuelve un nuevo array con los resultados de haber ejecutado `callback` una vez por cada elemento del array inicial.
+
+## Implementando Array#map a mano
+
+Veamos ahora como crear nuestro propio Array#map para entender mejor su funcionamiento. Vamos a implementarlo como una función llamada `map` cuyo primer valor va a ser el `array` a mapear y después vamos a recibir el `callback` y el valor de `this`.
+
+```js
+function map(array, callback, thisArg) {
+  const result = [];
+  const boundCallback = thisArg ? callback.bind(thisArg) : callback;
+  for (let index = 0; index < array.length; index++) {
+    result.push(boundCallback(array[index], index, array));
+  }
+  return result;
+}
+
+const numbers = [1, 2, 3];
+const doubles = map(numbers, number => number * 2);
+console.log(doubles); // [2,4,6]
+```
+
+¿Qué es lo que hicimos? Nuestra función recibe los tres argumentos que dijimos antes, luego crea un array vacío llamado `result` y una constante llamada `boundCallback` que en caso de que se haya definido `thisArg` es igual a hacer Function#bind de `callback` con el valor de `thisArg` y en caso contrario es igual a `callback`. Después iteramos el array inicial y hacemos `result.push` del valor que devuelve el `callback`, al cual le pasamos el valor actual del array, el índice y el array entero. Por último devolvemos el resultado.
+
+## Casos de uso
+
+Array#map es usado un montón en JavaScript, especialmente cuando se trabaja de una forma funcional. Es usado en React.js para transformar listas de datos en elementos de React, por ejemplo:
+
+```js
+function List({ list }) {
+  return (
+    <ul>
+      {list.map(item => (
+        <Item key={item.id} {...item} />
+      ))}
+    </ul>
+  );
+}
+
+ReactDOM.render(<List list={[{ id: 1 }, { id: 2 }]} />, target);
+```
+
+Este componente `List` usa Array#map para transformar cada `item` del array `list` en el elemento devuelto por el componente `Item` pasándole toda la información de cada `item` al componente.
+
+---
+
+Fuera de React puede ser usado también para trabajar con listas de elementos del DOM.
+
+```js
+const $selectList = document.querySelectorAll("select");
+const values = Array.from($selectList).map($select => $select.value);
+```
+
+Lo que hace el ejemplo es obtener todos los `<select>` de una página lo que devuelve un objeto NodeList, usando `Array.from` lo convertimos a un array y usamos Array#map para obtener una lista (`values`) de los valores de cada `<select>`.
+
+## Palabras finales
+
+Este método es muy útil y es usado a diario al trabajar con Arrays en JavaScript. Si no lo habías usado antes te recomiendo probar varios ejemplos de uso para familiarizarte, cuando lo hagas vas a querer usarlo siempre, especialmente en combinación de [Array#filter](/articles/js-basics/array-prototype-filter) y Array#reduce.

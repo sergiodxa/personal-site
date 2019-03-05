@@ -2,28 +2,16 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next export -o dist",
-    "postexport": "cp static/sw.js dist && cp static/robots.txt dist && npm run build:rss && npm run build:sitemap",
-    "build:rss": "npm run build:rss:essays && npm run build:rss:links",
-    "build:rss:essays": "node scripts/build-rss-essays.js",
-    "build:rss:links": "node scripts/build-rss-links.js",
-    "build:sitemap": "node scripts/build-sitemap.js",
-    "alias": "now alias",
-    "start": "next start",
-    "start:static": "serve -p 3000",
-    "deploy": "now",
-    "postdeploy": "npm run alias",
-    "test": "jest",
-    "check:mean:words": "node scripts/check-mean-words.js"
+    "build:dev": "node ../contentz/src",
+    "build": "contentz build",
+    "start": "serve public -p 3000"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
   "keywords": [
-    "nextjs",
+    "contentz",
     "blog",
     "personal-website",
     "personal-site"
@@ -40,39 +28,9 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@mdx-js/mdx": "0.16.6",
-    "@mdx-js/tag": "0.18.0",
-    "@sergiodxa/fs": "1.1.6",
-    "@sergiodxa/icons": "1.0.1",
-    "@sergiodxa/map": "1.0.4",
-    "@sergiodxa/palette": "1.0.1",
-    "@sergiodxa/types": "1.0.1",
-    "@sergiodxa/ui": "1.1.2",
-    "@zeit/next-mdx": "1.2.0",
-    "classnames": "2.2.6",
-    "compose-function": "3.0.3",
-    "date-fns": "1.30.1",
-    "globby": "9.0.0",
-    "lodash.memoize": "4.1.2",
-    "next": "7.0.3",
-    "next-ga": "2.3.4",
-    "next-nprogress": "1.4.0",
-    "prop-types": "15.7.2",
-    "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "react-inspector": "^2.3.1",
-    "remark-emoji": "2.0.2",
-    "slugify": "1.3.4"
+    "contentz": "2.0.3"
   },
   "devDependencies": {
-    "jest": "23.6.0",
-    "jest-puppeteer": "3.9.0",
-    "puppeteer": "1.12.2",
     "serve": "10.1.2"
-  },
-  "jest": {
-    "notify": true,
-    "notifyMode": "failure",
-    "preset": "jest-puppeteer"
   }
 }

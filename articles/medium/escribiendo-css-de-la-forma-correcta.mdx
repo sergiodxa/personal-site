@@ -1,0 +1,138 @@
+---
+title: Escribiendo CSS de la forma correcta
+date: 2014-10-31T00:00:00Z
+published: true
+lang: es
+canonical_url: https://medium.com/@sergiodxa/escribiendo-css-de-la-forma-correcta-b420a498219c
+---
+
+Como desarrollador **FrontEnd** me encuentro constantemente utilizando **CSS**. Este lenguaje para dar estilos a páginas web tiende a empezar siendo algo simple y volverse muy complicado conforme avanza el desarrollo del sitio (mantener 100 líneas de CSS es fácil, mantener decenas de miles no).
+
+Para evitar este tipo de problemas fui desarrollando distintas prácticas para mejorar mi código, probando prácticas usadas por otros desarrolladores e incorporando lo que me resultaba útil a mi flujo de trabajo.
+
+Las siguientes son todas las prácticas que fui desarrollando con el tiempo, como aclaración utilizo el [pre-procesador](/articles/medium/ventajas-y-desventajas-de-los-pre-procesadores-de-css) **LESS** por lo que mucho de lo que sigue está basado en que se utilizan pre-procesadores.
+
+## Sintaxis
+
+Empecemos hablando de la sintaxis, cada desarrollador comúnmente tiene las suyas propias dependiendo de donde aprendieron y se suelen quedar con esa sintaxis.
+
+Con el tiempo fui desarrollando mi propia sintaxis para escribir el código, algunas de las reglas que definí son:
+
+- Usar identación suave con dos espacios, el usar espacios en vez de tabulaciones permite que todos los editores muestran la identación de la misma forma, los dos espacios es para que se note la identación, pero no sea tan grande.
+- Si dos selectores comparten estilos agruparlos dejando cada uno en una línea.
+- Dejar un espacio al final del selector y antes de la llave de apertura ({).
+- Termina todas las declaraciones de estilos con punto y coma (;), esto ayuda a evitar futuros errores por olvidarse de ponerlo en la última línea.
+- Cada declaración tiene que tiene su propia línea, esto permite encontrar más fácil los errores que teniendo todo en una sola línea.
+- No prefijes los valores de 0.x, por ejemplo si tenés 0.5 es mejor usar .5.
+- Usa minúsculas para los valores hexadecimales de los colores, es más fácil de leer de esta forma y utiliza la forma abreviada siempre que puedas (#f00 en vez de #ff0000).
+- No coloques unidades al valor 0, no es necesario que ya 0 es siempre 0 sin importar la unidad, 0px son 0em y 0%.
+
+## Orden de declaración
+
+Para el orden de declaración me resulta mucho más cómodo usar el orden alfabético, esto resulta muy cómodo para poder buscar luego una propiedad, por ejemplo si querés buscar un z-index sabes que siempre está al final de las declaraciones. Otra razón para usar este orden es que algunos editores (como **Sublime Text**) tienen una opción para ordenar alfabéticamente tocando una sola tecla o con dos clicks.
+
+## @imports
+
+En CSS tradicional los `@import` son anecdóticos, son más lentos de cargar que un `<link>` en el HTML y no unen de verdad el CSS, sino que hace una nueva petición al servidor para bajar el segundo CSS.
+
+En los pre procesadores en cambio el `@import` se vuelve una herramienta muy poderosa ya que estos son utilizados por los compiladores para buscar una segunda hoja de estilos e incorporarla al CSS final, quedando un único CSS que combina muchos archivos de LESS.
+
+## Media queries
+
+Para ubicar las media queries hay muchas formas diferentes, una de las primeras es colocar los media queries al final del documento fijándote en cada archivo individualmente, otra es crear 3 media queries (**mobile**, **tablets** y **desktop**) y ubicar los estilos que aparecen en 2 o más de las versiones fuera de las media queries y en la que no modificar esa regla desde la media query.
+
+Actualmente el método que utilizo consiste en colocar justo después de cada selector la media query de ese selector, gracias a los pre procesadores puedo colocar la media query dentro del selector como si fuese otra declaración.
+
+## Prefijos
+
+Para esto también hay muchas opciones, una muy buena es usar [**prefix-free**](http://leaverou.github.io/prefixfree/) de [**Lea Verou**](http://lea.verou.me/), otra es usar mixins dentro del pre procesador que se encarguen de agregar los prefijos de cada navegador y por último usar algún plugin para tu editor que los agregue por vos.
+
+Para sitios me parece mejor la segunda opción, el uso de mixins. Dejo siempre una lista de mixins para todas las propiedades que tengas prefijos para poder usarlas fácilmente en cualquier proyecto.
+
+Para aplicaciones en cambio es preferible usar prefix-free y olvidarse de los prefijos, aunque tengas que cargar otro archivo **JS**, este solo pesa 2kb y te ahorra muchas líneas de CSS.
+
+## Declaraciones multi línea e individuales
+
+Cuando se declaran las propiedades de un estilo estas las coloco siempre en su propia línea, quedando la primer línea del selector y la llave de apertura ({), cada propiedad en una línea propia y una última línea para la llave de cierre (}).
+
+En el caso de estilos de una sola propiedad coloco todo en una sola línea dejando un espacio entre las llaves y la declaración.
+
+## Propiedades abreviadas
+
+Muchas veces se aconseja el uso de las propiedades abreviadas para reducir la cantidad de líneas de código, usar margin: x x x x; en vez de declarar cada margen por separado.
+
+Esto es genial cuando se quieren declarar los estilos para todos los márgenes (o paddings, o propiedades del background o lo que sea) pero cuando solo necesitas declarar el margen inferior (por poner un ejemplo) esto no tiene mucho sentido ya que estarías declarando todos los márgenes solo para declarar uno solo.
+
+Para esto es mejor usar la forma no abreviada (margin-bottom en el ejemplo) y dejar la forma abreviada para cuando tenga sentido.
+
+## Anidación
+
+Es mejor tratar de evitar la anidación siempre que se pueda, en lugar de anidar es mucho mejor crear clases con prefijos, por ejemplo `.btn` y `.btn-success` es mejor que tener `.btn` y `.btn .success`.
+
+Solamente considero que vale la pena anidar cuando querés dar estilos a una etiqueta directamente sin usar clases (cosa que es mejor tratar de evitar de todas formas).
+
+## Comentarios
+
+Los comentarios tienen que ser simples, de una línea y no más de 80 columnas. Tiene que haber al menos un comentario por cada modulo o componente creado explicando para que sirve ese componente.
+
+Las clases de utilería también tiene que tener un pequeño comentario explicando su función.
+
+## Nombre de clases
+
+Los nombres de las clases **deben estar en inglés** siempre, y para los nombres de clases la mejor metodología que encontré es usar la siguiente estructura:
+
+```css
+.moduleName-subElement {
+}
+.moduleName—modifier {
+}
+.moduleName.is-state {
+}
+```
+
+Para las clases de utiliería quedarían:
+
+```css
+.u-name {
+}
+.u-name-xs {
+}
+.u-name-sm {
+}
+.u-name-md {
+}
+.u-name-lg {
+}
+```
+
+Un ejemplo:
+
+```css
+.btn {
+}
+.btn—lg {
+}
+.btn—success {
+}
+.btn-icon {
+}
+.btn.is-disabled {
+}
+```
+
+Como ven en el ejemplo tenemos un botón, que puede estar modificado para ser grande o ser un botón de éxito, dentro puede tener un ícono y también puede estar desactivado.
+
+## Organización
+
+Por último la organización del código, para esto uso la metodología de **SMACSS** que propone dividir el código de la siguiente forma:
+
+- Base: Estos son los estilos aplicados a etiquetas de forma global, un ejemplo es Normalize o Reset.
+- Layout: El sistema de grillas y estilos específicos de una pantalla.
+- Modules: Componentes reutilizables de la aplicación, como botones, formularios, bloques, etc.
+- States: Estados modificados de los estilos, estos son los is-disable por ejemplo.
+- Theme: Todo lo relacionado al tema, colores de texto, fondo, borde, imágenes de fondo.
+  Base debería ser un único archivo con todos los estilos, layout debería ser un archivo que importe los distintos layouts, los cuales deberían estar en una carpeta. Modules debería ser similar a layout, un archivo que importar otros. Los states deberían estar o agrupados por módulos o todos juntos y el tema debería estar todo junto.
+
+---
+
+Esta es la forma que, con el tiempo, encontré más cómoda para escribir mi código en CSS, tratando de reutilizar código y de mantener un código lo más organizado posible.

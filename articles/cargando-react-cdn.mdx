@@ -1,0 +1,48 @@
+---
+title: Cargando React desde un CDN
+date: 2019-02-26T15:57:55.585Z
+description: Para usar React hay cargar el código de la librería. Ya sea desde un administrador de paquetes como npm o yarn, o en este ejemplo desde un CDN.
+lang: es
+published: true
+tags: Spanish, Frontend, React, JavaScript
+---
+
+<!-- import ReactDOM from "react-dom";
+import Inspector from "react-inspector";
+import DevTools from "../../components/devtools.js"; -->
+
+Lo primero que necesitamos hacer para usar React es cargar el código de la librería. Hay muchas formas, ya sea desde un administrador de paquetes como npm o [yarn](https://sdx.im/link/https://platzi.com/blog/manejo-de-dependencias-javascript-con-yarn), la forma más fácil y la recomendada para empezar a aprender React es cargarlo como a cualquier archivo JS, con una etiqueta `<script>`.
+
+Para eso necesitamos el contenido de la librería o una URL que podamos usar de `src`, en nuestro caso vamos a usar la URL de un CDN.
+
+> **Nota**: un CDN o Content Delivery Network, es una red de servidores, distribuidos por todo el mundo, que poseen los mismos archivos estáticos (no generados dinamicamente) y nos sirve para asegurarnos de que nuestro código se cargue desde el servidor más cercano posible a nuestros usuarios.
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.2/umd/react.production.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.2/umd/react-dom.production.min.js"></script>
+```
+
+Esas dos etiquetas `<script>` deben ser agregadas a un archivo HTML para poder cargar React y ReactDOM. ¿Por qué dos scripts? ¿Qué es ReactDOM?
+
+El código de React solo nos da lo necesario para poder crear nuestros componentes, mientras que ReactDOM es lo que se llama un `renderer` y nos permite usar los componentes y elementos creados con React en una aplicación web que usa el DOM.
+
+Al igual que hay ReactDOM existe React Native para usar componentes de React en aplicaciones nativas de celulares y muchas más alternativas.
+
+Ahora por último vamos a ver que todo funcione, para eso vamos a agregar un `<script>` con el siguiente código de JavaScript.
+
+```js
+console.log(React);
+console.log(ReactDOM);
+```
+
+Y en nuestra terminal del navegador deberíamos ver algo así:
+
+<!-- <DevTools>
+  <Inspector data={React} />
+  <Inspector data={ReactDOM} />
+</DevTools> -->
+
+Donde el primer objeto es el contenido de React y el segundo el de ReactDOM. Con esto ya estamos seguros de que ambas librería cargaron sin problemas.
+
+Ya tenemos React y ReactDOM cargados en nuestro sitio web y listo para usarlo como podemos leer en [Hola Mundo con React](/articles/hola-mundo-react)
