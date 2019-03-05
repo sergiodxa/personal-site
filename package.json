@@ -4,6 +4,7 @@
   "scripts": {
     "build:dev": "node ../contentz/src",
     "build": "contentz build",
+    "social": "contentz social",
     "start": "serve public -p 3000"
   },
   "repository": {
