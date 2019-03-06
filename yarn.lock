@@ -676,10 +676,10 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/contentz/-/contentz-2.1.1.tgz#33650042fc772dc21027b3255428b52dee185dcf"
-  integrity sha512-kPe3TEBQq9HnG2GVdIxtkweDDx5NJpsBKoUVoLOaBAS4ELEkQamIOxjxkf9OmHSmdBYxlwxN/LFpvzgEooz6Pg==
+contentz@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/contentz/-/contentz-2.1.0.tgz#79e78d3d4e80518587d2b5cc997b598c25707dbb"
+  integrity sha512-98a8FZJa+udUV/jrDB8thD7MrhTwuq6GqAuJhKWx9wOOSXIPkl6x4lGTrtpqGNKabsv8nd08InaSW/W+4K0KDg==
   dependencies:
     "@emotion/core" "^10.0.7"
     "@mdx-js/mdx" "^0.17.5"
