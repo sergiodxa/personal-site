@@ -2,6 +2,7 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
+    "dev": "watch \"yarn build\" articles pages",
     "build:dev": "node ../contentz/src",
     "build": "contentz build",
     "social": "contentz social",
