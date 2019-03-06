@@ -1,0 +1,173 @@
+---
+title: Aplicaciones web con Zero Server
+description: Introducción a Zero Server, el framework de desarrollo web con cero configuración.
+published: true
+lang: es
+date: "2019-03-06T04:56:18.723Z"
+tags: Zero Server, Spanish, Node.js, React
+---
+
+[**Zero** Server](https://zeroserver.io/) es un nuevo framework de desarrollo web basado en JavaScript muy interesante, es totalmente sin configuración y soporta muchas tecnologías, Zero se encarga de configurar rutas, construir y transpilar la aplicación y te deja escribir código de Node.js (con Express), React, HTML, Markdown, MDX o simples archivos estáticos, todo en una carpeta
+
+## Instalación
+
+Como cualquier librerías o framework JavaScript se puede instalar con npm
+
+```bash
+npm install zero
+```
+
+O con yarn
+
+```bash
+yarn add zero
+```
+
+## Hola Mundo en Zero
+
+El Hola Mundo de Zero es crear un API que devuelva la hora y un Frontend que pida esa hora al API y la muestre.
+
+Lo primero es el API, en el proyecto se crea una carpeta `/api` con el archivo `time.js`, la carpeta `/api` _no_ es obligatoria y `time.js` podría estar en la raíz del proyecto, por organización es mejor ponerlo en `/api`.
+
+Dentro de `time.js` se va a exportar una función que recibe `Request` y `Response` de Express.js
+
+```js
+const format = require("date-fns/format");
+
+function main(req, res) {
+  const time = format(Date.now(), "hh:mm A");
+  res.send({ time: time });
+}
+
+module.exports = main;
+```
+
+Una vez guardado se corre `zero` en el proyecto, Zero se va a encargar de instalar cualquier dependencia del código e iniciar el servidor.
+
+Si ahora se accede a http://localhost:3000/api/time Zero va a responder con un JSON similar a este
+
+```json
+{ "time": "11:14 PM" }
+```
+
+¡Con esto está listo el primer endpoint del API!
+
+Sin apagar el servidor. Podemos crear ahora una aplicación de React que consuma esta API, para eso se crear un archivo `index.jsx` en la raíz, Zero identifica archivos `.jsx` como componentes de React.
+
+Dentro de `index.jsx` se coloca el siguiente código.
+
+```js
+import React, { Component } from "react";
+
+class Home extends Component {
+  static async getInitialProps() {
+    const response = await fetch("/api/time");
+    const data = await response.json();
+    return { time: data.time };
+  }
+
+  render() {
+    return <h1>Current time is: {this.props.time}</h1>;
+  }
+}
+
+export default Home;
+```
+
+Un componente normal de React que usa clases, con un método estático adicional llamado `getInitialProps` (inspirado en [Next.js](https://nextjs.org)), este método asíncrono permite al componente obtener información inicial antes de renderizarse, tanto en el servidor como en el cliente, y recibir esa información como props.
+
+Si se accede a https://localhost:3000 Zero va a empaquetar la aplicación de React y hacer render, al entrar se va a ver una página con el siguiente mensaje.
+
+> Current time is: 11:20 PM
+
+Con eso esta lista la aplicación, algo super simple pero sin configurar nada.
+
+## Archivos estáticos
+
+Estos son archivos de imágenes, vídeos, documentos, etc. y pueden estar ubicados junto al código de la app en cualquier lugar del proyecto. Zero los sirve tal cual sin efectuar ninguna modificación.
+
+## Node
+
+Como ya se vió arriba Zero trata archivos `.js` como código de Node.js y los sirve como URLs con su nombre de archivo como endpoint. Cada archivo debe exportar una sola función que es usada para manejar peticiones.
+
+### TypeScript
+
+Zero soporta también TypeScript, si un archivo termina en `.ts` Zero los pasa de TypeScript a JavaScript y lo usa como un archivo normal de JavaScript.
+
+### Query
+
+Zero lee los parámetros de la query e inyecta una propiedad `query` al objeto `Request`.
+
+### Verbos http
+
+Zero soporta todos los verbos HTTP. Peticiones `POST` tiene la información procesada como JSON e inyectada en el objeto `Request` como `body`, ya sea `json` o `urlencoded`.
+
+### Rutas personalizadas
+
+Zero usa los nombres de archivo para las rutas y no tiene forma de configurar rutas propias. En caso de desear convertir algo como `/user?id=sergio` a `/user/sergio` Zero envia peticiones de rutas no encontradas a la ruta más cercana, esto quiere decir que si `/user/sergio.js` no existe pero `/user.js` existe entonces Zero va a enviar a `/user.js` una petición en cuyo `Request` va a existir `params` como un array con los valores extras, en el ejemplos sería `["sergio"]`
+
+### Fetch API
+
+Fetch es un API de los navegadores para hacer peticiones HTTP usando promesas. Zero agrega esto también a Node.js y permite hasta hacer peticiones a URls relativas (como `/user/sergio`).
+
+Si se desea usar `fetch` desde una URL protegida por autenticación solo hay que pasar `credentials: "include"` en las opciones de `fetch` (segundo argumento) y este se encarga de pasar la sesión del usuario al endpoint pedido.
+
+### Sesiones
+
+Zero maneja sesiones de usuarios automáticamente. Por defecto Zero guarda las sesiones en una carpeta `tmp`, esto funciona bien en local pero en producción no es buena idea, para esto Zero soporta Redis y MongoDB
+
+#### Usando Redis
+
+Zero lee las credenciales desde la variable de entorno `SESSION_REDIS_URL`, también soporta archivos `.env` sin configurar nada. Como alternativa se puede agregar `SESSION_REDIS_HOST`, `SESSION_REDIS_PASSWORD` y `SESSION_REDIS_PORT` a las variables de entorno y Zero las combina para conectarse a Redis.
+
+#### Usando MongoDB
+
+Para usar MongoDB es similar, Zero usa la variable de entorno `SESSION_MONGODB_URL`, con solo agregarla Zero va a empezar a usar MongoDB para guardar la sesión del usuario.
+
+#### Tiempo de vida de una sesión
+
+Para configurar el tiempo de vida de una sesión se usa la variable de entorno `SESSION_TTL` con un valor en segundos. Por defecto el valor es de un año.
+
+## React
+
+Como ya se vió arriba Zero soporta React, si se crea un archivo `.jsx` Zero lo considera una página que usa React y se encarga de hacer el bundle y responder peticiones haciendo Server Side Render de esa página, osea del componente.
+
+Zero además soporta importar archivos CSS, SCSS y SASS e inyecta la sesión del usuario en `this.props`.
+
+### `getInitialProps`
+
+Zero, al igual que Next.js, soporta el método estático asíncrono `getInitialProps`. Este método que recibe el objeto `Request` como `req`, la sesión del usuario como `user` y la URL actual como `url`, todo en un solo objeto. La respuesta de este método es inyectada como `prop` al componente al momento de hacer render.
+
+### Fetch API
+
+Zero soporte usar Fetch en el servidor en `getInitialProps`, además soporte pasar credenciales de usuario usando `credentials: "include"` como en Node.js, esto funciona igual tanto en el servidor como en el navegador.
+
+### Agregando contenido a `<head>`
+
+Para agregar contenido al `<head>` de la página, por ejemplo el `<title>`, Zero soporta [React Helmet](https://github.com/nfl/react-helmet), solo hay que importarlo como
+
+```js
+import { Helmet } from "react-helmet";
+```
+
+Y usarlo en el `render` de un componente para agregar contenido al `<head>`.
+
+### TypeScript
+
+También soporta TypeScript en React usando `.tsx`, similar a como lo soporta en Node.js
+
+## HTML
+
+Zero lee el HTML y se encarga de juntar los CSS, SCSS, SASS, JavaScript e incluso imágenes y procesarlas para optimizarlas y cambiar las URLs a los nuevos archivo, todo esto lo hace con [Parcel](https://parceljs.org/).
+
+Para detectar HTML usa `.htm` o `.html`.
+
+## Markdown
+
+Zero lee archivos Markdown y los transforma en HTML al usarlos. También soporta [MDX](/articles/introduccion-a-mdx) lo que permite importas otro archivo Markdown o MDX, importar componentes de React y usarlos directamente en el Markdown.
+
+Incluso importar React Helmet para agregar contenido al `<head>`.
+
+## Palabras finales
+
+Zero Server, aunque nuevo, es un framework muy prometedor ya que permite crear aplicaciones web que combinen varias tecnologías sin configurar nada y optimizadas para producción. Se viene soporte a más tecnologías como `.vue` para Vue.js o Svelte o soporte a una Progressive Web App.
