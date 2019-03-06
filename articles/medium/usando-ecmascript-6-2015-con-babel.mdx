@@ -40,7 +40,7 @@ babel-node app.js
 
 Estas formas que vimos de usarlo son las más básicas, usando todo desde la consola. Sin embargo Babel también se puede usar en combinación con otras herramientas.
 
-Una de estas posibles herramientas es [Browserify](http://browserify.org/), este nos permite escribír nuestro código usando require(‘modulo’) para tener módulos como si fuese Node.js y luego generar un único archivo final que enviamos al navegador y funciona sin problemas.
+Una de estas posibles herramientas es [Browserify](https://browserify.org/), este nos permite escribír nuestro código usando require(‘modulo’) para tener módulos como si fuese Node.js y luego generar un único archivo final que enviamos al navegador y funciona sin problemas.
 
 Browserify además nos permite incluir diversos plugins, uno de esto es [Babelify](https://github.com/babel/babelify), este nos permite escribír nuestro código usando ES6 e incluso usando el sistema de módulos de ES6 y que Browserify lo convierta a ES5 y genere el archivo final.
 
@@ -60,7 +60,7 @@ De esta forma le decimos a Browserify que use Babelify para convertír el códig
 
 ## Automatizándolo con Gulp
 
-Además de poder usar Babel con Browserify también nos es posible usarlo con [Gulp](http://gulpjs.com/). Esto nos permite agregar Babel como parte de nuestras tareas de Gulp para generar nuestro archivo JS final. La forma más simple sería usar el plugin de Gulp llamado gulp-babel, para esto lo bajamos con NPM con el comando:
+Además de poder usar Babel con Browserify también nos es posible usarlo con [Gulp](https://gulpjs.com/). Esto nos permite agregar Babel como parte de nuestras tareas de Gulp para generar nuestro archivo JS final. La forma más simple sería usar el plugin de Gulp llamado gulp-babel, para esto lo bajamos con NPM con el comando:
 
 ```bash
 npm i -D gulp gulp-babel
@@ -109,7 +109,7 @@ Con esto ya tenemos nuestra tarea de Gulp para usar Browserify con Babel para ge
 
 ## Usando ECMAScript 7/2016 con Babel
 
-Aunque ES6 todavía no esta totalmente soportado por los navegadores ya esta en desarrollo la siguiente versión del estandar desde el año pasado. Esta nueva versión, que incluso [Google Chrome soporta una de sus nuevas características](http://www.html5rocks.com/en/tutorials/es7/observe/), va a incorporar varias nuevas características y algunas de estas son soportadas de forma experimental por Babel.
+Aunque ES6 todavía no esta totalmente soportado por los navegadores ya esta en desarrollo la siguiente versión del estandar desde el año pasado. Esta nueva versión, que incluso [Google Chrome soporta una de sus nuevas características](https://www.html5rocks.com/en/tutorials/es7/observe/), va a incorporar varias nuevas características y algunas de estas son soportadas de forma experimental por Babel.
 
 Estas características experimentales están desactivadas por defecto, pero es posible activarlas agregando un parámetro llamado optional al momento de ejecutar Babel e indicarle que características soportar.
 
@@ -195,7 +195,7 @@ Con solo agregar esa línea Browserify ya va a leer sin problemas nuestros archi
 
 ## Reiniciando nuestra aplicación con Nodemon
 
-Si deciden usar Babel para iniciar sus aplicaciones de Node.js usando ES6 y ES7 es posible hacer que en caso de error o de cambios en los archivos la aplicación se reinicie usando [Nodemon](http://nodemon.io/). Para esto hay que usar el comando:
+Si deciden usar Babel para iniciar sus aplicaciones de Node.js usando ES6 y ES7 es posible hacer que en caso de error o de cambios en los archivos la aplicación se reinicie usando [Nodemon](https://nodemon.io/). Para esto hay que usar el comando:
 
 ```bash
 nodemon --exec babel-node -- app.js
@@ -211,7 +211,7 @@ Con esto ya podemos usar babel-node con ES7 y que si hay un error o si modificam
 
 ## Escribiendo nuestras pruebas con Mocha y Babel
 
-También es posible usar Babel junto a [Mocha](http://mochajs.org/) usando un comando de Mocha llamado compilers. Este comando nos permite decirle a Mocha que use alguna herramienta para compilar no solo el código a testear sino también el código de las pruebas, por lo que podemos ahora probar nuestro código de ES6 escribiendo nuestras pruebas en ES6.
+También es posible usar Babel junto a [Mocha](https://mochajs.org/) usando un comando de Mocha llamado compilers. Este comando nos permite decirle a Mocha que use alguna herramienta para compilar no solo el código a testear sino también el código de las pruebas, por lo que podemos ahora probar nuestro código de ES6 escribiendo nuestras pruebas en ES6.
 
 Para usarlo necesitamos entonces ejecutar el siguiente comando:
 
@@ -238,6 +238,6 @@ De esta forma podríamos configurarlo en un solo lugar y que funcione siempre ig
 
 ---
 
-Si quieren seguír investigando más sobre Babel pueden ir al [sitio oficial](http://babeljs.io/) donde pueden ver formas de [usarlo con otras herramientas](http://babeljs.io/docs/setup/) como Grunt, Webpack, Require.js, Meteor, Rails, Sails, Ember, WebStorm, etc.
+Si quieren seguír investigando más sobre Babel pueden ir al [sitio oficial](https://babeljs.io/) donde pueden ver formas de [usarlo con otras herramientas](https://babeljs.io/docs/setup/) como Grunt, Webpack, Require.js, Meteor, Rails, Sails, Ember, WebStorm, etc.
 
-Tienen además información sobre como usarlo más a fondo, como hacer un uso más avanzado y hasta una página donde pueden [probarlo en vivo](http://babeljs.io/repl/#?experimental=true&evaluate=true&loose=true&spec=false&playground=false&code=) incluso con las características de ES7.
+Tienen además información sobre como usarlo más a fondo, como hacer un uso más avanzado y hasta una página donde pueden [probarlo en vivo](https://babeljs.io/repl/#?experimental=true&evaluate=true&loose=true&spec=false&playground=false&code=) incluso con las características de ES7.

@@ -15,7 +15,7 @@
   title: Architecture as a burden
   comment: A great list of bad decisions in Software Architecture and how to avoid them.
   date: 2018-10-15T21:01:32.677Z
-- url: "http://www.aosabook.org/en/distsys.html"
+- url: https://www.aosabook.org/en/distsys.html
   title: "The Architecture of Open Source Applications (Volume 2): Scalable Web Architecture and Distributed Systems"
   comment: A comprehensive guide on scalable architectures for web applications.
   date: 2018-09-17T16:00:09.333Z

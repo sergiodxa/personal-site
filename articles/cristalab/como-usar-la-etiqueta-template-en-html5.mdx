@@ -3,17 +3,15 @@ title: Cómo usar la etiqueta template en HTML5
 date: 2015-01-04T00:00:00Z
 published: true
 lang: es
-canonical_url: http://www.cristalab.com/tutoriales/como-usar-la-etiqueta-template-en-html5-c114548l/
+canonical_url: https://www.cristalab.com/tutoriales/como-usar-la-etiqueta-template-en-html5-c114548l/
 tags: Cristalab
 ---
 
-![Logo de HTML5 Template](http://l4c.me/uploads/htmlt5template-1421039930_full550.jpg)
-
 Hasta hace unos años, cuando un desarrollador quería hacer templates de sus páginas, la opción era usar algún lenguaje en el Backend como PHP, Ruby, Python, etc.
 
-Actualmente el uso de templates es posible del lado del Frontend usando JavaScript. Para manejar dichos los templates tenemos algunos engines como: [Jade](http://jade-lang.com/), Swig, [Mustache](https://mustache.github.io/), [Handlebars](http://handlebarsjs.com/), etc.
+Actualmente el uso de templates es posible del lado del Frontend usando JavaScript. Para manejar dichos los templates tenemos algunos engines como: [Jade](https://jade-lang.com/), Swig, [Mustache](https://mustache.github.io/), [Handlebars](https://handlebarsjs.com/), etc.
 
-Gracias a la popularidad de estos motores de templates la [WhatWG](https://whatwg.org/) creó una etiqueta nueva en HTML5 poco conocida, que gracias a los [Web Components](http://webcomponents.org/) se está volviendo cada vez más popular, [la etiqueta `<template>`](http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-template-element).
+Gracias a la popularidad de estos motores de templates la [WhatWG](https://whatwg.org/) creó una etiqueta nueva en HTML5 poco conocida, que gracias a los [Web Components](https://webcomponents.org/) se está volviendo cada vez más popular, [la etiqueta `<template>`](https://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-template-element).
 
 ## Soporte
 
@@ -64,10 +62,10 @@ Luego de colocar el clon del template en nuestra aplicación el contenido es ren
 
 ## Como usarlo en Internet Explorer y otros navegadores viejos
 
-Aunque la etiqueta `<template>` no tiene soporte en Internet Explorer es posible utilizarlo gracias a la librería [HTML5Shiv](https://github.com/aFarkas/html5shiv), que por cierto forma parte de de [Modernizr](http://modernizr.com/) por lo que si están usando este, entonces ya tienen HTML5Shiv y ya pueden usar la etiqueta `<template>`.
+Aunque la etiqueta `<template>` no tiene soporte en Internet Explorer es posible utilizarlo gracias a la librería [HTML5Shiv](https://github.com/aFarkas/html5shiv), que por cierto forma parte de de [Modernizr](https://modernizr.com/) por lo que si están usando este, entonces ya tienen HTML5Shiv y ya pueden usar la etiqueta `<template>`.
 
 Hay sin embargo una pequeña diferencia entre el soporte nativo de la etiqueta y el que permite HTML5Shiv y es que el soporte nativo funciona como está explicado arriba, mientras que HTML5Shiv lo que hace es crear el elemento usando `document.createElement()` y luego le pone el estilo `display: none` por defecto, por lo que durante muy poco tiempo es posible que el usuario vea el contenido del template.
 
 ## Demo
 
-Pueden ver una demo del código de arriba en CodePen en el siguiente link: http://codepen.io/sergiodxa/pen/EaNwVz
+Pueden ver una demo del código de arriba en CodePen en el siguiente link: https://codepen.io/sergiodxa/pen/EaNwVz
