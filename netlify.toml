@@ -1,0 +1,28 @@
+[build]
+  publish = "public"
+  command = "yarn build"
+
+# From .dev to .com (maybe temporal)
+[[redirects]]
+  from = "https://sergiodxa.dev/*"
+  to = "https://sergiodxa.com/:splat"
+  status = 307
+  force = true
+
+# Hide Netlify subdomain
+[[redirects]]
+  from = "https://sergiodxa.netlify.com/*"
+  to = "https://sergiodxa.com/:splat"
+  status = 301
+  force = true
+
+# From /essays to /articles
+[[redirects]]
+  from = "/essays/*"
+  to = "/articles/:splat"
+
+# Avoid caching the Service Worker
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "nocache, max-age=0, must-revalidate, no-store"

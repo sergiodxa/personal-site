@@ -1,0 +1,94 @@
+---
+title: Usando ECMAScript 6 en tus tareas de Gulp
+date: 2015-06-09T00:00:00Z
+published: true
+lang: es
+canonical_url: https://medium.com/@sergiodxa/usando-ecmascript-6-en-tus-tareas-de-gulp-a05f83f8bbac
+---
+
+Algo muy molesto cuando estás [usando ES6 con Babel.js](/articles/medium/usando-ecmascript-6-2015-con-babel) y Gulp.js para automatizar tareas es que el archivo gulpfile.js sigue estando en ES5 y usando los módulos de CommonJS, aunque el resto de tu aplicación use ES6 y sus sistema de módulos.
+
+Esto se acabo desde la última versión de Gulp.js. Al momento de actualizar nuestra instalación global y local de Gulp.js a la **v3.9.0** ya nos es posible empezar a usar ES6 en nuestro gulpfile.js gracias a Babel.js.
+
+Para hacer esto primero necesitamos tener la última versión de Gulp.js, para eso podemos usar el comando:
+
+```bash
+npm up -D gulp && sudo npm up -g gulp
+```
+
+Este comando va actualizar la versión de Gulp que tengamos instalada tanto de forma local como global. Luego de esto necesitamos asegurarnos de tener Babel.js en nuestro `package.json`:
+
+```bash
+npm i -D babel
+```
+
+Por último solo tenemos que renombrar nuestro archivo `gulpfile.js` a `gulpfile.babel.js` y listo, con solo esto ya podemos hacer algo como esto:
+
+```js
+import babelify from "babelify";
+import browserify from "browserify";
+import buffer from "vinyl-buffer";
+import eslint from "gulp-eslint";
+import gulp from "gulp";
+import source from "vinyl-source-stream";
+import uglify from "gulp-uglify";
+
+const config = {
+  browserify: {
+    fileName: "app.js",
+    extensions: [".js"],
+    transform: [babelify]
+  }
+};
+
+const paths = {
+  src: {
+    eslint: "./src/es6/**/*.js",
+    js: "./src/es6/app.js"
+  },
+  build: {
+    js: "./build/js/"
+  }
+};
+
+gulp.task("eslint", () => {
+  return gulp
+    .src(paths.src.eslint)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
+});
+
+gulp.task("build:js", ["eslint"], () => {
+  return browserify({
+    entries: paths.src.js,
+    debug: true,
+    extensions: config.browserify.extensions,
+    transform: config.browserify.transform
+  })
+    .bundle()
+    .pipe(source(config.browserify.fileName))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.build.js));
+});
+
+gulp.task("watch", () => {
+  gulp.watch([paths.src.eslint], ["build:js"]);
+});
+
+gulp.task("build", ["build:js"]);
+
+gulp.task("default", ["build", "watch"]);
+```
+
+<center>
+  <small>
+    <small>
+      Tareas de Gulp para ejecutar ESLint y Browserify + Babelify cada vez que
+      cambia un archivo
+    </small>
+  </small>
+</center>
+
+Ahora al momento de ejecutar Gulp este va a leer el archivo gulpfile.babel.js y va a ejecutar estas tareas usando Babel.js para transpilar el código en el momento.

@@ -1,0 +1,71 @@
+---
+title: Cómo usar la etiqueta template en HTML5
+date: 2015-01-04T00:00:00Z
+published: true
+lang: es
+canonical_url: https://www.cristalab.com/tutoriales/como-usar-la-etiqueta-template-en-html5-c114548l/
+tags: Cristalab
+---
+
+Hasta hace unos años, cuando un desarrollador quería hacer templates de sus páginas, la opción era usar algún lenguaje en el Backend como PHP, Ruby, Python, etc.
+
+Actualmente el uso de templates es posible del lado del Frontend usando JavaScript. Para manejar dichos los templates tenemos algunos engines como: [Jade](https://jade-lang.com/), Swig, [Mustache](https://mustache.github.io/), [Handlebars](https://handlebarsjs.com/), etc.
+
+Gracias a la popularidad de estos motores de templates la [WhatWG](https://whatwg.org/) creó una etiqueta nueva en HTML5 poco conocida, que gracias a los [Web Components](https://webcomponents.org/) se está volviendo cada vez más popular, [la etiqueta `<template>`](https://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html#the-template-element).
+
+## Soporte
+
+No todos los navegadores soportan la etiqueta `<template>`. Actualmente es soportado por Firefox +22, Chrome +26, Safari +7.1, Opera +15, iOS Safari +8, Android Browser +4.4, Opera Mobile +24, Chrome for Android +39 y Firefox for Android +33, Internet Explorer no tiene soporte alguno a esta etiqueta.
+
+Para poder detectar si el navegador que el usuario está usando tiene soporte para esta etiqueta simplemente creamos el elemento del DOM con JavaScript y nos fijamos si posee la propiedad .content.
+
+```js
+if ('content' in document.createElement('template')) {
+  // Funciona!
+} else {
+  // Usamos algún motor de templates
+}
+```
+
+## Creando el template
+
+La etiqueta `<template>` es esencialmente un elemento clonable del DOM para ser reutilizado en tu sitio o aplicación web. Para crear un template simplemente escribes HTML común y lo colocas dentro de la etiqueta `<template>`.
+
+```html
+<template id="template">
+  <h1></h1>
+</template>
+```
+
+## Características principales
+
+Envolver contenido dentro de `<template>` nos da cuatro características importantes.
+
+1. El contenido es parseado e interpretado por el navegador, pero no renderizado por lo que es invisible para el usuario.
+2. Cualquier contenido dentro del template no tiene efectos secundarios. Los scripts no se ejecutan, las imágenes no cargan, el audio no suena y los vídeos no se reproducen, hasta que el template sea usado.
+3. El contenido del template no es considerado parte del documento, hacer un `document.getElementById()` o `.querySelector()` no va a regresar los elementos del template.
+4. El template puede ser colocado en cualquier parte dentro de `<head>`, `<body>` o `<frameset>` y puede contener cualquier tipo de contenido que sea posible usar dentro de estos elementos.
+
+
+## Activando los templates
+
+Para usar un template hay que activarlo, de otra forma nunca va a ser renderizado. La forma más simple es copiar el .content usando document.importNode(). La propiedad .content la representación en JavaScript del contenido del template y desde donde se puede acceder a todo el contenido de este.
+
+```js
+var t = document.querySelector('#template');
+var clone = document.importNode(t.content, true);
+clone.querySelector('h1').innerHTML = 'Hola Cristalab';
+document.body.appendChild(clone);
+```
+
+Luego de colocar el clon del template en nuestra aplicación el contenido es renderizado, en este ejemplo dentro del h1 se coloca el string Hola Cristalab y se renderiza todo el HTML del template.
+
+## Como usarlo en Internet Explorer y otros navegadores viejos
+
+Aunque la etiqueta `<template>` no tiene soporte en Internet Explorer es posible utilizarlo gracias a la librería [HTML5Shiv](https://github.com/aFarkas/html5shiv), que por cierto forma parte de de [Modernizr](https://modernizr.com/) por lo que si están usando este, entonces ya tienen HTML5Shiv y ya pueden usar la etiqueta `<template>`.
+
+Hay sin embargo una pequeña diferencia entre el soporte nativo de la etiqueta y el que permite HTML5Shiv y es que el soporte nativo funciona como está explicado arriba, mientras que HTML5Shiv lo que hace es crear el elemento usando `document.createElement()` y luego le pone el estilo `display: none` por defecto, por lo que durante muy poco tiempo es posible que el usuario vea el contenido del template.
+
+## Demo
+
+Pueden ver una demo del código de arriba en CodePen en el siguiente link: https://codepen.io/sergiodxa/pen/EaNwVz
