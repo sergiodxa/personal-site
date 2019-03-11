@@ -1,7 +1,8 @@
 /node_modules
 /logs
+/.vscode
+/public
+/.cache
+/.tmp
 *.log
 .DS_Store
-.vscode
-/public
-.cache
