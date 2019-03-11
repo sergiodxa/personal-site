@@ -43,6 +43,7 @@
     }
   },
   "lint-staged": {
+    "relative": true,
     "articles/**/*.mdx": [
       "yarn social",
       "git add"
