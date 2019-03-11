@@ -43,7 +43,11 @@
     }
   },
   "lint-staged": {
-    "*.mdx": [
+    "articles/**/*.mdx": [
+      "yarn social",
+      "git add"
+    ],
+    "pages/**/*.mdx": [
       "yarn social",
       "git add"
     ]
