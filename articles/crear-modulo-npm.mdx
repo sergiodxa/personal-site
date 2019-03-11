@@ -1,0 +1,611 @@
+---
+title: Cómo crear y publicar un módulo para npm
+description: Aprende como crear un módulo y publicarlo a npm configurando Prettier, ESLint, pruebas, tipos y más.
+date: 2019-03-11T17:12:50.625Z
+published: true
+lang: es
+tags: Spanish, JavaScript, npm, Module
+---
+
+JavaScript tiene el ecosistema más grande de módulos los cuales se alojan en GitHub y se publican al registro de [npm](https://www.npmjs.com/) para su posterior uso en proyectos.
+
+Usar un módulo desde npm es bastante sencillo, solo necesitamos correr `npm install <module>` o `yarn add <module>` (reemplazando `<module>` por el nombre del módulo a instalar) y listo, el módulo se va a registrar como dependencia de nuestro proyecto y vamos a poder importarlo en nuestro código.
+
+En este tutorial crearemos un módulo, lo más completo posible, y lo publicaremos al registro de npm para que cualquiera lo use.
+
+## Inicia el proyecto
+
+Primero hay que iniciar el proyecto, para esto se puede usar **npx**, una herramienta que viene junto a npm que permite instalar, temporalmente, y ejecutar módulos desde npm. Creá una carpeta para el proyecto con el nombre del proyecto, digamos `my-module`, y dentro ejecutá los siguientes comandos.
+
+```bash
+git init
+echo "# my-module" > README.md
+npx license MIT -o "Sergio Xalambrí" > LICENSE
+npx gitignore node
+npx covgen "hello@sergiodxa.com"
+npm init -y # o yarn init -y
+git add -A
+git commit -m "Initial commit"
+```
+
+Vayamos línea por línea viendo que hace cada comando.
+
+1. Se inicia git en la carpeta de nuestro proyecto
+2. Se crea un archivo README.md con el contenido `# my-module`
+3. Se genera una licencia MIT con nuestro nombre y la guardamos en el archivo LICENSE
+4. Se genera un `.gitignore` genérico para proyectos de Node.js y JavaScript
+5. Se genera un archivo CONTRIBUTING.md con nuestro email siguiendo el [Contributor Covenant](https://www.contributor-covenant.org/)
+6. Se inicia el proyecto de Node.js haciendo que se cree un package.json
+7. Se agregan todos los archivos a git
+8. Se crea un commit inicial
+
+Con estos ya está todo listo para empezar el proyecto, y nuestra carpeta debería tener estos archivos.
+
+```file-tree
+[
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" }
+]
+```
+
+## Manifiesto
+
+El manifiest es el archivo `package.json`, este posee información del módulo como el nombre, versión, autor y dependencias, entre otras. Con el sexto comando que corriste antes se creó uno inicial que debería verse más o menos así
+
+```json
+{
+  "name": "my-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+> _Nota_: Depende de tu configuración de npm puede haber más o menos información inicial, este es uno básico.
+
+Vamos a ver que es cada propiedad.
+
+- `name` es el nombre del módulo, por defecto el nombre de la carpeta, el nombre puede además incluír un namespace en la forma de `@namespace/my-module`, el namespace debe ser o tu nombre de usuario en npm o una organización a la que pertenezcas.
+- `version` es la versión del módulo, siguiente el sistema de versionamiento semático ([semver](https://semver.org/)).
+- `description` es la descripción del proyecto, se usa en el registro de npm para mostrar que hace el proyecto, lo ideal es que sea corta y concisa.
+- `main` es la ubicación u nombre del archivo principal de nuestro código, por defecto es `index.js`, en caso de que decidamos usar otro archivo diferente o con otro nombre vamos a necesitarlo.
+- `scripts` es un objeto que posee listas de scripts con nombres que podemos luego ejecutar haciendo `npm run <script>` o `yarn <script>`, por defecto viene un script `test` que muestra une error (_nota_: `test` es uno de varios scripts especiales que se pueden ejecutar con `npm <script>` sin el run).
+- `keywords` son palabras claves que puede usar el registro para que nuestro módulo salga en ciertas búsquedas
+- `author` es la información del autor, puede ser un string con el formato `name <url> (email)` o un objeto con esas propiedades
+- `license` es la licencia bajo la cual publicas el módulo, en nuestro caso vamos a usar MIT por lo que deberíamos cambiarlo.
+
+## El código
+
+Creá una carpeta `src` con el archivo `index.js` que tenga esto dentro:
+
+```js
+function hello(name = "Sergio") {
+  return `Hello, ${name}`;
+}
+
+export default hello;
+```
+
+Algo super simple, podés poner cualquier contenido en realidad, pero para el ejemplo voy a usar ese. Nuestro proyecto ahora debería verse así.
+
+```file-tree
+[
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" }
+]
+```
+
+## Dependencias
+
+El código de este módulo es super simple y no necesita dependencias, en caso de que las necesite se pueden instalar haciendo
+
+```bash
+npm install another-module
+# yarn add another-module
+```
+
+También es importante saber que existen varios tipos de dependencias que en el `package.json` se definen con distintos nombres.
+
+- `dependencies` son las dependencias del código las cuales se usan directamente haciendo `import` en el código del módulo
+- `devDependencies` se usan solo en desarrollo, normalmente son herramientas que se usan al desarrollar el módulo, como pueden ser frameworks de pruebas o herramientas de compilación
+- `peerDependencies` son dependencias que se usan directo en el código, pero que se espera que el usuario del módulo provea, esto es normal para que se pueda usar cualquier versión de estas dependencias.
+
+Hay más, pero estas son las más comunes, en el caso de `my-module` no hay `dependencies` pero si va a haber `devDependencies`, para instalarlas se usa el comando
+
+```bash
+npm install -D another-module
+# yarn add -D another-module
+```
+
+Donde la `-D` indica que es una dependencia de desarrollo. Las que se van a usar en el módulo, y que yo recomiendo son dos.
+
+- [Jest](https://jestjs.io/)
+- [microbundle](https://github.com/developit/microbundle)
+
+El primero es un framework de pruebas creado por Facebook que va a servir para automatizar las pruebas del código.
+
+El segundo es una herramienta del creador de Preact, y otro muchos módulos pequeños, que sirve para hacer distintas versiones del código compatibles con varios sistemas de módulos que existen, en total soporta 3, un módulo de CommonJS para usar en Node.js, uno de UMD para usar en una etiqueta script en el navegador y uno de ECMAScript que usa `export` e `import` para que herramientas como webpack o Parcel puedan optimizar el código final.
+
+Para instalar ambos el comando final sería
+
+```bash
+npm install -D jest microbundle
+# yarn add -D jest microbundle
+```
+
+> _Nota_: como se ve, se pueden poner varios módulos separados por espacios
+
+## Configurando los scripts
+
+Ya teniendo instaladas las dependencias hay que configurar scripts en el `package.json` para usarlas. Si abrís el archivo debería estar actualizado para verse así.
+
+```json
+{
+  "name": "@sergiodxa/my-module",
+  "version": "1.0.0",
+  "description": "My super cool module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sergio Xalambrí <hello@sergiodxa.com> (https://sergiodxa.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "microbundle": "^0.9.0"
+  }
+}
+```
+
+Ahora el `package.json` tiene la propiedad `devDependencies`, además ya deberías haber cambiando `license` por MIT, poner tu nombre, email y sitio web en `author` y una descripción. El nombre del módulo en este caso como ya está usado es necesario ponerle un namespace.
+
+Ya visto eso, para configurar los scripts solo hay que actualizar el objeto `scripts` con el siguiente.
+
+```json
+{
+  "test": "jest",
+  "build": "microbundle"
+}
+```
+
+El primero es para ejecutar las pruebas y el segundo para hacer "build" del módulo usanod microbundle. el proyecto debería ahora verse así (el `yarn.lock` solo aparece si usaste yarn para instalar módulo, si usas npm habría un `package-lock.json`).
+
+```file-tree
+[
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" },
+  { "type": "file", "name": "yarn.lock" }
+]
+```
+
+## Agregando pruebas
+
+Idealmente un módulo siempre debería tener pruebas automatizadas, en este caso las pruebas que se pueden agregar son bastantes simples, usar la función `hello` con y sin valor de `name`. Para esto creamos un archivo `src/index.test.js` con el archivo de del test.
+
+```js
+mport hello from ".";
+
+describe("it should say hello", () => {
+  it("should greet 'Sergio'", () => {
+    expect(hello()).toBe("Hello, Sergio");
+  });
+
+  it("should greet 'Daniel'", () => {
+    expect(hello("Daniel")).toBe("Hello, Daniel");
+  });
+});
+```
+
+Hasta ahora nuestro proyecto debería verse así en el sistema de archivos
+
+```file-tree
+[
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.test.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" },
+  { "type": "file", "name": "yarn.lock" }
+]
+```
+
+### Soportando ESModules en Jest
+
+Como usamos módulo de ECMAScript en nuestro código y Jest no lo soporta (debido a que Node.js no lo soporta) entonces necesitamos usar una herramienta para dar soporte.
+
+Para estos usamos `babel-jest` y `@babel/preset-env`.
+
+```bash
+npm install -D babel-jest @babel/preset-env
+# yarn add -D babel-jest @babel/preset-env
+```
+
+Ahora creamos un `babel.config.js` en la raíz del proyecto y colocamos el siguiente código.
+
+```js
+module.exports = {
+  presets: ["@babel/preset-env"]
+};
+```
+
+El proyecto debería verse ahora de esta forma.
+
+```file-tree
+[
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.test.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "babel.config.js" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" },
+  { "type": "file", "name": "yarn.lock" }
+]
+```
+
+### Corriendo las pruebas
+
+Con todo listo, ya podemos ver si nuestro módulo funciona, para esto corremos las pruebas con `yarn test` y deberíamos ver algo así.
+
+```bash
+$ yarn test
+yarn run v1.13.0
+$ jest
+ PASS  src/index.test.js
+  it should say hello
+    ✓ should greet 'Sergio' (4ms)
+    ✓ should greet 'Daniel'
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        2.1s
+Ran all test suites.
+✨  Done in 3.35s.
+```
+
+¡Si vemos esto es que todo pasó y el código funciona!
+
+## Construyendo archivos para producción
+
+Ahora es necesario construir los archivos para producción de nuestro módulo, los que vamos a publicar a npm. Esto lo hacemos con la dependencia de desarrollo **microbundle** que instalamos antes y lo ejecutamos con `yarn build`.
+
+Por defecto microbundle va a colocar todos los archivos en la raíz del proyecto, vamos a configurarlo para que queden en una carpeta `dist` que podemos agregar al archivo `.gitignore`, para configurar microbundle, para configurarlo usamos el `package.json`.
+
+```json
+{
+  "name": "@sergiodxa/my-module",
+  "version": "1.0.0",
+  "description": "My super cool module",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "microbundle"
+  },
+  "keywords": [],
+  "author": "Sergio Xalambrí <hello@sergiodxa.com> (https://sergiodxa.com)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.4.0",
+    "jest": "^24.1.0",
+    "microbundle": "^0.9.0"
+  }
+}
+```
+
+Agregando `main` con la ruta del archivo para Node.js (CJS), `umd:main` para el archivo UMD y `module` para el archivo de ESM le estamos diciendo a microbundle que los archivos que genere deben estar en esas ubicaciones. La propiedad `source` indica el archivo fuente que va a usar microbundle para empezar a construir nuestro módulo.
+
+Si ahora ejecutamos `npm run build` o `yarn build` va a generar la carpeta `dist` con el código.
+
+```file-tree
+[
+  {
+    "close": true,
+    "type": "folder",
+    "name": "dist",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.js.map" },
+      { "type": "file", "name": "index.mjs" },
+      { "type": "file", "name": "index.mjs.map" },
+      { "type": "file", "name": "index.umd.js" },
+      { "type": "file", "name": "index.umd.js.map" }
+    ]
+  },
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.test.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "babel.config.js" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" },
+  { "type": "file", "name": "yarn.lock" }
+]
+```
+
+## Configurando `prepublish`
+
+Algo que puede pasar es que nos olvidemos de hacer `build` antes de publicar nuestro módulo, para esto podemos definir un hook en nuestro scripts del `package.json`, para esto npm nos ofrece poner un script con el prefijo `pre`, este script va a correr antes de ejecutar otro script prefijado. Mejor veamos con un ejemplo, si hay un script `build` podemos tener `prebuild` para ejecutar otro script antes de hacer `build`.
+
+En el caso de `publish` que es usado para publicar un módulo podemos poner `prepublish` donde vamos a ejecutar `npm run build` para hacer build del proyecto.
+
+```json
+{
+  "name": "@sergiodxa/my-module",
+  "version": "1.0.0",
+  "description": "My super cool module",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "microbundle",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "Sergio Xalambrí <hello@sergiodxa.com> (https://sergiodxa.com)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.4.0",
+    "jest": "^24.1.0",
+    "microbundle": "^0.9.0"
+  }
+}
+```
+
+Con esto, cuando vayamos a publicar nuestro módulo vamos a estar seguros de que antes se hizo build. Adicionalmente podemos agregar un `prebuild` script para ejecutar `npm test` y nunca hacer build si las pruebas no pasan primero.
+
+## Evitándose commitear archivos con errores
+
+Otra cosa que podemos hacer es asegurarnos de nunca commitear a nuestro repositorio código que no pase las pruebas o que no pase un linter para ver que esté bien escrito. Para esto existen unas herramientas llamadas **husky** y **lint-staged** que nos sirven para ejecutar un script antes de hacer commit.
+
+Para usarlas primero necesitamos instalarlas.
+
+```bash
+npm install -D husky lint-staged
+# yarn add -D husky lint-staged
+```
+
+Después a nuestro `package.json` le agregamos la configuración de estas herramientas.
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
+}
+```
+
+Con esa configuración vamos a ejecutar las pruebas de nuestro módulo antes de hacer commit, si las pruebas *no pasan* entonces no se permite hacer commit hasta que pasen, con esto nos aseguramos de que nada se guarda en Git si las pruebas están rotas.
+
+También instalamos `lint-staged`, esta herramienta nos permite ejecutar algo solo para los archivos actualizados o agregados. Podemos usarlo entonces para usar un linter y asegurarnos de que el código cumpla ciertas reglas.
+
+### Configurando un Linter
+
+Para asegurarnos de que nuestro código cumple ciertas reglas podemos usar un Linter, un linter lo que hace es leer nuestro código de forma estática (sin ejecutarlo) y detectar errores según ciertas reglas preconfiguradas.
+
+Vamos a usar ESLint y Prettier para asegurarnos de que nuestro código no tenga errores y esté escrito con un estilo igual sin importar cuantas personas trabajen el código del módulo.
+
+```bash
+npm install -D eslint eslint-plugin-prettier eslint-config-prettier prettier
+# yarn add -D eslint eslint-plugin-prettier eslint-config-prettier prettier
+```
+
+Ahora vamos a configurar ESLint creando un archivo `.eslintrc` con el siguiente contenido.
+
+```json
+{
+  "extends": ["prettier"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}
+```
+
+Con esto le decimos a ESLint que extienda la configuración de Prettier, que lo use como Plugin, que soporte ECMAScript 2018 y que el código se ejecuta en entornos ES6 o más y Node.js. Ahora hay que hacer que en cada cambio a un archivo `.js` se ejecute prettier y ESLint, para eso configuramos en el `package.json` lo siguiente.
+
+```json
+{
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
+```
+
+Ahora Prettier va a arreglar cualquier problema en archivos `.json` y `.md` y Prettier y ESLint van a ver problemas en archivos `.js`.
+
+## Agregando tipado
+
+TypeScript es cada vez más popular en la comundidad de JavaScript, FlowType aunque no tan popular tiene sus usuarios, incluso si tu código no usa directamente estos lenguajes es posible proveer los tipos de datos que usa nuestro módulo y ayudar a quienes usan estas herramientas.
+
+Para esto vamos a crear un archivo `index.d.ts` y un archivo `index.js.flow` con los tipos de datos de nuestro módulo, en este caso es bastante simple.
+
+```typescript
+export default function hello(name: string): string;
+```
+
+Esos son todos los tipos necesarios por nuestro módulo. Este mismo código se puede agregar a ambos archivos. Luego de esto nuestro proyecto debería verse así.
+
+```file-tree
+[
+  {
+    "close": true,
+    "type": "folder",
+    "name": "dist",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.js.map" },
+      { "type": "file", "name": "index.mjs" },
+      { "type": "file", "name": "index.mjs.map" },
+      { "type": "file", "name": "index.umd.js" },
+      { "type": "file", "name": "index.umd.js.map" }
+    ]
+  },
+  {
+    "type": "folder",
+    "name": "src",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "index.test.js" }
+    ]
+  },
+  { "type": "file", "name": ".gitignore" },
+  { "type": "file", "name": "babel.config.js" },
+  { "type": "file", "name": "index.d.ts" },
+  { "type": "file", "name": "index.js.flow" },
+  { "type": "file", "name": "package.json" },
+  { "type": "file", "name": "README.md" },
+  { "type": "file", "name": "LICENSE" },
+  { "type": "file", "name": "yarn.lock" }
+]
+```
+
+## Publicando
+
+Ya con todo listo y configurado, es hora de publicar el módulo, primero hay que estar seguro de hacer commit de todos los archivos cambiados y hacerles push a nuestro repositorio de Github. Después vamos a definir que archivos vamos a subir a npm creando en nuestro `package.json` una key `files` con un array de los archivos y carpetas a subir.
+
+```json
+{
+  "name": "@sergiodxa/my-module",
+  "version": "1.0.0",
+  "description": "My super cool module",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "prebuild": "npm test",
+    "build": "microbundle",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "Sergio Xalambrí <hello@sergiodxa.com> (https://sergiodxa.com)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.4.0",
+    "husky": "^1.3.1",
+    "jest": "^24.1.0",
+    "lint-staged": "^8.1.5",
+    "microbundle": "^0.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "files": [
+    "dist",
+    "index.d.ts",
+    "index.js.flow",
+    "package.json",
+    "README.md"
+  ]
+}
+
+```
+
+¡Ahora sí, hora de publicar¡ Esto lo hacemos con el siguiente comando.
+
+```bash
+npm publish
+```
+
+Si da un error por usar un namespace diciéndo que pagues para publicar módulos privados hay que agregar `--access public` al comando.
+
+```bash
+npm publish --access public
+```
+
+¡Ya con esto va a estar publicado! Este mismo módulo se puede bajar desde [@sergiodxa/my-module](https://www.npmjs.com/package/@sergiodxa/my-module).
+
+## Palabras finales
+
+Son muchos pasos, pero no todos son realmente necesarios, con tener el `package.json` y el código es sufciente para hacer `publish`, en ese artículo fuimos un poco más allá agregando un build, pruebas automatizadas, linter y más cosas para asegurarnos de publicar un buen módulo lo más completo.
