@@ -3,7 +3,7 @@
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
     "dev": "watch \"yarn build\" articles pages",
-    "build:dev": "node ../contentz/src",
+    "build:dev": "node ../contentz/cli.js build",
     "build": "contentz build",
     "social": "contentz social",
     "start": "serve public -p 3000"
