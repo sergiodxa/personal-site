@@ -20,4 +20,4 @@ navigation:
   - name: Books
     path: https://leanpub.com/u/sergiodxa
 incremental: false
-favicon: /static/favicon@48.png
+icon: /static/favicon@48.png
