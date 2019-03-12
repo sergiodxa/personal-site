@@ -17,5 +17,7 @@ social:
 navigation:
   - name: Services
     path: /services/
+  - name: Books
+    path: https://leanpub.com/u/sergiodxa
 incremental: false
 favicon: /static/favicon@48.png
