@@ -1,0 +1,78 @@
+---
+title: "Conceptos básicos de JS: Array#forEach"
+date: 2019-02-07T05:44:51.745Z
+description: "Aprende a usar Array#forEeach, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript."
+lang: es
+published: true
+tags: JavaScript, Spanish, Array, ES5
+---
+
+_Array#forEach_, o `Array.prototype.forEach`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve iterar sobre un array y ejecutar una función por cada elemento del mismo, lo que en palabras más normales significa que vamos a recorrer un array y hacer algo con sus elementos. Veamos un ejemplo:
+
+```js
+const numbers = [1, 2, 3];
+const doubles = numbers.forEach(number => console.log(number * 2)); // 2 4 6
+```
+
+Lo que hace Array#forEach entonces es llamar la función que pasamos como argumento una vez por cada elemento del array.
+
+> _Nota_: Ya que Array#forEach no devuelve un nuevo array no se pueden agregar otros métodos como [Array#map](/articles/js-basics/array-prototype-map/) o [Array#filter](/articles/js-basics/array-prototype-filter) después de un Array#forEach, este debe ser el último método.
+
+Si queremos hacer lo mismo que Array#forEach tendríamos que hacer algo similar a esto:
+
+```js
+const numbers = [1, 2, 3];
+
+for (const number of numbers) {
+  console.log(number * 2); // 2 4 6
+}
+```
+
+Tendríamos que manualmente recorrer el array e ir haciendo `console.log` de cada valor multiplicado por dos.
+
+## Sintaxis
+
+La sintaxis completa de la función es la siguiente
+
+```js
+initial.forEach(function callback(currentValue, index, array) {
+  // Devuelve un nuevo elemento
+}, thisArg);
+```
+
+Array#forEach recibe dos argumentos, una función `callback` y un valor, cualquiera, que va a ser asignado como `this` del callback, en caso de usar _arrow functions_ este valor no hace nada. El callback a su vez recibe tres argumentos, la mayoría de las veces se suele usar solo el primero y algunas veces el segundo, el primero es el valor actual por el que estamos pasando en la iteración, el segundo es el índice dentro de nuestro array y el tercero es el mismo array que estamos iterando.
+
+Por último, la función devuelve `undefined` en vez del array recorrido.
+
+## Implementando Array#forEach a mano
+
+Veamos ahora como crear nuestro propio Array#forEach para entender mejor su funcionamiento. Vamos a implementarlo como una función llamada `forEach` cuyo primer valor va a ser el `array` a mapear y después vamos a recibir el `callback` y el valor de `this`.
+
+```js
+function forEach(array, callback, thisArg) {
+  const boundCallback = thisArg ? callback.bind(thisArg) : callback;
+  for (let index = 0; index < array.length; index++) {
+    boundCallback(array[index], index, array);
+  }
+}
+
+const numbers = [1, 2, 3];
+forEach(numbers, number => console.log(number * 2)); //  2 4 6
+```
+
+¿Qué es lo que hicimos? Nuestra función recibe los tres argumentos que dijimos antes, luego crea una constante llamada `boundCallback` que en caso de que se haya definido `thisArg` es igual a hacer Function#bind de `callback` con el valor de `thisArg` y en caso contrario es igual a `callback`. Después iteramos el array inicial y al `callback`, al cual le pasamos el valor actual del array, el índice y el array entero.
+
+## Casos de uso
+
+Array#forEach es usado un montón en JavaScript, especialmente cuando se trabaja de una forma funcional. Se puede usar cada vez que se quiera hacer un efecto secundario por cada elemento de un array.
+
+```js
+const $inputList = document.querySelectorAll("input");
+Array.from($inputList).forEach($select => $select.addEventListener("change", handleChange))
+```
+
+Lo que hace el ejemplo es obtener todos los `<input>` de una página lo que devuelve un objeto NodeList, usando `Array.from` lo convertimos a un array y usamos Array#forEach empezamos a escuchar el evento `change` de cada uno usando una función `handleChange` que podemos definir en nuestro código.
+
+## Palabras finales
+
+Este método es muy útil y es usado a diario al trabajar con Arrays en JavaScript. Si no lo habías usado antes te recomiendo probar varios ejemplos de uso para familiarizarte, cuando lo hagas vas a querer usarlo siempre.
