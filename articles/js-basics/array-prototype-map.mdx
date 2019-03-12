@@ -3,6 +3,7 @@ title: "Conceptos básicos de JS: Array#map"
 date: 2019-02-07T05:44:51.745Z
 description: Aprende a usar Array#map, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.
 lang: es
+published: true
 tags: JavaScript, Spanish, Array, ES5
 ---
 
@@ -16,7 +17,7 @@ console.log(doubles); // [2,4,6]
 
 Lo que hace Array#map entonces es llamar la función que pasamos como argumento una vez por cada elemento del array.
 
-> _Nota_: Ya que Array#map devuelve un nuevo array, es una mala práctica usarlo para modificar manualmente el array inicial o hacer algún otro efecto al recorrer el array, para eso es mejor usar Array#forEach.
+> _Nota_: Ya que Array#map devuelve un nuevo array, es una mala práctica usarlo para modificar manualmente el array inicial o hacer algún otro efecto al recorrer el array, para eso es mejor usar [Array#forEach](/articles/js-basics/array-prototype-foreach/).
 
 Si queremos hacer lo mismo que Array#map tendríamos que hacer algo similar a esto:
 
@@ -31,7 +32,7 @@ for (const number of numbers) {
 console.log(doubles); // [2,4,6]
 ```
 
-Tendríamos que crear un nuevo array vacío, recorrer el primero e ir haciendo Array#push de cada valor multiplicado por dos.
+Tendríamos que crear un nuevo array vacío, recorrer el primero e ir haciendo [Array#push](/articles/js-basics/array-prototype-push/) de cada valor multiplicado por dos.
 
 ## Sintaxis
 
