@@ -1,0 +1,86 @@
+---
+title: Deploy de Contentz a Netlify
+description: Aprende como llevar tu sitio de Contentz a producción usando Netlify.
+date: 2019-03-21T19:56:31.276Z
+published: true
+lang: es
+tags: Contentz, Netlify, Deploy, Spanish
+---
+
+[**Contentz**](https://contentz.tech) es una herramienta para crear sitios web y blogs fácilmente sin configurar nada, pero con la opción de hacerlo para algunas cosas. [Netlify](https://www.netlify.com/) es una plataforma para hacer deploy de sitios web estáticos de forma global.
+
+Contentz genera sitios estáticos por lo que es candidato ideal para usar Netlify. En este artículo vamos a ver como configurar todo lo que necesitemos para usarlos juntos.
+
+## Creando el repositorio
+
+Primero necesitamos crear el repositorio de Git donde vamos a tener nuestro contenido. Netlify soporta GitHub, GitLab y Bitbucket, en este caso vamos a usar GitHub.
+
+Para esto vamos a https://github.com/new y creamos un repositorio que vamos a llamar `personal-site`. Luego clonamos nuestro repositorio a nuestra computadora.
+
+```bash
+git clone git@github.com:username/personal-site.git
+```
+
+## Iniciamos el proyecto
+
+Ahora vamos a iniciar nuestro sitio, para esto corremos los siguientes comandos:
+
+```bash
+npx gitignore node
+npx license MIT -o "Sergio Xalambrí" > LICENSE
+yarn init --yes
+yarn add contentz
+mkdir articles
+```
+
+Ahora vamos a crear nuestro primer artículo con el comando:
+
+```bash
+yarn contentz write hola-mundo.mdx
+```
+
+Y vamos a cambiar `published` a `true` en la metadata del artículo, al principio del archivo.
+
+Luego generamos la imagen social de nuestro artículo:
+
+```bash
+yarn contentz social articles/hola-mundo.mdx
+```
+
+Por último guardamos todo, hacemos commit y push de GitHub.
+
+```bash
+git add .
+git commit -m "Inicio del sitio"
+git push origin master
+```
+
+## Configurando Netlify
+
+Ahora vamos a configurar Netlify, para esto iniciamos sesión y vamos a https://app.netlify.com/start para agregar un nuevo sitio. Lo conectamos a nuestra cuenta de GitHub y buscamos nuestro repositorio.
+
+!["Interfaz para crear un nuevo sitio en Netlify"](/static/articles/netlify-add.png "Interfaz para crear un nuevo sitio en Netlify")
+
+Creamos el sitio en las opciones de build dejamos todo vacío.
+
+Ahora en nuestro repositorio vamos a crear un archivo `netlify.toml` con el siguiente contenido:
+
+```toml
+[build]
+  publish = "public"
+  command = "yarn contentz build"
+```
+
+Con esto configuramos que va a publicar la carpeta `public` que genera Contentz y que el comando que va a usar para hacer construir el sitio es `yarn contentz build`.
+
+Ahora guardamos, hacemos commit y push del repositorio.
+
+```bash
+git add netlify.toml
+git commit -m "Configure Netlify"
+git push origin master
+```
+
+## Accedemos a nuestro sitio
+
+Con esto Netlify debería poder construir nuestro sitio y hacerle deploy sin problemas. Si accedemos a la URL que nos provee Netlify, ó a nuestro dominio propio en caso de haberlo configurado, vamos a ver nuestro sitio web hecho con Contentz funcionando.
