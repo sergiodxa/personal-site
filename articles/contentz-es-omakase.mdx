@@ -1,0 +1,54 @@
+---
+title: Contentz es Omakase
+description: Contentz toma decisiones por uno, a cambio nos ofrece un sitio optimizado para un mejor rendimiento y lectura.
+date: 2019-03-21T18:33:05.473Z
+published: true
+lang: es
+tags: Contentz, Spanish, Omakase, Rails
+---
+
+**Omakase** es un término que leí por primera vez en la doctrina de Rails, es una palabra japonesa que significa "_Te dejo la decisión a vos_", usada normalmente en restaurantes de sushi donde el comensal deja que el chef eliga que comida preparar a su gusto y lo que crea es mejor.
+
+Rails se considera omakase porque al usarlo el desarrollador deja la toma de (_muchas_) decisiones sobre que usar al framework en vez de tomarlas en cada proyecto que cree.
+
+[Contentz](https://contentz.tech), [mi generador de sitios estáticos](/presentando-contentz) es Omakase como Rails. Al usar Contentz uno acepta que lo importante es crear el contenido, eso que es único de tu sitio web o blog y deja que este tome las decisiones menos importantes.
+
+¿Cómo se va a mostrar? ¿Con qué diseño? ¿Que optimizaciones se van a realizar al sitio? ¿Cómo creas páginas? ¿Qué tal artículos? ¿Archivos estáticos? Todo estas decisiones las toma Contentz por uno.
+
+Esto permite concentrarte en lo más importante, escribir el contenido, artículos o páginas fijas, que conforman tu sitio.
+
+## ¿Pero qué pasa si quiero personalizar mi sitio?
+
+Todo en la vida se trata de tradeoffs, Contentz te facilita escribir y tener un sitio bueno a cambio de no tomar decisiones sobre como se ve el sitio o como funcionan algunas cosas. Existe opciones muy buenas para tener más personalización como Gatsby, Next.js, Jekyll, Hugo, etc. y aunque Contentz capaz en el futuro tenga la opción de soportar temas para personalizar el diseño lo idea sería siempre dejarlo tal cual.
+
+¿Por qué es mejor dejarlo tal cual? En mi experiencia, y habiendo visto a otras personas crear sus propios sitios o blogs desde cero, uno pasa más tiempo creando el sitio y personalizando el diseño y al final cuando está todo listo para empezar a escribir ya la inspiración o las ganas se fueron. Por esto mismo servicios como Medium son tan populares, te fuerzan a solo escribir sin pensar en otra cosa.
+
+Contentz te ofrece esto mismo, pero pudiéndo alojar el sitio en cualquier servidor usando un dominio propio.
+
+## ¿Cómo empezar con Contentz?
+
+Instala Contentz desde npm usando
+
+```bash
+yarn add contentz
+```
+
+Luego crea tu primer artículo usando
+
+```bash
+contentz write hola-mundo.mdx
+```
+
+Cambia `published` a `true` al principio del artículo, ahora genera la imagen para redes sociaes (Open Graph) usando
+
+```bash
+contentz social articles/hola-mundo.mdx
+```
+
+Por último construye tu sitio usando
+
+```bash
+contentz build
+```
+
+Tu sitio va a generarse en la carpeta `public`, sube eso a un servidor, por ejemplo Netlify o GitHub Pages, y vas a tener tu sitio listo y funcionando. Para configurar más cosas puedes [leer la documentación](https://contentz.tech/docs/).
