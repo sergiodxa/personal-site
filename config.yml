@@ -15,8 +15,6 @@ social:
   dev: sergiodxa
   meetup: 182915204
 navigation:
-  - name: Services
-    path: /services/
   - name: Books
     path: https://leanpub.com/u/sergiodxa
 incremental: false
