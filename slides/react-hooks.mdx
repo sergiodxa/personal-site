@@ -1,0 +1,448 @@
+---
+title: Introduction to the Hooked World of React
+published: true
+---
+
+# Introduction to the Hooked World of React
+
+## Say Goodbye to the Classy World!
+
+---
+
+### I'm Sergio Xalambrí
+> Senior Software Engineer currently working at [Able](https://able.co)
+
+- 5 years programming
+- 4 jobs
+- 3 countries 🇦🇷🇨🇴🇵🇪
+
+---
+
+## What are Hooks?
+
+---
+
+## State in the Classy World
+```js
+import React from "react";
+
+class Counter extends React.Component {
+  state = {
+    counter: 0
+  };
+
+  render() {
+    return (
+      <>
+        <div>Clicks: {this.state.counter}</div>
+        <button
+          onClick={() =>
+            this.setState(state => ({ counter: state.counter + 1 }))
+          }
+        >
+          Increment
+        </button>
+      </>
+    );
+  }
+}
+
+export default Counter;
+```
+
+--- 
+
+## State in the Hooked World
+
+```js
+import React from "react";
+
+function Counter() {
+  const [counter, setCounter] = React.useState(0);
+
+  return (
+    <>
+      <div>Clicks: {counter}</div>
+      <button onClick={() => setCounter(state => state + 1)}>Increment</button>
+    </>
+  );
+}
+
+export default Counter;
+```
+
+---
+
+## React.useState
+
+Define your initial state, get the value and a function to update it
+
+```js
+const [state, setState] = React.useState(initialState); // create the state
+```
+
+The updater could receive the new value or a function to update (as setState)
+
+```js
+setState(newValue); // update state
+setState(currentValue => newValue); // update using prev value
+```
+
+---
+
+## Effects in the Classy World
+
+```js
+import React from "react";
+
+class Chat extends React.Component {
+  state = {
+    messages: [],
+    message: "",
+    connected: false
+  };
+
+  componentDidMount() {
+    this.connect();
+    this.listen();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.url !== this.props.url) {
+      this.ws.close();
+      this.connect();
+      this.listen();
+    }
+  }
+
+  componentWillUnmount() {
+    this.ws.close();
+  }
+
+  connect = () => {
+    this.ws = new WebSocket(this.props.url);
+  };
+
+  listen = () => {
+    this.ws.onmessage = ({ data }) => {
+      this.setState(state => ({
+        messages: state.messages.concat(JSON.parse(data))
+      }));
+    };
+    this.ws.onopen = () => this.setState({ connected: true });
+    this.ws.onclose = () => this.setState({ connected: false });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const { message } = this.state;
+    this.ws.send(
+      JSON.stringify({
+        id: Date.now(),
+        content: message
+      })
+    );
+    this.setState({ message: "" });
+  };
+
+  render() {
+    return (
+      <>
+        <h1>Chat</h1>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="message">Message</label>
+          <input
+            type="text"
+            name="message"
+            id="message"
+            disabled={!this.state.connected}
+            value={this.state.message}
+            onChange={event => this.setState({ message: event.target.value })}
+          />
+          <button>Send</button>
+        </form>
+        <ul>
+          {this.state.messages.map(message => (
+            <li key={message.id}>{message.content}</li>
+          ))}
+        </ul>
+      </>
+    );
+  }
+}
+
+export default Chat;
+```
+
+---
+
+## Effects & Ref in the Hooked World
+
+```js
+import React from "react";
+
+function Chat({ url }) {
+  const ws = React.useRef(null);
+
+  const [messages, setMessages] = React.useState([]);
+  const [content, setContent] = React.useState("");
+  const [connected, setConnected] = React.useState(false);
+
+  React.useEffect(() => {
+    const server = new WebSocket(url);
+    ws.current = server;
+    return () => {
+      ws.current = null;
+      server.close();
+    };
+  }, [url]);
+
+  React.useEffect(() => {
+    if (ws.current) {
+      ws.current.onmessage = ({ data }) =>
+        setMessages(state => state.concat(JSON.parse(data)));
+      ws.current.onopen = () => setConnected(true);
+      ws.current.onclose = () => setConnected(false);
+    }
+  }, [ws.current]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    ws.current.send(
+      JSON.stringify({
+        id: Date.now(),
+        content
+      })
+    );
+    setContent("");
+  }
+
+  return (
+    <>
+      <h1>Chat</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="message">Message</label>
+        <input
+          type="text"
+          name="message"
+          id="message"
+          disabled={!connected}
+          value={content}
+          onChange={event => setContent(event.target.value)}
+        />
+        <button>Send</button>
+      </form>
+      <ul>
+        {messages.map(message => (
+          <li key={message.id}>{message.content}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default Chat;
+```
+
+---
+
+## React.useEffect
+
+Pass a function and run it after each render, optionally pass an array of values and keep track of those values to run the effect.
+
+Lastly return a function to clear the effect before running again and when unmounting.
+
+```js
+React.useEffect(() => {
+  // run the effect
+  return () => {
+    // clear the effect
+  };
+}, [valueToListen]); // set values to keep track of
+```
+
+---
+
+## React.useRef
+
+Save a value to reuse across renders, similar to an instance property.
+
+```js
+const ref = React.useRef(initialValue); // create the ref
+ref.current = newValue; // update the value
+console.log(ref.current); // use the value
+```
+
+---
+
+## Context in the Classy World
+
+```js
+import React from "react";
+
+const ThemeContext = React.createContext();
+```
+
+```js
+import React from "react";
+import ThemeContext from "@company/theme-context";
+
+class App extends React.Component {
+  static contextType = ThemeContext;
+  componentDidMount() {
+    // use this.context.theme for something
+  }
+  componentDidUpdate() {
+    // use this.context.theme for something
+  }
+  render() {
+    return (
+      <ThemeContext.Consumer>
+        {theme => <div className={theme}>Using theme {this.context.theme}</div>}
+      </ThemeContext.Consumer>
+    );
+  }
+}
+
+export default App;
+```
+
+---
+
+## Context in the Hooked World
+
+```js
+import React from "react";
+
+const ThemeContext = React.createContext();
+```
+
+```js
+import React from "react";
+
+function App() {
+  const theme = React.useContext(ThemeContext);
+
+  React.useEffect(() => {
+    // use theme for something
+  }, [theme]);
+
+  return <div className={theme}>Using theme {theme}</div>;
+}
+
+export default App;
+```
+
+---
+
+## React.useContext
+
+Receive a context object created with `React.createContext` and return the current value.
+
+```js
+const contextValue = React.useContext(contextObject);
+```
+
+---
+
+## Custom Hooks
+
+---
+
+## useThemeContext Custom Hook
+
+```js
+import React from "react";
+
+const ThemeContext = React.createContext();
+
+export function ThemeProvider({ theme, children }) {
+  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+```
+
+---
+
+## useLocalState Custom Hook
+
+```js
+import React from "react";
+
+function useLocalState(key, initialValue = "") {
+  const [state, setState] = React.useState(initialValue);
+
+  React.useEffect(() => {
+    const value = localStorage.getItem(key);
+    update(value || initialValue);
+  }, [key]);
+
+  React.useEffect(() => {
+    function handler({ key: eventKey, newValue }) {
+      if (eventKey === key && newValue !== state) update(newValue);
+    }
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener(handler);
+  }, [key]);
+
+  function update(newState) {
+    localStorage.setItem(key, newState);
+    setState(newState);
+  }
+
+  function clear() {
+    localStorage.setItem(key, initialValue);
+    setState(initialValue);
+  }
+
+  return [state, update, clear];
+}
+
+export default useLocalState;
+```
+
+---
+
+## Using useLocalState
+
+```js
+import React from "react";
+import useLocalState from "@company/useLocalState";
+
+function App() {
+  const [state, setState, clearState] = useLocalState("token", "");
+  return (
+    ...
+  );
+}
+
+export default App;
+```
+
+---
+
+## Other Built-In Hooks
+
+- useReducer - Control state using a reducer function (as in Redux)
+- useCallback - Memoize a function
+- useMemo - Memoize a computed value
+- useImperativeHandle - Add imperative code to a ref
+- useLayoutEffect - Run effects synchronously after all DOM mutations
+- useDebugValue - Display a custom label in the React DevTools
+
+---
+
+## Third-Party Custom Hooks
+
+- useHooks - Easy to understand React Hook recipes
+- rehooks - React Hooks for Everything
+- The Platform - Web API's turned into React Hooks and Suspense-friendly React components
+- react-hanger - A small collection of useful hooks
+- awesome-react-hooks - Awesome React Hooks Resources
+
+---
+
+## Any Questions?
