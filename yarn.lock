@@ -1458,10 +1458,10 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.3.0.tgz#cb99c6b2a8292215f046af577d89c1d96610a1f1"
-  integrity sha512-OQcORjdrjApcveaC5T2y84uThXCxaXVZgPV+lnxX3dnrUB1EFBgoBo+K/UznUJaiaTEzcT1m9n1Zd4CjYLQOwA==
+contentz@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.4.0.tgz#deb95e5c97f8fc2a94cf8a9c8dcd6adc0378b266"
+  integrity sha512-CnZojGqFounhQTa8M/baaTV7geDcS4ngICoJPCwr8E80Q5MUGnK4wy9zGnJFrV5YP2y+3UumbyO87z49bifciQ==
   dependencies:
     "@babel/core" "^7.3.4"
     "@babel/preset-env" "^7.3.4"
@@ -1476,6 +1476,7 @@ contentz@3.3.0:
     del "^3.0.0"
     emotion "^10.0.7"
     emotion-server "^10.0.7"
+    execa "^1.0.0"
     get-hrefs "^2.0.0"
     globby "^9.0.0"
     gray-matter "^4.0.2"
