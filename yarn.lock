@@ -1465,10 +1465,10 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.8.0.tgz#0ae304103b57fccbb65e516f080a724f7acf71e9"
-  integrity sha512-Hml+cGLRKc/AaJwgcMEPw92ATIMtTRCgKz8Pf7i/r6miyMamZdWL4XjLEe2KY8PxeruRT5f0YNFGwB5PbuKD/Q==
+contentz@3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.8.1.tgz#d268263d209a2db328e84023d8c9ce2aaa22b121"
+  integrity sha512-xIKBsyzOjv0jB1i43rVKVfeWY6LqE4+w3MdZvr6XdWIi4aAj/a3mR+P97qxXyaeFQt5dniVl6fua1hirKtVfLA==
   dependencies:
     "@babel/core" "^7.3.4"
     "@babel/preset-env" "^7.3.4"
