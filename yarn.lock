@@ -1465,7 +1465,7 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@^3.10.0:
+contentz@3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.10.0.tgz#d23e0a14f8c05af1b311130f62a0691ea83a5ff1"
   integrity sha512-hK5kRe+9ObU/C9LvxLMYCtB2FPJZ7OwLcnyPYIn4d1RO9+H39HdW8uuj3ZRPoMwPDi5gr5GiipVt/eyGlVXcgw==
