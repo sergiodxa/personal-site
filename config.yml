@@ -6,7 +6,6 @@ language: en
 repository: https://github.com/sergiodxa/personal-site/
 email: hello@sergiodxa.com
 patreon: sergiodxa
-paypal: sergiodxa
 social:
   twitter: sergiodxa
   github: sergiodxa
@@ -19,3 +18,4 @@ navigation:
     path: https://leanpub.com/u/sergiodxa
 incremental: false
 icon: /static/favicon@48.png
+analytics: UA-48432002-3
