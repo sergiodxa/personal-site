@@ -667,10 +667,10 @@
     meow "^5.0.0"
     mkdirp "^0.5.1"
 
-"@contentz/social@^3.13.1":
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/@contentz/social/-/social-3.13.1.tgz#073cd9237db47d177af7946201be3c906693e4b1"
-  integrity sha512-+Bod8/VThSvRymKykUhrCvWXmXUljd7JhKOt0iGxTYm4kVBY06XUCJRPaRoCWSlkqJjg66tlwVjYuXDuKl3tFw==
+"@contentz/social@^3.13.2":
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/@contentz/social/-/social-3.13.2.tgz#0861412a5932d5c69a34f7145484e7ee4d1a8941"
+  integrity sha512-w/1KOjCVYbva25ZWgIu95my9vzMAsaRkO8jl9r2Mjbbc8fba9P++daavD+T33OIgEqrsYObYTyOmmvabWUiaJQ==
   dependencies:
     "@contentz/utils" "^3.13.1"
     "@emotion/core" "^10.0.10"
@@ -680,6 +680,7 @@
     local-chrome "^0.1.0"
     meow "^5.0.0"
     puppeteer-core "^1.14.0"
+    react "^16.8.6"
     react-dom "^16.8.6"
     relative "^3.0.2"
 
@@ -1516,15 +1517,15 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.13.1.tgz#a82051b71e1506f69b2116c7989d976c9e5bbcab"
-  integrity sha512-s7SPh8cheb5rGhLJxMNvBnHwsw4ERZ4HxmMWMLHL3QdDg+Ej94Ip+HKNVdWt8uGFGMC652fZ0EMCv+x0Rk+8Cg==
+contentz@3.13.2:
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.13.2.tgz#04c88c979a59e0a828b13e10298fdf4ef0d25d6f"
+  integrity sha512-CXDcNij8VAwoHoHbgITYpXtQ4IiM+SS/z3inIOWQdEbr/lJx5kqq3DjyXm7Z1HUYxz5Ux8R1D8/pS/FN4GxrpQ==
   dependencies:
     "@babel/core" "^7.3.4"
     "@babel/preset-env" "^7.3.4"
     "@contentz/init" "^3.13.1"
-    "@contentz/social" "^3.13.1"
+    "@contentz/social" "^3.13.2"
     "@contentz/write" "^3.13.1"
     "@emotion/babel-preset-css-prop" "^10.0.9"
     "@emotion/core" "^10.0.7"
@@ -3891,7 +3892,7 @@ react-slugify@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-slugify/-/react-slugify-1.2.0.tgz#bd3e6a6e67234b771616f2651a657361d4704353"
   integrity sha512-s3CwIkMdEzp+YMPZYaTvRkJ8oCbK1ZduWAB6E+Ic8j/HCqAKatlLFW3XQ8vpGZWAzkSI2m2bOu1BPR1vMMWOpA==
 
-react@^16.8.2:
+react@^16.8.2, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
