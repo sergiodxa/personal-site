@@ -53,11 +53,11 @@ Por último, la función devuelve un nuevo array con los resultados de haber eje
 Veamos ahora como crear nuestro propio Array#filter para entender mejor su funcionamiento. Vamos a implementarlo como una función llamada `filter` cuyo primer valor va a ser el `array` a filtear y después vamos a recibir el `callback` y el valor de `this`.
 
 ```js
-function map(array, callback, thisArg) {
+function filter(array, callback, thisArg) {
   const result = [];
   const boundCallback = thisArg ? callback.bind(thisArg) : callback;
   for (let index = 0; index < array.length; index++) {
-    if (boundCallback(array[index], index, array)) result.push();
+    if (boundCallback(array[index], index, array)) result.push(array[index]);
   }
   return result;
 }

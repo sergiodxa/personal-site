@@ -667,10 +667,10 @@
     meow "^5.0.0"
     mkdirp "^0.5.1"
 
-"@contentz/social@^3.13.1":
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/@contentz/social/-/social-3.13.1.tgz#073cd9237db47d177af7946201be3c906693e4b1"
-  integrity sha512-+Bod8/VThSvRymKykUhrCvWXmXUljd7JhKOt0iGxTYm4kVBY06XUCJRPaRoCWSlkqJjg66tlwVjYuXDuKl3tFw==
+"@contentz/social@^3.13.2":
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/@contentz/social/-/social-3.13.2.tgz#0861412a5932d5c69a34f7145484e7ee4d1a8941"
+  integrity sha512-w/1KOjCVYbva25ZWgIu95my9vzMAsaRkO8jl9r2Mjbbc8fba9P++daavD+T33OIgEqrsYObYTyOmmvabWUiaJQ==
   dependencies:
     "@contentz/utils" "^3.13.1"
     "@emotion/core" "^10.0.10"
@@ -680,6 +680,7 @@
     local-chrome "^0.1.0"
     meow "^5.0.0"
     puppeteer-core "^1.14.0"
+    react "^16.8.6"
     react-dom "^16.8.6"
     relative "^3.0.2"
 
@@ -1516,15 +1517,15 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.13.1.tgz#a82051b71e1506f69b2116c7989d976c9e5bbcab"
-  integrity sha512-s7SPh8cheb5rGhLJxMNvBnHwsw4ERZ4HxmMWMLHL3QdDg+Ej94Ip+HKNVdWt8uGFGMC652fZ0EMCv+x0Rk+8Cg==
+contentz@3.13.2:
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.13.2.tgz#04c88c979a59e0a828b13e10298fdf4ef0d25d6f"
+  integrity sha512-CXDcNij8VAwoHoHbgITYpXtQ4IiM+SS/z3inIOWQdEbr/lJx5kqq3DjyXm7Z1HUYxz5Ux8R1D8/pS/FN4GxrpQ==
   dependencies:
     "@babel/core" "^7.3.4"
     "@babel/preset-env" "^7.3.4"
     "@contentz/init" "^3.13.1"
-    "@contentz/social" "^3.13.1"
+    "@contentz/social" "^3.13.2"
     "@contentz/write" "^3.13.1"
     "@emotion/babel-preset-css-prop" "^10.0.9"
     "@emotion/core" "^10.0.7"
@@ -1591,17 +1592,6 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
-
-cosmiconfig@^5.0.2:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.1.0.tgz#6c5c35e97f37f985061cdf653f114784231185cf"
-  integrity sha512-kCNPvthka8gvLtzAxQXvWo4FxqRB+ftRZyPZNuab5ngvM9Y7yw7hbEysglptLgpkGX9nAOKTBVkHUAe8xtYR6Q==
-  dependencies:
-    import-fresh "^2.0.0"
-    is-directory "^0.3.1"
-    js-yaml "^3.9.0"
-    lodash.get "^4.4.2"
-    parse-json "^4.0.0"
 
 cosmiconfig@^5.2.0:
   version "5.2.0"
@@ -2403,10 +2393,10 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-husky@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-2.2.0.tgz#4dda4370ba0f145b6594be4a4e4e4d4c82a6f2d5"
-  integrity sha512-lG33E7zq6v//H/DQIojPEi1ZL9ebPFt3MxUMD8MR0lrS2ljEPiuUUxlziKIs/o9EafF0chL7bAtLQkcPvXmdnA==
+husky@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-2.3.0.tgz#8b78ed24d763042df7fd899991985d65a976dd13"
+  integrity sha512-A/ZQSEILoq+mQM3yC3RIBSaw1bYXdkKnyyKVSUiJl+iBjVZc5LQEXdGY1ZjrDxC4IzfRPiJ0IqzEQGCN5TQa/A==
   dependencies:
     cosmiconfig "^5.2.0"
     execa "^1.0.0"
@@ -2415,9 +2405,9 @@ husky@2.2.0:
     is-ci "^2.0.0"
     pkg-dir "^4.1.0"
     please-upgrade-node "^3.1.1"
-    read-pkg "^5.0.0"
+    read-pkg "^5.1.1"
     run-node "^1.0.0"
-    slash "^2.0.0"
+    slash "^3.0.0"
 
 ignore@^4.0.3:
   version "4.0.6"
@@ -2805,14 +2795,6 @@ js-yaml@^3.11.0, js-yaml@^3.13.0, js-yaml@^3.8.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@^3.9.0:
-  version "3.12.2"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.2.tgz#ef1d067c5a9d9cb65bd72f285b5d8105c77f14fc"
-  integrity sha512-QHn/Lh/7HhZ/Twc7vJYQTkjuCa0kaCcDcjK5Zlk2rvnUpy7DxMJ23+Jc2dcyvltwQVg1nygAVlB2oRDFHoRS5Q==
-  dependencies:
-    argparse "^1.0.7"
-    esprima "^4.0.0"
-
 jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
@@ -2889,14 +2871,14 @@ line-column-path@^1.0.0:
   resolved "https://registry.yarnpkg.com/line-column-path/-/line-column-path-1.0.0.tgz#383b83fca8488faa7a59940ebf28b82058c16c55"
   integrity sha1-ODuD/KhIj6p6WZQOvyi4IFjBbFU=
 
-lint-staged@8.1.6:
-  version "8.1.6"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-8.1.6.tgz#128a9bc5effbf69a359fb8f7eeb2da71a998daf6"
-  integrity sha512-QT13AniHN6swAtTjsrzxOfE4TVCiQ39xESwLmjGVNCMMZ/PK5aopwvbxLrzw+Zf9OxM3cQG6WCx9lceLzETOnQ==
+lint-staged@8.1.7:
+  version "8.1.7"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-8.1.7.tgz#a8988bc83bdffa97d04adb09dbc0b1f3a58fa6fc"
+  integrity sha512-egT0goFhIFoOGk6rasPngTFh2qDqxZddM0PwI58oi66RxCDcn5uDwxmiasWIF0qGnchHSYVJ8HPRD5LrFo7TKA==
   dependencies:
     chalk "^2.3.1"
     commander "^2.14.1"
-    cosmiconfig "^5.0.2"
+    cosmiconfig "^5.2.0"
     debug "^3.1.0"
     dedent "^0.7.0"
     del "^3.0.0"
@@ -3017,11 +2999,6 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
-
-lodash.get@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
 lodash@^4.15.0, lodash@^4.17.11:
   version "4.17.11"
@@ -3915,7 +3892,7 @@ react-slugify@^1.2.0:
   resolved "https://registry.yarnpkg.com/react-slugify/-/react-slugify-1.2.0.tgz#bd3e6a6e67234b771616f2651a657361d4704353"
   integrity sha512-s3CwIkMdEzp+YMPZYaTvRkJ8oCbK1ZduWAB6E+Ic8j/HCqAKatlLFW3XQ8vpGZWAzkSI2m2bOu1BPR1vMMWOpA==
 
-react@^16.8.2:
+react@^16.8.2, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
@@ -3959,10 +3936,10 @@ read-pkg@^3.0.0:
     normalize-package-data "^2.3.2"
     path-type "^3.0.0"
 
-read-pkg@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-5.1.0.tgz#62b924384c4525a1a7a96e2d456b80df142b4390"
-  integrity sha512-NjNkqf8hlMuSxh+p8h8x8sCIfEv/MoRs/nYDmSRSAk879F9C94ADq+kHUJ4LTy5Nn0PYSmMYsy1mD4+lcXiBKg==
+read-pkg@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-5.1.1.tgz#5cf234dde7a405c90c88a519ab73c467e9cb83f5"
+  integrity sha512-dFcTLQi6BZ+aFUaICg7er+/usEoqFdQxiEBsEMNGoipenihtxxtdrQuBXvyANCEI8VuUIVYFgeHGx9sLLvim4w==
   dependencies:
     "@types/normalize-package-data" "^2.4.0"
     normalize-package-data "^2.5.0"
@@ -4263,10 +4240,10 @@ sentence-case@^2.1.0:
     no-case "^2.2.0"
     upper-case-first "^1.1.2"
 
-serve-handler@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/serve-handler/-/serve-handler-6.0.0.tgz#c6eaf6f89881adede09cd737b54e8b2eff4fd585"
-  integrity sha512-2/e0+N1abV1HAN+YN8uCOPi1B0bIYaR6kRcSfzezRwszak5Yzr6QhT34XJk2Bw89rhXenqwLNJb4NnF2/krnGQ==
+serve-handler@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/serve-handler/-/serve-handler-6.0.1.tgz#4155c3f8aab265d0240671259aeda5a5bf4fef70"
+  integrity sha512-k/im4Fbx96d8VcrJDjrsagNd9Vq18tVYRDDe90rpNO8Mr76KJF/zES5tBZdlLEbhBXjOs36m9Wl+hRCiDnYfmA==
   dependencies:
     bytes "3.0.0"
     content-disposition "0.5.2"
@@ -4277,10 +4254,10 @@ serve-handler@6.0.0:
     path-to-regexp "2.2.1"
     range-parser "1.2.0"
 
-serve@11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/serve/-/serve-11.0.0.tgz#577f4e0f4b57058d12e3be19373f1a3d6d8826dc"
-  integrity sha512-Gnyyp3JAtRUo0dRH1/YWPKbnaXHfzQBiVh9+qSUi6tyVcVA8twUP2c+GnOwsoe9Ss7dfOHJUTSA4fdWP//Y4gQ==
+serve@11.0.1:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/serve/-/serve-11.0.1.tgz#60893a727563da08654250566e3ad7377a0a3ec3"
+  integrity sha512-kmcR5jOumMcmoDVJk7izj2Gnz+ql4K3Xq1g0l4XX598lLYvbXgfS1oeTgckPVGzsk0MU/dBPHiolRgH0fI7c5g==
   dependencies:
     "@zeit/schemas" "2.6.0"
     ajv "6.5.3"
@@ -4289,7 +4266,7 @@ serve@11.0.0:
     chalk "2.4.1"
     clipboardy "1.2.3"
     compression "1.7.3"
-    serve-handler "6.0.0"
+    serve-handler "6.0.1"
     update-check "1.5.2"
 
 set-getter@^0.1.0:
@@ -4347,6 +4324,11 @@ slash@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
   integrity sha512-ZYKh3Wh2z1PpEXWr0MpSBZ0V6mZHAQfYevttO11c51CaWjGTaadiKZ+wVt1PbMlDV5qhMFslpZCemhwOK7C89A==
+
+slash@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/slash/-/slash-3.0.0.tgz#6539be870c165adbd5240220dbe361f1bc4d4634"
+  integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
 
 slice-ansi@0.0.4:
   version "0.0.4"

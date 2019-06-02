@@ -33,12 +33,12 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "contentz": "3.13.1"
+    "contentz": "3.13.2"
   },
   "devDependencies": {
-    "husky": "2.2.0",
-    "lint-staged": "8.1.6",
-    "serve": "11.0.0",
+    "husky": "2.3.0",
+    "lint-staged": "8.1.7",
+    "serve": "11.0.1",
     "watch": "1.0.2"
   },
   "husky": {
