@@ -24,7 +24,6 @@ date: 2019-04-24
 
 > 3 countries 🇦🇷🇨🇴🇵🇪
 
-
 ---
 
 ## What are Hooks?
@@ -32,6 +31,7 @@ date: 2019-04-24
 ---
 
 ## State in the Classy World
+
 ```js
 import React from "react";
 
@@ -59,7 +59,7 @@ class Counter extends React.Component {
 export default Counter;
 ```
 
---- 
+---
 
 ## State in the Hooked World
 
@@ -366,7 +366,9 @@ import React from "react";
 const ThemeContext = React.createContext();
 
 export function ThemeProvider({ theme, children }) {
-  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+  );
 }
 
 export function useTheme() {
