@@ -1,0 +1,193 @@
+---
+title: Next.js
+published: false
+date: 2019-06-12
+---
+
+![](/static/slides/nextjs.png)
+
+---
+
+## Universal React.js made Easy and Simple
+
+---
+
+## Features
+
+---
+
+## File-System Routing
+
+> Each file inside a `pages` folder is its own route, as in the old PHP days.
+
+```file-tree
+[
+  {
+    "type": "folder",
+    "name": "pages",
+    "children": [
+      { "type": "file", "name": "index.js" },
+      { "type": "file", "name": "about.js" }
+    ]
+  },
+  { "type": "file", "name": "next.config.js" },
+  { "type": "file", "name": "package.json" }
+]
+```
+
+---
+
+## Automatic Code Splitting
+
+> Each page generates its own JavaScript bundle with only the required code for such page.
+
+---
+
+## Server-Side Rendering
+
+> The first access to the application will be _rendered Server-Side_ to HTML.
+
+---
+
+## AMP Support
+
+> With a simple High Order Component you can make a page render AMP-only content
+
+> or hybrid that supports normal HTML and AMP for SEO improvement.
+
+---
+
+## Single Page Application
+
+> Subsequent page navigation will happen _Client-Side_, requesting
+
+> the JavaScript bundle of the new page on-demand.
+
+---
+
+## Powerful Pre-fetching Capabilities
+
+> You have full control of what pages to pre-fetch in order to
+
+> improve Client-Side navigation times.
+
+---
+
+## Static Exporting
+
+> If the application is simple enough, you can _export to static HTML_
+
+> on build-time instead of running a Node.js application.
+
+---
+
+## CSS in JS
+
+> It comes with an awesome CSS in JS solution called **styled-jsx** already bundled.
+
+> In case you prefer a different one, (e.g. _Emotion_, _Styled Component_, _CSS Modules_, etc.)
+
+> you can still use them and styled-jsx is not included in the final bundles.
+
+---
+
+## Zero Setup
+
+> It has a few conventions (e.g. pages for routes) and abstracts
+
+> you away from the configuration.
+
+---
+
+## Fully Extensible
+
+> Yet it's fully configurable without ejecting as CRA,
+
+> just extend the webpack or Babel configuration as you want when you need it.
+
+---
+
+## Initial data fetching with `getInitialProps`
+
+> A new life cycle method `getInitialProps` is added,
+
+> it lets you fetch data before rendering a page, either server or client side.
+
+---
+
+## Merging Application with Zones
+
+> Next.js Zones allows you to create multiple Next.js applications
+
+> running independently and to connect them as a single application
+
+> when running in production under the same domain.
+
+---
+
+## Serverless Ready
+
+> It can output each page as its own Node.js HTTP request listener
+
+> to be used in a Serverless environment, specially ZEIT Now.sh
+
+---
+
+## Examples for Everything
+
+> The GitHub repository has almost 200 examples for using Next.js including:
+
+- Authentication
+- Custom Servers & Complex Routing
+- Desktop Applications with Electron
+- Server Side Rendering Cache
+- Redux, and similar tools, integration (not required with Next.js IMO)
+- Styled Components, Emotion, CSS Modules, SASS, LESS and more CSS solutions
+
+---
+
+## Example Time
+
+---
+
+## Who's using it Next.js?
+
+> A surprisingly large amount of companies are using Next.js in production right now.
+
+- ZEIT (the creators)
+- Marvel Comics
+- Invision
+- Nike
+- Hulu
+- TicketMaster
+- Open Collective
+- Twitch
+- Repl.it
+- Docker Hub
+- Starbucks Reserves
+- Internationalization
+- And More!
+
+---
+
+## Next for Next.js
+
+---
+
+### server(less) middleware
+
+---
+
+### API routes
+
+---
+
+### useLink
+
+---
+
+### Rendering in Next.js (SSR, Pre-rendering, CSR, SPA)
+
+---
+
+## Questions?
