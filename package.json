@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "husky": "2.3.0",
-    "lint-staged": "8.1.7",
+    "lint-staged": "8.2.0",
     "serve": "11.0.1",
     "watch": "1.0.2"
   },
