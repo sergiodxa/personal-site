@@ -33,7 +33,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "contentz": "3.13.2"
+    "contentz": "^3.13.3"
   },
   "devDependencies": {
     "husky": "2.3.0",
