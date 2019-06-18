@@ -1,0 +1,78 @@
+---
+title: Introducción a Ruby on Rails
+description: Aprende lo básico para empezar a usar Ruby on Rails
+date: 2019-03-22T21:10:12.380Z
+published: false
+---
+
+Hace unos días estuve aprendiendo Ruby on Rails, ya que la empresa donde trabajo, [Able](https://able.co), usa este framework en backend. A continuación una introducción con algunas de las cosas que aprendí.
+
+## Instalando Rails
+
+Los primero para usar Rails es instalarlo, para esto hay que tener Ruby instalado. Una vez instalado se instala como una gema.
+
+```bash
+gem install rails
+```
+
+> _Nota_: Como todas las gemas de Ruby, se instala global.
+
+## Crear una aplicación
+
+Una vez instalado hay que crear una aplicación, esto lo hace Rails con un comando.
+
+```bash
+rails new my-app
+```
+
+Con esto Rails va a crear una carpeta `my-app` con todo lo necesario para empezar a trabajar, que son un montón de archivos.
+
+Luego nos movemos a esta carpeta usando `cd my-app`.
+
+## Iniciando la aplicación
+
+Ya creada la aplicación hay que iniciarla, esto nos va a servir para ver que no hubo ningún error y se hace con un comando.
+
+```bash
+rails server
+# o `rails s`
+```
+
+Si todo está bien vamos a ver la página por defecto de Rails.
+
+!["Yay! You're on Rails](/static/articles/rails-initial.png "Página de inicio por defecto de Ruby on Rails")
+
+¡Genial! Ya está funcionando la aplicación.
+
+## Creando un controlador
+
+Rails usa el patrón de arquitectura MVC, para definir rutas entonces usaríamos controladores. Rails nos provee una forma de generar controladores automáticamente junto a un template simple para ese controlador.
+
+```bash
+rails generate controller Welcome index
+```
+
+Con esto Rails nos va a generar un controlador llamado `Welcome` para la acción `index`, esta acción significa que va a manejar la ruta `/` usando `GET`.
+
+## Actualizando la vista
+
+Ya creado el controlador hay que actualizar la vista, las vistas en Rails son templates de ERB, en el paso anterior Rails además del controlador nos crea el archivo `app/views/welcome/index.html.erb`, dentro hay un HTML de ejemplo, vamos a poner uno propio.
+
+```html
+<h1>Hello, Rails!</h1>
+```
+
+## Configurando las rutas
+
+Ahora es momento de configurar las rutas de Rails para que use el controlador Welcome, el cual a su vez va a usar la vista que modificamos antes. Para esto abrimos `config/routes.rb` y modificamos el archivo generador para que tenga esto.
+
+```ruby
+Rails.application.routes.draw do
+  get 'welcome/index'
+  root 'welcome#index' # Línea nueva
+end
+```
+
+Ahora si iniciamos de nuevo nuestra aplicación y entramos en el navegador vamos a ver nuestro `<h1>`
+
+!["Hello, Rails!"](/static/articles/rails-custom-view.png "El HTML de la vista personalizda que hicimos")
