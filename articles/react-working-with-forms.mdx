@@ -1,0 +1,276 @@
+---
+title: Working with Forms in React without libraries
+description: Learn how to work with forms and form elements in React without using another library.
+date: 2019-06-19T20:21:42.909Z
+published: true
+tags: react, forms, hooks
+---
+
+Handling forms in JavaScript could be a difficult task, in this article we will learn how to tame them.
+
+## Uncontrolled Input
+
+First we need to talk about uncontrolled inputs, where I say input it's also select or textarea. This is the default state of an input, in this case we do nothing special and let the browser handle the value of it.
+
+```js
+function Form() {
+  const [message, setMessage] = React.useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setMessage(event.target.elements.message.value);
+    event.target.reset();
+  }
+
+  return (
+    <>
+      <p>{message}</p>
+      <form onSubmit={handleSubmit}>
+        <input name="message" type="text" />
+      </form>
+    </>
+  );
+}
+```
+
+As we can see in the example above we update our state `message` with the value of the input after the user submit the form, press `enter`, and to reset the input value we just reset the whole form using the `reset()` methods of the forms.
+
+This is normal DOM manipulation to read the value and reset it, nothing special of React.
+
+## Controlled Input
+
+Now let's talk about the interesting part, a controller input/select/textarea is an element where the value is bound to the state and we need to update the state to update the input value the use see.
+
+```js
+function Form() {
+  const [message, setMessage] = React.useState("");
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setMessage("");
+  }
+
+  function handleChange(event) {
+    setMessage(event.target.value);
+  }
+
+  return (
+    <>
+      <p>{message}</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="message"
+          type="text"
+          onChange={handleChange}
+          value={message}
+        />
+      </form>
+    </>
+  );
+}
+```
+
+Our example set the `input` value to `message` and attached a `onChange` event listener we call `handleChange`, inside this function we need the `event.target.value` where we will receive the new value of the input, which is current value plus what the user typed, and we call `setMessage` to update our component state, this will update the content of the `p` tag and the value of the `input` tag to match the new state.
+
+If we want to reset the input we could call `setMessage("")`, as we do in `handleSubmit`, and this will reset the state and doing so the input's value and the `p` content.
+
+## Adding a Simple Validation
+
+Now let's add a simple validation, complex validations are similar but with more rules, in this case we will make the input invalid if the special character `_` is used.
+
+```js
+function Form() {
+  const [message, setMessage] = React.useState("");
+  const [error, setError] = React.useState(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setError(null);
+    setMessage("");
+  }
+
+  function handleChange(event) {
+    const value = event.target.value;
+    if (value.includes("_")) setError("You cannot use an underscore");
+    else setError(null);
+    setMessage(value);
+  }
+
+  return (
+    <>
+      <p>{message}</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          id="message"
+          name="message"
+          type="text"
+          onChange={handleChange}
+          value={message}
+        />
+        {error && (
+          <label style={{ color: "red" }} htmlFor="message">
+            {error}
+          </label>
+        )}
+      </form>
+    </>
+  );
+}
+```
+
+We create two states, one for the input value and another of the error message. As before inside our `handleSubmit` we will reset the `message` state to an empty string and additionally we will reset the `error` state to `null`.
+
+In the `handleChange` we will read the new value of the input and see if the underscore is there. In case we found an underscore we will update the error state to the message `"You cannot use an underscore"` if it's not there we will set it to `null`. After the validation we will update the `message` state with the new value.
+
+In our returned UI we will check of the presence of an `error` and render a `label` with text color red pointing to the input and showing the error message inside. The error is inside a label to let the user click it and move the focus to the input.
+
+## Controlling a Textarea
+
+Before I said working with `input` and `textarea` was similar, and it actually is, let's change the element we render to a `textarea`, our code above will continue to work without any other change as we could see below.
+
+```js
+function Form() {
+  const [message, setMessage] = React.useState("");
+  const [error, setError] = React.useState(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  function handleChange(event) {
+    const value = event.target.value;
+    if (value.includes("_")) {
+      setError("You cannot use an underscore");
+    } else {
+      setError(null);
+      setMessage(value);
+    }
+  }
+
+  return (
+    <>
+      <p>{message}</p>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          id="message"
+          name="message"
+          onChange={handleChange}
+          value={message}
+        />
+        {error && (
+          <label style={{ color: "red" }} htmlFor="message">
+            {error}
+          </label>
+        )}
+      </form>
+    </>
+  );
+}
+```
+
+While usually `textarea` is an element with internal content as `<textarea>Content here</textarea>` in React to change the value we use the `value` prop like an inputs and the `onChange` event, making the change between input and textarea similar.
+
+## Controlling a Select
+
+Now let's talk about the `select`. As with the `textarea` you treat it as a normal `input`, pass a `value` prop with the selected value and listen to value changes with `onChange`. The value passed to the `select` should match the value of one of the options to show one of them as the currently selected option.
+
+```js
+function Form() {
+  const [option, setOption] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  function handleChange(event) {
+    setOption(event.target.value);
+  }
+
+  function handleResetClick() {
+    setOption(null);
+  }
+
+  function handleHooksClick() {
+    setOption("hooks");
+  }
+
+  return (
+    <>
+      <p>{option}</p>
+      <form onSubmit={handleSubmit}>
+        <select onChange={handleChange} value={option}>
+          <option value="classes">Classes</option>
+          <option value="flux">Flux</option>
+          <option value="redux">Redux</option>
+          <option value="hooks">Hooks</option>
+        </select>
+      </form>
+      <button type="button" onClick={handleResetClick}>
+        Reset
+      </button>
+      <button type="button" onClick={handleHooksClick}>
+        Hooks!
+      </button>
+    </>
+  );
+}
+```
+
+## Working with File Inputs
+
+Now to finish let's talk about the file input, this special input can't be controlled, but it's still possible to get some data and save it in the state to show it elsewhere. In the example below we are creating a custom UI for a hidden file input.
+
+```js
+function Form() {
+  const [fileKey, setFileKey] = React.useState(Date.now());
+  const [fileName, setFileName] = React.useState("");
+  const [fileSize, setFileSize] = React.useState(0);
+  const [error, setError] = React.useState(null);
+
+  function resetFile() {
+    setFileKey(Date.now());
+    setFileName("");
+    setFileSize(0);
+    setError(null);
+  }
+
+  function handleChange(event) {
+    const file = event.target.files[0];
+
+    setFileSize(file.size);
+
+    if (file.size > 100000) setError("That file is too big!");
+    else setError(null);
+
+    setFileName(file.name);
+  }
+
+  return (
+    <form>
+      <label htmlFor="file">
+        Select a single file to upload. (max size: 100kb)
+        <br />
+        {fileName && (
+          <>
+            <strong>File:</strong> {fileName} ({fileSize / 1000}kb)
+          </>
+        )}
+        <input id="file" type="file" key={fileKey} onChange={handleChange} style={{ display: "none" }} />
+      </label>
+      {error && (
+        <label style={{ color: "red" }} htmlFor="file">
+          {error}
+        </label>
+      )}
+      <button type="button" onClick={resetFile}>
+        Reset file
+      </button>
+    </form>
+  );
+}
+```
+
+We listen to the change event and read the file size and name and validate the size of the file, if it's too big we set the `error` state to the message `"That file is too big!"`, if the file is not that big we will set the error to `null`, this let us remove the previous error if the user selected a big file before.
+
+We also have a button to reset the input, since we can't control the state we could use the `key` to force React render the input again and resetting it in the process, we use the current date and every time the user click on `Reset file` it will get the current date and save it to the `fileKey` state and reset it input.
