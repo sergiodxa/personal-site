@@ -16,5 +16,5 @@ social:
 navigation:
   - name: Books
     path: https://leanpub.com/u/sergiodxa
-incremental: true
+incremental: false
 icon: /static/favicon@48.png
