@@ -649,7 +649,7 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@contentz/build@^1.0.2":
+"@contentz/build@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@contentz/build/-/build-1.0.2.tgz#05458e25560ae522008df786743ea907d6341937"
   integrity sha512-OfEEts1DJLif4yovA9lyPq+OCiDatkzgCJQn4SCkjstU84mEjzXJSdI63xeKmwJejIaSRfHk751/ZZFFFaq6Qg==
@@ -685,7 +685,7 @@
     relative "3.0.2"
     terser "3.17.0"
 
-"@contentz/social@^3.14.1":
+"@contentz/social@3.14.1":
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/@contentz/social/-/social-3.14.1.tgz#2962504b3237adf37772e0b9b2ffdedb19e90022"
   integrity sha512-37wHcPNXewvQ4G/EWa53WosNPOUPhvs7eukQuqvrobAV8jjP1gnLojDgezEWEQX3H1Vt9Kr6/JDgsiSqe00gHQ==
@@ -710,7 +710,7 @@
     gray-matter "^4.0.2"
     mkdirp "^0.5.1"
 
-"@contentz/write@^3.13.2":
+"@contentz/write@3.13.2":
   version "3.13.2"
   resolved "https://registry.yarnpkg.com/@contentz/write/-/write-3.13.2.tgz#f7b9a20195f920c6dae408ac1dc9f99ee4cbee07"
   integrity sha512-Af6LGeWVUD6HIBSjS55ZV8j3+3ScyFJLJCLc/I2XzsPnamh6U6DYlL+YYM5awJzQdZa0aCFLczSJnXwwBcGYnQ==
@@ -1513,7 +1513,7 @@ content-disposition@0.5.2:
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.2.tgz#0cf68bb9ddf5f2be7961c3a85178cb85dba78cb4"
   integrity sha1-DPaLud318r55YcOoUXjLhdunjLQ=
 
-contentz@^3.14.1:
+contentz@3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/contentz/-/contentz-3.14.1.tgz#e66a1eeb187881c600c97923a4ed761f830bcf58"
   integrity sha512-JVtqbXxRyzx31NpWflYbeuRY7QYsay3lakc02rmA2sGfgJwIL59qbZxoo3RLrZ/oSZUfzXphbtJspHG++Daysg==
