@@ -39,7 +39,7 @@
     "contentz": "3.14.1"
   },
   "devDependencies": {
-    "husky": "2.6.0",
+    "husky": "2.7.0",
     "lint-staged": "8.2.1",
     "serve": "11.0.2",
     "watch": "1.0.2"
