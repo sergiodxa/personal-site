@@ -1,4 +1,12 @@
 ---
+- url: https://aweary.dev/fault-tolerance-react/
+  title: "The Fault in Our Tolerance: Accounting for Failures in React"
+- url: https://joelhooks.com/digital-garden
+  title: "🌱 My blog is a digital garden, not a blog"
+- url: https://stackingthebricks.com/how-blogs-broke-the-web/
+  title: How the Blog Broke the Web
+- url: https://basecamp.com/shapeup
+  title: "Shape Up: Stop Running in Circles and Ship Work that Matters"
 - url: https://noti.st/sturobson/yc1gwN/design-systems-and-front-end-architecture#saPZSRV
   title: Design Systems and Front-End Architecture by Stuart Robson
 - url: https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/
