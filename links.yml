@@ -1,4 +1,10 @@
 ---
+- url: https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+  title: We have a problem with promises
+- url: https://pouchdb.com/2015/03/05/taming-the-async-beast-with-es7.html
+  title: Taming the asynchronous beast with ES7
+- url: https://rauchg.com/2014/7-principles-of-rich-web-applications/
+  title: 7 Principles of Rich Web Applications
 - url: https://aweary.dev/fault-tolerance-react/
   title: "The Fault in Our Tolerance: Accounting for Failures in React"
 - url: https://joelhooks.com/digital-garden
