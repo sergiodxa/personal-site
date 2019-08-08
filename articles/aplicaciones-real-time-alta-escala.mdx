@@ -24,7 +24,7 @@ Dicho eso, la naturaleza asíncrona de Node.js y su simplicidad lo hacen una bue
 
 De todas formas es importante usar una tecnología que conocemos y nos sintamos cómodos programando, si usan Ruby pueden usar ActionCable para implementarlo sin problemas y eventualmente ver si vale la pena migrar, capaz en este caso a Elixir debido a la similaridad.
 
-Otra parte importante de un servidor de WS es un sistema de colas o Pub/Subsub que nos permita escalar horizontalmente nuestro servidor sin perder mensajes, de esta forma nuestro servidor simplemente recibirías mensajes desde estos servicios y los enviaría a sus usuarios conectados. Para esto podemos usar Redis como Pub/Sub simple o un sistema más especializado como RabbitMQ o Apache Kafka o usando bases de datos que permitan suscribirse a cambios como RethinkDB.
+Otra parte importante de un servidor de WS es un sistema de colas o Pub/Sub que nos permita escalar horizontalmente nuestro servidor sin perder mensajes, de esta forma nuestro servidor simplemente recibiría mensajes desde estos servicios y los enviaría a sus usuarios conectados. Para esto podemos usar Redis como Pub/Sub simple o un sistema más especializado como RabbitMQ o Apache Kafka o usando bases de datos que permitan suscribirse a cambios como RethinkDB.
 
 ## Evitar Mutaciones desde WebSocket
 
