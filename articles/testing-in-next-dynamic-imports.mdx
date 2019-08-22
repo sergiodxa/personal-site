@@ -1,0 +1,106 @@
+---
+title: "Testing in Next.js: Dynamic Imports"
+description: Learn how to test components using next/dynamic in a Next.js application.
+date: 2019-08-22T03:14:16.989Z
+published: true
+lang: en
+tags: nextjs, javascript, react, testing
+---
+
+If you are using Next.js most probable you are also using `next/dynamic`, their alternative to `React.lazy` which has support for Server-Side Rendering. An amazing feature bundled with Next.js actually.
+
+And if you are trying to test your components, [and you should](/articles/an-accessible-approach-to-frontend-testing/), you will hit against an error because the dynamic import is not supported in your tests.
+
+Let's see a way to solve this and test our code. Let's say we have the following component:
+
+```js
+import dynamic from "next/dynamic";
+const LazyComponent = dynamic(() => import("./lazy-component"));
+
+function MyComponent() {
+  // some logic here
+  return (
+    <div>
+      {/* Some JSX here */}
+      {true /* replace with real condition */ && <LazyComponent />}
+    </div>
+  );
+}
+
+export default MyComponent;
+```
+
+## Babel Plugin for Dynamic Imports
+
+The first thing you will need is to configure Babel to transpile dynamic imports to something Node.js can understand, to do so we can use the plugin `babel-plugin-transform-dynamic-import`.
+
+```bash
+yarn add -D babel-plugin-transform-dynamic-import
+```
+
+Now let's configure it in our `.babelrc` file
+
+```json
+{
+  "presets": ["next/babel"],
+  "env": {
+    "test": {
+      "plugins": ["transform-dynamic-import"]
+    }
+  }
+}
+```
+
+The preset is required to don't lose the default Next.js configuration for Babel, the `env` key let us define plugins or presets based on the `NODE_ENV` environment variable value.
+
+In our case if `NODE_ENV` is equal to `test` it will apply the plugin `babel-plugin-transform-dynamic-import`.
+
+## Mock `next/dynamic` Implementation
+
+Now we need to mock the `next/dynamic` implementation in our test, we can use the [jest-next-dynamic](https://www.npmjs.com/package/jest-next-dynamic) package to achieve that.
+
+```bash
+yarn add -D jest-next-dynamic
+```
+
+Let's write a simple test for our component.
+
+```js
+import { render, waitForElement } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+
+import MyComponent from "./my-component";
+
+test("MyComponent", async () => {
+  const { getByText } = render(<MyComponent />);
+  // fire some events here
+  const lazyContent = await waitForElement(() => getByText(/I'm Lazy/));
+  expect(lazyContent).toBeInTheDocument();
+});
+```
+
+In our test we are using [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro) to render our `MyComponent`, we wait for an element with the text `I'm Lazy` to appear and, thanks to [@testing-library/jest-dom](https://testing-library.com/docs/ecosystem-jest-dom) we expect that element to be present in the document.
+
+Now if we run that test it should throw an error, let's fix that too.
+
+```js
+import { render, waitForElement } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import preloadAll from "jest-next-dynamic";
+
+import MyComponent from "./my-component";
+
+test("MyComponent", async () => {
+  await preloadAll();
+  const { getByText } = render(<MyComponent />);
+  // fire some events here
+  const lazyContent = await waitForElement(() => getByText(/I'm Lazy/));
+  expect(lazyContent).toBeInTheDocument();
+});
+```
+
+We are now importing `preloadAll` from `jest-next-dynamic` and using it inside our test before everything else, this will tell `next/dynamic` to preload every dynamic component, when they are all loaded we can render our component and test for the `LazyComponent` to be there.
+
+## Final Words
+
+With this you could write unit and integration tests against components using `next/dynamic` without issues and be sure your application is working as supposed.
