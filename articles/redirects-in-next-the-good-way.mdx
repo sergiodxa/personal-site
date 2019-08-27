@@ -97,6 +97,6 @@ The `shallow: true` tell Next to do not call `getInitialProps`, combine with the
 
 When the user log in into the application it will be redirected back to `/private` but this time without the `shallow: true` and that will cause the `getInitialProps` to be executed again so it will see this time it has the `session` cookie and it will continue the normal flow of our `PrivatePage`.
 
-## Final Word
+## Final Words
 
 This is the best approach to implement redirects using Next, I learned it while I was working at [ZEIT](https://zeit.co) the creators of the framework and is how I implemented a few redirects back there.
