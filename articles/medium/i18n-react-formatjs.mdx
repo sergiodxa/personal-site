@@ -1,0 +1,234 @@
+---
+title: Internacionalización con React.js y FormatJS
+description: Guía de como usar FormatJS para internacionalizar aplicaciones hechas con React.js y poder pluralizar o formatear fechas y números.
+date: 2015-09-27T03:57:35.667Z
+published: true
+canonical_url: https://medium.com/@sergiodxa/internacionalizaci%C3%B3n-con-react-js-y-formatjs-389957dbc098
+---
+
+![](https://cdn-images-1.medium.com/max/800/1*EmoBZdtiFTBne4nj6_J1HA.png)
+
+### Internacionalización con React.js y FormatJS
+
+Cuando hacemos una aplicación web que aspira a crecer y ser usada por personas de cualquier parte del planeta nos toca ofrecer nuestra aplicación en distintos idiomas para que cualquier lo pueda entender fácilmente, hacer esto se lo conoce como internacionalización, abreviado i18n (esto significa que hay 18 letras entre la i y la n en la palabra inglesa _internationalization_).
+
+Hay muchas formas de realizar esto dependiendo de las tecnologías usadas, cuando trabajamos con [React.js](https://platzi.com/cursos/reactjs/) la forma casi estándar de hacer esto es usar la librería [FormatJS](http://formatjs.io/) de Yahoo! que posee integración con varios sistema de vistas entre ellos [React](https://github.com/yahoo/react-intl).
+
+#### Integrando FormatJS a React
+
+Lo primero que necesitamos es descargar la implementación para React de FormatJS, react-intl, para eso lo hacemos con npm usando el comando:
+
+```bash
+npm i -S react-intl
+```
+
+Una vez descargado lo importamos en nuestros componentes de la siguiente forma:
+
+```js
+import React, { createClass, PropTypes } from "react";
+import { IntlMixin } from "react-intl";
+
+const MyComponent = createClass({
+  displayName: "My Component",
+
+  propTypes: {
+    locales: PropTypes.string.isRequired,
+    messages: PropTypes.objectOf(PropTypes.string).isRequired
+  },
+
+  mixins: [IntlMixin],
+
+  render() {
+    return <div>{this.getIntlMessage("helloWorld")}</div>;
+  }
+});
+```
+
+Veamos que hacemos acá. Lo primero es cargar React, la función para crear un componente (createClass, muy mal nombre BTW) y el objeto PropTypes.
+
+Luego cargamos de la librería **react-intl** de el mixin IntlMixin, esto nos incluye varias funciones para i18n en React.
+
+A continuación creamos nuestro componente que va a recibír dos props, **_locales_** donde vamos a recibír un string con el idioma y **_messages_** donde recibimos un objeto con todos los strings de cada mensaje que vayamos a usar en nuestro component. A nuestro componente le pasamos también un listado de los mixins a usar, ahí pasamos el mixin IntlMixin, por último en el render de nuestro componente usamos la función **getIntlMessage** pasandole el key que usemos para identificar el mensaje a usar.
+
+Por último renderizamos nuestro componente pasandole el lenguaje y los mensajes:
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import MyComponent from "./components/MyComponent";
+
+const data = {
+  locales: "es",
+  messages: {
+    helloWorld: "Hola mundo"
+  }
+};
+
+const $target = document.getElementById("renderTarget");
+ReactDOM.render(<MyComponent {...data} />, $target);
+```
+
+Al momento de renderizarse nuestro componente va a recibír el idioma y los mensajes que le pasamos y los va a usar para cargar los textos, sin embargo hasta ahora no estamos usando el idioma para nada, así que vamos a empezar a usarlo, el idioma nos sirve para cuando queremos usar las funciones para mostrar fechas según el idioma.
+
+#### Mostrando fechas según el idioma
+
+Para usar estas funciones necesitamos cargar un componte que nos provee react-intl llamado **FormattedDate** y luego pasarle la fecha en una propiedad llamada _value_ y la forma en que queremos mostrarla en propiedades llamadas _day_, _month_ y _year_.
+
+```js
+<FormattedDate value={new Date()} day="numeric" month="long" year="numeric" />
+```
+
+Al momento de renderizar nuestro componente **FormattedDate** se va a encargar de mostrar la fecha según el idioma provisto en la propiedad locales, si el idioma es español se mostraría **26 de setiembre de 2015**, si el idioma es inglés entonces se mostraría **September 26, 2015.**
+
+#### Mostrando fechas relativas
+
+Otra funcionalidad es la de mostrar fechas relativas, esto se hace con el componente **FormattedRelative**, este componente se cargar de la misma forma que **FormattedDate** aunque en este caso solo es necesario pasar la propiedad _value_ la cual debe poseer una fecha diferente a la actual.
+
+```js
+<FormattedRelative value={Date.now() - 1000 * 60 * 60 * 24} />
+<FormattedRelative value={Date.now() - 1000 * 60 * 60 * 2} />
+<FormattedRelative value={Date.now() + 1000 * 60 * 51} />
+```
+
+En este ejemplo estamos mostrando 3 fechas diferentes, la primera es exactamente un día antes de la actual, la segunda 2 horas y la tercera es dentro de 1 hora.
+
+Si el locales que le pasamos a nuestro componente indica un idioma español estas fechas se mostrarías como _ayer_, _hace 2 horas_ y _en 1 hora_. Si el idioma fuese inglés mostraría _yesterday_, _2 hours ago_ y _in 1 hour._
+
+Este componente muestra por defecto el que considere el mejor mensaje posible, es posible además forzar la forma en que se va a mostrar pasandole una propiedad llamada units.
+
+```js
+<FormattedRelative value={Date.now() - 1000 * 60 * 60 * 22} units="minute" />
+```
+
+Si lo usamos de esta forma mostraría el mensaje _hace 1.320 minutos_ en español o _1,320 minutos ago_ si esta inglés, acá podemos ver además que dependiendo del idioma cambia el separador de miles entre coma o punto.
+
+#### Pluralización de mensajes
+
+Además de elegír mensajes o formatear fechas es posible pluralizar mensajes, esto quiere decír uqe muestra palabras distintas dependiendo de una cantidad, para eso usamos el componente **FormattedMessage** que recibiría un mensaje obtenido con _getIntlMessage_ y cualquier variable que queramos pasarle, y en este caso lo importante esta en el mensaje que pasamos con getIntlMessage donde hay que usar un formato similar a este:
+
+```js
+`El {takenDate, date, long}, {name} {numPhotos, plural,
+  =0 {no}
+  other {}
+} sacó {numPhotos, plural,
+  =0 {ninguna foto.}
+  =1 {una foto.}
+  other {# fotos.}
+}
+```
+
+De esta forma podemos pasarle este mensaje al componente FormattedMessage junto con los valores _takenDate_ (el cual sería una fecha y se mostraría en formato largo (con el nombre completo), name donde indicaríamos un nombre y numPhotos el cual sería un número.
+
+```js
+<FormattedMessage
+  message={this.getIntlMessage("photos")}
+  name="Sergio"
+  numPhotos={1000}
+  takenDate={new Date()}
+/>
+```
+
+```js
+<FormattedMessage
+  message={this.getIntlMessage("photos")}
+  name="Sergio"
+  numPhotos={0}
+  takenDate={new Date()}
+/>
+```
+
+```js
+<FormattedMessage
+  message={this.getIntlMessage("photos")}
+  name="Sergio"
+  numPhotos={1}
+  takenDate={new Date()}
+/>
+```
+
+Estos tres casos se mostrarían los mensajes:
+
+> El 26 de setiembre de 2015, Sergio sacó 1.000 fotos.
+
+> El 26 de setiembre de 2015, Sergio no sacó ninguna foto.
+
+> El 26 de setiembre de 2015, Sergio sacó una foto.
+
+De esta forma podemos fácilmente modificar el mensaje dependiendo de algún número evitando hacer cosas como mostrar un _(s)_ al final de una palabra que puede o no estar en plural.
+
+#### Usando HTML en los mensajes
+
+Cuando queremos usar un mensaje con HTML vemos que **FormattedMessage** no funciona, en este caso necesitamos usar el componente **FormattedHTMLMessage**, este componente funcionaría de forma similar a FormattedMessage con la diferencia de que ahora podemos meter código HTML dentro del string del mensaje.
+
+```js
+{numComments, plural,
+  =0 {sin comentarios}
+  =1 {<strong>1</strong> comentario}
+  other {<strong>#</strong> comentarios}
+}
+```
+
+Este mensaje podemos luego pasárselo a FormattedHTMLMessage así:
+
+```js
+<FormattedHTMLMessage
+  message={this.getIntlMessage("comments")}
+  numComments={0}
+/>
+```
+
+```js
+<FormattedHTMLMessage
+  message={this.getIntlMessage("comments")}
+  numComments={1}
+/>
+```
+
+```js
+<FormattedHTMLMessage
+  message={this.getIntlMessage("comments")}
+  numComments={42}
+/>
+```
+
+Y al renderizarse estos tres componentes se mostrarían los mensajes:
+
+> sin comentarios
+
+> **1** comentario
+
+> **42** comentarios
+
+Con el **1** y el **42** en negrita gracias a la etiqueta `<strong>` que pusimos en nuestro mensaje.
+
+#### Formateando números
+
+Por últimos tenemos al componente **FormattedNumber** que nos permite elegír como mostrar números con un separador de comas dependiendo del idioma, agregar un símbolo de porcentaje o mostrar una moneda (incluyendo el símbolo).
+
+```js
+  <FormattedNumber value={42000} />
+  <FormattedNumber value={0.9} format="percentage" />
+  <FormattedNumber value={29} format="USD" />
+```
+
+Estos tres números con idioma español se mostrarían:
+
+> 42.000
+
+> 90%
+
+> US\$29
+
+Y si el idioma es inglés se mostrarían:
+
+> 42,000
+
+> 90%
+
+> \$29
+
+---
+
+Como se puede ver gracias a FormatJS es posible aplicar i18n a nuestros componentes de React fácilmente dándonos funcionalidad para trabajar con fechas, fechas relativas, pluralización de mensajes con y sin HTML o formatear números y monedas.
+
+Para quien quiera leer más sobre como armar mensajes para la pluralización puede hacerlo en la [documentación de FormatJS](http://formatjs.io/guides/message-syntax/).
