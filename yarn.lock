@@ -724,10 +724,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@contentz/build@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.1.0.tgz#3e3adefe9379d4b2140cfad89b92771359b9e941"
-  integrity sha512-u2QWoz+gBwestlXGOSkodatA/KHf7zrcrKoLLp0B2zyssb3wH18eyv2am8K8CB89TI3Eew9FdxeZUuwGgbAUIQ==
+"@contentz/build@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.1.1.tgz#062817f2575b0fd6bd0ccf4462f3e731bc2cad65"
+  integrity sha512-fM8b8q0Wk4qc8QN+DZWttsWfeOJQ7eMv+zjD7TaELf+1ys9H6MaG6VgYwi+yyEHkWwX6tBkmHqzHy8m9vR7svA==
   dependencies:
     "@babel/core" "7.5.5"
     "@babel/preset-env" "7.5.5"
