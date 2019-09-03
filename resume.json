@@ -1,0 +1,107 @@
+{
+  "basics": {
+    "name": "Sergio Xalambrí",
+    "label": "Software Engineer",
+    "email": "hello@sergiodxa.com",
+    "website": "https://sergiodxa.com",
+    "summary": "Software Engineer and Technical Writer",
+    "location": {
+      "city": "Lima",
+      "region": "Perú"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "sergiodxa",
+        "url": "https://twitter.com/sergiodxa"
+      },
+      {
+        "network": "GitHub",
+        "username": "sergiodxa",
+        "url": "https://github..com/sergiodxa"
+      },
+      {
+        "network": "DEV",
+        "username": "sergiodxa",
+        "url": "https://dev.to/sergiodxa"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Able",
+      "position": "Tech Lead",
+      "website": "https://able.co",
+      "startDate": "2018-09-18",
+      "summary": "Software Engineer and Technical Writer",
+      "highlights": ["Teach Frontend at Codeable"]
+    },
+    {
+      "company": "ZEIT",
+      "position": "Lead Support Engineer",
+      "website": "https://zeit.co",
+      "startDate": "2017-07-01",
+      "endDate": "2018-09-11"
+    },
+    {
+      "company": "Platzi",
+      "position": "Frontend Developer",
+      "website": "https://platzi.com",
+      "startDate": "2015-08-01",
+      "endDate": "2017-07-01"
+    },
+    {
+      "company": "Promaker",
+      "position": "Frontend Developer",
+      "website": "https://promaker.com.ar",
+      "startDate": "2013-10-15",
+      "endDate": "2014-12-01"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Escuela Técnica Manuel Belgrano",
+      "area": "Electricity",
+      "studyType": "Technicature",
+      "startDate": "2006-03-01",
+      "endDate": "2011-12-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Frontend Development",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React",
+        "Next",
+        "CSS in JS",
+        "TypeScript",
+        "Redux",
+        "WebSockets"
+      ]
+    },
+    {
+      "name": "Backend Development",
+      "keywords": [
+        "Node.js",
+        "Serverless",
+        "TypeScript",
+        "WebSocket",
+        "Rails",
+        "Express",
+        "MongoDB",
+        "SQL"
+      ]
+    },
+    {
+      "name": "Programming Languages",
+      "keywords": ["JavaScript", "TypeScript", "Python", "Ruby", "PHP"]
+    }
+  ],
+  "languages": [
+    { "language": "Spanish", "fluency": "Native speaker" },
+    { "language": "English", "fluency": "C1" }
+  ]
+}
