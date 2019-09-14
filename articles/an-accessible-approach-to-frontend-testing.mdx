@@ -1,5 +1,5 @@
 ---
-title: An accessible approach to Frontend testing
+title: An Accessible Approach to Frontend Testing
 date: 2017-09-30T00:00:00Z
 description: Testing is hard. Testing Frontend is harder. But you should do it anyways.
 lang: en
@@ -26,7 +26,7 @@ In the JS world there are a lot of possible linters, [ESLint](https://eslint.org
 
 But configuring tools is not amusing, that's why there are other linters like [Standard](https://standardjs.com/) or [xo](https://github.com/sindresorhus/xo) which don’t require any configuration. Internally they use ESLint (and can be used as configurations for ESLint) which let you extended them using his rules if it’s required for the project.
 
-## Unit tests for business logic
+## Unit Tests for Business Logic
 
 When talking about automated code testing the usual is to think about a unit test. In Frontend unit testing code is hard because testing a UI with a simple unit test is no that easy (and useful).
 
@@ -34,7 +34,7 @@ But a Frontend codebase is not only UI, it usually has business logic independen
 
 To provide an example in a [React](https://reactjs.org/) [+](https://github.com/reactjs/react-redux) [Redux](https://redux.js.org/) application the reducers can be unit tested, also something like [Redux Sagas](https://redux-saga.js.org/) that allow to unit test the async related code easier.
 
-## Snapshot tests for UI
+## Snapshot Tests for Ui
 
 So far I mentioned linters to check common bugs and unit tests for business logic, but what about the UI? The whole Frontend idea is about UI.
 
@@ -46,7 +46,7 @@ Because this tests validate the code still work as expected when a change is mad
 
 This could also be used for non-UI code also to add some regression test to that code.
 
-## End to End tests for complex workflows
+## End to End Tests for Complex Workflows
 
 Complex workflow are common in many WebApps and snapshots or unit tests don’t mean the workflows are going to work as expected. End to end or **e2e** tests can be used to test this workflows.
 
@@ -56,7 +56,7 @@ And since they aren’t that easy to write beside being slow they end up being a
 
 As with other tests there’re many possible tools to do this, [Selenium](https://www.seleniumhq.org/), [TestCafe](https://devexpress.github.io/testcafe/), [PhantomJS](https://phantomjs.org/), [Headless Chrome](https://developers.google.com/web/updates/2017/04/headless-chrome), [Puppeteer](https://github.com/GoogleChrome/puppeteer) and many more tools.
 
-## Gradual implementation
+## Gradual Implementation
 
 While starting a new application is easy to start with test and do everything right from the beginning, but in most cases the projects already exists and have a lot of legacy code. Then, how implement all of this? Doing it gradually.
 
