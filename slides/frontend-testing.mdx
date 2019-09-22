@@ -2,7 +2,7 @@
 title: Testing in the Frontend World
 description: Testing is hard. Testing Frontend is harder. But you should do it anyways.
 published: true
-date: "Sat, 26 Sep 2019 18:45:00 GMT-3"
+date: "Sat, 26 Sep 2019 19:00:00 GMT-3"
 ---
 
 # Testing in the Frontend World
@@ -27,40 +27,163 @@ date: "Sat, 26 Sep 2019 18:45:00 GMT-3"
 
 ## Static Testing
 
-> Use ESLint to detect bugs, e.g. typos, and codebase improvements on build time.
+> Use [ESLint](https://eslint.org) to detect bugs, e.g. typos, and codebase improvements on build time.
 
-> Use TypeScript or FlowType to detect type bugs on build time, and as documentation.
+> Use [TypeScript](https://www.typescriptlang.org) to detect type bugs on build time, and as documentation.
+
+```bash
+/Users/sergiodxa/Projects/contentz-tech/build/src/utils/render.tsx
+   3:10  warning  'jsx' is defined but never used    @typescript-eslint/no-unused-vars
+  14:22  warning  Missing return type on function
+
+[tsl] ERROR in /Users/sergiodxa/Projects/contentz-tech/build/src/utils/parse-path.ts(27,3)
+      TS2322: Type 'string' is not assignable to type 'number'.
+```
 
 ---
 
-## Unit Testing
+## Logic Unit Testing
 
-> Use Jest, or similar tools, to unit test business logic decoupled from UI.
+> Use [Jest](https://jestjs.io) to unit test business logic decoupled from UI.
+
+```js
+import reducer, { defaultState } from "./reducer";
+import { addEntity } from "./actions";
+
+test("reducer should return default state", () => {
+  expect(reducer(undefined, { type: "RANDOM" })).toEqual(defaultState);
+});
+
+test("reducer should return current state", () => {
+  expect(reducer(defaultState, { type: "RANDOM" })).toEqual(defaultState);
+});
+
+test("reducer should handle the addEntity action", () => {
+  expect(reducer(defaultState, addEntity("article", { id: 1 }))).toEqual({
+    ...defaultState,
+    entities: {
+      articles: { 1: { id 1 }}
+    }
+  })
+});
+```
 
 ---
 
-## UI Regression Testing with Snapshots
+## Component Unit Testing
 
-> Use Jest Snapshots, or similar tools, for regression testing of the HTML and CSS.
+> Use Jest to unit tests the component using different possible approaches.
+
+---
+
+### HTML + CSS Regression Testing with Snapshots
+
+> Use [Jest Snapshots](https://jestjs.io/docs/en/snapshot-testing) for regression testing of the **HTML and CSS output**.
+
+```js
+import React from "react";
+import { render } from "@testing-library/react";
+import LoginForm from "./login-form";
+
+test("LoginForm should generate the correct HTML and CSS", () => {
+  const { asFragment } = render(<LoginForm onSubmit={jest.fn()} />);
+  expect(asFragment()).toMatchSnapshot();
+});
+```
+
+---
+
+### Visual Regression Testing with Snapshots
+
+> Use [Storybook](https://storybook.js.org) with [Storyshots](https://www.npmjs.com/package/@storybook/addon-storyshots) for **visual** regression testing.
+
+---
+
+### Behavior Testing with Testing Library
+
+> Use [Testing Library](https://testing-library.com/) to tests the behavior of the component from the user point of view.
+
+```js
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import LoginForm from "./login-form";
+
+test("LoginForm should call the onSubmit callback", () => {
+  const onSubmit = jest.fn();
+  const { getByText } = render(<LoginForm onSubmit={onSubmit} />);
+  fireEvent.click(getByText(/send/));
+  expect(onSubmit).toHaveBeenCalled();
+});
+```
 
 ---
 
 ## Integration Tests for Complex Component
 
-> Test the rendered component and interact with it in the test itself.
+> Use [Cypress](https://www.cypress.io) or [TestCafé](https://devexpress.github.io/testcafe/) to test complex workflows as a real user, in a real browser with a fake backend and faking any HTTP call.
+
+```js
+import { RequestMock } from "testcafe";
+import { within, addTestcafeTestingLibrary } from "@testing-library/testcafe";
+
+const loginAPIMock = RequestMock.onRequestTo(
+  "http://localhost:3000/api"
+).respond(null, 200);
+
+fixture`Login`.beforeEach(addTestcafeTestingLibrary)
+  .page`http://localhost:3000`.requestHooks(loginAPIMock);
+
+test("fill login", async t => {
+  const { getByLabelText, getByText } = await within("body");
+  await t.typeText(getByLabelText(/email/), "hello@sergiodxa.com");
+  await t.typeText(getByLabelText(/password/), "abc@123456");
+  await t.click(getByText(/submit/));
+  await t.expect(getByText(/success/).exists).ok();
+});
+```
 
 ---
 
 ## End to End Tests for Complex Workflows
 
-> Use Puppeteer, Cypress, TestCafe, etc. to test complex workflow as a real user.
+> Use Cypress or TestCafé to test complex workflows as a real user, in a real browser with a real working backend.
+
+```js
+import { RequestMock } from "testcafe";
+import { within, addTestcafeTestingLibrary } from "@testing-library/testcafe";
+
+fixture`Login`.beforeEach(addTestcafeTestingLibrary)
+  .page`http://localhost:3000`;
+
+test("fill login", async t => {
+  const { getByLabelText, getByText } = await within("body");
+  await t.typeText(getByLabelText(/email/), "hello@sergiodxa.com");
+  await t.typeText(getByLabelText(/password/), "abc@123456");
+  await t.click(getByText(/submit/));
+  await t.expect(getByText(/success/).exists).ok();
+});
+```
 
 ---
 
-## Demo
+## Test Run Demo
 
 > Let's test [contentz-tech/build](https://github.com/contentz-tech/build)
 
 ---
 
-## Questions?
+## Some Useful Links
+
+- [Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
+- [Common Testing Mistakes](https://kentcdodds.com/blog/common-testing-mistakes/)
+- [Static vs Unit vs Integration vs E2E Testing for Frontend Apps](https://kentcdodds.com/blog/unit-vs-integration-vs-e2e-tests)
+- [Component vs (UI) Integration vs E2E tests](https://github.com/NoriSte/ui-testing-best-practices/blob/master/sections/testing-strategy/component-vs-integration-vs-e2e-testing.md)
+- [Effective Snapshot Testing](https://kentcdodds.com/blog/effective-snapshot-testing)
+- [Found a bug? Write the test, then fix it](https://github.com/NoriSte/ui-testing-best-practices/blob/master/sections/testing-strategy/write-test-then-fix-bug.md)
+- [Front-end productivity boost: Cypress as your main development browser](https://dev.to/noriste/front-end-productivity-boost-cypress-as-your-main-development-browser-5cdk)
+
+---
+
+## Thanks!
+
+#### Questions?
