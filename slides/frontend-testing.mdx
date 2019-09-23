@@ -23,6 +23,10 @@ date: "Sat, 26 Sep 2019 19:00:00 GMT-3"
 
 ##### [An Accessible Approach to Frontend Testing](/articles/an-accessible-approach-to-frontend-testing)
 
+##### You can see these slides in
+
+##### https://sergiodxa.com/slides/frontend-testing/
+
 ---
 
 ## Static Testing
@@ -76,9 +80,9 @@ test("reducer should handle the addEntity action", () => {
 
 ---
 
-### HTML + CSS Regression Testing with Snapshots
+### Regression Testing with Snapshots
 
-> Use [Jest Snapshots](https://jestjs.io/docs/en/snapshot-testing) for regression testing of the **HTML and CSS output**.
+> Use [Jest Snapshots](https://jestjs.io/docs/en/snapshot-testing) for regression testing of the output.
 
 ```js
 import React from "react";
@@ -91,11 +95,7 @@ test("LoginForm should generate the correct HTML and CSS", () => {
 });
 ```
 
----
-
-### Visual Regression Testing with Snapshots
-
-> Use [Storybook](https://storybook.js.org) with [Storyshots](https://www.npmjs.com/package/@storybook/addon-storyshots) for **visual** regression testing.
+> _Note:_ Use [Storybook](https://storybook.js.org) with [Storyshots](https://www.npmjs.com/package/@storybook/addon-storyshots) for **visual** regression testing.
 
 ---
 
