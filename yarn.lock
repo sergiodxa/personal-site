@@ -25,10 +25,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@contentz/build@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.4.0.tgz#74756253c2d1d436584fa7452e9c491343bd00d2"
-  integrity sha512-v7zswm4zglew0ZJS5lbtYYj3Z1Gmd/SRcvQ13CFSG67ubaRtYzmvZeityGybg6hz6PWAIaYridE3td2beHUDyw==
+"@contentz/build@2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.4.1.tgz#fdbd23472364f5a641b660ccfece3ba8d1de842a"
+  integrity sha512-whGA0Xvfcq2DLsAIggziLsCgLK98T8NMLhdAcjySw2qayLcCaBPsapEXPpU4mPhgi5WG/BtkiChbImdaMNpM0Q==
   dependencies:
     "@mdx-js/tag" "^0.20.3"
     chalk "2.4.2"
