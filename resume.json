@@ -98,15 +98,16 @@
     {
       "name": "Frontend Development",
       "keywords": [
-        "HTML",
-        "CSS",
-        "JavaScript",
         "React",
-        "Next",
+        "Next.js",
         "CSS in JS",
-        "TypeScript",
-        "Redux",
-        "WebSockets"
+        "Emotion",
+        "Styled Components",
+        "DOM Testing Library",
+        "React Testing Library",
+        "Cypress",
+        "TestCafé",
+        "Redux"
       ]
     },
     {
@@ -116,15 +117,17 @@
         "Serverless",
         "TypeScript",
         "WebSocket",
+        "Socket.io",
         "Rails",
         "Express",
         "MongoDB",
+        "Redis",
         "SQL"
       ]
     },
     {
       "name": "Programming Languages",
-      "keywords": ["JavaScript", "TypeScript", "Python", "Ruby", "PHP"]
+      "keywords": ["HTML", "CSS", "JavaScript", "TypeScript", "Python", "Ruby", "PHP"]
     }
   ],
   "languages": [
