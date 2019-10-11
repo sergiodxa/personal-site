@@ -37,6 +37,7 @@
     {
       "company": "Able",
       "position": "Frontend Instructor",
+      "summary": "I teach Frontend development for six month at our internal bootcamp Codeable.",
       "website": "https://able.co",
       "startDate": "2019-02-01",
       "endDate": "2019-08-19"
@@ -50,17 +51,31 @@
     },
     {
       "company": "ZEIT",
+      "position": "Software Engineer",
+      "website": "https://zeit.co",
+      "startDate": "2018-07-01",
+      "endDate": "2018-09-11"
+    },
+    {
+      "company": "ZEIT",
       "position": "Lead Support Engineer",
       "website": "https://zeit.co",
       "startDate": "2017-07-01",
-      "endDate": "2018-09-11"
+      "endDate": "2018-07-01"
+    },
+    {
+      "company": "Platzi",
+      "position": "JavaScript Developer",
+      "website": "https://platzi.com",
+      "startDate": "2016-05-01",
+      "endDate": "2017-07-01"
     },
     {
       "company": "Platzi",
       "position": "Frontend Developer",
       "website": "https://platzi.com",
       "startDate": "2015-08-01",
-      "endDate": "2017-07-01"
+      "endDate": "2016-05-01"
     },
     {
       "company": "Promaker",
