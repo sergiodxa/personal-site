@@ -41,10 +41,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@contentz/build@2.4.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.4.2.tgz#8c93eb65b579f1bbfab5a871a730c51ac216f226"
-  integrity sha512-gnCRsSMghl1BEdJ+St70wTvTTucn6IhshB5BJziljaIoXtyGvPghwvj711hvWCQyVNYiwKKbblVlPJrQDVOLIg==
+"@contentz/build@2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.5.0.tgz#c1e23d0b44d06f3dbc64ad031da0a46f0f192cc6"
+  integrity sha512-zMTEE/7Hv7FXljEfA56w1IJSbbE8/+Ij6eFFI8dKYFa5OiL49BRJCgoMEuaC1WzCLBEuP4ycNSQUKujz/e+nag==
   dependencies:
     "@mdx-js/tag" "^0.20.3"
     chalk "2.4.2"
