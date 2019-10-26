@@ -37,7 +37,7 @@
     {
       "company": "Able",
       "position": "Frontend Instructor",
-      "summary": "I teach Frontend development for six month at our internal bootcamp Codeable.",
+      "summary": "I taught Frontend development for six months at our internal bootcamp Codeable.",
       "website": "https://able.co",
       "startDate": "2019-02-01",
       "endDate": "2019-08-19"
@@ -107,7 +107,8 @@
         "React Testing Library",
         "Cypress",
         "TestCafé",
-        "Redux"
+        "Redux",
+        "PWA"
       ]
     },
     {
@@ -115,7 +116,6 @@
       "keywords": [
         "Node.js",
         "Serverless",
-        "TypeScript",
         "WebSocket",
         "Socket.io",
         "Rails",
@@ -126,7 +126,7 @@
       ]
     },
     {
-      "name": "Programming Languages",
+      "name": "Languages",
       "keywords": ["HTML", "CSS", "JavaScript", "TypeScript", "Python", "Ruby", "PHP"]
     }
   ],
