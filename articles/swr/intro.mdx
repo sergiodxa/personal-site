@@ -1,15 +1,25 @@
 ---
 title: Introduction to SWR
-description: Learn how to start using SWR, the ZEIT data fetching library for React applications.
+description:
+  Learn how to start using SWR, the ZEIT data fetching library for React
+  applications.
 date: 2019-11-20T06:13:30.309Z
 published: true
 tags: swr, react, nextjs, javascript
 lang: en
+next:
+  title: Using Paginated Data with SWR
+  path: /articles/swr/pagination
+  description:
+    Learn how to use SWR to build an infinite scrolled paginated data.
 ---
 
-SWR is an all-new data fetching library made by the team at [ZEIT](https://zeit.co), the same team that created Now and [Next.js](https://nextjs.org/).
+SWR is an all-new data fetching library made by the team at
+[ZEIT](https://zeit.co), the same team that created Now and
+[Next.js](https://nextjs.org/).
 
-This new library is made specifically for React applications as a custom hook with a straightforward interface.
+This new library is made specifically for React applications as a custom hook
+with a straightforward interface.
 
 Let's build a small project using SWR and Next.js to see how it works.
 
@@ -21,23 +31,30 @@ First, let's create the project.
 npx create-next-app
 ```
 
-This will give us a basic Next.js application after writing the name we want for it.
+This will give us a basic Next.js application after writing the name we want for
+it.
 
-Now let's install SWR and `isomorphic-unfetch`, this one will help us do the fetch.
+Now let's install SWR and `isomorphic-unfetch`, this one will help us do the
+fetch.
 
 ```sh
 yarn add swr isomorphic-unfetch
 ```
 
-And that's all if we run our project with `yarn dev` we will already have a page with some components, we could safely delete them since we are not going to use them.
+And that's all if we run our project with `yarn dev` we will already have a page
+with some components, we could safely delete them since we are not going to use
+them.
 
 ## The API
 
-The API we will consume in our application is [Pokeapi](https://pokeapi.co/), this free API will give use endpoints to get information about different Pokémon.
+The API we will consume in our application is [Pokeapi](https://pokeapi.co/),
+this free API will give use endpoints to get information about different
+Pokémon.
 
 ### The Initial Page
 
-Let's start coding, first, we need to create a file `pages/index.js` where we will export a React component, this will be our home page.
+Let's start coding, first, we need to create a file `pages/index.js` where we
+will export a React component, this will be our home page.
 
 ```js
 import Head from "next/head";
@@ -71,11 +88,13 @@ function HomePage() {
 export default HomePage;
 ```
 
-> Note: We are using Tailwind here to have some basic styles, this is not the best way to load Tailwind in a real-world application.
+> Note: We are using Tailwind here to have some basic styles, this is not the
+> best way to load Tailwind in a real-world application.
 
 ### Fetcher
 
-Our `fetcher` above is a simple module that will run the `fetch` and reply with the JSON data instead of the HTTP response.
+Our `fetcher` above is a simple module that will run the `fetch` and reply with
+the JSON data instead of the HTTP response.
 
 ```js
 import fetch from "isomorphic-unfetch";
@@ -89,7 +108,8 @@ export default fetcher;
 
 ## A Better List of Pokémon
 
-With this we have a list of the first 20 Pokémon names, let's create a new component to show more information about each one.
+With this we have a list of the first 20 Pokémon names, let's create a new
+component to show more information about each one.
 
 ```js
 import fetcher from "../lib/fetcher";
@@ -137,7 +157,8 @@ function PokemonShort({ name }) {
 export default PokemonShort;
 ```
 
-Here we will show the Pokémon name since the beginning and only show the loading text until we have the stats, measures and sprite URL.
+Here we will show the Pokémon name since the beginning and only show the loading
+text until we have the stats, measures and sprite URL.
 
 Now on our HomePage, we need to import and use `PokemonShort`.
 
@@ -177,6 +198,8 @@ Now we should see a list of cards with the data of each Pokémon.
 
 ![Our Next.js + SWR Pokedex Application](/static/articles/swr/intro.png "Our Next.js + SWR Pokedex Application")
 
-With this, we saw how to use SWR to fetch a list of data and then render a component per item and fetch more data inside them.
+With this, we saw how to use SWR to fetch a list of data and then render a
+component per item and fetch more data inside them.
 
-In future articles, I will continue working on this application and add more features.
+In future articles, I will continue working on this application and add more
+features.

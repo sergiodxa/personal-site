@@ -1,0 +1,336 @@
+---
+title: Using Paginated Data with SWR
+description: Learn how to use SWR to build an infinite scrolled paginated data.
+date: 2019-11-20T14:30:36.698Z
+published: true # Change to `true` to list it
+---
+
+In a [previous article](/articles/swr/intro) we build a Next.js application with
+SWR to fetch data from the [Pokeapi](https://pokeapi.co/). However, our API
+gives us paginated data so we couldn't show all the Pokémon at the same time and
+it was limited to the first 20 one.
+
+Let's modify it to build add infinite scroll to it and show all possible
+Pokémon.
+
+## Introducing useSWRPages
+
+Along with `useSWR`, the SWR library gives us a `useSWRPages` hook which lets us
+do paginated data. The way it works is we pass a key for cache the whole list,
+in our case, it will be `pokemon-list`.
+
+And we pass an inlined React component, this component will receive an `offset`
+and a `withSWR` function, here we will pass the results of `useSWR` to
+`withSWR`, then we could check if we don't have data to show a loading message
+or if we already have the data and return an array of elements.
+
+```js
+import Head from "next/head";
+import useSWR, { useSWRPages } from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+
+function HomePage() {
+  const { pages, isLoadingMore, loadMore } = useSWRPages(
+    "pokemon-list",
+    ({ offset, withSWR }) => {
+      const url = offset || "https://pokeapi.co/api/v2/pokemon";
+      const { data } = withSWR(useSWR(url, fetcher));
+
+      if (!data) return null;
+
+      const { results } = data;
+      return results.map(result => (
+        <PokemonShort key={result.name} name={result.name} />
+      ));
+    },
+    SWR => SWR.data.next,
+    []
+  );
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">{pages}</div>
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+This hook returns a key `pages` where it the elements of all of our pages, this
+is what we need to render. We also have an `isLoadingMore` key to know when we
+are in the process of fetching more data from our API.
+
+There is another `isReachingEnd` to know when we don't have more things to load
+so we could do something in the UI, e.g. stop rendering a button.
+
+## Manually Load More
+
+Let's start implementing our load more using a manual click on a button.
+
+```js
+import React from "react";
+import Head from "next/head";
+import useSWR, { useSWRPages } from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+
+function HomePage() {
+  const { pages, isLoadingMore, loadMore } = useSWRPages(
+    "pokemon-list",
+    ({ offset, withSWR }) => {
+      const url = offset || "https://pokeapi.co/api/v2/pokemon";
+      const { data } = withSWR(useSWR(url, fetcher));
+
+      if (!data) return null;
+
+      const { results } = data;
+      return results.map(result => (
+        <PokemonShort key={result.name} name={result.name} />
+      ));
+    },
+    SWR => SWR.data.next,
+    []
+  );
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">{pages}</div>
+        <div className="mx-auto mt-10 mb-20 w-1/3">
+          <button
+            className="bg-red-600 border-solid border-2 hover:bg-white border-red-600 text-white hover:text-red-600 font-bold py-2 px-4 rounded-full w-full"
+            disabled={isLoadingMore}
+            onClick={loadMore}
+          >
+            Load More Pokémon
+          </button>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+Here our new button will trigger the `loadMore` function `useSWRPages` gives us
+to trigger a new fetch. We also use the `isLoadingMore` more to disable the
+button while we are loading.
+
+## Infinite Scroll
+
+Now let's implement infinite scroll, we will use our button to detect if we
+reached the end and call `loadMore`.
+
+First, we need to detect if we are near the button, this is possible using the
+IntersectionObserver API, let's create a hook to use it.
+
+```js
+import React from "react";
+
+function useOnScreen(ref, rootMargin = "0px") {
+  const [isIntersecting, setIntersecting] = React.useState(false);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting),
+      { rootMargin }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => {
+      observer.unobserve(ref.current);
+    };
+  }, []);
+
+  return isIntersecting;
+}
+
+export default useOnScreen;
+```
+
+Now let's update our HomePage to use it, we will also create an effect to run
+`loadMode` if our hook returns true.
+
+```js
+import React from "react";
+import Head from "next/head";
+import useSWR, { useSWRPages } from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+import useOnScreen from "../hooks/use-on-screen";
+
+function HomePage() {
+  const { pages, isLoadingMore, loadMore } = useSWRPages(
+    "pokemon-list",
+    ({ offset, withSWR }) => {
+      const url = offset || "https://pokeapi.co/api/v2/pokemon";
+      const { data } = withSWR(useSWR(url, fetcher));
+
+      if (!data) return null;
+
+      const { results } = data;
+      return results.map(result => (
+        <PokemonShort key={result.name} name={result.name} />
+      ));
+    },
+    SWR => SWR.data.next,
+    []
+  );
+
+  const $loadMoreButton = React.useRef(null);
+  const isOnScreen = useOnScreen($loadMoreButton, "200px");
+
+  React.useEffect(() => {
+    if (isOnScreen) loadMore();
+  }, [isOnScreen]);
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">{pages}</div>
+        <div className="mx-auto mt-10 mb-20 w-1/3">
+          <button
+            ref={$loadMoreButton}
+            className="bg-red-600 border-solid border-2 hover:bg-white border-red-600 text-white hover:text-red-600 font-bold py-2 px-4 rounded-full w-full"
+            disabled={isLoadingMore}
+            onClick={loadMore}
+          >
+            Load More Pokémon
+          </button>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+## Infinite Scroll Triggered by Click
+
+This is nice, but maybe the user doesn't want to start doing infinite scroll
+right away, instead, we could wait for the first click on the button and then
+initialize the infinite scroll, we could even limit the amount of infinite
+scrolls we want and expect the user to click again to confirm.
+
+```js
+import React from "react";
+import Head from "next/head";
+import useSWR, { useSWRPages } from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+import useOnScreen from "../hooks/use-on-screen";
+
+function HomePage() {
+  const { pages, isLoadingMore, loadMore } = useSWRPages(
+    "pokemon-list",
+    ({ offset, withSWR }) => {
+      const url = offset || "https://pokeapi.co/api/v2/pokemon";
+      const { data } = withSWR(useSWR(url, fetcher));
+
+      if (!data) return null;
+
+      const { results } = data;
+      return results.map(result => (
+        <PokemonShort key={result.name} name={result.name} />
+      ));
+    },
+    SWR => SWR.data.next,
+    []
+  );
+
+  const [infiniteScrollEnabled, setInfiniteScrollEnabled] = React.useState(
+    false
+  );
+  const $loadMoreButton = React.useRef(null);
+  const infiniteScrollCount = React.useRef(0);
+  const isOnScreen = useOnScreen($loadMoreButton, "200px");
+
+  React.useEffect(() => {
+    if (!infiniteScrollEnabled || !isOnScreen) return;
+
+    loadMore();
+
+    const count = infiniteScrollCount.current;
+
+    if (count + 1 === 3) {
+      setInfiniteScrollEnabled(false);
+      infiniteScrollCount.current = 0;
+    } else {
+      infiniteScrollCount.current = count + 1;
+    }
+  }, [infiniteScrollEnabled, isOnScreen]);
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">{pages}</div>
+        <div className="mx-auto mt-10 mb-20 w-1/3">
+          <button
+            ref={$loadMoreButton}
+            className="bg-red-600 border-solid border-2 hover:bg-white border-red-600 text-white hover:text-red-600 font-bold py-2 px-4 rounded-full w-full"
+            disabled={isLoadingMore}
+            onClick={() => {
+              loadMore();
+              setInfiniteScrollEnabled(true);
+            }}
+          >
+            Load More Pokémon
+          </button>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+Here we have a state to know if the infinite scroll is enabled and a ref to
+count how many times we have loaded more using infinite scroll. Once we did it
+three times we disable infinite scroll and reset the count, then the user can
+click the button again to enable it back.
+
+## Final Words
+
+With this, we added pagination support to our application using SWR, note how
+the SWR specific code was created at the beginning and we didn't change it
+again, the rest of our code was special for our application in how we want the
+user experience to work and not in how we should handle data fetching.
+
+This is one of the best features of SWR, you only need to care about what makes
+your application special and not generic things like data fetching.
+
+In the next article, we will continue adding more features to our Pokedex
+application.
