@@ -1,31 +1,48 @@
 ---
 title: Introducing Contentz
-description: Contentz, a Pure Static Site Generator which let you focus on the content and gives you a highly optimized website. 
+description:
+  Contentz, a Pure Static Site Generator which let you focus on the content and
+  gives you a highly optimized website.
 date: 2019-04-23T02:13:19.559Z
 published: true
 lang: en
 tags: Contentz, SSG, Website, showdev
 ---
 
-A few weeks ago I wrote an article, in Spanish, describing what I would expect from my ideal static site generator, today I'm presenting [**Contentz**](https://contentz.tech). I call it a Pure Static Site Generator because it only load a few JavaScript lines to use Service Workers to cache offline the whole site and for analytics or slides support, instead of loading a lot of JavaScript as other modern SSG do.
+A few weeks ago I wrote an article, in Spanish, describing what I would expect
+from my ideal static site generator, today I'm presenting
+[**Contentz**](https://contentz.tech). I call it a Pure Static Site Generator
+because it only load a few JavaScript lines to use Service Workers to cache
+offline the whole site and for analytics or slides support, instead of loading a
+lot of JavaScript as other modern SSG do.
 
 ## Motivation
 
-I originally made my website and blog using [Next.js](https://nextjs.org) with its static export feature, but building it on each deploy take a few minutes and required me to generate the JS bundles of each article every time.
+I originally made my website and blog using [Next.js](https://nextjs.org) with
+its static export feature, but building it on each deploy take a few minutes and
+required me to generate the JS bundles of each article every time.
 
-¡I tried Gatsby and the template took me more time than my website! Since I didn't wanted to wait that long I decide to migrate, fast options like Jekyll or Hugo didn't supported a few features I had already built like generating a service worker for offline first cache, or didn't allowed me to use MDX to extend Markdown.
+¡I tried Gatsby and the template took me more time than my website! Since I
+didn't wanted to wait that long I decide to migrate, fast options like Jekyll or
+Hugo didn't supported a few features I had already built like generating a
+service worker for offline first cache, or didn't allowed me to use MDX to
+extend Markdown.
 
-That's why I created Contentz, it has support for MDX, but only server side, it import and use component to render HTML and it never generate a JS bundle for the individual page, this make the build process way faster.
+That's why I created Contentz, it has support for MDX, but only server side, it
+import and use component to render HTML and it never generate a JS bundle for
+the individual page, this make the build process way faster.
 
 ## Starting to Use It
 
-To start using Contentz you could either manually install it or let it initialize your website and auto install.
+To start using Contentz you could either manually install it or let it
+initialize your website and auto install.
 
 ```bash
 $ npx contentz init my-blog
 ```
 
-Once installed you will have a little configuration file called `config.yml` with this content.
+Once installed you will have a little configuration file called `config.yml`
+with this content.
 
 ```yml
 ---
@@ -35,15 +52,20 @@ language: en
 incremental: false # Change to `true` if your server support keeping `.cache` and `public` folders
 ```
 
-In this file you could start configuring more thing, like your website domain using `domain: https://contentz.tech` (required for the RSS feed). You will also have a `pages` and `articles` folders.
+In this file you could start configuring more thing, like your website domain
+using `domain: https://contentz.tech` (required for the RSS feed). You will also
+have a `pages` and `articles` folders.
 
-Contentz support both, custom pages or blog articles. To create a new blog article you could use the built-in command `write`.
+Contentz support both, custom pages or blog articles. To create a new blog
+article you could use the built-in command `write`.
 
 ```bash
 $ contentz write my-first-article.mdx
 ```
 
-This will create a file `my-first-article.mdx` inside `articles`. If you have the environment variable `EDITOR` configured it will try to open it automatically. The content will always be:
+This will create a file `my-first-article.mdx` inside `articles`. If you have
+the environment variable `EDITOR` configured it will try to open it
+automatically. The content will always be:
 
 ```markdown
 ---
@@ -53,7 +75,6 @@ published: false # Change to `true` to list it
 ---
 
 Here be dragons
-
 ```
 
 Now let's change `published` to `true` and build the website.
@@ -66,19 +87,32 @@ This will create a `public` directory with your whole website generated.
 
 ## Incremental Build
 
-One of the core features of Contentz is the **Incremental Build** support. By default if you run `contentz build` it will only generate the changed files or the related files to those who changed.
+One of the core features of Contentz is the **Incremental Build** support. By
+default if you run `contentz build` it will only generate the changed files or
+the related files to those who changed.
 
-This mean if you only change a single article of your blog it will not build the whole blog again, it will only do it for such article and the list of articles.
+This mean if you only change a single article of your blog it will not build the
+whole blog again, it will only do it for such article and the list of articles.
 
-This could be disabled setting `incremental: false` inside `config.yml`. This could be useful if you don't control what files are keep between deployments and can't keep the `.cache` and `public` directories.
+This could be disabled setting `incremental: false` inside `config.yml`. This
+could be useful if you don't control what files are keep between deployments and
+can't keep the `.cache` and `public` directories.
 
 ## Offline First
 
-Contentz generate a Service Worker configured to automatically cache any HTTP request to the same site and serve it fist from network and then from cache. This means after the user access a page of the website it will be automatically cached, if the user lost internet connection and tries to access again it will load from cache, but while the user has internet access it will keep updating the cache with the latest content.
+Contentz generate a Service Worker configured to automatically cache any HTTP
+request to the same site and serve it fist from network and then from cache.
+This means after the user access a page of the website it will be automatically
+cached, if the user lost internet connection and tries to access again it will
+load from cache, but while the user has internet access it will keep updating
+the cache with the latest content.
 
 ## Open Graph Generator
 
-Create an Open Graph for each page or article is a boring task. [Even companies like ZEIT automate it!](https://zeit.co/blog/social-og-image-cards-as-a-service) Contentz has an open graph or social image actually, since it works as Twitter Card too, generator.
+Create an Open Graph for each page or article is a boring task.
+[Even companies like ZEIT automate it!](https://zeit.co/blog/social-og-image-cards-as-a-service)
+Contentz has an open graph or social image actually, since it works as Twitter
+Card too, generator.
 
 To use it run the following command:
 
@@ -86,10 +120,16 @@ To use it run the following command:
 $ contentz social articles/my-first-article.mdx home
 ```
 
-Now Contentz will generate the social image for your article and the home page. Those files will be stored in the `/static/_social` folder, you should add them to Git to avoid generating them on every deploy.
+Now Contentz will generate the social image for your article and the home page.
+Those files will be stored in the `/static/_social` folder, you should add them
+to Git to avoid generating them on every deploy.
 
 ## Final Words
 
-There are more features [you could read in the documentation](https://contentz.tech/docs/), if you want to add more features [issues](https://github.com/sergiodxa/contentz/issues) and [pull requests](https://github.com/sergiodxa/contentz/pulls) are welcomed.
+There are more features
+[you could read in the documentation](https://contentz.tech/docs/), if you want
+to add more features [issues](https://github.com/sergiodxa/contentz/issues) and
+[pull requests](https://github.com/sergiodxa/contentz/pulls) are welcomed.
 
-If you start using it in your own website [let me know on my twitter!](https://twitter.com/sergiodxa)
+If you start using it in your own website
+[let me know on my twitter!](https://twitter.com/sergiodxa)

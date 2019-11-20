@@ -6,7 +6,11 @@ lang: es
 tags: Cristalab, JavaScript, OOP, Career change
 ---
 
-La programación orientada a objetos o POO (OOP en inglés Object Oriented Programming) es una forma de realizar aplicaciones. Javascript por defecto no es un lenguaje orientado a objetos, pero gracias a Prototype es posible usarlo de esta forma. En este tutorial veremos cómo aplicar Javascript orientado a objetos.
+La programación orientada a objetos o POO (OOP en inglés Object Oriented
+Programming) es una forma de realizar aplicaciones. Javascript por defecto no es
+un lenguaje orientado a objetos, pero gracias a Prototype es posible usarlo de
+esta forma. En este tutorial veremos cómo aplicar Javascript orientado a
+objetos.
 
 > En este tutorial doy por supuesto que se tiene una noción básica de POO.
 
@@ -18,7 +22,8 @@ En JS un objeto es un tipo de variable que se define de la siguiente manera:
 var objeto = { Propiedad: "valor", Propiedad2: "valor2" };
 ```
 
-Cuando se hace POO con JS se usan funciones (ya que JS es una lenguaje orientado a funciones) de la siguiente manera:
+Cuando se hace POO con JS se usan funciones (ya que JS es una lenguaje orientado
+a funciones) de la siguiente manera:
 
 ```js
 var miFuncion = function(parametro1, parametro2) {
@@ -27,7 +32,8 @@ var miFuncion = function(parametro1, parametro2) {
 };
 ```
 
-Luego cuando se quiere crear el nuevo objeto basado en la función definida se usa:
+Luego cuando se quiere crear el nuevo objeto basado en la función definida se
+usa:
 
 ```js
 var miObjeto = new miFuncion("valor1", "valor2");
@@ -40,7 +46,9 @@ return miObjeto.parametro1;
 return miObjeto.parametro2;
 ```
 
-Eso regresaría ‘valor1′ y ‘valor2′. Hasta ahí es fácil, sin embargo esto solo no es bastante útil, ya que solo definimos propiedades al objeto y no métodos. Para definir un método se realiza con funciones dentro del objeto.
+Eso regresaría ‘valor1′ y ‘valor2′. Hasta ahí es fácil, sin embargo esto solo no
+es bastante útil, ya que solo definimos propiedades al objeto y no métodos. Para
+definir un método se realiza con funciones dentro del objeto.
 
 ```js
 var miOtraFuncion = function(parametro1) {
@@ -58,7 +66,8 @@ var miOtroObjeto = new miOtraFuncion("Hola mundo");
 miOtroObjeto.miMetodo();
 ```
 
-Lo que regresaría ‘Hola mundo’. Una función puede tener tantos métodos y parámetros como se quiera. Ahora veamos un ejemplo un poco más útil.
+Lo que regresaría ‘Hola mundo’. Una función puede tener tantos métodos y
+parámetros como se quiera. Ahora veamos un ejemplo un poco más útil.
 
 ```js
 var persona = function(nombre, edad, altura, peso) {
@@ -93,7 +102,11 @@ johnDoe.mostrarDatos(); //esto muestra un alert con el siguiente contenido: "Nom
 janeDoe.mayoriaEdad(); //este otro muestra un alert que dice: "Jane Doe es menor de edad.".
 ```
 
-Este código permitiría crear tantas personas como se deseen, imprimir sus datos y comprobar si es mayor de edad. La POO como se puede ver es muy útil si se la sabe aprovechar y permite ahorrarse mucho código ya que con definir una vez el tipo de objeto (persona) luego es cuestión de crear tantos objetos de estos como se quiera, con sus parámetros y métodos ya creador.
+Este código permitiría crear tantas personas como se deseen, imprimir sus datos
+y comprobar si es mayor de edad. La POO como se puede ver es muy útil si se la
+sabe aprovechar y permite ahorrarse mucho código ya que con definir una vez el
+tipo de objeto (persona) luego es cuestión de crear tantos objetos de estos como
+se quiera, con sus parámetros y métodos ya creador.
 
 Ahora para finalizar un último ejemplo de JSOO más avanzado.
 
@@ -142,4 +155,8 @@ miCaja.meterCosas(miOtroObjeto);
 miCaja.verContenido();
 ```
 
-Como se puede ver en este ejemplo más avanzado tenemos una caja de 50x50x50 y dos objetos un libro de 30x40x10 y un dvd de 40x15x52 (tamaños raros, lo se). Lo primero que hacemos es guardar el libro en la caja, luego vemos si esta guardado, vaciamos la caja, tratamos de meter el dvd, no nos deja porque es muy grande y volvemos a ver el contenido y nos dice que está vacía.
+Como se puede ver en este ejemplo más avanzado tenemos una caja de 50x50x50 y
+dos objetos un libro de 30x40x10 y un dvd de 40x15x52 (tamaños raros, lo se). Lo
+primero que hacemos es guardar el libro en la caja, luego vemos si esta
+guardado, vaciamos la caja, tratamos de meter el dvd, no nos deja porque es muy
+grande y volvemos a ver el contenido y nos dice que está vacía.

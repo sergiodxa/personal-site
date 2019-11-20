@@ -6,15 +6,22 @@ lang: es
 canonical_url: https://medium.com/@sergiodxa/ventas-y-desventajas-de-los-pre-procesadores-de-css-6528fdac9926
 ---
 
-Usar pre-procesadores de CSS de a poco se convierte un estándar en el mundo del desarrollo web front-end, pero primero empecemos hablando sobre qué son los pre-procesadores de CSS.
+Usar pre-procesadores de CSS de a poco se convierte un estándar en el mundo del
+desarrollo web front-end, pero primero empecemos hablando sobre qué son los
+pre-procesadores de CSS.
 
 ## ¿Qué son?
 
-Los pre-processadores son lenguajes para hacer hojas de estilos para sitios web, similares a CSS, pero que poseen ciertas características que este no tiene y cuando terminas se compilan a CSS puro y minificado.
+Los pre-processadores son lenguajes para hacer hojas de estilos para sitios web,
+similares a CSS, pero que poseen ciertas características que este no tiene y
+cuando terminas se compilan a CSS puro y minificado.
 
 ## ¿Cuales existen?
 
-Existen principalmente 3 pre-procesadores de CSS (hay más, pero no son tan conocidos), estos son **LESS**, **SASS** y **Stylus**. Cada uno tiene sus propias características que los hacen diferente de los demás y a su vez comparten varias muy comunes.
+Existen principalmente 3 pre-procesadores de CSS (hay más, pero no son tan
+conocidos), estos son **LESS**, **SASS** y **Stylus**. Cada uno tiene sus
+propias características que los hacen diferente de los demás y a su vez
+comparten varias muy comunes.
 
 ## Ventajas de usarlos
 
@@ -22,27 +29,42 @@ Entonces veamos algunas ventajas de usarlos.
 
 ### Código más organizado
 
-Al estar usando pre-procesadores puedes hacer un uso mejorado de la propiedad @import de CSS lo que te permite separar tu código en varios archivos para mejorar la organización del código y que luego al compilar a CSS todo se junte en un solo archivo minificado de forma que el usuario solo baja un único CSS, pero al desarrollar uno puede facilmente tener varios archivos.
+Al estar usando pre-procesadores puedes hacer un uso mejorado de la propiedad
+@import de CSS lo que te permite separar tu código en varios archivos para
+mejorar la organización del código y que luego al compilar a CSS todo se junte
+en un solo archivo minificado de forma que el usuario solo baja un único CSS,
+pero al desarrollar uno puede facilmente tener varios archivos.
 
 ### Proyectos más fáciles de mantener
 
-Al poder separar tu código en múltilpes archivos resulta más fácil mantener tus proyectos ya que puedes aplicar mejor [OOCSS](https://oocss.org/), [SMACSS](https://smacss.com/) o alguna otra metodología y volver tu código más modular e independiente, pudiendo modificarlo sin problemas.
+Al poder separar tu código en múltilpes archivos resulta más fácil mantener tus
+proyectos ya que puedes aplicar mejor [OOCSS](https://oocss.org/),
+[SMACSS](https://smacss.com/) o alguna otra metodología y volver tu código más
+modular e independiente, pudiendo modificarlo sin problemas.
 
 ### Reutilización de código
 
-El hecho de separar tu código en modulos independientes lo vuelve más reutilizable evitandote escribir muchas veces estilos que se repiten por todo el sitio.
+El hecho de separar tu código en modulos independientes lo vuelve más
+reutilizable evitandote escribir muchas veces estilos que se repiten por todo el
+sitio.
 
 ## Desventajas de usarlos
 
-Ya vimos las ventajas, pero no todo el perfecto así que veamos algunas desventajas de usarlos.
+Ya vimos las ventajas, pero no todo el perfecto así que veamos algunas
+desventajas de usarlos.
 
 ### Deben aprender a usarse
 
-No es que sea muy complicado aprender a usarlos, pero el hecho de tener que aprenderlo hace que algunos desarrolladores no les guste usarlos. Personalmente si un desarrollador front-end piensa eso probablemente este en el negocio equivocado.
+No es que sea muy complicado aprender a usarlos, pero el hecho de tener que
+aprenderlo hace que algunos desarrolladores no les guste usarlos. Personalmente
+si un desarrollador front-end piensa eso probablemente este en el negocio
+equivocado.
 
 ### Puede llevar a algunas malas prácticas
 
-A pesar de permitirte hacer mejores estilos usar pre-procesadores puede llevar a algunas malas prácticas como son la anidación de estilos, esto es cuando en el css tienes algo así:
+A pesar de permitirte hacer mejores estilos usar pre-procesadores puede llevar a
+algunas malas prácticas como son la anidación de estilos, esto es cuando en el
+css tienes algo así:
 
 ```css
 .clase .subclase {
@@ -50,7 +72,9 @@ A pesar de permitirte hacer mejores estilos usar pre-procesadores puede llevar a
 }
 ```
 
-Es muy común ver CSS hecho de esta forma por desarrolladores que usan pre-procesadores debido a que estos te permiten escribir código anidado mucho más facilmente gracias a la siguiente sintaxis (sacada de LESS):
+Es muy común ver CSS hecho de esta forma por desarrolladores que usan
+pre-procesadores debido a que estos te permiten escribir código anidado mucho
+más facilmente gracias a la siguiente sintaxis (sacada de LESS):
 
 ```css
 .clase {
@@ -60,7 +84,11 @@ Es muy común ver CSS hecho de esta forma por desarrolladores que usan pre-proce
 }
 ```
 
-Escribir el código de esta forma puede parecer muy cómodo pero cuando tienes muchos estilos anidados puede llevar a relentizar el renderizado del sitio web. Igualmente hacer esto con una sola clase no esta del todo mal, y puede ser útil en algunas ocasiones, lo que hay que evitar es abusar de la anidación de clases y que termines teniendo esto:
+Escribir el código de esta forma puede parecer muy cómodo pero cuando tienes
+muchos estilos anidados puede llevar a relentizar el renderizado del sitio web.
+Igualmente hacer esto con una sola clase no esta del todo mal, y puede ser útil
+en algunas ocasiones, lo que hay que evitar es abusar de la anidación de clases
+y que termines teniendo esto:
 
 ```css
 .clase .sub-clase .sub-sub-clase .sub-sub-sub-clase {
@@ -72,9 +100,12 @@ Si llegas a tener esto probablemente deberías replantear tu CSS:
 
 ### Repetir código usando Mixins
 
-Se contradice un poco con la ventaja de reutilizar código, pero es que los mixins que poseen los pre-procesadores solo sirven para repetir código y no para reutilizarlos como algunos piensan.
+Se contradice un poco con la ventaja de reutilizar código, pero es que los
+mixins que poseen los pre-procesadores solo sirven para repetir código y no para
+reutilizarlos como algunos piensan.
 
-Los mixins son un objeto que posee ciertas propiedades que pueden ser variables en valor y que se aplican a algún estilo. Por ejemplo
+Los mixins son un objeto que posee ciertas propiedades que pueden ser variables
+en valor y que se aplican a algún estilo. Por ejemplo
 
 ```css
 .bordes-laterales(@width; @color) {
@@ -83,7 +114,10 @@ Los mixins son un objeto que posee ciertas propiedades que pueden ser variables 
 }
 ```
 
-Ese mixin te permite pasando un ancho y un color agregar un borde a cada lado del elemento, así simple puede parecer útil porque permite en una línea agregar lo mismo que dos líneas y más fácil de recordar. Sin embargo esto lleva a tener cosas como:
+Ese mixin te permite pasando un ancho y un color agregar un borde a cada lado
+del elemento, así simple puede parecer útil porque permite en una línea agregar
+lo mismo que dos líneas y más fácil de recordar. Sin embargo esto lleva a tener
+cosas como:
 
 ```csss
 .clase {
@@ -107,8 +141,13 @@ Lo que compila a esto:
 }
 ```
 
-Como se puede ver esto termina causando repetición de código, para evitar esto existen los extends, pero la muchos desarrolladores usan los mixins sin saber que estos existen por lo que terminan repitiendo mucho código.
+Como se puede ver esto termina causando repetición de código, para evitar esto
+existen los extends, pero la muchos desarrolladores usan los mixins sin saber
+que estos existen por lo que terminan repitiendo mucho código.
 
 ## Conclusión
 
-A pesar de las desventajas sigue siendo muy útil usar pre-procesadores, además de que todas las desventajas se pueden eliminar aplicando buenas prácticas como evitar los mixins y evitar anidar estilos y en el caso de aprender a usarlo es algo bastante fácil.
+A pesar de las desventajas sigue siendo muy útil usar pre-procesadores, además
+de que todas las desventajas se pueden eliminar aplicando buenas prácticas como
+evitar los mixins y evitar anidar estilos y en el caso de aprender a usarlo es
+algo bastante fácil.

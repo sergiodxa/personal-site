@@ -1,16 +1,24 @@
 ---
 title: Mezclando flujos síncronos y asíncronos usando promesas en JavaScript
 date: 2017-06-23T22:39:48.419988Z
-description: Manejar flujos de datos síncronos es fácil, con Promises también es fácil hacerlos asíncronos. Ahora veamos como combinarlos.
+description:
+  Manejar flujos de datos síncronos es fácil, con Promises también es fácil
+  hacerlos asíncronos. Ahora veamos como combinarlos.
 published: true
 lang: es
 canonical_url: https://platzi.com/blog/mezclando-flujos-sincronos-y-asincronos/
 tags: JavaScript, Promises, Async, ES2015, ES6
 ---
 
-Manejar flujos de datos síncronos es fácil, con Async/Await también es fácil hacerlos asíncronos. Pero qué pasa si tenemos una función que debe realizar cierta lógica síncrona y luego asíncrona y devolver una promesa. Si esta lógica síncrona falla, ¿qué ocurriría?
+Manejar flujos de datos síncronos es fácil, con Async/Await también es fácil
+hacerlos asíncronos. Pero qué pasa si tenemos una función que debe realizar
+cierta lógica síncrona y luego asíncrona y devolver una promesa. Si esta lógica
+síncrona falla, ¿qué ocurriría?
 
-Si todo está bien obtenemos una promesa que se resuelve con el resultado, si hay un error en la parte asíncrona obtenemos una promesa que se rechaza y vemos el error. Pero si el error ocurre en la parte síncrona entonces obtenemos un error normal y no una promesa.
+Si todo está bien obtenemos una promesa que se resuelve con el resultado, si hay
+un error en la parte asíncrona obtenemos una promesa que se rechaza y vemos el
+error. Pero si el error ocurre en la parte síncrona entonces obtenemos un error
+normal y no una promesa.
 
 ```js
 const promesa = readMultiFiles();
@@ -19,7 +27,10 @@ const promesa = readMultiFiles();
 promesa.then(data => console.log(data)).catch(error => console.error(error));
 ```
 
-Vamos a ver como podemos evitar esto y mezclar estos dos flujos síncronos y asíncronos. Para eso vamos a crear una función que recibe un string con una lista de rutas de archivos, vamos a convertir ese string en un array y luego leer todos esos archivos del disco.
+Vamos a ver como podemos evitar esto y mezclar estos dos flujos síncronos y
+asíncronos. Para eso vamos a crear una función que recibe un string con una
+lista de rutas de archivos, vamos a convertir ese string en un array y luego
+leer todos esos archivos del disco.
 
 ```js
 import fs from 'fs'
@@ -35,7 +46,8 @@ const readMultiFiles = list => {
 }
 ```
 
-Esa es nuestra función, ese `JSON.parse` se puede romper si mandamos un dato inválido en el parámetro `list`. Vamos a meter entonces un `try/catch`.
+Esa es nuestra función, ese `JSON.parse` se puede romper si mandamos un dato
+inválido en el parámetro `list`. Vamos a meter entonces un `try/catch`.
 
 ```js
 import fs from 'fs'
@@ -55,7 +67,10 @@ const readMultiFiles = list => {
 }
 ```
 
-Por ahora no hicimos nada con el error. Lo que vamos a hacer es usar un método estático del objeto `Promise` para crear una promesa que ya este rechazada. Eso se hace gracias a `Promise.reject` a la cual le pasamos un objeto error y nos devuelve una promesa automáticamente rechazada.
+Por ahora no hicimos nada con el error. Lo que vamos a hacer es usar un método
+estático del objeto `Promise` para crear una promesa que ya este rechazada. Eso
+se hace gracias a `Promise.reject` a la cual le pasamos un objeto error y nos
+devuelve una promesa automáticamente rechazada.
 
 ```js
 import fs from 'fs'
@@ -75,7 +90,11 @@ const readMultiFiles = list => {
 }
 ```
 
-¡Con eso si ocurre un error síncrono nuestra función va a igualmente devolver una promesa! Genial, ahora vamos a ver algo: ¿Qué pasa si `list` contiene un objeto? Si el valor es por ejemplo `"{}"` entonces no va a dar error al hacer el `JSON.parse`. Podemos validar esto con una condición y devolver un error personalizado.
+¡Con eso si ocurre un error síncrono nuestra función va a igualmente devolver
+una promesa! Genial, ahora vamos a ver algo: ¿Qué pasa si `list` contiene un
+objeto? Si el valor es por ejemplo `"{}"` entonces no va a dar error al hacer el
+`JSON.parse`. Podemos validar esto con una condición y devolver un error
+personalizado.
 
 ```js
 import fs from 'fs'
@@ -96,7 +115,10 @@ const readMultiFiles = list => {
 }
 ```
 
-Luego podemos agregar otra validación para que si `files` está vacío directamente, devolvemos una promesa resuelta con una lista vacía. Eso lo hacemos con otro método estático `Promise.resolve` que crea una promesa resuelta con los datos que le hayamos pasado.
+Luego podemos agregar otra validación para que si `files` está vacío
+directamente, devolvemos una promesa resuelta con una lista vacía. Eso lo
+hacemos con otro método estático `Promise.resolve` que crea una promesa resuelta
+con los datos que le hayamos pasado.
 
 ```js
 import fs from 'fs'
@@ -118,8 +140,11 @@ const readMultiFiles = list => {
 }
 ```
 
-Con eso acabamos de crear una función que mezcla flujos síncronos y asíncronos, hace validaciones para devolver algunos errores personalizados o terminar todo .
+Con eso acabamos de crear una función que mezcla flujos síncronos y asíncronos,
+hace validaciones para devolver algunos errores personalizados o terminar todo .
 
 ## Conclusiones
 
-Como vemos gracias a los métodos estáticos `Promise.resolve` y `Promise.reject` es muy fácil mezclar flujos síncronos y asíncronos y asegurarnos de devolver siempre promesas y no tener que estar validando tipos de datos.
+Como vemos gracias a los métodos estáticos `Promise.resolve` y `Promise.reject`
+es muy fácil mezclar flujos síncronos y asíncronos y asegurarnos de devolver
+siempre promesas y no tener que estar validando tipos de datos.

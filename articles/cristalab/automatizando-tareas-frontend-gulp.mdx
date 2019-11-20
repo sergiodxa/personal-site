@@ -6,87 +6,133 @@ lang: es
 tags: Cristalab
 ---
 
-Como desarrollador Frontend, hay ciertas tareas que se terminan volviendo repetitivas durante el desarrollo, como compilar el CSS desde un pre-procesador, concatenar archivos o minificarlos. Es hasta el ambiente de producción en donde realizamos estas dos ultimas tareas.
+Como desarrollador Frontend, hay ciertas tareas que se terminan volviendo
+repetitivas durante el desarrollo, como compilar el CSS desde un pre-procesador,
+concatenar archivos o minificarlos. Es hasta el ambiente de producción en donde
+realizamos estas dos ultimas tareas.
 
-Gracias a herramientas como [Gulp.js](https://gulpjs.com/) y [Grunt.js](https://gruntjs.com/) ahora es posible automatizar todas estas tareas repetitivas e inicializarlas con un único comando en la terminal. En este tutorial les voy a explicar como usar una de estas herramientas, **Gulp.js**.
+Gracias a herramientas como [Gulp.js](https://gulpjs.com/) y
+[Grunt.js](https://gruntjs.com/) ahora es posible automatizar todas estas tareas
+repetitivas e inicializarlas con un único comando en la terminal. En este
+tutorial les voy a explicar como usar una de estas herramientas, **Gulp.js**.
 
 ## Descargar e instalar Gulp.js
 
-Lo primero que necesitamos hacer para empezar a usar Gulp.js es descargarlo e instalarlo, para esto necesitamos tener Node.js instalado, si no lo tienen pueden [ir al sitio](https://nodejs.org/), descargarlo e instalarlo. Una vez tengan Node.js simplemente abren la consola y escriben el comando para instalar Gulp.js de forma global.
+Lo primero que necesitamos hacer para empezar a usar Gulp.js es descargarlo e
+instalarlo, para esto necesitamos tener Node.js instalado, si no lo tienen
+pueden [ir al sitio](https://nodejs.org/), descargarlo e instalarlo. Una vez
+tengan Node.js simplemente abren la consola y escriben el comando para instalar
+Gulp.js de forma global.
 
 ```bash
 sudo npm i -g gulp
 ```
 
-Luego de que lo tengan instalado de forma global necesitan instalarlo en cada proyecto donde lo vayan a usar, para eso simplemente van desde la consola a la carpeta del proyecto usando el comando:
+Luego de que lo tengan instalado de forma global necesitan instalarlo en cada
+proyecto donde lo vayan a usar, para eso simplemente van desde la consola a la
+carpeta del proyecto usando el comando:
 
 ```bash
 npm i -D gulp
 ```
 
-El `-D` es para que lo agregue como dependencia de desarrollo en el archivo `package.json` del proyecto. Es lo mismo que `--save-dev`.
+El `-D` es para que lo agregue como dependencia de desarrollo en el archivo
+`package.json` del proyecto. Es lo mismo que `--save-dev`.
 
 ## Instalar plugins
 
-Lo siguiente es buscar los plugins necesarios para nuestro proyecto, para eso pueden ir al [sitio de Gulp.js](https://gulpjs.com/plugins/) y en la sección de plugins tienen la lista completa con un buscador.
+Lo siguiente es buscar los plugins necesarios para nuestro proyecto, para eso
+pueden ir al [sitio de Gulp.js](https://gulpjs.com/plugins/) y en la sección de
+plugins tienen la lista completa con un buscador.
 
-O pueden ir directamente a [NPM](https://npmjs.org/) y buscar ahí el plugin agregando la palabra gulp a su búsqueda.
+O pueden ir directamente a [NPM](https://npmjs.org/) y buscar ahí el plugin
+agregando la palabra gulp a su búsqueda.
 
-Para este ejemplo vamos a compilar del pre-procesador [LESS](https://lesscss.org/) a CSS, además de minificar el CSS resultante y por último que si se cambian los archivos de LESS vuelva a compilar.
+Para este ejemplo vamos a compilar del pre-procesador
+[LESS](https://lesscss.org/) a CSS, además de minificar el CSS resultante y por
+último que si se cambian los archivos de LESS vuelva a compilar.
 
-Para esto buscamos y descargamos los plugins [gulp-less](https://www.npmjs.com/packages/gulp-less), [gulp-minify-css](https://www.npmjs.com/packages/gulp-minify-css) y [gulp-watch](https://www.npmjs.com/packages/gulp-watch), podemos instalarlos en nuestro proyecto con el comando:
+Para esto buscamos y descargamos los plugins
+[gulp-less](https://www.npmjs.com/packages/gulp-less),
+[gulp-minify-css](https://www.npmjs.com/packages/gulp-minify-css) y
+[gulp-watch](https://www.npmjs.com/packages/gulp-watch), podemos instalarlos en
+nuestro proyecto con el comando:
 
 ```bash
 npm i -D gulp-less gulp-minify-css gulp-watch
 ```
 
-Con esto ya están descargados en la carpeta node_modules del proyecto y agregados como dependencia de desarrollo a nuestro package.json.
+Con esto ya están descargados en la carpeta node_modules del proyecto y
+agregados como dependencia de desarrollo a nuestro package.json.
 
 ## Armar las tareas de Gulp.js
 
-Ahora viene lo más importante, armar las tareas que queremos ejecutar, para esto necesitamos crear un archivo **gulpfile.js** en la raíz de nuestro proyecto (donde esté el package.json), en este archivo lo primero que vamos a hacer es cargar Gulp.js y nuestros plugins, para eso agregamos estas líneas:
+Ahora viene lo más importante, armar las tareas que queremos ejecutar, para esto
+necesitamos crear un archivo **gulpfile.js** en la raíz de nuestro proyecto
+(donde esté el package.json), en este archivo lo primero que vamos a hacer es
+cargar Gulp.js y nuestros plugins, para eso agregamos estas líneas:
 
 ```js
-var gulp = require('gulp');
-var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
-var watch = require('gulp-watch');
+var gulp = require("gulp");
+var less = require("gulp-less");
+var minifyCSS = require("gulp-minify-css");
+var watch = require("gulp-watch");
 ```
 
-Ya importados los módulos necesarios podemos escribir nuestras tareas. Las tareas en gulp se definen con el método `task` que posee gulp y que recibe el nombre de la tarea y una función a ejecutar.
+Ya importados los módulos necesarios podemos escribir nuestras tareas. Las
+tareas en gulp se definen con el método `task` que posee gulp y que recibe el
+nombre de la tarea y una función a ejecutar.
 
 ```js
-gulp.task('css', function () {
-   // acá vamos a poner nuestra tarea
+gulp.task("css", function() {
+  // acá vamos a poner nuestra tarea
 });
 ```
 
-Dentro de nuestra tarea lo primero es indicar cuales son los archivos sobre los que vamos a trabajar, para esto usamos otro método de gulp llamado `src` que recibe o un string con la ruta relativa al archivo o un array con muchos archivos, estas rutas pueden hacer referencia a una carpeta entera usando * en lugar del nombre de un archivo. En nuestro caso solo apuntamos a nuestro archivo principal.
+Dentro de nuestra tarea lo primero es indicar cuales son los archivos sobre los
+que vamos a trabajar, para esto usamos otro método de gulp llamado `src` que
+recibe o un string con la ruta relativa al archivo o un array con muchos
+archivos, estas rutas pueden hacer referencia a una carpeta entera usando \* en
+lugar del nombre de un archivo. En nuestro caso solo apuntamos a nuestro archivo
+principal.
 
 ```js
-gulp.task('css', function () {
-   gulp.src('./less/main.less')
+gulp.task("css", function() {
+  gulp.src("./less/main.less");
 });
 ```
 
-Ahora necesitamos empezar a ejecutar nuestros plugins, para eso necesitamos decir a Gulp.js que luego de obtener el archivo main.less le pase el contenido a nuestros plugins, esto se hace con el método `pipe` que recibe como parámetro la ejecución de una función, en nuestro caso uno de nuestros plugins.
+Ahora necesitamos empezar a ejecutar nuestros plugins, para eso necesitamos
+decir a Gulp.js que luego de obtener el archivo main.less le pase el contenido a
+nuestros plugins, esto se hace con el método `pipe` que recibe como parámetro la
+ejecución de una función, en nuestro caso uno de nuestros plugins.
 
 ```js
-gulp.task('css', function () {
-   gulp.src('./less/main.less')
-   .pipe(less({
-      paths: __dirname + '/less',
-      filename: 'main.less',
-      ru: true
-   })) // 1
-   .pipe(minifyCSS()) // 2
+gulp.task("css", function() {
+  gulp
+    .src("./less/main.less")
+    .pipe(
+      less({
+        paths: __dirname + "/less",
+        filename: "main.less",
+        ru: true
+      })
+    ) // 1
+    .pipe(minifyCSS()); // 2
 });
 ```
 
-En el punto 1 compilamos nuestro LESS a CSS, el objeto que le pasamos como parámetro le indica la ruta donde encontrar todos nuestros archivos de LESS, el nombre de nuestro archivo principal y por último que use rutas relativas para los @import que usemos en nuestros archivos, de esta forma podemos trabajar con múltiples archivos LESS y Gulp.js los va a compilar a un único CSS.
-El punto 2 recibe el CSS compilado en el punto 1 y lo minifica, simple.
+En el punto 1 compilamos nuestro LESS a CSS, el objeto que le pasamos como
+parámetro le indica la ruta donde encontrar todos nuestros archivos de LESS, el
+nombre de nuestro archivo principal y por último que use rutas relativas para
+los @import que usemos en nuestros archivos, de esta forma podemos trabajar con
+múltiples archivos LESS y Gulp.js los va a compilar a un único CSS. El punto 2
+recibe el CSS compilado en el punto 1 y lo minifica, simple.
 
-Por último para terminar nuestra tarea necesitamos indicarlo donde guardar el archivo final que generamos, esto es con otro método de Gulp.js llamado `dest`, este método recibe como único parámetro un string con la ruta donde vamos a guardar los archivos finales.
+Por último para terminar nuestra tarea necesitamos indicarlo donde guardar el
+archivo final que generamos, esto es con otro método de Gulp.js llamado `dest`,
+este método recibe como único parámetro un string con la ruta donde vamos a
+guardar los archivos finales.
 
 ```js
 gulp.task('css', function () {
@@ -101,25 +147,37 @@ gulp.task('css', function () {
 });
 ```
 
-Se agrega dentro de una pipe para poder recibir el archivo que minificado que devuelve minifyCSS.
+Se agrega dentro de una pipe para poder recibir el archivo que minificado que
+devuelve minifyCSS.
 
-Ahora que tenemos nuestra tarea lista la podemos ejecutar desde la terminal con el comando:
+Ahora que tenemos nuestra tarea lista la podemos ejecutar desde la terminal con
+el comando:
 
 ```bash
 gulp css
 ```
 
-Cuando se termine de ejecutar la tarea (mientras más pipe agregues más tarda) vamos a tener un archivo main.css en la carpeta css ubicada en la raíz de nuestro proyecto.
+Cuando se termine de ejecutar la tarea (mientras más pipe agregues más tarda)
+vamos a tener un archivo main.css en la carpeta css ubicada en la raíz de
+nuestro proyecto.
 
-Ahora nos falta poder vigilar todos los cambios de los archivos de la carpeta less y volver a ejecutar automáticamente la tarea css, para eso creamos otra tarea llamada watch y programamos la tarea de esta forma:
+Ahora nos falta poder vigilar todos los cambios de los archivos de la carpeta
+less y volver a ejecutar automáticamente la tarea css, para eso creamos otra
+tarea llamada watch y programamos la tarea de esta forma:
 
 ```js
-gulp.task('watch', function () {
-   gulp.watch(['./less/**/*.less'], ['css']);
+gulp.task("watch", function() {
+  gulp.watch(["./less/**/*.less"], ["css"]);
 });
 ```
 
-Esta vez no hicimos la tarea como antes, esto es porque el plugin gulp-watch agrega un método watch a gulp en lugar de funcionar como una tarea normal que se usa con pipe, por eso simplemente le decimos que se fije en la carpeta less cualquier archivo .less (*.less) ubicado tanto en esta carpeta como en otras subcarpetas (**) y si alguno cambia ejecute la tarea css. Los parámetros pueden no estar en un array, pero si los pasas en un array podes ejecutar múltiples tareas o escuchar varias rutas.
+Esta vez no hicimos la tarea como antes, esto es porque el plugin gulp-watch
+agrega un método watch a gulp en lugar de funcionar como una tarea normal que se
+usa con pipe, por eso simplemente le decimos que se fije en la carpeta less
+cualquier archivo .less (\*.less) ubicado tanto en esta carpeta como en otras
+subcarpetas (\*\*) y si alguno cambia ejecute la tarea css. Los parámetros
+pueden no estar en un array, pero si los pasas en un array podes ejecutar
+múltiples tareas o escuchar varias rutas.
 
 Ahora para poder ejecutar esta tarea tenemos que usar el comando
 
@@ -127,12 +185,17 @@ Ahora para poder ejecutar esta tarea tenemos que usar el comando
 gulp watch
 ```
 
-Con esto ya estaría escuchando los cambios, sin embargo actualmente tendríamos que ejecutar dos comandos para hacer que todo funcione perfectamente, primero compilar una vez el CSS y luego escuchar los cambios.
+Con esto ya estaría escuchando los cambios, sin embargo actualmente tendríamos
+que ejecutar dos comandos para hacer que todo funcione perfectamente, primero
+compilar una vez el CSS y luego escuchar los cambios.
 
-Como esto es molesto también podemos automatizarlo, para eso creamos una nueva tarea y la llamamos `default`, a esta tarea no le pasamos una función como hicimos antes, sino que le pasamos un array con cada una de las tareas que queremos que se ejecuten, en nuestro caso css y watch.
+Como esto es molesto también podemos automatizarlo, para eso creamos una nueva
+tarea y la llamamos `default`, a esta tarea no le pasamos una función como
+hicimos antes, sino que le pasamos un array con cada una de las tareas que
+queremos que se ejecuten, en nuestro caso css y watch.
 
 ```js
-gulp.task('default', ['css', 'watch']);
+gulp.task("default", ["css", "watch"]);
 ```
 
 Ahora simplemente usamos el comando:
@@ -141,11 +204,28 @@ Ahora simplemente usamos el comando:
 gulp
 ```
 
-Y con esto estamos ejecutando una vez cada tarea (al no indicar el nombre de la tarea Gulp.js trata de ejecutar la tarea con el nombre default, si no existe da error), así que primero compila el CSS y luego se queda escuchando los cambios, ya luego es la tarea watch la que se encarga de volver a ejecutar la tarea css cada vez que sea necesarios.
+Y con esto estamos ejecutando una vez cada tarea (al no indicar el nombre de la
+tarea Gulp.js trata de ejecutar la tarea con el nombre default, si no existe da
+error), así que primero compila el CSS y luego se queda escuchando los cambios,
+ya luego es la tarea watch la que se encarga de volver a ejecutar la tarea css
+cada vez que sea necesarios.
 
 ## Conclusión
 
-Al principio puede resultar algo raro estar automatizando estas tareas, pero luego de acostumbrarse pasa a ser algo casi imprescindible en cada proyecto que realicemos, y con la gran cantidad de plugins que existen para Gulp.js se pueden automatizar una cantidad enorme de cosas ya sea compilar [Stylus](https://www.npmjs.com/packages/gulp-stylus), [CoffeeScript](https://www.npmjs.com/packages/gulp-coffee), [concatenar archivos](https://www.npmjs.com/packages/gulp-concat) de JS, [minificarlos](https://www.npmjs.com/packages/gulp-minify), [ejecutar pruebas unitarias](https://www.npmjs.org/package/gulp-mocha) e incluso es posible [iniciar un servidor HTTP](https://www.npmjs.com/package/gulp-connect) para probar el sitio.
+Al principio puede resultar algo raro estar automatizando estas tareas, pero
+luego de acostumbrarse pasa a ser algo casi imprescindible en cada proyecto que
+realicemos, y con la gran cantidad de plugins que existen para Gulp.js se pueden
+automatizar una cantidad enorme de cosas ya sea compilar
+[Stylus](https://www.npmjs.com/packages/gulp-stylus),
+[CoffeeScript](https://www.npmjs.com/packages/gulp-coffee),
+[concatenar archivos](https://www.npmjs.com/packages/gulp-concat) de JS,
+[minificarlos](https://www.npmjs.com/packages/gulp-minify),
+[ejecutar pruebas unitarias](https://www.npmjs.org/package/gulp-mocha) e incluso
+es posible
+[iniciar un servidor HTTP](https://www.npmjs.com/package/gulp-connect) para
+probar el sitio.
 
-Los invito a probar Gulp ó si no les convence intentar con Grunt.js, otro automatizador de tareas. Sin duda alguna vale mucho la pena incorporar estas herramientas en nuestro ambiente de trabajo para ayudarnos a poder dedicar más tiempo a escribir código y menos a realizar todas estas tareas repetitivas.
-
+Los invito a probar Gulp ó si no les convence intentar con Grunt.js, otro
+automatizador de tareas. Sin duda alguna vale mucho la pena incorporar estas
+herramientas en nuestro ambiente de trabajo para ayudarnos a poder dedicar más
+tiempo a escribir código y menos a realizar todas estas tareas repetitivas.

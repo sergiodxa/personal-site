@@ -1,21 +1,30 @@
 ---
 title: Redirects in Next.js, the Best Way
-description: Learn how to create redirects when using Next.js in the most efficient way.
+description:
+  Learn how to create redirects when using Next.js in the most efficient way.
 date: 2019-08-20T18:20:48.099Z
 published: true
 lang: en
 tags: JavaScript, React, Next, Redirects
 ---
 
-When working with Next.js is super common to reach the point you need to redirect the user to another page, maybe because the user tried to access a private page or the user tried to access an old page.
+When working with Next.js is super common to reach the point you need to
+redirect the user to another page, maybe because the user tried to access a
+private page or the user tried to access an old page.
 
-This could be done in multiple ways, the most popular is to use an HTTP Redirect to achieve this, or `Router.replace` if the page is accessed client-side.
+This could be done in multiple ways, the most popular is to use an HTTP Redirect
+to achieve this, or `Router.replace` if the page is accessed client-side.
 
-While that works just fine is not ideal, for the first render the user will need an extra request to the server to get the correct page, but it turns out you already know the page the user is going to request since you are setting the HTTP Redirect, why not then render the correct page at straightaway?
+While that works just fine is not ideal, for the first render the user will need
+an extra request to the server to get the correct page, but it turns out you
+already know the page the user is going to request since you are setting the
+HTTP Redirect, why not then render the correct page at straightaway?
 
 ## Server-Side Code
 
-This way to set the redirect involves both Server and Client-side code, let's start with the server-side code. Let's say we have two pages, a `/login` and a `/private` page, both in our pages directory like this.
+This way to set the redirect involves both Server and Client-side code, let's
+start with the server-side code. Let's say we have two pages, a `/login` and a
+`/private` page, both in our pages directory like this.
 
 ```file-tree
 [
@@ -30,7 +39,9 @@ This way to set the redirect involves both Server and Client-side code, let's st
 ]
 ```
 
-In our private page we want to render our login page if the user is not logged in, let's say we know if the user is logged in because it has a certain cookie. We could validate the logged-in state in `getInitialProps`.
+In our private page we want to render our login page if the user is not logged
+in, let's say we know if the user is logged in because it has a certain cookie.
+We could validate the logged-in state in `getInitialProps`.
 
 ```js
 PrivatePage.getInitialProps = async context => {
@@ -40,7 +51,8 @@ PrivatePage.getInitialProps = async context => {
 };
 ```
 
-> _Note_: `readCookies` is a fake function that should read the cookies from the request headers and return an object with them.
+> _Note_: `readCookies` is a fake function that should read the cookies from the
+> request headers and return an object with them.
 
 Now in our `PrivatePage` component, we can render the login directly.
 
@@ -60,15 +72,21 @@ function PrivatePage({ loggedIn, ...props }) {
 export default PrivatePage;
 ```
 
-With this when the user access `/private` and doesn't have the `session` cookie, it will instead receive the HTML of the login page.
+With this when the user access `/private` and doesn't have the `session` cookie,
+it will instead receive the HTML of the login page.
 
-> _Note_: We used a dynamic import to avoid loading the code of LoginPage if it's not going to be used. This will save the user a few kB.
+> _Note_: We used a dynamic import to avoid loading the code of LoginPage if
+> it's not going to be used. This will save the user a few kB.
 
 ## Client-Side Code
 
-Let's go to the Client-Side part of our redirect, the user accessed `/private` and received the login page HTML, that's great but the user still sees `/private` in their browser. Let's fix that.
+Let's go to the Client-Side part of our redirect, the user accessed `/private`
+and received the login page HTML, that's great but the user still sees
+`/private` in their browser. Let's fix that.
 
-Next comes with a module called `next/router` which lets us change the route programmatically, we could use that to navigate to another page without requiring the user to click a link.
+Next comes with a module called `next/router` which lets us change the route
+programmatically, we could use that to navigate to another page without
+requiring the user to click a link.
 
 Let's add an effect in our `PrivatePage` to change the URL.
 
@@ -89,14 +107,27 @@ function PrivatePage({ loggedIn, ...props }) {
 // more code here
 ```
 
-This effect will do the trick, what that is doing is, first, validate if the user is logged in to do nothing, but if the user is not logged in it will replace the current URL with `/`.
+This effect will do the trick, what that is doing is, first, validate if the
+user is logged in to do nothing, but if the user is not logged in it will
+replace the current URL with `/`.
 
-The function `Router.replace` receives the `href` which is the actual route inside Next (aka the page) and the `as` which is the route we want to show to the user. Those two let use tell Next.js to use our already loaded `PrivatePage` but disguise it as `/login` in the browser.
+The function `Router.replace` receives the `href` which is the actual route
+inside Next (aka the page) and the `as` which is the route we want to show to
+the user. Those two let use tell Next.js to use our already loaded `PrivatePage`
+but disguise it as `/login` in the browser.
 
-The `shallow: true` tell Next to do not call `getInitialProps`, combine with the other two will make Next only change the URL but not doing anything else, this means technically the user is still on `PrivatePage` which is rendering `LoginPage`.
+The `shallow: true` tell Next to do not call `getInitialProps`, combine with the
+other two will make Next only change the URL but not doing anything else, this
+means technically the user is still on `PrivatePage` which is rendering
+`LoginPage`.
 
-When the user log in into the application it will be redirected back to `/private` but this time without the `shallow: true` and that will cause the `getInitialProps` to be executed again so it will see this time it has the `session` cookie and it will continue the normal flow of our `PrivatePage`.
+When the user log in into the application it will be redirected back to
+`/private` but this time without the `shallow: true` and that will cause the
+`getInitialProps` to be executed again so it will see this time it has the
+`session` cookie and it will continue the normal flow of our `PrivatePage`.
 
 ## Final Words
 
-This is the best approach to implement redirects using Next, I learned it while I was working at [ZEIT](https://zeit.co) the creators of the framework and is how I implemented a few redirects back there.
+This is the best approach to implement redirects using Next, I learned it while
+I was working at [ZEIT](https://zeit.co) the creators of the framework and is
+how I implemented a few redirects back there.

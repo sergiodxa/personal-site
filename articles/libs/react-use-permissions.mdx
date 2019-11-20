@@ -7,7 +7,8 @@ tags: react, hooks, permissions
 published: true
 ---
 
-React Hook for the [Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions).
+React Hook for the
+[Permissions API](https://developer.mozilla.org/en-US/docs/Web/API/Permissions).
 
 ## Installation
 
@@ -33,7 +34,10 @@ import usePermissions from "react-use-permissions";
 
 Then use it inside any functional React component passing any valid name.
 
-> Valid names are `accelerometer`, `accessibility-events`, `ambient-light-sensor`, `background-sync`, `camera`​, `clipboard-read`, `clipboard-write`, `geolocation`, `gyroscope`, `magnetometer`, `microphone`, `midi`, `notifications`, `payment-handler`, `persistent-storage`, and `push`
+> Valid names are `accelerometer`, `accessibility-events`,
+> `ambient-light-sensor`, `background-sync`, `camera`​, `clipboard-read`,
+> `clipboard-write`, `geolocation`, `gyroscope`, `magnetometer`, `microphone`,
+> `midi`, `notifications`, `payment-handler`, `persistent-storage`, and `push`
 
 ```js
 const format = function Component() {
@@ -58,4 +62,7 @@ const format = function Component() {
 };
 ```
 
-When the component is rendered the hook will return `null` initially and then check if the user has already granted or denied the permissions returning a boolean. In case the user hasn't already it will be prompted and then the hook will return the new state.
+When the component is rendered the hook will return `null` initially and then
+check if the user has already granted or denied the permissions returning a
+boolean. In case the user hasn't already it will be prompted and then the hook
+will return the new state.

@@ -1,19 +1,29 @@
 ---
 title: Carrusel de elementos dinámicos con React.js
 date: 2019-01-29T18:44:19.942Z
-description: Tutorial sobre como implementar un carrusel para elementos de diferentes tamaños usando React.js
+description:
+  Tutorial sobre como implementar un carrusel para elementos de diferentes
+  tamaños usando React.js
 published: true
 lang: en
 tags: React, Carousel, Spanish, JavaScript
 ---
 
-Imaginemos el siguiente caso, tenemos una lista de elementos que necesitamos mostrar de forma horizontal, estos no entran en pantalla por lo que queremos poner un carrusel para ir moviéndonos entre ellos, pero ocurre que dichos elementos varián de tamaño, algunos miden 100px de ancho, otros 300px y así.
+Imaginemos el siguiente caso, tenemos una lista de elementos que necesitamos
+mostrar de forma horizontal, estos no entran en pantalla por lo que queremos
+poner un carrusel para ir moviéndonos entre ellos, pero ocurre que dichos
+elementos varián de tamaño, algunos miden 100px de ancho, otros 300px y así.
 
-Vamos a ver como armar un componente de React que reciba como hijos una lista de elementos y cree una paginación horizontal que permite que al llegar al último elemento en pantalla el carrusel se mueva para mostrar el siguiente grupo de elementos.
+Vamos a ver como armar un componente de React que reciba como hijos una lista de
+elementos y cree una paginación horizontal que permite que al llegar al último
+elemento en pantalla el carrusel se mueva para mostrar el siguiente grupo de
+elementos.
 
-> **Nota**: Todo esto estás basado en un componente _real_ que tuve que armar para un proyecto en el que estoy trabajando actualmente.
+> **Nota**: Todo esto estás basado en un componente _real_ que tuve que armar
+> para un proyecto en el que estoy trabajando actualmente.
 
-Para esto vamos a crear un componente simple de React extendiendo de `React.Component`.
+Para esto vamos a crear un componente simple de React extendiendo de
+`React.Component`.
 
 ```js
 import React, { Component } from "react";
@@ -49,13 +59,19 @@ function App() {
 render(<App />, document.getElementById("root"));
 ```
 
-Como vemos nuestro componente va a recibir cuatro props, el primero es el clásico `children` con la lista de elementos hijos.
+Como vemos nuestro componente va a recibir cuatro props, el primero es el
+clásico `children` con la lista de elementos hijos.
 
-El segundo es `component` este nos va a servir para indicar que tag o componente personalizado queremos usar para envolver a los elementos hijos.
+El segundo es `component` este nos va a servir para indicar que tag o componente
+personalizado queremos usar para envolver a los elementos hijos.
 
-El tercero es el `leftPadding`, este nos va a servir para definir un espacio que debe queda siempre a la izquierda al momento de hacer el cambio de página de esta forma los elementos de la siguiente página no van a quedar pegados al borde de la pantalla o del contenedor de nuestro carrusel.
+El tercero es el `leftPadding`, este nos va a servir para definir un espacio que
+debe queda siempre a la izquierda al momento de hacer el cambio de página de
+esta forma los elementos de la siguiente página no van a quedar pegados al borde
+de la pantalla o del contenedor de nuestro carrusel.
 
-El cuarto y último nos permite indicarle cuál es el elemento con foco actualmente, esto nos va a servir para saber en donde está parado el usuario.
+El cuarto y último nos permite indicarle cuál es el elemento con foco
+actualmente, esto nos va a servir para saber en donde está parado el usuario.
 
 Sigamos programando el componente, vamos a definir el método `render` de este.
 
@@ -80,7 +96,9 @@ class Carousel extends Component {
 }
 ```
 
-Ahora vamos a empezar a armar la lógica, vamos a definir un `componentDidUpdate` que nos permite enterarnos cuando cambia el prop `focus` y calcular la nueva posición del carrusel.
+Ahora vamos a empezar a armar la lógica, vamos a definir un `componentDidUpdate`
+que nos permite enterarnos cuando cambia el prop `focus` y calcular la nueva
+posición del carrusel.
 
 ```js
 import React, { Component } from "react";
@@ -116,7 +134,12 @@ class Carousel extends Component {
 }
 ```
 
-Este método va a recibir el antiguo foco y va a revisar si cambió, en caso de hacerlo va a restar el foco actual menos el foco anterior, esto va a dar `-1` o `+1` dependiendo de si se movió para la izquierda (`-1`) o para la derecha (`+1`), este valor se lo vamos a pasar a un método que vamos a llamar `move` que va a recibir la dirección en la que se está moviendo. Vamos a ver como implementarlo.
+Este método va a recibir el antiguo foco y va a revisar si cambió, en caso de
+hacerlo va a restar el foco actual menos el foco anterior, esto va a dar `-1` o
+`+1` dependiendo de si se movió para la izquierda (`-1`) o para la derecha
+(`+1`), este valor se lo vamos a pasar a un método que vamos a llamar `move` que
+va a recibir la dirección en la que se está moviendo. Vamos a ver como
+implementarlo.
 
 ```js
 import React, { Component } from "react";
@@ -172,13 +195,24 @@ class Carousel extends Component {
 }
 ```
 
-Ya tenemos la función que se va a encargar de mover nuestro carrusel, está comentado pero veamos como funciona. Primero nos fijamos que ya calculamos los tamaños y en caso de no estar calculados llamamos al método `calculateSizes`.
+Ya tenemos la función que se va a encargar de mover nuestro carrusel, está
+comentado pero veamos como funciona. Primero nos fijamos que ya calculamos los
+tamaños y en caso de no estar calculados llamamos al método `calculateSizes`.
 
-Después obtenemos de nuestra lista de tamaños el elemento con el foco y de este nos traemos la página a la que pertenece (ya vamos a ver como se calcula), si la página actual (guarda en el estado) es igual que la página nueva no hacemos nada.
+Después obtenemos de nuestra lista de tamaños el elemento con el foco y de este
+nos traemos la página a la que pertenece (ya vamos a ver como se calcula), si la
+página actual (guarda en el estado) es igual que la página nueva no hacemos
+nada.
 
-Luego obtenemos el primero elemento de la página y de este sacamos la posición en pixeles en las que está ubicado. Por último actualizamos el estado guardando la página actual y la posición en X en la que debe estar ubicado nuestro carrusel, este se calcula haciendo `start` menos el `leftPadding` que recibimos como props, en caso de que el resultado sea menor a 0 ponemos 0, si no el resultado (esto para que funciona le primer página).
+Luego obtenemos el primero elemento de la página y de este sacamos la posición
+en pixeles en las que está ubicado. Por último actualizamos el estado guardando
+la página actual y la posición en X en la que debe estar ubicado nuestro
+carrusel, este se calcula haciendo `start` menos el `leftPadding` que recibimos
+como props, en caso de que el resultado sea menor a 0 ponemos 0, si no el
+resultado (esto para que funciona le primer página).
 
-Ahora vamos a ver como se calculan los tamaños y páginas del carrusel, acá es la lógica más pesada.
+Ahora vamos a ver como se calculan los tamaños y páginas del carrusel, acá es la
+lógica más pesada.
 
 ```js
 import React, { Component, createRef } from "react";
@@ -274,21 +308,49 @@ class Carousel extends Component {
 }
 ```
 
-Este método es más complejo, veamos como funciona paso a paso. Primero creamos una referencia a nuestro componente y lo usamos para obtener la lista de nodos del DOM hijos y su ancho. Esta lista de nodos del DOM la convertimos a un array para poder luego iterarla usando métodos de arrays.
+Este método es más complejo, veamos como funciona paso a paso. Primero creamos
+una referencia a nuestro componente y lo usamos para obtener la lista de nodos
+del DOM hijos y su ancho. Esta lista de nodos del DOM la convertimos a un array
+para poder luego iterarla usando métodos de arrays.
 
-Lo siguiente es transformar cada nodo de la lista en sus valores usando `getBoundingClientRect()`, este método de los elementos de DOM nos devuelve un objeto con las propiedades `left`, `top`, `right`, `bottom`, `x`, `y`, `width`, y `height` que nos indican el tamaño y su posición en la pantalla. De estos tomamos `x` como `start`, el `width` y sumamos ambos para calcular el `end`, esto nos indica donde empieza el elemento, su tamaño y donde termina.
+Lo siguiente es transformar cada nodo de la lista en sus valores usando
+`getBoundingClientRect()`, este método de los elementos de DOM nos devuelve un
+objeto con las propiedades `left`, `top`, `right`, `bottom`, `x`, `y`, `width`,
+y `height` que nos indican el tamaño y su posición en la pantalla. De estos
+tomamos `x` como `start`, el `width` y sumamos ambos para calcular el `end`,
+esto nos indica donde empieza el elemento, su tamaño y donde termina.
 
-Lo siguiente es calcular las páginas, para esto hacemos un `reduce` cuyo valor inicial es un objeto con las propiades `rest` con valor 0, `lastPage` con valor 1 y `elements` como un array vacío. En cada iteración de nuestro `reduce` vamos a calcular la página usando la ecuación `Math.ceil((end + result.rest + this.props.leftPadding) / pageWidth)`, esto lo que hace es suma donde termina el elemento más el resto (`rest`) de la página anterior más el `leftPadding` y lo divide por el ancho del contenedor, que sería el ancho de cada página.
+Lo siguiente es calcular las páginas, para esto hacemos un `reduce` cuyo valor
+inicial es un objeto con las propiades `rest` con valor 0, `lastPage` con valor
+1 y `elements` como un array vacío. En cada iteración de nuestro `reduce` vamos
+a calcular la página usando la ecuación
+`Math.ceil((end + result.rest + this.props.leftPadding) / pageWidth)`, esto lo
+que hace es suma donde termina el elemento más el resto (`rest`) de la página
+anterior más el `leftPadding` y lo divide por el ancho del contenedor, que sería
+el ancho de cada página.
 
-Luego devolvemos un objeto con las mismas propiedades que al inicio del `reduce` calculando sus nuevos valores. Primero si `lastPage` no es igual a la página que calculamos actualizamos `lastPage`, luego a nuestra lista de elementos le concatenamos un nuevo objeto con su `width`, `start`, `end` y su `page` que calculamos. Por último calculamos el resto, este se calcula solo en caso de que la página haya cambiado y es el resultado de tomar el ancho de una página, multiplicarlo por la última página y restarle el punto de inicio del elemento.
+Luego devolvemos un objeto con las mismas propiedades que al inicio del `reduce`
+calculando sus nuevos valores. Primero si `lastPage` no es igual a la página que
+calculamos actualizamos `lastPage`, luego a nuestra lista de elementos le
+concatenamos un nuevo objeto con su `width`, `start`, `end` y su `page` que
+calculamos. Por último calculamos el resto, este se calcula solo en caso de que
+la página haya cambiado y es el resultado de tomar el ancho de una página,
+multiplicarlo por la última página y restarle el punto de inicio del elemento.
 
-Este resto nos sirve para que si un elemento empieza en digamos la página 1 pero termina en la página 2 entonces debe pertenecer a la página 2 ya que es la única forma de que se vea completo en la pantalla, para esto en el cálculo de la página sumamos el resto de la página actual más la posición donde termina más el `leftPadding` y si con todo esto no entra en pantalla entonces debe pertenecer a la siguiente página.
+Este resto nos sirve para que si un elemento empieza en digamos la página 1 pero
+termina en la página 2 entonces debe pertenecer a la página 2 ya que es la única
+forma de que se vea completo en la pantalla, para esto en el cálculo de la
+página sumamos el resto de la página actual más la posición donde termina más el
+`leftPadding` y si con todo esto no entra en pantalla entonces debe pertenecer a
+la siguiente página.
 
-Una vez hicimos todo el cálculo obtenemos solo los elementos (su tamaño, posiciones y página) y lo devolvemos.
+Una vez hicimos todo el cálculo obtenemos solo los elementos (su tamaño,
+posiciones y página) y lo devolvemos.
 
 ## Usando Hooks
 
-Ahora que vimos como funciona vamos a migrarlo a Hooks para ver como se podría hacer de forma más moderna.
+Ahora que vimos como funciona vamos a migrarlo a Hooks para ver como se podría
+hacer de forma más moderna.
 
 ```js
 import React, { useRef, useState, useEffect } from "react";
@@ -377,11 +439,16 @@ function Carousel({ children, focus = 0, leftPadding = 0, component = "div" }) {
 }
 ```
 
-Como vemos el código queda más corto y un poco más simple. Es importante recordar que hooks todavía no es estable y para probarlo necesitanse necesita instalar react y react-dom usando `react@next` y `react-dom@next`.
+Como vemos el código queda más corto y un poco más simple. Es importante
+recordar que hooks todavía no es estable y para probarlo necesitanse necesita
+instalar react y react-dom usando `react@next` y `react-dom@next`.
 
 ## Palabras finales
 
-Con esto acabamos de implementar nuestro carrusel para hijos de diferentes tamaños, parece algo complicado pero la lógica es bastante simple. A este carrusel aún podemos agregarle mejores, como soportar `rtl` o volverlo más accesible.
+Con esto acabamos de implementar nuestro carrusel para hijos de diferentes
+tamaños, parece algo complicado pero la lógica es bastante simple. A este
+carrusel aún podemos agregarle mejores, como soportar `rtl` o volverlo más
+accesible.
 
 Por último acá debajo pueden ver como queda funcionando (la versión con clases).
 

@@ -1,19 +1,27 @@
 ---
 title: Composición de Componentes en React
 date: 2019-02-26T16:27:49.966Z
-description: Una de las mejores cosas de React es poder combinar componentes para crear nuevo componentes más complejos
+description:
+  Una de las mejores cosas de React es poder combinar componentes para crear
+  nuevo componentes más complejos
 lang: es
 published: true
 tags: Frontend, React, JavaScript, Spanish
 next:
   title: Componentes con Hijos Personalizables en React
   path: /articles/componentes-react-hijos-personalizables
-  description: Para evitar prop drilling y hacer componentes aún más personalizables vamos a ver como usar un prop para cambiar el contenido de un componentes de React.
+  description:
+    Para evitar prop drilling y hacer componentes aún más personalizables vamos
+    a ver como usar un prop para cambiar el contenido de un componentes de
+    React.
 ---
 
-Hasta ahora [hemos creado un solo componente](/articles/componentes-con-react), lo más normal al usar React es tener múltiples componentes y combinarlos para formar un componente más complejo. Hoy vamos a ver como hacer esto.
+Hasta ahora [hemos creado un solo componente](/articles/componentes-con-react),
+lo más normal al usar React es tener múltiples componentes y combinarlos para
+formar un componente más complejo. Hoy vamos a ver como hacer esto.
 
-Si [recordamos del artículo anterior](/articles/tipos-datos-react) nuestro componente debe lucir así:
+Si [recordamos del artículo anterior](/articles/tipos-datos-react) nuestro
+componente debe lucir así:
 
 ```js
 function Hello(props) {
@@ -29,7 +37,8 @@ Hello.defaultProps = {
 };
 ```
 
-Vamos a crear un componente `Header` que renderice `Hello` internamente y agregue una etiqueta `<header>` alrededor de nuestro `<h1>`.
+Vamos a crear un componente `Header` que renderice `Hello` internamente y
+agregue una etiqueta `<header>` alrededor de nuestro `<h1>`.
 
 ```js
 function Header(props) {
@@ -49,13 +58,23 @@ Header.defaultProps = {
 };
 ```
 
-Si vemos acabamos de crear nuestro nuevo componente que [crea un elemento](/articles/hola-mundo-react) `<header>` y dentro de este crea otro elemento usando el componente `Hello`, a parte de esto hicimos que este nuevo componente reciba el prop `name` y se lo pase tal cual a `Hello`.
+Si vemos acabamos de crear nuestro nuevo componente que
+[crea un elemento](/articles/hola-mundo-react) `<header>` y dentro de este crea
+otro elemento usando el componente `Hello`, a parte de esto hicimos que este
+nuevo componente reciba el prop `name` y se lo pase tal cual a `Hello`.
 
-> **Nota**: Pasar props de un componente padre a un componente hijo se conoce como prop drilling. En futuros artículos veremos algunos problemas de esta técnica y como solucionarlos, pero es importante entender que **no es una mala práctica** hacerlo.
+> **Nota**: Pasar props de un componente padre a un componente hijo se conoce
+> como prop drilling. En futuros artículos veremos algunos problemas de esta
+> técnica y como solucionarlos, pero es importante entender que **no es una mala
+> práctica** hacerlo.
 
-Esto es llama composición de componente, el nombre viene de Programación Funcional donde existe la técnica Composición de Funciones. La idea es que uses funciones, o en nuestro caso componentes, más pequeños y simples para crear funciones/componentes más complejos.
+Esto es llama composición de componente, el nombre viene de Programación
+Funcional donde existe la técnica Composición de Funciones. La idea es que uses
+funciones, o en nuestro caso componentes, más pequeños y simples para crear
+funciones/componentes más complejos.
 
-De esta forma podríamos tener varios componentes que usen internamente `Hello` para crear diferentes resultados agregando más contenido alrededor de este.
+De esta forma podríamos tener varios componentes que usen internamente `Hello`
+para crear diferentes resultados agregando más contenido alrededor de este.
 
 Si ahora actualizamos nuestro código quedaría así:
 
@@ -94,4 +113,5 @@ const node = document.getElementById("app");
 ReactDOM.render(element, node);
 ```
 
-¡Con esto acabas de crear tu segundo componente! [En otro artíuclo veremos como mejorar Header para personalizar el contenido dentro de `<header>`](/articles/componentes-react-hijos-personalizables).
+¡Con esto acabas de crear tu segundo componente!
+[En otro artíuclo veremos como mejorar Header para personalizar el contenido dentro de `<header>`](/articles/componentes-react-hijos-personalizables).

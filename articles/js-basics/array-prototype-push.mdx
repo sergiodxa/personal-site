@@ -1,13 +1,17 @@
 ---
 title: "Conceptos básicos de JS: Array#push"
 date: 2019-02-11T15:51:40.696Z
-description: Aprende a usar Array#push, como se implementa a mano y casos de uso prácticos de este método de los array en JavaScript.
+description:
+  Aprende a usar Array#push, como se implementa a mano y casos de uso prácticos
+  de este método de los array en JavaScript.
 lang: es
 published: true
 tags: JavaScript, Spanish, Array, ES3
 ---
 
-_Array#push_, o `Array.prototype.push`, es un método que poseen todos lo arrays en JavaScript. Este método nos sirve para agregar uno o más valores nuevos a un array y el largo final del array con estos nuevos elementos. Veamos un ejemplo:
+_Array#push_, o `Array.prototype.push`, es un método que poseen todos lo arrays
+en JavaScript. Este método nos sirve para agregar uno o más valores nuevos a un
+array y el largo final del array con estos nuevos elementos. Veamos un ejemplo:
 
 ```js
 const numbers = [1, 2, 3];
@@ -16,9 +20,12 @@ console.log(numbers); // [1,2,3,4,5]
 console.log(total); // 5
 ```
 
-Lo que hace Array#push entonces es agregar cada uno de los elementos que le pasemos y nos devuelve la propiedad `length` del array actualizado con estos elementos.
+Lo que hace Array#push entonces es agregar cada uno de los elementos que le
+pasemos y nos devuelve la propiedad `length` del array actualizado con estos
+elementos.
 
-Si queremos hacer lo mismo que Array#push tendríamos que hacer algo similar a esto:
+Si queremos hacer lo mismo que Array#push tendríamos que hacer algo similar a
+esto:
 
 ```js
 const numbers = [1, 2, 3];
@@ -30,7 +37,10 @@ console.log(numbers); // [1,2,3,4,5]
 console.log(numbers.length); // 5
 ```
 
-Tendríamos que asignar nuestros nuevos elementos a la posición `array.length` del array, lo que dado que los arrays empiezan en 0 y length cuenta desde 1 significa agregarlo en una posición nueva inmediatamente después del último elemento que existe hasta ese momento.
+Tendríamos que asignar nuestros nuevos elementos a la posición `array.length`
+del array, lo que dado que los arrays empiezan en 0 y length cuenta desde 1
+significa agregarlo en una posición nueva inmediatamente después del último
+elemento que existe hasta ese momento.
 
 ## Sintaxis
 
@@ -40,11 +50,16 @@ La sintaxis completa de la función es la siguiente
 const total = array.push(...elements);
 ```
 
-Array#push recibe uno o más argumentos, cada argumento es agregado al array uno por uno hasta que el último argumento quede al final del array. Por último se devuelve el tamaño nuevo del array.
+Array#push recibe uno o más argumentos, cada argumento es agregado al array uno
+por uno hasta que el último argumento quede al final del array. Por último se
+devuelve el tamaño nuevo del array.
 
 ## Implementando Array#push a mano
 
-Veamos ahora como crear nuestro propio Array#push para entender mejor su funcionamiento. Vamos a implementarlo como una función llamada `push` cuyo primer valor va a ser el `array` al cual hacer push y el resto de los argumentos van a ser los elementos a agregar.
+Veamos ahora como crear nuestro propio Array#push para entender mejor su
+funcionamiento. Vamos a implementarlo como una función llamada `push` cuyo
+primer valor va a ser el `array` al cual hacer push y el resto de los argumentos
+van a ser los elementos a agregar.
 
 ```js
 function push(array, ...values) {
@@ -60,11 +75,17 @@ console.log(numbers); // [1,2,3,4,5]
 console.log(total); // 5
 ```
 
-¿Qué es lo que hicimos? Nuestra función recibe el array al cuál queremos agregarle elemento y uno o más elementos, usando parámetros rest, los `...` antes de `values`, podemos entonces obtener todos estos valores a agregar como un array que si no hay argumentos está vacío y sino tiene todos los que pasemos. Internamente iteramos este array de valores y los vamos agregando uno por uno al array, al final devolvemos el nuevo largo del array.
+¿Qué es lo que hicimos? Nuestra función recibe el array al cuál queremos
+agregarle elemento y uno o más elementos, usando parámetros rest, los `...`
+antes de `values`, podemos entonces obtener todos estos valores a agregar como
+un array que si no hay argumentos está vacío y sino tiene todos los que pasemos.
+Internamente iteramos este array de valores y los vamos agregando uno por uno al
+array, al final devolvemos el nuevo largo del array.
 
 ## Casos de uso
 
-Array#push es usado un montón en JavaScript. Por ejemplo para combinar dos arrays en uno solo.
+Array#push es usado un montón en JavaScript. Por ejemplo para combinar dos
+arrays en uno solo.
 
 ```js
 const numbers1 = [1, 2, 3];
@@ -78,8 +99,13 @@ console.log(total); // 6
 
 Ahora `numbers1` va a tener todos los elementos de `numbers2`.
 
-> _Nota_: ya que Array#push modifica el array en vez de crear uno nuevo cuando se trabaja de forma funcional se suele usar más Array#concat.
+> _Nota_: ya que Array#push modifica el array en vez de crear uno nuevo cuando
+> se trabaja de forma funcional se suele usar más Array#concat.
 
 ## Palabras finales
 
-Este método es muy útil y es usado a diario al trabajar con Arrays en JavaScript cuando no se trabaja de forma funcional. Si no lo habías usado antes te recomiendo probar varios ejemplos de uso para familiarizarte e igualmente pruebe Array#concat como alternativa funcional y combinable con Array#map, Array#filter y Array#reduces.
+Este método es muy útil y es usado a diario al trabajar con Arrays en JavaScript
+cuando no se trabaja de forma funcional. Si no lo habías usado antes te
+recomiendo probar varios ejemplos de uso para familiarizarte e igualmente pruebe
+Array#concat como alternativa funcional y combinable con Array#map, Array#filter
+y Array#reduces.

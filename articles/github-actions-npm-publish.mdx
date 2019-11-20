@@ -1,15 +1,22 @@
 ---
 title: Automatically Publish to npm using GitHub Actions
-description: Create a GitHub Actions workflow to automatically publish new version of a package when creating a new release on GitHub.
+description:
+  Create a GitHub Actions workflow to automatically publish new version of a
+  package when creating a new release on GitHub.
 date: 2019-10-29T15:49:37.884Z
 lang: en
 tags: github, npm, automate, publish
 published: true
 ---
 
-Since I got access to the new GitHub Actions version I have waited to have a reason to use them and there was a workflow I always wanted to automate since it was too repetitive, publish to npm.
+Since I got access to the new GitHub Actions version I have waited to have a
+reason to use them and there was a workflow I always wanted to automate since it
+was too repetitive, publish to npm.
 
-I have multiple packages in npm, like [flagged](https://github.com/sergiodxa/flagged) or [@contentz/build](https://github.com/contentz-tech/build), that I wanted to automate the publish.
+I have multiple packages in npm, like
+[flagged](https://github.com/sergiodxa/flagged) or
+[@contentz/build](https://github.com/contentz-tech/build), that I wanted to
+automate the publish.
 
 ## The Action
 
@@ -41,7 +48,8 @@ This code is the GitHub Action I used, let's see what it does.
 name: Publish
 ```
 
-First we put a name to the action, this will be displayed in the checks of each PR or commit.
+First we put a name to the action, this will be displayed in the checks of each
+PR or commit.
 
 ```yml
 on:
@@ -49,7 +57,11 @@ on:
     types: [published]
 ```
 
-Then we configure when we want the action to run, in this case I'm saying on each release event when it's specifically a new release publish, the `types: [published]` is required here since releases could also be updated or deleted, we only want to publish to npm when a new release is created (published).
+Then we configure when we want the action to run, in this case I'm saying on
+each release event when it's specifically a new release publish, the
+`types: [published]` is required here since releases could also be updated or
+deleted, we only want to publish to npm when a new release is created
+(published).
 
 ```yml
 jobs:
@@ -57,7 +69,8 @@ jobs:
     runs-on: ubuntu-latest
 ```
 
-Then we create or job `build` and configure it to run on the latest version of Ubuntu.
+Then we create or job `build` and configure it to run on the latest version of
+Ubuntu.
 
 ```yml
 steps:
@@ -75,38 +88,54 @@ steps:
 Now we need to configure the steps of the job, this is what it does:
 
 - Get access to the repository files.
-- Install Node.js, with the version 12 and using the registry URL of npm, this could be changed to a custom registry or the GitHub registry.
+- Install Node.js, with the version 12 and using the registry URL of npm, this
+  could be changed to a custom registry or the GitHub registry.
 - Run the `yarn install` command to install the package dependencies.
-- Run the `npm publish` command, the `--access public` force the package to be public even if the name is namespaced, this command is also run with the environment variable `NODE_AUTH_TOKEN` whose value is a secret configured in the repository called `NPM_TOKEN`.
+- Run the `npm publish` command, the `--access public` force the package to be
+  public even if the name is namespaced, this command is also run with the
+  environment variable `NODE_AUTH_TOKEN` whose value is a secret configured in
+  the repository called `NPM_TOKEN`.
 
-The packages dependencies are installed because I configured a `prepare` script in the `package.json` of my package which runs the build of my module before publishing.
+The packages dependencies are installed because I configured a `prepare` script
+in the `package.json` of my package which runs the build of my module before
+publishing.
 
 ## Configure the Secret
 
-To configure the npm token secret go to `https://github.com/$username/$repository/settings/secrets` and click on `Add a new secret`.
+To configure the npm token secret go to
+`https://github.com/$username/$repository/settings/secrets` and click on
+`Add a new secret`.
 
 ![GitHub settings to configure the secrets with two secrets already configured](/static/articles/gh-secrets.png "Here click on 'Add a new secret'")
 
-Once you click click that button GitHub will show you a form to write the name and the value of the secret.
+Once you click click that button GitHub will show you a form to write the name
+and the value of the secret.
 
 ![GitHub form to create a new secret](/static/articles/gh-secrets-new.png)
 
-In our case we used `NPM_TOKEN` as name, for the value let's go to `https://www.npmjs.com/settings/$username/tokens` to get a new token.
+In our case we used `NPM_TOKEN` as name, for the value let's go to
+`https://www.npmjs.com/settings/$username/tokens` to get a new token.
 
 ![npm settings page on the token sections](/static/articles/npm-tokens.png "Click the Create New Token button")
 
-Click the `Create New Token` button in this page and you will navigate to a form.
+Click the `Create New Token` button in this page and you will navigate to a
+form.
 
 ![npm form to create a new token with the read and publish option checked](/static/articles/npm-tokens-new.png "Here check the first option, read and publish")
 
-In this form check the first option, `read and publish` and click on `Create Token`, this way your token will have access to publish as you.
+In this form check the first option, `read and publish` and click on
+`Create Token`, this way your token will have access to publish as you.
 
 ![npm results page after creating a new token with the token hidden behind a yellow rectangle](/static/articles/npm-tokens-result.png "Note the token above doesn't work anymore")
 
-Now you will get back to the list of tokens with your new token created and displayed to you, copy it and go back to GitHub and add it as value.
+Now you will get back to the list of tokens with your new token created and
+displayed to you, copy it and go back to GitHub and add it as value.
 
-Once you have done that you will be able to add the secret and use it in your GitHub Actions.
+Once you have done that you will be able to add the secret and use it in your
+GitHub Actions.
 
 ## Final Words
 
-Now you can create a new Release on your package repository and get your package published on npm too without using any command yourself. You could even do it from your phone!
+Now you can create a new Release on your package repository and get your package
+published on npm too without using any command yourself. You could even do it
+from your phone!

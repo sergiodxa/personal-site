@@ -8,31 +8,52 @@ canonical_url: https://medium.com/@sergiodxa/compilando-el-frontend-con-webpack-
 
 ![](https://cdn-images-1.medium.com/max/1200/1*S820JcwsvouKCtlxhP6xiA.png)
 
-Cuando estamos haciendo desarrollo [Frontend](https://platzi.com/frontend/) es una buena práctica separar nuestro código en distintos módulos, tanto el código de JavaScript como el CSS, e incluso nuestros templates HTML.
+Cuando estamos haciendo desarrollo [Frontend](https://platzi.com/frontend/) es
+una buena práctica separar nuestro código en distintos módulos, tanto el código
+de JavaScript como el CSS, e incluso nuestros templates HTML.
 
-Sin embargo, al momento de enviarlo al usuario lo mejor es enviar un archivo, o al menos unos pocos, para eso una vez tenemos nuestro código listo lo normal es usar herramientas que tomen todos nuestro módulo y los empaqueten en un solo archivos.
+Sin embargo, al momento de enviarlo al usuario lo mejor es enviar un archivo, o
+al menos unos pocos, para eso una vez tenemos nuestro código listo lo normal es
+usar herramientas que tomen todos nuestro módulo y los empaqueten en un solo
+archivos.
 
-Si trabajamos con pre-procesadores de CSS estos nos permiten trabajar nuestros estilos en módulos y luego al compilarlos generar un único archivo final, de la misma forma existen herramientas como [Browserify](https://browserify.org/) que nos permiten trabajar nuestro JS en módulos de CommonJS (e incluso de [ES2015/6](https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636)).
+Si trabajamos con pre-procesadores de CSS estos nos permiten trabajar nuestros
+estilos en módulos y luego al compilarlos generar un único archivo final, de la
+misma forma existen herramientas como [Browserify](https://browserify.org/) que
+nos permiten trabajar nuestro JS en módulos de CommonJS (e incluso de
+[ES2015/6](https://medium.com/@sergiodxa/usando-ecmascript-6-2015-con-babel-b9cc670b5636)).
 
-Aunque estas herramientas son muy buenas, existe una herramienta llamada [webpack](https://webpack.github.io/) realizada específicamente para el desarrollo Frontend de aplicaciones web.
+Aunque estas herramientas son muy buenas, existe una herramienta llamada
+[webpack](https://webpack.github.io/) realizada específicamente para el
+desarrollo Frontend de aplicaciones web.
 
 ### ¿Qué es webpack?
 
-Webpack es simplemente un empaquetador de módulos hecho específicamente para desarrollo Frontend, pero posible de usar incluso en Backend. Webpack esta pensado para módulos de JS, usando los sistemas de módulos de CommonJS, AMD e incluso [ES6](http://sergio.xalambri.com.ar/es6/).
+Webpack es simplemente un empaquetador de módulos hecho específicamente para
+desarrollo Frontend, pero posible de usar incluso en Backend. Webpack esta
+pensado para módulos de JS, usando los sistemas de módulos de CommonJS, AMD e
+incluso [ES6](http://sergio.xalambri.com.ar/es6/).
 
-A diferencia de Browserify también soporta módulos descargados tanto desde npm como de Bower, y gracias a su increíble sistema de loaders es posible extenderlo para poder usarlo con CSS, HTML, y más. Para terminar webpack permite la carga asíncrona de módulos para evitar mandar código no esencial al usuario.
+A diferencia de Browserify también soporta módulos descargados tanto desde npm
+como de Bower, y gracias a su increíble sistema de loaders es posible extenderlo
+para poder usarlo con CSS, HTML, y más. Para terminar webpack permite la carga
+asíncrona de módulos para evitar mandar código no esencial al usuario.
 
 ### Instalando webpack
 
-Instalar webpack es tan fácil como instalar cualquier cosa desde npm, simplemente con un comando en la terminal:
+Instalar webpack es tan fácil como instalar cualquier cosa desde npm,
+simplemente con un comando en la terminal:
 
 ```bash
 sudo npm i -g webpack
 ```
 
-Al igual que con [Gulp.js](https://platzi.com/blog/automatizacion-gulp-js/) es necesario instalar webpack de forma global y luego de forma local en cada proyecto donde lo vayamos a utilizar.
+Al igual que con [Gulp.js](https://platzi.com/blog/automatizacion-gulp-js/) es
+necesario instalar webpack de forma global y luego de forma local en cada
+proyecto donde lo vayamos a utilizar.
 
-Una vez instalado global vamos a la carpeta de nuestro proyecto y ahí instalamos otra vez webpack, además instalamos los loaders que vayamos a utilizar:
+Una vez instalado global vamos a la carpeta de nuestro proyecto y ahí instalamos
+otra vez webpack, además instalamos los loaders que vayamos a utilizar:
 
 ```bash
 npm i -D webpack
@@ -42,20 +63,35 @@ npm i -D styles-loader css-loader stylus-loader</pre>
 
 #### Loaders
 
-Los loaders de webpack son la forma de extender webpack para que además de entender JS nativo (tal cual lo soporte al versión de Node.js usada) pueda entender cualquier otro tipo de recursos, gracias a los loaders cualquier recurso es un módulo de webpack.
+Los loaders de webpack son la forma de extender webpack para que además de
+entender JS nativo (tal cual lo soporte al versión de Node.js usada) pueda
+entender cualquier otro tipo de recursos, gracias a los loaders cualquier
+recurso es un módulo de webpack.
 
 En este ejemplo vamos a cargar varios loaders:
 
-- **babel-loader**: Este loader es el que habilita el soporte a ES6 gracias al uso de Babel.js.
-- **eslint-loader**: Este loader nos permite ejecutar ESLint antes de compilar nuestro JS para evitar errores en nuestros código y asegurarnos de seguír un estándar.
-- **json-loader**: Este loader nos permite cargar archivos JSON dentro de nuestros módulos JS y guardarlos en una constante como un objeto de JS ya parseado.
-- **styles-loader**: Este loader es el que nos permite desde nuestro módulos de JS cargar archivos de estilos y que se agreguen a etiquetas `<style>` o generar un archivo `.css`.
-- **css-loader**: Este loader nos permite cargar archivos .css en nuestros archivos JS, es necesario para usar styles-loader.
-- **stylus-loader**: Este loader compila código de Stylus a CSS para luego usarlo con css-loader.
+- **babel-loader**: Este loader es el que habilita el soporte a ES6 gracias al
+  uso de Babel.js.
+- **eslint-loader**: Este loader nos permite ejecutar ESLint antes de compilar
+  nuestro JS para evitar errores en nuestros código y asegurarnos de seguír un
+  estándar.
+- **json-loader**: Este loader nos permite cargar archivos JSON dentro de
+  nuestros módulos JS y guardarlos en una constante como un objeto de JS ya
+  parseado.
+- **styles-loader**: Este loader es el que nos permite desde nuestro módulos de
+  JS cargar archivos de estilos y que se agreguen a etiquetas `<style>` o
+  generar un archivo `.css`.
+- **css-loader**: Este loader nos permite cargar archivos .css en nuestros
+  archivos JS, es necesario para usar styles-loader.
+- **stylus-loader**: Este loader compila código de Stylus a CSS para luego
+  usarlo con css-loader.
 
 ### Configurando webpack
 
-Para poder empezar a utilizar webpack es necesario crear un archivo de configuración llamada webpack.config.js, este archivo (el cual es completamente programable con JS) es donde vamos a configurar los loaders a usar, el entry point de nuestra aplicación y la ubicación del paquete generado.
+Para poder empezar a utilizar webpack es necesario crear un archivo de
+configuración llamada webpack.config.js, este archivo (el cual es completamente
+programable con JS) es donde vamos a configurar los loaders a usar, el entry
+point de nuestra aplicación y la ubicación del paquete generado.
 
 Nuestro archivo de configuración va a tener entonces algo similar a esto:
 
@@ -73,27 +109,44 @@ module.exports = {
 };
 ```
 
-Esta es la configuración mínima, en esta estamos definiendo un entry point llamado main y el path a dicho archivo y los datos del output donde le indicamos a webpack el path de los paquetes generados y el nombre del archivo, en el nombre vemos que dice `[name]`, esto webpack lo substituye con el nombre del entry point, en nuestro caso main.
+Esta es la configuración mínima, en esta estamos definiendo un entry point
+llamado main y el path a dicho archivo y los datos del output donde le indicamos
+a webpack el path de los paquetes generados y el nombre del archivo, en el
+nombre vemos que dice `[name]`, esto webpack lo substituye con el nombre del
+entry point, en nuestro caso main.
 
-En nuestros entry points es posible agregar tantos como queramos y webpack los compilaría a todos a la vez.
+En nuestros entry points es posible agregar tantos como queramos y webpack los
+compilaría a todos a la vez.
 
 ### Usando webpack
 
-Una vez configurado webpack iniciarlo es simplemente ejecutar un comando en la terminal:
+Una vez configurado webpack iniciarlo es simplemente ejecutar un comando en la
+terminal:
 
 ```bash
 webpack
 ```
 
-Con esto ya es suficiente para iniciar webpack una vez y generar nuestro compilado. Si quisiéramos también podemos decirle a webpack que se quede escuchando nuestro entry points y los módulos que carguen para volver a compilarse automáticamente, para esto usamos el comando:
+Con esto ya es suficiente para iniciar webpack una vez y generar nuestro
+compilado. Si quisiéramos también podemos decirle a webpack que se quede
+escuchando nuestro entry points y los módulos que carguen para volver a
+compilarse automáticamente, para esto usamos el comando:
 
 ```bash
 webpack --watch
 ```
 
-Acá es donde podemos ver en acción una una de las mejores cosas de webpack, cada vez que cambiemos un módulo de nuestro código en vez de recompilar todo, como hace Browserify, webpack recompila solo ese módulo y actualiza el archivo compilado con la nueva versión del módulo modificado. Esto hace que la primera vez que se ejecuta webpack pueda tardar un poco, pero la próxima vez que se compile sea mucho más rápido.
+Acá es donde podemos ver en acción una una de las mejores cosas de webpack, cada
+vez que cambiemos un módulo de nuestro código en vez de recompilar todo, como
+hace Browserify, webpack recompila solo ese módulo y actualiza el archivo
+compilado con la nueva versión del módulo modificado. Esto hace que la primera
+vez que se ejecuta webpack pueda tardar un poco, pero la próxima vez que se
+compile sea mucho más rápido.
 
-Para terminar es posible ejecutar webpack es modo producción con el parámetro -p, esto genera archivos minificados, en el caso de JS usando [Uglify](https://github.com/mishoo/UglifyJS), además agregando el comando -d es posible hacer que webpack genere archivos de source maps para desarrollo.
+Para terminar es posible ejecutar webpack es modo producción con el parámetro
+-p, esto genera archivos minificados, en el caso de JS usando
+[Uglify](https://github.com/mishoo/UglifyJS), además agregando el comando -d es
+posible hacer que webpack genere archivos de source maps para desarrollo.
 
 ```bash
 webpack -p
@@ -102,7 +155,10 @@ webpack -d
 
 ### Usando loaders
 
-Con lo que hicimos hasta ahora ya es posible usar webpack para archivos JS normales, sin embargo antes descargamos varios loaders para poder extender webpack, para poder usarlos es necesario agregar una propiedad de nuestro configuración llamada module.
+Con lo que hicimos hasta ahora ya es posible usar webpack para archivos JS
+normales, sin embargo antes descargamos varios loaders para poder extender
+webpack, para poder usarlos es necesario agregar una propiedad de nuestro
+configuración llamada module.
 
 ```js
 const webpack = require("webpack");
@@ -130,21 +186,43 @@ module.exports = {
 };
 ```
 
-Agregando la propiedad module con un array llamado loaders podemos ir pasando cada uno de los loaders que necesitamos, cada loader debe ser entonces un objeto con al menos dos propiedades.
+Agregando la propiedad module con un array llamado loaders podemos ir pasando
+cada uno de los loaders que necesitamos, cada loader debe ser entonces un objeto
+con al menos dos propiedades.
 
-La propiedad test es una expresión regular para los formatos de archivos a los que queremos aplicarle los loaders. En estos dos ejemplos a los archivos .js y .jsx (`/\.jsx?\$/` sirve para ambos formatos) le aplicamos 2 loaders y a los .json le aplicamos otro loader diferente.
+La propiedad test es una expresión regular para los formatos de archivos a los
+que queremos aplicarle los loaders. En estos dos ejemplos a los archivos .js
+y .jsx (`/\.jsx?\$/` sirve para ambos formatos) le aplicamos 2 loaders y a
+los .json le aplicamos otro loader diferente.
 
-La segunda propiedad es loaders o loader (el primero si son varios), si usamos varios loaders le tenemos que pasar un array con los nombres de cada loader en orden de derecha a izquierda, en nuestro ejemplo primero se aplicaría el eslint-loader y si este no devuelve un error se ejecutaría babel-loader para compilar el código en ES2015 y ES2016.
+La segunda propiedad es loaders o loader (el primero si son varios), si usamos
+varios loaders le tenemos que pasar un array con los nombres de cada loader en
+orden de derecha a izquierda, en nuestro ejemplo primero se aplicaría el
+eslint-loader y si este no devuelve un error se ejecutaría babel-loader para
+compilar el código en ES2015 y ES2016.
 
-Si usamos un solo loader simplemente pasamos un string con el nombre del loader a usar, en este caso json-loader para parsear los archivos JSON. En algunos módulos de npm es posible que carguen archivos JSON por lo que es mejor siempre cargar este loader.
+Si usamos un solo loader simplemente pasamos un string con el nombre del loader
+a usar, en este caso json-loader para parsear los archivos JSON. En algunos
+módulos de npm es posible que carguen archivos JSON por lo que es mejor siempre
+cargar este loader.
 
 ### Compilando estilos con webpack
 
-Como dije antes es posible extender webpack para que funcione con archivos de estilos e incluso otros tipos de archivos. Para el caso de los estilos antes descargamos 3 loaders, usarlos haría que webpack agregue una etiqueta `<style>` con nuestro CSS, aunque esto puede llegar a ser aceptable nos haría dependientes de nuestro JS para tener CSS, lo cual no es buena idea, para evitar esto podemos descargar un plugin de webpack que nos permite extraer el CSS generado a un archivo separado.
+Como dije antes es posible extender webpack para que funcione con archivos de
+estilos e incluso otros tipos de archivos. Para el caso de los estilos antes
+descargamos 3 loaders, usarlos haría que webpack agregue una etiqueta `<style>`
+con nuestro CSS, aunque esto puede llegar a ser aceptable nos haría dependientes
+de nuestro JS para tener CSS, lo cual no es buena idea, para evitar esto podemos
+descargar un plugin de webpack que nos permite extraer el CSS generado a un
+archivo separado.
 
 #### Plugins
 
-Además de los loaders es posible cargar plugins para extender las funciones de webpack, mientras los loaders permiten que webpack entiendan otros formatos de archivos, los plugins nos permiten agregar nuevas funciones como pueden ser extraer el CSS generado o crear un archivo commons.js en el caso de que tengamos múltiples entry points.
+Además de los loaders es posible cargar plugins para extender las funciones de
+webpack, mientras los loaders permiten que webpack entiendan otros formatos de
+archivos, los plugins nos permiten agregar nuevas funciones como pueden ser
+extraer el CSS generado o crear un archivo commons.js en el caso de que tengamos
+múltiples entry points.
 
 Continuando con nuestro estilos vamos a descargar el plugin con el comando:
 
@@ -190,17 +268,28 @@ module.exports = {
 };
 ```
 
-En las nuevas líneas podemos ver que primero cargamos el plugin que acabamos de descargar, luego iniciamos pasandole que use como nombre del archivo de estilos [name].css, de forma similar a como hacemos en el output.filename el [name] se va substituir con el nombre del entry point (main en nuestro caso).
+En las nuevas líneas podemos ver que primero cargamos el plugin que acabamos de
+descargar, luego iniciamos pasandole que use como nombre del archivo de estilos
+[name].css, de forma similar a como hacemos en el output.filename el [name] se
+va substituir con el nombre del entry point (main en nuestro caso).
 
-Luego agregamos el nuevo loader para archivos `.styl` el cual va a usar el plugin para extraer los estilos generado luego de la compilación de los archivos de estilos.
+Luego agregamos el nuevo loader para archivos `.styl` el cual va a usar el
+plugin para extraer los estilos generado luego de la compilación de los archivos
+de estilos.
 
-Por último agregamos una propiedad plugins donde pasamos un array de los plugins usados, en este caso solo extractCSS (la instancia de del plugin extract-text-webpack-plugin que iniciamos antes).
+Por último agregamos una propiedad plugins donde pasamos un array de los plugins
+usados, en este caso solo extractCSS (la instancia de del plugin
+extract-text-webpack-plugin que iniciamos antes).
 
 ### Creando un commons.js
 
-Antes dije que era posible crear un archivo commons.js, para el que no sabe para que serviría una archivo de este tipo básicamente es un archivo con todo el código compartido entre varios entry points, para esto necesitamos agregar más de un entry point.
+Antes dije que era posible crear un archivo commons.js, para el que no sabe para
+que serviría una archivo de este tipo básicamente es un archivo con todo el
+código compartido entre varios entry points, para esto necesitamos agregar más
+de un entry point.
 
-Para agregar múltiples entry points solo tenemos que modificar nuestra configuración en la propiedad entry.
+Para agregar múltiples entry points solo tenemos que modificar nuestra
+configuración en la propiedad entry.
 
 ```js
 const webpack = require("webpack");
@@ -239,7 +328,11 @@ module.exports = {
 };
 ```
 
-Como se puede ver simplemente cambiamos nuestro entry point main por dos entry points, uno para el home y el otro para el about. Esto solo nos permite tener multiples entry points, sin embargo no crea el commons.js, para esto vamos a cargar otro plugin de webpack, solo que esta vez el plugin ya viene incorporado con webpack.
+Como se puede ver simplemente cambiamos nuestro entry point main por dos entry
+points, uno para el home y el otro para el about. Esto solo nos permite tener
+multiples entry points, sin embargo no crea el commons.js, para esto vamos a
+cargar otro plugin de webpack, solo que esta vez el plugin ya viene incorporado
+con webpack.
 
 ```js
 const webpack = require("webpack");
@@ -283,14 +376,30 @@ module.exports = {
 };
 ```
 
-Como se ve los que hacemos es que iniciamos el plugin CommonsChunkPlugin pasandole dos strings, el primero es el nombre del archivo commons.css y el segundo es el nombre del archivo commons.js.
+Como se ve los que hacemos es que iniciamos el plugin CommonsChunkPlugin
+pasandole dos strings, el primero es el nombre del archivo commons.css y el
+segundo es el nombre del archivo commons.js.
 
-Luego le pasamos lo que nos devuelve el plugin al array de plugins de la configuración, con solo estos dos cambios la próxima vez que ejecutemos webpack para compilar nuestro código va a generar el archivo de commons.js y commons.css.
+Luego le pasamos lo que nos devuelve el plugin al array de plugins de la
+configuración, con solo estos dos cambios la próxima vez que ejecutemos webpack
+para compilar nuestro código va a generar el archivo de commons.js y
+commons.css.
 
 ---
 
-Con esta configuración (que casi siempre se repite) es posible empezar a usar webpack de una forma bastante útil tanto para empaquetar nuestro JS como nuestro CSS.
+Con esta configuración (que casi siempre se repite) es posible empezar a usar
+webpack de una forma bastante útil tanto para empaquetar nuestro JS como nuestro
+CSS.
 
-Para concluir, webpack tiene muchas más posibilidades, como puede ser cargar módulos de forma asíncrono o realizar algo llamado [hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html) que nos permite actualizar módulos de JS o CSS sin necesidad de recargar toda la pagína, simplemente cambiando el módulo necesario al vuelo. Combinándolo con [React.js](https://platzi.com/cursos/reactjs/) es incluso posible actualizar componentes de React.js sin perder props o states gracias a [react-hot-reload](https://gaearon.github.io/react-hot-loader/).
+Para concluir, webpack tiene muchas más posibilidades, como puede ser cargar
+módulos de forma asíncrono o realizar algo llamado
+[hot module replacement](https://webpack.github.io/docs/hot-module-replacement.html)
+que nos permite actualizar módulos de JS o CSS sin necesidad de recargar toda la
+pagína, simplemente cambiando el módulo necesario al vuelo. Combinándolo con
+[React.js](https://platzi.com/cursos/reactjs/) es incluso posible actualizar
+componentes de React.js sin perder props o states gracias a
+[react-hot-reload](https://gaearon.github.io/react-hot-loader/).
 
-Como se ve webpack nos permite mejorar nuestro proceso de empaquetado de módulos frontend e incluso de backend mediante un solo empaquetador para todo capaz de entender casi cualquier tipo de archivo.
+Como se ve webpack nos permite mejorar nuestro proceso de empaquetado de módulos
+frontend e incluso de backend mediante un solo empaquetador para todo capaz de
+entender casi cualquier tipo de archivo.

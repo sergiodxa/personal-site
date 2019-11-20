@@ -1,6 +1,8 @@
 ---
 title: Introduction to React with the State & Effects hooks
-description: Learn how to start a React project, create your first component and use the State and Effects hooks to implement basic behaviors.
+description:
+  Learn how to start a React project, create your first component and use the
+  State and Effects hooks to implement basic behaviors.
 date: 2019-06-15T20:54:54.697Z
 published: true
 lang: en
@@ -8,22 +10,27 @@ tags: english, react, hooks, javascript
 next:
   title: Working with conditions & list in React
   path: /articles/react-conditions-lists
-  description: Learn how to conditionally render elements and how to properly work with lists in React.
+  description:
+    Learn how to conditionally render elements and how to properly work with
+    lists in React.
 ---
 
 ## Starting a React Project
 
-Let's start by creating a new React application, we could use the Create React App (_CRA_) tool to generate a basic boilerplate without configuration.
+Let's start by creating a new React application, we could use the Create React
+App (_CRA_) tool to generate a basic boilerplate without configuration.
 
 ```bash
 $ npx create-react-app my-app
 ```
 
-The `npx` command comes bundled with `npm` and let us use a command from a npm package without installing it globally.
+The `npx` command comes bundled with `npm` and let us use a command from a npm
+package without installing it globally.
 
 ## Running Your Project
 
-Now that we have the project created we could access our application directory and start the project, to do so run the following commands.
+Now that we have the project created we could access our application directory
+and start the project, to do so run the following commands.
 
 ```bash
 $ cd my-app
@@ -32,7 +39,9 @@ $ yarn start
 
 ## Rendering an Element with React
 
-You will notice your project comes with some files already created, delete all files inside the `src` folder and create a new `index.js` file with the content below.
+You will notice your project comes with some files already created, delete all
+files inside the `src` folder and create a new `index.js` file with the content
+below.
 
 ```js
 // src/index.js
@@ -43,7 +52,8 @@ const $root = document.getElementById("root");
 render(<h1>Hello, World!</h1>, $root);
 ```
 
-This will render `<h1>Hello, World!</h1>` to the DOM using React, we just rendered our first element.
+This will render `<h1>Hello, World!</h1>` to the DOM using React, we just
+rendered our first element.
 
 ## Creating a Component
 
@@ -59,13 +69,19 @@ const $root = document.getElementById("root");
 render(<HelloWorld />, $root);
 ```
 
-A component is a normal JavaScript function but the name should start with a capitalized letter and it must return some kind of HTML code. There are other valid values like arrays or null, but you usually want to return HTML.
+A component is a normal JavaScript function but the name should start with a
+capitalized letter and it must return some kind of HTML code. There are other
+valid values like arrays or null, but you usually want to return HTML.
 
-> _Note_: This is not real HTML, is something called JSX and in build time is transformed to function calls, specifically to the `React.createElement` function.
+> _Note_: This is not real HTML, is something called JSX and in build time is
+> transformed to function calls, specifically to the `React.createElement`
+> function.
 
 ## Running an Effect
 
-This time we will run a side effect, in this case we will change the title of the page, the one you read on the tab of your browser. To do it we need to use `React.useEffect`.
+This time we will run a side effect, in this case we will change the title of
+the page, the one you read on the tab of your browser. To do it we need to use
+`React.useEffect`.
 
 ```js
 // src/index.js
@@ -78,13 +94,20 @@ function HelloWorld() {
 }
 ```
 
-This useEffect function is called a _hook_, a function you can use to rely on React to do different things, in this case to run a side effect after the component is rendered in the screen.
+This useEffect function is called a _hook_, a function you can use to rely on
+React to do different things, in this case to run a side effect after the
+component is rendered in the screen.
 
-The useEffect hook receives a function and execute it after each render of the component (if the component is updated it will run it again). In our function we are changing the `document.title` to the string `Hello, World!`.
+The useEffect hook receives a function and execute it after each render of the
+component (if the component is updated it will run it again). In our function we
+are changing the `document.title` to the string `Hello, World!`.
 
 ## Handling Events
 
-One thing you will always need to do is to listen to events happening on the application and react to them, events like clicks, changes, submits, scroll, etc. In React we do that using `onEventName` where `EventName` is the name of the event, e.g. `onClick`, `onChange`, `onSubmit`, `onMouseOver`, etc.
+One thing you will always need to do is to listen to events happening on the
+application and react to them, events like clicks, changes, submits, scroll,
+etc. In React we do that using `onEventName` where `EventName` is the name of
+the event, e.g. `onClick`, `onChange`, `onSubmit`, `onMouseOver`, etc.
 
 ```js
 // src/index.js
@@ -106,11 +129,17 @@ function HelloWorld() {
 }
 ```
 
-We are now creating an input of type text with a default value `Hello, World!` and we will listen to the change event, when the input changes it will call our `handleChange` function and run the `console.log(event.target.value)`.
+We are now creating an input of type text with a default value `Hello, World!`
+and we will listen to the change event, when the input changes it will call our
+`handleChange` function and run the `console.log(event.target.value)`.
 
 ## Using State
 
-But we don't usually want to only log the value, we want to keep it and use it elsewhere in our application, to do so we use another hook from React, this one is called `React.useState` and let us keep values in memory and change them when we need them, when a state changes the component is rendered again with the new value.
+But we don't usually want to only log the value, we want to keep it and use it
+elsewhere in our application, to do so we use another hook from React, this one
+is called `React.useState` and let us keep values in memory and change them when
+we need them, when a state changes the component is rendered again with the new
+value.
 
 ```js
 // src/index.js
@@ -134,15 +163,26 @@ function HelloWorld() {
 }
 ```
 
-We are creating a new state and destructuring the resulting array in two elements, the first one `title` is the state value, the second one `setTitle` is a function React provides us to change the value of the state, we need to call it with the new state value.
+We are creating a new state and destructuring the resulting array in two
+elements, the first one `title` is the state value, the second one `setTitle` is
+a function React provides us to change the value of the state, we need to call
+it with the new state value.
 
-In our input we changed `defaultValue` to `value`, this force the input to have our `title` state as value, that means it doesn't matter if the user writes something as long as the state doesn't change the input value will not change.
+In our input we changed `defaultValue` to `value`, this force the input to have
+our `title` state as value, that means it doesn't matter if the user writes
+something as long as the state doesn't change the input value will not change.
 
-Here is where our `handleChange` works, it will read the new supposed value from the change event and pass it to `setTitle` to update the state, this will trigger a new render and update the input with the new value.
+Here is where our `handleChange` works, it will read the new supposed value from
+the change event and pass it to `setTitle` to update the state, this will
+trigger a new render and update the input with the new value.
 
 ## Using State & Effect together
 
-Using the state only to keep track of the value of an input is ok but it's not something really useful, let's synchronize the state of the input with the title of the document. We can use our `title` state inside our `useEffect` hook and change the title of the document dynamically based on what the user wrote in the input.
+Using the state only to keep track of the value of an input is ok but it's not
+something really useful, let's synchronize the state of the input with the title
+of the document. We can use our `title` state inside our `useEffect` hook and
+change the title of the document dynamically based on what the user wrote in the
+input.
 
 ```js
 // src/index.js
@@ -166,11 +206,15 @@ function HelloWorld() {
 }
 ```
 
-We could also use the value of the `title` state inside the `<h1>` to update it while the user is writing.
+We could also use the value of the `title` state inside the `<h1>` to update it
+while the user is writing.
 
 ## Adding a Second State & Effect
 
-Now let's add a second state and effect, inside our component we could have as many states and effects as we want/need, the only rule is they can't be inside an condition or loop. Let's keep track if the user is currently writing, like Slack or Facebook does in their chats.
+Now let's add a second state and effect, inside our component we could have as
+many states and effects as we want/need, the only rule is they can't be inside
+an condition or loop. Let's keep track if the user is currently writing, like
+Slack or Facebook does in their chats.
 
 ```js
 // src/index.js
@@ -203,19 +247,34 @@ function HelloWorld() {
 }
 ```
 
-We created a new state using `React.useState` and defaulted its value to `false`, the state we call it `isWriting` and the function to change it `setIsWriting`. We updated the original effect to only update the title of the document while the user is not writing.
+We created a new state using `React.useState` and defaulted its value to
+`false`, the state we call it `isWriting` and the function to change it
+`setIsWriting`. We updated the original effect to only update the title of the
+document while the user is not writing.
 
-Now we run a second effect where we are doing a `setTimeout` to update the `isWriting` state to false after a second. In the `handleChange` function we are changing both state, the `isWriting` to `true` and the `title` to the new content the user wrote.
+Now we run a second effect where we are doing a `setTimeout` to update the
+`isWriting` state to false after a second. In the `handleChange` function we are
+changing both state, the `isWriting` to `true` and the `title` to the new
+content the user wrote.
 
-At the end we added a single line to show in the UI if the user is writing, the `.toString()` is required to show the `true` or `false` as content.
+At the end we added a single line to show in the UI if the user is writing, the
+`.toString()` is required to show the `true` or `false` as content.
 
 ## Adding an Effect Dependencies Array
 
-If we run the example above it's possible to see before first second it's working fine and then it starts to update the state without waiting for the user to stop writing. This is because both effects are running after each render.
+If we run the example above it's possible to see before first second it's
+working fine and then it starts to update the state without waiting for the user
+to stop writing. This is because both effects are running after each render.
 
-We could pass a second argument to `useEffect` which is an array listing the values from outside the effect our effect depends on. In our case the first effect will use `isWriting` and `title` from state, that means it depends on the values of those states, while the second one depends only in the `isWriting`.
+We could pass a second argument to `useEffect` which is an array listing the
+values from outside the effect our effect depends on. In our case the first
+effect will use `isWriting` and `title` from state, that means it depends on the
+values of those states, while the second one depends only in the `isWriting`.
 
-The idea of this array of dependencies is we could limit our effect to only run if those dependencies changed. If `isWriting` didn't changed the second effect will not run, if `title` didn't changed too then even the first effect will not run.
+The idea of this array of dependencies is we could limit our effect to only run
+if those dependencies changed. If `isWriting` didn't changed the second effect
+will not run, if `title` didn't changed too then even the first effect will not
+run.
 
 ```js
 // src/index.js
@@ -250,9 +309,13 @@ function HelloWorld() {
 
 ## Clearing an Effect
 
-This is working a little bit better, but still we are seeing the title of the document change after one second. What we can do now is clear the timeout between each call of our effect.
+This is working a little bit better, but still we are seeing the title of the
+document change after one second. What we can do now is clear the timeout
+between each call of our effect.
 
-Inside an effect it's possible to return a function which will be executed before the next run of that effect, this let us clear the results of the previously run effect. In our case we could use it to run `clearTimeout`.
+Inside an effect it's possible to return a function which will be executed
+before the next run of that effect, this let us clear the results of the
+previously run effect. In our case we could use it to run `clearTimeout`.
 
 ```js
 // src/index.js
@@ -288,9 +351,12 @@ function HelloWorld() {
 
 ## Lifting State Up
 
-So far we created a single component, if we keep adding functionality to that component it will start to grow until it's hard, if not impossible, to maintain and add new features.
+So far we created a single component, if we keep adding functionality to that
+component it will start to grow until it's hard, if not impossible, to maintain
+and add new features.
 
-We could avoid that splitting it in different components and compose them in a parent component.
+We could avoid that splitting it in different components and compose them in a
+parent component.
 
 ```js
 // src/title.js
@@ -309,7 +375,10 @@ function Title({ value, isWriting }) {
 export default Title;
 ```
 
-In our first component we move the `<h1>` and the effect to update the document's title to another component called `Title`. Our component will receive an object as first argument, this is called `props` and we can destructure it to read their properties, in our case `value` and `isWriting`.
+In our first component we move the `<h1>` and the effect to update the
+document's title to another component called `Title`. Our component will receive
+an object as first argument, this is called `props` and we can destructure it to
+read their properties, in our case `value` and `isWriting`.
 
 ```js
 // src/input.js
@@ -331,9 +400,14 @@ function Input({ value, onWrite }) {
 export default Input;
 ```
 
-In our second component we move the `<input />`, the `handleChange` and the effect to set if it's writing to another component called `Input`. This will receive two values inside our `prop`, the `value` of the input, the same we receive in `Title`, and a function to change the value called `onWrite`.
+In our second component we move the `<input />`, the `handleChange` and the
+effect to set if it's writing to another component called `Input`. This will
+receive two values inside our `prop`, the `value` of the input, the same we
+receive in `Title`, and a function to change the value called `onWrite`.
 
-We will call this function with `event.target.value` to update it when the user writes something and inside our effect after one second with the same value, this change will make sense in the next component.
+We will call this function with `event.target.value` to update it when the user
+writes something and inside our effect after one second with the same value,
+this change will make sense in the next component.
 
 ```js
 // src/hello-world.js
@@ -363,11 +437,23 @@ function HelloWorld() {
 export default HelloWorld;
 ```
 
-Our latest component is our `HelloWorld`, this will import the `Title` and `Input` components and use them inside its return value sending `value`, `isWriting` and `onWrite` as props.
+Our latest component is our `HelloWorld`, this will import the `Title` and
+`Input` components and use them inside its return value sending `value`,
+`isWriting` and `onWrite` as props.
 
-This component will also keep the states for `title` and `isWriting`, this is called _"lift the state up"_, in our example those state are used inside our other component and our `HelloWorld` component too, because of this we can't move the value directly to the input since the data flow in React is single way from the top to the bottom of the component tree, we need to keep the state as near the top as required to be able to share the value, in our case that is `HelloWorld`.
+This component will also keep the states for `title` and `isWriting`, this is
+called _"lift the state up"_, in our example those state are used inside our
+other component and our `HelloWorld` component too, because of this we can't
+move the value directly to the input since the data flow in React is single way
+from the top to the bottom of the component tree, we need to keep the state as
+near the top as required to be able to share the value, in our case that is
+`HelloWorld`.
 
-Inside the `handleWrite` function we will update the value of `title` with the new received value and we will change `isWriting` to the result of the condition `value !== title`, this means if the value we received is the same as the current value we will set `isWriting` to false, if they are different we will set it to `true`.
+Inside the `handleWrite` function we will update the value of `title` with the
+new received value and we will change `isWriting` to the result of the condition
+`value !== title`, this means if the value we received is the same as the
+current value we will set `isWriting` to false, if they are different we will
+set it to `true`.
 
 With this we only need to render the `HelloWorld` component.
 
@@ -385,6 +471,12 @@ render(<HelloWorld />, $root);
 <iframe
   src="https://codesandbox.io/embed/react-hello-world-with-hooks-mz3v0?autoresize=1&fontsize=14&module=%2Fsrc%2Fhello-world.js"
   title="React Hello World with Hooks"
-  css={css`width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;`}
+  css={css`
+    width: 100%;
+    height: 500px;
+    border: 0;
+    border-radius: 4px;
+    overflow: hidden;
+  `}
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 />

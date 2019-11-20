@@ -1,43 +1,57 @@
 ---
 title: Tipos de datos en React
 date: 2019-02-26T16:14:01.492Z
-description: Hay varias formas de definir que tipos de datos recibe un componente en React, puede ser TypeScript, Flow o PropTypes
+description:
+  Hay varias formas de definir que tipos de datos recibe un componente en React,
+  puede ser TypeScript, Flow o PropTypes
 lang: es
 published: true
 tags: Spanish, React, JavaScript, Tipos
 next:
   title: Composición de Componentes en React
   path: /articles/composicion-componentes-react
-  description: Una de las mejores cosas de React es poder combinar componentes para crear nuevo componentes más complejos.
+  description:
+    Una de las mejores cosas de React es poder combinar componentes para crear
+    nuevo componentes más complejos.
 ---
 
-[Siguiendo](/articles/react-props-valores-predefinidos) con el uso de _props_ vamos a definir como definir a que tipo de dato pertenecen nuestros props.
+[Siguiendo](/articles/react-props-valores-predefinidos) con el uso de _props_
+vamos a definir como definir a que tipo de dato pertenecen nuestros props.
 
-Esto aunque parece más trabajo ayuda a documentar nuestros componentes para que tanto otros desarrolladores, como nosotros mismos en el futuro, podamos saber que recibe un componente y no encontrarnos con errores.
+Esto aunque parece más trabajo ayuda a documentar nuestros componentes para que
+tanto otros desarrolladores, como nosotros mismos en el futuro, podamos saber
+que recibe un componente y no encontrarnos con errores.
 
 Hay, como todo en JavaScript, varias formas de definir tipos de datos en React.
 
 ## TypeScript
 
-Una forma es usar TypeScript en vez de JavaScript normal, TypeScript es un lenguaje de programación que extiende JavaScript para agregar, entre otras cosas, tipos de datos al lenguaje los cuales son detectados por su compilador para ayudarte a prevenir errores durante el funcionamiento de la aplicación.
+Una forma es usar TypeScript en vez de JavaScript normal, TypeScript es un
+lenguaje de programación que extiende JavaScript para agregar, entre otras
+cosas, tipos de datos al lenguaje los cuales son detectados por su compilador
+para ayudarte a prevenir errores durante el funcionamiento de la aplicación.
 
 ```typescript
 interface Props {
   name?: string;
 }
 
-function Hello({ name = "Mundo"}: Props) {
+function Hello({ name = "Mundo" }: Props) {
   return React.createElement("h1", null, `Hola ${props.name}!`);
 }
 ```
 
-En este caso ya que usamos TypeScript es más común usar funcionalidades propias del lenguaje para, por ejemplo, definir valores por defecto a un _prop_.
+En este caso ya que usamos TypeScript es más común usar funcionalidades propias
+del lenguaje para, por ejemplo, definir valores por defecto a un _prop_.
 
-> Si querés aprender TypeScript te recomiendo leer su documentación en https://www.typescriptlang.org/.
+> Si querés aprender TypeScript te recomiendo leer su documentación en
+> https://www.typescriptlang.org/.
 
 ## FlowType
 
-Similar a TypeScript, FlowType extiende JavaScript para agregar tipos de datos, en este caso solo hace esto. Sus tipos son usados también al momento de compilar para detectar errores.
+Similar a TypeScript, FlowType extiende JavaScript para agregar tipos de datos,
+en este caso solo hace esto. Sus tipos son usados también al momento de compilar
+para detectar errores.
 
 ```js
 type Props {
@@ -49,11 +63,16 @@ function Hello({ name = "Mundo"}: Props) {
 }
 ```
 
-> Si querés aprender FlowType te recomiendo leer su documentación en https://flow.org/.
+> Si querés aprender FlowType te recomiendo leer su documentación en
+> https://flow.org/.
 
 ## PropTypes
 
-PropTypes es la forma propia de React que funciona sin necesidad de compilar y de usar otro lenguaje de programación. Originalmente venía incluído en el mismo React, actualmente dada la popularidad de TypeScript y FlowType se separó en una librería externa para reducir el tamaño de React, así solo quienes usen PropTypes lo cargan.
+PropTypes es la forma propia de React que funciona sin necesidad de compilar y
+de usar otro lenguaje de programación. Originalmente venía incluído en el mismo
+React, actualmente dada la popularidad de TypeScript y FlowType se separó en una
+librería externa para reducir el tamaño de React, así solo quienes usen
+PropTypes lo cargan.
 
 Para cargarlo en nuestro proyecto es igual que hicimos con React y ReactDOM.
 
@@ -63,7 +82,9 @@ Para cargarlo en nuestro proyecto es igual que hicimos con React y ReactDOM.
 
 Una etiqueta `<script>` con el link para cargarlo desde un CDN.
 
-Ahora vamos a tipar nuestro componente, para eso vamos a agregarle una propiedad estática llamada `propTypes` que va a ser un objeto donde cada key es un prop y su valor es el tipo de dato.
+Ahora vamos a tipar nuestro componente, para eso vamos a agregarle una propiedad
+estática llamada `propTypes` que va a ser un objeto donde cada key es un prop y
+su valor es el tipo de dato.
 
 ```js
 function Hello(props) {
@@ -79,9 +100,12 @@ Hello.defaultProps = {
 };
 ```
 
-Con esto acabamos de definir que el prop `name` **debe** ser un _string_. Si ahora pasamos cualquier otro valor React nos va a mostrar en la consola de nuestro navegador un error de tipo de dato.
+Con esto acabamos de definir que el prop `name` **debe** ser un _string_. Si
+ahora pasamos cualquier otro valor React nos va a mostrar en la consola de
+nuestro navegador un error de tipo de dato.
 
-Al igual que hay `PropTypes.string` hay muchos otros tipos de datos dependiendo de nuestras necesidades.
+Al igual que hay `PropTypes.string` hay muchos otros tipos de datos dependiendo
+de nuestras necesidades.
 
 | PropTypes                     | Descripción                                                     |
 | ----------------------------- | --------------------------------------------------------------- |
@@ -102,13 +126,17 @@ Al igual que hay `PropTypes.string` hay muchos otros tipos de datos dependiendo 
 | `shape({ name: string })`     | Un objeto con la forma específicada                             |
 | `any`                         | Cualquier tipo de dato                                          |
 
-> **Nota**: Normalmente `shape` es mejor que `object` u `objectOf` ya que nos permite especificar la forma exacta que debe tener el objeto que vamos a recibir como prop.
+> **Nota**: Normalmente `shape` es mejor que `object` u `objectOf` ya que nos
+> permite especificar la forma exacta que debe tener el objeto que vamos a
+> recibir como prop.
 
-Adicionalmente es posible crear PropTypes personalizados para hacer validaciones propias sobre los props. Esto lo veremos más adelante.
+Adicionalmente es posible crear PropTypes personalizados para hacer validaciones
+propias sobre los props. Esto lo veremos más adelante.
 
 ### Props Obligatorios
 
-También es posible definir un prop como obligatorio para que, en caso de no estar definido, React muestre un error avisando que es obligatorio.
+También es posible definir un prop como obligatorio para que, en caso de no
+estar definido, React muestre un error avisando que es obligatorio.
 
 ```js
 function Hello(props) {
@@ -120,7 +148,11 @@ Hello.propTypes = {
 };
 ```
 
-Como vemos, es cuestión de agregar `.isRequired` al tipo de dato para hacerlo obligatorio, otra efecto de esto es que podemos sacar el `defaultProps` ya que al ser obligatorio estamos seguros de que el usuario de nuestro componente va a definir siempre `name` y si no lo hace no nos molesta que falle el componente pues está marcado como obligatorio.
+Como vemos, es cuestión de agregar `.isRequired` al tipo de dato para hacerlo
+obligatorio, otra efecto de esto es que podemos sacar el `defaultProps` ya que
+al ser obligatorio estamos seguros de que el usuario de nuestro componente va a
+definir siempre `name` y si no lo hace no nos molesta que falle el componente
+pues está marcado como obligatorio.
 
 ## Palabras finales
 
@@ -145,6 +177,10 @@ const node = document.getElementById("app");
 ReactDOM.render(element, node);
 ```
 
-Ya vimos como hacer [un componente que use props](/articles/componentes-react-personalizables-props.mdx), [definir valores por defecto](/articles/react-props-valores-predefinidos) y ahora especificar el tipo de datos.
+Ya vimos como hacer
+[un componente que use props](/articles/componentes-react-personalizables-props.mdx),
+[definir valores por defecto](/articles/react-props-valores-predefinidos) y
+ahora especificar el tipo de datos.
 
-En próximos artículos [veremos como hacer composición de componentes de React](/articles/composicion-components-react).
+En próximos artículos
+[veremos como hacer composición de componentes de React](/articles/composicion-components-react).

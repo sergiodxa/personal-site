@@ -1,23 +1,37 @@
 ---
 title: Feature Flags in React with Flagged
-description: Use Flagged to detect Feature Flags and render or not a React component
+description:
+  Use Flagged to detect Feature Flags and render or not a React component
 date: 2019-10-26T17:45:34.989Z
 lang: en
 published: true
 tags: react, showdev, featureflags, flagged
 ---
 
-When you are working in a big product, with multiple teams adding features and doing continuos deployment it's common to need a way to hide certain unfinished or unpolished parts of a UI from the users in production.
+When you are working in a big product, with multiple teams adding features and
+doing continuos deployment it's common to need a way to hide certain unfinished
+or unpolished parts of a UI from the users in production.
 
-Or maybe you want to only show certain features to some users, maybe only to paid users or employees of a company. Even it's possible that you want to hide parts of the UI based on the role, e.g. only show admin features to admin users.
+Or maybe you want to only show certain features to some users, maybe only to
+paid users or employees of a company. Even it's possible that you want to hide
+parts of the UI based on the role, e.g. only show admin features to admin users.
 
-This is where enters Feature Flags, a technique to hide or show features based on a flag, which is basically a boolean which tells the application if the feature is enabled or not.
+This is where enters Feature Flags, a technique to hide or show features based
+on a flag, which is basically a boolean which tells the application if the
+feature is enabled or not.
 
-Let's see how we could show or hide React components based on those flags, for doing this we are going to use a package called [Flagged](https://github.com/sergiodxa/flagged), which is a super tiny library to use this technique in React based applications.
+Let's see how we could show or hide React components based on those flags, for
+doing this we are going to use a package called
+[Flagged](https://github.com/sergiodxa/flagged), which is a super tiny library
+to use this technique in React based applications.
 
 ## Hide Admin Only Components
 
-Let's start with the simplest one, hide components intended to be available only to admin users. Let's say we have a wiki application, this application shows to the user the content along a button to edit it, but those edits should be moderated and if you are an admin it will show another button to see pending edits.
+Let's start with the simplest one, hide components intended to be available only
+to admin users. Let's say we have a wiki application, this application shows to
+the user the content along a button to edit it, but those edits should be
+moderated and if you are an admin it will show another button to see pending
+edits.
 
 ```js
 import React from "react";
@@ -39,9 +53,14 @@ function ContentPage({ content }) {
 export default ContentPage;
 ```
 
-Something like that should work, right? But what happens when an non-admin users access a page rendered by this component? It will see two buttons, the edit and the moderate, and if the user tries to click the moderate button it will probably got a rejection when trying to access the moderation page which is probably a protected page already.
+Something like that should work, right? But what happens when an non-admin users
+access a page rendered by this component? It will see two buttons, the edit and
+the moderate, and if the user tries to click the moderate button it will
+probably got a rejection when trying to access the moderation page which is
+probably a protected page already.
 
-This is not ideal from the user perspective, we shouldn't show a button the user can't use, to solve this let's use flagged.
+This is not ideal from the user perspective, we shouldn't show a button the user
+can't use, to solve this let's use flagged.
 
 ```js
 import React from "react";
@@ -60,9 +79,12 @@ function App({ user }) {
 export default App;
 ```
 
-This will make the flag `moderate` enabled if the user has the role `admin` and disabled in other cases.
+This will make the flag `moderate` enabled if the user has the role `admin` and
+disabled in other cases.
 
-Now we need to check the flag status in our component, in our case since we want to hide `ModerateButton` completely if the user is not admin we could use the `withFeature` high order component flagged gives us.
+Now we need to check the flag status in our component, in our case since we want
+to hide `ModerateButton` completely if the user is not admin we could use the
+`withFeature` high order component flagged gives us.
 
 ```js
 import React from "react";
@@ -76,13 +98,20 @@ function ModerateButton() {
 export default withFeature("moderate")(ModerateButton);
 ```
 
-Now our component will only render if the flag `moderate` is `true`, if it's `false` then `withFeature` will return `null` and avoid rendering at all.
+Now our component will only render if the flag `moderate` is `true`, if it's
+`false` then `withFeature` will return `null` and avoid rendering at all.
 
-This is useful in the case we want to render or not a component without a fallback in case the feature is disabled.
+This is useful in the case we want to render or not a component without a
+fallback in case the feature is disabled.
 
 ## Paid Only Feature with Fallback
 
-Let's say now we want to only let paid users be able to edit content in our wiki, while free users will only be able to read the content, we could use an approach similar to before and hide the edit button completely from free users, however in this case it could be better to let the free users know this edit feature exists and they need to pay to use it, this way users may be tempted to pay us.
+Let's say now we want to only let paid users be able to edit content in our
+wiki, while free users will only be able to read the content, we could use an
+approach similar to before and hide the edit button completely from free users,
+however in this case it could be better to let the free users know this edit
+feature exists and they need to pay to use it, this way users may be tempted to
+pay us.
 
 Let's start by adding a new flag.
 
@@ -108,9 +137,11 @@ function App({ user }) {
 export default App;
 ```
 
-This will enable the `paid` features if the user is either an admin or has an active subscription.
+This will enable the `paid` features if the user is either an admin or has an
+active subscription.
 
-Now let's use the `Feature` component flagged gives use to provide an alternative to the Edit button in case the user is not a paid one.
+Now let's use the `Feature` component flagged gives use to provide an
+alternative to the Edit button in case the user is not a paid one.
 
 ```js
 import React from "react";
@@ -136,9 +167,13 @@ function ContentPage({ content }) {
 export default ContentPage;
 ```
 
-This `Feature` component will let use know if the feature `paid` is enabled so we could show two different components based on that. Our `FakeEditButton` could simulate the `EditButton` and show a modal to convince the user to become a paid one in order to use it.
+This `Feature` component will let use know if the feature `paid` is enabled so
+we could show two different components based on that. Our `FakeEditButton` could
+simulate the `EditButton` and show a modal to convince the user to become a paid
+one in order to use it.
 
-We could also use the `Feature` component to replace the `withFeature` high order component.
+We could also use the `Feature` component to replace the `withFeature` high
+order component.
 
 ```js
 import React from "react";
@@ -166,15 +201,24 @@ function ContentPage({ content }) {
 export default ContentPage;
 ```
 
-This way we could ditch the `withFeature` HOC, the only possible issue here is not our `ContentPage` needs to know if `ModerateButton` should be behind a flag or not, in the HOC approach it was the `ModerateButton` the only one aware of the flag.
+This way we could ditch the `withFeature` HOC, the only possible issue here is
+not our `ContentPage` needs to know if `ModerateButton` should be behind a flag
+or not, in the HOC approach it was the `ModerateButton` the only one aware of
+the flag.
 
 ## Run Effects Based on a Flag
 
-We saw how to use the high order component and the render prop API Flagged gives us, both of those use internally the custom hook `useFeature` to detect if the feature is enabled or not. This custom hook could also help use create custom logic based on a flag.
+We saw how to use the high order component and the render prop API Flagged gives
+us, both of those use internally the custom hook `useFeature` to detect if the
+feature is enabled or not. This custom hook could also help use create custom
+logic based on a flag.
 
-Let say now want to track when a free user access a page, but we don't want to track paid users, since they are paying we promising them anonymity in our application.
+Let say now want to track when a free user access a page, but we don't want to
+track paid users, since they are paying we promising them anonymity in our
+application.
 
-Let's create a custom hook `useTracking` which will use our `useFeature` to check if it should or not track the user.
+Let's create a custom hook `useTracking` which will use our `useFeature` to
+check if it should or not track the user.
 
 ```js
 import React from "react";
@@ -227,7 +271,8 @@ That's all, our tracking hook will only work for non-paid users.
 
 ## Hooks as a Low Level Primitive
 
-We could also use the `useFeature` hook to replace the render prop component in `ContentPage`.
+We could also use the `useFeature` hook to replace the render prop component in
+`ContentPage`.
 
 ```js
 import React from "react";
@@ -288,6 +333,11 @@ This will render `ModerateButton` only if `isModerator` is `true`.
 
 ## Final Words
 
-As you could see above there are multiple cases in which feature flags flags is useful and with [Flagged](https://github.com/sergiodxa/flagged) there are multiple approaches you could take to detect if a flag is enabled and render a component or run an effect.
+As you could see above there are multiple cases in which feature flags flags is
+useful and with [Flagged](https://github.com/sergiodxa/flagged) there are
+multiple approaches you could take to detect if a flag is enabled and render a
+component or run an effect.
 
-Are you using feature flags in your project? Do you know another example where it could be useful? Do you have any question about how Flagged or Feature Flags works? Send me tweet to share your thoughts.
+Are you using feature flags in your project? Do you know another example where
+it could be useful? Do you have any question about how Flagged or Feature Flags
+works? Send me tweet to share your thoughts.

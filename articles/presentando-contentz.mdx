@@ -1,17 +1,25 @@
 ---
 title: Presentando Contentz
-description: Contentz, un Pure Static Site Generator para obtener un sitio web super optimizado.
+description:
+  Contentz, un Pure Static Site Generator para obtener un sitio web super
+  optimizado.
 date: 2019-03-05T21:03:17.909Z
 published: true
 lang: es
 tags: Contentz, SSG, Spanish, Website
 next:
   title: Contentz es Omakase
-  description: Contentz toma decisiones por uno, a cambio nos ofrece un sitio optimizado para un mejor rendimiento y lectura.
+  description:
+    Contentz toma decisiones por uno, a cambio nos ofrece un sitio optimizado
+    para un mejor rendimiento y lectura.
   path: /articles/contentz-es-omakase
 ---
 
-Hace unos días escribí sobre [que esperaría de mi generador de sitios estáticos ideal](/articles/generador-sitios-estaticos-propio), hoy presento [**Contentz**](https://github.com/sergiodxa/contentz). Lo llamo un Pure Static Site Generator porque solo usa JavaScript en el navegador para crear un Service Worker mínimo que se encarga de guardar en cache todo el sitio.
+Hace unos días escribí sobre
+[que esperaría de mi generador de sitios estáticos ideal](/articles/generador-sitios-estaticos-propio),
+hoy presento [**Contentz**](https://github.com/sergiodxa/contentz). Lo llamo un
+Pure Static Site Generator porque solo usa JavaScript en el navegador para crear
+un Service Worker mínimo que se encarga de guardar en cache todo el sitio.
 
 ## Empezando a usarlo
 
@@ -27,7 +35,8 @@ O también usando yarn.
 yarn add contentz
 ```
 
-Una vez instalado hay que crear un archivo de configuración (muy pequeño) con la siguiente información.
+Una vez instalado hay que crear un archivo de configuración (muy pequeño) con la
+siguiente información.
 
 ```yml
 ---
@@ -36,120 +45,218 @@ description: Senior Software Engineer and Technical Writer
 domain: https://sergiodxa.com
 ```
 
-En este archivo se agrega el título del sitio, la descripción y el dominio donde va a estar alojado (necesario para el feed RSS). Una vez hecho esto hay que crear una carpeta `articles` y/o una carpeta `pages`. Ambas son opcionales, puede haber artículos sin páginas personalizadas o páginas personalizadas sin artículos.
+En este archivo se agrega el título del sitio, la descripción y el dominio donde
+va a estar alojado (necesario para el feed RSS). Una vez hecho esto hay que
+crear una carpeta `articles` y/o una carpeta `pages`. Ambas son opcionales,
+puede haber artículos sin páginas personalizadas o páginas personalizadas sin
+artículos.
 
-Ya con las carpetas creadas hay que decirle a Contentz que construya el sitio web.
+Ya con las carpetas creadas hay que decirle a Contentz que construya el sitio
+web.
 
 ```bash
 contentz build
 ```
 
-Con esto Contentz lee los artículos y páginas y va a crear una carpeta `/public` en el proyecto con el HTML de cada una, además va a generar un `index.html` y un `/public/articles/index.html` donde se van a listar todos los artículos.
+Con esto Contentz lee los artículos y páginas y va a crear una carpeta `/public`
+en el proyecto con el HTML de cada una, además va a generar un `index.html` y un
+`/public/articles/index.html` donde se van a listar todos los artículos.
 
-Eso es todo, ahora solo es necesario desplegar nuestra carpeta `/public` a un servidor para que esté online, para esto pueden usar [Netlify](https://netlify.com).
+Eso es todo, ahora solo es necesario desplegar nuestra carpeta `/public` a un
+servidor para que esté online, para esto pueden usar
+[Netlify](https://netlify.com).
 
 ## Escribe en MDX, publica en HTML optimizado
 
-Contentz usa MDX para tu contenido junto a Frontmatter para la metadata, un ejemplo de artículo sería este.
+Contentz usa MDX para tu contenido junto a Frontmatter para la metadata, un
+ejemplo de artículo sería este.
 
 ```markdown
 ---
 title: Presentando Contentz
-description: Contentz, un Pure Static Site Generator para obtener un sitio web super optimizado
+description:
+  Contentz, un Pure Static Site Generator para obtener un sitio web super
+  optimizado
 date: 2019-03-05T21:03:17.909Z
 published: true
 lang: es
 tags: Contentz, SSG, Spanish, Website
 ---
 
-Hace unos días escribí sobre [que esperaría de mi generador de sitios estáticos ideal](/articles/generador-sitios-estaticos-propio), hoy presento [Contentz](https://github.com/sergiodxa/contentz). Lo llamo un Pure Static Site Generator porque solo usa JavaScript en el navegador para crear un Service Worker mínimo que se encarga de guardar en cache todo el sitio.
+Hace unos días escribí sobre
+[que esperaría de mi generador de sitios estáticos ideal](/articles/generador-sitios-estaticos-propio),
+hoy presento [Contentz](https://github.com/sergiodxa/contentz). Lo llamo un Pure
+Static Site Generator porque solo usa JavaScript en el navegador para crear un
+Service Worker mínimo que se encarga de guardar en cache todo el sitio.
 ```
 
-Contentz lee este contenido y lo renderiza a HTML al momento de construir el sitio. Durante este proceso obtiene todos los enlaces a contenido del mismo sitio (como `/articles/generador-sitios-estaticos-propio` en el ejemplo) y agrega una etiqueta `<link rel="prefetch" href="/articles/generador-sitios-estaticos-propio" />`, esto le dice al navegador que tiene que hacer prefetch de la página, lo que significa que cuando una persona haga click en el enlace va a cargar inmediatamente ya que, en realidad, el navegador ya descargó el HTML en background.
+Contentz lee este contenido y lo renderiza a HTML al momento de construir el
+sitio. Durante este proceso obtiene todos los enlaces a contenido del mismo
+sitio (como `/articles/generador-sitios-estaticos-propio` en el ejemplo) y
+agrega una etiqueta
+`<link rel="prefetch" href="/articles/generador-sitios-estaticos-propio" />`,
+esto le dice al navegador que tiene que hacer prefetch de la página, lo que
+significa que cuando una persona haga click en el enlace va a cargar
+inmediatamente ya que, en realidad, el navegador ya descargó el HTML en
+background.
 
-Otra detalle especial es que todo el CSS está en etiquetas `<style>` directo en el HTML y el único archivo JavaScript que se carga es para el Service Worker que se genera, esto hace que la carga sea mucho más rápida al no necesitar ejecutar mucho JavaScript en el navegador o descargar hojas de estilos CSS.
+Otra detalle especial es que todo el CSS está en etiquetas `<style>` directo en
+el HTML y el único archivo JavaScript que se carga es para el Service Worker que
+se genera, esto hace que la carga sea mucho más rápida al no necesitar ejecutar
+mucho JavaScript en el navegador o descargar hojas de estilos CSS.
 
 ## Construye el sitio de forma incremental
 
-Algo que siempre me molestó de otros generadores de sitios estáticos es que cada vez que necesito construir el sitio lo hace desde cero, aunque solo cambió un archivo. En cambio, Contentz, al tener control de todo el diseño y limitarte a escribir artículos y páginas puede fácilmente detectar que cambió y solo generar el HTML de las páginas afectadas.
+Algo que siempre me molestó de otros generadores de sitios estáticos es que cada
+vez que necesito construir el sitio lo hace desde cero, aunque solo cambió un
+archivo. En cambio, Contentz, al tener control de todo el diseño y limitarte a
+escribir artículos y páginas puede fácilmente detectar que cambió y solo generar
+el HTML de las páginas afectadas.
 
 Esto permite ir construyendo el sitio web de forma incremental. 🤯
 
-En caso de que se desee deshabilitar esta funcionalidad simplemente hay que agregar al `config.yml` la regla `incremental: false` (en caso de ser `true` o no existir está habilitado). Esto puede ser útil para forzar a regenerar todo el sitio o por si tu hosting guarda cache la carpeta `.cache`, usada por Contentz para saber que cambió, pero no `/public` para guardar el HTML creado anteriormente.
+En caso de que se desee deshabilitar esta funcionalidad simplemente hay que
+agregar al `config.yml` la regla `incremental: false` (en caso de ser `true` o
+no existir está habilitado). Esto puede ser útil para forzar a regenerar todo el
+sitio o por si tu hosting guarda cache la carpeta `.cache`, usada por Contentz
+para saber que cambió, pero no `/public` para guardar el HTML creado
+anteriormente.
 
 ## Compartir enlaces
 
-Algo que me gusta mucho es [compartir enlaces de sitios web interesantes que leo](/links/), Contentz soporta esta funcionalidad permitiéndome crear un archivo `links.yml` con un código similar a este.
+Algo que me gusta mucho es
+[compartir enlaces de sitios web interesantes que leo](/links/), Contentz
+soporta esta funcionalidad permitiéndome crear un archivo `links.yml` con un
+código similar a este.
 
 ```yml
 ---
 - url: https://htmlreference.io/
   title: HTML Reference
-  comment: An incredible and complete guide of all the HTML tags with visual examples
+  comment:
+    An incredible and complete guide of all the HTML tags with visual examples
   date: 2019-01-28T19:44:10.945Z
 ```
 
-Al decirle a Contentz que construya un sitio web este va a crear una lista, similar a la de artículos, en `/links/` con todos los enlaces que existan en este archivo. Además va a agregar un enlace automáticamente en el header llamado `Link` que apunte a esta página y se va a encargar de hacerle prefetch automáticamente.
+Al decirle a Contentz que construya un sitio web este va a crear una lista,
+similar a la de artículos, en `/links/` con todos los enlaces que existan en
+este archivo. Además va a agregar un enlace automáticamente en el header llamado
+`Link` que apunte a esta página y se va a encargar de hacerle prefetch
+automáticamente.
 
 ## Offline First automático
 
-Contentz genera un Service Worker con un código mínimo, para ser exactos con este código
+Contentz genera un Service Worker con un código mínimo, para ser exactos con
+este código
 
 ```js
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-sw.js"),workbox&&workbox.routing.registerRoute(o=>location.origin&&o.url.origin&&"/load-sw.js"!==o.url.pathname&&"/sw.js"!==o.url.pathname,new workbox.strategies.NetworkFirst);
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/4.0.0/workbox-sw.js"
+),
+  workbox &&
+    workbox.routing.registerRoute(
+      o =>
+        location.origin &&
+        o.url.origin &&
+        "/load-sw.js" !== o.url.pathname &&
+        "/sw.js" !== o.url.pathname,
+      new workbox.strategies.NetworkFirst()
+    );
 ```
 
-Ese código lo que hace es guardar en cache todas las peticiones HTTP que se hagan al mismo sitio excepto `/load-sw.js` y `/sw.js`, ya que no queremos cachear nuestro Service Worker y tener problemas al actualizar luego. Una vez guardados en cache siempre que el usuario tenga conexión a internet va a mandar una petición HTTP normal y responderle al usuario con lo que mande el servidor, pero en caso de que el usuario pierda su acceso a internet va a responder con la cache.
+Ese código lo que hace es guardar en cache todas las peticiones HTTP que se
+hagan al mismo sitio excepto `/load-sw.js` y `/sw.js`, ya que no queremos
+cachear nuestro Service Worker y tener problemas al actualizar luego. Una vez
+guardados en cache siempre que el usuario tenga conexión a internet va a mandar
+una petición HTTP normal y responderle al usuario con lo que mande el servidor,
+pero en caso de que el usuario pierda su acceso a internet va a responder con la
+cache.
 
-Esto significa que el usuario una vez acceda a la página pueder volver a verla incluso si está offline. Gracias al uso de prefetch el usuario también puede acceder a otras páginas que no entró directamente ya que el navegador ya las pidió antes y por tanto el Service Worker ya las guardó en cache, por ejemplo si el usuario accede a la lista de artículos en `/articles/` entonces el Service Worker va a tener en cache todos los artículos para acceso offline, si no tienen imágenes o nada externo el usuario debería poder navegar por el sitio offline sin problemas.
+Esto significa que el usuario una vez acceda a la página pueder volver a verla
+incluso si está offline. Gracias al uso de prefetch el usuario también puede
+acceder a otras páginas que no entró directamente ya que el navegador ya las
+pidió antes y por tanto el Service Worker ya las guardó en cache, por ejemplo si
+el usuario accede a la lista de artículos en `/articles/` entonces el Service
+Worker va a tener en cache todos los artículos para acceso offline, si no tienen
+imágenes o nada externo el usuario debería poder navegar por el sitio offline
+sin problemas.
 
 ## Feed RSS
 
-Aunque muchos no lo usan, personalmente me gusta mucho RSS para enterarme de nuevos artículos en blogs que sigo. Por eso es que Contentz lee todos tus artículos y genera un feed RSS en `/atom.xml` con la lista, encaso de que cambie un archivo se generaría de nuevo el feed RSS con los artículos nuevos o actualizados.
+Aunque muchos no lo usan, personalmente me gusta mucho RSS para enterarme de
+nuevos artículos en blogs que sigo. Por eso es que Contentz lee todos tus
+artículos y genera un feed RSS en `/atom.xml` con la lista, encaso de que cambie
+un archivo se generaría de nuevo el feed RSS con los artículos nuevos o
+actualizados.
 
 ## Archivos estáticos
 
-Usar archivos estáticos también es algo común en cualquier sitio web, para poner imágenes por ejemplo. Contentz soporta esto permitiendo que crees una carpeta `/static` con tu contenido estático, dentro puede haber cualquier archivo o carpeta, Contentz simplemente va a copiar todo `/static` a `/public/static`, de forma que si en un artículo o página se carga una imágen la carpeta `/static` va a existir dentro de `/public` correctamente.
+Usar archivos estáticos también es algo común en cualquier sitio web, para poner
+imágenes por ejemplo. Contentz soporta esto permitiendo que crees una carpeta
+`/static` con tu contenido estático, dentro puede haber cualquier archivo o
+carpeta, Contentz simplemente va a copiar todo `/static` a `/public/static`, de
+forma que si en un artículo o página se carga una imágen la carpeta `/static` va
+a existir dentro de `/public` correctamente.
 
 ## Generador de imágenes sociales
 
-Algo super tedioso al publicar un blog es crear imágenes sociales, un Open Graph básicamente, al punto de que históricamente o no tenía un Open Graph o estaba usando uno genérico, Contentz tiene una función para generar estos Open Graph por si solo, para esto hay que ejecutar el siguiente comando.
+Algo super tedioso al publicar un blog es crear imágenes sociales, un Open Graph
+básicamente, al punto de que históricamente o no tenía un Open Graph o estaba
+usando uno genérico, Contentz tiene una función para generar estos Open Graph
+por si solo, para esto hay que ejecutar el siguiente comando.
 
 ```bash
 contentz social <path>
 ```
 
-Donde `<path>` es el archivo cuyo Open Graph queremos generar, por ejemplo `contentz social articles/hello-world.mdx` va a generar el Open Graph del artículo `hello-world.mdx`
+Donde `<path>` es el archivo cuyo Open Graph queremos generar, por ejemplo
+`contentz social articles/hello-world.mdx` va a generar el Open Graph del
+artículo `hello-world.mdx`
 
-Para las páginas especiales es necesario también ejecutarlo, pero en estos casos usando nombres fijos que son
+Para las páginas especiales es necesario también ejecutarlo, pero en estos casos
+usando nombres fijos que son
 
 - home
 - error
 - articles/archive (ambos funcionan)
 - links
 
-Entonces al iniciar un sitio sería necesario ejecutar `contentz social home error articles links` al menos una vez, como pueden ver además es posible pasar más de un archivo a la vez.
+Entonces al iniciar un sitio sería necesario ejecutar
+`contentz social home error articles links` al menos una vez, como pueden ver
+además es posible pasar más de un archivo a la vez.
 
-Todas las imágenes generadas por Contentz van a estar ubicadas en `/static/_social` y todos los artículos automáticamente cargan su Open Graph desde las carpetas correctas sin tener que hacer nada, así que una vez generado el Open Graph ya va a funcionar de una.
+Todas las imágenes generadas por Contentz van a estar ubicadas en
+`/static/_social` y todos los artículos automáticamente cargan su Open Graph
+desde las carpetas correctas sin tener que hacer nada, así que una vez generado
+el Open Graph ya va a funcionar de una.
 
 ## Estilos directo en MDX
 
-Otra posibilidad de MDX es agregar estilos directo en tu MDX, internamente Contentz usa [Emotion](https://emotion.sh/) para el CSS y carga tanto `jsx` como el template literal `css` por lo que es posible estilizar de dos formas.
+Otra posibilidad de MDX es agregar estilos directo en tu MDX, internamente
+Contentz usa [Emotion](https://emotion.sh/) para el CSS y carga tanto `jsx` como
+el template literal `css` por lo que es posible estilizar de dos formas.
 
 ```jsx
 <div css={{ color: "red" }}>This is red</div>
 <div css={css`color: blue`}>This is blue</div>
 ```
 
-Ya sea usando el prop `css` con un objeto o con el resultado del template literal `css` para poner CSS usando la sintaxis normal de CSS, ambos casos funcionan y permiten agregar estilos a elementos directo en el MDX.
+Ya sea usando el prop `css` con un objeto o con el resultado del template
+literal `css` para poner CSS usando la sintaxis normal de CSS, ambos casos
+funcionan y permiten agregar estilos a elementos directo en el MDX.
 
 ## Páginas especiales
 
-Como ya mencioné en otras partes, hay ciertas páginas especiales, estas son `/` (la home), `/articles/` (la lista de artículos), `/links/` (la lista de enlaces compartidos) y `/404.html` (la página de error). Estas páginas se generan solas sin que tengas que escribir nada.
+Como ya mencioné en otras partes, hay ciertas páginas especiales, estas son `/`
+(la home), `/articles/` (la lista de artículos), `/links/` (la lista de enlaces
+compartidos) y `/404.html` (la página de error). Estas páginas se generan solas
+sin que tengas que escribir nada.
 
 ### Home (`/`)
 
-Esta página se genera siempre, sirve de página de inicio, usa el `title` y `description` de tu `config.yml` para mostrarlos en el contenido. Se pueden agregar además links a redes sociales agregando la siguiente configuración
+Esta página se genera siempre, sirve de página de inicio, usa el `title` y
+`description` de tu `config.yml` para mostrarlos en el contenido. Se pueden
+agregar además links a redes sociales agregando la siguiente configuración
 
 ```yml
 social:
@@ -161,31 +268,56 @@ social:
   meetup: 182915204
 ```
 
-Esa además es la lista de redes sociales soportadas actualmente. Adicionalmente es posible `email: hello@sergiodxa.com` al `config.yml` para que se agregue junto a las redes sociales un ícono de email.
+Esa además es la lista de redes sociales soportadas actualmente. Adicionalmente
+es posible `email: hello@sergiodxa.com` al `config.yml` para que se agregue
+junto a las redes sociales un ícono de email.
 
 ### Lista de artículos (`/articles/`)
 
-La lista de artículos es bien simple, se genera automáticamente con todos los artículos que tengan `published: true` en su frontmatter, eso es todo lo que se puede modificar de la lista, con solo tener un artículo alcanza para que se genere y siempre está enlazada en el header.
+La lista de artículos es bien simple, se genera automáticamente con todos los
+artículos que tengan `published: true` en su frontmatter, eso es todo lo que se
+puede modificar de la lista, con solo tener un artículo alcanza para que se
+genere y siempre está enlazada en el header.
 
 ### Lista de enlaces (`/links/`)
 
-Similar a la lista de artículos la lista de enlaces no tiene mucha configuración, solo agregar un `links.yml` y se va a generar con los enlaces, cada enlaces en dicho archivo se agrega.
+Similar a la lista de artículos la lista de enlaces no tiene mucha
+configuración, solo agregar un `links.yml` y se va a generar con los enlaces,
+cada enlaces en dicho archivo se agrega.
 
 ### Error 404 (`/404.html`)
 
-Esta página se genera para poder manejar los 404 con un diseño acorde al resto del sitio y enlaces a otras secciones. Se genera solo sin necesidad de configurar nada, aunque es probable que en el proveedor de hosting sea necesario configurar que muestre este archivo en caso de no encontrar alguna página.
+Esta página se genera para poder manejar los 404 con un diseño acorde al resto
+del sitio y enlaces a otras secciones. Se genera solo sin necesidad de
+configurar nada, aunque es probable que en el proveedor de hosting sea necesario
+configurar que muestre este archivo en caso de no encontrar alguna página.
 
 ## Enlace a Patreon
 
-Yo tengo un [Patreon](https://sdx.im/link/https://patreon.com/sergiodxa) donde a quién le gusten mis artículos o el contenido que creo pueden apoyarme monetariamente. Como esto es algo cada vez más común Contentz soporta esto y permite agregar `patreon: sergiodxa` al archivo `config.yml` para que se agregue en la home y al final de cada página y artículo un mensaje con el enlace a Patreon.
+Yo tengo un [Patreon](https://sdx.im/link/https://patreon.com/sergiodxa) donde a
+quién le gusten mis artículos o el contenido que creo pueden apoyarme
+monetariamente. Como esto es algo cada vez más común Contentz soporta esto y
+permite agregar `patreon: sergiodxa` al archivo `config.yml` para que se agregue
+en la home y al final de cada página y artículo un mensaje con el enlace a
+Patreon.
 
 ## Editar en GitHub
 
-Mi sitio personal [está en GitHub en un repositorio público](https://github.com/sergiodxa/personal-site), y en caso de querer editarlo o que alguien que lo lea quiere editar es posible simplemente mandar un Pull Request con los cambios. Contentz también soporta este caso y permite agregar `repository: https://github.com/sergiodxa/personal-site/` al `config.yml` para mostrar un enlace al final de cada artículo o página que dice `Editor on GitHub` para sugerir poder editarlo y enlaza directo al respositorio en el archivo correcto.
+Mi sitio personal
+[está en GitHub en un repositorio público](https://github.com/sergiodxa/personal-site),
+y en caso de querer editarlo o que alguien que lo lea quiere editar es posible
+simplemente mandar un Pull Request con los cambios. Contentz también soporta
+este caso y permite agregar
+`repository: https://github.com/sergiodxa/personal-site/` al `config.yml` para
+mostrar un enlace al final de cada artículo o página que dice `Editor on GitHub`
+para sugerir poder editarlo y enlaza directo al respositorio en el archivo
+correcto.
 
 ## Navegación
 
-El header es generado solo con el enlace a `/links/` y a la lista de artículos en `/articles/`, en caso de tener páginas personalizadas o querer enlazar a algún otro lado se pueden agregar enlaces extras en el `config.yml` agregando
+El header es generado solo con el enlace a `/links/` y a la lista de artículos
+en `/articles/`, en caso de tener páginas personalizadas o querer enlazar a
+algún otro lado se pueden agregar enlaces extras en el `config.yml` agregando
 
 ```yml
 navigation:
@@ -197,4 +329,8 @@ Cada grupo de `name` y `path` va a ser un enlace en el header.
 
 ## Palabras finales
 
-Contentz no es un trabajo 100% terminado, pero estoy bastante contento con el resultado, en todas las pruebas que hice el sitio carga muy rápido y pase de tardar minutos en hacer deploy de mi sitio a segundos, con la funcionalidad de incremental activada incluso **¡Menos de un segundo!** Eso es muy rápido a comparación.
+Contentz no es un trabajo 100% terminado, pero estoy bastante contento con el
+resultado, en todas las pruebas que hice el sitio carga muy rápido y pase de
+tardar minutos en hacer deploy de mi sitio a segundos, con la funcionalidad de
+incremental activada incluso **¡Menos de un segundo!** Eso es muy rápido a
+comparación.

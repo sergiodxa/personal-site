@@ -1,21 +1,31 @@
 ---
 title: Componente de React personalizables usando props
 date: 2019-02-26T16:04:00.252Z
-description: Los props nos permiten crear componentes de React que sean personalizables y que nos sirven para muchos más casos
+description:
+  Los props nos permiten crear componentes de React que sean personalizables y
+  que nos sirven para muchos más casos
 lang: es
 published: true
 tags: Frontend, React, JavaScript, Spanish
 next:
   title: Props con valores predefinidos en React
   path: /articles/react-props-valores-predefinidos
-  description: Es muy común querer tener props con valores por defecto en nuestros componentes de React, veremos varias formas de lograr este objetivo.
+  description:
+    Es muy común querer tener props con valores por defecto en nuestros
+    componentes de React, veremos varias formas de lograr este objetivo.
 ---
 
-[Ya cargamos React y ReactDOM](/articles/cargando-react-cdn), [renderizamos un elemento](/articles/hola-mundo-react) y [lo encapsulamos en un componente](/articles/componentes-con-react). Es hora volver personalizable nuestro componente para que sea útil en varios casos.
+[Ya cargamos React y ReactDOM](/articles/cargando-react-cdn),
+[renderizamos un elemento](/articles/hola-mundo-react) y
+[lo encapsulamos en un componente](/articles/componentes-con-react). Es hora
+volver personalizable nuestro componente para que sea útil en varios casos.
 
-Para estamos vamos a aprender que son los _props_ ¿Te acuerdas al hacer nuestro Hola, Mundo! vimos como pasarle atributos a una etiqueta del DOM al usar `React.createElement`?
+Para estamos vamos a aprender que son los _props_ ¿Te acuerdas al hacer nuestro
+Hola, Mundo! vimos como pasarle atributos a una etiqueta del DOM al usar
+`React.createElement`?
 
-Vamos a usar eso mismo para pasarle parámetros a nuestro componente y usarlos para personalizar el resultado.
+Vamos a usar eso mismo para pasarle parámetros a nuestro componente y usarlos
+para personalizar el resultado.
 
 ```js
 function Hello() {
@@ -23,7 +33,10 @@ function Hello() {
 }
 ```
 
-Ese es nuestro componente hasta ahora, vamos a hacer que el `Mundo` sea personalizable usando _props_ para así poder escribir un `Hola, X!`, primero cualquier _props_ que reciba nuestro componente va a ser parte de un objeto que recibimos como primer argumento de nuestro componente.
+Ese es nuestro componente hasta ahora, vamos a hacer que el `Mundo` sea
+personalizable usando _props_ para así poder escribir un `Hola, X!`, primero
+cualquier _props_ que reciba nuestro componente va a ser parte de un objeto que
+recibimos como primer argumento de nuestro componente.
 
 ```js
 function Hello(props = {}) {
@@ -31,7 +44,9 @@ function Hello(props = {}) {
 }
 ```
 
-Con esto definimos este argumento `props` que por defecto es un objeto vacío. Luego necesitamos usar el prop que vamos a recibir, el nombre lo podemos definir nosotros, en este caso vamos a usar `name`.
+Con esto definimos este argumento `props` que por defecto es un objeto vacío.
+Luego necesitamos usar el prop que vamos a recibir, el nombre lo podemos definir
+nosotros, en este caso vamos a usar `name`.
 
 ```js
 function Hello(props = {}) {
@@ -39,7 +54,8 @@ function Hello(props = {}) {
 }
 ```
 
-Con esto nuestro `<h1>` va a tener Hola y lo que pasemos como `name` o, en caso de no pasar nada, usamos _Mundo_ como estaba antes.
+Con esto nuestro `<h1>` va a tener Hola y lo que pasemos como `name` o, en caso
+de no pasar nada, usamos _Mundo_ como estaba antes.
 
 Ahora que ya esta listo nuestro componente es hora de usarlo.
 
@@ -54,6 +70,8 @@ const node = document.getElementById("app");
 ReactDOM.render(element, node);
 ```
 
-Lo que hicimos es, en vez de pasar `null` como segundo argumento de `React.createElement` pasamos un objeto con la propiedad `name` con el valor que vamos a usar.
+Lo que hicimos es, en vez de pasar `null` como segundo argumento de
+`React.createElement` pasamos un objeto con la propiedad `name` con el valor que
+vamos a usar.
 
 Ahora ya tenemos nuestro componente personalizable siendo renderizado.

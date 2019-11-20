@@ -1,7 +1,9 @@
 ---
 title: Qué son y cómo funcionan las promesas en JavaScript
 date: 2017-03-06T00:00:00Z
-description: Manejar flujos de datos asíncronos es complejo, pero con Promesas esto se vuelve mucho más fácil
+description:
+  Manejar flujos de datos asíncronos es complejo, pero con Promesas esto se
+  vuelve mucho más fácil
 published: true
 lang: es
 canonical_url: https://platzi.com/blog/que-es-y-como-funcionan-las-promesas-en-javascript/
@@ -9,10 +11,13 @@ tags: JavaScript, Promises, Async, ES2015, ES6
 next:
   title: Mezclando flujos síncronos y asíncronos usando promesas en JavaScript
   path: /articles/mezclando-flujos-sincronos-y-asincronos
-  description: Manejar flujos de datos síncronos es fácil, con Promises también es fácil hacerlos asíncronos. Ahora veamos como combinarlos.
+  description:
+    Manejar flujos de datos síncronos es fácil, con Promises también es fácil
+    hacerlos asíncronos. Ahora veamos como combinarlos.
 ---
 
-Manejar flujos de datos asíncronos es complejo, quién no ha terminado con código como este:
+Manejar flujos de datos asíncronos es complejo, quién no ha terminado con código
+como este:
 
 ```js
 checkWeather("buenos aires", (error, weather) => {
@@ -33,7 +38,10 @@ checkWeather("buenos aires", (error, weather) => {
 });
 ```
 
-Esto se conoce como el callback hell, un código complejo y difícil de mantener, pero existe una solución, [Promesas](https://www.youtube.com/watch?v=FmdPjo00BgU&). El código anterior con promesas sería algo similar a esto:
+Esto se conoce como el callback hell, un código complejo y difícil de mantener,
+pero existe una solución,
+[Promesas](https://www.youtube.com/watch?v=FmdPjo00BgU&). El código anterior con
+promesas sería algo similar a esto:
 
 ```js
 checkWatcher("buenos aires")
@@ -50,9 +58,19 @@ checkWatcher("buenos aires")
   .catch(error => console.error(error));
 ```
 
-Menos líneas y mucha menos indentación en el código, pero entendamos como funciona una promesa. Pongamos otro ejemplo. Supongamos que vamos a comprar comida a un restaurante de comida rápida, cuando terminamos de pagar por nuestra comida nos dan un ticket con un número, cuando llamen a ese número podemos entonces ir a buscar nuestra comida.
+Menos líneas y mucha menos indentación en el código, pero entendamos como
+funciona una promesa. Pongamos otro ejemplo. Supongamos que vamos a comprar
+comida a un restaurante de comida rápida, cuando terminamos de pagar por nuestra
+comida nos dan un ticket con un número, cuando llamen a ese número podemos
+entonces ir a buscar nuestra comida.
 
-Ese ticket que nos dieron es nuestra promesa, ese ticket nos indica que eventualmente vamos a tener nuestra comida, pero que todavía no la tenemos. Cuando llaman a ese número para que vayamos a buscar la comida entonces quiere decir que la promesa se completó. Pero resulta que una promesa se puede completar correctamente o puede ocurrir un error, ¿Qué error puede ocurrir en nuestro caso? Por ejemplo puede pasar que el restaurante no tenga más comida, entonces cuando nos llamen con nuestro número pueden pasar dos cosas.
+Ese ticket que nos dieron es nuestra promesa, ese ticket nos indica que
+eventualmente vamos a tener nuestra comida, pero que todavía no la tenemos.
+Cuando llaman a ese número para que vayamos a buscar la comida entonces quiere
+decir que la promesa se completó. Pero resulta que una promesa se puede
+completar correctamente o puede ocurrir un error, ¿Qué error puede ocurrir en
+nuestro caso? Por ejemplo puede pasar que el restaurante no tenga más comida,
+entonces cuando nos llamen con nuestro número pueden pasar dos cosas.
 
 1. Nuestro pedido se resuelve y obtenemos la comida.
 2. Nuestro pedido es rechazado y obtenemos una razón del por qué.
@@ -65,11 +83,17 @@ const ticket = getFood();
 ticket.then(food => eatFood(food)).catch(error => getRefund(error));
 ```
 
-Cuando tratamos de obtener la comida (`getFood`) obtuvimos una promesa (`ticket`), si esta se resuelve correctamente entonces recibimos nuestra comida (`food`) y nos la comemos (eatFood). Si nuestro pedido es rechazado entonces obtenemos la razón (`error`) y pedimos que nos devuelvan el dinero (`getRefund`).
+Cuando tratamos de obtener la comida (`getFood`) obtuvimos una promesa
+(`ticket`), si esta se resuelve correctamente entonces recibimos nuestra comida
+(`food`) y nos la comemos (eatFood). Si nuestro pedido es rechazado entonces
+obtenemos la razón (`error`) y pedimos que nos devuelvan el dinero
+(`getRefund`).
 
 ## Crear una promesa
 
-Las promesas se crean usando un constructor llamado `Promise` y pasándole una función que recibe dos parámetros, `resolve` y `reject`, que nos permiten indicarle a esta que se **resolvió** o se **rechazó**.
+Las promesas se crean usando un constructor llamado `Promise` y pasándole una
+función que recibe dos parámetros, `resolve` y `reject`, que nos permiten
+indicarle a esta que se **resolvió** o se **rechazó**.
 
 ```js
 const promise = new Promise((resolve, reject) => {
@@ -86,23 +110,36 @@ promise
   .catch(error => console.error(error));
 ```
 
-Lo que acabamos de hacer es crear una nueva promesa que se va a completar luego de 1 segundo, si el número aleatorio que generamos es mayor a 5 entonces se resuelve, si es menor a 5 entonces es rechazada y obtenemos un error.
+Lo que acabamos de hacer es crear una nueva promesa que se va a completar luego
+de 1 segundo, si el número aleatorio que generamos es mayor a 5 entonces se
+resuelve, si es menor a 5 entonces es rechazada y obtenemos un error.
 
 ## Estados de las promesas
 
-Esto nos lleva a hablar del estado de una promesa, básicamente existen 3 posibles estados.
+Esto nos lleva a hablar del estado de una promesa, básicamente existen 3
+posibles estados.
 
 - **Pendiente**
 - **Resuelta**
 - **Rechazada**
 
-Una promesa originalmente esta **Pendiente**. Cuando llamamos a `resolve` entonces la promesa pasa a estar **Resuelta**, si llamamos a `reject` pasa a estar **Rechazada**, usualmente cuando es rechazada obtenemos un error que nos va a indicar la razón del rechazo. Cuando una promesa se resuelve entonces se ejecuta la función que pasamos al método `.then`, si la promesa es rechazada entonces se ejecuta la función que pasamos a `.catch`, de esta forma podemos controlar el flujo de datos.
+Una promesa originalmente esta **Pendiente**. Cuando llamamos a `resolve`
+entonces la promesa pasa a estar **Resuelta**, si llamamos a `reject` pasa a
+estar **Rechazada**, usualmente cuando es rechazada obtenemos un error que nos
+va a indicar la razón del rechazo. Cuando una promesa se resuelve entonces se
+ejecuta la función que pasamos al método `.then`, si la promesa es rechazada
+entonces se ejecuta la función que pasamos a `.catch`, de esta forma podemos
+controlar el flujo de datos.
 
-> También es posible pasar una segunda función a `.then` la cual se ejecutaría en caso de un error en vez de ejecutar el `.catch`
+> También es posible pasar una segunda función a `.then` la cual se ejecutaría
+> en caso de un error en vez de ejecutar el `.catch`
 
 ## Recibiendo parámetros
 
-Antes creamos una promesa, esa promesa se completa luego de 1 segundo y se resuelve si el número generado es mayor a 5. ¿Qué pasa si queremos hacerlo dinámico? La solución es muy simple, creamos una función que recibe los parámetros necesarios y devuelve la instancia de `Promise`.
+Antes creamos una promesa, esa promesa se completa luego de 1 segundo y se
+resuelve si el número generado es mayor a 5. ¿Qué pasa si queremos hacerlo
+dinámico? La solución es muy simple, creamos una función que recibe los
+parámetros necesarios y devuelve la instancia de `Promise`.
 
 ```js
 function randomDelayed(max = 10, expected = 5, delay = 1000) {
@@ -125,11 +162,17 @@ randomDelayed(100, 75, 2500)
   .catch(error => console.error(error));
 ```
 
-Cuando ejecutamos `randomDelayed(100, 75, 2500)` creamos una promesa que luego de **2.5 segundos** se va a resolver siempre que el número generado (entre 0 y **100**) sea mayor a **75**. Lo mismo que habíamos hecho antes, pero esta vez personalizable.
+Cuando ejecutamos `randomDelayed(100, 75, 2500)` creamos una promesa que luego
+de **2.5 segundos** se va a resolver siempre que el número generado (entre 0 y
+**100**) sea mayor a **75**. Lo mismo que habíamos hecho antes, pero esta vez
+personalizable.
 
 ## Pasando de callback a promesas
 
-¿Qué ocurre si una función que queremos utiliza callbacks? ¿Cómo podríamos usarla con promesas? Muy simple, podemos crear una versión con promesas de esa función haciendo lo que hicimos arriba. Por ejemplo leer una archivo usando el módulo `fs` de Node.js.
+¿Qué ocurre si una función que queremos utiliza callbacks? ¿Cómo podríamos
+usarla con promesas? Muy simple, podemos crear una versión con promesas de esa
+función haciendo lo que hicimos arriba. Por ejemplo leer una archivo usando el
+módulo `fs` de Node.js.
 
 ```js
 import fs from "fs";
@@ -148,13 +191,19 @@ readFile("./archivo.txt")
   .catch(error => console.error(error));
 ```
 
-De esta forma creamos una función que lee un archivo del disco como `utf8` y si no ocurre ningún error entonces se resuelve, si hay un error es rechazada.
+De esta forma creamos una función que lee un archivo del disco como `utf8` y si
+no ocurre ningún error entonces se resuelve, si hay un error es rechazada.
 
 ## Encadenando promesas
 
-En el primer ejemplo de promesas vimos algo muy interesante, usamos muchos `.then` y llamamos a varias funciones que devuelven promesas. Este patrón se llama **promise chaining** o encadenamiento de promesas.
+En el primer ejemplo de promesas vimos algo muy interesante, usamos muchos
+`.then` y llamamos a varias funciones que devuelven promesas. Este patrón se
+llama **promise chaining** o encadenamiento de promesas.
 
-Básicamente nos evita anidar código, en vez de eso una promesa puede devolver otra promesa y llamar al siguiente `.then` de la cadena. Veamos un ejemplo, supongamos que `archivo.txt` devuelve un string con el path de otro archivo, y queremos leer este segundo archivo, con callbacks quedaría algo así:
+Básicamente nos evita anidar código, en vez de eso una promesa puede devolver
+otra promesa y llamar al siguiente `.then` de la cadena. Veamos un ejemplo,
+supongamos que `archivo.txt` devuelve un string con el path de otro archivo, y
+queremos leer este segundo archivo, con callbacks quedaría algo así:
 
 ```js
 fs.readFile("./archivo.txt", "utf8", (error, path) => {
@@ -165,7 +214,10 @@ fs.readFile("./archivo.txt", "utf8", (error, path) => {
 });
 ```
 
-Como vemos dentro de nuestro primer callback tenemos que validar el primer error, luego llamar a otra función que obtiene los datos de verdad, y si tenemos que ir anidando muchas funciones que usen callback podemos llegar a tener muchos niveles de indentación. Con promesas esto quedaría así:
+Como vemos dentro de nuestro primer callback tenemos que validar el primer
+error, luego llamar a otra función que obtiene los datos de verdad, y si tenemos
+que ir anidando muchas funciones que usen callback podemos llegar a tener muchos
+niveles de indentación. Con promesas esto quedaría así:
 
 ```js
 readFile("./archivo.txt")
@@ -174,11 +226,23 @@ readFile("./archivo.txt")
   .catch(error => console.error(error));
 ```
 
-Qué hacemos acá, primero leemos `./archivo.txt`, si ocurre un error esta promesa se rechaza y lo mostramos en el `console.error`, si todo va bien se ejecuta el primer `.then`, este ejecuta un nuevo `readFile`, como `.then` recibe el path al nuevo archivo y `readFile` solo recibe un argumento (el path) entonces podemos pasar directamente `readFile` y la promesa se encarga de ejecutarlo.
+Qué hacemos acá, primero leemos `./archivo.txt`, si ocurre un error esta promesa
+se rechaza y lo mostramos en el `console.error`, si todo va bien se ejecuta el
+primer `.then`, este ejecuta un nuevo `readFile`, como `.then` recibe el path al
+nuevo archivo y `readFile` solo recibe un argumento (el path) entonces podemos
+pasar directamente `readFile` y la promesa se encarga de ejecutarlo.
 
-Este segundo `readFile` devuelve una nueva promesa, otra vez si hay un error se ejecuta el `.catch`, pero si podemos leer el archivo sin problema entonces se ejecuta el segundo `.then`, el cual recibe el contenido del segundo archivo y lo muestra en consola.
+Este segundo `readFile` devuelve una nueva promesa, otra vez si hay un error se
+ejecuta el `.catch`, pero si podemos leer el archivo sin problema entonces se
+ejecuta el segundo `.then`, el cual recibe el contenido del segundo archivo y lo
+muestra en consola.
 
-Como vemos, podemos simplemente encadenar tantos `.then` como queramos y seguir ejecutando funciones que devuelvan promesas. ¿Lo mejor? No solo hay que devolver promesas, ya que si la función que pasamos a `.then` hace un `return` entonces el valor devuelto pasa al siguiente `.then` de la cadena, sin importar que sea una promesa, un objeto, un string, un número o cualquier otro tipo de datos. _Por ejemplo_:
+Como vemos, podemos simplemente encadenar tantos `.then` como queramos y seguir
+ejecutando funciones que devuelvan promesas. ¿Lo mejor? No solo hay que devolver
+promesas, ya que si la función que pasamos a `.then` hace un `return` entonces
+el valor devuelto pasa al siguiente `.then` de la cadena, sin importar que sea
+una promesa, un objeto, un string, un número o cualquier otro tipo de datos.
+_Por ejemplo_:
 
 ```js
 import { resolve } from "path";
@@ -190,11 +254,23 @@ readFile("./archivo.txt.")
   .catch(error => console.error(error));
 ```
 
-La función `resolve` que exporta el módulo `path` nos permite armar la ruta absoluta a un archivo y devuelve un string, gracias a los `.then` podemos hacer una función que recibe el `fileName` del primero archivo y luego devuelve esta ruta absoluta la cual llega como parámetro al segundo `.then`, el cual usa esa ruta para leer el segundo archivo y devuelve una promesa que se resuelve con el contenido de este. Y como siempre si en algún momento hay ocurre un error se ejecuta el `.catch`.
+La función `resolve` que exporta el módulo `path` nos permite armar la ruta
+absoluta a un archivo y devuelve un string, gracias a los `.then` podemos hacer
+una función que recibe el `fileName` del primero archivo y luego devuelve esta
+ruta absoluta la cual llega como parámetro al segundo `.then`, el cual usa esa
+ruta para leer el segundo archivo y devuelve una promesa que se resuelve con el
+contenido de este. Y como siempre si en algún momento hay ocurre un error se
+ejecuta el `.catch`.
 
 ## Promesas en paralelo
 
-Hasta ahora solo vimos como ejecutar una función asíncrona a la vez (en serie), sin embargo es muy común que necesitemos realizar múltiples al tiempo, por ejemplo para obtener varios datos de un API. Para eso la clase `Promise` tiene un método estático llamado `Promise.all` el cual recibe un único parámetro, una lista de promesas las cuales se ejecutan simultáneamente, si alguna de estas es rechazadas entonces toda la lista lo es, pero si todas se resuelven entonces podemos obtener una lista de todas las respuestas.
+Hasta ahora solo vimos como ejecutar una función asíncrona a la vez (en serie),
+sin embargo es muy común que necesitemos realizar múltiples al tiempo, por
+ejemplo para obtener varios datos de un API. Para eso la clase `Promise` tiene
+un método estático llamado `Promise.all` el cual recibe un único parámetro, una
+lista de promesas las cuales se ejecutan simultáneamente, si alguna de estas es
+rechazadas entonces toda la lista lo es, pero si todas se resuelven entonces
+podemos obtener una lista de todas las respuestas.
 
 ```js
 import { resolve } from "path";
@@ -206,11 +282,21 @@ Promise.all([readFile("./archivo1.txt"), readFile("./archivo2.txt")])
   .catch(error => console.error(error));
 ```
 
-Lo que hacemos en el ejemplo de arriba es leer 2 archivos al tiempo, eso nos devuelve una lista (`data`) de contenidos, los cuales contienen la ruta para otro archivo, los convertimos entonces a una nueva lista de rutas absolutas (`resolve`) y usamos esas rutas para crear una nueva lista de promesas a partir de `readFile`. Si en algún momento ocurrió un error lo mostramos como tal en consola, si todo se resuelve bien entonces escribimos en consola la lista de contenidos de archivos.
+Lo que hacemos en el ejemplo de arriba es leer 2 archivos al tiempo, eso nos
+devuelve una lista (`data`) de contenidos, los cuales contienen la ruta para
+otro archivo, los convertimos entonces a una nueva lista de rutas absolutas
+(`resolve`) y usamos esas rutas para crear una nueva lista de promesas a partir
+de `readFile`. Si en algún momento ocurrió un error lo mostramos como tal en
+consola, si todo se resuelve bien entonces escribimos en consola la lista de
+contenidos de archivos.
 
 ## Carrera de promesas
 
-Antes hablamos de ejecutar varias promesas en paralelo y obtener una respuesta cuando todas se completen, existe otro método que nos permite correr varias al tiempo, pero solo obtener el resultado de la primer promesa. Gracias a esto es posible mandar múltiples peticiones HTTP a un API y luego recibir una sola respuesta, la primera. Este método se llama `Promise.race`.
+Antes hablamos de ejecutar varias promesas en paralelo y obtener una respuesta
+cuando todas se completen, existe otro método que nos permite correr varias al
+tiempo, pero solo obtener el resultado de la primer promesa. Gracias a esto es
+posible mandar múltiples peticiones HTTP a un API y luego recibir una sola
+respuesta, la primera. Este método se llama `Promise.race`.
 
 ```js
 import { resolve } from 'path';
@@ -222,11 +308,16 @@ Promise.race([readFile('./archivo1.txt'), readFile('./archivo2.txt'])
   .catch(error => consol.error(error));
 ```
 
-Como vemos en el ejemplo otra vez leemos 2 archivos, pero esta vez solo obtenemos el contenido de 1, el que primero se termine de leer. O si alguno se completó con un error entonces entramos al `.catch` y mostramos el error en consola.
+Como vemos en el ejemplo otra vez leemos 2 archivos, pero esta vez solo
+obtenemos el contenido de 1, el que primero se termine de leer. O si alguno se
+completó con un error entonces entramos al `.catch` y mostramos el error en
+consola.
 
 ## Promesas resueltas inmediatamente
 
-Algunas veces la forma de manejar el flujo de datos de las promesas encadenando `.then` nos facilita trabajar con nuestro código, para eso podemos crear una promesa que inicie resuelta directamente usando un método estático de `Promise`.
+Algunas veces la forma de manejar el flujo de datos de las promesas encadenando
+`.then` nos facilita trabajar con nuestro código, para eso podemos crear una
+promesa que inicie resuelta directamente usando un método estático de `Promise`.
 
 ```js
 Promise.resolve().then(() => {
@@ -234,7 +325,8 @@ Promise.resolve().then(() => {
 });
 ```
 
-Otra opción es pasarle un parámetro a `resolve` para que nuestro primer `.then` reciba ese valor.
+Otra opción es pasarle un parámetro a `resolve` para que nuestro primer `.then`
+reciba ese valor.
 
 ```js
 import { resolve } from "path";
@@ -246,11 +338,13 @@ Promise.resolve("./archivo1.txt")
   .catch(error => console.error(error));
 ```
 
-Como vemos iniciamos la cadena con un string y desde ahí obtenemos el path absoluto, leemos el archivos y lo mostramos en consola.
+Como vemos iniciamos la cadena con un string y desde ahí obtenemos el path
+absoluto, leemos el archivos y lo mostramos en consola.
 
 ## Promesas rechazadas inmediatamente
 
-De la misma forma que creamos promesas resuelta inmediatamente podemos crear promesas **rechazadas**. Solo que esta vez usamos `Promise.reject`.
+De la misma forma que creamos promesas resuelta inmediatamente podemos crear
+promesas **rechazadas**. Solo que esta vez usamos `Promise.reject`.
 
 ```js
 Promise.reject(new Error("Nuestro error"))
@@ -260,8 +354,15 @@ Promise.reject(new Error("Nuestro error"))
   .catch(error => console.error(error));
 ```
 
-¿Para qué nos sirve esto? Si tenemos una función síncrona que queremos resolver mediante promesas podríamos si da un error devolver `Promise.reject` con el error y `Promise.resolve` con la respuesta correcta. De esta forma en vez de crear una instancia de la clase `Promise` simplemente devolvemos la promesa ya resuelta o ya rechazada.
+¿Para qué nos sirve esto? Si tenemos una función síncrona que queremos resolver
+mediante promesas podríamos si da un error devolver `Promise.reject` con el
+error y `Promise.resolve` con la respuesta correcta. De esta forma en vez de
+crear una instancia de la clase `Promise` simplemente devolvemos la promesa ya
+resuelta o ya rechazada.
 
 ## Conclusiones
 
-Trabajar con promesas nos facilita mucho el control de flujos de datos asíncronos en una aplicación, además las promesas son la base para luego poder implementar características más avanzadas de JavaScript como **Async/Await** que nos facilitan aún más nuestro código.
+Trabajar con promesas nos facilita mucho el control de flujos de datos
+asíncronos en una aplicación, además las promesas son la base para luego poder
+implementar características más avanzadas de JavaScript como **Async/Await** que
+nos facilitan aún más nuestro código.

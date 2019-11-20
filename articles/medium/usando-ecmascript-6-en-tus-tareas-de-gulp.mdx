@@ -6,23 +6,33 @@ lang: es
 canonical_url: https://medium.com/@sergiodxa/usando-ecmascript-6-en-tus-tareas-de-gulp-a05f83f8bbac
 ---
 
-Algo muy molesto cuando estás [usando ES6 con Babel.js](/articles/medium/usando-ecmascript-6-2015-con-babel) y Gulp.js para automatizar tareas es que el archivo gulpfile.js sigue estando en ES5 y usando los módulos de CommonJS, aunque el resto de tu aplicación use ES6 y sus sistema de módulos.
+Algo muy molesto cuando estás
+[usando ES6 con Babel.js](/articles/medium/usando-ecmascript-6-2015-con-babel) y
+Gulp.js para automatizar tareas es que el archivo gulpfile.js sigue estando en
+ES5 y usando los módulos de CommonJS, aunque el resto de tu aplicación use ES6 y
+sus sistema de módulos.
 
-Esto se acabo desde la última versión de Gulp.js. Al momento de actualizar nuestra instalación global y local de Gulp.js a la **v3.9.0** ya nos es posible empezar a usar ES6 en nuestro gulpfile.js gracias a Babel.js.
+Esto se acabo desde la última versión de Gulp.js. Al momento de actualizar
+nuestra instalación global y local de Gulp.js a la **v3.9.0** ya nos es posible
+empezar a usar ES6 en nuestro gulpfile.js gracias a Babel.js.
 
-Para hacer esto primero necesitamos tener la última versión de Gulp.js, para eso podemos usar el comando:
+Para hacer esto primero necesitamos tener la última versión de Gulp.js, para eso
+podemos usar el comando:
 
 ```bash
 npm up -D gulp && sudo npm up -g gulp
 ```
 
-Este comando va actualizar la versión de Gulp que tengamos instalada tanto de forma local como global. Luego de esto necesitamos asegurarnos de tener Babel.js en nuestro `package.json`:
+Este comando va actualizar la versión de Gulp que tengamos instalada tanto de
+forma local como global. Luego de esto necesitamos asegurarnos de tener Babel.js
+en nuestro `package.json`:
 
 ```bash
 npm i -D babel
 ```
 
-Por último solo tenemos que renombrar nuestro archivo `gulpfile.js` a `gulpfile.babel.js` y listo, con solo esto ya podemos hacer algo como esto:
+Por último solo tenemos que renombrar nuestro archivo `gulpfile.js` a
+`gulpfile.babel.js` y listo, con solo esto ya podemos hacer algo como esto:
 
 ```js
 import babelify from "babelify";
@@ -91,4 +101,6 @@ gulp.task("default", ["build", "watch"]);
   </small>
 </center>
 
-Ahora al momento de ejecutar Gulp este va a leer el archivo gulpfile.babel.js y va a ejecutar estas tareas usando Babel.js para transpilar el código en el momento.
+Ahora al momento de ejecutar Gulp este va a leer el archivo gulpfile.babel.js y
+va a ejecutar estas tareas usando Babel.js para transpilar el código en el
+momento.
