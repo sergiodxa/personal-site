@@ -1,0 +1,180 @@
+---
+title: Introduction to SWR
+description: Learn how to start using SWR, the ZEIT data fetching library for React applications.
+date: 2019-11-20T06:13:30.309Z
+published: true
+tags: swr, react, nextjs, javascript
+lang: en
+---
+
+SWR is an all new data fetching library made by the team at [ZEIT](https://zeit.co), the same team who created Now and [Next.js](https://nextjs.org/).
+
+This new library is made specifically for React applications as a custom hook with a super simple interface. Let's create a super simple project using SWR and Next.js.
+
+## Setup Project
+
+First let's create the project.
+
+```sh
+npx create-next-app
+```
+
+This will give us a basic Next.js application after writing the name we want for it.
+
+Now let's install SWR and `isomorphic-unfetch`, this one will help us do the fetch.
+
+```sh
+yarn add swr isomorphic-unfetch
+```
+
+And that's all, if we our our project with `yarn dev` we already have a page with some components, but we could delete them.
+
+## The API
+
+The API we will consume in our application is [Pokeapi](https://pokeapi.co/), this free API will give use endpoints to get information about different Pokémon.
+
+### The Initial Page
+
+Let's start coding, first we need to create a file `pages/index.js` where we will export a React component, this will be our home page.
+
+```js
+import Head from "next/head";
+import useSWR from "swr";
+import fetcher from "../lib/fetcher";
+
+function HomePage() {
+  const { data } = useSWR("https://pokeapi.co/api/v2/pokemon", fetcher);
+
+  if (!data) return <h1>Loading...</h1>;
+  const { results } = data;
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">
+          <article key={result.name}>{result.name}</article>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+> Note: We are using Tailwind here to have some basic styles, this is not the best way to load Tailwind in a real world application.
+
+### Fetcher
+
+Our `fetcher` above is a simple module which will run the `fetch` and reply with the JSON data instead of the HTTP response.
+
+```js
+import fetch from "isomorphic-unfetch";
+
+function fetcher(...args) {
+  return fetch(...args).then(response => response.json());
+}
+
+export default fetcher;
+```
+
+## A Better List of Pokémon
+
+With this we have a list of the first 20 Pokémon names, let's create a new component to show more information of each one.
+
+```js
+import fetcher from "../lib/fetcher";
+import useSWR from "swr";
+
+function PokemonShort({ name }) {
+  const { data } = useSWR(`https://pokeapi.co/api/v2/pokemon/${name}`, fetcher);
+
+  return (
+    <div className="my-5 p-2 w-1/3">
+      <article className="shadow p-5 relative">
+        <h2 className="font-bold text-xl capitalize">{name}</h2>
+        {data ? (
+          <>
+            <div className="absolute top-0 right-0">
+              <img src={data.sprites.front_default} />
+            </div>
+            <ul>
+              <li>
+                <strong>Weight</strong>: {data.weight}
+              </li>
+              <li>
+                <strong>Height</strong>: {data.height}
+              </li>
+            </ul>
+            <br />
+            <h3 className="font-bold text-lg">Stats</h3>
+            <ul className="flex justify-start items-baseline flex-wrap">
+              {data.stats.map(stat => (
+                <li key={stat.stat.name} className="w-3/6">
+                  <strong className="capitalize">{stat.stat.name}</strong>:{" "}
+                  {stat.base_stat}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="font-bold text-l capitalize">Loading {name}...</p>
+        )}
+      </article>
+    </div>
+  );
+}
+
+export default PokemonShort;
+```
+
+Here we will show the Pokémon name since the beginning and only show the loading text until we have the stats, measures and sprite URL.
+
+Now in our HomePage we need to import and use `PokemonShort`.
+
+```js
+import Head from "next/head";
+import useSWR from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+
+function HomePage() {
+  const { data } = useSWR("https://pokeapi.co/api/v2/pokemon", fetcher);
+
+  if (!data) return <h1>Loading...</h1>;
+  const { results } = data;
+
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto max-w-md">
+        {results.map(result => (
+          <PokemonShort key={result.name} name={result.name} />
+        ))}
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+Now we should see a list of card with the data of each Pokémon.
+
+![Our Next.js + SWR Pokedex Application](/static/articles/swr/intro.png "Our Next.js + SWR Pokedex Application")
+
+With this we saw we to use SWR to fetch a list of data and then render a component per item and fetch more data there.
+
+In future articles I will continue working on this application and add more feature.
