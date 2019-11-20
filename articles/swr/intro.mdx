@@ -7,7 +7,7 @@ tags: swr, react, nextjs, javascript
 lang: en
 ---
 
-SWR is an all new data fetching library made by the team at [ZEIT](https://zeit.co), the same team who created Now and [Next.js](https://nextjs.org/).
+SWR is an all-new data fetching library made by the team at [ZEIT](https://zeit.co), the same team that created Now and [Next.js](https://nextjs.org/).
 
 This new library is made specifically for React applications as a custom hook with a straightforward interface.
 
@@ -15,7 +15,7 @@ Let's build a small project using SWR and Next.js to see how it works.
 
 ## Setup Project
 
-First let's create the project.
+First, let's create the project.
 
 ```sh
 npx create-next-app
@@ -29,7 +29,7 @@ Now let's install SWR and `isomorphic-unfetch`, this one will help us do the fet
 yarn add swr isomorphic-unfetch
 ```
 
-And that's all, if we our our project with `yarn dev` we already have a page with some components, but we could delete them.
+And that's all if we run our project with `yarn dev` we will already have a page with some components, we could safely delete them since we are not going to use them.
 
 ## The API
 
@@ -37,7 +37,7 @@ The API we will consume in our application is [Pokeapi](https://pokeapi.co/), th
 
 ### The Initial Page
 
-Let's start coding, first we need to create a file `pages/index.js` where we will export a React component, this will be our home page.
+Let's start coding, first, we need to create a file `pages/index.js` where we will export a React component, this will be our home page.
 
 ```js
 import Head from "next/head";
@@ -71,11 +71,11 @@ function HomePage() {
 export default HomePage;
 ```
 
-> Note: We are using Tailwind here to have some basic styles, this is not the best way to load Tailwind in a real world application.
+> Note: We are using Tailwind here to have some basic styles, this is not the best way to load Tailwind in a real-world application.
 
 ### Fetcher
 
-Our `fetcher` above is a simple module which will run the `fetch` and reply with the JSON data instead of the HTTP response.
+Our `fetcher` above is a simple module that will run the `fetch` and reply with the JSON data instead of the HTTP response.
 
 ```js
 import fetch from "isomorphic-unfetch";
@@ -89,7 +89,7 @@ export default fetcher;
 
 ## A Better List of Pokémon
 
-With this we have a list of the first 20 Pokémon names, let's create a new component to show more information of each one.
+With this we have a list of the first 20 Pokémon names, let's create a new component to show more information about each one.
 
 ```js
 import fetcher from "../lib/fetcher";
@@ -139,7 +139,7 @@ export default PokemonShort;
 
 Here we will show the Pokémon name since the beginning and only show the loading text until we have the stats, measures and sprite URL.
 
-Now in our HomePage we need to import and use `PokemonShort`.
+Now on our HomePage, we need to import and use `PokemonShort`.
 
 ```js
 import Head from "next/head";
@@ -173,10 +173,10 @@ function HomePage() {
 export default HomePage;
 ```
 
-Now we should see a list of card with the data of each Pokémon.
+Now we should see a list of cards with the data of each Pokémon.
 
 ![Our Next.js + SWR Pokedex Application](/static/articles/swr/intro.png "Our Next.js + SWR Pokedex Application")
 
-With this we saw we to use SWR to fetch a list of data and then render a component per item and fetch more data there.
+With this, we saw how to use SWR to fetch a list of data and then render a component per item and fetch more data inside them.
 
-In future articles I will continue working on this application and add more feature.
+In future articles, I will continue working on this application and add more features.
