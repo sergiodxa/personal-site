@@ -1,0 +1,302 @@
+---
+title: Using Suspense for Data Fetching Today with SWR
+description:
+  Learn how to use SWR for data fetching with Suspense to handle loading states.
+date: 2019-11-20T23:48:35.960Z
+tags: swr, react, nextjs, javascript
+lang: en
+published: true
+---
+
+In previous articles we built a Pokedex project
+[using SWR](/articles/swr/intro/) and then we added it
+[pagination](/articles/swr/pagination/) with the same library. Today we will
+learn how we can use Suspense to handle the loading states while we fetch the
+data, and without using the experimental version of React.js.
+
+## Running Demo
+
+> This is the final project running in CodeSandbox
+
+<iframe
+  src="https://codesandbox.io/embed/using-suspense-for-data-fetching-today-with-swr-zh9kf?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden "
+  }}
+  title="Using Suspense for Data Fetching Today with SWR"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+## Check if we are running Server-Side
+
+Suspense doesn't work yet for Server-Side Rendering, since we are using Next.js
+we will need to detect if we are running Client-Side or Server-side to avoid
+rendering our component.
+
+```js
+const isServer = typeof window === "undefined";
+```
+
+With that tiny line we could detect if we are running Server-Side.
+
+## Creating the Fallback Using
+
+Now we need to create a fallback UI for our components while they are being
+suspended, we could also use those fallbacks when rendering server side.
+
+```js
+export function Fallback({ children }) {
+  return <div className="-mx-2 flex flex-wrap">{children}</div>;
+}
+```
+
+This will be our fallback for the list of Pokémon, `children` will be the
+content.
+
+```js
+function GrayBar() {
+  return <div className="w-3/5 h-5 bg-gray-300" />;
+}
+
+export function Fallback() {
+  return (
+    <div className="my-5 p-2 w-1/3">
+      <article className="shadow p-5 relative">
+        <h2 className="font-bold text-xl capitalize">
+          <GrayBar />
+        </h2>
+        <div className="absolute top-0 right-0 select-none">
+          <div
+            style={{ width: "96px", height: "96px" }}
+            className="bg-gray-300"
+          />
+        </div>
+        <ul>
+          <li>
+            <strong>Weight</strong>: <GrayBar />
+          </li>
+          <li>
+            <strong>Height</strong>: <GrayBar />
+          </li>
+        </ul>
+        <br />
+        <h3 className="font-bold text-lg">Stats</h3>
+        <ul className="flex justify-start items-baseline flex-wrap">
+          <li className="w-3/6">
+            <strong className="capitalize">speed</strong> <GrayBar />
+          </li>
+          <li className="w-3/6">
+            <strong className="capitalize">special-defense</strong> <GrayBar />
+          </li>
+          <li className="w-3/6">
+            <strong className="capitalize">special-attack</strong> <GrayBar />
+          </li>
+          <li className="w-3/6">
+            <strong className="capitalize">defense</strong> <GrayBar />
+          </li>
+          <li className="w-3/6">
+            <strong className="capitalize">attack</strong> <GrayBar />
+          </li>
+          <li className="w-3/6">
+            <strong className="capitalize">hp</strong> <GrayBar />
+          </li>
+        </ul>
+      </article>
+    </div>
+  );
+}
+```
+
+And this one will be our fallback UI for each Pokémon individually, we will put
+those components inside the same file of each UI they are mocking to keep them
+together.
+
+## Rendering the Fallback Server-Side
+
+Let's use what we did above to render the fallback UI Server-Side.
+
+```js
+import React from "react";
+import Head from "next/head";
+import PokemonList, {
+  Fallback as PokemonListFallback
+} from "../components/pokemon-list";
+import { Fallback as PokemonShortFallback } from "../components/pokemon-short";
+
+const isServer = typeof window === "undefined";
+
+function HomePage() {
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        {!isServer ? (
+          <PokemonList />
+        ) : (
+          <PokemonListFallback>
+            {Array.from({ length: 9 }, (_, index) => (
+              <PokemonShortFallback key={index} />
+            ))}
+          </PokemonListFallback>
+        )}
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+As you could see we moved the content of the list with their logic to another
+file and we import it here. We also only render `PokemonList` if we are not
+running Server-Side and in the fallback we render nine mocked Pokémon cards.
+
+## Adding Suspense
+
+Now it's time to use Suspense, we need to first wrap `PokemonList` in
+`React.Suspense`.
+
+```js
+import React from "react";
+import Head from "next/head";
+import PokemonList, {
+  Fallback as PokemonListFallback
+} from "../components/pokemon-list";
+import { Fallback as PokemonShortFallback } from "../components/pokemon-short";
+
+const isServer = typeof window === "undefined";
+
+const fallback = (
+  <PokemonListFallback>
+    {Array.from({ length: 9 }, (_, index) => (
+      <PokemonShortFallback key={index} />
+    ))}
+  </PokemonListFallback>
+);
+
+function HomePage() {
+  return (
+    <>
+      <Head>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+      </Head>
+      <section className="container mx-auto">
+        {!isServer ? (
+          <React.Suspense fallback={fallback}>
+            <PokemonList />
+          </React.Suspense>
+        ) : (
+          fallback
+        )}
+      </section>
+    </>
+  );
+}
+
+export default HomePage;
+```
+
+To re-use the element we move the fallback outside our HomePage and use it in
+both the `React.Suspense` and when rendering Server-Side.
+
+To make SWR uses Suspense we need to pass `{ suspense: true }` after the
+`fetcher`.
+
+```js
+import React from "react";
+import useSWR, { useSWRPages } from "swr";
+import fetcher from "../lib/fetcher";
+import PokemonShort from "../components/pokemon-short";
+import useOnScreen from "../hooks/use-on-screen";
+
+function PokemonList() {
+  const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
+    "pokemon-list",
+    ({ offset, withSWR }) => {
+      const url = offset || "https://pokeapi.co/api/v2/pokemon";
+      const { data } = withSWR(useSWR(url, fetcher, { suspense: true }));
+
+      if (!data) return null;
+
+      const { results } = data;
+      return results.map(result => (
+        <PokemonShort key={result.name} name={result.name} />
+      ));
+    },
+    SWR => SWR.data.next,
+    []
+  );
+
+  const [infiniteScrollEnabled, setInfiniteScrollEnabled] = React.useState(
+    false
+  );
+  const $loadMoreButton = React.useRef(null);
+  const infiniteScrollCount = React.useRef(0);
+  const isOnScreen = useOnScreen($loadMoreButton, "200px");
+
+  React.useEffect(() => {
+    if (!infiniteScrollEnabled || !isOnScreen) return;
+
+    loadMore();
+
+    const count = infiniteScrollCount.current;
+
+    if (count + 1 === 3) {
+      setInfiniteScrollEnabled(false);
+      infiniteScrollCount.current = 0;
+    } else {
+      infiniteScrollCount.current = count + 1;
+    }
+  }, [infiniteScrollEnabled, isOnScreen]);
+
+  return (
+    <>
+      <div className="-mx-2 flex flex-wrap">{pages}</div>
+      <div className="mx-auto mt-10 mb-20 w-1/3">
+        {!isReachingEnd && (
+          <button
+            ref={$loadMoreButton}
+            className="bg-red-600 border-solid border-2 hover:bg-white border-red-600 text-white hover:text-red-600 font-bold py-2 px-4 rounded-full w-full"
+            disabled={isLoadingMore}
+            onClick={() => {
+              loadMore();
+              setInfiniteScrollEnabled(true);
+            }}
+          >
+            Load More Pokémon
+          </button>
+        )}
+      </div>
+    </>
+  );
+}
+
+export function Fallback({ children }) {
+  return <div className="-mx-2 flex flex-wrap">{children}</div>;
+}
+
+export default PokemonList;
+```
+
+With that if we reload the page we will see the fallback UI and then when SWR
+finish the fetch of the data it will show them all the Pokémon at the same time.
+
+With this we made our application uses Suspense for the loading state of the
+data fetching, a single line of configuration in `useSWR` and that's all we
+need.
+
+The only downside here is that every time we fetch a new page we will see the
+Fallback UI for a few seconds.
