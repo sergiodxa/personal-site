@@ -2,10 +2,8 @@
 title: Using Suspense for Data Fetching Today with SWR
 description:
   Learn how to use SWR for data fetching with Suspense to handle loading states.
-date: 2019-11-20T23:48:35.960Z
 tags: swr, react, nextjs, javascript
-lang: en
-published: true
+published: false
 ---
 
 In previous articles we built a Pokedex project
@@ -25,7 +23,7 @@ data, and without using the experimental version of React.js.
     height: 500,
     border: 0,
     borderRadius: 4,
-    overflow: "hidden "
+    overflow: "hidden"
   }}
   title="Using Suspense for Data Fetching Today with SWR"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
@@ -42,12 +40,12 @@ rendering our component.
 const isServer = typeof window === "undefined";
 ```
 
-With that tiny line we could detect if we are running Server-Side.
+With that tiny line, we could detect if we are running Server-Side.
 
 ## Creating the Fallback Using
 
 Now we need to create a fallback UI for our components while they are being
-suspended, we could also use those fallbacks when rendering server side.
+suspended, we could also use those fallbacks when rendering server-side.
 
 ```js
 export function Fallback({ children }) {
@@ -159,7 +157,7 @@ export default HomePage;
 
 As you could see we moved the content of the list with their logic to another
 file and we import it here. We also only render `PokemonList` if we are not
-running Server-Side and in the fallback we render nine mocked Pokémon cards.
+running Server-Side and in the fallback, we render nine mocked Pokémon cards.
 
 ## Adding Suspense
 
@@ -291,10 +289,11 @@ export function Fallback({ children }) {
 export default PokemonList;
 ```
 
-With that if we reload the page we will see the fallback UI and then when SWR
-finish the fetch of the data it will show them all the Pokémon at the same time.
+With that, if we reload the page we will see the fallback UI and then when SWR
+finishes the fetch of the data it will show them all the Pokémon at the same
+time.
 
-With this we made our application uses Suspense for the loading state of the
+With this, we made our application uses Suspense for the loading state of the
 data fetching, a single line of configuration in `useSWR` and that's all we
 need.
 
