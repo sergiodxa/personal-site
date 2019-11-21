@@ -23,6 +23,24 @@ with a straightforward interface.
 
 Let's build a small project using SWR and Next.js to see how it works.
 
+## Running Demo
+
+> This is the final project running in CodeSandbox
+
+<iframe
+  src="https://codesandbox.io/embed/hello-world-l6zmc?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden "
+  }}
+  title="Introduction to SWR"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
 ## Setup Project
 
 First, let's create the project.
@@ -182,10 +200,12 @@ function HomePage() {
           rel="stylesheet"
         />
       </Head>
-      <section className="container mx-auto max-w-md">
-        {results.map(result => (
-          <PokemonShort key={result.name} name={result.name} />
-        ))}
+      <section className="container mx-auto">
+        <div className="-mx-2 flex flex-wrap">
+          {results.map(result => (
+            <PokemonShort key={result.name} name={result.name} />
+          ))}
+        </div>
       </section>
     </>
   );
