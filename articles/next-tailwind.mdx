@@ -1,0 +1,239 @@
+---
+title: Using Tailwind with Next.js
+description: Learn how to use Tailwind in a Next.js application.
+date: 2019-12-26T20:19:09.388Z
+published: true
+lang: en
+tags: nextjs, react, tailwind
+---
+
+Tailwind's a CSS library that comes with a collection of utility classes to be used in your HTML when using it, most of the time you wouldn't write custom CSS, it let you focus on your app and gives you good design constraints to work with.
+
+Next.js it's a React meta-framework that gives you a lot of features out of the box and lets you create complex applications without caring too much about tooling and configuration, instead it lets you focus on building your applications and give you good defaults for most things.
+
+Both tools come from the idea of let you care about what makes your application unique and let you stop thinking about the same things all the time. Let's see how to use them together.
+
+## Running Demo
+
+> This is the final project running in CodeSandbox
+
+<iframe
+  src="https://codesandbox.io/embed/using-tailwind-with-nextjs-npogn?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="Using Tailwind with Next.js"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+## Create the Next.js Application
+
+To create a Next.js application run the following command:
+
+```sh
+$ npx create-next-app my-app
+```
+
+This will create a basic Next.js application with the required libraries already installed, the `package.json` scripts configured and an example page.
+
+## Adding PostCSS
+
+To use Tailwind we need to use PostCSS too, it's not a hard requirement however, you can always load the CSS of Tailwind from a CDN or static file, but PostCSS will let us add some nice plugins to improve the performance.
+
+```sh
+$ yarn add -D tailwindcss postcss-easy-import cssnano autoprefixer @fullhuman/postcss-purgecss
+```
+
+- [tailwindcss](https://www.npmjs.com/package/tailwindcss) - The CSS library itself
+- [postcss-easy-import](https://www.npmjs.com/package/postcss-easy-import) - A PostCSS plugin to inline `@import` statements in CSS
+- [cssnano](https://www.npmjs.com/package/cssnano) - A CSS minifier, it even minify CSS shorthands
+- [autoprefixer](https://www.npmjs.com/package/autoprefixer) - A PostCSS plugin to automatically add prefixes for CSS properties to work cross browser
+- [@fullhuman/postcss-purgecss](https://www.npmjs.com/package/@fullhuman/postcss-purgecss) - A PostCSS plugin to remove unused CSS
+
+## Configuring PostCSS
+
+Now let's configure PostCSS, we need to create a `postcss.config.js` in the root of our project, side by side with the `package.json`.
+
+```js
+module.exports = {
+  plugins: [
+    require("postcss-easy-import"),
+    require("tailwindcss"),
+    process.env.NODE_ENV === "production" &&
+      require("@fullhuman/postcss-purgecss")({
+        content: [
+          "./pages/**/*.{js,jsx,ts,tsx}",
+          "./components/**/*.{js,jsx,ts,tsx}"
+        ],
+        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+      }),
+    require("autoprefixer"),
+    require("cssnano")
+  ]
+};
+```
+
+Here we are telling PostCSS what plugins we want to use, and in which order, first we need to tell PostCSS to inline `@import` statements, then load Tailwind, then, if we are in production (more about this below), purge unused CSS, then autoprefix the CSS not purged and finally minify the final resulting CSS.
+
+Why only purge CSS in production? If we are developing we will want to be able to use any Tailwind, or custom CSS, class without running the build process of PostCSS again, in production however we want to remove the classes we are not using to reduce the size of our CSS bundle.
+
+And when we are finally in production we want to check all of our code in `pages/` and `components/`, all of them, either `.js`, `.jsx`, `.ts` or `.tsx`. To see what classes match we will configure it to use the RegEx `/[A-Za-z0-9-_:/]+/g`, this will support using `:` in the classes, something Tailwind does for styling `focus`, `hover` and `active` states and media queries.
+
+## Add PostCSS to Next.js
+
+Now we need to tell Next.js to run PostCSS as part of its build process. Luckily for us, the Next.js team maintains an official plugin to add external CSS support using PostCSS, we only need to install it.
+
+```sh
+$ yarn add -D @zeit/next-css
+```
+
+And now we need to create a `next.config.js` file, this lets us customize the Next.js configuration, it's a file you usually don't need but in our case, we will need it.
+
+```js
+const withCSS = require("@zeit/next-css");
+
+module.exports = withCSS({});
+```
+
+That's what we will need to add, require the plugin and then export it passing an empty object, that empty object is any extra configuration you may want to pass to Next.js, we will let it be empty this time.
+
+Now let's create a `styles.css` file at the root of our project.
+
+```css
+/* purgecss start ignore */
+@tailwind base;
+/* purgecss end ignore */
+@tailwind components;
+@tailwind utilities;
+```
+
+That's all we need to add to this file, with this we are loading Tailwind base, components, and utility styles. We are also telling PurgeCSS to don't purge the base styles.
+
+## Using Tailwind
+
+Now that we have everything configured and our `styles.css` ready let's update our the basic components the `create-next-app` give us to use Tailwind instead.
+
+```js
+// components/nav.js
+import React from "react";
+import Link from "next/link";
+
+const links = [
+  { href: "https://zeit.co/now", label: "ZEIT" },
+  { href: "https://github.com/zeit/next.js", label: "GitHub" }
+].map(link => {
+  link.key = `nav-link-${link.href}-${link.label}`;
+  return link;
+});
+
+const Nav = () => (
+  <nav className="text-center">
+    <ul className="flex justify-between px-4 my-4 py-1">
+      <li className="flex px-2 py-1">
+        <Link href="/">
+          <a className="text-blue-500 no-underline text-sm">Home</a>
+        </Link>
+      </li>
+      {links.map(({ key, href, label }) => (
+        <li key={key} className="flex px-2 py-1">
+          <a className="text-blue-500 no-underline text-sm" href={href}>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+);
+
+export default Nav;
+```
+
+```js
+import React from "react";
+import Head from "next/head";
+import Nav from "../components/nav";
+
+const Home = () => (
+  <div className="text-sans">
+    <Head>
+      <title>Home</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+
+    <Nav />
+
+    <div className="w-full text-gray-900">
+      <h1 className="m-0 w-full pt-20 leading-tight text-5xl text-center font-bold">
+        Welcome to Next.js!
+      </h1>
+      <p className="text-center my-4 text-m">
+        To get started, edit <code>pages/index.js</code> and save to reload.
+      </p>
+
+      <div className="max-w-4xl mx-auto pt-20 py-auto pb-8 flex flex-row justify-around">
+        <a
+          href="https://nextjs.org/docs"
+          className="pt-4 px-5 pb-6 w-64 text-left no-underline text-gray-800 border border-gray-400 hover:border-blue-500"
+        >
+          <h3 className="m-0 text-blue-500 text-lg font-bold">
+            Documentation &rarr;
+          </h3>
+          <p className="m-0 pt-3 py-0 pb-0 text-sm text-gray-900">
+            Learn more about Next.js in the documentation.
+          </p>
+        </a>
+        <a
+          href="https://nextjs.org/learn"
+          className="pt-4 px-5 pb-6 w-64 text-left no-underline text-gray-800 border border-gray-400 hover:border-blue-500"
+        >
+          <h3 className="m-0 text-blue-500 text-lg font-bold">
+            Next.js Learn &rarr;
+          </h3>
+          <p className="m-0 pt-3 py-0 pb-0 text-sm text-gray-900">
+            Learn about Next.js by following an interactive tutorial!
+          </p>
+        </a>
+        <a
+          href="https://github.com/zeit/next.js/tree/master/examples"
+          className="pt-4 px-5 pb-6 w-64 text-left no-underline text-gray-800 border border-gray-400 hover:border-blue-500"
+        >
+          <h3 className="m-0 text-blue-500 text-lg font-bold">
+            Examples &rarr;
+          </h3>
+          <p className="m-0 pt-3 py-0 pb-0 text-sm text-gray-900">
+            Find other example boilerplates on the Next.js GitHub.
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
+export default Home;
+```
+
+If we check our application right now it will load without styles, let's create a `pages/_app.js` file to import our `styles.css`.
+
+```js
+// pages/_app.js
+import "../styles.css";
+
+import React from "react";
+import App from "next/app";
+
+export default class TailwindApp extends App {
+  render() {
+    const { Component, pageProps } = this.props;
+    return <Component {...pageProps} />;
+  }
+}
+```
+
+This file will load our CSS one time and ensure it's always loaded.
+
+If we try it now we will see a website, not exactly equal, but similar to the example website Next.js comes with, from this point, we could start using Tailwind however we want and once we are ready to deploy build for production and only get the CSS we are using.
