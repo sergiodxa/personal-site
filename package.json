@@ -42,7 +42,7 @@
     "emotion": "^10.0.27",
     "husky": "3.1.0",
     "lint-staged": "9.5.0",
-    "serve": "11.2.0",
+    "serve": "11.3.0",
     "watch": "1.0.2"
   },
   "husky": {
