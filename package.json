@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "emotion": "^10.0.27",
-    "husky": "3.1.0",
+    "husky": "4.0.10",
     "lint-staged": "10.0.0",
     "serve": "11.3.0",
     "watch": "1.0.2"
