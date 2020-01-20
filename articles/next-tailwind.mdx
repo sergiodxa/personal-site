@@ -46,12 +46,10 @@ This will create a basic Next.js application with the required libraries already
 To use Tailwind we need to use PostCSS too, it's not a hard requirement however, you can always load the CSS of Tailwind from a CDN or static file, but PostCSS will let us add some nice plugins to improve the performance.
 
 ```sh
-$ yarn add -D tailwindcss postcss-easy-import cssnano autoprefixer @fullhuman/postcss-purgecss
+$ yarn add -D tailwindcss autoprefixer @fullhuman/postcss-purgecss
 ```
 
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss) - The CSS library itself
-- [postcss-easy-import](https://www.npmjs.com/package/postcss-easy-import) - A PostCSS plugin to inline `@import` statements in CSS
-- [cssnano](https://www.npmjs.com/package/cssnano) - A CSS minifier, it even minify CSS shorthands
 - [autoprefixer](https://www.npmjs.com/package/autoprefixer) - A PostCSS plugin to automatically add prefixes for CSS properties to work cross browser
 - [@fullhuman/postcss-purgecss](https://www.npmjs.com/package/@fullhuman/postcss-purgecss) - A PostCSS plugin to remove unused CSS
 
@@ -62,29 +60,35 @@ Now let's configure PostCSS, we need to create a `postcss.config.js` in the root
 ```js
 module.exports = {
   plugins: [
-    require("postcss-easy-import"),
-    require("tailwindcss"),
-    process.env.NODE_ENV === "production" &&
-      require("@fullhuman/postcss-purgecss")({
-        content: [
-          "./pages/**/*.{js,jsx,ts,tsx}",
-          "./components/**/*.{js,jsx,ts,tsx}"
-        ],
-        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
-      }),
-    require("autoprefixer"),
-    require("cssnano")
+    "tailwindcss",
+    process.env.NODE_ENV === "production"
+      ? [
+          "@fullhuman/postcss-purgecss",
+          {
+            content: [
+              "./pages/**/*.{js,jsx,ts,tsx}",
+              "./components/**/*.{js,jsx,ts,tsx}"
+            ],
+            defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
+          }
+        ]
+      : undefined,
+    "autoprefixer"
   ]
 };
 ```
+
+> Note: We need to use this syntax of using strings instead of requires due Next.js requirements.
 
 Here we are telling PostCSS what plugins we want to use, and in which order, first we need to tell PostCSS to inline `@import` statements, then load Tailwind, then, if we are in production (more about this below), purge unused CSS, then autoprefix the CSS not purged and finally minify the final resulting CSS.
 
 Why only purge CSS in production? If we are developing we will want to be able to use any Tailwind, or custom CSS, class without running the build process of PostCSS again, in production however we want to remove the classes we are not using to reduce the size of our CSS bundle.
 
-And when we are finally in production we want to check all of our code in `pages/` and `components/`, all of them, either `.js`, `.jsx`, `.ts` or `.tsx`. To see what classes match we will configure it to use the RegEx `/[A-Za-z0-9-_:/]+/g`, this will support using `:` in the classes, something Tailwind does for styling `focus`, `hover` and `active` states and media queries.
+And when we are finally in production we want to check all of our code in `pages/` and `components/`, all of them, either `.js`, `.jsx`, `.ts` or `.tsx`. To see what classes match we will configure it to use the RegEx `/[\w-/:]+(?<!:)/g`, this will support using `:` in the classes, something Tailwind does for styling `focus`, `hover` and `active` states and media queries.
 
 ## Add PostCSS to Next.js
+
+> Note: This is not required anymore if you are using Next.js v9.2 or greater.
 
 Now we need to tell Next.js to run PostCSS as part of its build process. Luckily for us, the Next.js team maintains an official plugin to add external CSS support using PostCSS, we only need to install it.
 
@@ -102,21 +106,23 @@ module.exports = withCSS({});
 
 That's what we will need to add, require the plugin and then export it passing an empty object, that empty object is any extra configuration you may want to pass to Next.js, we will let it be empty this time.
 
+## Create Global Stylesheet for Tailwind
+
 Now let's create a `styles.css` file at the root of our project.
 
 ```css
 /* purgecss start ignore */
 @tailwind base;
-/* purgecss end ignore */
 @tailwind components;
+/* purgecss end ignore */
 @tailwind utilities;
 ```
 
-That's all we need to add to this file, with this we are loading Tailwind base, components, and utility styles. We are also telling PurgeCSS to don't purge the base styles.
+That's all we need to add to this file, with this we are loading Tailwind base, components, and utility styles. We are also telling PurgeCSS to don't purge the base and components styles.
 
 ## Using Tailwind
 
-Now that we have everything configured and our `styles.css` ready let's update our the basic components the `create-next-app` give us to use Tailwind instead.
+Now that we have everything configured and our `styles.css` ready let's update the basic components that `create-next-app` give us to use Tailwind instead.
 
 ```js
 // components/nav.js
@@ -221,10 +227,9 @@ If we check our application right now it will load without styles, let's create 
 
 ```js
 // pages/_app.js
-import "../styles.css";
-
 import React from "react";
 import App from "next/app";
+import "../styles.css";
 
 export default class TailwindApp extends App {
   render() {
@@ -234,6 +239,6 @@ export default class TailwindApp extends App {
 }
 ```
 
-This file will load our CSS one time and ensure it's always loaded.
+This file will load our CSS one time and ensure it's always loaded. Next.js (starting at v9.2) will take care of loading our `styles.css` globally in every page and minified it in production.
 
 If we try it now we will see a website, not exactly equal, but similar to the example website Next.js comes with, from this point, we could start using Tailwind however we want and once we are ready to deploy build for production and only get the CSS we are using.
