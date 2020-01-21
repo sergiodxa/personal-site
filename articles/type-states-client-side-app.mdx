@@ -121,7 +121,7 @@ Now, this may look like a good idea, but it will require a lot of boilerplate co
 
 ### Enter SWR
 
-SWR it's a tiny library [I already](<(/articles/swr/intro/)>) [wrote](/articles/swr/pagination/) [about](/articles/swr/suspense/) in previous articles, this library not only handle most of the logic and boilerplate to fetch data, it will also keep it in a cache which will be shared across all components. This could look as if it was a Global State similar to Redux, the key difference here is that the cache is the source of truth but every time you call the SWR hook you will have an internal local state which will have the data.
+SWR it's a tiny library [I already](/articles/swr/intro/) [wrote](/articles/swr/pagination/) [about](/articles/swr/suspense/) in previous articles, this library not only handle most of the logic and boilerplate to fetch data, it will also keep it in a cache which will be shared across all components. This could look as if it was a Global State similar to Redux, the key difference here is that the cache is the source of truth but every time you call the SWR hook you will have an internal local state which will have the data.
 
 ```js
 function UserList() {
