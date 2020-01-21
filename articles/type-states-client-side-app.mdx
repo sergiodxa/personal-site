@@ -1,0 +1,198 @@
+---
+title: What Type of States Could You Find in a Client-Side Application?
+description: Client-Side Applications could have different types of states based on the requirements, let's dig through them and learn their differences.
+lang: en
+tags: react, swr, state, redux
+date: 2020-01-21T05:00:00.000Z
+published: true
+---
+
+When building a Frontend application, one of the hardest parts is handling the application state, this state could include a lot of different kinds of data, open/closed state of a modal, the currently authenticated user, or store application data coming from an API.
+
+## UI State
+
+UI State is a category of states only related to UI changes, they are usually transient, which means once the component using that states is unmounted the UI State becomes useless, because of that the UI State is usually stored locally in the component which will use it.
+
+Examples of this type of state are the value of the input (see code snippet below), if a model is open or closed, if a button is disabled or enabled, etc.
+
+```js
+function Input(props) {
+  const [value, setValue] = React.useState("");
+  // more logic here maybe using the props or some effects
+  return (
+    <input
+      {...props}
+      value={value}
+      onChange={event => setValue(event.target.value)}
+    />
+  );
+}
+```
+
+## Application-Level State
+
+The application-level state is a special kind of state used by different parts of the application which is also expected to keep in sync between them. Some classic examples of those states are the currently logged in user if there is one, and the theme used by the application.
+
+In React, you will usually use some kind of global store to save this kind of data, this could be manually using Context or using a library like Redux or MobX.
+
+```js
+function UserAvatar() {
+  const user = useCurrentUser(); // read from Context or Redux
+  if (!user) return null;
+  return <img src={user.avatarUrl} />;
+}
+```
+
+This kind of state it's not frequently updated, in the case of the current user you will probably update it two times, when the user log-in or log out, and maybe it would be updated if the user changes their profile info, but even that it's not that common.
+
+### Why Not Keep Everything Global?
+
+Once you have a store for the global state it's common to start moving more UI State to be global instead of local to the component.
+
+While it's not a bad practice per se it will cause several performance issues once your global state it's updated and a lot of components are subscribed to it, then you may start adding different performance optimizations, maybe add `React.memo` to your components, use `React.useMemo` and `React.useCallback` to avoid updating the state if it was not truly required.
+
+Or maybe you are using a library like Redux or MobX which comes with already built-in solutions for those performance problems. But even if the library solves the performance issue, ask yourself, why use a technique which gives your performance issue and then add a library to solve it if you could avoid the performance issue altogether and use the local state for your UI state and keep the global state only for Application-Level State.
+
+## API Cache
+
+There is a third kind of state you will commonly see in Frontend applications, an API cache is the state where you keep the data you got from the API, the reason to call it an API Cache is because you are saving a copy of the API data in-memory to be used without fetching again every time the component it's rendered like you would do with an in-memory cache to avoid querying the database server-side on every request.
+
+The most common implementation of this is something like the code below:
+
+```js
+function UserList() {
+  // here we will save the state
+  const [users, setUsers] = React.useState([]);
+  const [error, setError] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  // run an effect to fetch the data and update the state
+  React.useEffect(() => {
+    fetch("/api/users")
+      .then(res => res.json())
+      .then(data => setUsers(data))
+      .catch(error => setError(error))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  // render something based on the states above
+  if (isLoading) return <Spinner />;
+  if (error) return <Alert type="error" message={error.message} />;
+  return users.map(user => <UserItem key={user.id} {...user} />);
+}
+```
+
+We need to manually keep track of the data, the error, and the loading state.
+
+In that case, we are using the local state to store the cache of our API. This works if we are not going to use the data in another part of the application, but as soon as you have two sibling components with the same data requirement we will need to lift the state up to share it or fetch it two times, risking it to be out of sync.
+
+Eventually, if a lot of parts in the application use this cache you may lift it to the first component and to avoid prop drilling you may want to put it in a Context object, at that moment we moved from a local state to a global state.
+
+Another way to use global states for this is by using something like Redux.
+
+```js
+function UserList() {
+  // here we will read from the Store the list of ids of our users
+  const users = useSelector(state => state.entities.users.ids);
+  // here we will read from the Store the list of possible errors we had
+  const errors = useSelector(state => state.entities.users.errors);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!users || errors) {
+      dispatch(fetchCollection("users"));
+    }
+  }, [users, errors, dispatch]);
+
+  if (!users && !errors) return <Spinner />;
+
+  if (errors) {
+    return errors.map(error => (
+      <Alert key={error.message} type="error" message={error.message} />
+    ));
+  }
+
+  // our UserItem will receive the ID and get the entity from the Store
+  return users.map(user => <UserItem key={user.id} id={user} />);
+}
+```
+
+Now, this may look like a good idea, but it will require a lot of boilerplate code to handle the loading, normalization of the data, handling errors, handle retrying, in the example above I retry if there are no users or there are errors, but I never stop doing it.
+
+### Enter SWR
+
+SWR it's a tiny library [I already](<(/articles/swr/intro/)>) [wrote](/articles/swr/pagination/) [about](/articles/swr/suspense/) in previous articles, this library not only handle most of the logic and boilerplate to fetch data, it will also keep it in a cache which will be shared across all components. This could look as if it was a Global State similar to Redux, the key difference here is that the cache is the source of truth but every time you call the SWR hook you will have an internal local state which will have the data.
+
+```js
+function UserList() {
+  const { data, error } = useSWR("/api/users", fetcher);
+  if (!data) return <Spinner />;
+  if (error) return <Alert type="error" message={error.message} />;
+  return users.map(user => <UserItem key={user.id} {...user} />);
+}
+```
+
+Look how simpler it looks compared to both solutions above.
+
+The way this works is the following:
+
+- Component render call SWR hook to read from `/api/users`
+- SWR check if the data it's already in the cache, `/api/users` becomes the cache key
+- If it's already in the cache
+  - Update the hook internal, local, state to get the data
+  - Re-render the component using the data
+- If it's not already in the cache
+  - Fetch the data
+  - Update the cache
+  - Update the hook internal, local, state to get the data
+  - Re-render the component using the data
+
+Starting now our component will follow a state-while-revalidate method to update the state, it will always keep rendering the component with the data it already read, if it suspects it changed instead of deleting the data to fetching again, showing a loading state in the middle, it will keep rendering the **stale** data while it revalidate it with the API, then it will update the internal local state.
+
+There are other libraries following a similar pattern as this one, the other most popular is [React Query](https://github.com/tannerlinsley/react-query#readme).
+
+## Usage for each one
+
+Now that we defined the different kinds of states we could have, let's use some real-world applications to exemplify when to use each one.
+
+### Database Driven Applications
+
+I call a Database-Driven Applications the kind of apps where most of the works happen querying the database and the UI, while it could have multiple states and real-time features it's mostly a **"show this list of data from the query results"**.
+
+Some examples of this kind of applications are:
+
+- Search Focused Apps (e.g blogs or e-commerces)
+- Dashboards
+
+Those are not all the examples of course but are some of the most popular, in this kind of application most of the state we will have is API Cache, fetch some articles and show them in a list, fetch a products and their comments, fetch different data and draw graphics, the API is the source of truth in those applications.
+
+Using a library like [SWR](https://swr.now.sh) will help a lot to focus more on the UI and reduce the boilerplate required around data fetching, keeping the data in a external cache not affecting React will also give a nice performance improvement when doing Client-Side navigation since we could show already fetched data while revalidating with the backend if it changed.
+
+It could even be used to work pseudo-real-time thanks to the SWR option to do interval polling.
+
+Most of the time we are working on this kind of application.
+
+### UI Driven Applications
+
+A UI Driven Application while it still has a lot of querying a database, but it will have way more times **derived states computed from such data**.
+
+Some examples of this kind of applications are:
+
+- Chat (and multi-channel chats)
+- Social Networks
+
+Imagine an application like Slack, it will show the list of channels and the messages of the currently active one, that sounds simple, but at the same time it's getting new message through [something like WebSockets](/articles/scalable-real-time-applications/) for all channels, if the user is mentioned in one of those it should show a notification badge near the channel name, if it has more than one it will show the amount, it also has threads inside the messages of a channel and a view dedicated to seeing only threads.
+
+While it's possible to use something like SWR to build this, an application like Slack could benefit a lot for normalizing the data and store it in a single place, like Redux, then derive most of the states (e.g. notifications) from the stored data.
+
+This will also help to simplify updating data, in a Database-Driven Applications you will have a limited amount of fetches and you could know which URLs are being fetched in case you want to revalidate them from another part of the UI. In a UI Driven Applications having all the API data normalized and stored in a single place will allow us to update it there and get the updates everywhere automatically without revalidating against the API and multiple requests.
+
+This is a not so common type of applications, sometimes it's part of a bigger one (the chat) which is more Database Driven.
+
+## So, What Should I Use?
+
+The normal question here is "it depends", but let's be more opinionated here.
+
+You probably want a combination of a **local state for your UI State and an API Cache** like SWR, maybe using React Context for the few Application-Level State you will have (e.g. authenticated user). **This will handle like 95% (_completely arbitrary number_) of your product requirements and will give you a nice and performant application without headaches**.
+
+If you are building a _Slack-like or Facebook-like application_ go with a **centralized state for API Cache and Application-Level State since the beginning**, use local state for the UI State _when possible_, it may look like more work at the beginning but **will benefit a lot at the long term when a new product requirement could be solved deriving a state from the already available data**.
