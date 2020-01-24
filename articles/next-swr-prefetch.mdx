@@ -9,13 +9,13 @@ lang: en
 
 Next.js comes with an amazing performance optimization where it will do code splitting of each page but if your page link to another one it will prefetch the JavaScript bundle as low priority, this way once the user navigates to another page it will, probably, already have the bundle of the new page and render it immediately, if the page is not using `getInitialProps`.
 
-This works amazingly great and makes navigation super fast, except you don't get any data prefetching benefit, your new page will render the loading state and then render with data once the requests to the API resolved successfully.
+This works amazingly great and makes navigation super-fast, except you don't get any data prefetching benefit, your new page will render the loading state and then render with data once the requests to the API resolved successfully.
 
-But the key thing here is that we, as developer, may probably know which data the user will need on each page, or at least most of it, so it's possible to fetch it before the user trigger a navigation.
+But the key thing here is that we, as a developer, may probably know which data the user will need on each page, or at least most of it, so it's possible to fetch it before the user navigates to another page.
 
 SWR it's another great library, from the same team doing Next.js, which let use do remote data-fetching way easier, one of the best part of it is that while each call of SWR will have its own copy of the data it also has an external cache, if a new call of SWR happens it will first check in the cache to get the data and then revalidate against the API, to be sure we always have the correct data.
 
-This cache it's also updatable from the outside using a simple function called `mutate` which SWR give us. This is great since we could call this function and then once a React component is rendered using SWR it will already have the data in cache.
+This cache's also updatable from the outside using a simple function called `mutate` which SWR gives us. This is great since we could call this function and then once a React component is rendered using SWR it will already have the data in the cache.
 
 ## Running Demo
 
@@ -66,7 +66,7 @@ export default function MyApp({ Component, pageProps }) {
 
 It could be something like that, `Layout` render a div with a CSS Grid to position the `Navigation` and the `Main` components in the correct places.
 
-Now if the user clicks on **Home** we now we will not show any dynamic data, so we don't care about that link, we could let Next.js prefetch the JS bundle and call it a day.
+Now if the user clicks on **Home** we now will not show any dynamic data, so we don't care about that link, we could let Next.js prefetch the JS bundle and call it a day.
 
 But **My Profile** and **Users** will need dynamic data from the API.
 
@@ -77,7 +77,7 @@ export default function MyProfile() {
 }
 ```
 
-That could be the `MyProfile` page, we call a `useCurrentUser` hook which will call `useSWR` internally to get the currently logged in user.
+That could be the `MyProfile` page, we call a `useCurrentUser` hook which will call `useSWR` internally to get the currently logged-in user.
 
 ```js
 export default function Users() {
@@ -140,7 +140,7 @@ export default function NavItem({ href, label, prepare = noop }) {
 }
 ```
 
-Now if the user mouse enter the link, aka the user hover the link, we will call our `prepare` function, we could do this because if the user hover the link it may want to click it, so we trigger the fetch of the data, once the user click it it may have already fetched it and updated SWR cache, if the user never click we only prefetched data and cache it for nothing but didn't lose anything.
+Now if the user mouse enter the link, aka the user hover the link, we will call our `prepare` function, we could do this because if the user hovers the link it may want to click it, so we trigger the fetch of the data, once the user clicks it may have already fetched it and updated SWR cache if the user never clicks we only prefetched data and cache it for nothing but didn't lose anything.
 
 Now let's implement `getUsers` and `getCurrentUser` functions.
 
@@ -153,7 +153,7 @@ export function fetchAndCache(key) {
   const request = fetcher(key);
   mutate(key, request, false);
   return request;
-} 
+}
 
 export function getCurrentUser() {
   return fetchAndCache("/api/users/current");
@@ -164,9 +164,9 @@ export function getUsers() {
 }
 ```
 
-The `fetcher` function trigger the `fetch` and parse de response as JSON.
+The `fetcher` function triggers the `fetch` and parses the response as JSON.
 
-The `fetchAndCache` function will call `fetcher`, keep the promise, not the result since we are not awaiting it or calling `.then`, and pass the `key`, our URL, to `mutate` along the request promise, the `false` as third argument will tell SWR to not revalidate the data against the backend, we don't need it because we just fetched it so we will it to don't do that.
+The `fetchAndCache` function will call `fetcher`, keep the promise, not the result since we are not awaiting it or calling `.then`, and pass the `key`, our URL, to `mutate` along with the request promise, the `false` as the third argument will tell SWR to not revalidate the data against the backend, we don't need it because we just fetched it so we will it to don't do that.
 
 Lastly `getCurrentUser` and `getUsers` are wrappers around `fetchAndCache` to specify a certain `key` (URL).
 
@@ -176,4 +176,4 @@ With all of this once we hover over **My Profile** and **Users** it will trigger
 
 ## Final Words
 
-As you could see adding a simple function call before the user starts a page navigation it could help us increase the perceived performance of our application, we could continue improving this adding checks to ensure we are not prefetching data if the users is on a low-speed connection or using mobile data which could help him save data and only load what it really needs.
+As you could see adding a simple function call before the user starts a page navigation it could help us increase the perceived performance of our application, we could continue improving this adding checks to ensure we are not prefetching data if the users are on a low-speed connection or using mobile data which could help him save data and only load what it really needs.
