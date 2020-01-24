@@ -1,0 +1,273 @@
+---
+title: Render as you Fetch Pattern with SWR
+description: Learn how to use the Render as you Fetch pattern with React and SWR.
+date: 2020-01-23T22:03:45.211Z
+published: true
+lang: en
+tags: react, swr, fetch
+---
+
+Render as you Fetch is a pattern which let you start fetching the data you will need at the same time you start rendering the component using that data. This way you don't need to wait to render in the loading state to start fetching, called _Fetch on Render_, neither wait for fetching to finish to start rendering, called _Fetch Then Render_.
+
+Let's build an example app using all of those patterns to understand how they all work.
+
+## Fetch on Render
+
+This is the most common pattern of the three, the idea here is that you initially render your component with a loading state and then you start fetching the data.
+
+```js
+// fetcher.js
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+export default function fetcher(url) {
+  return sleep(1000).then(() => ({ url }));
+}
+```
+
+First we create a simple fetcher function, this one will sleep for one second and then return with an object containing the received URL.
+
+```js
+import React from "react";
+
+export default function Loading() {
+  return <p>Loading...</p>;
+}
+```
+
+Then let's build a simple `Loading` component with a message. It will be used as fallback for both the data fetching and the lazy loading.
+
+```js
+// resource.js
+import React from "react";
+import useSWR from "swr";
+import fetcher from "./fetcher";
+import Loading from "./loading";
+
+export default function Resource({ id }) {
+  const { data } = useSWR(`/api/resource/${id}`, fetcher);
+
+  if (!data) {
+    return <Loading />;
+  }
+
+  return <p>{data.url}</p>;
+}
+```
+
+Now let's build our `Resource` component, this one will call SWR with the URL appending the `props.id` and using our fetcher, inside it we will check if `data` is not defined and render our `Loading` component, if it's defined we will render the URL.
+
+Here SWR will call our `fetcher` function passing the URL after the component rendered one time, using an effect to call our function.
+
+```js
+// app.js
+import React from "react";
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+const LazyResource = React.lazy(() =>
+  sleep(1000).then(() => import("./resource"))
+);
+
+export default function App() {
+  const [id, setID] = React.useState(null);
+
+  function handleChange(event) {
+    setID(event.target.value);
+  }
+
+  return (
+    <>
+      <label htmlFor="id">Resource ID:</label>{" "}
+      <input id="id" type="text" onChange={handleChange} value={id} />
+      {id && (
+        <React.Suspense fallback={<p>Loading...</p>}>
+          <LazyResource id={id} />
+        </React.Suspense>
+      )}
+    </>
+  );
+}
+```
+
+Now our `App` component will render a simple input where you could write an ID, then it will update a state to store the ID, if the ID is not falsy we will render our `Resource` component, however we are importing our component using `React.lazy` to lazy load it, this means if you never change the ID then you will never load the code for that component, but that also mean we need to first load the component, which in our case takes at least one second due our sleep function, and then render and then trigger the fetcher function.
+
+Let's see the example running in CodeSandbox.
+
+<iframe
+  src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-1-d3zy2?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="Render as you Fetch Pattern with SWR - 1"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+If we try it our application is now taking **two seconds** to show the URL the first time and **one second** for every change after that.
+
+It works, but it's not ideal.
+
+## Fetch Then Render
+
+The Fetch Then Render approach goes in a different direction, instead of rendering and then starting the fetch we will fetch the data and then render after it fetched. While it sounds similar it has a different implementation.
+
+Most of our code will remain the same, let's focus on the changes.
+
+```js
+// resource.js
+import React from "react";
+
+export default function Resource({ data }) {
+  return <p>{data.url}</p>;
+}
+```
+
+In our `Resource` component we are not handling our loading state anymore, neither we are fetching the data, instead we are receiving the data from the parent component.
+
+```js
+// app.js
+import React from "react";
+import useSWR from "swr";
+import Loading from "./loading";
+import fetcher from "./fetcher";
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+const LazyResource = React.lazy(() =>
+  sleep(1000).then(() => import("./resource"))
+);
+
+export default function App() {
+  const [id, setID] = React.useState(null);
+  const { data } = useSWR("/api/resource/" + id, fetcher);
+
+  async function handleChange(event) {
+    setID(event.target.value);
+  }
+
+  return (
+    <>
+      <label htmlFor="id">Resource ID:</label>{" "}
+      <input id="id" type="text" onChange={handleChange} value={id} />
+      {!id ? (
+        <p>Enter ID</p>
+      ) : data ? (
+        <React.Suspense fallback={<Loading />}>
+          <LazyResource data={data} />
+        </React.Suspense>
+      ) : (
+        <Loading />
+      )}
+    </>
+  );
+}
+```
+
+In our `App` component we are now updating the ID and then letting SWR trigger a new call of fetcher, basically we moved the data fetching from the component using the data to the parent component. In the `return` statement of our component we now check if we have a valid ID and then if we have data to know if we should render the `Loading` component.
+
+Let's see it running again in CodeSandbox.
+
+<iframe
+  src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-2-z45id?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="Render as you Fetch Pattern with SWR - 2"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+It still takes **two seconds** to render the `Resource` component the first time we write an ID. It wasn't an improvement compared to the _Fetch on Render_ pattern, just a different way to do it.
+
+## Render as you Fetch
+
+Now let's see the pattern we are more interested about, Render as you Fetch, the idea here is that you, as developer, most of the time, know what data your component needs, or there is a way to know it. So instead of waiting for the fetch to finish to render or the render to finish to fetch we could **render and fetch at the same time**.
+
+Let's see it implemented. First we need to update our `Resource` component.
+
+```js
+// resource.js
+import React from "react";
+import useSWR from "swr";
+import fetcher from "./fetcher";
+
+export default function Resource({ id }) {
+  const { data } = useSWR(`/api/resource/${id}`, fetcher, { suspense: true });
+
+  return <p>{data.url}</p>;
+}
+```
+
+Note that we added the data fetching back into the component, however we are not handling the loading state, instead we are configuring SWR to suspend our component until the data is fetched.
+
+```js
+// app.js
+import React from "react";
+import { mutate } from "swr";
+import Loading from "./loading";
+import fetcher from "./fetcher";
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+const LazyResource = React.lazy(() =>
+  sleep(1000).then(() => import("./resource"))
+);
+
+export default function App() {
+  const [id, setID] = React.useState(null);
+
+  async function handleChange(event) {
+    const newID = event.target.value;
+    mutate(`/api/resource/${newID}`, fetcher(`/api/resource/${newID}`), false);
+    setID(newID);
+  }
+
+  return (
+    <>
+      <label htmlFor="id">Resource ID:</label>{" "}
+      <input id="id" type="text" onChange={handleChange} value={id} />
+      {!id ? (
+        <p>Enter ID</p>
+      ) : (
+        <React.Suspense fallback={<Loading />}>
+          <LazyResource id={id} />
+        </React.Suspense>
+      )}
+    </>
+  );
+}
+```
+
+If we check our `App` component, we removed the usage of `useSWR` because we moved it back to `Resource`, but we imported a function called `mutate` from SWR.
+
+This little function let use update the data cached by SWR in a certain key. To do so we need to call it passing the cache key, the URL in our case, the data and if we want SWR to revalidate it against our API, the last option which is enabled by default is useful to support Optimistic UI updates, in our case since we are going to just get the data from the API we don't need to revalidate it, so we pass `false`.
+
+But the most important part here is the second argument, I wrote above we need to pass the data there, but we are instead passing a Promise object, without awaiting for it to resolve. This works because `mutate` realize we send a Promise and it will internally wait for it to resolve. Thanks to that we could trigger the fetch and update the input value immediately.
+
+Let's see now how it works in CodeSandbox with these changes.
+
+<iframe
+  src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-3-rnt1z?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="Render as you Fetch Pattern with SWR - 3"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+As you can see now the time to render the URL on the screen is **only one second**! That's amazing because that means we are getting the _code_ and the _data_ required to render the component at the same time. Our `Resource` component is then reusing the data previously fetched and rendering right away, without needing to wait another second to get the data.
+
+Try playing with the fake delays in the lazy loading and the data fetching, you will see how we are only waiting for the longest delay and not for both of them combined.
