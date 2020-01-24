@@ -51,9 +51,6 @@
     }
   },
   "lint-staged": {
-    "*.mdx": [
-      "yarn social",
-      "git add"
-    ]
+    "*.mdx": ["yarn social"]
   }
 }
