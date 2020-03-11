@@ -1,0 +1,77 @@
+---
+title: 7 Principles of Modern Web Applications
+date: 2020-02-20T18:29:39.347Z
+published: false
+lang: en
+tags: nextjs, swr, react, webapps
+---
+
+Many years ago, probably around five, I found an amazing article titled "7 Principles of Rich Web Applications", there the author [Guillermo Rauch](https://rauchg.com) mentioned seven point, he called them principles, that any web application using a lot of JavaScript should thrive to follow to provide a great user experience.
+
+Almost six years has passed and the article is still being recommended by a lot of people in the community and all of the principles he defined there are completely relevant today.
+
+Let's talk about all of them and see how we could leverage modern tools to build application following all of them.
+
+## Server rendered pages are not optional
+
+> Server rendering is not about SEO, it’s about performance. Consider the additional roundtrips to get scripts, styles, and subsequent API requests. In the future, consider HTTP 2.0 “pushing” of resources.
+
+In the original article, Guillermo, explained how the latency works and how in order to avoid extra roundtrips while rendering a page we should server-side render our application.
+
+In 2017, ZEIT introduced [Next.js](https://nextjs.org), a web framework built on top of React.js to solve most of the common issues like configuring the bundler, compiler, etc. And together with that they added multiple nice features, one of them was Server-Side Rendering (SSR) of all pages by default without being able to opt-out, which resonates with the point we are talking about, _Server rendered pages are not optional_.
+
+With the times, Next.js has evolved, along with the community, and common practices allowing you to do Static Site Generation (SSG) in two different ways:
+
+1. Your pages are SSG at build time without fetching data (usually you render static data or a skeleton)
+2. Your pages are SSG at build time with fetched data
+
+In the first point you usually render a completely static page (e.g. a landing page) or the skeleton of your UI and fill it with data Client-Side. In the second point you get the data you need at build time and generate the HTML right there, this is similar to doing SSG but at build time.
+
+Both ways have benefits and let you give a better UX, because even rendering only a skeleton is better than rendering a white screen.
+
+Tools like Next.js combined with deploying the HTML, CSS and JS to globally distributed CDN and deploying APIs to different servers also around the world help reduce the initial load time and future roundtrips between the client and the server.
+
+## Act immediately on user input
+
+> JavaScript allows us to mask network latency altogether. Applying this as a design principle should even remove most spinners or “loading” messages from your applications. PJAX or TurboLinks miss out on opportunities to improve the perception of speed.
+
+This is something React solves really good, you can listen to different user events, like input changes or button clicks, and then you update a state and automatically change the UI, even if you have to fetch data you could start doing it right away.
+
+With the upcoming Concurrent Mode to React this will only become better, now you will be able to start a transition which requires data fetching while React keeps the current UI mounted, for a limited amount of time, until both the data and the UI is ready to be displayed, this will help developer drastically reduce the amount of spinners or "loading" messages because most of the time the data fetching and the rendering will happen fast enough to avoid them, and if for some reason they take more time than expected it will show a spinner or the defined fallback to show it's actually loading.
+
+## React to data changes
+
+> When data changes on the server, let the clients know without asking. This is a form of performance improvement that frees the user from manual refresh actions (F5, pull to refresh). New challenges: (re)connection management, state reconciliation.
+
+Last year, in 2019, ZEIT (yes the same people behind Next.js) introduced [SWR](https://swr.now.sh) to the world, this simple library was inspired in an HTTP cache invalidation strategy, the whole name means `state-while-revalidate`. The whole idea of SWR is to fetch remote data from any backend and then it will store it in a in-memory cache, when the application needs to access the same data again, maybe it navigated for multiple pages and eventually came back to a previously visited one, it will render the _stale data while revalidate_ it, then it will update the UI to use the correct one.
+
+Along with that feature SWR comes a options to revalidate in others conditions, we could revalidate when the browser tab recover the focus, we could revalidate every X seconds, we could revalidate after recovering internet connection, etc.
+
+Using all of those feature let your application keep updating itself without needing the user to trigger a soft revalidation (click somewhere or pull to refresh) or a hard revalidation (reload the page or close and open again the app). And because it's not using WebSockets or another bi-directional communication protocol you don't need to care about reconnecting, getting missed atomic data, you always get all the data again, and it become way easier to scale your backend thanks to let you wrote stateless APIs to could be scaled horizontally.
+
+## Control the data exchange with the server
+
+> We can now fine-tune the data exchange with the server. Make sure to handle errors, retry on behalf of the user, sync data on the background and maintain offline caches.
+
+React.js has a new Suspense feature that let you 
+
+Again, SWR and React.js solves this, use manual fetched to update/create/delete data and SWR to read it and keep it up-to-date, completely control how you interact with the data and how to react to changes without requiring to reload the page.
+
+## Don’t break history, enhance it
+
+> Without the browser managing URLs and history for us, new challenges emerge. Make sure not to break expectations related to scrolling. Keep your own caches for fast feedback.
+
+Next.js has a really nice simple to start using router that will let you get all the benefits of a SPA without breaking the history, you can always go back and forward and get the correct UI.
+
+## Push code updates
+
+> Pushing data without pushing code is insufficient. If your data updates automatically, so should your code. Avoid API errors and improve performance. Use stateless DOM for side-effect free repainting.
+Next.js solves this in a really nice way, if you deployed an update for your application while an user was navigating it, the next time it moves to a different page Next.js will detect it and reload to ensure it clears stale code.
+
+## Predict behavior
+
+> Negative latency.
+
+Next.js partially solves this with code prefetching for different bundles when you are likely to navigate to another page, SWR let you also do it for data-fetching calling `mutate` against the data you know you will need before navigating to another page.
+
+## Conclusions
