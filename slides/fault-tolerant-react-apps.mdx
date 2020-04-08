@@ -1,0 +1,191 @@
+---
+title: Fault Tolerant React Apps
+published: true
+date: "Wed, 8 Apr 2020 13:00:00 GMT-5"
+---
+
+# Fault Tolerant React Apps
+
+---
+
+> Fault tolerance is the property that enables a system to continue operating properly
+
+> in the event of the failure of some (one or more faults within) of its components.
+
+---
+
+## Error Boundaries
+
+---
+
+```tsx
+class ErrorBoundary extends React.Component<Props, State> {
+  state: State = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: Error) { notifySentry(error); }
+  retry: () => { this.setState({ hasError: false }); }
+  render(): React.ReactNode {
+    if (!this.state.hasError) return this.props.children;
+    return (
+      <>
+        <p>Something is broken :(</p>
+        <button onClick={this.retry}>Try again</button>
+      </>
+    );
+  }
+}
+```
+
+---
+
+## Where Should I Put My Error Boundaries?
+
+---
+
+## How Do I Know What Is the Right Amount of Boundaries?
+
+---
+
+### Not Enough Error Boundaries
+### Too Many Error Boundaries
+### The Right Amount
+
+---
+
+## Not Enough Error Boundaries
+
+---
+
+```tsx
+import App from "./app";
+import ErrorBoundary from "./error-boundary";
+
+ReactDOM.render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById("root")
+);
+```
+
+---
+
+> Fault tolerance is the property that enables a system to **continue operating properly**
+
+> in the event of the failure of some (one or more faults within) of its components.
+
+---
+
+## Too Many Error Boundaries
+
+---
+
+```tsx
+function CheckoutForm(props: Props): JSX.Element {
+  return (
+    <form>
+      <CartDescription items={props.items} />
+      <CreditCardInput />
+      <CheckoutButton cartId={props.id} />
+    </form>
+  );
+}
+```
+
+---
+
+```tsx
+<ErrorBoundary>
+  <CartDescription items={props.items} />
+</ErrorBoundary>
+<ErrorBoundary>
+  <CreditCardInput />
+</ErrorBoundary>
+<ErrorBoundary>
+  <CheckoutButton cartId={props.id} />
+</ErrorBoundary>
+```
+
+---
+
+### Half-Broken UI is Full-Broken UX
+
+#### What if...
+
+- they didn’t finish entering their credit card info?
+- they did enter the credit card before `CreditCardInput` crashed was that state retained?
+- What happens when they try to checkout?
+
+---
+
+### Generic Error Boundary, Generic Fallback 
+
+---
+
+#### Performance Penalty
+
+---
+
+## The Right Amount of Error Boundaries
+
+---
+
+> Identify the feature boundaries in your application
+
+> and put your error boundaries there
+
+---
+
+### Finding Features in GitHub
+
+---
+
+### Recursively Finding Features
+
+---
+
+## Testing your Fault Tolerance
+
+```tsx
+function CreditCardInput(props: Props): JSX.Element {
+  // What happens if I messed up here? Let's find out!
+  throw new Error("Random error that could probably fail!")
+  return <input className="credit-card" />
+}
+```
+
+---
+
+### Chaos Engineering
+
+> Make components fail randomly and unexpectedly, in development.
+
+```sh
+$ yarn add react-chaos
+```
+
+```tsx
+import withChaos from 'react-chaos';
+// ...
+export default withChaos(CheckoutForm);
+```
+
+---
+
+## Lessons Learned
+
+- Avoid having a single error boundary at the top.
+
+- Don’t overuse error boundaries either.
+
+- Identify the feature boundaries in your app and put your error boundaries there.
+
+- Recursively ask yourself “if this component crashes, should its siblings also crash?”.
+
+- Intentionally design your app for error states. 
+
+- Go break things on purpose to see what happens.
+
+---
+
+## Questions?
