@@ -1,0 +1,26 @@
+---
+title: Setup a redirect inside a project deployed to Vercel
+description: Learn how you can create a redirect in any project deployed to the Vercel platform.
+date: 2020-05-09T08:37:03.640Z
+published: true
+tags: vercel, redirect
+---
+
+If you have had a website for a certain time most probably your links have been shared in different websites, and most of those are website you can go and update in case you decide to move a page to another URL.
+
+[Vercel](https://vercel.com) makes solving this problem easy, first create a `now.json` file, if you don't already have one, and put this content inside:
+
+```json
+{
+  "redirects": [{ "source": "/essays(.*)", "destination": "/articles$1" }]
+}
+```
+
+The `redirects` key is an array with all of our redirects, inside we write an object per redirect we want to setup, and define the keys `source` and `destination`.
+
+The `source` is a string with the pathname the user will access before its redirected, in this case I have that sergiodxa.com/essays redirects me to the `destination`, and the `destination` is another string with the target URL the user will be redirected, in my case that ise sergiodxa.com/articles, if you go, right now, to https://sergiodxa.com/essays/vercel/setup-redirect it will take you to this same page you are reading right now.
+
+The `(.*)` let us tell to Vercel we want to catch whatever comes after `/essays`, that let use detect URLs like `/essays/vercel/setup-redirect` and not only `/essays`, this is a RegEx and whatever matches inside the parenthesis will be available for use to use in the `destination`.
+
+And going there, the `$1` means the first element detected and caught between parenthesis by the `source`, this is what let use append whatever the user write after `/essay` and `/article` so we can correctly redirect the user.
+
