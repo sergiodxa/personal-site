@@ -10,9 +10,6 @@
     "write": "contentz write",
     "start": "serve public -p 3000"
   },
-  "engines": {
-    "node": "^10.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sergiodxa/personal-site.git"
