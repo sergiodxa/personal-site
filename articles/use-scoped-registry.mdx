@@ -1,0 +1,36 @@
+---
+title: Use a scoped registry with Yarn
+description: Learn how you can configure Yarn to use a different registry for scoped packages
+date: 2020-05-09T08:23:30.874Z
+published: true
+tags: registry, yarn, github, verdaccio
+---
+
+When working with private packages we have a few options to use as our registry
+
+- npm registry
+- GitHub registry
+- Custom registry (e.g. [Verdaccio](https://verdaccio.org))
+
+If we decide to use the npm registry, and pay for it, we can continue using Yarn and npm without changes. And what if we use another one? And if we want to keep using the npm registry for non-scoped packages?
+
+Enter `.yarnrc`, create this file inside the project root and write this:
+
+```
+"@company:registry" "https://npm.pkg.github.com"
+```
+
+Now every time you install a package with the `@company` scope (e.g. `@company/design-system`) Yarn will use the GitHub registry to download it instead of the public npm registry.
+
+You can use any scope and any URL as a registry, if you setup your own Verdaccio registry under `registry.company.com` you can add:
+
+```
+"@company:registry" "https://registry.company.com"
+```
+
+And the best thing is that you can have more than one:
+
+```
+"@frontend:registry" "https://npm.pkg.github.com"
+"@backend:registry" "https://registry.company.com"
+```
