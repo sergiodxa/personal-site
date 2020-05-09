@@ -1,0 +1,84 @@
+---
+title: Using Immer with SWR to mutate data
+published: true
+description: Use Immer to make optimistic UI updates with SWR easier to follow
+tags: swr, immer, react, typescript
+lang: en
+date: 2020-05-09T02:16:03.019Z
+---
+
+SWR comes with a nice function called `mutate` that let you change the cached data for a given key, it comes with multiple different options but one of the nicest one is to pass a function, get the current data and update it, from anywhere.
+
+```ts
+import { mutate } from "swr"
+
+mutate("/api/me", user => ({ ...user, name: "Sergio" }))
+```
+
+This function update the name of the user cached as `/api/me`, and if there is a component subscribed to that cache key it will trigger a revalidation, this is however something we can disable passing a `false` as third argument.
+
+If you see the example above we used restructuring to copy the `user` object, this is required because SWR uses object reference to avoid unnecessary re-renders.
+
+Enter Immer, this small lib let you mutate an object while performing an immutable change, let's see the example updated
+
+```ts
+import { mutate } from "swr"
+import produce from "immer'
+
+mutate("/api/me", produce(user => {
+  user.name = "Sergio"
+}))
+```
+
+This `produce` function will receive a callback and it will execute it passing a "draft" copy of the object, in this draft we could mutate the object however we want, then produce will return a new function that receives the original object to mutate, it run our callback, and generate a new object with our changes applied, lastly it will return the new updated object.
+
+Looks like a lot of work, and it is, however for the user of Immer it's only a few lines as we saw above, what will happen combined with `mutate` is that the returned function will be passed to `mutate` as we did before and it will receive the cached value, then it will return the updated value and it will update the cache, triggering a re-render of any component subscribed to that cache key.
+
+And this is great because it allow use to implement Optimistic UI easier, let's see an example
+
+```js
+import React from 'react'
+import useSWR, { mutate } from 'swr'
+import produce from "immer"
+
+async function fetcher(...args) {
+  const res = await fetch(...args)
+  return await res.json()
+}
+export default () => {
+  const [text, setText] = React.useState('');
+  const { data } = useSWR('/api/data', fetcher)
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+
+    // in this mutate call we will optimistically update the UI
+    mutate("/api/data", produce(draftData => {
+      draftData.push(text) // here we push the new text
+    }), false) // we don't trigger a revalidation
+
+    // in this mutate call, we will POST the API and update the UI
+    // if the update fails it will rollback the optimistic change
+    await mutate('/api/data', await fetch('/api/data', {
+      method: 'POST',
+      body: JSON.stringify({ text })
+    }))
+
+    setText('') // after the update we clear the input
+  }
+
+  return <div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        onChange={event => setText(event.target.value)}
+        value={text}
+      />
+      <button>Create</button>
+    </form>
+    <ul>
+      {data ? data.map(datum => <li key={datum}>{datum}</li>) : 'loading...'}
+    </ul>
+  </div>
+}
+```
