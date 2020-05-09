@@ -1,0 +1,146 @@
+---
+title: Use React.Suspense to wait for an image to load
+description: Learn how to use React.Suspense to handle the loading state of an image.
+date: 2020-05-09T09:13:43.273Z
+published: true
+tags: typescript, react, suspense, image
+---
+
+> Note: React.Suspense for anything other than components lazy-loading is still unstable.
+
+While React.Suspense is still unstable we can already start using it with its current implementation, in this case we can use it to handle the loading state of an image, why is this useful? This way we can avoid rendering a component until the image or images required have finished loading.
+
+The first thing we need to do is to create a function to interact with resources, a resource is anything we could fetch and cache.
+
+```ts
+// A Resource is an object with a read method returning the payload
+interface Resource<Payload> {
+  read: () => Payload;
+}
+
+type status = "pending" | "success" | "error";
+
+// this function let use get a new function using the asyncFn we pass
+// this function also receives a payload and return us a resource with
+// that payload assigned as type
+function createResource<Payload>(
+  asyncFn: () => Promise<Payload>
+): Resource<Payload> {
+  // we start defining our resource is on a pending status
+  let status: status = "pending";
+  // and we create a variable to store the result
+  let result: any;
+  // then we immediately start running the `asyncFn` function
+  // and we store the resulting promise
+  const promise = asyncFn().then(
+    (r: Payload) => {
+      // once it's fulfilled we change the status to success
+      // and we save the returned value as result
+      status = "success";
+      result = r;
+    },
+    (e: Error) => {
+      // once it's rejected we change the status to error
+      // and we save the returned error as result
+      status = "error";
+      result = e;
+    }
+  );
+  // lately we return an error object with the read method
+  return {
+    read(): Payload {
+      // here we will check the status value
+      switch (status) {
+        case "pending":
+          // if it's still pending we throw the promise
+          // throwing a promise is how Suspense know our component is not ready
+          throw promise;
+        case "error":
+          // if it's error we throw the error
+          throw result;
+        case "success":
+          // if it's success we return the result
+          return result;
+      }
+    },
+  };
+}
+```
+
+After we have that we can technically fetch using Suspense any data, but let's use it to fetch only images.
+
+```ts
+//  First we need a type of cache to avoid creating resources for images
+//  we have already fetched in the past
+const cache = new Map<string, any>();
+
+// then we create our loadImage function, this function receives the source
+// of the image and returns a resource
+function loadImage(source: string): Resource<string> {
+  // here we start getting the resource from the cache
+  let resource = cache.get(source);
+  // and if it's there we return it immediately
+  if (resource) return resource;
+  // but if it's not we create a new resource
+  resource = createResource<string>(
+    () =>
+      // in our async function we create a promise
+      new Promise((resolve, reject) => {
+        // then create a new image element
+        const img = new window.Image();
+        // set the src to our source
+        img.src = source;
+        // and start listening for the load event to resolve the promise
+        img.addEventListener("load", () => resolve(source));
+        // and also the error event to reject the promise
+        img.addEventListener("error", () =>
+          reject(new Error(`Failed to load image ${source}`))
+        );
+      })
+  );
+  // before finishing we save the new resource in the cache
+  cache.set(source, resource);
+  // and return return it
+  return resource;
+}
+```
+
+Now we can start using it, let's create a simple `SuspenseImage` component:
+
+```tsx
+function SuspenseImage(
+  props: React.ImgHTMLAttributes<HTMLImageElement>
+): JSX.Element {
+  loadImage(props.src).read();
+  return <img {...props} />;
+}
+```
+
+This short component will use our `loadImage` function to suspend itself until the image has finished loading, let's use it now:
+
+```tsx
+interface User {
+  fullName: string;
+  avatar: string;
+}
+
+function User({ fullName, avatar }: User) {
+  return (
+    <div>
+      <SuspenseImage src={avatar} />
+      <h2>{fullName}</h2>
+    </div>
+  );
+}
+
+function UserList({ users }: { users: User[] }) {
+  return (
+    <React.Suspense fallback={<>Loading users...</>}>
+      {users.map((user) => <User key={user.id} {...user} />)}
+    </React.Suspense>
+  )
+}
+```
+
+Now when we render our UserList it will keep rendering the `Loading users...` fallback until all the user has loaded the image, once that has happened it will render all the users with their avatar at once without leaving any empty space in the middle.
+
