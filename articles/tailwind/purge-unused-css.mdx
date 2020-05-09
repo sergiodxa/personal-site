@@ -1,0 +1,29 @@
+---
+title: Purge unused CSS with TailwindCSS
+description: Learn how to use the built-in purge support of Tailwind to remove unused classes in production.
+date: 2020-05-09T09:05:38.436Z
+published: true
+tags: tailwind, purge, css
+---
+
+[TailwindCSS](https://tailwindcss.com) now comes with built-in support to purge the unused CSS, to use this creeate, if you don't already have, a `tailwind.config.js` file in your project root, inside it export an object, using CommonJS syntax, and there define a property `purge` with an array of the globs to use to find which files are using Tailwind.
+
+```js
+module.exports = {
+  purge: [
+    "./src/**/*.{ts,tsx}"
+  ],
+};
+```
+
+In our example we are searching for any `.ts` or `.tsx` file inside any level of folders inside the `src` folder in the root.
+
+We could also disable it by passing `false` instead of an array.
+
+```js
+module.exports = {
+  purge: false
+};
+```
+
+This is helpful if we are purging them using another tool.
