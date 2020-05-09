@@ -26,3 +26,9 @@
   for = "/sw.js"
   [headers.values]
     Cache-Control = "nocache, max-age=0, must-revalidate, no-store"
+
+[[plugins]]
+package= "netlify-plugin-a11y"
+
+[[plugins]]
+package = "netlify-plugin-checklinks"
