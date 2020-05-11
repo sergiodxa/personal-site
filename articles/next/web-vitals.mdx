@@ -1,0 +1,50 @@
+---
+title: Report Web Vitals in Next.js
+description: Measure the performance of our Next.js application with Web Vitals
+date: 2020-05-11T17:49:13.664Z
+published: true
+tags: javascript, webvital, nextjs, performance
+---
+
+To get a report on [Web Vitals](https://web.dev/vitals/) while using Next.js create a `pages/_app.js`, if you don't already have one, and add the following line:
+
+```ts
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
+```
+
+Next.js will automatically start to keep track of multiple metrics and give you back a report. The metrics we can track include:
+
+- [Time to First Byte](https://developer.mozilla.org/en-US/docs/Glossary/Time_to_first_byte) (TTFB)
+- [First Contentful Paint](https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint) (FCP)
+- [Largest Contentful Paint](https://web.dev/lcp/) (LCP)
+- [First Input Delay](https://web.dev/fid/) (FID)
+- [Cumulative Layout Shift](https://web.dev/cls/) (CLS)
+- Next.js-hydration
+- Next.js-route-change-to-render
+- Next.js-render
+
+_Next.js-hydration_ is the amount of time it takes a page to start and finish hydrating the HTML.
+
+_Next.js-route-change-to-render_ is the amount of time it takes a page to start rendering after a route change.
+
+_Next.js-render_ is the amount of time it takes a page to finish rendering after a route change.
+
+If you want to learn more about the first five follow the links above.
+
+Once you have the report you can start tracking them however your prefer, if you are using Google Analytics you could replace the `console.log` with:
+
+```js
+export function reportWebVitals({ id, name, label, value }) {
+  ga("send", "event", {
+    eventCategory: `Next.js ${label} metric`,
+    eventAction: name,
+    eventValue: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+    eventLabel: id, // id unique to current page load
+    nonInteraction: true, // avoids affecting bounce rate.
+  });
+}
+```
+
+Now we will start sending those metric to Google Analytics and keep track of them, we could then use them to detect slow pages and fix them.
