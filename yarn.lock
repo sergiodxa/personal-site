@@ -3147,10 +3147,10 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-netlify-plugin-a11y@^0.0.9:
-  version "0.0.9"
-  resolved "https://registry.able.co/netlify-plugin-a11y/-/netlify-plugin-a11y-0.0.9.tgz#cfbcc3c2f64874a9b0fe841a03c1282a9662fa0f"
-  integrity sha512-IRZM4Y4d6p7i7usC1X3c5EuUtMrliO+jJ6b61HVeir50+IdWKA+T0G56uqkdJE5984dms3eWeaTHxKry7mUFSw==
+netlify-plugin-a11y@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/netlify-plugin-a11y/-/netlify-plugin-a11y-0.0.10.tgz#5500fa5c1a1b9ecde68bb19e66066434f8a4e549"
+  integrity sha512-tRNIwyYdrw7qXH6FEMtDuVkeh6ygE255H+gbX0ckmAu/6GpdQdRAbIsajag79dhUQe/Kj3wkejV/BC/qZHigXw==
   dependencies:
     chalk "^3.0.0"
     pa11y "^5.3.0"

@@ -37,7 +37,7 @@
     "@contentz/social": "3.14.3",
     "@contentz/write": "3.13.2",
     "contentz": "3.14.1",
-    "netlify-plugin-a11y": "^0.0.9",
+    "netlify-plugin-a11y": "^0.0.10",
     "netlify-plugin-checklinks": "^4.1.0"
   },
   "devDependencies": {
