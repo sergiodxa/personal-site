@@ -36,12 +36,9 @@
     "@contentz/build": "2.5.5",
     "@contentz/social": "3.14.3",
     "@contentz/write": "3.13.2",
-    "contentz": "3.14.1",
-    "netlify-plugin-a11y": "^0.0.10",
-    "netlify-plugin-checklinks": "^4.1.0"
+    "contentz": "3.14.1"
   },
   "devDependencies": {
-    "emotion": "^10.0.27",
     "husky": "3.1.0",
     "lint-staged": "10.2.2",
     "serve": "11.3.0",
