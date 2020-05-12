@@ -1,0 +1,19 @@
+---
+title: Configure Google Suite MX records in Vercel
+description: Use Google Suite with a domain whose NS records is in Vercel
+date: 2020-05-12T05:10:09.201Z
+published: true
+tags: vercel, gsuite, domains, dns
+---
+
+If you have a domain with the NameServer records handled by Vercel and want to use it with Google Suite you will need to use the CLI to add a few MX records, those records are always the same and only the domain changes, so you can copy the snippet below and put your domain
+
+```bash
+now dns add [domain] '@' MX alt1.aspmx.l.google.com 5 && \
+now dns add [domain] '@' MX alt2.aspmx.l.google.com 5 && \
+now dns add [domain] '@' MX alt3.aspmx.l.google.com 5 && \
+now dns add [domain] '@' MX alt4.aspmx.l.google.com 5 && \
+now dns add [domain] '@' MX aspmx.l.google.com 5
+```
+
+> Note: You can paste the lines above in your terminal with the correct domain and it will automatically work.
