@@ -2,7 +2,8 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
-    "dev": "watch \"yarn build\" articles pages slides",
+    "watch": "watch \"yarn build\" articles pages slides",
+    "dev": "concurrently 'yarn watch' 'yarn start'",
     "build:dev": "node ../contentz/cli.js build",
     "build": "contentz build",
     "social:dev": "node ../contentz/cli.js social",
@@ -39,6 +40,7 @@
     "contentz": "3.14.1"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "husky": "3.1.0",
     "lint-staged": "10.2.2",
     "serve": "11.3.0",
