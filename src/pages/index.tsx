@@ -35,11 +35,11 @@ export default function Home() {
       <Navigation />
 
       <main id="hero" className="max-w-screen-lg mx-auto px-4 space-y-8">
-        <h1 className="font-semibold text-2xl tracking-widest leading-none">
+        <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
           Sergio Xalambrí
         </h1>
 
-        <h2 className="text-yellow-500 text-base tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
+        <h2 className="text-yellow-500 text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
           T-Shaped Frontend Engineer
         </h2>
 

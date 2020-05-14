@@ -109,7 +109,7 @@ function LanguagesSection(props: { languages: Language[] }) {
           <article key={language.language}>
             <SubTitle>
               {language.language}{" "}
-              <small className="font-hairline">({language.fluency})</small>
+              <small className="text-xs">({language.fluency})</small>
             </SubTitle>
           </article>
         ))}
