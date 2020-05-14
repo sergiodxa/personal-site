@@ -1,0 +1,22 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+
+html,
+body {
+  font-size: 20px;
+  @apply bg-black;
+  @apply text-white;
+  @apply antialiased;
+  background-image: radial-gradient(
+    circle,
+    #333,
+    #333 1px,
+    #000 1px,
+    #000
+  );
+  background-size: 2rem 2rem;
+}
+
+/* purgecss end ignore */
+@tailwind utilities;
