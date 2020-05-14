@@ -3,15 +3,13 @@
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
     "watch": "watch \"yarn build\" articles pages slides",
-    "dev": "next",
-    "build:next": "next build",
-    "start:next": "next start",
     "build:dev": "node ../contentz/cli.js build",
-    "build": "contentz build",
     "social:dev": "node ../contentz/cli.js social",
     "social": "contentz social",
     "write": "contentz write",
-    "start": "serve public -p 3000"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
