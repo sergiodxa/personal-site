@@ -6966,6 +6966,11 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sortbyfrequency@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.able.co/sortbyfrequency/-/sortbyfrequency-1.0.11.tgz#c23a94734de26b2e60a4b74e8fe5170b180dee26"
+  integrity sha512-jGpeSRCS3ggtrgWWSB1k7b/EwJOH4msVpEBmqAXC1ce/ykNTUfFNcWvUsQqVV7zXNEvszy3RTGxWzJRFlVEfnw==
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.able.co/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"

@@ -31,7 +31,7 @@ export default function ResumePage(props: Props) {
   return (
     <>
       <Navigation />
-      <main id="hero" className="max-w-screen-lg mx-auto px-4 space-y-8">
+      <main id="hero" className="max-w-screen-lg mx-auto px-4 space-y-8 mb-8">
         <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
           Bookmarks
         </h1>
@@ -43,7 +43,7 @@ export default function ResumePage(props: Props) {
 
         <section className="space-y-4 md:max-w-screen-md md:mx-auto">
           {links.map((link) => (
-            <LinkArticle key={link.url} {...link} />
+            <LinkItem key={link.url} {...link} />
           ))}
         </section>
       </main>
@@ -51,10 +51,10 @@ export default function ResumePage(props: Props) {
   );
 }
 
-function LinkArticle({ url, title }: Link) {
+function LinkItem({ url, title }: Link) {
   return (
     <article>
-      <a href={url} title={title} className="underline text-yellow-500">
+      <a href={url} title={title} className="underline text-yellow-500 visited:text-yellow-600 hover:text-white">
         <h3 className="text-md md:text-lg tracking-wider leading-normal font-semibold">{title}</h3>
       </a>
     </article>

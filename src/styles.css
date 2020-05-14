@@ -3,7 +3,7 @@
 @tailwind components;
 
 html {
-  font-size: 20px;
+  font-size: 16px;
   @apply bg-black;
   @apply text-white;
   @apply antialiased;

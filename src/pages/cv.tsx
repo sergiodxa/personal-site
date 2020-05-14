@@ -6,6 +6,7 @@ import { resolve } from "path";
 import { Resume, Skill, Language, Basics, Work } from "types/resume";
 import useResume from "data/resume";
 import Navigation from "components/navigation";
+import Tag from "components/tag";
 
 const readFile = promisify(fs.readFile);
 
@@ -73,14 +74,6 @@ function SubTitle({ children }: { children: React.ReactNode }) {
 
 function SectionContent({ children }: { children: React.ReactNode }) {
   return <section className="space-y-4 md:pl-4">{children}</section>;
-}
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return (
-    <small className="bg-yellow-500 hover:bg-black text-black hover:text-yellow-500 py-1 px-3 mr-2 my-1 leading-none text-xs rounded select-all cursor-default">
-      {children}
-    </small>
-  );
 }
 
 function SkillsSection(props: { skills: Skill[] }) {

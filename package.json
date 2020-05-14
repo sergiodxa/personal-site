@@ -47,6 +47,7 @@
     "react": "^0.0.0-experimental-f6b8d31a7",
     "react-dom": "^0.0.0-experimental-f6b8d31a7",
     "react-icons": "^3.10.0",
+    "sortbyfrequency": "^1.0.11",
     "swr": "^0.2.0",
     "tailwindcss": "^1.4.6"
   },
