@@ -2,12 +2,12 @@ module.exports = {
   purge: ["./src/**/*.tsx"],
   theme: {
     extend: {
-      backgroundColor: {
-      },
-      textColor: {
-      },
+      backgroundColor: {},
+      textColor: {},
     },
   },
-  variants: {},
+  variants: {
+    textColor: ["responsive", "hover", "focus", "visited"],
+  },
   plugins: [],
 };
