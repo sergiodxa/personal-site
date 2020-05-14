@@ -37,6 +37,9 @@ export default function ResumePage({ resume: _resume }: Props) {
     <>
       <Navigation />
       <main className="max-w-screen-lg mx-auto px-4 space-y-8 mb-8">
+        <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
+          Resume
+        </h1>
         <BasicsSection {...resume.basics} />
         <SkillsSection skills={resume.skills} />
         <WorksSection experiences={resume.work} />
@@ -128,9 +131,7 @@ function BasicsSection({
 }: Basics) {
   return (
     <SectionWrapper id="section-basics">
-      <h1 className="font-semibold text-2xl tracking-widest leading-none">
-        {name}
-      </h1>
+      <h2 className="font-semibold text-lg leading-none">{name}</h2>
       <div className="space-y-2 leading-none">
         <address className="block not-italic">
           Based on{" "}
@@ -233,7 +234,12 @@ function WorksSection({ experiences }: { experiences: Work[] }) {
                 ) : null}
                 {index < companyGroup.length - 1 && <Line />}
                 {experience.summary && (
-                  <p className="hidden md:block text-sm" style={{ gridArea: "body" }}>{experience.summary}</p>
+                  <p
+                    className="hidden md:block text-sm"
+                    style={{ gridArea: "body" }}
+                  >
+                    {experience.summary}
+                  </p>
                 )}
               </div>
             ))}
