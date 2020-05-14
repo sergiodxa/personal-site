@@ -1,145 +1,146 @@
 ---
-- url: http://farmdev.com/thoughts/108/the-art-of-ui-skeletons/
-  title: The Art of UI Skeletons
-- url: https://dev.to/educative/how-to-design-a-web-application-software-architecture-101-188b
-  title: "How to Design a Web Application: Software Architecture 101"
-- url: https://www.youtube.com/watch?v=sOMAMtOBiA8
-  title: Testing in the Frontend World
-- url: https://www.sonniesedge.net/posts/real-dark-web/
-  title: The Real Dark Web
-- url: https://overreacted.io/the-elements-of-ui-engineering/
-  title: The Elements of UI Engineering
-- url: http://bradfrost.com/blog/post/frontend-design-react-and-a-bridge-over-the-great-divide/
-  title: "frontend design, react, and a bridge over the great divide"
-- url: https://css-tricks.com/the-great-divide/
-  title: The Great Divide
-- url: https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
-  title: We have a problem with promises
-- url: https://pouchdb.com/2015/03/05/taming-the-async-beast-with-es7.html
-  title: Taming the asynchronous beast with ES7
-- url: https://rauchg.com/2014/7-principles-of-rich-web-applications/
-  title: 7 Principles of Rich Web Applications
-- url: https://aweary.dev/fault-tolerance-react/
-  title: "The Fault in Our Tolerance: Accounting for Failures in React"
-- url: https://joelhooks.com/digital-garden
-  title: "🌱 My blog is a digital garden, not a blog"
-- url: https://stackingthebricks.com/how-blogs-broke-the-web/
-  title: How the Blog Broke the Web
-- url: https://basecamp.com/shapeup
-  title: "Shape Up: Stop Running in Circles and Ship Work that Matters"
-- url: https://noti.st/sturobson/yc1gwN/design-systems-and-front-end-architecture#saPZSRV
-  title: Design Systems and Front-End Architecture by Stuart Robson
-- url: https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/
-  title: Turning the database inside-out with Apache Samza
-- url: https://css-tricks.com/how-to-section-your-html/
-  title: How to Section Your HTML
-- url: https://bradfrost.com/blog/post/write-on-your-own-website/
-  title: write on your own website
-- url: https://matthiasott.com/articles/going-indie-reclaiming-content
-  title: "Going Indie. Step 2: Reclaiming Content"
-- url: https://www.sarasoueidan.com/desk/just-write/
-  title: Just write
-- url: https://github.com/kylelobo/The-Documentation-Compendium
-  title: The Documentation Compendium
-- url: https://uxmovement.com/mobile/why-text-buttons-hurt-mobile-usability/
-  title: Why Text Buttons Hurt Mobile Usability
-- url: http://www.tristanharris.com/2016/05/how-technology-hijacks-peoples-minds%e2%80%8a-%e2%80%8afrom-a-magician-and-googles-design-ethicist/
-  title: "How Technology Hijacks People’s Minds — from a Magician and Google’s Design Ethicist"
-- url: https://softwareontheroad.com/ideal-nodejs-project-structure/
-  title: Bulletproof node.js project architecture 🛡️
-- url: https://hueniverse.com/http-frameworks-must-die-717a37b6b164
-  title: HTTP Frameworks Must Die
-- url: https://stevebennett.co/2017/07/24/the-power-of-sensible-defaults/
-  title: The Power of Sensible Defaults
-- url: https://htmlreference.io/
-  title: HTML Reference
-- url: https://cssreference.io/
-  title: CSS Reference
-- url: https://blog.codinghorror.com/the-god-login/
-  title: The God Login
-- url: https://dev.to/schreiber_chris/architecture-as-a-burden-18ca
-  title: Architecture as a burden
-- url: https://www.aosabook.org/en/distsys.html
-  title: "The Architecture of Open Source Applications (Volume 2): Scalable Web Architecture and Distributed Systems"
-- url: https://blog.marvelapp.com/body-text-small/
-  title: Your Body Text Is Too Small
-- url: https://refactoringui.com/
-  title: Refactoring UI
-- url: https://arkwright.github.io/scaling-react-server-side-rendering.html
-  title: Scaling React Server-Side Rendering
-- url: https://zeit.co/blog/new-static-deployments
-  title: ZEIT - New Static Deployments
-- url: https://inclusive-components.design/cards/
-  title: Cards
-- url: https://medium.com/@sergiodxa/introducing-grial-js-6c414d6dc947
-  title: Introducing Grial
-- url: https://platzi.com/blog/aplicando-estilos-a-pulse-editor-con-styled-components/
-  title: Aplicando estilos a Pulse Editor con styled-components
-- url: https://platzi.com/blog/usando-socketio-en-aplicaciones-de-nextjs/
-  title: Usando socket.io en aplicaciones de Next.js
-- url: https://platzi.com/blog/personalizando-babeljs-en-aplicaciones-de-nextjs/
-  title: Personalizando Babel.js en aplicaciones de Next.js
-- url: https://platzi.com/blog/depurando-aplicaciones-de-nodejs-v800/
-  title: Depurando aplicaciones de Node.js v8.0.0
-- url: https://platzi.com/blog/creando-sitios-estaticos-con-nextjs/
-  title: Creando sitios estáticos con Next.js
-- url: https://platzi.com/blog/creando-botones-propios-para-pulse-editor/
-  title: Creando botones propios para Pulse Editor
-- url: https://platzi.com/blog/nueva-version-nodejs-npm/
-  title: Te presentamos la nueva versión de Node.js
-- url: https://platzi.com/blog/aplicacion-de-escritorio-pulse/
-  title: Aplicación de escritorio Pulse
-- url: https://platzi.com/blog/implementando-pulse-editor/
-  title: Implementando Pulse Editor
-- url: https://platzi.com/blog/presentamos-pulse-editor/
-  title: Presentamos Pulse Editor
-- url: https://platzi.com/blog/progressive-server-side-render/
-  title: Implementa Progressive server-side render con Next.js
-- url: https://platzi.com/blog/crea-aplicaciones-de-escritorio-con-electron-y-nextjs/
-  title: Crea aplicaciones de escritorio con Electron y Next.js
-- url: https://platzi.com/blog/manejo-de-dependencias-javascript-con-yarn/
-  title: Manejo de dependencias JavaScript con Yarn
-- url: https://platzi.com/blog/nextjs-el-futuro-de-las-aplicaciones-con-react/
-  title: Next.js, el futuro de las aplicaciones con React
-- url: https://platzi.com/blog/deploy-microservicios/
-  title: Deploy y orquestación de microservicios con now.sh
-- url: https://platzi.com/blog/introduccion-json-web-tokens/
-  title: Introducción a JSON Web Tokens (JWT)
-- url: https://platzi.com/blog/que-es-babel/
-  title: ¿Qué es y para qué sirve Babel?
-- url: https://platzi.com/blog/aplicaciones-isomorficas/
-  title: ¿Qué es una aplicación isomórfica?
-- url: https://platzi.com/blog/aplicaciones-escritorio-electron-js/
-  title: Desarrollando aplicaciones de escritorio con Electron.js
-- url: https://platzi.com/blog/microservicios-en-node-con-micro/
-  title: Crea microservicios en Node.js con micro.js
-- url: https://platzi.com/blog/react-js-en-servidor-con-django/
-  title: Usando React.js en el servidor con Django
-- url: https://medium.com/react-redux/estado-inmutable-con-redux-e-immutable-js-5a3d69ef0451
-  title: Estado inmutable con Redux e Immutable.js
-- url: https://medium.com/react-redux/react-componentes-alto-orden-2498211e933f
-  title: Componentes de Alto Orden en React.js
-- url: https://medium.com/react-redux/obteniendo-datos-en-aplicaciones-de-redux-1007e8703521
-  title: Obteniendo datos en aplicaciones de Redux
-- url: https://medium.com/react-redux/server-render-react-redux-1f6cb0b557c9
-  title: Renderizando aplicaciones de Redux en el servidor
-- url: https://medium.com/react-redux/wip-usando-redux-en-el-servidor-con-socket-io-61e31242e366
-  title: Usando Redux en el servidor con Socket.io
-- url: https://medium.com/react-redux/creando-c%C3%B3digo-modular-con-ducks-de-redux-bfd7b67ff8c0
-  title: Creando código modular con ducks de Redux
-- url: https://medium.com/react-redux/manejo-de-errores-en-redux-js-adf9dfa0129b
-  title: Manejo de errores en Redux.js
-- url: https://medium.com/react-redux/migrando-a-redux-f7a15457a805
-  title: Migrando a Redux
-- url: https://medium.com/react-redux/glosario-de-t%C3%A9rminos-de-redux-c2bca005ca69
-  title: Glosario de términos de Redux
-- url: https://medium.com/react-redux/estructura-de-archivos-ducks-para-redux-js-36bb56a70cb3
-  title: Estructura de archivos Ducks para Redux.js
-- url: https://medium.com/react-redux/ruteo-en-aplicaciones-de-redux-y-react-js-d62de452bf1b
-  title: Ruteo en aplicaciones de Redux y React.js
-- url: https://medium.com/react-redux/pruebas-unitarias-en-redux-js-d7285c013123
-  title: Pruebas unitarias en Redux.js
-- url: https://medium.com/react-redux/acciones-as%C3%ADncronas-en-redux-js-d06e2514c4b8
-  title: Acciones asíncronas en Redux.js
-- url: https://medium.com/react-redux/middlewares-en-redux-js-88081fcd6c91
-  title: Middlewares en Redux.js
+links:
+  - url: http://farmdev.com/thoughts/108/the-art-of-ui-skeletons/
+    title: The Art of UI Skeletons
+  - url: https://dev.to/educative/how-to-design-a-web-application-software-architecture-101-188b
+    title: "How to Design a Web Application: Software Architecture 101"
+  - url: https://www.youtube.com/watch?v=sOMAMtOBiA8
+    title: Testing in the Frontend World
+  - url: https://www.sonniesedge.net/posts/real-dark-web/
+    title: The Real Dark Web
+  - url: https://overreacted.io/the-elements-of-ui-engineering/
+    title: The Elements of UI Engineering
+  - url: http://bradfrost.com/blog/post/frontend-design-react-and-a-bridge-over-the-great-divide/
+    title: "frontend design, react, and a bridge over the great divide"
+  - url: https://css-tricks.com/the-great-divide/
+    title: The Great Divide
+  - url: https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+    title: We have a problem with promises
+  - url: https://pouchdb.com/2015/03/05/taming-the-async-beast-with-es7.html
+    title: Taming the asynchronous beast with ES7
+  - url: https://rauchg.com/2014/7-principles-of-rich-web-applications/
+    title: 7 Principles of Rich Web Applications
+  - url: https://aweary.dev/fault-tolerance-react/
+    title: "The Fault in Our Tolerance: Accounting for Failures in React"
+  - url: https://joelhooks.com/digital-garden
+    title: "🌱 My blog is a digital garden, not a blog"
+  - url: https://stackingthebricks.com/how-blogs-broke-the-web/
+    title: How the Blog Broke the Web
+  - url: https://basecamp.com/shapeup
+    title: "Shape Up: Stop Running in Circles and Ship Work that Matters"
+  - url: https://noti.st/sturobson/yc1gwN/design-systems-and-front-end-architecture#saPZSRV
+    title: Design Systems and Front-End Architecture by Stuart Robson
+  - url: https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/
+    title: Turning the database inside-out with Apache Samza
+  - url: https://css-tricks.com/how-to-section-your-html/
+    title: How to Section Your HTML
+  - url: https://bradfrost.com/blog/post/write-on-your-own-website/
+    title: write on your own website
+  - url: https://matthiasott.com/articles/going-indie-reclaiming-content
+    title: "Going Indie. Step 2: Reclaiming Content"
+  - url: https://www.sarasoueidan.com/desk/just-write/
+    title: Just write
+  - url: https://github.com/kylelobo/The-Documentation-Compendium
+    title: The Documentation Compendium
+  - url: https://uxmovement.com/mobile/why-text-buttons-hurt-mobile-usability/
+    title: Why Text Buttons Hurt Mobile Usability
+  - url: http://www.tristanharris.com/2016/05/how-technology-hijacks-peoples-minds%e2%80%8a-%e2%80%8afrom-a-magician-and-googles-design-ethicist/
+    title: "How Technology Hijacks People’s Minds — from a Magician and Google’s Design Ethicist"
+  - url: https://softwareontheroad.com/ideal-nodejs-project-structure/
+    title: Bulletproof node.js project architecture 🛡️
+  - url: https://hueniverse.com/http-frameworks-must-die-717a37b6b164
+    title: HTTP Frameworks Must Die
+  - url: https://stevebennett.co/2017/07/24/the-power-of-sensible-defaults/
+    title: The Power of Sensible Defaults
+  - url: https://htmlreference.io/
+    title: HTML Reference
+  - url: https://cssreference.io/
+    title: CSS Reference
+  - url: https://blog.codinghorror.com/the-god-login/
+    title: The God Login
+  - url: https://dev.to/schreiber_chris/architecture-as-a-burden-18ca
+    title: Architecture as a burden
+  - url: https://www.aosabook.org/en/distsys.html
+    title: "The Architecture of Open Source Applications (Volume 2): Scalable Web Architecture and Distributed Systems"
+  - url: https://blog.marvelapp.com/body-text-small/
+    title: Your Body Text Is Too Small
+  - url: https://refactoringui.com/
+    title: Refactoring UI
+  - url: https://arkwright.github.io/scaling-react-server-side-rendering.html
+    title: Scaling React Server-Side Rendering
+  - url: https://zeit.co/blog/new-static-deployments
+    title: ZEIT - New Static Deployments
+  - url: https://inclusive-components.design/cards/
+    title: Cards
+  - url: https://medium.com/@sergiodxa/introducing-grial-js-6c414d6dc947
+    title: Introducing Grial
+  - url: https://platzi.com/blog/aplicando-estilos-a-pulse-editor-con-styled-components/
+    title: Aplicando estilos a Pulse Editor con styled-components
+  - url: https://platzi.com/blog/usando-socketio-en-aplicaciones-de-nextjs/
+    title: Usando socket.io en aplicaciones de Next.js
+  - url: https://platzi.com/blog/personalizando-babeljs-en-aplicaciones-de-nextjs/
+    title: Personalizando Babel.js en aplicaciones de Next.js
+  - url: https://platzi.com/blog/depurando-aplicaciones-de-nodejs-v800/
+    title: Depurando aplicaciones de Node.js v8.0.0
+  - url: https://platzi.com/blog/creando-sitios-estaticos-con-nextjs/
+    title: Creando sitios estáticos con Next.js
+  - url: https://platzi.com/blog/creando-botones-propios-para-pulse-editor/
+    title: Creando botones propios para Pulse Editor
+  - url: https://platzi.com/blog/nueva-version-nodejs-npm/
+    title: Te presentamos la nueva versión de Node.js
+  - url: https://platzi.com/blog/aplicacion-de-escritorio-pulse/
+    title: Aplicación de escritorio Pulse
+  - url: https://platzi.com/blog/implementando-pulse-editor/
+    title: Implementando Pulse Editor
+  - url: https://platzi.com/blog/presentamos-pulse-editor/
+    title: Presentamos Pulse Editor
+  - url: https://platzi.com/blog/progressive-server-side-render/
+    title: Implementa Progressive server-side render con Next.js
+  - url: https://platzi.com/blog/crea-aplicaciones-de-escritorio-con-electron-y-nextjs/
+    title: Crea aplicaciones de escritorio con Electron y Next.js
+  - url: https://platzi.com/blog/manejo-de-dependencias-javascript-con-yarn/
+    title: Manejo de dependencias JavaScript con Yarn
+  - url: https://platzi.com/blog/nextjs-el-futuro-de-las-aplicaciones-con-react/
+    title: Next.js, el futuro de las aplicaciones con React
+  - url: https://platzi.com/blog/deploy-microservicios/
+    title: Deploy y orquestación de microservicios con now.sh
+  - url: https://platzi.com/blog/introduccion-json-web-tokens/
+    title: Introducción a JSON Web Tokens (JWT)
+  - url: https://platzi.com/blog/que-es-babel/
+    title: ¿Qué es y para qué sirve Babel?
+  - url: https://platzi.com/blog/aplicaciones-isomorficas/
+    title: ¿Qué es una aplicación isomórfica?
+  - url: https://platzi.com/blog/aplicaciones-escritorio-electron-js/
+    title: Desarrollando aplicaciones de escritorio con Electron.js
+  - url: https://platzi.com/blog/microservicios-en-node-con-micro/
+    title: Crea microservicios en Node.js con micro.js
+  - url: https://platzi.com/blog/react-js-en-servidor-con-django/
+    title: Usando React.js en el servidor con Django
+  - url: https://medium.com/react-redux/estado-inmutable-con-redux-e-immutable-js-5a3d69ef0451
+    title: Estado inmutable con Redux e Immutable.js
+  - url: https://medium.com/react-redux/react-componentes-alto-orden-2498211e933f
+    title: Componentes de Alto Orden en React.js
+  - url: https://medium.com/react-redux/obteniendo-datos-en-aplicaciones-de-redux-1007e8703521
+    title: Obteniendo datos en aplicaciones de Redux
+  - url: https://medium.com/react-redux/server-render-react-redux-1f6cb0b557c9
+    title: Renderizando aplicaciones de Redux en el servidor
+  - url: https://medium.com/react-redux/wip-usando-redux-en-el-servidor-con-socket-io-61e31242e366
+    title: Usando Redux en el servidor con Socket.io
+  - url: https://medium.com/react-redux/creando-c%C3%B3digo-modular-con-ducks-de-redux-bfd7b67ff8c0
+    title: Creando código modular con ducks de Redux
+  - url: https://medium.com/react-redux/manejo-de-errores-en-redux-js-adf9dfa0129b
+    title: Manejo de errores en Redux.js
+  - url: https://medium.com/react-redux/migrando-a-redux-f7a15457a805
+    title: Migrando a Redux
+  - url: https://medium.com/react-redux/glosario-de-t%C3%A9rminos-de-redux-c2bca005ca69
+    title: Glosario de términos de Redux
+  - url: https://medium.com/react-redux/estructura-de-archivos-ducks-para-redux-js-36bb56a70cb3
+    title: Estructura de archivos Ducks para Redux.js
+  - url: https://medium.com/react-redux/ruteo-en-aplicaciones-de-redux-y-react-js-d62de452bf1b
+    title: Ruteo en aplicaciones de Redux y React.js
+  - url: https://medium.com/react-redux/pruebas-unitarias-en-redux-js-d7285c013123
+    title: Pruebas unitarias en Redux.js
+  - url: https://medium.com/react-redux/acciones-as%C3%ADncronas-en-redux-js-d06e2514c4b8
+    title: Acciones asíncronas en Redux.js
+  - url: https://medium.com/react-redux/middlewares-en-redux-js-88081fcd6c91
+    title: Middlewares en Redux.js
