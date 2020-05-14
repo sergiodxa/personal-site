@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import clsx from "clsx";
-import { FaTerminal } from "react-icons/fa";
+import { FiCommand } from "react-icons/fi";
 
 const links = [
   { href: "/", label: "About" },
@@ -43,7 +43,7 @@ export default function Navigation() {
         htmlFor="menu"
         className="md:hidden flex border-b border-yellow-500 items-center text-yellow-500 px-4 space-x-4"
       >
-        <FaTerminal />
+        <FiCommand />
         <span className="sr-only">Open Menu</span>
         <select
           id="menu"
