@@ -9,6 +9,11 @@ import Navigation from "components/navigation";
 
 const readFile = promisify(fs.readFile);
 
+const formatDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  year: "numeric",
+}).format;
+
 interface Props {
   resume: Resume;
 }
@@ -31,13 +36,11 @@ export default function ResumePage({ resume: _resume }: Props) {
   return (
     <>
       <Navigation />
-      <main className="max-w-screen-lg mx-auto mt-10">
-        <section className="space-y-10">
-          <BasicsSection {...resume.basics} />
-          <SkillsSection skills={resume.skills} />
-          <WorksSection experiences={resume.work} />
-          <LanguagesSection languages={resume.languages} />
-        </section>
+      <main className="max-w-screen-lg mx-auto px-4 space-y-8 mb-8">
+        <BasicsSection {...resume.basics} />
+        <SkillsSection skills={resume.skills} />
+        <WorksSection experiences={resume.work} />
+        <LanguagesSection languages={resume.languages} />
       </main>
     </>
   );
@@ -62,16 +65,16 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 function SubTitle({ children }: { children: React.ReactNode }) {
-  return <h4 className="text-lg leading-none">{children}</h4>;
+  return <h4 className="text-sm md:text-lg leading-none">{children}</h4>;
 }
 
 function SectionContent({ children }: { children: React.ReactNode }) {
-  return <section className="space-y-4 pl-4">{children}</section>;
+  return <section className="space-y-4 md:pl-4">{children}</section>;
 }
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <small className="bg-yellow-500 hover:bg-black text-black hover:text-yellow-500 py-1 px-3 mr-2 my-1 leading-none">
+    <small className="bg-yellow-500 hover:bg-black text-black hover:text-yellow-500 py-1 px-3 mr-2 my-1 leading-none text-xs">
       {children}
     </small>
   );
@@ -125,34 +128,46 @@ function BasicsSection({
 }: Basics) {
   return (
     <SectionWrapper id="section-basics">
-      <h1 className="text-4xl leading-none">{name}</h1>
-      <div className="space-x-10">
-        <span>
+      <h1 className="font-semibold text-2xl tracking-widest leading-none">
+        {name}
+      </h1>
+      <div className="space-y-2 leading-none">
+        <address className="block not-italic">
           Based on{" "}
-          <strong>
+          <strong className="text-yellow-500 font-semibold">
             {location.city}, {location.region}
           </strong>
-        </span>
-        <a href={website} title="Personal website">
-          {website}
+        </address>
+        <a
+          href={website}
+          title="Personal website"
+          className="block underline text-yellow-500 tracking-wider"
+        >
+          {website.slice(8)}
         </a>
-        <a href={email} title="Email address">
+        <a
+          href={email}
+          title="Email address"
+          className="block underline text-yellow-500 tracking-wider"
+        >
           {email}
         </a>
       </div>
-      <blockquote className="border-l-4 border-yellow-500 pl-4 -ml-4 whitespace-pre-wrap leading-relaxed">
+      <blockquote className="border-l-4 border-yellow-500 pl-4 -ml-4 whitespace-pre-wrap leading-relaxed text-sm">
         {summary}
       </blockquote>
-      <div className="flex flex-no-wrap space-x-8">
+      <div className="md:flex md:flex-no-wrap md:space-x-8 space-y-2 md:space-y-0">
         {profiles.map((profile) => (
-          <React.Fragment key={profile.network}>
-            <div className="space-x-2">
-              <strong>{profile.network}</strong>
-              <a href={profile.url} title={profile.network}>
-                @{profile.username}
-              </a>
-            </div>
-          </React.Fragment>
+          <div key={profile.network} className="space-x-2">
+            <strong>{profile.network}</strong>
+            <a
+              href={profile.url}
+              title={profile.network}
+              className="underline text-yellow-500 tracking-wider"
+            >
+              @{profile.username}
+            </a>
+          </div>
         ))}
       </div>
     </SectionWrapper>
@@ -172,11 +187,6 @@ function WorksSection({ experiences }: { experiences: Work[] }) {
     return works;
   }, []);
 
-  const format = new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    year: "numeric",
-  }).format;
-
   return (
     <SectionWrapper id="section-work">
       <SectionTitle>Experience</SectionTitle>
@@ -185,45 +195,46 @@ function WorksSection({ experiences }: { experiences: Work[] }) {
           <SubTitle>{companyGroup[0].company}</SubTitle>
           <div>
             {companyGroup.map((experience, index) => (
-              <div key={JSON.stringify(experience)}>
-                <div
-                  key={JSON.stringify(experience)}
-                  className="items-center grid max-w-screen-sm"
-                  style={{
-                    gridTemplateAreas:
-                      "'dot position . date' 'line body body body'",
-                    gridTemplateColumns: "25px 1fr 10px 200px",
-                    gridTemplateRows: "40px minmax(0.5rem,1fr)",
-                  }}
+              <div
+                key={JSON.stringify(experience)}
+                className="items-center grid max-w-sm"
+                style={{
+                  gridTemplateAreas:
+                    "'dot position . date' 'line body body body'",
+                  gridTemplateColumns: "25px 1fr 10px 160px",
+                  gridTemplateRows: "40px minmax(1rem, 1fr)",
+                }}
+              >
+                <Dot />
+                <strong
+                  className="leading-none font-semibold text-sm md:text-md"
+                  style={{ gridArea: "position" }}
                 >
-                  <Dot />
-                  <strong style={{ gridArea: "position" }}>
-                    {experience.position}
-                  </strong>
-                  {experience.startDate ? (
-                    experience.endDate ? (
-                      <em
-                        className="text-light not-italic text-sm text-right"
-                        style={{ gridArea: "date" }}
-                      >
-                        {format(new Date(experience.startDate))}
-                        {" - "}
-                        {format(new Date(experience.endDate))}
-                      </em>
-                    ) : (
-                      <em
-                        className="text-light not-italic text-sm text-right"
-                        style={{ gridArea: "date" }}
-                      >
-                        {format(new Date(experience.startDate))} - Current
-                      </em>
-                    )
-                  ) : null}
-                  {index < companyGroup.length - 1 && <Line />}
-                  <div style={{ gridArea: "body" }}>
-                    <p>{experience.summary}</p>
-                  </div>
-                </div>
+                  {experience.position}
+                </strong>
+                {experience.startDate ? (
+                  experience.endDate ? (
+                    <em
+                      className="text-light not-italic text-xs text-right"
+                      style={{ gridArea: "date" }}
+                    >
+                      {formatDate(new Date(experience.startDate))}
+                      {" - "}
+                      {formatDate(new Date(experience.endDate))}
+                    </em>
+                  ) : (
+                    <em
+                      className="text-light not-italic text-xs text-right"
+                      style={{ gridArea: "date" }}
+                    >
+                      {formatDate(new Date(experience.startDate))} - Current
+                    </em>
+                  )
+                ) : null}
+                {index < companyGroup.length - 1 && <Line />}
+                {experience.summary && (
+                  <p className="hidden md:block text-sm" style={{ gridArea: "body" }}>{experience.summary}</p>
+                )}
               </div>
             ))}
           </div>
