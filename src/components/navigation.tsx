@@ -41,7 +41,7 @@ export default function Navigation() {
       <select
         value={pathname}
         onChange={(event) => Router.push(event.target.value)}
-        className="text-black md:hidden"
+        className="appearance-none text-yellow-500 md:hidden bg-transparent w-full py-2 px-4 focus:outline-none"
       >
         {links.map((link) => (
           <option value={link.href} key={link.href}>
