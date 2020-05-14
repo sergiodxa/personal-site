@@ -41,7 +41,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       <label
         htmlFor="menu"
-        className="md:hidden flex border-b border-yellow-500 items-center text-yellow-500 px-4 space-x-4"
+        className="md:hidden flex items-center text-black px-4 space-x-4 bg-yellow-500"
       >
         <FiCommand />
         <span className="sr-only">Open Menu</span>
