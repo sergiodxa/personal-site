@@ -5,6 +5,7 @@ import { FiCommand } from "react-icons/fi";
 
 const links = [
   { href: "/", label: "About" },
+  { href: "/links", label: "Bookmarks" },
   { href: "/articles", label: "Articles" },
   { href: "/talks", label: "Talks" },
   { href: "/channel", label: "Channel" },
