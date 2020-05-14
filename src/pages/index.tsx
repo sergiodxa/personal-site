@@ -39,7 +39,7 @@ export default function Home() {
           Sergio Xalambrí
         </h1>
 
-        <h2 className="text-yellow-500 text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
+        <h2 className="text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
           T-Shaped Frontend Engineer
         </h2>
 

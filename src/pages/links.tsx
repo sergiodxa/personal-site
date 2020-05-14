@@ -20,15 +20,13 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     data: { links },
   } = read(path);
 
-  return { props: { links } };
+  return { props: { links }, unstable_revalidate: 1 };
 };
 
 export default function ResumePage(props: Props) {
   const {
     data: { links },
   } = useLinks(props);
-  console.log(links);
-  
 
   return (
     <>
@@ -38,10 +36,27 @@ export default function ResumePage(props: Props) {
           Bookmarks
         </h1>
 
-        <h2 className="text-yellow-500 text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
-          These are links that I have found interesting and worth to save and share them with others.
-        </h2>
+        <p className="text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
+          These are links that I have found interesting and worth to save and
+          share them with others.
+        </p>
+
+        <section className="space-y-4 md:max-w-screen-md md:mx-auto">
+          {links.map((link) => (
+            <LinkArticle key={link.url} {...link} />
+          ))}
+        </section>
       </main>
     </>
+  );
+}
+
+function LinkArticle({ url, title }: Link) {
+  return (
+    <article>
+      <a href={url} title={title} className="underline text-yellow-500">
+        <h3 className="text-md md:text-lg tracking-wider leading-normal font-semibold">{title}</h3>
+      </a>
+    </article>
   );
 }
