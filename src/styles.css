@@ -2,8 +2,7 @@
 @tailwind base;
 @tailwind components;
 
-html,
-body {
+html {
   font-size: 20px;
   @apply bg-black;
   @apply text-white;
