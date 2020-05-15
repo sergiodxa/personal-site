@@ -1,0 +1,188 @@
+---
+title: Sync WebApp Session Status between Tabs with SWR
+description: Implement a synced session status using SWR to keep the user logged in/out in all the tabs or windows
+date: 2020-05-15T07:11:20.918Z
+published: true
+tags: swr, sync, react, nextjs
+---
+
+[SWR](https://swr.now.sh) revalidate on focus feature let us ensure our data update when the user comes back to our tab. Using this feature we could build a simple synchronization of the session status between all the tabs of our page, so if one log out all will automatically become log out once the user is back to that tab.
+
+## Running Demo
+
+> This is the example code in GitHub
+
+https://github.com/sergiodxa/swr-sync-session
+
+> This is the running app in a Vercel deployment
+
+https://swr-sync-session-example.now.sh/
+
+> This is the final project running in CodeSandbox
+
+<iframe
+  src="https://codesandbox.io/embed/github/sergiodxa/swr-sync-session/tree/master/?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden"
+  }}
+  title="Sync WebApp Session Status between Tabs with Swr"
+  allow=""
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+## How to Build It
+
+First we need a basic login and logout implementation, and a way to know if we are logged in, to do so we build extremely simple and completely insecure login using Next.js API pages.
+
+```js
+// pages/api/login.js
+export default function login(req, res) {
+  const { username } = req.body;
+  if (!username) {
+    res.status(401);
+    res.json({ message: "Invalid user" });
+  } else {
+    res.setHeader("Set-Cookie", `session=${username};`);
+    res.status(201);
+    res.json({ message: "Logged in" });
+  }
+}
+
+// pages/api/logout.js
+export default function logout(req, res) {
+  if (req.cookies?.session === "invalid") {
+    res.status(400);
+    res.json({ message: "You are not logged in!" });
+  } else {
+    res.setHeader("Set-Cookie", "session=invalid;");
+    res.status(200);
+    res.json({ message: "Logged out" });
+  }
+}
+
+// pages/api/me.js
+export default function me(req, res) {
+  if (!req.cookies.session || req.cookies.session === "invalid") {
+    res.status(401);
+    res.json({ message: "Not logged in!" });
+  } else {
+    res.status(200);
+    res.json({ name: req.cookies.session });
+  }
+}
+```
+
+Those three files will store the user's name in a cookie, if the cookie exists we are logged in, elsewhere we are not.
+
+After we have that we create a custom hook to call useSWR against the `/api/me` endpoint.
+
+```js
+import useSWR from "swr";
+
+async function fetcher(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.status >= 400) return { error: data.message };
+  return { data };
+}
+
+export default function useMe() {
+  return useSWR("/api/me", fetcher);
+}
+```
+
+This `useMe` hook will simply fetch `/api/me` endpoint using our custom fetcher, this fetcher will detect if the status code is a 4xx or 5xx and return an object with an error key, if it's a 2xx it will return an object with the data our API returns.
+
+Now let's create our `pages/index.js`
+
+```js
+import Router from "next/router";
+import useMe from "../hooks/use-me";
+import { useState } from "react";
+
+function login(user) {
+  return fetch("/api/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: user }),
+  });
+}
+
+export default function IndexPage() {
+  const { data: res, mutate } = useMe();
+  const [user, setUser] = useState("");
+
+  React.useLayoutEffect(() => {
+    if (res?.data) Router.replace("/private")
+  }, [res])
+
+  if (res?.data) {
+    return null;
+  }
+
+  return (
+    <div>
+      <h1>To log in click below</h1>
+      <input type="text" value={user} onChange={e => setUser(e.target.value)} />
+      <button onClick={() => login(user).then(() => mutate())}>Log In</button>
+    </div>
+  );
+}
+```
+
+The `login` function will POST the username against the login endpoint, inside the page we will use `useMe`, if there is no `data` key, we are not logged in, we will render a simple page with an input to let the user write a name and a button to login.
+
+If there is data we will render `null` so we don't show anything, and inside a a layout effect we will replace the current URL with `/private`. We do this so the user don't see anything and is immediately redirected to our private page.
+
+When the user click the button we will call `login` and after it we will call `mutate` without any argument as a way to revalidate the data of our `useMe` hook.
+
+Lastly, in our `pages/private.js` we will do something similar.
+
+```js
+import useMe from "../hooks/use-me";
+import Router from "next/router";
+
+function logout() {
+  return fetch("/api/logout", { method: "POST" });
+}
+
+export default function Private() {
+  const { data: res, mutate } = useMe();
+
+  React.useLayoutEffect(() => {
+    if (!res || res.error) Router.replace("/");
+  }, [res])
+
+  if (!res || res.error) {
+    return null;
+  }
+
+  if (!res || !res.data) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>Hello, {res.data.name}</h1>
+      <p>If you are reading this you are logged in! Congrats!</p>
+      <button onClick={() => logout().then(() => mutate())}>Log out</button>
+    </div>
+  );
+}
+```
+
+The `logout` function will POSt against the logout endpoint, then in our page we will also call `useMe`, this time we use both, the data and the error, if we have data we will render a simple message with the user name we got from the API. Below the message we also have a button to logout where we will call `logout` and then `mutate` to revalidate the data of `useMe`.
+
+Once the user is logged out we will stop having `res.data` and we will have `res.error`, if we have an error we will render `null` so the user see nothing while we replace the URL with `/` as a way to redirect it.
+
+Lastly, and this is something we didn't have before, we will render a loading message if we don't have data nor an error.
+
+---
+
+After we did this, we can open our app in two tabs or two windows and login in one of them, once we change back to the other one it will automatically log in, if we wait 2 seconds we can logout and go back to the other tab/window and we will be automatically logged out.
+
+> Note: the 2 seconds is because SWR deduplicate requests against the same key in a range of time below 2 seconds, we can configure it but that's not part of this example.
