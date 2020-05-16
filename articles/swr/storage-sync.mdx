@@ -1,0 +1,123 @@
+---
+title: Sync SWR cache with Web Storage
+description: Use Web Storage to retain SWR cache between page reloads
+date: 2020-05-15T05:28:17.582Z
+published: true
+tags: swr, react, typescript, webstorage
+---
+
+[SWR](http://swr.now.sh) comes with a really great cache to help keeping data between page navigation in Single Page Apps, but when doing a hard reload of the browser we will lose every key in our cache and that from zero.
+
+## Sync by SWR call
+
+One first way to start saving those keys is to do it in a per-SWR call basis, to do this we need to use two, not commonly used options of SWR, `onSuccess` and `onFailure`.
+
+Let's say we have an API endpoint called `/api/me` that gives you the current logged in user, we could create a custom `useUser` hook using SWR internally to cache it and let us use it everywhere.
+
+```ts
+import useSWR from "swr";
+import User from "types/user";
+
+const key = "/api/me";
+
+function useUser() {
+  return useSWR<User>(key, fetcher);
+}
+```
+
+Now let's save the user in localStorage.
+
+```ts
+import useSWR from "swr";
+import User from "types/user";
+
+const key = "/api/me";
+
+function useUser() {
+  return useSWR<User>(key, fetcher, {
+    onSuccess(user) {
+      localStorage.setItem(key, JSON.stringify(user));
+    },
+  });
+}
+```
+
+With this, every time SWR successfully fetch the user it will update localStorage. Now let's add a way to delete when it fails.
+
+```ts
+import useSWR from "swr";
+import User from "types/user";
+
+const key = "/api/me"
+
+function useUser() {
+  return useSWR<User>(key, fetcher, {
+    onFailure() {
+      localStorage.removeItem(key)
+    }
+    onSuccess(user) {
+      localStorage.setItem(key, JSON.stringify(user));
+    },
+  });
+}
+```
+
+Now if for some reason SWR can't fetch the logged in user, e.g. because it was logged out, we will delete the key, so the next time the user reload the page it will not be already logged in.
+
+And lately we need to prefill the cache with the localStorage data.
+
+```ts
+import useSWR, { mutate } from "swr";
+import User from "types/user";
+
+const key = "/api/me"
+
+if (typeof window !== "undefined") {
+  const data = localStorage.getItem(key);
+  if (data) mutate(key, JSON.parse(data), false)
+}
+
+function useUser() {
+  return useSWR<User>(key, fetcher, {
+    onFailure() {
+      localStorage.removeItem(key)
+    }
+    onSuccess(user) {
+      localStorage.setItem(key, JSON.stringify(user));
+    },
+  });
+}
+```
+
+Here we are checking our code is running Client-Side, this is to avoid breaking while doing SSR/SSG with tools like Next.js, then we get the possible data from localStorage and if it exists we `mutate` the cache key with the parsed value, the last `false` is to avoid any revalidation at that moment.
+
+With all of this every time we use this hook it will have its cache prefilled with the user stored in localStorage, it will fetch the data again to revalidate it, if it's a success it will update the localStorage key and if it's a failure it will delete the localStorage key.
+
+## Sync Every key
+
+The second way it to sync every key in Storage, to do this I built a simple library called `swr-sync-storage`, this lib let us pick between local and session storages. So, let's install it.
+
+```bash
+$ yarn add swr-sync-storage
+```
+
+Now in your main file (`pages/_app.js` in Next or `index.js` in CRA) add this
+
+```ts
+import { syncWithStorage } from "swr-sync-storage";
+
+if (typeof window !== "undefined") {
+  // to sync with localStorage
+  syncWithStorage("local");
+
+  // to sync with sessionStorage
+  syncWithStorage("session");
+}
+```
+
+If we are running Client-Side we will call one of those functions, then the lib will fill the SWR cache with any value stored in the picked Web Storage and with the prefix `swr-`, so you can have more keys not affecting your SWR cache.
+
+And it will subscribe to updates in the cache, updating the Web Storage data.
+
+**Warning**: Note that doing this will sync absolutely everything in your SWR cache, without a proper invalidation strategy it could cause bugs due a mismatch between the cached data in Web Storage and the new expected value.
+

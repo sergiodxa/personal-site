@@ -1,5 +1,7 @@
 ---
 links:
+  - url: https://paco.im/blog/shared-hook-state-with-swr
+    title: Shared Hook State with SWR
   - url: http://farmdev.com/thoughts/108/the-art-of-ui-skeletons/
     title: The Art of UI Skeletons
   - url: https://dev.to/educative/how-to-design-a-web-application-software-architecture-101-188b
