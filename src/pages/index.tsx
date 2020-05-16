@@ -1,7 +1,7 @@
 import { FaDev, FaTwitter, FaGithub, FaNpm, FaEnvelope } from "react-icons/fa";
-import Navigation from "components/navigation";
 import Title from "components/title";
 import Description from "components/description";
+import { motion } from "framer-motion";
 
 const social = [
   {
@@ -33,24 +33,21 @@ const social = [
 
 export default function Home() {
   return (
-    <>
-      <Navigation />
+    <motion.main
+      id="hero"
+      className="max-w-screen-md mx-auto px-4 space-y-8"
+    >
+      <Title>Sergio Xalambrí</Title>
 
-      <main id="hero" className="max-w-screen-md mx-auto px-4 space-y-8">
-        <Title>Sergio Xalambrí</Title>
+      <Description>T-Shaped Frontend Engineer</Description>
 
-        <Description>
-          T-Shaped Frontend Engineer
-        </Description>
-
-        <aside className="text-yellow-500 light:text-indigo-500 flex flex-row space-x-4">
-          {social.map(({ icon, href, title }) => (
-            <a key={href} href={href} title={title}>
-              {icon}
-            </a>
-          ))}
-        </aside>
-      </main>
-    </>
+      <aside className="text-yellow-500 light:text-indigo-500 flex flex-row space-x-4">
+        {social.map(({ icon, href, title }) => (
+          <a key={href} href={href} title={title}>
+            {icon}
+          </a>
+        ))}
+      </aside>
+    </motion.main>
   );
 }

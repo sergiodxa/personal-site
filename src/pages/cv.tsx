@@ -5,9 +5,9 @@ import { promisify } from "util";
 import { resolve } from "path";
 import { Resume, Skill, Language, Basics, Work } from "types/resume";
 import useResume from "data/resume";
-import Navigation from "components/navigation";
 import Tag from "components/tag";
 import Title from "components/title";
+import { motion } from "framer-motion";
 
 const readFile = promisify(fs.readFile);
 
@@ -36,18 +36,13 @@ export default function ResumePage({ resume: _resume }: Props) {
   const { data: resume } = useResume(_resume);
 
   return (
-    <>
-      <Navigation />
-      <main className="max-w-screen-md mx-auto px-4 space-y-8 mb-8">
-        <Title>
-          Resume
-        </Title>
-        <BasicsSection {...resume.basics} />
-        <SkillsSection skills={resume.skills} />
-        <WorksSection experiences={resume.work} />
-        <LanguagesSection languages={resume.languages} />
-      </main>
-    </>
+    <motion.main className="max-w-screen-md mx-auto px-4 space-y-8 mb-8">
+      <Title>Resume</Title>
+      <BasicsSection {...resume.basics} />
+      <SkillsSection skills={resume.skills} />
+      <WorksSection experiences={resume.work} />
+      <LanguagesSection languages={resume.languages} />
+    </motion.main>
   );
 }
 

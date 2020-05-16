@@ -2,14 +2,12 @@ import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import clsx from "clsx";
 import { FiCommand } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const links = [
   { href: "/", label: "About" },
-  { href: "/links", label: "Bookmarks" },
   { href: "/articles", label: "Articles" },
-  { href: "/talks", label: "Talks" },
-  { href: "/channel", label: "Channel" },
-  { href: "/lessons", label: "Lessons" },
+  { href: "/links", label: "Bookmarks" },
   { href: "/cv", label: "Resume" },
 ];
 
@@ -28,13 +26,15 @@ export default function Navigation() {
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href}>
-              <a
+              <motion.a
+                href={link.href}
+                animate
                 className={
                   link.href === pathname ? activeClassName : baseClassName
                 }
               >
                 {link.label}
-              </a>
+              </motion.a>
             </Link>
           </li>
         ))}

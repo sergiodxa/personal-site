@@ -1,6 +1,5 @@
 import * as React from "react";
 import { GetStaticProps } from "next";
-import Navigation from "components/navigation";
 import { Article } from "types/article";
 import readListArticles from "services/read-list-articles";
 import Link from "next/link";
@@ -86,67 +85,74 @@ export default function ArticlesPage(props: Props) {
     .filter(filterByTitleAndTags.bind(null, query));
 
   return (
-    <>
-      <Navigation />
-      <main id="hero" className="max-w-screen-md mx-auto px-4 space-y-8 mb-8">
-        <Title>Articles</Title>
+    <motion.main
+      id="hero"
+      className="max-w-screen-md mx-auto px-4 space-y-8 mb-8"
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={{ exit: { transition: { staggerChildren: 0.1 } } }}
+    >
+      <Title>Articles</Title>
 
-        <Description>
-          List of articles I have wrote with the time, sorted by creation date,
-          below you can search for what article you want.
-        </Description>
+      <Description>
+        Find the complete list of articles I have wrote, below you can search by
+        title or tags, or click a tag to see the related articles.
+      </Description>
 
-        <div className="space-y-2">
-          <div className="relative">
-            <Input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search article"
-            />
-            <span className="absolute top-0 right-0 bottom-0 py-2 px-4 select-none">
-              {filteredArticles.length}
-            </span>
-          </div>
-          <div>
-            <TagCloud
-              tags={tags}
-              active={query}
-              onTag={(tag) => {
-                setQuery(tag);
-                setTagLimit();
-              }}
-              limit={tagsLimit}
-              close={setTagLimit}
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() =>
-              tagsLimit === Infinity ? setTagLimit() : removeTagLimit()
-            }
-            className="focus:outline-none select-none text-xs hidden md:inline-block text-yellow-500 light:text-indigo-500"
-          >
-            {tagsLimit === Infinity ? <>See less tags</> : <>See all tags</>}
-          </button>
+      <div className="space-y-2 sticky top-0 py-2 bg-black shadow-lg z-10">
+        <div className="relative">
+          <Input
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search article by title or tag"
+          />
+          <span className="absolute top-0 right-0 bottom-0 py-2 px-4 select-none">
+            {filteredArticles.length}
+          </span>
         </div>
+        <div>
+          <TagCloud
+            tags={tags}
+            active={query}
+            onTag={(tag) => {
+              setQuery(tag);
+              setTagLimit();
+            }}
+            limit={tagsLimit}
+            close={setTagLimit}
+          />
+        </div>
+        <button
+          type="button"
+          onClick={() =>
+            tagsLimit === Infinity ? setTagLimit() : removeTagLimit()
+          }
+          className="focus:outline-none select-none text-xs hidden md:inline-block text-yellow-500 light:text-indigo-500"
+        >
+          {tagsLimit === Infinity ? <>See less tags</> : <>See all tags</>}
+        </button>
+      </div>
 
-        <section className="space-y-4 md:max-w-screen-md md:mx-auto">
-          {filteredArticles
-            .map((article) => ({ ...article, date: new Date(article.date) }))
-            .sort((a, b) => b.date.getTime() - a.date.getTime())
-            .map((article) => (
-              <ArticleItem key={article.slug} {...article} />
-            ))}
-        </section>
-      </main>
-    </>
+      <motion.section
+        className="space-y-8 md:max-w-screen-md md:mx-auto"
+        animate
+      >
+        {filteredArticles
+          .map((article) => ({ ...article, date: new Date(article.date) }))
+          .sort((a, b) => b.date.getTime() - a.date.getTime())
+          .map((article) => (
+            <ArticleItem key={article.slug} {...article} />
+          ))}
+      </motion.section>
+    </motion.main>
   );
 }
 
-function ArticleItem({ slug, title }: Article) {
+function ArticleItem({ slug, title, description }: Article) {
   return (
-    <article>
+    <motion.article className="space-y-1" animate>
       <Link href="/articles/[...slug]" as={slug}>
         <a
           title={title}
@@ -157,7 +163,8 @@ function ArticleItem({ slug, title }: Article) {
           </h3>
         </a>
       </Link>
-    </article>
+      {description && <Description border={false}>{description}</Description>}
+    </motion.article>
   );
 }
 
@@ -206,7 +213,10 @@ function TagCloud({
                 type="button"
                 onClick={handleClick}
                 data-tag={tag}
-                className="focus:outline-none focus:shadow-outline select-none mr-1 my-1"
+                className={clsx(
+                  "focus:outline-none focus:shadow-outline select-none mr-1 my-1",
+                  { "transform scale-110 mr-2 my-2": isFull && isDesktop }
+                )}
                 exit={{ opacity: 0 }}
               >
                 <Tag key={tag} active={tag === active.trim()}>
