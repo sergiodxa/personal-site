@@ -2,8 +2,9 @@ module.exports = {
   purge: ["./src/**/*.tsx"],
   theme: {
     extend: {
-      backgroundColor: {},
-      textColor: {},
+      screens: {
+        light: { raw: "(prefers-color-scheme: light)" },
+      },
     },
   },
   variants: {

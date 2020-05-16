@@ -7,6 +7,7 @@ import { Resume, Skill, Language, Basics, Work } from "types/resume";
 import useResume from "data/resume";
 import Navigation from "components/navigation";
 import Tag from "components/tag";
+import Title from "components/title";
 
 const readFile = promisify(fs.readFile);
 
@@ -37,10 +38,10 @@ export default function ResumePage({ resume: _resume }: Props) {
   return (
     <>
       <Navigation />
-      <main className="max-w-screen-lg mx-auto px-4 space-y-8 mb-8">
-        <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
+      <main className="max-w-screen-md mx-auto px-4 space-y-8 mb-8">
+        <Title>
           Resume
-        </h1>
+        </Title>
         <BasicsSection {...resume.basics} />
         <SkillsSection skills={resume.skills} />
         <WorksSection experiences={resume.work} />
@@ -128,26 +129,26 @@ function BasicsSection({
       <div className="space-y-2 leading-none">
         <address className="block not-italic">
           Based on{" "}
-          <strong className="text-yellow-500 font-semibold">
+          <strong className="text-yellow-500 light:text-indigo-500 font-semibold">
             {location.city}, {location.region}
           </strong>
         </address>
         <a
           href={website}
           title="Personal website"
-          className="block underline text-yellow-500 tracking-wider"
+          className="block underline text-yellow-500 light:text-indigo-500 tracking-wider"
         >
           {website.slice(8)}
         </a>
         <a
           href={email}
           title="Email address"
-          className="block underline text-yellow-500 tracking-wider"
+          className="block underline text-yellow-500 light:text-indigo-500 tracking-wider"
         >
           {email}
         </a>
       </div>
-      <blockquote className="border-l-4 border-yellow-500 pl-4 -ml-4 whitespace-pre-wrap leading-relaxed text-sm">
+      <blockquote className="border-l-4 border-yellow-500 light:border-indigo-500 pl-4 -ml-4 whitespace-pre-wrap leading-relaxed text-sm">
         {summary}
       </blockquote>
       <div className="md:flex md:flex-no-wrap md:space-x-8 space-y-2 md:space-y-0">
@@ -157,7 +158,7 @@ function BasicsSection({
             <a
               href={profile.url}
               title={profile.network}
-              className="underline text-yellow-500 tracking-wider"
+              className="underline text-yellow-500 light:text-indigo-500 tracking-wider"
             >
               @{profile.username}
             </a>
@@ -246,7 +247,7 @@ function WorksSection({ experiences }: { experiences: Work[] }) {
 function Line() {
   return (
     <div
-      className="bg-yellow-500 w-1 h-full ml-1"
+      className="bg-yellow-500 light:bg-indigo-500 w-1 h-full ml-1"
       style={{ gridArea: "line" }}
     />
   );
@@ -255,7 +256,7 @@ function Line() {
 function Dot() {
   return (
     <div
-      className="bg-yellow-500 rounded-full w-3 h-3"
+      className="bg-yellow-500 light:bg-indigo-500 rounded-full w-3 h-3"
       style={{ gridArea: "dot" }}
     />
   );

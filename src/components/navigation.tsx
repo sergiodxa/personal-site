@@ -13,10 +13,10 @@ const links = [
   { href: "/cv", label: "Resume" },
 ];
 
-const baseClassName = "block py-2 px-6 text-yellow-500";
+const baseClassName = "block py-2 px-6 text-yellow-500 light:text-indigo-500";
 const activeClassName = clsx(
   baseClassName,
-  "text-white border-b border-yellow-500"
+  "text-white border-b border-yellow-500 light:border-indigo-500"
 );
 
 export default function Navigation() {
@@ -42,7 +42,7 @@ export default function Navigation() {
       {/* Mobile Menu */}
       <label
         htmlFor="menu"
-        className="md:hidden flex items-center px-4 space-x-4 text-black bg-yellow-500"
+        className="md:hidden flex items-center px-4 space-x-4 text-black bg-yellow-500 light:text-indigo-100 light:bg-indigo-500"
       >
         <FiCommand />
         <span className="sr-only">Open Menu</span>

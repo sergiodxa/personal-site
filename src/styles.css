@@ -3,18 +3,17 @@
 @tailwind components;
 
 html {
-  font-size: 16px;
+  font-size: 20px;
   @apply bg-black;
   @apply text-white;
   @apply antialiased;
-  background-image: radial-gradient(
-    circle,
-    #333,
-    #333 1px,
-    #000 1px,
-    #000
-  );
-  background-size: 2rem 2rem;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    @apply bg-white;
+    @apply text-black;
+  }
 }
 
 /* purgecss end ignore */

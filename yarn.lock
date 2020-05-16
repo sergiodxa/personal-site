@@ -3580,10 +3580,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framer-motion@^1.16.18:
-  version "1.16.18"
-  resolved "https://registry.able.co/framer-motion/-/framer-motion-1.16.18.tgz#a3bb25f7ad832fb0b7034d82b003b127fe9a8994"
-  integrity sha512-ZL4kTUmUh9HBmRm7rZOpcY/fXjIxSVfOY5FRqlfczMDKRKNifi7htpwzi65xE3MlAZuCQ/iJUVv2K2pvlM15QA==
+framer-motion@^2.0.0-beta.71:
+  version "2.0.0-beta.71"
+  resolved "https://registry.able.co/framer-motion/-/framer-motion-2.0.0-beta.71.tgz#ccdfb81e1f211922ab2ad4483a7643a2207b5dcf"
+  integrity sha512-aPl1EXkvHY+q6PN+XMFvYWJ6+9T2978dwAUZxZZtJlTTGSyTjAGd9iUTKiK1P3g2AxXG4A0wUktIA4Uknn+7rw==
   dependencies:
     "@popmotion/easing" "^1.0.2"
     "@popmotion/popcorn" "^0.4.2"
@@ -3591,7 +3591,7 @@ framer-motion@^1.16.18:
     hey-listen "^1.0.8"
     popmotion "9.0.0-beta-8"
     style-value-types "^3.1.6"
-    stylefire "^7.0.0"
+    stylefire "7.0.3"
     tslib "^1.10.0"
   optionalDependencies:
     "@emotion/is-prop-valid" "^0.8.2"
@@ -7325,7 +7325,7 @@ styled-jsx@3.2.5:
     stylis "3.5.4"
     stylis-rule-sheet "0.0.10"
 
-stylefire@^7.0.0:
+stylefire@7.0.3:
   version "7.0.3"
   resolved "https://registry.able.co/stylefire/-/stylefire-7.0.3.tgz#9120ecbb084111788e0ddaa04074799750f20d1d"
   integrity sha512-Q0l7NSeFz/OkX+o6/7Zg3VZxSAZeQzQpYomWmIpOehFM/rJNMSLVX5fgg6Q48ut2ETNKwdhm97mPNU643EBCoQ==
@@ -7568,9 +7568,9 @@ ts-pnp@^1.1.6:
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
 tslib@^1.10.0:
-  version "1.12.0"
-  resolved "https://registry.able.co/tslib/-/tslib-1.12.0.tgz#d1fc9cacd06a1456c62f2902b361573e83d66473"
-  integrity sha512-5rxCQkP0kytf4H1T4xz1imjxaUUPMvc5aWp0rJ/VMIN7ClRiH1FwFvBt8wOeMasp/epeUnmSW6CixSIePtiLqA==
+  version "1.13.0"
+  resolved "https://registry.able.co/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
+  integrity sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
 
 tslib@^1.9.0:
   version "1.10.0"

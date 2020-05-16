@@ -1,5 +1,7 @@
 import { FaDev, FaTwitter, FaGithub, FaNpm, FaEnvelope } from "react-icons/fa";
 import Navigation from "components/navigation";
+import Title from "components/title";
+import Description from "components/description";
 
 const social = [
   {
@@ -34,16 +36,14 @@ export default function Home() {
     <>
       <Navigation />
 
-      <main id="hero" className="max-w-screen-lg mx-auto px-4 space-y-8">
-        <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
-          Sergio Xalambrí
-        </h1>
+      <main id="hero" className="max-w-screen-md mx-auto px-4 space-y-8">
+        <Title>Sergio Xalambrí</Title>
 
-        <h2 className="text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
+        <Description>
           T-Shaped Frontend Engineer
-        </h2>
+        </Description>
 
-        <aside className="text-yellow-500 flex flex-row space-x-4">
+        <aside className="text-yellow-500 light:text-indigo-500 flex flex-row space-x-4">
           {social.map(({ icon, href, title }) => (
             <a key={href} href={href} title={title}>
               {icon}

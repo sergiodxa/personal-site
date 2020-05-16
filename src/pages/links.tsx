@@ -4,6 +4,8 @@ import { read } from "gray-matter";
 import { resolve } from "path";
 import useLinks from "data/links";
 import Navigation from "components/navigation";
+import Title from "components/title";
+import Description from "components/description";
 
 interface Link {
   url: string;
@@ -31,15 +33,15 @@ export default function ResumePage(props: Props) {
   return (
     <>
       <Navigation />
-      <main id="hero" className="max-w-screen-lg mx-auto px-4 space-y-8 mb-8">
-        <h1 className="font-semibold text-2xl md:text-4xl tracking-widest leading-none">
+      <main id="hero" className="max-w-screen-md mx-auto px-4 space-y-8 mb-8">
+        <Title>
           Bookmarks
-        </h1>
+        </Title>
 
-        <p className="text-md md:text-lg tracking-wide border-l-4 border-yellow-500 pl-4 -ml-4 leading-none">
+        <Description>
           These are links that I have found interesting and worth to save and
           share them with others.
-        </p>
+        </Description>
 
         <section className="space-y-4 md:max-w-screen-md md:mx-auto">
           {links.map((link) => (
@@ -54,7 +56,7 @@ export default function ResumePage(props: Props) {
 function LinkItem({ url, title }: Link) {
   return (
     <article>
-      <a href={url} title={title} className="underline text-yellow-500 visited:text-yellow-600 hover:text-white">
+      <a href={url} title={title} className="underline text-yellow-500 visited:text-yellow-600 hover:text-white light:text-indigo-500 light:visited:text-indigo-600 light:hover:text-indigo-900">
         <h3 className="text-md md:text-lg tracking-wider leading-normal font-semibold">{title}</h3>
       </a>
     </article>
