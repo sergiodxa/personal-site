@@ -5,7 +5,7 @@ export default function Tag({
   active = false,
 }: {
   children: React.ReactNode;
-  active: boolean;
+  active?: boolean;
 }) {
   const cn = clsx(
     "py-1 px-3 mr-2 my-1 leading-none text-xs rounded cursor-default",
