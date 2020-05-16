@@ -8,7 +8,7 @@ export default function Tag({
   active?: boolean;
 }) {
   const cn = clsx(
-    "py-1 px-3 mr-2 my-1 leading-none text-xs rounded cursor-default",
+    "py-1 px-3 mr-2 my-1 leading-none text-xs rounded cursor-default font-semibold",
     {
       "text-yellow-500 bg-black": active,
       "light:text-indigo-100 light:bg-indigo-900": active,
