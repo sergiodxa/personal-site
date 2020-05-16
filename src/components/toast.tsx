@@ -15,11 +15,11 @@ export function Toast({ type = "tip", label, onClick }: Props) {
       className="text-center pb-4 pr-4 fixed right-0 bottom-0 z-20"
     >
       <button
-        className="py-2 px-4 bg-black border-2 border-yellow-500 items-center text-yellow-500 leading-none rounded-full flex inline-flex space-x-2 focus:outline-none focus:shadow-outline"
+        className="py-2 px-4 bg-black light:bg-indigo-100 border-2 border-yellow-500 light:border-indigo-500 items-center text-yellow-500 light:text-indigo-500 leading-none rounded-full flex inline-flex space-x-2 focus:outline-none focus:shadow-outline"
         role="alert"
         onClick={onClick}
       >
-        <span className="flex rounded-full bg-yellow-500 text-black uppercase px-2 py-1 text-xs font-bold">
+        <span className="flex rounded-full bg-yellow-500 light:bg-indigo-500 text-black light:text-indigo-100 uppercase px-2 py-1 text-xs font-bold">
           {type}
         </span>
         <span className="font-semibold text-left flex-auto">{label}</span>
