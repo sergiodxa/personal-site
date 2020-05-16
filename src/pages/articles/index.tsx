@@ -194,7 +194,11 @@ function TagCloud({
   return (
     <>
       <motion.div className={cn} animate>
-        <div className="flex items-center flex-wrap justify-start">
+        <div
+          className={clsx("flex items-center flex-wrap justify-start", {
+            "p-10": isFull && isDesktop,
+          })}
+        >
           <AnimatePresence>
             {tags.slice(0, limit).map((tag) => (
               <motion.button
@@ -220,7 +224,8 @@ function TagCloud({
               type="tip"
               label={
                 <>
-                  Press <kbd className="text-md text-pink-500">Esc</kbd> to close the tag cloud
+                  Press <kbd className="text-md text-pink-500">Esc</kbd> to
+                  close the tag cloud
                 </>
               }
               onClick={() => setToastIsOpen(false)}
