@@ -11,10 +11,14 @@ const links = [
   { href: "/cv", label: "Resume" },
 ];
 
-const baseClassName = "block py-2 px-6 text-yellow-500 light:text-indigo-500";
+const baseStyles = "block py-1 px-4";
+const inactiveClassName = clsx(
+  baseStyles,
+  "text-yellow-500 light:text-indigo-500"
+);
 const activeClassName = clsx(
-  baseClassName,
-  "text-white border-b border-yellow-500 light:border-indigo-500"
+  baseStyles,
+  "text-white border-yellow-500 light:text-black light:border-indigo-500"
 );
 
 export default function Navigation() {
@@ -22,15 +26,14 @@ export default function Navigation() {
   return (
     <nav className="mb-4">
       {/* Desktop Menu */}
-      <ul className="hidden md:flex">
+      <ul className="p-2 hidden md:flex space-x-2">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href}>
               <motion.a
                 href={link.href}
-                animate
                 className={
-                  link.href === pathname ? activeClassName : baseClassName
+                  link.href === pathname ? activeClassName : inactiveClassName
                 }
               >
                 {link.label}
