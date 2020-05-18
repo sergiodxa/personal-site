@@ -26,7 +26,7 @@ export default function Navigation() {
   return (
     <nav className="mb-4">
       {/* Desktop Menu */}
-      <ul className="p-2 hidden md:flex space-x-2">
+      <ul className="p-2 hidden md:flex space-x-2 justify-end">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href}>
