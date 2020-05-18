@@ -13,9 +13,9 @@ export default async function resume(
   const article = await readFile(
     resolve(
       "./articles/",
-      Array.isArray(slug) ? slug.join("/") : slug + ".mdx"
+      (Array.isArray(slug) ? slug.join("/") : slug) + ".mdx"
     ),
     "utf-8"
   );
-  res.send(article);
+  res.json({ article });
 }
