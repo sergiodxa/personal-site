@@ -42,7 +42,7 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "husky": "3.1.0",
-    "lint-staged": "10.2.4",
+    "lint-staged": "10.2.6",
     "serve": "11.3.0",
     "watch": "1.0.2"
   },
