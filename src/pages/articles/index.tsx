@@ -15,6 +15,10 @@ import { useLockBodyScroll } from "hooks/use-lock-body-scroll";
 import { useOnEscapePress } from "hooks/use-on-escape-press";
 import { Toast } from "components/toast";
 import { useMatchMedia } from "hooks/use-match-media";
+import fetcher from "utils/fetcher";
+import useSWR, { mutate } from "swr";
+import marked from "marked";
+import matter from "gray-matter";
 
 interface ArticleParsedTags extends Article {
   tags?: string[];
@@ -61,6 +65,7 @@ export default function ArticlesPage(props: Props) {
   }: { query: { query?: string } } = useRouter();
 
   const [tagsLimit, setTagsLimit] = React.useState(10);
+  const [slug, setSlug] = React.useState<string>(null);
 
   const setTagLimit = React.useCallback(() => setTagsLimit(10), [setTagsLimit]);
 
@@ -78,6 +83,15 @@ export default function ArticlesPage(props: Props) {
     }
   }, []);
 
+  const openArticle = React.useCallback((slug: string) => {
+    setSlug(slug);
+    Router.push(
+      { pathname: "/articles" },
+      { pathname: slug },
+      { shallow: true }
+    );
+  }, []);
+
   const tags = sortByFrequency(getFlatFilters(props.articles));
 
   const filteredArticles = props.articles
@@ -93,6 +107,16 @@ export default function ArticlesPage(props: Props) {
       exit="exit"
       variants={{ exit: { transition: { staggerChildren: 0.1 } } }}
     >
+      <AnimatePresence>
+        {slug && (
+          <React.Suspense fallback={<>Loading...</>}>
+            <ArticleModal
+              {...props.articles.find((article) => article.slug === slug)}
+            />
+          </React.Suspense>
+        )}
+      </AnimatePresence>
+
       <Title>Articles</Title>
 
       <Description>
@@ -143,26 +167,41 @@ export default function ArticlesPage(props: Props) {
           .map((article) => ({ ...article, date: new Date(article.date) }))
           .sort((a, b) => b.date.getTime() - a.date.getTime())
           .map((article) => (
-            <ArticleItem key={article.slug} {...article} />
+            <ArticleItem
+              key={article.slug}
+              onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+                event.preventDefault();
+                mutate(`/api${slug}`, fetcher(`/api${slug}`), false);
+                openArticle(article.slug);
+              }}
+              {...article}
+            />
           ))}
       </motion.section>
     </motion.main>
   );
 }
 
-function ArticleItem({ slug, title, description }: Article) {
+interface ArticleItemProps extends Article {
+  onClick: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+function ArticleItem({ slug, title, description, onClick }: ArticleItemProps) {
   return (
     <motion.article className="space-y-1" animate>
-      <Link href="/articles/[...slug]" as={slug}>
-        <a
-          title={title}
-          className="underline text-yellow-500 light:text-indigo-500"
-        >
-          <h3 className="text-md md:text-lg tracking-wider leading-normal font-semibold">
-            {title}
-          </h3>
-        </a>
-      </Link>
+      <a
+        href={slug}
+        title={title}
+        className="underline text-yellow-500 light:text-indigo-500"
+        onClick={onClick}
+        onMouseEnter={() =>
+          mutate(`/api${slug}`, fetcher(`/api${slug}`), false)
+        }
+      >
+        <h3 className="text-md md:text-lg tracking-wider leading-normal font-semibold">
+          {title}
+        </h3>
+      </a>
       {description && <Description border={false}>{description}</Description>}
     </motion.article>
   );
@@ -244,6 +283,27 @@ function TagCloud({
         </AnimatePresence>
       </div>
     </>
+  );
+}
+
+function ArticleModal({ slug }: Article) {
+  const {
+    data: { article },
+  } = useSWR(`/api${slug}`, fetcher, {
+    suspense: true,
+  });
+
+  const { content, data } = matter(article);
+  const html = marked(content);
+
+  console.log(data);
+
+  return (
+    <motion.section initial={{ y: "100%" }} animate={{ y: 0 }} className="space-y-4">
+      <Title>{data.title}</Title>
+      <Description>{data.description}</Description>
+      <article dangerouslySetInnerHTML={{ __html: html }} />
+    </motion.section>
   );
 }
 
