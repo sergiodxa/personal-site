@@ -36,6 +36,7 @@
   "dependencies": {
     "@contentz/build": "2.5.6",
     "@contentz/write": "3.13.2",
+    "@emotion/core": "^10.0.28",
     "contentz": "3.14.1"
   },
   "devDependencies": {
