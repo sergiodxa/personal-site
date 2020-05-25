@@ -35,25 +35,14 @@
   "homepage": "https://sergiodxa.com",
   "dependencies": {
     "@contentz/build": "2.5.6",
-    "@contentz/social": "3.14.3",
     "@contentz/write": "3.13.2",
-    "contentz": "3.14.1"
+    "@emotion/core": "^10.0.28",
+    "contentz": "3.14.1",
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "husky": "3.1.0",
-    "lint-staged": "10.2.6",
     "serve": "11.3.1",
     "watch": "1.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.mdx": [
-      "yarn social"
-    ]
   }
 }
