@@ -46,10 +46,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@contentz/build@2.5.6":
-  version "2.5.6"
-  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.5.6.tgz#f58fc605f49302d45a8eac28f1a263cc5ae27d06"
-  integrity sha512-8L702S58cdlT4jY0vXBU2eJ9TeW2inWCc5FGkOZ+Wa86QdrsqvOJWNJn5fKeKPgBFwHRCl/efb3XOgbXrjB9Iw==
+"@contentz/build@2.5.7":
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/@contentz/build/-/build-2.5.7.tgz#3c84fb2670948e501a77609efdbfbc0f895ea877"
+  integrity sha512-U6Db3dw3f3Bq+EGQP9oquiIPebgIKa/LKVfgdd+6E3VmsEuKDTKGcua/5KmzjDOXyKaLBn7EvQPSE0GYAvp6Vg==
   dependencies:
     "@mdx-js/tag" "^0.20.3"
     chalk "4.0.0"

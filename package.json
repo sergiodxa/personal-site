@@ -34,7 +34,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@contentz/build": "2.5.6",
+    "@contentz/build": "2.5.7",
     "@contentz/write": "3.13.2",
     "@emotion/core": "^10.0.28",
     "contentz": "3.14.1",
