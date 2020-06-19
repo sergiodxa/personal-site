@@ -1,0 +1,162 @@
+---
+title: Use SWR with Geolocation
+description: Learn how to use SWR with the Geolocation WebAPI to show the user location in a map and keep it up-to-date with any change.
+date: 2020-06-19T05:36:42.220Z
+published: true
+tags: swr, react, geolocation, javascript
+lang: en
+---
+
+While SWR is mostly used to fetch data from an API, it could be used to read data from any source, in this case, we will create a `fetcher` function to get the current position in latitude and longitude of the user.
+
+We will also subscribe to location changes and update the data SWR used to ensure we keep it up-to-date.
+
+## Running Demo
+
+> This is the final project running in CodeSandbox
+
+<iframe
+  src="https://codesandbox.io/embed/use-swr-with-geolocation-d3l7h?fontsize=14&hidenavigation=1&theme=light&view=preview"
+  style={{
+    width: "100%",
+    height: 500,
+    border: 0,
+    borderRadius: 4,
+    overflow: "hidden",
+  }}
+  title="Use SWR with Geolocation"
+  allow="geolocation"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
+
+## Creating the Fetcher
+
+First of all, we need to create the `fetcher` we will pass to SWR, this function must return a Promise resolved to the data we want SWR to cache. However, Geolocation API uses a callback, to convert it to a Promise we could return an instance of Promise and manually resolve it when we get the location.
+
+```js
+function fetcher() {
+  return new Promise((resolve, reject) => {
+    function onSuccess({ coords }) {
+      resolve([coords.latitude, coords.longitude]);
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, reject);
+  });
+}
+```
+
+As you can see, the `onSuccess` callback we pass to `navigator.geolocation.getCurrentPosition` will resolve the Promise with an array with the latitude and longitude.
+
+## Using SWR in a Component
+
+Now we need to use our fetcher in a component. First, we need to create a component where we will call `useSWR` as the key we will use `geolocation` this key is not going to be used by the fetcher in our case, as you would typically do if you used an API endpoint, as the `fetcher` we will use our function from above.
+
+```js
+function App() {
+  const { data: position, mutate } = useSWR("geolocation", fetcher);
+
+  if (!position) {
+    return (
+      <Map zoom={15}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+      </Map>
+    );
+  }
+
+  return (
+    <Map center={position} zoom={15}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position} />
+    </Map>
+  );
+}
+```
+
+As you can see, we detect if the `position` exists and render a centered map with a marker if it exists and a non-centered map without a marker, if it does not, exists.
+
+> Note: The Map, TileLayer and Marker components come from the react-leaflet library, but could be easily replaced with Google Map components if desired. I have used this one because it does not need any API key to work.
+
+## Subscribing to Location Changes
+
+To subscribe to changes in the current location, we could use the `navigator.geolocation.watchPosition` function, and this function receives a callback similar to `navigator.geolocation.getCurrentPosition`, we could then use the `mutate` function from SWR to update the cached data.
+
+To run that function, we could use the useEffect hook of React.
+
+```js
+React.useEffect(() => {
+  const id = navigator.geolocation.watchPosition((position) => {
+    mutate([position.coords.latitude, position.coords.longitude], false);
+  });
+  return () => navigator.geolocation.clearWatch(id);
+}, [mutate]);
+```
+
+Notice we are getting an id from `watchPosition`, this id is the watcher's identification. We later use it in the returned function to unsubscribe. This let us stop calling `mutate` after the component unmounts.
+
+We also call `mutate` without passing the key, this is because `useSWR` will also return a `mutate` function (you can see it in the step before) with the `key` predefined, so we only need to pass the rest of the arguments.
+
+In our case we disable the revalidation because we can trust the data we received, there is no need to call `getCurrentPosition` again after a new position comes from `watchPosition`.
+
+## All Combined
+
+If we combined all the code above, we will get the following code:
+
+```js
+import React from "react";
+import useSWR from "swr";
+import { Map, TileLayer, Marker } from "react-leaflet"; // the Map library
+
+// Our fetcher function
+function fetcher() {
+  return new Promise((resolve, reject) => {
+    function onSuccess({ coords }) {
+      resolve([coords.latitude, coords.longitude]);
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, reject);
+  });
+}
+
+export default function App() {
+  const { data: position, mutate } = useSWR("geolocation", fetcher);
+
+  // Our effect is defined after useSWR and before the condition
+  React.useEffect(() => {
+    const id = navigator.geolocation.watchPosition((position) => {
+      mutate([position.coords.latitude, position.coords.longitude], false);
+    });
+    return () => navigator.geolocation.clearWatch(id);
+  }, [mutate]);
+
+  if (!position) {
+    return (
+      <Map zoom={15}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+      </Map>
+    );
+  }
+
+  return (
+    <Map center={position} zoom={15}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position} />
+    </Map>
+  );
+}
+```
+
+You can see the application working in the demo at the beginning of the article, if you are on Google Chrome (or another Chromium-based browser) you can mock your sensors in the DevTools to simulate being in another part of the world, and the map will update in real-time.
+
+You can also open it in your mobile phone and go out for a walk to see how you move, the amount of distance and accuracy of your location will vary per physical device.
