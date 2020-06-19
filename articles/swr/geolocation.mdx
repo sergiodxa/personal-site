@@ -7,7 +7,7 @@ tags: swr, react, geolocation, javascript
 lang: en
 ---
 
-While SWR is mostly used to fetch data from an API, it could be used to read data from any source, in this case we will create a `fetcher` function to get the current position in latitude and longitude of the user.
+While SWR is mostly used to fetch data from an API, it could be used to read data from any source, in this case, we will create a `fetcher` function to get the current position in latitude and longitude of the user.
 
 We will also subscribe to location changes and update the data SWR used to ensure we keep it up-to-date.
 
@@ -45,11 +45,11 @@ function fetcher() {
 }
 ```
 
-As you can see, the `onSuccess` callback we pass to `navigator.geolocation.getCurrentPosition` will resolve the promise with an array with the latitude and longitude.
+As you can see, the `onSuccess` callback we pass to `navigator.geolocation.getCurrentPosition` will resolve the Promise with an array with the latitude and longitude.
 
 ## Using SWR in a Component
 
-Now we need to use our fetcher in a component, let's create a component where we will call `useSWR`, as the key we will use `geolocation`, this key is not going to be used by the fetcher in our case, as you would normally do if you used an API endpoint, as the `fetcher` we will use our function from above.
+Now we need to use our fetcher in a component. First, we need to create a component where we will call `useSWR` as the key we will use `geolocation` this key is not going to be used by the fetcher in our case, as you would typically do if you used an API endpoint, as the `fetcher` we will use our function from above.
 
 ```js
 function App() {
@@ -78,13 +78,13 @@ function App() {
 }
 ```
 
-As you can see we detect if the `position` exists and render a centered map with a marker if it exists and a non-centered map without a marker if it doesn't exists.
+As you can see, we detect if the `position` exists and render a centered map with a marker if it exists and a non-centered map without a marker, if it does not, exists.
 
-> Note: The Map, TileLayer and Marker components come from the react-leaflet library, but could be easily replaced with Google Map components if desired. I used this one because it doesn't need any API key to work.
+> Note: The Map, TileLayer and Marker components come from the react-leaflet library, but could be easily replaced with Google Map components if desired. I have used this one because it does not need any API key to work.
 
 ## Subscribing to Location Changes
 
-To subscribe to changes in the current location we could use the `navigator.geolocation.watchPosition` function, this function receives a callback similar to `navigator.geolocation.getCurrentPosition`, we could then use the `mutate` function from SWR to update it's stored data.
+To subscribe to changes in the current location, we could use the `navigator.geolocation.watchPosition` function, and this function receives a callback similar to `navigator.geolocation.getCurrentPosition`, we could then use the `mutate` function from SWR to update the cached data.
 
 To run that function, we could use the useEffect hook of React.
 
@@ -97,9 +97,11 @@ React.useEffect(() => {
 }, [mutate]);
 ```
 
-Notice we are gettting an id from `watchPosition`, this id is the identified of the watcher, we later use it in the returned function to unsubscribe, this let us stop calling `mutate` after the component unmounts.
+Notice we are getting an id from `watchPosition`, this id is the watcher's identification. We later use it in the returned function to unsubscribe. This let us stop calling `mutate` after the component unmounts.
 
-You can also see we call `mutate` without passing the key, this is because `useSWR` will also return a `mutate` function (you can see it in step before) with the `key` already defined, so we only need to pass the new data and if we want to revalidate the data or not, in our case we disable the revalidation because we can trust the data we received, there is no need to call `getCurrentPosition` again after a new position comes from `watchPosition`
+We also call `mutate` without passing the key, this is because `useSWR` will also return a `mutate` function (you can see it in the step before) with the `key` predefined, so we only need to pass the rest of the arguments.
+
+In our case we disable the revalidation because we can trust the data we received, there is no need to call `getCurrentPosition` again after a new position comes from `watchPosition`.
 
 ## All Combined
 
@@ -126,7 +128,7 @@ export default function App() {
 
   // Our effect is defined after useSWR and before the condition
   React.useEffect(() => {
-    const id = navigator.geolocation.watchPosition(position => {
+    const id = navigator.geolocation.watchPosition((position) => {
       mutate([position.coords.latitude, position.coords.longitude], false);
     });
     return () => navigator.geolocation.clearWatch(id);
@@ -155,4 +157,6 @@ export default function App() {
 }
 ```
 
-You can see the application workin in the demo at the beginning of the article, if you are on Google Chrome (or another Chromium-based browser) you can mock your sensors in the DevTools to simulate being in another part of the world, and the map will update in real-time, you can also open it in your mobile phone and go out for a walk to see how you move, the amount of distance and accuracy of your location will vary per physical device.
+You can see the application working in the demo at the beginning of the article, if you are on Google Chrome (or another Chromium-based browser) you can mock your sensors in the DevTools to simulate being in another part of the world, and the map will update in real-time.
+
+You can also open it in your mobile phone and go out for a walk to see how you move, the amount of distance and accuracy of your location will vary per physical device.
