@@ -57,7 +57,7 @@ function App() {
 
   if (!position) {
     return (
-      <Map zoom={15}>
+      <Map center={[0, 0]} zoom={15}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -136,7 +136,7 @@ export default function App() {
 
   if (!position) {
     return (
-      <Map zoom={15}>
+      <Map center={[0, 0]} zoom={15}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
