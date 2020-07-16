@@ -3,7 +3,11 @@ title: Use React.Suspense to wait for an image to load
 description: Learn how to use React.Suspense to handle the loading state of an image.
 date: 2020-05-09T09:13:43.273Z
 published: true
+lang: en
 tags: typescript, react, suspense, image
+translated_to:
+  - lang: es
+    path: /articles/react/cargando-imagenes-con-suspense/
 ---
 
 > Note: React.Suspense for anything other than components lazy-loading is still unstable.
@@ -20,7 +24,7 @@ interface Resource<Payload> {
 
 type status = "pending" | "success" | "error";
 
-// this function let use get a new function using the asyncFn we pass
+// this function let us get a new function using the asyncFn we pass
 // this function also receives a payload and return us a resource with
 // that payload assigned as type
 function createResource<Payload>(
@@ -67,11 +71,11 @@ function createResource<Payload>(
 }
 ```
 
-After we have that we can technically fetch using Suspense any data, but let's use it to fetch only images.
+After we have done this, we can technically fetch using Suspense any data, but let's use it to fetch only images.
 
 ```ts
-//  First we need a type of cache to avoid creating resources for images
-//  we have already fetched in the past
+// First we need a type of cache to avoid creating resources for images
+// we have already fetched in the past
 const cache = new Map<string, any>();
 
 // then we create our loadImage function, this function receives the source
