@@ -5,6 +5,9 @@ date: 2020-07-16T04:37:52.438Z
 published: true
 lang: en
 tags: react, typescript, hooks, architecture
+translated_to:
+  - lang: es
+    path: /articles/react/estructura-archivos/
 ---
 
 When using React one of the most common question is how to organize the files inside it. In my years using it I have tried multiple options, including using feature folders, folders per components, one component per file and more, after trying them all, I finally found one that is simple and scale with big projects at the same time.
@@ -50,7 +53,7 @@ This way, all the component I create are in the same file, this make it easier t
 - The component is used by another component in a different file
 - The component is used by two or more routes
 - The component is too complex and it makes sense to test it in isolation
-- The component represents a whole feature (usualy this is realted to the point above)
+- The component represents a whole feature (usualy this is related to the point above)
 
 And I create a new component inside the same file if
 
@@ -70,9 +73,14 @@ This way I end up with hooks like `useCurrentUser` or `useTodos`, that use SWR i
 
 ```tsx
 import { useCurrentUser } from "hooks/use-current-user";
+
+function MyComponent() {
+  const { data: currentUser } = useCurrentUser();
+  // the rest of the code
+}
 ```
 
-And then call the hook and get the current logged-in user, because SWR dedupes requests I don't need to care about using fetching many times because I call it many times, this let me avoid using Context.
+Because SWR dedupes requests I don't need to care about using fetching many times because I call it many times, this let me avoid using Context.
 
 And talking about context, I still use it, but only when the value stored in the context is mostly static, e.g. feature flags or assets), this way I don't have issues because the context value changed and triggered a re-render in most of the application.
 
@@ -86,7 +94,7 @@ I only avoid testing the hook when they are wrappers of SWR.
 
 Routes is a special components folder, this follow the same rules I use for components inside `src/components`, the only difference is that they represent a single route of my application.
 
-The files here must always have a single `export default`, this is required to be able to lazily import the routes in the entry point which is where I define my pages.
+The files here must always have a single `export default`, this is required to be able to lazily import the routes in the entry point which is where I define my routes.
 
 These components are sometimes not importing a single component from the components folder, because they implement the whole features the page needs, and when I import external components I try to do it lazily too.
 
@@ -116,6 +124,16 @@ I don't really create an App component because most of the time I can directly r
 
 When using Next.js, this is the `pages/_app.tsx` file.
 
-## Appendix: Assets
+## 🖼️ Appendix: Assets
 
-When using assets, I don't like to import them in my code, this makes the build process way slower and the only benefit, have hashes in the assets name, I can gain it using other specialized tools, In my case I work with Rails as a backend, thus I let Rails handle static assets and I use the Rails view to pass the URLs of those assets to React adding a script of type `application/json` with a JSON containing the URLs.
+When using assets, I don't like to import them in my code, this makes the build process way slower and the only benefit, have hashes in the assets name, I can gain it using other specialized tools. In my case I work with Rails as a backend, thus I let Rails handle static assets and I use the Rails view to pass the URLs of those assets to React adding a script of type `application/json` with a JSON containing the URLs.
+
+```html
+<script type="application/json" id="initial-props">
+{
+  "assets": {
+    "logo": <%= asset_path("images/logo.png") %>
+  }
+}
+</script>
+```
