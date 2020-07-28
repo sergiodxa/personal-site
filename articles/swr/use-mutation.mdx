@@ -1,0 +1,121 @@
+---
+title: Build an Optimistic UI in React using SWR with useMutation
+description: Use the useMutation hook together with SWR to implement optimistic updates in your React components
+date: 2020-07-23T08:17:26.188Z
+published: true
+lang: en
+tags: swr, useMutation, react, hooks
+---
+
+One commont UX improvement when building User Interfaces is to add optimistic updates to the application.
+
+Let's see how to do it easily with the [SWR](/swr/intro) Hook and the [useMutation](https://github.com/sergiodxa/use-mutation) hook.
+
+---
+
+We need to create a function where we will perform our mutation, let's say we are creating a new comment in an article.
+
+```ts
+async function createComment({
+  authorId,
+  articleId,
+  body,
+}: {
+  authorId: number;
+  articleId: number;
+  body: string;
+}) {
+  const response = await fetch("/api/comments", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ authorId, articleId, body }),
+  });
+
+  if (!response.ok) throw new Error(response.statusText);
+
+  return await response.json();
+}
+```
+
+With this, we can create a `useCreateComment` hook, this will let use re-use our mutation together with the optimistic update.
+
+Here we will use the `cache` object and `mutate` function from SWR to optimistically update the data cachd by SWR.
+
+```ts
+import { cache, mutate } from "swr";
+import useMutation from "use-mutation";
+
+export function useCreateComment() {
+  return useMutation<{ authorId: number; articleId: number; body: string }>(
+    createComment,
+    {
+      onMutate(input) {
+        // first we keep the current data in a const
+        const currentData = cache.get(["article", input.articleId]);
+
+        mutate((cachedData) => {
+          // here we are adding the input data (the new comment) to the list of
+          // comments of the article
+          return { ...cachedData, comments: cachedData.comments.concat(input) };
+        }, false);
+        
+        // this function is our rollback function, we will use it in case the
+        // mutation failed
+        return () => mutate(["article", input.articleId], currentData, false);
+      },
+
+      onSuccess(data) {
+        // if the mutation was a success, we update the cache of SWR to replace
+        // the comment to optimistically added and add the final one returned
+        // by the API
+        mutate(["article", data.articleId], cachedData => {
+          return {...cachedData, comments: cachedData.comments.map(comment => {
+            if (comment.id) return comment;
+            return data;
+          })}
+        });
+      }
+
+      onFailure(error, rollback) {
+        console.error(error);
+        // here we are calling the rallback fn returned by onMutate
+        rollback();
+      },
+    }
+  );
+}
+```
+
+And lately, we can use it in a React component
+
+```tsx
+import * as React from "react";
+import { useCreateComment } from "mutations/use-create-comment";
+
+function CommentForm({ articleId, userId }) {
+  const [mutate, { status }] = useCreateComment();
+  const [body, setBody] = React.useState("");
+
+  const handleSubmit = React.useCallback<React.FormEventHandler>(
+    function handleSubmit(event) {
+      event.preventDefault();
+      mutate({ articleId, userId, body });
+    },
+    [body]
+  );
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <textarea
+        value={body}
+        onChange={(event) => setBody(event.target.value)}
+      />
+      <button>Create comment</button>
+    </form>
+  );
+}
+```
+
+With this, once the user submit the form, it will first add the new commet at the bottom of the list, and then, it will try to create it, and if for some reason the request failed it will automatically rollback to use th previous data.

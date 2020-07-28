@@ -1,0 +1,141 @@
+---
+title: Como organizo mis aplicaciones de React
+description: Hay muchas formas de organizar aplicaciones de React, con los años esta es la que más me ha convencido
+date: 2020-07-16T05:56:01.823Z
+published: true
+lang: es
+tags: react, typescript, hooks, architecture
+translated_from:
+  lang: en
+  title: How I Organize React Applications
+  path: /articles/react/file-structure/
+---
+
+Una de las preguntas más comunes cuando se usa React es como organizar los archivos de nuestra app. Con los años usé varias formas, tener carpetas por features, carpetas por component, un component por archivo, etc. Después de probar todas estas formas llegué a una suficientemente simple y escalable para proyectos grandes.
+
+```
+src/components/
+  {name}.tsx
+  {name}.test.tsx
+src/hooks
+  {name}.ts
+  {name}.test.tsx
+src/routes/
+  {name}.tsx
+  {name}.test.tsx
+src/utils
+  {name}.ts
+  {name}.test.ts
+src/index.tsx               # El entry point
+```
+
+## 🧱 Componentes
+
+La primera carpeta es la de components, acá coloco los componentes de la aplicación. Una cosa que hago diferente de muchos desarrolladores es que no creo un nuevo archivo por cada componente de React, en un archivo normalmente escribo varios componentes, algo como esto:
+
+```tsx
+import * as React from "react";
+// Otros imports que pueda necesitar
+
+function ListItem(props) { ... }
+
+function List(props) { ... }
+
+function Group(props) { ... }
+
+function Button(props) { ... }
+
+export default function MyComponent() { ... }
+```
+
+De esta forma todos los componentes están en el mismo archivo, esto hace mucho más fácil modificarlos, sin embargo, no quiere decir que solo tengo un archivo con todos mis components, creo un nuevo archivo en estos casos:
+
+- Quiero importarlos de forma async, en ese caso necesito un nuevo archivo
+- El componente se usa en varios archivos
+- El componente es usado por dos o más rutas
+- El componente es lo suficientemente complejo para que tenga sentido que tenga pruebas propias
+- El componente representa un feature entero (normalmente relaciondo al punto anterior)
+
+Y, create un nuevo componente en el mismo archivo si:
+
+- Necesito reusarlo dentro del mismo archivo
+- Voy a usarlo dentro de una lista y tengo que usar hooks
+- Quiero usar hooks solo cierta parte del componente principal
+- Quiero poder controlar como el componente se suspende, ya que [uso Suspense para data fetching](/articles/swr/suspense/), pero sin suspende al componente padre
+- El componente se volvió muy grande y tiene sentido dividirlo para que sea más legible
+
+Para el caso de las pruebas, creo un único archivo por componente y punto todas las pruebas ahí, para escribirlas uso React Testing Library y sigo todas las prácticas que recominendan.
+
+## ⚓️ Hooks
+
+Creo hooks custom cada vez que necesito compartir comportamiento entre componentes y cuando estoy usando [SWR](https://swr.vercel.app) para crear hooks específicos para cada recurso de mi API.
+
+De esta forma termino con hooks como `useCurrentUser` or `useTodos`, que usan internamente SWR para hacer fetch de la data y definen la key de cache y la función fetcher dentro del mismo archivo, haciendo esto puedo compartir data entre componentes haciendo:
+
+```tsx
+import { useCurrentUser } from "hooks/use-current-user";
+
+function MyComponent() {
+  const { data: currentUser } = useCurrentUser();
+  // el resto del código
+}
+```
+
+Ya que SWR evita peticiones duplicadas al API no me tengo que preocupar de que al usar varias veces mis hooks se hagan varias peticiones, lo que además me evita usar contexto.
+
+Y hablando de contexto, lo uso, pero solo para valores mayormente estático (e.g. feature flags o assets), esto me evita problamas de que al modificar el valor en contexto se vuelva a renderizar casi toda mi aplicación.
+
+Como con los componentes, hago pruebas de mis hooks, para esto creo un componente Tester dentro de los tests donde uso el hook y testeo ese componente directamente.
+
+Aunque, evito escribir pruebas de hooks que solo son wrappers de SWR.
+
+## 🗺️ Rutas
+
+> Nota: Cuando uso Next.js esto es reemplazado por la carpeta `folders`.
+
+Rutas es una carpeta de componentes espacial, siga todas las mismas reglas que uso para crear componentes en `src/components`, con la única diference de que cada componente dentro de rutas representa una ruta de mi aplicación.
+
+Los archivos dentro de esta carpeta deben tener siempre un `export default`, esto es necesario para poder importar de forma asíncrona las rutas en el entry point, que es donde defino mis rutas.
+
+Estos componente a veces no importan nada de la carpeta de components, esto pasa cuando la ruta tiene todo el código que necesito, y cuando import componentes externos normalmente intento hacerlo de forma asíncrona.
+
+También escribo pruebas para mis rutas, en su caso tiendo a hacer pruebas de integración más que pruebas unitarias, esto es porque cuando pruebo toda una página incluye varios features.
+
+## 🔨 Utils
+
+Creo funciones utilitarias todo el tiempo, me ayudan a nombrar piezas de lógica o simplement hacer más fácil de entender que está ocurriendo, especialmente cuando tiene múltiples condiciones, ya que puedo hacer algo como:
+
+```ts
+function getSomething() {
+  if (condition) return value;
+  if (anotherCondition) return anotherValue;
+  return yetAnotherValue;
+}
+```
+
+Sin embargo, no siempre las creo dentro de `src/utils`, primero las escribo dentro dentro del mismo archivo donde las necesito, que puede ser un hook, components, ruta o incluso otro util, una vez que un util es usado en tres o más archivo lo muevo a su propio archivo para evitar duplicados ([WET](https://dev.to/wuz/stop-trying-to-be-so-dry-instead-write-everything-twice-wet-5g33)).
+
+También escribo pruebas para mis funciones utilitarias cuando estas son bastante largas o suficientemente complejas para necesitarlas, aunque cuando son solo wrappers de otra función o de una API de los navegadores evito agregarle pruebas.
+
+## 🚪 Entry point
+
+Finalmente, el entry point es donde importo de forma asíncrona todas mis rutas y donde importa los proveedores de context que puedas necesitas, acá defino todas las rutas y renderizo la aplicación.
+
+Normalmente no creo un componente App ya que en la mayoría de casos con solo renderizar Router y las rutas es suficientemente para que la aplicación funcione.
+
+Cuando uso Next.js, esto es reemplazado por `pages/_app.tsx`.
+
+## 🖼️ Apéndice: Assets
+
+Cuando uso assets evito importarlos directo en mi código, esto hace el build mucho más lento y el único beneficio, agregar hashes a los nombres de los assets, lo puedo lograr con otras herramientas especializadas. En mi caso trabajo con Rails como backend, así que dejo que este maneje mis assets y uso las vistas de Rails para pasar las URLs de esos assets a React agregando una etiqueta script de tipo `application/json` con un JSON con las URLs.
+
+```html
+<script type="application/json" id="initial-props">
+{
+  "assets": {
+    "logo": <%= asset_path("images/logo.png") %>
+  }
+}
+</script>
+```
+

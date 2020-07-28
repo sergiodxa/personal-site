@@ -1,0 +1,139 @@
+---
+title: How I Organize React Applications
+description: There are many ways to organize a React application, with the years this the the one I liked the most
+date: 2020-07-16T04:37:52.438Z
+published: true
+lang: en
+tags: react, typescript, hooks, architecture
+translated_to:
+  - lang: es
+    path: /articles/react/estructura-archivos/
+---
+
+When using React one of the most common question is how to organize the files inside it. In my years using it I have tried multiple options, including using feature folders, folders per components, one component per file and more, after trying them all, I finally found one that is simple and scale with big projects at the same time.
+
+```
+src/components/
+  {name}.tsx
+  {name}.test.tsx
+src/hooks
+  {name}.ts
+  {name}.test.tsx
+src/routes/
+  {name}.tsx
+  {name}.test.tsx
+src/utils
+  {name}.ts
+  {name}.test.ts
+src/index.tsx               # The entry point
+```
+
+## 🧱 Components
+
+The first folder is the components folder, this one contains the components of the application. One special thing I do that most React developers don't is that I don't create a new file per React component, this means in the same file I can have more than one React component, in a normal file inside components I wrote things like:
+
+```tsx
+import * as React from "react";
+// Possible more imports here
+
+function ListItem(props) { ... }
+
+function List(props) { ... }
+
+function Group(props) { ... }
+
+function Button(props) { ... }
+
+export default function MyComponent() { ... }
+```
+
+This way, all the component I create are in the same file, this make it easier to change them, this doesn't mean all the components are always in the same file, I move components to a new file in some cases
+
+- I want to lazily import them, in that case I need a new file to import
+- The component is used by another component in a different file
+- The component is used by two or more routes
+- The component is too complex and it makes sense to test it in isolation
+- The component represents a whole feature (usualy this is related to the point above)
+
+And I create a new component inside the same file if
+
+- I need to re-use it inside the same file
+- I need to use it inside a list and call hooks per each item
+- I want to use hooks only related for that part of the main feature of the file
+- I want to suspend the component, because [I use suspense for data fetching](/articles/swr/suspense/), without suspending the parent component
+- The component its getting to big and it makes sense to split it to make it easy to read it
+
+For the tests, I create a single test file per component and put all the tests I wrote there, to write them I use React Testing Library and I follow all the best practices they recommend.
+
+## ⚓️ Hooks
+
+I create custom hooks everytime I need to share behavior between components and when I'm using [SWR](https://swr.vercel.app) to wrap it in hooks specific for each resource of my API.
+
+This way I end up with hooks like `useCurrentUser` or `useTodos`, that use SWR internally to fetch data and define the key and fetcher function inside the same file, doing this I can easily share data between components because I can add
+
+```tsx
+import { useCurrentUser } from "hooks/use-current-user";
+
+function MyComponent() {
+  const { data: currentUser } = useCurrentUser();
+  // the rest of the code
+}
+```
+
+Because SWR dedupes requests I don't need to care about using fetching many times because I call it many times, this let me avoid using Context.
+
+And talking about context, I still use it, but only when the value stored in the context is mostly static, e.g. feature flags or assets), this way I don't have issues because the context value changed and triggered a re-render in most of the application.
+
+As with components, I test the hooks, to do it I create a simple Tester component using the hook and I test the component.
+
+I only avoid testing the hook when they are wrappers of SWR.
+
+## 🗺️ Routes
+
+> Note: When using Next.js this is replaced by the `pages` folder.
+
+Routes is a special components folder, this follow the same rules I use for components inside `src/components`, the only difference is that they represent a single route of my application.
+
+The files here must always have a single `export default`, this is required to be able to lazily import the routes in the entry point which is where I define my routes.
+
+These components are sometimes not importing a single component from the components folder, because they implement the whole features the page needs, and when I import external components I try to do it lazily too.
+
+Here I also add tests, but in this case I do more integration tests rather and unit tests, this is because I'm testing the whole page with all the features inside it.
+
+## 🔨 Utils
+
+I create utility functions all the time, it helps me name piece of logics or simple make it easier to understand what is happening, specially when there are multiple conditions because I can do things like:
+
+```ts
+function getSomething() {
+  if (condition) return value;
+  if (anotherCondition) return anotherValue;
+  return yetAnotherValue;
+}
+```
+
+However, I don't always create them in a file inside `src/utils`, I first write them inside the same file it needs them, this could be a hook, component, route, or even another utility, but if my utility function is used in three or more files then I move it to a file inside the utils folder to avoid duplicating it ([WET](https://dev.to/wuz/stop-trying-to-be-so-dry-instead-write-everything-twice-wet-5g33)).
+
+I also write test for the utils I code only when they are large or complex enough to need it, and when they are not only wrappers of another function, specially if they wrap a browser API.
+
+## 🚪 Entry Point
+
+Finally, the entry point is where I lazily import all the routes, I import the context providers I may need, and I define all my routes and render the whole application.
+
+I don't really create an App component because most of the time I can directly render the Router and Route components without wrapping them in an App.
+
+When using Next.js, this is the `pages/_app.tsx` file.
+
+## 🖼️ Appendix: Assets
+
+When using assets, I don't like to import them in my code, this makes the build process way slower and the only benefit, have hashes in the assets name, I can gain it using other specialized tools. In my case I work with Rails as a backend, thus I let Rails handle static assets and I use the Rails view to pass the URLs of those assets to React adding a script of type `application/json` with a JSON containing the URLs.
+
+```html
+<script type="application/json" id="initial-props">
+{
+  "assets": {
+    "logo": <%= asset_path("images/logo.png") %>
+  }
+}
+</script>
+```
