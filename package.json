@@ -2,11 +2,6 @@
   "name": "personal-site",
   "description": "Sergio Xalambrí's personal website",
   "scripts": {
-    "watch": "watch \"yarn build\" articles pages slides",
-    "build:dev": "node ../contentz/cli.js build",
-    "social:dev": "node ../contentz/cli.js social",
-    "social": "contentz social",
-    "write": "contentz write",
     "dev": "next",
     "build": "next build",
     "start": "next start"
@@ -16,8 +11,8 @@
     "url": "git+https://github.com/sergiodxa/personal-site.git"
   },
   "keywords": [
-    "contentz",
     "blog",
+    "digital-garden",
     "personal-website",
     "personal-site"
   ],
@@ -34,21 +29,24 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@contentz/build": "2.5.7",
-    "@contentz/write": "3.13.2",
-    "clsx": "^1.1.0",
-    "contentz": "3.14.1",
-    "framer-motion": "^2.0.0-beta.71",
+    "@octokit/rest": "^18.0.3",
+    "@tailwindcss/typography": "^0.2.0",
+    "@types/match-sorter": "^4.0.0",
+    "clsx": "^1.1.1",
+    "collected-notes": "^1.1.0",
     "globby": "^11.0.0",
     "gray-matter": "^4.0.2",
     "marked": "^1.0.0",
-    "next": "^9.4.0",
-    "react": "^0.0.0-experimental-f6b8d31a7",
-    "react-dom": "^0.0.0-experimental-f6b8d31a7",
+    "match-sorter": "^4.2.0",
+    "next": "^9.5.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
     "sortbyfrequency": "^1.0.11",
-    "swr": "^0.2.0",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "typescript": "^3.9.2",
+    "use-mutation": "^2.0.1",
+    "use-safe-callback": "^1.0.2"
   },
   "devDependencies": {
     "@types/globby": "^9.1.0",
@@ -60,7 +58,6 @@
     "husky": "3.1.0",
     "lint-staged": "10.2.2",
     "serve": "11.3.0",
-    "typescript": "^3.9.2",
     "watch": "1.0.2"
   }
 }

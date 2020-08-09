@@ -1,67 +1,81 @@
-import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import * as React from "react";
 import clsx from "clsx";
-import { FiCommand } from "react-icons/fi";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import Head from "next/head";
+import { Spacer } from "./spacer";
 
-const links = [
-  { href: "/", label: "About" },
+const links: Array<{ href: string; label: string }> = [
   { href: "/articles", label: "Articles" },
-  { href: "/links", label: "Bookmarks" },
-  { href: "/cv", label: "Resume" },
+  // { href: "/talks", l/abel: "Talks" },
+  // { href: "/oss", label: "Open Source" },
+  { href: "/bookmarks", label: "Bookmarks" },
+  // { href: "/uses", label: "Stack" },
+  // { href: "/hire", label: "Hire me!" },
 ];
 
-const baseStyles = "block py-1 px-4";
-const inactiveClassName = clsx(
-  baseStyles,
-  "text-yellow-500 light:text-indigo-500"
-);
-const activeClassName = clsx(
-  baseStyles,
-  "text-white border-yellow-500 light:text-black light:border-indigo-500"
-);
+export function Navigation({
+  current,
+  title,
+}: {
+  current: string;
+  title?: string;
+}) {
+  const isHome = current === "home";
 
-export default function Navigation() {
-  const { pathname } = useRouter();
   return (
-    <nav className="mb-4">
-      {/* Desktop Menu */}
-      <ul className="p-2 hidden md:flex space-x-2 justify-end">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href}>
-              <motion.a
-                href={link.href}
-                className={
-                  link.href === pathname ? activeClassName : inactiveClassName
-                }
-              >
-                {link.label}
-              </motion.a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-      {/* Mobile Menu */}
-      <label
-        htmlFor="menu"
-        className="md:hidden flex items-center px-4 space-x-4 text-black bg-yellow-500 light:text-indigo-100 light:bg-indigo-500"
-      >
-        <FiCommand />
-        <span className="sr-only">Open Menu</span>
-        <select
-          id="menu"
-          value={pathname}
-          onChange={(event) => Router.push(event.target.value)}
-          className="appearance-none bg-transparent w-full py-2 focus:outline-none rounded-none"
-        >
-          {links.map((link) => (
-            <option value={link.href} key={link.href}>
-              {link.label}
-            </option>
-          ))}
-        </select>
-      </label>
-    </nav>
+    <>
+      <Head>
+        {title ? (
+          <title>{title} | Sergio Xalambri</title>
+        ) : (
+          <title>Sergio Xalambrí</title>
+        )}
+      </Head>
+
+      <nav className="flex py-4 items-baseline space-x-2">
+        <Link href="/">
+          <a
+            aria-current={isHome ? "page" : "false"}
+            className="text-xl leading-none relative flex-shrink-0"
+          >
+            <h1
+              className="font-semibold"
+              style={{
+                background: "linear-gradient(90deg, #ED8936, #F6E05E)",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                height: 27,
+              }}
+            >
+              Sergio Xalambrí
+            </h1>
+          </a>
+        </Link>
+
+        <Spacer />
+
+        <ul className="flex text-sm overflow-x-auto">
+          {links.map((link) => {
+            const isActive = current === link.label.toLowerCase();
+            return (
+              <li key={link.href} className="px-2 flex-shrink-0">
+                <Link href={link.href}>
+                  <a
+                    className={clsx("text-orange-500 font-semibold", {
+                      "no-underline": isActive,
+                      underline: !isActive,
+                    })}
+                    aria-current={isActive ? "page" : "false"}
+                  >
+                    {link.label}
+                  </a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </>
   );
 }

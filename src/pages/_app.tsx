@@ -1,14 +1,13 @@
-import { AnimatePresence } from "framer-motion";
-import Navigation from "components/navigation";
+import Head from "next/head";
 import "../styles.css";
 
-export default function BlogApp({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
-    <>
-      <Navigation />
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} />
-      </AnimatePresence>
-    </>
+    <main role="document" className="px-2">
+      <Head>
+        <title>Sergio Xalambrí</title>
+      </Head>
+      <Component {...pageProps} />
+    </main>
   );
 }

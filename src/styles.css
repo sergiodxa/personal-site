@@ -4,16 +4,7 @@
 
 html {
   font-size: 20px;
-  @apply bg-black;
-  @apply text-white;
-  @apply antialiased;
-}
-
-@media (prefers-color-scheme: light) {
-  html {
-    @apply bg-white;
-    @apply text-black;
-  }
+  @apply bg-black text-gray-100 antialiased;
 }
 
 /* purgecss end ignore */
