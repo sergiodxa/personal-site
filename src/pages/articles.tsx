@@ -90,7 +90,7 @@ export default function Articles(props: Props) {
   function handleSubmit(event: React.FocusEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-  function filterByTag(tag: string, item: HTMLDivElement) {
+  function filterByTag(tag: string) {
     if (window.screenTop !== 0) {
       window.scrollTo({
         top: 0,
