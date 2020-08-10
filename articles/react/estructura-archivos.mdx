@@ -93,13 +93,13 @@ Aunque, evito escribir pruebas de hooks que solo son wrappers de SWR.
 
 > Nota: Cuando uso Next.js esto es reemplazado por la carpeta `folders`.
 
-Rutas es una carpeta de componentes espacial, siga todas las mismas reglas que uso para crear componentes en `src/components`, con la única diference de que cada componente dentro de rutas representa una ruta de mi aplicación.
+Rutas es una carpeta de componentes especial, sigue las mismas reglas que uso para crear componentes en `src/components`, con la única diferencia de que cada componente dentro de rutas representa una ruta de mi aplicación.
 
-Los archivos dentro de esta carpeta deben tener siempre un `export default`, esto es necesario para poder importar de forma asíncrona las rutas en el entry point, que es donde defino mis rutas.
+Los archivos dentro de esta carpeta deben tener siempre un `export default`, esto es necesario para poder importar de forma asíncrona las rutas en el entry point, que es donde defino las rutas.
 
-Estos componente a veces no importan nada de la carpeta de components, esto pasa cuando la ruta tiene todo el código que necesito, y cuando import componentes externos normalmente intento hacerlo de forma asíncrona.
+Estos componentes a veces no importan nada de la carpeta de components, esto pasa cuando la ruta tiene todo el código que necesita. Cuando necesito importar componentes externos normalmente intento hacerlo de forma asíncrona.
 
-También escribo pruebas para mis rutas, en su caso tiendo a hacer pruebas de integración más que pruebas unitarias, esto es porque cuando pruebo toda una página incluye varios features.
+También escribo pruebas para mis rutas, en su caso tiendo a hacer pruebas de integración más que pruebas unitarias, esto es porque se incluyen varios features.
 
 ## 🔨 Utils
 
