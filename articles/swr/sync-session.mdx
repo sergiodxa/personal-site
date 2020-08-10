@@ -22,17 +22,11 @@ https://swr-sync-session-example.now.sh/
 
 <iframe
   src="https://codesandbox.io/embed/github/sergiodxa/swr-sync-session/tree/master/?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
+  style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"
   title="Sync WebApp Session Status between Tabs with Swr"
   allow=""
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 ## How to Build It
 
@@ -119,8 +113,8 @@ export default function IndexPage() {
   const [user, setUser] = useState("");
 
   React.useLayoutEffect(() => {
-    if (res?.data) Router.replace("/private")
-  }, [res])
+    if (res?.data) Router.replace("/private");
+  }, [res]);
 
   if (res?.data) {
     return null;
@@ -129,7 +123,11 @@ export default function IndexPage() {
   return (
     <div>
       <h1>To log in click below</h1>
-      <input type="text" value={user} onChange={e => setUser(e.target.value)} />
+      <input
+        type="text"
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
+      />
       <button onClick={() => login(user).then(() => mutate())}>Log In</button>
     </div>
   );
@@ -157,7 +155,7 @@ export default function Private() {
 
   React.useLayoutEffect(() => {
     if (!res || res.error) Router.replace("/");
-  }, [res])
+  }, [res]);
 
   if (!res || res.error) {
     return null;
