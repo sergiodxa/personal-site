@@ -1,18 +1,13 @@
 ---
 title: Using Suspense for Data Fetching Today with SWR
-description:
-  Learn how to use SWR for data fetching with Suspense to handle loading states.
+description: Learn how to use SWR for data fetching with Suspense to handle loading states.
 tags: swr, react, nextjs, javascript
 date: 2019-11-21T14:30:36.698Z
 published: true
 Lang: es
 ---
 
-In previous articles we built a Pokedex project
-[using SWR](/articles/swr/intro/) and then we added it
-[pagination](/articles/swr/pagination/) with the same library. Today we will
-learn how we can use Suspense to handle the loading states while we fetch the
-data, and without using the experimental version of React.js.
+In previous articles we built a Pokedex project [using SWR](/articles/swr/intro/) and then we added it [pagination](/articles/swr/pagination/) with the same library. Today we will learn how we can use Suspense to handle the loading states while we fetch the data, and without using the experimental version of React.js.
 
 ## Running Demo
 
@@ -20,23 +15,15 @@ data, and without using the experimental version of React.js.
 
 <iframe
   src="https://codesandbox.io/embed/using-suspense-for-data-fetching-today-with-swr-zh9kf?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
+  style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"
   title="Using Suspense for Data Fetching Today with SWR"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 ## Check if we are running Server-Side
 
-Suspense doesn't work yet for Server-Side Rendering, since we are using Next.js
-we will need to detect if we are running Client-Side or Server-side to avoid
-rendering our component.
+Suspense doesn't work yet for Server-Side Rendering, since we are using Next.js we will need to detect if we are running Client-Side or Server-side to avoid rendering our component.
 
 ```js
 const isServer = typeof window === "undefined";
@@ -46,8 +33,7 @@ With that tiny line, we could detect if we are running Server-Side.
 
 ## Creating the Fallback Using
 
-Now we need to create a fallback UI for our components while they are being
-suspended, we could also use those fallbacks when rendering server-side.
+Now we need to create a fallback UI for our components while they are being suspended, we could also use those fallbacks when rendering server-side.
 
 ```js
 export function Fallback({ children }) {
@@ -55,8 +41,7 @@ export function Fallback({ children }) {
 }
 ```
 
-This will be our fallback for the list of Pokémon, `children` will be the
-content.
+This will be our fallback for the list of Pokémon, `children` will be the content.
 
 ```js
 function GrayBar() {
@@ -112,9 +97,7 @@ export function Fallback() {
 }
 ```
 
-And this one will be our fallback UI for each Pokémon individually, we will put
-those components inside the same file of each UI they are mocking to keep them
-together.
+And this one will be our fallback UI for each Pokémon individually, we will put those components inside the same file of each UI they are mocking to keep them together.
 
 ## Rendering the Fallback Server-Side
 
@@ -124,7 +107,7 @@ Let's use what we did above to render the fallback UI Server-Side.
 import React from "react";
 import Head from "next/head";
 import PokemonList, {
-  Fallback as PokemonListFallback
+  Fallback as PokemonListFallback,
 } from "../components/pokemon-list";
 import { Fallback as PokemonShortFallback } from "../components/pokemon-short";
 
@@ -157,20 +140,17 @@ function HomePage() {
 export default HomePage;
 ```
 
-As you could see we moved the content of the list with their logic to another
-file and we import it here. We also only render `PokemonList` if we are not
-running Server-Side and in the fallback, we render nine mocked Pokémon cards.
+As you could see we moved the content of the list with their logic to another file and we import it here. We also only render `PokemonList` if we are not running Server-Side and in the fallback, we render nine mocked Pokémon cards.
 
 ## Adding Suspense
 
-Now it's time to use Suspense, we need to first wrap `PokemonList` in
-`React.Suspense`.
+Now it's time to use Suspense, we need to first wrap `PokemonList` in `React.Suspense`.
 
 ```js
 import React from "react";
 import Head from "next/head";
 import PokemonList, {
-  Fallback as PokemonListFallback
+  Fallback as PokemonListFallback,
 } from "../components/pokemon-list";
 import { Fallback as PokemonShortFallback } from "../components/pokemon-short";
 
@@ -209,11 +189,9 @@ function HomePage() {
 export default HomePage;
 ```
 
-To re-use the element we move the fallback outside our HomePage and use it in
-both the `React.Suspense` and when rendering Server-Side.
+To re-use the element we move the fallback outside our HomePage and use it in both the `React.Suspense` and when rendering Server-Side.
 
-To make SWR uses Suspense we need to pass `{ suspense: true }` after the
-`fetcher`.
+To make SWR uses Suspense we need to pass `{ suspense: true }` after the `fetcher`.
 
 ```js
 import React from "react";
@@ -232,11 +210,11 @@ function PokemonList() {
       if (!data) return null;
 
       const { results } = data;
-      return results.map(result => (
+      return results.map((result) => (
         <PokemonShort key={result.name} name={result.name} />
       ));
     },
-    SWR => SWR.data.next,
+    (SWR) => SWR.data.next,
     []
   );
 
@@ -291,13 +269,8 @@ export function Fallback({ children }) {
 export default PokemonList;
 ```
 
-With that, if we reload the page we will see the fallback UI and then when SWR
-finishes the fetch of the data it will show them all the Pokémon at the same
-time.
+With that, if we reload the page we will see the fallback UI and then when SWR finishes the fetch of the data it will show them all the Pokémon at the same time.
 
-With this, we made our application uses Suspense for the loading state of the
-data fetching, a single line of configuration in `useSWR` and that's all we
-need.
+With this, we made our application uses Suspense for the loading state of the data fetching, a single line of configuration in `useSWR` and that's all we need.
 
-The only downside here is that every time we fetch a new page we will see the
-Fallback UI for a few seconds.
+The only downside here is that every time we fetch a new page we will see the Fallback UI for a few seconds.

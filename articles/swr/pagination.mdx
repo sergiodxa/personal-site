@@ -8,18 +8,12 @@ published: true
 next:
   title: Using Suspense for Data Fetching Today with SWR
   path: /articles/swr/suspense/
-  description:
-    Learn how to use SWR for data fetching with Suspense to handle loading
-    states.
+  description: Learn how to use SWR for data fetching with Suspense to handle loading states.
 ---
 
-In a [previous article](/articles/swr/intro) we build a Next.js application with
-SWR to fetch data from the [Pokeapi](https://pokeapi.co/). However, our API
-gives us paginated data so we couldn't show all the Pokémon at the same time and
-it was limited to the first 20 one.
+In a [previous article](/articles/swr/intro) we build a Next.js application with SWR to fetch data from the [Pokeapi](https://pokeapi.co/). However, our API gives us paginated data so we couldn't show all the Pokémon at the same time and it was limited to the first 20 one.
 
-Let's modify it to build add infinite scroll to it and show all possible
-Pokémon.
+Let's modify it to build add infinite scroll to it and show all possible Pokémon.
 
 ## Running Demo
 
@@ -27,28 +21,17 @@ Pokémon.
 
 <iframe
   src="https://codesandbox.io/embed/introduction-to-swr-xzpk5?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
+  style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"
   title="Using Paginated Data with SWR"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 ## Introducing useSWRPages
 
-Along with `useSWR`, the SWR library gives us a `useSWRPages` hook which lets us
-do paginated data. The way it works is we pass a key for cache the whole list,
-in our case, it will be `pokemon-list`.
+Along with `useSWR`, the SWR library gives us a `useSWRPages` hook which lets us do paginated data. The way it works is we pass a key for cache the whole list, in our case, it will be `pokemon-list`.
 
-And we pass an inlined React component, this component will receive an `offset`
-and a `withSWR` function, here we will pass the results of `useSWR` to
-`withSWR`, then we could check if we don't have data to show a loading message
-or if we already have the data and return an array of elements.
+And we pass an inlined React component, this component will receive an `offset` and a `withSWR` function, here we will pass the results of `useSWR` to `withSWR`, then we could check if we don't have data to show a loading message or if we already have the data and return an array of elements.
 
 ```js
 import Head from "next/head";
@@ -66,11 +49,11 @@ function HomePage() {
       if (!data) return null;
 
       const { results } = data;
-      return results.map(result => (
+      return results.map((result) => (
         <PokemonShort key={result.name} name={result.name} />
       ));
     },
-    SWR => SWR.data.next,
+    (SWR) => SWR.data.next,
     []
   );
 
@@ -92,12 +75,9 @@ function HomePage() {
 export default HomePage;
 ```
 
-This hook returns a key `pages` where it the elements of all of our pages, this
-is what we need to render. We also have an `isLoadingMore` key to know when we
-are in the process of fetching more data from our API.
+This hook returns a key `pages` where it the elements of all of our pages, this is what we need to render. We also have an `isLoadingMore` key to know when we are in the process of fetching more data from our API.
 
-There is another `isReachingEnd` to know when we don't have more things to load
-so we could do something in the UI, e.g. stop rendering a button.
+There is another `isReachingEnd` to know when we don't have more things to load so we could do something in the UI, e.g. stop rendering a button.
 
 ## Manually Load More
 
@@ -120,11 +100,11 @@ function HomePage() {
       if (!data) return null;
 
       const { results } = data;
-      return results.map(result => (
+      return results.map((result) => (
         <PokemonShort key={result.name} name={result.name} />
       ));
     },
-    SWR => SWR.data.next,
+    (SWR) => SWR.data.next,
     []
   );
 
@@ -155,17 +135,13 @@ function HomePage() {
 export default HomePage;
 ```
 
-Here our new button will trigger the `loadMore` function `useSWRPages` gives us
-to trigger a new fetch. We also use the `isLoadingMore` more to disable the
-button while we are loading.
+Here our new button will trigger the `loadMore` function `useSWRPages` gives us to trigger a new fetch. We also use the `isLoadingMore` more to disable the button while we are loading.
 
 ## Infinite Scroll
 
-Now let's implement infinite scroll, we will use our button to detect if we
-reached the end and call `loadMore`.
+Now let's implement infinite scroll, we will use our button to detect if we reached the end and call `loadMore`.
 
-First, we need to detect if we are near the button, this is possible using the
-IntersectionObserver API, let's create a hook to use it.
+First, we need to detect if we are near the button, this is possible using the IntersectionObserver API, let's create a hook to use it.
 
 ```js
 import React from "react";
@@ -193,8 +169,7 @@ function useOnScreen(ref, rootMargin = "0px") {
 export default useOnScreen;
 ```
 
-Now let's update our HomePage to use it, we will also create an effect to run
-`loadMode` if our hook returns true.
+Now let's update our HomePage to use it, we will also create an effect to run `loadMode` if our hook returns true.
 
 ```js
 import React from "react";
@@ -214,11 +189,11 @@ function HomePage() {
       if (!data) return null;
 
       const { results } = data;
-      return results.map(result => (
+      return results.map((result) => (
         <PokemonShort key={result.name} name={result.name} />
       ));
     },
-    SWR => SWR.data.next,
+    (SWR) => SWR.data.next,
     []
   );
 
@@ -259,10 +234,7 @@ export default HomePage;
 
 ## Infinite Scroll Triggered by Click
 
-This is nice, but maybe the user doesn't want to start doing infinite scroll
-right away, instead, we could wait for the first click on the button and then
-initialize the infinite scroll, we could even limit the amount of infinite
-scrolls we want and expect the user to click again to confirm.
+This is nice, but maybe the user doesn't want to start doing infinite scroll right away, instead, we could wait for the first click on the button and then initialize the infinite scroll, we could even limit the amount of infinite scrolls we want and expect the user to click again to confirm.
 
 ```js
 import React from "react";
@@ -282,11 +254,11 @@ function HomePage() {
       if (!data) return null;
 
       const { results } = data;
-      return results.map(result => (
+      return results.map((result) => (
         <PokemonShort key={result.name} name={result.name} />
       ));
     },
-    SWR => SWR.data.next,
+    (SWR) => SWR.data.next,
     []
   );
 
@@ -343,20 +315,12 @@ function HomePage() {
 export default HomePage;
 ```
 
-Here we have a state to know if the infinite scroll is enabled and a ref to
-count how many times we have loaded more using infinite scroll. Once we did it
-three times we disable infinite scroll and reset the count, then the user can
-click the button again to enable it back.
+Here we have a state to know if the infinite scroll is enabled and a ref to count how many times we have loaded more using infinite scroll. Once we did it three times we disable infinite scroll and reset the count, then the user can click the button again to enable it back.
 
 ## Final Words
 
-With this, we added pagination support to our application using SWR, note how
-the SWR specific code was created at the beginning and we didn't change it
-again, the rest of our code was special for our application in how we want the
-user experience to work and not in how we should handle data fetching.
+With this, we added pagination support to our application using SWR, note how the SWR specific code was created at the beginning and we didn't change it again, the rest of our code was special for our application in how we want the user experience to work and not in how we should handle data fetching.
 
-This is one of the best features of SWR, you only need to care about what makes
-your application special and not generic things like data fetching.
+This is one of the best features of SWR, you only need to care about what makes your application special and not generic things like data fetching.
 
-In the next article, we will continue adding more features to our Pokedex
-application.
+In the next article, we will continue adding more features to our Pokedex application.

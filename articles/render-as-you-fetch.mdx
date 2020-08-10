@@ -17,7 +17,7 @@ This is the most common pattern of the three, the idea here is that you initiall
 
 ```js
 // fetcher.js
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function fetcher(url) {
   return sleep(1000).then(() => ({ url }));
@@ -62,7 +62,7 @@ Here SWR will call our `fetcher` function passing the URL after the component re
 // app.js
 import React from "react";
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const LazyResource = React.lazy(() =>
   sleep(1000).then(() => import("./resource"))
@@ -95,17 +95,11 @@ Let's see this example running in CodeSandbox.
 
 <iframe
   src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-1-d3zy2?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
+  style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"
   title="Render as you Fetch Pattern with SWR - 1"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 If we try it our application is now taking **two seconds** to show the URL the first time and **one second** for every change after that.
 
@@ -135,7 +129,7 @@ import useSWR from "swr";
 import Loading from "./loading";
 import fetcher from "./fetcher";
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const LazyResource = React.lazy(() =>
   sleep(1000).then(() => import("./resource"))
@@ -173,17 +167,11 @@ Let's see it running again in CodeSandbox.
 
 <iframe
   src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-2-z45id?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
+  style="width:100%;height:500px;border:0;border-radius:4px;overflow:hidden;"
   title="Render as you Fetch Pattern with SWR - 2"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 It still takes **two seconds** to render the `Resource` component the first time we write an ID. It wasn't an improvement compared to the _Fetch on Render_ pattern, just a different way to do it.
 
@@ -215,7 +203,7 @@ import { mutate } from "swr";
 import Loading from "./loading";
 import fetcher from "./fetcher";
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const LazyResource = React.lazy(() =>
   sleep(1000).then(() => import("./resource"))
@@ -256,17 +244,10 @@ Let's see now how it works in CodeSandbox with these changes.
 
 <iframe
   src="https://codesandbox.io/embed/render-as-you-fetch-pattern-with-swr-3-rnt1z?fontsize=14&hidenavigation=1&theme=light&view=preview"
-  style={{
-    width: "100%",
-    height: 500,
-    border: 0,
-    borderRadius: 4,
-    overflow: "hidden"
-  }}
   title="Render as you Fetch Pattern with SWR - 3"
   allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 As you can see now the time to render the URL on the screen is **only one second**! That's amazing because that means we are getting the _code_ and the _data_ required to render the component at the same time. Our `Resource` component is then reusing the data previously fetched and rendering right away, without needing to wait for another second to get the data.
 

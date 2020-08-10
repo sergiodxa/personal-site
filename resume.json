@@ -4,7 +4,7 @@
     "label": "Software Engineer",
     "email": "hello@sergiodxa.com",
     "website": "https://sergiodxa.com",
-    "summary": "Software Engineer, Tech Lead and Technical Writer",
+    "summary": "Tech Lead at Able, previously Vercel & Platzi. Core Contributor of SWR y contributor of Next.js and more OSS projects.\nSergio taught React, Redux, Next.js and Vercel in multiple online courses and workshops. He was part of the staff of Codeable, the first web development bootcamp in Lima, Perú.",
     "location": {
       "city": "Lima",
       "region": "Perú"
@@ -113,11 +113,11 @@
         "DOM Testing Library",
         "React Testing Library",
         "Cypress",
-        "TestCafé",
         "Redux",
         "PWA",
         "SWR",
-        "Tailwind"
+        "Tailwind",
+        "React Table"
       ]
     },
     {
@@ -130,9 +130,7 @@
         "Rails",
         "Express",
         "MongoDB",
-        "Redis",
-        "SQL",
-        "Express.js"
+        "Redis"
       ]
     },
     {
