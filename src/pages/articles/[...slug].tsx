@@ -23,7 +23,6 @@ export async function getStaticProps({ params }): Promise<{ props: Props }> {
     props: {
       slug: slug.join("/"),
       meta,
-      // content,
       content: marked(content, {
         breaks: true,
         headerIds: true,
@@ -45,8 +44,6 @@ export async function getStaticPaths() {
 }
 
 export default function ArticlePage({ meta, content }: Props) {
-  console.log(content);
-
   return (
     <>
       <Header>
