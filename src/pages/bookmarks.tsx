@@ -110,7 +110,6 @@ export default function Bookmarks(props: Props) {
             </label>
 
             <input
-              type="search"
               className="bg-black border-2 border-gray-900 w-full p-2 text-sm focus:outline-none focus:border-blue-500 focus:bg-gray-900 text-gray-100 resize-none rounded placeholder-gray-700 focus:placeholder-gray-400"
               id="ama"
               placeholder="React, SWR, Next..."
