@@ -9,7 +9,8 @@ import { Container } from "components/container";
 import { Header } from "components/header";
 import { DesktopOnly } from "components/media-query";
 import { AMAForm } from "components/ama-form";
-import { getListOfArticles, Article } from "utils/get-list-of-articles";
+import { getListOfArticles } from "utils/get-list-of-articles";
+import { Article } from "types/article";
 
 type Props = {
   links: Array<{ title: string; url: string }>;
@@ -42,7 +43,10 @@ function ArticleItem({ title, url }: { title: string; url: string }) {
   if (url.startsWith("http")) {
     return (
       <article className="">
-        <a href={url} className="text-white underline font-medium hover:no-underline visited:text-gray-500">
+        <a
+          href={url}
+          className="text-white underline font-medium hover:no-underline visited:text-gray-500"
+        >
           <h3 className="text-sm">{title}</h3>
         </a>
       </article>
@@ -111,7 +115,10 @@ export default function Home({ links, articles }: Props) {
                 I'm a Software Engineer, specialized in Frontend.
                 <br />
                 <Hoverable whileHover={workHover}>
-                  I currently work at <a href="https://able.co" className="text-orange-500">Able</a>
+                  I currently work at{" "}
+                  <a href="https://able.co" className="text-orange-500">
+                    Able
+                  </a>
                 </Hoverable>
                 , building products to help other people.
               </p>
