@@ -7,5 +7,9 @@ html {
   @apply bg-black text-gray-100 antialiased;
 }
 
+body {
+  margin: 0;
+}
+
 /* purgecss end ignore */
 @tailwind utilities;

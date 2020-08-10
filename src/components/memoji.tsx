@@ -36,13 +36,13 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   name: MemojiName;
 }
 
-export function Memoji({ name, ...props }: Props) {
+export function Memoji({ name, style, ...props }: Props) {
   return (
     <img
       {...props}
       src={`/static/avatar/${name}.png`}
       alt={memojis[name]}
-      style={{ filter: "drop-shadow(0 0 5px #ED8936" }}
+      style={{ filter: "drop-shadow(0 0 5px #ED8936", ...style }}
     />
   );
 }

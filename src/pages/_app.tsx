@@ -3,7 +3,7 @@ import "../styles.css";
 
 export default function App({ Component, pageProps }) {
   return (
-    <main role="document" className="px-2">
+    <main role="document">
       <Head>
         <title>Sergio Xalambrí</title>
         <link rel="icon" href="/static/favicon@48.png" />

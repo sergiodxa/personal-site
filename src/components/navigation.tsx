@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import Head from "next/head";
 import { Spacer } from "./spacer";
+import { MemojiName, Memoji } from "./memoji";
 
 const links: Array<{ href: string; label: string }> = [
   { href: "/articles", label: "Articles" },
@@ -16,9 +17,11 @@ const links: Array<{ href: string; label: string }> = [
 export function Navigation({
   current,
   title,
+  memoji = "happy",
 }: {
   current: string;
   title?: string;
+  memoji?: MemojiName;
 }) {
   const isHome = current === "home";
 
@@ -34,18 +37,23 @@ export function Navigation({
 
       <nav className="flex py-4 items-baseline space-x-2">
         <Link href="/">
-          <a
-            aria-current={isHome ? "page" : "false"}
-            className="text-xl leading-none relative flex-shrink-0 font-semibold"
-            style={{
-              background: "linear-gradient(90deg, #ED8936, #F6E05E)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              height: 27,
-            }}
-          >
-            Sergio Xalambrí
+          <a aria-current={isHome ? "page" : "false"}>
+            <span
+              className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline"
+              style={{
+                background: "linear-gradient(90deg, #ED8936, #F6E05E)",
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                height: 27,
+              }}
+            >
+              Sergio Xalambrí
+            </span>
+            <Memoji
+              name={memoji}
+              className="inline md:hidden w-5 h-5 transform scale-150"
+            />
           </a>
         </Link>
 

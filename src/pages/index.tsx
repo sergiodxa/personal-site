@@ -105,7 +105,7 @@ export default function Home({ links, articles }: Props) {
 
       <Header>
         <Container>
-          <Navigation current="home" />
+          <Navigation current="home" memoji={memoji} />
 
           <aside className="flex items-start mb-4">
             <div className="mt-4">
