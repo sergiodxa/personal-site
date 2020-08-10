@@ -22,11 +22,11 @@ export default async function listener(
 
   try {
     await octokit.request("POST /repos/{owner}/{repo}/issues", {
-      owner: "sergiodxa",
-      repo: "ama",
+      owner: process.env.GH_USERNAME,
+      repo: process.env.GH_AMA_REPO,
       title,
       body: question,
-      assignees: ["sergiodxa"]
+      assignees: [process.env.GH_USERNAME],
     });
     return res.json({ status: "success" });
   } catch (error) {
