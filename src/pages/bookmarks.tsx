@@ -27,7 +27,10 @@ export async function getStaticProps(): Promise<{ props: Props }> {
 function LinkItem({ link }: { link: Link }) {
   return (
     <article className="space-y-2">
-      <a href={link.url} className="font-semibold underline hover:no-underline text-white visited:text-gray-500">
+      <a
+        href={link.url}
+        className="font-semibold underline hover:no-underline text-white visited:text-gray-500"
+      >
         <h3 className="text-lg">{link.title}</h3>
       </a>
     </article>
@@ -62,12 +65,21 @@ export default function Bookmarks(props: Props) {
           <Navigation current="bookmarks" title="Bookmarks" />
 
           <aside className="flex items-start mb-4 space-x-4">
-            <div className="mt-4">
-              <h2 className="text-2xl text-orange-500 font-semibold">
+            <div className="mt-4 space-y-2">
+              <h2
+                className="text-xl leading-7 font-semibold"
+                style={{
+                  background: "linear-gradient(45deg, #ED8936, #F6E05E)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
                 Bookmarks
               </h2>
-              <p className="prose">
-                A collection of links I have found interesting and worth saving them for the future.
+              <p className="leading-7">
+                A collection of links I have found interesting and worth saving
+                them for the future.
               </p>
             </div>
 

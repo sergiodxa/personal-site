@@ -104,14 +104,14 @@ export default function Home({ links, articles }: Props) {
           <Navigation current="home" />
 
           <aside className="flex items-start mb-4">
-            <div className="prose mt-4">
-              <p>
+            <div className="mt-4">
+              <p className="leading-7">
                 Hi there! I'm Sergio Xalambrí.
                 <br />
                 I'm a Software Engineer, specialized in Frontend.
                 <br />
                 <Hoverable whileHover={workHover}>
-                  I currently work at <a href="https://able.co">Able</a>
+                  I currently work at <a href="https://able.co" className="text-orange-500">Able</a>
                 </Hoverable>
                 , building products to help other people.
               </p>

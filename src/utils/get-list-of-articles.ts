@@ -3,29 +3,9 @@ import fs from "fs";
 import matter from "gray-matter";
 import { promisify } from "util";
 import { resolve } from "path";
+import { Article } from "types/article";
 
 const readFile = promisify(fs.readFile);
-
-export type Article = {
-  slug: string;
-  title: string;
-  description?: string;
-  published: boolean;
-  tags?: string;
-  lang: "en" | "es";
-  date: string;
-  canonical_url?: string;
-  next?: {
-    title: string;
-    path: string;
-    description: string;
-  };
-  translated_from?: {
-    lang: string;
-    title: string;
-    path: string;
-  };
-};
 
 function parseSlug(path: string): string {
   return path.slice(path.indexOf("/articles"), path.length - 4);

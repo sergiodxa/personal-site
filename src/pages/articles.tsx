@@ -8,7 +8,8 @@ import { Container } from "components/container";
 import { Spacer } from "components/spacer";
 import { DesktopOnly } from "components/media-query";
 import { Memoji, MemojiName } from "components/memoji";
-import { getListOfArticles, Article } from "utils/get-list-of-articles";
+import { getListOfArticles } from "utils/get-list-of-articles";
+import { Article } from "types/article";
 import { AMAForm } from "components/ama-form";
 
 type ReducerArticle = Pick<Article, "slug" | "title" | "description" | "tags">;
@@ -116,8 +117,19 @@ export default function Articles(props: Props) {
           <Navigation current="articles" title="Articles" />
 
           <aside className="flex items-start mb-4 space-x-4">
-            <div className="mt-4 prose">
-              <p>
+            <div className="mt-4 space-y-2">
+              <h2
+                className="text-xl leading-7 font-semibold"
+                style={{
+                  background: "linear-gradient(45deg, #ED8936, #F6E05E)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Articles
+              </h2>
+              <p className="leading-7">
                 All the articles I have wrote in my career, search for what you
                 want in the form below.
               </p>

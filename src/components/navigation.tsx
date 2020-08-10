@@ -36,20 +36,16 @@ export function Navigation({
         <Link href="/">
           <a
             aria-current={isHome ? "page" : "false"}
-            className="text-xl leading-none relative flex-shrink-0"
+            className="text-xl leading-none relative flex-shrink-0 font-semibold"
+            style={{
+              background: "linear-gradient(90deg, #ED8936, #F6E05E)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              height: 27,
+            }}
           >
-            <h1
-              className="font-semibold"
-              style={{
-                background: "linear-gradient(90deg, #ED8936, #F6E05E)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                height: 27,
-              }}
-            >
-              Sergio Xalambrí
-            </h1>
+            Sergio Xalambrí
           </a>
         </Link>
 
