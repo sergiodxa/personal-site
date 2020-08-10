@@ -19,6 +19,12 @@ src/components/
 src/hooks
   {name}.ts
   {name}.test.tsx
+src/mutations/
+  {name}.ts
+  {name}.test.tsx
+src/queries/
+  {name}.ts
+  {name}.test.tsx
 src/routes/
   {name}.tsx
   {name}.test.tsx
@@ -67,26 +73,137 @@ For the tests, I create a single test file per component and put all the tests I
 
 ## ⚓️ Hooks
 
-I create custom hooks everytime I need to share behavior between components and when I'm using [SWR](https://swr.vercel.app) to wrap it in hooks specific for each resource of my API.
+I create custom hooks everytime I need to share behavior between components.
 
-This way I end up with hooks like `useCurrentUser` or `useTodos`, that use SWR internally to fetch data and define the key and fetcher function inside the same file, doing this I can easily share data between components because I can add
+An example of a Hook I usually create are things like [`useAsset` combined a Context provider to share asset URLs](#🖼️-apendix-assets) or `useBoundingClientRect` to share a generic behavior.
 
-```tsx
-import { useCurrentUser } from "hooks/use-current-user";
+And talking about Context, I still use it, but only when the value stored in the Context is mostly static, e.g. feature flags or assets), this way I don't have issues because the Context value changed and triggered a re-render in most of the application.
 
-function MyComponent() {
-  const { data: currentUser } = useCurrentUser();
-  // the rest of the code
+As with components, I test the hooks, to do it I create a simple Tester component using the hook in the test file and I test the component directly.
+
+## 🧬 Mutations
+
+A mutation is a special kind of Hook, a mutation represent a single unit of change the user can perform in an application in a single action, they are wrapper of [useMutation](https://github.com/sergiodxa/use-mutation), a tiny Hook I created based on the useMutation Hook of [React Query](https://react-query.tanstack.com).
+
+As an example I tend to have mutations like `useUploadAvatar` or `useCreateTodo`, a mutation could represent a really simple change or a complex one, the idea is that the user perform it as an individual action.
+
+Note that a mutation doesn't match the HTTP methods POST/PUT/PATCH/DELETE, they are not like a CRUD wrapper (e.g. `useCreateTodo`, `useUpdateTodo` and `useDeleteTodo`), while I can still craete mutations with those names I also have mutations with names like `useCompleteTodo` which is calling a PATCH against the todos endpoints and only update a certain field.
+
+Example of what I don't do:
+
+```ts
+import useUpdateTodo from "mutations/use-update-todo";
+
+function Todo() {
+  const [updateTodo] = useUpdateTodo();
+
+  function handleCompleteClick() {
+    updateTodo({ completed: true });
+  }
+
+  // return some UI
 }
 ```
 
-Because SWR dedupes requests I don't need to care about using fetching many times because I call it many times, this let me avoid using Context.
+That looks generic, I could use the same mutation to update any field of the Todo resource, instead I do it this way:
 
-And talking about context, I still use it, but only when the value stored in the context is mostly static, e.g. feature flags or assets), this way I don't have issues because the context value changed and triggered a re-render in most of the application.
+```ts
+import useCompleteTodo from "mutations/use-complete-todo";
 
-As with components, I test the hooks, to do it I create a simple Tester component using the hook and I test the component.
+function Todo() {
+  const [completeTodo] = useCompleteTodo();
 
-I only avoid testing the hook when they are wrappers of SWR.
+  function handleCompleteClick() {
+    completeTodo({ id: 1 });
+  }
+
+  // return some UI
+}
+```
+
+This is more specific, the mutation will only update the completed field of the Todo resource with the ID I specified, and that's all.
+
+Another thing I do in these mutations is to add the optimistic update of the data client-side, if possible since somethings it's not, and implement a rollback in case it failed together with a revalidation after a success.
+
+This is a final example of how I create my mutations
+
+```ts
+import { mutate, cache } from "swr";
+import useMutation from "use-mutation";
+import { Todo } from "types/schema";
+
+type CompleteTodoInput = { id: number };
+type CompleteTodoOutput = Todo;
+
+async function completeTodo(
+  input: CompleteTodoInput
+): Promise<CompleteTodoOutput> {
+  const res = fetch(`/api/todos/${id}`, {
+    method: "POST",
+    body: JSON.stringify({ completed: true }),
+  });
+  if (!res.ok) throw new Error(res.statusText);
+  return (await res.json()) as CompleteTodoOutput;
+}
+
+export function useCompleteTodo() {
+  return useMutation(completeTodo, {
+    onMutate({ input }) {
+      const key = ["todos", input.id];
+      const old = cache.get(key);
+
+      // optimistically update cached data
+      mutate(
+        key,
+        (todo) => {
+          return { ...todo, completed: true };
+        },
+        false
+      );
+
+      // rollback optimistic update
+      return () => mutate(key, old);
+    },
+
+    onSuccess({ input }) {
+      // revalidate
+      mutate(["todos", input.id]);
+    },
+
+    onFailure({ rollback }) {
+      // rollback in case of failure
+      if (rollback) rollback();
+    },
+  });
+}
+```
+
+## 🔍 Queries
+
+A query is another special kind of Hook, in this case their only purpose is to wrap SWR and provide the required key and fetcher function. Usually a Hook inside this folder will looks like this:
+
+```ts
+import useSWR, { ConfigInterface } from "swr";
+
+// fetcher
+async function getCurrentUser() {
+  const res = await fetch("/api/me");
+  return await res.json();
+}
+
+export function useCurrentUser(config = {}: ConfigInterface) {
+  return useSWR("current-user", getCurrentUser, { suspense: true, ...config });
+}
+```
+
+As you can see, the code here is usually small, a few notable points:
+
+- The fetcher is called as `getX` and the Hook is `useX` where `X` is the data I'm querying
+- The `key` is not the URL of the endpoint, instead I use a meaningfull name, this makes it easier to later call `mutate("current-user")` to revalidate it or mutate it
+- The Hook receives all the configuration options of SWR and pass it to useSWR, this let me control the configuration in a per-instance way.
+- SWR is, by default, configured to enable Suspense for Data-Fetching, I always use it this way, but I can still disable it in some cases passing a custom config.
+
+Another things to remark here is that I usually don't test queries, this is because most of the code is a simple fetch whose test will be mocked anyway making it useless the Hook is just a wrapper of SWR.
 
 ## 🗺️ Routes
 
@@ -130,10 +247,10 @@ When using assets, I don't like to import them in my code, this makes the build 
 
 ```html
 <script type="application/json" id="initial-props">
-{
-  "assets": {
-    "logo": <%= asset_path("images/logo.png") %>
+  {
+    "assets": {
+      "logo": <%= asset_path("images/logo.png") %>
+    }
   }
-}
 </script>
 ```
