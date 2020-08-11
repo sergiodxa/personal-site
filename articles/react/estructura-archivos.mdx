@@ -56,7 +56,7 @@ De esta forma todos los componentes están en el mismo archivo, esto hace mucho 
 - El componente es lo suficientemente complejo para que tenga sentido que tenga pruebas propias
 - El componente representa un feature entero (normalmente relaciondo al punto anterior)
 
-Y, create un nuevo componente en el mismo archivo si:
+Y creo un nuevo componente en el mismo archivo si:
 
 - Necesito reusarlo dentro del mismo archivo
 - Voy a usarlo dentro de una lista y tengo que usar hooks
@@ -64,7 +64,7 @@ Y, create un nuevo componente en el mismo archivo si:
 - Quiero poder controlar como el componente se suspende, ya que [uso Suspense para data fetching](/articles/swr/suspense/), pero sin suspende al componente padre
 - El componente se volvió muy grande y tiene sentido dividirlo para que sea más legible
 
-Para el caso de las pruebas, creo un único archivo por componente y punto todas las pruebas ahí, para escribirlas uso React Testing Library y sigo todas las prácticas que recominendan.
+Para el caso de las pruebas, creo un único archivo por componente y junto todas las pruebas ahí, para escribirlas uso React Testing Library y sigo todas las prácticas que recominendan.
 
 ## ⚓️ Hooks
 
