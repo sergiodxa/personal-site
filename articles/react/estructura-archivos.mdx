@@ -4,7 +4,7 @@ description: Hay muchas formas de organizar aplicaciones de React, con los años
 date: 2020-07-16T05:56:01.823Z
 published: true
 lang: es
-tags: react, typescript, hooks, architecture
+tags: react, typescript, Hooks, architecture
 translated_from:
   lang: en
   title: How I Organize React Applications
@@ -17,7 +17,13 @@ Una de las preguntas más comunes cuando se usa React es como organizar los arch
 src/components/
   {name}.tsx
   {name}.test.tsx
-src/hooks
+src/Hooks
+  {name}.ts
+  {name}.test.tsx
+src/mutations/
+  {name}.ts
+  {name}.test.tsx
+src/queries/
   {name}.ts
   {name}.test.tsx
 src/routes/
@@ -59,8 +65,8 @@ De esta forma todos los componentes están en el mismo archivo, esto hace mucho 
 Y creo un nuevo componente en el mismo archivo si:
 
 - Necesito reusarlo dentro del mismo archivo
-- Voy a usarlo dentro de una lista y tengo que usar hooks
-- Quiero usar hooks solo cierta parte del componente principal
+- Voy a usarlo dentro de una lista y tengo que usar Hooks
+- Quiero usar Hooks solo cierta parte del componente principal
 - Quiero poder controlar como el componente se suspende, ya que [uso Suspense para data fetching](/articles/swr/suspense/), pero sin suspende al componente padre
 - El componente se volvió muy grande y tiene sentido dividirlo para que sea más legible
 
@@ -68,26 +74,137 @@ Para el caso de las pruebas, creo un único archivo por componente y junto todas
 
 ## ⚓️ Hooks
 
-Creo hooks custom cada vez que necesito compartir comportamiento entre componentes y cuando estoy usando [SWR](https://swr.vercel.app) para crear hooks específicos para cada recurso de mi API.
+Creo Hooks custom cada vez que necesito compartir comportamiento entre componentes.
 
-De esta forma termino con hooks como `useCurrentUser` or `useTodos`, que usan internamente SWR para hacer fetch de la data y definen la key de cache y la función fetcher dentro del mismo archivo, haciendo esto puedo compartir data entre componentes haciendo:
-
-```tsx
-import { useCurrentUser } from "hooks/use-current-user";
-
-function MyComponent() {
-  const { data: currentUser } = useCurrentUser();
-  // el resto del código
-}
-```
-
-Ya que SWR evita peticiones duplicadas al API no me tengo que preocupar de que al usar varias veces mis hooks se hagan varias peticiones, lo que además me evita usar contexto.
+Un ejemplo de un Hook que normalmento creo es [`useAssets` combinado con un ContextProvider para compartir las URLs de los assets](#🖼️-apéndice-assets) o `useBoundingClientRect` para compartir comportamiento genérico.
 
 Y hablando de contexto, lo uso, pero solo para valores mayormente estático (e.g. feature flags o assets), esto me evita problamas de que al modificar el valor en contexto se vuelva a renderizar casi toda mi aplicación.
 
-Como con los componentes, hago pruebas de mis hooks, para esto creo un componente Tester dentro de los tests donde uso el hook y testeo ese componente directamente.
+Como con los componentes, hago pruebas de mis Hooks, para esto creo un componente Tester dentro de los tests donde uso el hook y testeo ese componente directamente.
 
-Aunque, evito escribir pruebas de hooks que solo son wrappers de SWR.
+## 🧬 Mutaciones
+
+Una mutación es un tipo especial de Hook, las mutaciones representan una única unidad de cambio que el usuario puede realizar en la aplicación al realizar alguna acción, son wrappers de [useMutation](https://github.com/sergiodxa/use-mutation), un Hook pequeño que cree basado en el Hook del mismo nombre de [React Query](https://react-query.tanstack.com).
+
+Como ejemplo, normalmente tiendo a tener mutaciones como `useUploadAvatar` o `useCreateTodo`, una mutación puede representar un cambio pequeño o complejo, la idea es que el usuario lo haga como una única acción.
+
+Es importante destacar que no tienen que igualar los método HTTP POST/PUT/PATCH/DELETE, las mutaciones no son simples wrappers de un CRUD (por ejemplo `useCreateTodo`, `useUpdateTodo` y `useDeleteTodo`), aunque algunas veces creo mutaciones con esos nombres, más tiendo a tener nombres como `useCompleteTodo`, que si bien hace una operación PATCH sobre el endpoint de Todos, solo se encarga de un cambio de este recurso, no puede modificar otra cosa.
+
+Ejemplo de que no hago:
+
+```ts
+import useUpdateTodo from "mutations/use-update-todo";
+
+function Todo() {
+  const [updateTodo] = useUpdateTodo();
+
+  function handleCompleteClick() {
+    updateTodo({ id: 1, completed: true });
+  }
+
+  // retorna alguna UI
+}
+```
+
+Es demasiado genérico, podría usar la misma mutación para actualizar cualquier campo del recurso Todo, en vez de eso esto es lo que normalmente hago:
+
+```ts
+import useCompleteTodo from "mutations/use-complete-todo";
+
+function Todo() {
+  const [completeTodo] = useCompleteTodo();
+
+  function handleCompleteClick() {
+    completeTodo({ id: 1 });
+  }
+
+  // retorna alguna UI
+}
+```
+
+Este es mucho más específico, la mutación solo va a ctualizar el campo `completed` del recuros Todo con el ID que especifique, y eso es todo.
+
+Otra cosa que normalmente hago en estas mutaciones es agregar actualizaciones optimisticas a la información que tengo en el cliente, si es que es posible ya que algunas veses (ej. al crear un recurso) no lo es o es más difícil. También implemento un rollback para deshacer los cambios en caso de que la mutación falle junto a una revalidación en caso de éxito.
+
+Este es el ejemplo final de como queda una mutación:
+
+```ts
+import { mutate, cache } from "swr";
+import useMutation from "use-mutation";
+import { Todo } from "types/schema";
+
+type CompleteTodoInput = { id: number };
+type CompleteTodoOutput = Todo;
+
+async function completeTodo(
+  input: CompleteTodoInput
+): Promise<CompleteTodoOutput> {
+  const res = fetch(`/api/todos/${id}`, {
+    method: "POST",
+    body: JSON.stringify({ completed: true }),
+  });
+  if (!res.ok) throw new Error(res.statusText);
+  return (await res.json()) as CompleteTodoOutput;
+}
+
+export function useCompleteTodo() {
+  return useMutation(completeTodo, {
+    onMutate({ input }) {
+      const key = ["todos", input.id];
+      const old = cache.get(key);
+
+      // actualizo la cache de forma optimista
+      mutate(
+        key,
+        (todo) => {
+          return { ...todo, completed: true };
+        },
+        false
+      );
+
+      // función para deshacer los cambios
+      return () => mutate(key, old);
+    },
+
+    onSuccess({ input }) {
+      // revalido
+      mutate(["todos", input.id]);
+    },
+
+    onFailure({ rollback }) {
+      // deshago los cambios en caso de error
+      if (rollback) rollback();
+    },
+  });
+}
+```
+
+## 🔍 Queries
+
+Una query es otro tipo especial de Hook, en este caso su único propósito es hacer envolver a SWR y pasarle la key y la función fetcher. Usualmente un Hook dentro de esta carpeta se ve algo así:
+
+```ts
+import useSWR, { ConfigInterface } from "swr";
+
+// fetcher
+async function getCurrentUser() {
+  const res = await fetch("/api/me");
+  return await res.json();
+}
+
+export function useCurrentUser(config = {}: ConfigInterface) {
+  return useSWR("current-user", getCurrentUser, { suspense: true, ...config });
+}
+```
+
+Como se puede ver, el código es bastante pequeño, algunos a destacar son:
+
+- El fetcher se llama `getX` y el Hook `useX`, donde `X` es la data que estoy pidiendo del API. 
+- La `key` no es la URL del endpoint, en vez de eso tiene un nombre con significado, esto hace más fácil que luego llamemos a `mutate("current-user")` para revalidad o mutar esta data.
+- El Hook recibe todas las opciones de configuración de SWR y se las pasa a useSWR, esto me deja cambiar la configuración en cada lugar que uso el Hook.
+- A SWR los configuro por defecto para activar Suspense para Data-Fetching, esto es porque siempre lo uso de esta forma, pero permito desactivarlo pasando una configuración propia.
+
+Una última cosa a destacar es que usualmente no agrego pruebas a mis queries, esto es porque la mayoría del código es un simple fetch que al hacerle pruebas terminaría mockeando haciendo inútil la prueba.
 
 ## 🗺️ Rutas
 

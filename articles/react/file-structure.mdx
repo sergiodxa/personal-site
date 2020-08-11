@@ -98,7 +98,7 @@ function Todo() {
   const [updateTodo] = useUpdateTodo();
 
   function handleCompleteClick() {
-    updateTodo({ completed: true });
+    updateTodo({ id: 1, completed: true });
   }
 
   // return some UI
@@ -121,7 +121,7 @@ function Todo() {
 }
 ```
 
-This is more specific, the mutation will only update the completed field of the Todo resource with the ID I specified, and that's all.
+This is more specific, the mutation will only update the completed field of the Todo resource with the ID I've specified, and that's all.
 
 Another thing I do in these mutations is to add the optimistic update of the data client-side, if possible since somethings it's not, and implement a rollback in case it failed together with a revalidation after a success.
 
