@@ -38,7 +38,7 @@
     "gray-matter": "^4.0.2",
     "marked": "^1.0.0",
     "match-sorter": "^4.2.0",
-    "next": "^9.5.0",
+    "next": "^9.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
