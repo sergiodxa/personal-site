@@ -87,7 +87,7 @@ A mutation is a special kind of Hook, a mutation represent a single unit of chan
 
 As an example I tend to have mutations like `useUploadAvatar` or `useCreateTodo`, a mutation could represent a really simple change or a complex one, the idea is that the user perform it as an individual action.
 
-Note that a mutation doesn't match the HTTP methods POST/PUT/PATCH/DELETE, they are not like a CRUD wrapper (e.g. `useCreateTodo`, `useUpdateTodo` and `useDeleteTodo`), while I can still craete mutations with those names I also have mutations with names like `useCompleteTodo` which is calling a PATCH against the todos endpoints and only update a certain field.
+Note that a mutation doesn't match the HTTP methods POST/PUT/PATCH/DELETE, they are not like a CRUD wrapper (e.g. `useCreateTodo`, `useUpdateTodo` and `useDeleteTodo`), while I can still create mutations with those names I also have mutations with names like `useCompleteTodo` which is calling a PATCH against the todos endpoints and only update a certain field.
 
 Example of what I don't do:
 
