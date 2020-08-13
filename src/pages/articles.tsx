@@ -67,7 +67,7 @@ function ArticleItem({
             .map((tag) => (
               <button
                 onClick={() => onTagClick(tag)}
-                className="text-xs bg-gray-900 text-gray-400 px-2 leading-relaxed inline-block"
+                className="text-xs bg-gray-900 text-blue-400 px-2 leading-relaxed inline-block"
               >
                 {tag}
               </button>
