@@ -46,6 +46,7 @@ function ArticleItem({ title, url }: { title: string; url: string }) {
         <a
           href={url}
           className="text-white underline font-medium hover:no-underline visited:text-gray-500"
+          rel="noopener noreferrer"
         >
           <h3 className="text-sm">{title}</h3>
         </a>

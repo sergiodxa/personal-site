@@ -29,6 +29,7 @@ function LinkItem({ link }: { link: Link }) {
     <article className="space-y-2">
       <a
         href={link.url}
+        rel="noopener noreferrer"
         className="font-semibold underline hover:no-underline text-white visited:text-gray-500"
       >
         <h3 className="text-lg">{link.title}</h3>
