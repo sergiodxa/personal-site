@@ -23,14 +23,13 @@ export function AMAForm({
   // mutations
   const [submitQuestion, { status, reset }] = useSubmitQuestion();
   // callbacks
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    const target = event.target as HTMLFormElement;
     submitQuestion(
       { question },
       {
         onSuccess() {
-          target.reset();
+          setQuestion("");
         },
       }
     );
