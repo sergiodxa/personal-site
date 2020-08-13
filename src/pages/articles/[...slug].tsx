@@ -63,9 +63,11 @@ export default function ArticlePage({ meta, content }: Props) {
               >
                 {meta.title}
               </h1>
-              <p className="leading-7 border-l-4 border-orange-500 pl-2 py-1">
-                {meta.description}
-              </p>
+              {meta.description ? (
+                <p className="leading-7 border-l-4 border-orange-500 pl-2 py-1">
+                  {meta.description}
+                </p>
+              ) : null}
             </div>
 
             <Spacer />
@@ -80,12 +82,29 @@ export default function ArticlePage({ meta, content }: Props) {
       </Header>
 
       <Container>
-        <section className="space-y-2 -mt-6 md:-mt-12 bg-white p-4 rounded-lg border-black border-4 relative mb-12">
+        <section className="space-y-2 -mt-6 md:-mt-12 bg-white p-4 rounded-lg border-black border-4 relative mb-6">
           <article
             className="prose prose-sm md:prose lg:prose-lg"
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </section>
+      </Container>
+
+      <Container>
+        <footer className="mb-12">
+          {meta.cn ? (
+            <p className="text-gray-600 text-sm text-right">
+              Powered by{" "}
+              <a
+                href="https://collectednotes.com"
+                className="underline"
+                rel="noopener noreferrer"
+              >
+                Collected Notes
+              </a>
+            </p>
+          ) : null}
+        </footer>
       </Container>
     </>
   );

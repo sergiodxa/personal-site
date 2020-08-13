@@ -17,4 +17,5 @@ export type Article = {
     title: string;
     path: string;
   };
+  cn?: boolean;
 };
