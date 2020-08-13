@@ -1,4 +1,5 @@
 import * as React from "react";
+import { GetStaticPropsResult } from "next";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import matchSorter from "match-sorter";
@@ -18,9 +19,10 @@ type Props = {
   articles: Array<ReducerArticle>;
 };
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const articles = await getListOfArticles();
   return {
+    revalidate: 1,
     props: {
       articles: articles
         .filter((article) => article.published)

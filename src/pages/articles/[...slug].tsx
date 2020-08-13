@@ -1,4 +1,5 @@
 import * as React from "react";
+import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { getArticle } from "utils/get-article";
 import { Article } from "types/article";
@@ -19,7 +20,7 @@ type Props = {
 
 export async function getStaticProps({
   params,
-}): Promise<{ props: Props; revalidate: number }> {
+}): Promise<GetStaticPropsResult<Props>> {
   const { slug } = params;
   const [meta, content] = await getArticle(slug.join("/"));
   return {
