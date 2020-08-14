@@ -12,6 +12,7 @@ export default async function webhookCollectedNotes(
   req: NextApiRequest,
   res: NextApiResponse<"">
 ) {
+  console.log(process.env);
   const { event, data } = req.body as NoteEvent;
   console.log(event);
   if (event === "note-updated" || event === "note-created") {
