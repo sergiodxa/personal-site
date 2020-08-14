@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="black" />
         <meta name="apple-mobile-web-app-title" content="Sergio Xalambrí" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Sergio Xalambrí" />
         <meta property="og:description" content="T-Shaped Frontend Engineer" />
