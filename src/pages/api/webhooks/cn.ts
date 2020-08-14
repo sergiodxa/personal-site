@@ -8,7 +8,7 @@ type NoteEvent = NoteUpdatedEvent | NoteCreatedEvent;
 
 const host = process.env.VERCEL_URL || "localhost:3000";
 
-export default function webhookCollectedNotes(
+export default async function webhookCollectedNotes(
   req: NextApiRequest,
   res: NextApiResponse<"">
 ) {
@@ -19,7 +19,11 @@ export default function webhookCollectedNotes(
       pathname: `/articles/${data.note.path}`,
       protocol: host === "localhost:3000" ? "http" : "https",
     });
-    fetch(url);
+    try {
+      await fetch(url);
+    } catch (error) {
+      console.error(error);
+    }
   }
   res.send("");
 }
