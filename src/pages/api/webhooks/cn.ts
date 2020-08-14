@@ -6,8 +6,6 @@ type NoteUpdatedEvent = { event: "note-updated"; data: { note: Note } };
 type NoteCreatedEvent = { event: "note-created"; data: { note: Note } };
 type NoteEvent = NoteUpdatedEvent | NoteCreatedEvent;
 
-const host = process.env.VERCEL_URL || "localhost:3000";
-
 export default async function webhookCollectedNotes(
   req: NextApiRequest,
   res: NextApiResponse<"">
@@ -17,9 +15,9 @@ export default async function webhookCollectedNotes(
   console.log(event);
   if (event === "note-updated" || event === "note-created") {
     const url = format({
-      host,
+      host: "sergiodxa.com",
       pathname: `/articles/${data.note.path}`,
-      protocol: host === "localhost:3000" ? "http" : "https",
+      protocol: "https",
     });
     console.log(url);
     try {
