@@ -13,12 +13,14 @@ export default async function webhookCollectedNotes(
   res: NextApiResponse<"">
 ) {
   const { event, data } = req.body as NoteEvent;
+  console.log(event);
   if (event === "note-updated" || event === "note-created") {
     const url = format({
       host,
       pathname: `/articles/${data.note.path}`,
       protocol: host === "localhost:3000" ? "http" : "https",
     });
+    console.log(url);
     try {
       await fetch(url);
     } catch (error) {
