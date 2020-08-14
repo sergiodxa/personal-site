@@ -1,21 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { resolve } from "url";
+import { format } from "url";
 import { Note } from "collected-notes";
-import { RSA_NO_PADDING } from "constants";
 
-type NoteUpdatedEvent = { type: "note-updated"; data: { note: Note } };
-type NoteCreatedEvent = { type: "note-created"; data: { note: Note } };
+type NoteUpdatedEvent = { event: "note-updated"; data: { note: Note } };
+type NoteCreatedEvent = { event: "note-created"; data: { note: Note } };
 type NoteEvent = NoteUpdatedEvent | NoteCreatedEvent;
 
-const URL = process.env.VERCEL_URL || "localhost:3000";
+const host = process.env.VERCEL_URL || "localhost:3000";
 
 export default function webhookCollectedNotes(
   req: NextApiRequest,
   res: NextApiResponse<"">
 ) {
-  const event = req.body as NoteEvent;
-  if (event.type === "note-updated" || "note-created") {
-    fetch(resolve(URL, `/articles/${event.data.note.path}`));
+  const { event, data } = req.body as NoteEvent;
+  if (event === "note-updated" || event === "note-created") {
+    const url = format({
+      host,
+      pathname: `/articles/${data.note.path}`,
+      protocol: host === "localhost:3000" ? "http" : "https",
+    });
+    fetch(url);
   }
   res.send("");
 }
