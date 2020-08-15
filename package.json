@@ -33,7 +33,7 @@
     "@tailwindcss/typography": "^0.2.0",
     "@types/match-sorter": "^4.0.0",
     "clsx": "^1.1.1",
-    "collected-notes": "^1.4.1",
+    "collected-notes": "^1.4.2",
     "globby": "^11.0.0",
     "gray-matter": "^4.0.2",
     "marked": "^1.0.0",
