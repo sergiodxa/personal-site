@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Navigation } from "components/navigation";
-import { Memoji, MemojiName, memojis } from "components/memoji";
+import { GetStaticPropsResult } from "next";
 import Link from "next/link";
 import Head from "next/head";
+import { Navigation } from "components/navigation";
+import { Memoji, MemojiName, memojis } from "components/memoji";
 import { Spacer } from "components/spacer";
 import { getBookmarks } from "utils/get-bookmarks";
 import { Container } from "components/container";
@@ -65,7 +66,7 @@ function ArticleItem({ title, url }: { title: string; url: string }) {
   );
 }
 
-export async function getStaticProps(): Promise<{ props: Props }> {
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   const [links, articles] = await Promise.all([
     getBookmarks(),
     getListOfArticles(),
@@ -77,6 +78,7 @@ export async function getStaticProps(): Promise<{ props: Props }> {
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         .slice(0, 10),
     },
+    revalidate: 1,
   };
 }
 
