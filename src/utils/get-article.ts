@@ -1,27 +1,8 @@
-import fs from "fs";
 import matter from "gray-matter";
-import { promisify } from "util";
-import { resolve } from "path";
 import { Article } from "types/article";
 import { collectedNotes, Note } from "collected-notes";
 
-const readFile = promisify(fs.readFile);
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
-
-async function readFromDisk(slug: string): Promise<readonly [Article, string]> {
-  const path = resolve(`./articles/${slug}.mdx`);
-
-  const file = await readFile(path, "utf8");
-
-  let { data, content } = (matter(file) as unknown) as {
-    data: Article;
-    content: string;
-  };
-
-  data.cn = false;
-
-  return [JSON.parse(JSON.stringify(data)), content] as const;
-}
 
 async function readFromCN(slug: string): Promise<readonly [Article, string]> {
   const note = (await cn.read(process.env.CN_SITE_PATH, slug, "json")) as Note;
@@ -49,9 +30,5 @@ async function readFromCN(slug: string): Promise<readonly [Article, string]> {
 export async function getArticle(
   slug: string
 ): Promise<readonly [Article, string]> {
-  try {
-    return await readFromDisk(slug);
-  } catch(error) {
-    return await readFromCN(slug);
-  }
+  return await readFromCN(slug);
 }
