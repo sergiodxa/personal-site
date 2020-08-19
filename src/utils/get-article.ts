@@ -8,7 +8,7 @@ async function readFromCN(slug: string): Promise<readonly [Article, string]> {
   const note = (await cn.read(process.env.CN_SITE_PATH, slug, "json")) as Note;
   const links = await cn.links(Number(process.env.SITE_ID), note.id);
 
-  let { data, content } = (matter(note.body).data as unknown) as {
+  let { data, content } = (matter(note.body) as unknown) as {
     data: Article;
     content: string;
   };
