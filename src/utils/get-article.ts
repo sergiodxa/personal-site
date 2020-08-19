@@ -6,20 +6,22 @@ const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
 async function readFromCN(slug: string): Promise<readonly [Article, string]> {
   const note = (await cn.read(process.env.CN_SITE_PATH, slug, "json")) as Note;
+  const links = await cn.links(Number(process.env.SITE_ID), note.id);
 
-  let { data, content } = (matter(note.body) as unknown) as {
+  let { data, content } = (matter(note.body).data as unknown) as {
     data: Article;
     content: string;
   };
 
+  data.links = links;
+
   // strip title from content
   if (content.startsWith("# ")) {
-    const [title, ...restLines] = content.split("\n");
-    content = restLines.join("\n");
+    content = content.split("\n").slice(1).join("\n");
   }
 
   // merge note data with frontmatter metadata
-  data.title = note.title;
+  data.title = data.title ?? note.title;
   data.description = data.description ?? note.headline;
 
   data.cn = true;

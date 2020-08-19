@@ -1,3 +1,5 @@
+import { Link } from "collected-notes";
+
 export type Article = {
   slug: string;
   title: string;
@@ -18,4 +20,5 @@ export type Article = {
     path: string;
   };
   cn?: boolean;
+  links?: Link[];
 };
