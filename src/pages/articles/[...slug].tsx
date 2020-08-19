@@ -11,6 +11,7 @@ import { Spacer } from "components/spacer";
 import { DesktopOnly } from "components/media-query";
 import { Memoji } from "components/memoji";
 import marked from "marked";
+import { parse } from "url";
 
 type Props = {
   slug: string;
@@ -97,12 +98,48 @@ export default function ArticlePage({ meta, content }: Props) {
           {isFallback ? (
             <ContentSkeleton />
           ) : (
-            <article
-              className="prose prose-sm md:prose lg:prose-lg"
-              dangerouslySetInnerHTML={{
-                __html: content,
-              }}
-            />
+            <>
+              <article
+                className="prose prose-sm md:prose lg:prose-lg"
+                dangerouslySetInnerHTML={{
+                  __html: content,
+                }}
+              />
+              {meta.links?.length > 0 ? (
+                <aside className="max-w-prose mx-auto px-10 border-t border-gray-500 mt-6 py-6 mb-6">
+                  <p className="font-bold leading-normal">
+                    Links on this note↗
+                  </p>
+
+                  <ul>
+                    {meta.links?.map((link) => {
+                      const isInternal = link.kind === "internal";
+                      return (
+                        <li
+                          key={link.id}
+                          className="mt-1 ml-8"
+                          style={{
+                            listStylePosition: "outside",
+                            listStyleType: isInternal ? "square" : "none",
+                          }}
+                        >
+                          <a
+                            className="font-bold underline"
+                            href={link.url}
+                            title={link.title}
+                          >
+                            {link.host}
+                          </a>
+                          <span className="text-gray-600">
+                            {parse(link.url).pathname}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </aside>
+              ) : null}
+            </>
           )}
         </section>
       </Container>
