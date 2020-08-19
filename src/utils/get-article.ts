@@ -13,7 +13,9 @@ async function readFromCN(slug: string): Promise<readonly [Article, string]> {
     content: string;
   };
 
-  data.links = links;
+  if (links) {
+    data.links = links;
+  }
 
   // strip title from content
   if (content.startsWith("# ")) {
