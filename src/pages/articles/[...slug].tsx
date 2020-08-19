@@ -62,15 +62,7 @@ export default function ArticlePage({ meta, content }: Props) {
               <TitleSkeleton />
             ) : (
               <div className="mt-4 space-y-2">
-                <h1
-                  className="text-xl leading-normal font-semibold"
-                  style={{
-                    background: "linear-gradient(45deg, #ED8936, #F6E05E)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
+                <h1 className="text-xl leading-normal font-semibold bg-gradient-to-r from-orange-500 to-yellow-500 text-transparent bg-clip-text">
                   {meta.title}
                 </h1>
 

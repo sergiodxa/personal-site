@@ -38,16 +38,7 @@ export function Navigation({
       <nav className="flex py-4 items-baseline space-x-2">
         <Link href="/">
           <a aria-current={isHome ? "page" : "false"}>
-            <span
-              className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline"
-              style={{
-                background: "linear-gradient(90deg, #ED8936, #F6E05E)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                height: 27,
-              }}
-            >
+            <span className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline bg-gradient-to-r from-orange-500 to-yellow-500 text-transparent bg-clip-text">
               Sergio Xalambrí
             </span>
             <Memoji
