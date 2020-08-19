@@ -35,5 +35,6 @@ export async function getListOfArticles(): Promise<Article[]> {
       date: new Date(meta.date).toJSON() ?? note.created_at,
       published: true,
       slug: `/articles/${note.path}`,
-    }));
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));
 }
