@@ -1207,10 +1207,10 @@
   resolved "https://registry.yarnpkg.com/@types/match-sorter/-/match-sorter-4.0.0.tgz#8a7286019d4e328c09422bb2af2403a94b7038fd"
   integrity sha512-JK7HNHXZA7i/nEp6fbNAxoX/1j1ysZXmv2/nlkt2UpX1LiUWKLtyt/dMmDTlMPR6t6PkwMmIr2W2AAyu6oELNw==
 
-"@types/node@>= 8", "@types/node@^14.0.1":
-  version "14.0.27"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
-  integrity sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
+"@types/node@>= 8", "@types/node@^14.6.0":
+  version "14.6.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.0.tgz#7d4411bf5157339337d7cff864d9ff45f177b499"
+  integrity sha512-mikldZQitV94akrc4sCcSjtJfsTKt4p+e/s0AGscVA6XArQ9kFclP+ZiYUMnq987rc6QlYxXv/EivqlfSLxpKA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -2217,10 +2217,10 @@ clsx@^1.1.1:
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
-collected-notes@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-1.4.2.tgz#44c50f23ed7c8abb4fe498b2f05ad2d3502a9650"
-  integrity sha512-MgFK5S6dKWdCsnUoa926iuwT1WZiRtc3qacaaIetkrVh1gvaANB6UHIsNZ+aIhgz96EQZV24VUKnXGk46tnNng==
+collected-notes@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-1.6.0.tgz#c1f507daec0372494ca0c5723e8616d56cdad270"
+  integrity sha512-2IrekuuAJCKy3m3jyM9IdydhDEtfVMgFe8CnxTgHKD802nos/v+KTWZy1AcS1Dbxpk5BfiGXgKVo5rHD9s+klA==
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -6014,10 +6014,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-tailwindcss@^1.4.6:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.6.2.tgz#352da9e1b0d9154c95ce12483daa1c2fa1f1eea8"
-  integrity sha512-Cpa0kElG8Sg5sJSvTYi2frmIQZq0w37RLNNrYyy/W6HIWKspqSdTfb9tIN6X1gm4KV5a+TE/n7EKmn5Q9C7EUQ==
+tailwindcss@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.7.1.tgz#2660f71e2d6735a311965a5b8e574f0b051c3963"
+  integrity sha512-gc8dvU/Oxp+z+ow3+UblVE3MB40xmau3yIMDTM4VRVhW5Rqb2tDY7MyDH9YjjnlvBqtvQaWseLk7kk6Gpk3NPA==
   dependencies:
     "@fullhuman/postcss-purgecss" "^2.1.2"
     autoprefixer "^9.4.5"
@@ -6035,6 +6035,7 @@ tailwindcss@^1.4.6:
     postcss-js "^2.0.0"
     postcss-nested "^4.1.1"
     postcss-selector-parser "^6.0.0"
+    postcss-value-parser "^4.1.0"
     pretty-hrtime "^1.0.3"
     reduce-css-calc "^2.1.6"
     resolve "^1.14.2"
