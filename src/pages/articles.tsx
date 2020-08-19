@@ -24,14 +24,12 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   return {
     revalidate: 1,
     props: {
-      articles: articles
-        .filter((article) => article.published)
-        .map<ReducerArticle>((article) => ({
-          slug: article.slug,
-          title: article.title,
-          description: article.description ?? "",
-          tags: article.tags ?? "",
-        })),
+      articles: articles.map<ReducerArticle>((article) => ({
+        slug: article.slug,
+        title: article.title,
+        description: article.description ?? "",
+        tags: article.tags ?? "",
+      })),
     },
   };
 }
@@ -63,7 +61,7 @@ function ArticleItem({
           {article.tags
             .split(/\,\s?/)
             .map((tag) => tag.toLowerCase())
-            .sort()
+            .sort((a, b) => a.localeCompare(b))
             .map((tag) => (
               <button
                 onClick={() => onTagClick(tag)}
@@ -80,7 +78,6 @@ function ArticleItem({
 
 export default function Articles(props: Props) {
   // states
-  const { asPath } = useRouter();
   const [memoji, setMemoji] = React.useState<MemojiName>("working");
   const [filter, setFilter] = React.useState("");
   const [showAMA, setShowAMA] = React.useState(false);
@@ -103,14 +100,6 @@ export default function Articles(props: Props) {
     }
     setFilter(tag);
   }
-  // effects
-  React.useEffect(() => {
-    if (filter !== "" && !showAMA) {
-      Router.replace("/articles", `/articles?search=${filter}`);
-    } else if (asPath !== "articles") {
-      Router.replace("/articles", `/articles`);
-    }
-  }, [filter]);
   // render
   return (
     <>
