@@ -11,7 +11,7 @@ import { Header } from "components/header";
 import { DesktopOnly } from "components/media-query";
 import { AMAForm } from "components/ama-form";
 import { getListOfArticles } from "utils/get-list-of-articles";
-import { Article } from "types/article";
+import { Article } from "types";
 
 type Props = {
   links: Array<{ title: string; url: string }>;

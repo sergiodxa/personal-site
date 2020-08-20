@@ -2,7 +2,7 @@ import * as React from "react";
 import { GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { getArticle } from "utils/get-article";
-import { Article } from "types/article";
+import { Article } from "types";
 import { getListOfArticles } from "utils/get-list-of-articles";
 import { Header } from "components/header";
 import { Container } from "components/container";

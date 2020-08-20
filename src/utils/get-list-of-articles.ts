@@ -1,5 +1,5 @@
 import matter from "gray-matter";
-import { Article } from "types/article";
+import { Article } from "types";
 import { collectedNotes } from "collected-notes";
 
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);

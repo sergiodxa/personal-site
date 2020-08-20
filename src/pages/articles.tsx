@@ -10,7 +10,7 @@ import { Spacer } from "components/spacer";
 import { DesktopOnly } from "components/media-query";
 import { Memoji, MemojiName } from "components/memoji";
 import { getListOfArticles } from "utils/get-list-of-articles";
-import { Article } from "types/article";
+import { Article } from "types";
 import { AMAForm } from "components/ama-form";
 
 type ReducerArticle = Pick<Article, "slug" | "title" | "description" | "tags">;
