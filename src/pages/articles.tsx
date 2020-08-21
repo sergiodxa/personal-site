@@ -64,6 +64,7 @@ function ArticleItem({
             .sort((a, b) => a.localeCompare(b))
             .map((tag) => (
               <button
+                key={tag}
                 onClick={() => onTagClick(tag)}
                 className="text-xs bg-gray-900 text-blue-400 px-2 leading-relaxed inline-block"
               >
