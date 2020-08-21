@@ -18,29 +18,15 @@ type Props = {
   articles: Article[];
 };
 
-const noop = () => {};
-
-function Hoverable({ children, whileHover }) {
-  const rollback = React.useRef<React.MouseEventHandler>(noop);
-  function startHover(event) {
-    rollback.current = whileHover(event);
-  }
-  function endHover(event) {
-    if (typeof rollback.current === "function") rollback.current(event);
-  }
-  return (
-    <span
-      onMouseEnter={startHover}
-      onMouseLeave={endHover}
-      className="underline"
-      style={{ textDecorationStyle: "wavy", textDecorationColor: "#D53F8C" }}
-    >
-      {children}
-    </span>
-  );
-}
-
-function ArticleItem({ title, url }: { title: string; url: string }) {
+function ArticleItem({
+  title,
+  url,
+  path,
+}: {
+  title: string;
+  url: string;
+  path?: string;
+}) {
   if (url.startsWith("http")) {
     return (
       <article className="">
@@ -57,7 +43,7 @@ function ArticleItem({ title, url }: { title: string; url: string }) {
 
   return (
     <article className="">
-      <Link href={url}>
+      <Link as={url} href={path}>
         <a className="text-white underline font-medium hover:no-underline visited:text-gray-500">
           <h3 className="text-sm">{title}</h3>
         </a>
@@ -85,14 +71,6 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
 export default function Home({ links, articles }: Props) {
   const [memoji, setMemoji] = React.useState<MemojiName>("happy");
 
-  const workHover = React.useCallback(
-    function workHover() {
-      setMemoji("working");
-      return () => setMemoji(memoji);
-    },
-    [memoji]
-  );
-
   return (
     <>
       <Head>
@@ -116,13 +94,13 @@ export default function Home({ links, articles }: Props) {
                 Hi there! I'm Sergio Xalambrí.
                 <br />
                 I'm a Software Engineer, specialized in Frontend.
-                <br />
-                <Hoverable whileHover={workHover}>
-                  I currently work at{" "}
-                  <a href="https://able.co" className="text-orange-500">
-                    Able
-                  </a>
-                </Hoverable>
+                <br />I currently work at{" "}
+                <a
+                  href="https://able.co"
+                  className="text-orange-400 underline hover:text-orange-500"
+                >
+                  Able
+                </a>
                 , building products to help other people.
               </p>
             </div>
@@ -158,6 +136,7 @@ export default function Home({ links, articles }: Props) {
                   key={link.slug}
                   title={link.title}
                   url={link.slug}
+                  path="/articles/[...slug]"
                 />
               ))}
             </section>

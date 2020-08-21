@@ -38,7 +38,7 @@ export function Navigation({
       <nav className="flex py-4 items-baseline space-x-2">
         <Link href="/">
           <a aria-current={isHome ? "page" : "false"}>
-            <span className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline bg-gradient-to-r from-orange-500 to-yellow-500 text-transparent bg-clip-text">
+            <span className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline bg-gradient-to-r from-orange-400 to-yellow-400 text-transparent bg-clip-text">
               Sergio Xalambrí
             </span>
             <Memoji
@@ -57,7 +57,7 @@ export function Navigation({
               <li key={link.href} className="px-2 flex-shrink-0">
                 <Link href={link.href}>
                   <a
-                    className={clsx("text-orange-500 font-semibold", {
+                    className={clsx("text-orange-400 font-semibold", {
                       "no-underline": isActive,
                       underline: !isActive,
                     })}

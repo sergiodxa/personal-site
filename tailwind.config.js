@@ -15,4 +15,10 @@ module.exports = {
     textColor: ["responsive", "hover", "focus", "visited"],
   },
   plugins: [require("@tailwindcss/typography")],
+  future: {
+    removeDeprecatedGapUtilities: true,
+  },
+  experimental: {
+    uniformColorPalette: true,
+  },
 };
