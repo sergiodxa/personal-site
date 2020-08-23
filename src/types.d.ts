@@ -42,8 +42,6 @@ export type ArticleListPageProps = {
   >;
 };
 
-export type SearchPageProps = { site: Site };
-
 export type HomePageProps = {
   site: Site;
   bookmarks: Bookmark[];
