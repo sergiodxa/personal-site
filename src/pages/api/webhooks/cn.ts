@@ -38,15 +38,34 @@ async function regenerateList({ event }: NoteEvent) {
   }
 }
 
+async function regenerateHome({ event }: NoteEvent) {
+  if (
+    event !== "note-updated" &&
+    event !== "note-created" &&
+    event !== "note-deleted"
+  ) {
+    return;
+  }
+
+  const url = format({ host, protocol, pathname: `/` });
+
+  try {
+    await fetch(url);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default async function webhookCollectedNotes(
   req: NextApiRequest,
   res: NextApiResponse<"">
 ) {
-  const { event, data } = req.body as NoteEvent;
+  const event = req.body as NoteEvent;
 
   await Promise.all([
-    regenerateNote({ event, data }),
-    regenerateList({ event, data }),
+    regenerateHome(event),
+    regenerateNote(event),
+    regenerateList(event),
   ]);
 
   res.send("");
