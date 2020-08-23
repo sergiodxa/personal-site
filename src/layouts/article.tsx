@@ -16,33 +16,17 @@ export function ArticleLayout({ meta, body, links }: ArticlePageProps) {
       <Header>
         <Container>
           <Navigation current="articles" title="Articles" />
-
-          <section className="flex items-start mb-4 space-x-4">
-            {isFallback ? (
-              <TitleSkeleton />
-            ) : meta?.description ? (
-              <p className="mt-6 text-xl pl-2 py-1">{meta.description}</p>
-            ) : null}
-
-            <Spacer />
-
-            <figure className="flex-shrink-0">
-              <DesktopOnly>
-                <Memoji name="happy" width={210} />
-              </DesktopOnly>
-            </figure>
-          </section>
         </Container>
       </Header>
 
       <Container>
-        <section className="space-y-10 -mt-6 md:-mt-12 bg-white p-4 rounded-lg border-black border-4 relative mb-6">
+        <section className="space-y-10 -mt-8 bg-white p-4 rounded-lg border-black border-4 relative mb-6">
           {isFallback ? (
             <ContentSkeleton />
           ) : (
             <>
               <article
-                className="prose prose-sm md:prose lg:prose-lg"
+                className="prose prose-sm md:prose"
                 dangerouslySetInnerHTML={{
                   __html: body,
                 }}
