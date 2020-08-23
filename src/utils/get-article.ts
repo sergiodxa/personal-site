@@ -1,25 +1,20 @@
 import matter from "gray-matter";
-import { Article } from "types";
+import { Meta } from "types";
 import { collectedNotes, Note } from "collected-notes";
 
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
-async function readFromCN(slug: string): Promise<readonly [Article, string]> {
+async function readFromCN(slug: string): Promise<readonly [Meta, string]> {
   const note = (await cn.read(process.env.CN_SITE_PATH, slug, "json")) as Note;
   const links = await cn.links(Number(process.env.SITE_ID), note.id);
-
-  let { data, content } = (matter(note.body) as unknown) as {
-    data: Article;
-    content: string;
+  const body = await cn.body(Number(process.env.SITE_ID), note.id);
+console.log(body);
+  let { data } = (matter(note.body) as unknown) as {
+    data: Meta;
   };
 
   if (links) {
     data.links = links;
-  }
-
-  // strip title from content
-  if (content.startsWith("# ")) {
-    content = content.split("\n").slice(1).join("\n");
   }
 
   // merge note data with frontmatter metadata
@@ -28,11 +23,11 @@ async function readFromCN(slug: string): Promise<readonly [Article, string]> {
 
   data.cn = true;
 
-  return [JSON.parse(JSON.stringify(data)), content] as const;
+  return [JSON.parse(JSON.stringify(data)), body.body] as const;
 }
 
 export async function getArticle(
   slug: string
-): Promise<readonly [Article, string]> {
+): Promise<readonly [Meta, string]> {
   return await readFromCN(slug);
 }

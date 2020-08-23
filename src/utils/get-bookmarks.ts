@@ -1,6 +1,5 @@
 import Airtable from "airtable";
-
-export type Bookmark = { title: string; url: string };
+import { Bookmark } from "types";
 
 const base = new Airtable({
   apiKey: process.env.AIRTABLE_API_KEY,

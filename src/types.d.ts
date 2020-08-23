@@ -1,6 +1,8 @@
-import { Link } from "collected-notes";
+import { Note, Site, Link, HTML } from "collected-notes";
 
-export type Article = {
+export type Bookmark = { title: string; url: string };
+
+export type Meta = {
   slug: string;
   title: string;
   description?: string;
@@ -21,4 +23,31 @@ export type Article = {
   };
   cn?: boolean;
   links?: Link[];
+};
+
+export type ArticlePageProps = {
+  note: Note;
+  site: Site;
+  body: HTML;
+  links: Link[];
+  meta: Meta;
+};
+
+export type ArticlePageQuery = { path: string[] };
+
+export type ArticleListPageProps = {
+  site: Site;
+  notes: Array<
+    { meta: Pick<Meta, "slug" | "title" | "description" | "tags"> } & Note
+  >;
+};
+
+export type SearchPageProps = { site: Site };
+
+export type HomePageProps = {
+  site: Site;
+  bookmarks: Bookmark[];
+  notes: Array<
+    { meta: Pick<Meta, "slug" | "title" | "description" | "tags"> } & Note
+  >;
 };
