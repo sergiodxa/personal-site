@@ -1,6 +1,5 @@
 import * as React from "react";
 import { GetStaticPropsResult } from "next";
-import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import matchSorter from "match-sorter";
 import { Navigation } from "components/navigation";
