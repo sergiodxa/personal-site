@@ -3,9 +3,6 @@ import { useRouter } from "next/router";
 import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
-import { Spacer } from "components/spacer";
-import { DesktopOnly } from "components/media-query";
-import { Memoji } from "components/memoji";
 import { parse } from "url";
 import { ArticlePageProps } from "types";
 

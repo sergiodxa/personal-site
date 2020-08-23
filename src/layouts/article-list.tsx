@@ -7,7 +7,7 @@ import { Container } from "components/container";
 import { Spacer } from "components/spacer";
 import { DesktopOnly } from "components/media-query";
 import { Memoji, MemojiName } from "components/memoji";
-import { ArticleListPageProps, Meta } from "types";
+import { ArticleListPageProps } from "types";
 import { AMAForm } from "components/ama-form";
 
 function ArticleItem({
