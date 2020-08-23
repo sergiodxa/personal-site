@@ -1,6 +1,6 @@
 import * as React from "react";
-import Link from "next/link";
-import { getBookmarks } from "utils/get-bookmarks";
+import { GetStaticPropsResult } from "next";
+import { getBookmarks, Bookmark } from "utils/get-bookmarks";
 import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
@@ -8,23 +8,17 @@ import { Spacer } from "components/spacer";
 import { DesktopOnly } from "components/media-query";
 import { Memoji } from "components/memoji";
 import matchSorter from "match-sorter";
-import Router from "next/router";
-
-type Link = {
-  url: string;
-  title: string;
-};
 
 type Props = {
-  links: Link[];
+  bookmarks: Bookmark[];
 };
 
-export async function getStaticProps(): Promise<{ props: Props }> {
-  const links = await getBookmarks();
-  return { props: { links } };
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+  const bookmarks = await getBookmarks();
+  return { props: { bookmarks }, revalidate: 1 };
 }
 
-function LinkItem({ link }: { link: Link }) {
+function BookmarkItem({ link }: { link: Bookmark }) {
   return (
     <article className="space-y-2">
       <a
@@ -46,18 +40,10 @@ export default function Bookmarks(props: Props) {
     event.preventDefault();
   }
   // computed
-  const filteredLinks = matchSorter(props.links, filter, {
+  const filteredBookmarks = matchSorter(props.bookmarks, filter, {
     keys: ["title"],
     threshold: matchSorter.rankings.MATCHES,
   });
-  // effects
-  React.useEffect(() => {
-    if (filter !== "") {
-      Router.replace("/bookmarks", `/bookmarks?search=${filter}`);
-    } else {
-      Router.replace("/bookmarks", `/bookmarks`);
-    }
-  }, [filter]);
   // render
   return (
     <>
@@ -127,15 +113,15 @@ export default function Bookmarks(props: Props) {
                 className="text-xs text-gray-500 flex-shrink-0"
                 style={{ lineHeight: "32px" }}
               >
-                {filteredLinks.length} matching articles
+                {filteredBookmarks.length} matching bookmarks
               </p>
             </footer>
           </form>
         </section>
 
         <section className="space-y-2 mb-12 px-4 border-l-4 border-r-4 border-black">
-          {filteredLinks.map((link) => (
-            <LinkItem key={link.url} link={link} />
+          {filteredBookmarks.map((link) => (
+            <BookmarkItem key={link.url} link={link} />
           ))}
         </section>
       </Container>
