@@ -5,7 +5,7 @@ import Head from "next/head";
 import { Navigation } from "components/navigation";
 import { Memoji, MemojiName, memojis } from "components/memoji";
 import { Spacer } from "components/spacer";
-import { getBookmarks } from "utils/get-bookmarks";
+import { getBookmarks, Bookmark } from "utils/get-bookmarks";
 import { Container } from "components/container";
 import { Header } from "components/header";
 import { DesktopOnly } from "components/media-query";
@@ -14,7 +14,7 @@ import { getListOfArticles } from "utils/get-list-of-articles";
 import { Article } from "types";
 
 type Props = {
-  links: Array<{ title: string; url: string }>;
+  bookmarks: Bookmark[];
   articles: Article[];
 };
 
@@ -29,7 +29,7 @@ function ArticleItem({
 }) {
   if (url.startsWith("http")) {
     return (
-      <article className="">
+      <article>
         <a
           href={url}
           className="text-white underline font-medium hover:no-underline visited:text-gray-500"
@@ -42,7 +42,7 @@ function ArticleItem({
   }
 
   return (
-    <article className="">
+    <article>
       <Link as={url} href={path}>
         <a className="text-white underline font-medium hover:no-underline visited:text-gray-500">
           <h3 className="text-sm">{title}</h3>
@@ -53,13 +53,13 @@ function ArticleItem({
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-  const [links, articles] = await Promise.all([
-    getBookmarks(),
+  const [bookmarks, articles] = await Promise.all([
+    getBookmarks(10),
     getListOfArticles(),
   ]);
   return {
     props: {
-      links: links.slice(0, 10),
+      bookmarks,
       articles: articles
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
         .slice(0, 10),
@@ -68,7 +68,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
   };
 }
 
-export default function Home({ links, articles }: Props) {
+export default function Home({ bookmarks, articles }: Props) {
   const [memoji, setMemoji] = React.useState<MemojiName>("happy");
 
   return (
@@ -158,7 +158,7 @@ export default function Home({ links, articles }: Props) {
             </header>
 
             <section className="space-y-2">
-              {links.map((link) => (
+              {bookmarks.map((link) => (
                 <ArticleItem key={link.url} title={link.title} url={link.url} />
               ))}
             </section>

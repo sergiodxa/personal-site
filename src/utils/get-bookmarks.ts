@@ -1,14 +1,23 @@
-import fs from "fs";
-import { promisify } from "util";
-import { resolve } from "path";
-import matter from "gray-matter";
+import Airtable from "airtable";
 
-const readFile = promisify(fs.readFile);
+export type Bookmark = { title: string; url: string };
 
-type Link = { title: string; url: string; };
+const base = new Airtable({
+  apiKey: process.env.AIRTABLE_API_KEY,
+}).base(process.env.AIRTABLE_BASE);
 
-export async function getBookmarks(): Promise<Link[]> {
-  const linksYML = await readFile(resolve("./links.yml"), "utf-8");
-  const { links } = matter(linksYML).data;
-  return links;
+export async function getBookmarks(limit = 100): Promise<Bookmark[]> {
+  const table = base("links") as Airtable.Table<Bookmark>;
+
+  const records = await table
+    .select({
+      maxRecords: limit,
+      sort: [{ field: "created_at", direction: "desc" }],
+    })
+    .firstPage();
+
+  return records.map((record) => ({
+    title: record.fields.title,
+    url: record.fields.url,
+  }));
 }

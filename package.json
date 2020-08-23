@@ -31,7 +31,9 @@
   "dependencies": {
     "@octokit/rest": "^18.0.3",
     "@tailwindcss/typography": "^0.2.0",
+    "@types/airtable": "^0.8.0",
     "@types/match-sorter": "^4.0.0",
+    "airtable": "^0.9.0",
     "clsx": "^1.1.1",
     "collected-notes": "^1.7.0",
     "globby": "^11.0.0",
