@@ -49,3 +49,7 @@ export type HomePageProps = {
     { meta: Pick<Meta, "slug" | "title" | "description" | "tags"> } & Note
   >;
 };
+
+export type BookmarksPageProps = {
+  bookmarks: Bookmark[];
+}
