@@ -9,7 +9,7 @@ import { ArticlePageProps } from "types";
 
 export function ArticleLayout({ body, links, meta }: ArticlePageProps) {
   const { isFallback } = useRouter();
-  const isAMA = !isFallback && meta.tags.includes("ama");
+  const isAMA = !isFallback && meta?.tags?.includes("ama");
   return (
     <>
       <Header>
