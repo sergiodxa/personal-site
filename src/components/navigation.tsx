@@ -7,10 +7,10 @@ import { MemojiName, Memoji } from "./memoji";
 
 const links: Array<{ href: string; label: string }> = [
   { href: "/articles", label: "Articles" },
-  // { href: "/talks", l/abel: "Talks" },
-  // { href: "/oss", label: "Open Source" },
   { href: "/bookmarks", label: "Bookmarks" },
-  // { href: "/uses", label: "Stack" },
+  { href: "/ama", label: "Ask Me!" },
+  { href: "/uses", label: "Uses" },
+  // { href: "/oss", label: "Open Source" },
   // { href: "/hire", label: "Hire me!" },
 ];
 
@@ -52,7 +52,7 @@ export function Navigation({
 
         <ul className="flex text-sm overflow-x-auto">
           {links.map((link) => {
-            const isActive = current === link.label.toLowerCase();
+            const isActive = current.toLowerCase() === link.label.toLowerCase();
             return (
               <li key={link.href} className="px-2 flex-shrink-0">
                 <Link href={link.href}>
