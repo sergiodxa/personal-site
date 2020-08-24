@@ -22,6 +22,7 @@ async function main() {
    * @type {Array<{ title:string; url:string }>}
    */
   const links = matter(raw).data.links;
+  
   for await (const link of links.reverse()) {
     const record = { fields: { ...link, created_at: new Date() } };
     await table.create([record]);
