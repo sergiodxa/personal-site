@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Header } from "components/header";
 import { Container } from "components/container";
@@ -6,8 +7,9 @@ import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
-export function ArticleLayout({ body, links }: ArticlePageProps) {
+export function ArticleLayout({ body, links, meta }: ArticlePageProps) {
   const { isFallback } = useRouter();
+  const isAMA = !isFallback && meta.tags.includes("ama");
   return (
     <>
       <Header>
@@ -22,6 +24,18 @@ export function ArticleLayout({ body, links }: ArticlePageProps) {
             <ContentSkeleton />
           ) : (
             <>
+              {isAMA ? (
+                <aside className="prose prose-sm md:prose">
+                  <blockquote>
+                    Note: This is an answer to an Ask Me Anything request I
+                    received, you can ask me anything going to{" "}
+                    <Link href="/ama">
+                      <a>sergiodxa.com/ama</a>
+                    </Link>
+                    .
+                  </blockquote>
+                </aside>
+              ) : null}
               <article
                 className="prose prose-sm md:prose"
                 dangerouslySetInnerHTML={{
@@ -39,7 +53,7 @@ export function ArticleLayout({ body, links }: ArticlePageProps) {
                       const url = parse(link.url);
 
                       return (
-                        <li key={link.id} className="mt-1 ml-4">
+                        <li key={link.id} className="mt-1 ml-4 truncate">
                           <a
                             className="text-gray-900 font-semibold underline"
                             href={link.url}
