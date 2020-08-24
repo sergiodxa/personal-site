@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
-import { parse } from "url";
+import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
 export function ArticleLayout({ meta, body, links }: ArticlePageProps) {
@@ -35,21 +35,29 @@ export function ArticleLayout({ meta, body, links }: ArticlePageProps) {
                   </p>
 
                   <ul>
-                    {links.map((link) => (
-                      <li key={link.id} className="mt-1 ml-4">
-                        <a
-                          className="text-gray-900 font-semibold underline"
-                          href={link.url}
-                          title={link.title}
-                          rel="noopener noreferrer"
-                        >
-                          {link.host}
-                        </a>
-                        <span className="text-gray-600">
-                          {parse(link.url).pathname}
-                        </span>
-                      </li>
-                    ))}
+                    {links.map((link) => {
+                      const url = parse(link.url);
+
+                      return (
+                        <li key={link.id} className="mt-1 ml-4">
+                          <a
+                            className="text-gray-900 font-semibold underline"
+                            href={link.url}
+                            title={link.title}
+                            rel="noopener noreferrer"
+                          >
+                            {link.host}
+                          </a>
+                          <span className="text-gray-600">
+                            {format({
+                              pathname: url.pathname,
+                              query: url.query,
+                              hash: url.hash,
+                            })}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </aside>
               ) : null}
@@ -75,17 +83,6 @@ export function ArticleLayout({ meta, body, links }: ArticlePageProps) {
         </Container>
       ) : null}
     </>
-  );
-}
-
-function TitleSkeleton() {
-  return (
-    <div
-      className="animate-pulse h-5 bg-gray-400 rounded w-3/5"
-      style={{
-        marginTop: 32,
-      }}
-    />
   );
 }
 
