@@ -6,17 +6,16 @@ import matter from "gray-matter";
 
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
+const SITE_PATH = process.env.SITE_PATH;
+
 export const getStaticProps: GetStaticProps<
   ArticlePageProps,
   ArticlePageQuery
 > = async ({ params }) => {
-  const [{ site }, note] = await Promise.all([
+  const [{ site }, { note, body }, links] = await Promise.all([
     cn.site(process.env.CN_SITE_PATH),
-    cn.read(process.env.CN_SITE_PATH, params.path.join("/")),
-  ]);
-  const [links, { body }] = await Promise.all([
-    cn.links(site.id, note.id, "json"),
-    cn.body(site.id, note.id),
+    cn.body(process.env.CN_SITE_PATH, params.path.join("/")),
+    cn.links(process.env.CN_SITE_PATH, params.path.join("/"), "json"),
   ]);
   const meta = JSON.parse(JSON.stringify(matter(note.body).data)) as Meta;
   return { props: { note, site, body, links, meta }, revalidate: 1 };
