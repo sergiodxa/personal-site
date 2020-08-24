@@ -9,13 +9,7 @@ const matter = require("gray-matter");
 
 const readFile = promisify(fs.readFile);
 
-const {
-  CN_EMAIL,
-  CN_TOKEN,
-  CN_SITE_ID,
-  CN_SITE_PATH,
-  CONTENT_DIR,
-} = process.env;
+const { CN_EMAIL, CN_TOKEN, CN_SITE_PATH, CONTENT_DIR } = process.env;
 
 async function main() {
   const cn = collectedNotes(CN_EMAIL, CN_TOKEN);
@@ -37,7 +31,7 @@ async function main() {
           body: matter.stringify(`# ${data.title}\n${content}`, data),
           visibility,
         },
-        Number(CN_SITE_ID)
+        CN_SITE_PATH
       );
     })
   );
