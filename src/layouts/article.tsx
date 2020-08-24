@@ -6,7 +6,7 @@ import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
-export function ArticleLayout({ meta, body, links }: ArticlePageProps) {
+export function ArticleLayout({ body, links }: ArticlePageProps) {
   const { isFallback } = useRouter();
   return (
     <>
