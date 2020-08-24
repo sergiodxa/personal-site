@@ -25,6 +25,11 @@ export type Meta = {
   links?: Link[];
 };
 
+export type ReducedMeta = Pick<
+  Meta,
+  "slug" | "title" | "description" | "tags" | "date"
+>;
+
 export type ArticlePageProps = {
   note: Note;
   site: Site;
@@ -37,19 +42,20 @@ export type ArticlePageQuery = { path: string[] };
 
 export type ArticleListPageProps = {
   site: Site;
-  notes: Array<
-    { meta: Pick<Meta, "slug" | "title" | "description" | "tags"> } & Note
-  >;
+  notes: Array<{ meta: ReducedMeta } & Note>;
 };
 
 export type HomePageProps = {
   site: Site;
   bookmarks: Bookmark[];
-  notes: Array<
-    { meta: Pick<Meta, "slug" | "title" | "description" | "tags"> } & Note
-  >;
+  notes: Array<{ meta: ReducedMeta } & Note>;
 };
 
 export type BookmarksPageProps = {
   bookmarks: Bookmark[];
-}
+};
+
+export type AMAPageProps = {
+  site: Site;
+  notes: Array<{ meta: ReducedMeta } & Note>;
+};

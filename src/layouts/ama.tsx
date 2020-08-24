@@ -7,8 +7,10 @@ import { Container } from "components/container";
 import { Header } from "components/header";
 import { DesktopOnly } from "components/media-query";
 import { AMAForm } from "components/ama-form";
+import { AMAPageProps } from "types";
+import { ArticleItem } from "components/article-item";
 
-export function AMALayout() {
+export function AMALayout(props: AMAPageProps) {
   const [memoji, setMemoji] = React.useState<MemojiName>("happy");
 
   return (
@@ -59,6 +61,12 @@ export function AMALayout() {
       <Container>
         <section className="space-y-2 mb-4 -mt-6 md:-mt-12 bg-black p-4 rounded-lg border-gray-900 border-4">
           <AMAForm setMemoji={setMemoji} />
+        </section>
+
+        <section className="space-y-4 mb-12 px-4 border-l-4 border-r-4 border-black">
+          {props.notes.map((article) => (
+            <ArticleItem key={article.id} article={article.meta} />
+          ))}
         </section>
       </Container>
     </>

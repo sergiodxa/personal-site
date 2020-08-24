@@ -1,5 +1,4 @@
 import * as React from "react";
-import Link from "next/link";
 import matchSorter from "match-sorter";
 import { Navigation } from "components/navigation";
 import { Header } from "components/header";
@@ -9,50 +8,7 @@ import { DesktopOnly } from "components/media-query";
 import { Memoji, MemojiName } from "components/memoji";
 import { ArticleListPageProps } from "types";
 import { AMAForm } from "components/ama-form";
-
-function ArticleItem({
-  article,
-  onTagClick,
-}: {
-  article: ArticleListPageProps["notes"][0]["meta"];
-  onTagClick(tag: string): void;
-}) {
-  return (
-    <article>
-      <header>
-        <Link href={article.slug}>
-          <a className="font-semibold underline hover:no-underline text-white visited:text-gray-500">
-            <h3 className="text-lg">{article.title}</h3>
-          </a>
-        </Link>
-      </header>
-
-      {article.description ? (
-        <p className="border-l-4 border-orange-500 pl-2 py-1 leading-normal text-sm -ml-3">
-          {article.description}
-        </p>
-      ) : null}
-
-      {article.tags ? (
-        <footer className="space-x-2">
-          {article.tags
-            .split(/\,\s?/)
-            .map((tag) => tag.toLowerCase())
-            .sort((a, b) => a.localeCompare(b))
-            .map((tag) => (
-              <button
-                key={tag}
-                onClick={() => onTagClick(tag)}
-                className="text-xs bg-gray-900 text-blue-400 px-2 leading-relaxed inline-block"
-              >
-                {tag}
-              </button>
-            ))}
-        </footer>
-      ) : null}
-    </article>
-  );
-}
+import { ArticleItem } from "components/article-item";
 
 export function ArticlesListLayout(props: ArticleListPageProps) {
   // states

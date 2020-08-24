@@ -1,13 +1,13 @@
 import { GetStaticProps } from "next";
 import { collectedNotes } from "collected-notes";
-import { ArticleListPageProps, Meta } from "types";
+import { HomePageProps, Meta } from "types";
 import { HomeLayout } from "layouts/home";
 import { getBookmarks } from "utils/get-bookmarks";
 import matter from "gray-matter";
 
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
-export const getStaticProps: GetStaticProps<ArticleListPageProps> = async () => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const [bookmarks, { site, notes }] = await Promise.all([
     getBookmarks(10),
     cn.site(process.env.CN_SITE_PATH),
@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps<ArticleListPageProps> = async () => 
             description: meta.description ?? "",
             date: new Date(meta.date).toJSON() ?? note.created_at,
             slug: `/articles/${note.path}`,
+            tags: meta.tags ?? "",
           },
         }))
         .sort(

@@ -33,6 +33,7 @@ export const getStaticProps: GetStaticProps<ArticleListPageProps> = async () => 
             description: meta.description ?? "",
             date: new Date(meta.date).toJSON() ?? note.created_at,
             slug: `/articles/${note.path}`,
+            tags: meta.tags ?? "",
           },
         }))
         .sort((a, b) => a.title.localeCompare(b.title)),
