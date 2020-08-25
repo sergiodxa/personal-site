@@ -8,6 +8,7 @@ import { ArticlePageProps } from "types";
 
 export function ArticleLayout({ body, links, meta }: ArticlePageProps) {
   const isAMA = meta?.tags?.includes("ama");
+  const isDraft = meta.tags?.includes("draft");
   return (
     <>
       <Header>
@@ -27,6 +28,14 @@ export function ArticleLayout({ body, links, meta }: ArticlePageProps) {
                   <a>sergiodxa.com/ama</a>
                 </Link>
                 .
+              </blockquote>
+
+              <blockquote>
+                Warning: This article is still in draft, sentences may be
+                incomplete and ideas may be still in the open, typos are
+                expected.{" "}
+                <a href="https://twitter.com/sergiodxa">Follow me on Twitter</a>{" "}
+                to know when it's ready.
               </blockquote>
             </aside>
           ) : null}
