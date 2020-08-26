@@ -1,5 +1,4 @@
 import * as React from "react";
-import Head from "next/head";
 import Link from "next/link";
 import { Header } from "components/header";
 import { Container } from "components/container";
@@ -7,29 +6,19 @@ import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
-function formatOGURL(title: string, description: string) {
-  const eTitle = encodeURIComponent(title);
-  const eDescription = encodeURIComponent(description);
-  return `https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26title%3D$${eTitle}%26description%3D${eDescription}`;
-}
-
-export function ArticleLayout({ body, links, meta }: ArticlePageProps) {
-  const isAMA = meta?.tags?.includes("ama");
+export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
+  const isAMA = meta.tags?.includes("ama");
   const isDraft = meta.tags?.includes("draft");
   return (
     <>
-      <Head>
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
-        <meta
-          property="og:image"
-          content={formatOGURL(meta.title, meta.description)}
-        />
-      </Head>
-
       <Header>
         <Container>
-          <Navigation current="articles" title="Articles" />
+          <Navigation
+            current="articles"
+            title={note.title ?? "Articles"}
+            description={meta.description ?? note.headline}
+            path={`/articles/${meta.slug ?? note.path}`}
+          />
         </Container>
       </Header>
 

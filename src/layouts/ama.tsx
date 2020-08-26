@@ -28,7 +28,13 @@ export function AMALayout(props: AMAPageProps) {
 
       <Header>
         <Container>
-          <Navigation current="Ask Me!" memoji={memoji} />
+          <Navigation
+            current="Ask Me!"
+            memoji={memoji}
+            title="Ask me Anything!"
+            description="Ask me any question, I will wrote an article about it."
+            path="/ama"
+          />
 
           <aside className="flex items-start mb-4">
             <div className="mt-4">

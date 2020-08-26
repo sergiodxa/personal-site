@@ -1,4 +1,5 @@
 import * as React from "react";
+import { resolve } from "url";
 import clsx from "clsx";
 import Link from "next/link";
 import Head from "next/head";
@@ -14,16 +15,27 @@ const links: Array<{ href: string; label: string }> = [
   // { href: "/hire", label: "Hire me!" },
 ];
 
+function formatOGURL(title: string, description: string) {
+  const eTitle = encodeURIComponent(title);
+  const eDescription = encodeURIComponent(description);
+  return `https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26title%3D$${eTitle}%26description%3D${eDescription}`;
+}
+
 export function Navigation({
   current,
   title,
+  description = "T-Shaped Frontend Engineer",
+  path = "/",
   memoji = "happy",
 }: {
   current: string;
   title?: string;
+  description?: string;
+  path?: string;
   memoji?: MemojiName;
 }) {
-  const isHome = current === "home";
+  const isHome = current.toLowerCase() === "home";
+  const url = resolve("https://sergiodxa/", path);
 
   return (
     <>
@@ -33,6 +45,28 @@ export function Navigation({
         ) : (
           <title>Sergio Xalambrí</title>
         )}
+
+        <meta name="description" content={description} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={title ?? "Sergio Xalambrí"} />
+        <meta property="og:description" content={description} />
+        <meta
+          property="og:image"
+          content={formatOGURL(title ?? "Sergio Xalambrí", description)}
+        />
+        <meta property="og:image:alt" content={`${title}\n${description}`} />
+        <meta property="og:url" content="https://sergiodxa.com/" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:title" content={title ?? "Sergio Xalambrí"} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image"
+          content={formatOGURL(title ?? "Sergio Xalambrí", description)}
+        />
+        <meta name="twitter:summary" content={description} />
+        <meta name="twitter:url" content="https://sergiodxa.com/" />
       </Head>
 
       <nav className="flex py-4 items-baseline space-x-2">

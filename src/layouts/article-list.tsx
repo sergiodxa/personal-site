@@ -39,7 +39,12 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
     <>
       <Header>
         <Container>
-          <Navigation current="articles" title="Articles" />
+          <Navigation
+            current="articles"
+            title="Articles"
+            description="All the articles I have wrote in my career"
+            path="/articles"
+          />
 
           <aside className="flex items-start mb-4 space-x-4">
             <div className="mt-4 space-y-2">

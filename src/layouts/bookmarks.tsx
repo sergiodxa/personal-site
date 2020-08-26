@@ -39,7 +39,12 @@ export function BookmarksLayout(props: BookmarksPageProps) {
     <>
       <Header>
         <Container>
-          <Navigation current="bookmarks" title="Bookmarks" />
+          <Navigation
+            current="bookmarks"
+            title="Bookmarks"
+            description="A collection of links I have found interesting and worth saving them for the future."
+            path="/bookmarks"
+          />
 
           <aside className="flex items-start mb-4 space-x-4">
             <div className="mt-4 space-y-2">
