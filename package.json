@@ -60,7 +60,7 @@
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "husky": "3.1.0",
-    "lint-staged": "10.2.11",
+    "lint-staged": "10.2.13",
     "serve": "11.3.2",
     "watch": "1.0.2"
   }
