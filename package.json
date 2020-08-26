@@ -38,7 +38,6 @@
     "collected-notes": "^2.1.2",
     "globby": "^11.0.0",
     "gray-matter": "^4.0.2",
-    "marked": "^1.0.0",
     "match-sorter": "^4.2.0",
     "next": "^9.5.2",
     "node-fetch": "^2.6.0",
@@ -53,7 +52,6 @@
   },
   "devDependencies": {
     "@types/globby": "^9.1.0",
-    "@types/marked": "^1.1.0",
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.47",
     "autoprefixer": "^9.7.6",
