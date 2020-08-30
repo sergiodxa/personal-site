@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { collectedNotes } from "collected-notes";
 import { AMAPageProps, Meta } from "types";
-import { AMALayout } from "layouts/ama";
+import { TILLayout } from "layouts/til";
 import matter from "gray-matter";
 
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<AMAPageProps> = async () => {
             tags: meta.tags ?? "",
           },
         }))
-        .filter((note) => note.meta.tags.includes("ama"))
+        .filter((note) => note.meta.tags.toLowerCase().includes("til"))
         .sort(
           (a, b) =>
             new Date(new Date(b.meta.date)).getTime() -
@@ -47,4 +47,4 @@ export const getStaticProps: GetStaticProps<AMAPageProps> = async () => {
     revalidate: 1,
   };
 };
-export default AMALayout;
+export default TILLayout;

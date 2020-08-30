@@ -10,6 +10,7 @@ const links: Array<{ href: string; label: string }> = [
   { href: "/articles", label: "Articles" },
   { href: "/bookmarks", label: "Bookmarks" },
   { href: "/ama", label: "Ask Me!" },
+  { href: "/til", label: "TIL" },
   { href: "/uses", label: "Uses" },
   // { href: "/oss", label: "Open Source" },
   // { href: "/hire", label: "Hire me!" },

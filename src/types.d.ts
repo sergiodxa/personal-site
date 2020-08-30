@@ -59,3 +59,8 @@ export type AMAPageProps = {
   site: Site;
   notes: Array<{ meta: ReducedMeta } & Note>;
 };
+
+export type TILPageProps = {
+  site: Site;
+  notes: Array<{ meta: ReducedMeta } & Note>;
+};

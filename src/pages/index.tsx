@@ -10,7 +10,7 @@ const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const [bookmarks, { site, notes }] = await Promise.all([
     getBookmarks(10),
-    cn.site(process.env.CN_SITE_PATH, 1, "public_site"),
+    cn.site(process.env.CN_SITE_PATH),
   ]);
 
   // fetch all pages
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
       (_, index) => index + 1
     )) {
       if (page === 1) continue;
-      const res = await cn.site(process.env.CN_SITE_PATH, page, "public_site");
+      const res = await cn.site(process.env.CN_SITE_PATH, page);
       notes.push(...res.notes);
     }
   }
