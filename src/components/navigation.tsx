@@ -6,12 +6,12 @@ import Head from "next/head";
 import { Spacer } from "./spacer";
 import { MemojiName, Memoji } from "./memoji";
 
-const links: Array<{ href: string; label: string }> = [
-  { href: "/articles", label: "Articles" },
-  { href: "/bookmarks", label: "Bookmarks" },
-  { href: "/ama", label: "Ask Me!" },
-  { href: "/til", label: "TIL" },
-  { href: "/uses", label: "Uses" },
+const links: Array<{ href: string; label: string; title: string }> = [
+  { href: "/articles", label: "Articles", title: "My Articles" },
+  { href: "/bookmarks", label: "Bookmarks", title: "Links I Read" },
+  { href: "/ama", label: "AMA", title: "Ask me Anything!" },
+  { href: "/til", label: "TIL", title: "Today I Learn" },
+  { href: "/uses", label: "Uses", title: "What I Use" },
   // { href: "/oss", label: "Open Source" },
   // { href: "/hire", label: "Hire me!" },
 ];
@@ -97,6 +97,7 @@ export function Navigation({
                       underline: !isActive,
                     })}
                     aria-current={isActive ? "page" : "false"}
+                    title={link.title}
                   >
                     {link.label}
                   </a>
