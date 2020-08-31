@@ -45,39 +45,11 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
             description="All the articles I have wrote in my career"
             path="/articles"
           />
-
-          <aside className="flex items-start mb-4 space-x-4">
-            <div className="mt-4 space-y-2">
-              <h2
-                className="text-xl leading-7 font-semibold"
-                style={{
-                  background: "linear-gradient(45deg, #ED8936, #F6E05E)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Articles
-              </h2>
-              <p className="leading-7">
-                All the articles I have wrote in my career, search for what you
-                want in the form below.
-              </p>
-            </div>
-
-            <Spacer />
-
-            <figure className="flex-shrink-0">
-              <DesktopOnly>
-                <Memoji name={memoji} width={210} />
-              </DesktopOnly>
-            </figure>
-          </aside>
         </Container>
       </Header>
 
       <Container>
-        <section className="space-y-2 mb-4 -mt-6 md:-mt-12 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
+        <section className="space-y-2 mb-4 -mt-8 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
           {showAMA ? (
             <>
               <AMAForm

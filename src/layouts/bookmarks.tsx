@@ -45,39 +45,11 @@ export function BookmarksLayout(props: BookmarksPageProps) {
             description="A collection of links I have found interesting and worth saving them for the future."
             path="/bookmarks"
           />
-
-          <aside className="flex items-start mb-4 space-x-4">
-            <div className="mt-4 space-y-2">
-              <h2
-                className="text-xl leading-7 font-semibold"
-                style={{
-                  background: "linear-gradient(45deg, #ED8936, #F6E05E)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Bookmarks
-              </h2>
-              <p className="leading-7">
-                A collection of links I have found interesting and worth saving
-                them for the future.
-              </p>
-            </div>
-
-            <Spacer />
-
-            <figure className="flex-shrink-0">
-              <DesktopOnly>
-                <Memoji name="working" width={210} />
-              </DesktopOnly>
-            </figure>
-          </aside>
         </Container>
       </Header>
 
       <Container>
-        <section className="space-y-2 mb-4 -mt-6 md:-mt-12 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
+        <section className="space-y-2 mb-4 -mt-8 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
           <header id="search">
             <h2 className="font-semibold">Search Bookmarks</h2>
           </header>

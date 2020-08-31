@@ -1,14 +1,11 @@
 import * as React from "react";
 import Head from "next/head";
 import { Navigation } from "components/navigation";
-import { Memoji, MemojiName, memojis } from "components/memoji";
-import { Spacer } from "components/spacer";
+import { MemojiName, memojis } from "components/memoji";
 import { Container } from "components/container";
 import { Header } from "components/header";
-import { DesktopOnly } from "components/media-query";
 import { TILPageProps } from "types";
 import { ArticleItem } from "components/article-item";
-import { AMAForm } from "components/ama-form";
 
 export function TILLayout(props: TILPageProps) {
   const [memoji, setMemoji] = React.useState<MemojiName>("happy");
@@ -31,45 +28,15 @@ export function TILLayout(props: TILPageProps) {
           <Navigation
             current="TIL"
             memoji={memoji}
-            title="Today I Learn"
+            title="Today I Learned"
             description="I share small notes on things I learn"
             path="/til"
           />
-
-          <aside className="flex items-start mb-4">
-            <div className="mt-4">
-              <p className="leading-7">
-                Hi there! I'm Sergio Xalambrí.
-                <br />
-                I'm a Software Engineer, specialized in Frontend.
-                <br />I currently work at{" "}
-                <a
-                  href="https://able.co"
-                  className="text-orange-400 underline hover:text-orange-500"
-                >
-                  Able
-                </a>
-                , building products to help other people.
-              </p>
-            </div>
-
-            <Spacer />
-
-            <figure className="flex-shrink-0">
-              <DesktopOnly>
-                <Memoji name={memoji} width={210} />
-              </DesktopOnly>
-            </figure>
-          </aside>
         </Container>
       </Header>
 
       <Container>
-        <section className="space-y-2 mb-4 -mt-6 md:-mt-12 bg-black p-4 rounded-lg border-gray-900 border-4">
-          <AMAForm initialMemoji={memoji} setMemoji={setMemoji} />
-        </section>
-
-        <section className="space-y-4 mb-12 px-4 border-l-4 border-r-4 border-black">
+        <section className="space-y-4 -mt-8 bg-black p-8 rounded-lg border-gray-900 border-4 relative">
           {props.notes.map((article) => (
             <ArticleItem key={article.id} article={article.meta} />
           ))}
