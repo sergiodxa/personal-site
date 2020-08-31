@@ -2232,10 +2232,10 @@ clsx@^1.1.1:
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
 
-collected-notes@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-2.1.2.tgz#f1910ebfaf6a6fc7a55f8f42030bd6a9edff6e1d"
-  integrity sha512-2sogRIH3ht0id8Kl3VqK7bmPtLrHPBWJhWVH5S248c7c5gazifyishweRNf2yGjVrLOJtMJoE5z/gCjB1eBH1Q==
+collected-notes@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-2.2.0.tgz#c70564809a662153eb77dfe56623efaafd6850a7"
+  integrity sha512-kQvx5/JdvA9veSMsrGWhbYHR/XFkKEdigk0CdhbbYFPa5HpbyOdS4PCVCKc9hSKMDsGRbZKBwPyiO+9kvtusQA==
 
 collection-visit@^1.0.0:
   version "1.0.0"
