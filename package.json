@@ -38,7 +38,7 @@
     "collected-notes": "^2.2.0",
     "globby": "^11.0.0",
     "gray-matter": "^4.0.2",
-    "match-sorter": "^4.2.0",
+    "match-sorter": "^4.2.1",
     "next": "^9.5.3",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
