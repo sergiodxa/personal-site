@@ -1184,10 +1184,10 @@
   resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.2.0.tgz#b597c83502e3c3c6641a8aaabda223cd494ab349"
   integrity sha512-aPgMH+CjQiScLZculoDNOQUrrK2ktkbl3D6uCLYp1jgYRlNDrMONu9nMu8LfwAeetYNpVNeIGx7WzHSu0kvECg==
 
-"@types/airtable@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@types/airtable/-/airtable-0.8.0.tgz#3d6c4a843cd975b0c334df86f4927a957d276caf"
-  integrity sha512-gp150mdcRSHeTlKYAdkGk6xv0N1OxmgOItbPOkcPX5nKexYmy0U+mJ12oWKN4VpXJCH5Hhwj4g046rvSsip69A==
+"@types/airtable@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@types/airtable/-/airtable-0.8.1.tgz#c142822041a059e384693b4e647816a666db4546"
+  integrity sha512-kYdqZHoie1KAw06QC4Pp+wEqsJKrc2ZTnIp5sMAjcF27YJ38d6tp+RctfZt4LZE98c90Kis8K/kSnyvKHbXdWg==
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
