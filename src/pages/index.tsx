@@ -10,7 +10,7 @@ const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const [bookmarks, { site, notes }] = await Promise.all([
     getBookmarks(10),
-    cn.site(process.env.CN_SITE_PATH),
+    cn.site(process.env.CN_SITE_PATH, 1, "public"),
   ]);
 
   // fetch all pages

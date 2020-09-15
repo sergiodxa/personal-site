@@ -7,7 +7,7 @@ import matter from "gray-matter";
 const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
 export const getStaticProps: GetStaticProps<ArticleListPageProps> = async () => {
-  const { site, notes } = await cn.site(process.env.CN_SITE_PATH);
+  const { site, notes } = await cn.site(process.env.CN_SITE_PATH, 1, "public");
 
   // fetch all pages
   if (notes.length < site.total_notes) {
