@@ -46,7 +46,7 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
       <header>
         <Container>
           <Navigation current="home" />
-          <h1 className="text-8xl leading-none font-extrabold text-black md:text-center my-16">
+          <h1 className="text-7xl sm:text-8xl leading-none font-extrabold text-black md:text-center my-16">
             Sergio Xalambrí
           </h1>
           <div className="lg:px-4">
