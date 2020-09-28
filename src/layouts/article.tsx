@@ -9,8 +9,9 @@ import { ArticlePageProps } from "types";
 export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
   const isAMA = meta.tags?.includes("ama");
   const isDraft = meta.tags?.includes("draft");
+  const hasNote = isAMA || isDraft
   return (
-    <>
+    <section className="space-y-6 mb-12">
       <Header>
         <Container>
           <Navigation
@@ -23,9 +24,9 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
       </Header>
 
       <Container>
-        <section className="space-y-10 -mt-8 bg-white p-4 rounded-lg border-black border-4 relative mb-6">
-          {isAMA || isDraft ? (
-            <aside className="prose prose-sm md:prose">
+        <section className="space-y-10 relative">
+          {hasNote ? (
+            <aside className="prose prose-sm md:prose lg:prose-lg mx-auto">
               {isAMA ? (
                 <blockquote>
                   Note: This is an answer to an Ask Me Anything request I
@@ -53,7 +54,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
           ) : null}
 
           <article
-            className="prose prose-sm md:prose"
+            className="prose prose-sm md:prose lg:prose-lg mx-auto"
             dangerouslySetInnerHTML={{
               __html: body,
             }}
@@ -109,6 +110,6 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
           </p>
         </footer>
       </Container>
-    </>
+    </section>
   );
 }

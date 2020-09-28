@@ -3,22 +3,20 @@ import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { Spacer } from "components/spacer";
-import { DesktopOnly } from "components/media-query";
-import { Memoji } from "components/memoji";
 import matchSorter from "match-sorter";
 import { BookmarksPageProps, Bookmark } from "types";
 
 function BookmarkItem({ link }: { link: Bookmark }) {
   return (
-    <article className="space-y-2">
+    <li>
       <a
         href={link.url}
         rel="noopener noreferrer"
-        className="font-semibold underline hover:no-underline text-white visited:text-gray-500"
+        className="font-semibold underline hover:no-underline text-blue-600 visited:text-gray-600"
       >
-        <h3 className="text-lg">{link.title}</h3>
+        <h3 className="text-xl">{link.title}</h3>
       </a>
-    </article>
+    </li>
   );
 }
 
@@ -36,7 +34,7 @@ export function BookmarksLayout(props: BookmarksPageProps) {
   });
   // render
   return (
-    <>
+    <section className="space-y-6 mb-12">
       <Header>
         <Container>
           <Navigation
@@ -49,9 +47,9 @@ export function BookmarksLayout(props: BookmarksPageProps) {
       </Header>
 
       <Container>
-        <section className="space-y-2 mb-4 -mt-8 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
+        <section className="mx-auto relative rounded-lg">
           <header id="search">
-            <h2 className="font-semibold">Search Bookmarks</h2>
+            <h2 className="font-semibold text-2xl">Search Bookmarks</h2>
           </header>
 
           <form
@@ -59,12 +57,12 @@ export function BookmarksLayout(props: BookmarksPageProps) {
             onSubmit={handleSubmit}
             className="flex flex-col items-start space-y-2"
           >
-            <label htmlFor="ama" className="text-gray-600 text-sm">
+            <label htmlFor="ama" className="text-gray-600 text-lg">
               Search a bookmark by title.
             </label>
 
             <input
-              className="bg-black border-2 border-gray-900 w-full p-2 text-sm focus:outline-none focus:border-blue-500 focus:bg-gray-900 text-gray-100 resize-none rounded placeholder-gray-700 focus:placeholder-gray-400"
+              className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
               id="ama"
               placeholder="React, SWR, Next..."
               required
@@ -86,12 +84,14 @@ export function BookmarksLayout(props: BookmarksPageProps) {
           </form>
         </section>
 
-        <section className="space-y-2 mb-12 px-4 border-l-4 border-r-4 border-black">
-          {filteredBookmarks.map((link) => (
-            <BookmarkItem key={link.url} link={link} />
-          ))}
+        <section>
+          <ul className="space-y-4 list-disc list-inside lg:list-outside">
+            {filteredBookmarks.map((link) => (
+              <BookmarkItem key={link.url} link={link} />
+            ))}
+          </ul>
         </section>
       </Container>
-    </>
+    </section>
   );
 }

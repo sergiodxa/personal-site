@@ -1,8 +1,8 @@
-import useMutation from "use-mutation";
+import { useMutation } from "react-query";
 
 type Input = { question: string };
 
-async function submitQuestion (input: Input): Promise<void> {
+async function submitQuestion(input: Input): Promise<void> {
   const res = await fetch("/api/ama", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -15,5 +15,5 @@ async function submitQuestion (input: Input): Promise<void> {
 }
 
 export function useSubmitQuestion() {
-  return useMutation(submitQuestion);
+  return useMutation<void, Error, Input, never>(submitQuestion);
 }

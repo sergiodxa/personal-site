@@ -36,7 +36,6 @@ export function Navigation({
   memoji?: MemojiName;
 }) {
   const isHome = current.toLowerCase() === "home";
-  const url = resolve("https://sergiodxa/", path);
 
   return (
     <>
@@ -70,32 +69,36 @@ export function Navigation({
         <meta name="twitter:url" content="https://sergiodxa.com/" />
       </Head>
 
-      <nav className="flex py-4 items-baseline space-x-2">
-        <Link href="/">
-          <a aria-current={isHome ? "page" : "false"}>
-            <span className="text-xl leading-none relative flex-shrink-0 font-semibold hidden md:inline bg-gradient-to-r from-orange-400 to-yellow-400 text-transparent bg-clip-text">
-              Sergio Xalambrí
-            </span>
-            <Memoji
-              name={memoji}
-              className="inline md:hidden w-5 h-5 transform scale-150"
-            />
-          </a>
-        </Link>
+      <nav className="flex py-4 items-center space-x-2">
+        {!isHome ? (
+          <Link href="/">
+            <a
+              aria-current={isHome ? "page" : "false"}
+              className="flex-shrink-0"
+            >
+              <span className="text-xl leading-none relative flex-shrink-0 font-extrabold text-black">
+                Sergio Xalambrí
+              </span>
+            </a>
+          </Link>
+        ) : null}
 
         <Spacer />
 
-        <ul className="flex text-sm overflow-x-auto">
+        <ul className="flex text-md overflow-x-auto">
           {links.map((link) => {
             const isActive = current.toLowerCase() === link.label.toLowerCase();
             return (
               <li key={link.href} className="px-2 flex-shrink-0">
                 <Link href={link.href}>
                   <a
-                    className={clsx("text-orange-400 font-semibold", {
-                      "no-underline": isActive,
-                      underline: !isActive,
-                    })}
+                    className={clsx(
+                      "text-blue-600 font-semibold",
+                      {
+                        "no-underline hover:underline": isActive,
+                        "underline hover:no-underline": !isActive,
+                      }
+                    )}
                     aria-current={isActive ? "page" : "false"}
                     title={link.title}
                   >
