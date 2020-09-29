@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useSubmitQuestion } from "mutations/use-submit-question";
-import { Spacer } from "./spacer";
+import { Spacer } from "components/spacer";
+import { Button } from "components/button";
 
 type AMAFormProps = {
   initialValue?: string;
@@ -103,9 +104,7 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
             </p>
           ) : null}
 
-          <button className="bg-blue-500 text-white py-3 px-10 text-md rounded-full font-semibold select-none flex-shrink-0 leading-none">
-            Send Question
-          </button>
+          <Button label="Send Question" />
         </footer>
       </form>
     </>

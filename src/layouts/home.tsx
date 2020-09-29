@@ -56,7 +56,7 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
       </header>
 
       <Container>
-        <div className="sm:divide-y md:divide-y-0 md:divide-x divide-gray-200 md:flex">
+        <div className="divide-y md:divide-y-0 md:divide-x divide-gray-200 md:flex">
           <article className="px-0 py-6 md:px-6 md:py-2 md:w-1/2 space-y-2">
             <header id="articles">
               <h2 className="font-semibold text-xl">Latest Articles</h2>
