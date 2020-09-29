@@ -8,6 +8,15 @@ module.exports = {
       inset: {
         full: "100%",
       },
+      scale: {
+        500: "5",
+      },
+      fontSize: {
+        "7xl": "5rem",
+        "8xl": "6rem",
+        "9xl": "7rem",
+        "10xl": "8rem",
+      },
     },
   },
   variants: {

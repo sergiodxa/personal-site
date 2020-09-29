@@ -1,18 +1,14 @@
 import * as React from "react";
 import matchSorter from "match-sorter";
 import { Navigation } from "components/navigation";
-import { Header } from "components/header";
 import { Container } from "components/container";
 import { Spacer } from "components/spacer";
-import { DesktopOnly } from "components/media-query";
-import { Memoji, MemojiName } from "components/memoji";
 import { ArticleListPageProps } from "types";
 import { AMAForm } from "components/ama-form";
 import { ArticleItem } from "components/article-item";
 
 export function ArticlesListLayout(props: ArticleListPageProps) {
   // states
-  const [memoji, setMemoji] = React.useState<MemojiName>("working");
   const [filter, setFilter] = React.useState("");
   const [showAMA, setShowAMA] = React.useState(false);
   // computed
@@ -24,7 +20,7 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
   function handleSubmit(event: React.FocusEvent<HTMLFormElement>) {
     event.preventDefault();
   }
-  function filterByTag(tag: string) {
+  const filterByTag = React.useCallback(function filterByTag(tag: string) {
     if (window.screenTop !== 0) {
       window.scrollTo({
         top: 0,
@@ -33,11 +29,11 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
       });
     }
     setFilter(tag);
-  }
+  }, []);
   // render
   return (
-    <>
-      <Header>
+    <section className="space-y-6 mb-12">
+      <header>
         <Container>
           <Navigation
             current="articles"
@@ -46,24 +42,16 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
             path="/articles"
           />
         </Container>
-      </Header>
+      </header>
 
       <Container>
-        <section className="space-y-2 mb-4 -mt-8 bg-black p-4 rounded-lg border-gray-900 border-4 relative">
+        <div className="mx-auto relative rounded-lg">
           {showAMA ? (
             <>
-              <AMAForm
-                initialMemoji="working"
-                initialValue={filter}
-                onChange={setFilter}
-                setMemoji={setMemoji}
-              />
-              <p
-                className="absolute top-0 right-0 pt-4 pr-4"
-                style={{ margin: 0 }}
-              >
+              <AMAForm initialValue={filter} onChange={setFilter} />
+              <p className="absolute top-0 right-0" style={{ margin: 0 }}>
                 <button
-                  className="text-xs text-gray-500 underline"
+                  className="text-sm text-gray-500 underline"
                   onClick={() => setShowAMA(false)}
                 >
                   Go back to search?
@@ -73,7 +61,7 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
           ) : (
             <>
               <header id="search">
-                <h2 className="font-semibold">Search Articles</h2>
+                <h2 className="font-semibold text-2xl">Search Articles</h2>
               </header>
 
               <form
@@ -81,13 +69,13 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
                 onSubmit={handleSubmit}
                 className="flex flex-col items-start space-y-2"
               >
-                <label htmlFor="ama" className="text-gray-600 text-sm">
-                  Search an article, it will give by title, description, or
-                  keywords.
+                <label htmlFor="ama" className="text-gray-600 text-lg">
+                  What are you looking for? It will search by title,
+                  description, or keywords.
                 </label>
 
                 <input
-                  className="bg-black border-2 border-gray-900 w-full p-2 text-sm focus:outline-none focus:border-blue-500 focus:bg-gray-900 text-gray-100 resize-none rounded placeholder-gray-700 focus:placeholder-gray-400"
+                  className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
                   id="ama"
                   placeholder="React, SWR, Next..."
                   required
@@ -98,20 +86,21 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
 
                 <footer className="flex items-baseline w-full space-x-2">
                   {filteredArticles.length === 0 ? (
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm text-gray-700">
                       <button
                         onClick={() => setShowAMA(true)}
-                        className=" underline text-left"
+                        className="underline text-left"
                       >
                         Don't find what you are looking for? Click here to ask
                         me and I will write about it
                       </button>
                     </p>
                   ) : null}
+
                   <Spacer />
 
                   <p
-                    className="text-xs text-gray-500 flex-shrink-0"
+                    className="text-sm text-gray-700 flex-shrink-0"
                     style={{ lineHeight: "32px" }}
                   >
                     {filteredArticles.length} matching articles
@@ -120,10 +109,12 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
               </form>
             </>
           )}
-        </section>
+        </div>
+      </Container>
 
+      <Container>
         {!showAMA ? (
-          <section className="space-y-4 mb-12 px-4 border-l-4 border-r-4 border-black">
+          <section className="divide-y divide-gray-200">
             {filteredArticles.map((article) => (
               <ArticleItem
                 key={article.id}
@@ -134,6 +125,6 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
           </section>
         ) : null}
       </Container>
-    </>
+    </section>
   );
 }
