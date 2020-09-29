@@ -2,16 +2,16 @@ import * as React from "react";
 
 type SubmitButtonProps = {
   label: React.ReactNode;
-  behave: "submit";
+  behave?: "submit";
 };
 
-type BasicButtonProps = {
-  label: React.ReactNode;
-  behave: "button";
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
+// type BasicButtonProps = {
+//   label: React.ReactNode;
+//   behave: "button";
+//   onClick: React.MouseEventHandler<HTMLButtonElement>;
+// };
 
-export type ButtonProps = SubmitButtonProps | BasicButtonProps;
+export type ButtonProps = SubmitButtonProps;
 
 export function Button(props: ButtonProps) {
   return (
