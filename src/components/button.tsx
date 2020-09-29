@@ -1,15 +1,15 @@
 import * as React from "react";
 
-type BaseProps = { label: React.ReactNode; behave?: "submit" | "button" };
-
 type SubmitButtonProps = {
+  label: React.ReactNode;
   behave: "submit";
-} & BaseProps;
+};
 
 type BasicButtonProps = {
+  label: React.ReactNode;
   behave: "button";
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-} & BaseProps;
+};
 
 export type ButtonProps = SubmitButtonProps | BasicButtonProps;
 
