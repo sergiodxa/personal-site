@@ -35,32 +35,34 @@ function Tag({ onClick, label }: TagProps) {
 
 export function ArticleItem({ article, onTagClick }: ArticleItemProps) {
   return (
-    <article className="py-6 px-4">
-      <Link href={article.slug}>
-        <a className="font-semibold underline hover:no-underline text-blue-600 visited:text-gray-600 space-y-2">
-          <header>
-            <h3 className="text-xl">{article.title}</h3>
-          </header>
+    <article className="py-6 px-4 space-y-2">
+      <header>
+        <h3 className="text-xl">
+          <Link href={article.slug}>
+            <a className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 inline">
+              {article.title}
+            </a>
+          </Link>
+        </h3>
+      </header>
 
-          {/* {article.description ? (
-        <p className="border-l-4 border-blue-500 pl-2 py-1 leading-normal text-md -ml-2 text-md">
+      {article.description ? (
+        <p className="border-l-4 border-black pl-2 py-1 leading-normal text-md -ml-2 text-md">
           {article.description}
         </p>
-      ) : null} */}
+      ) : null}
 
-          {article.tags ? (
-            <footer className="space-x-1">
-              {article.tags
-                .split(/\,\s?/)
-                .map((tag) => tag.toLowerCase())
-                .sort((a, b) => a.localeCompare(b))
-                .map((tag) => (
-                  <Tag onClick={onTagClick} label={tag} key={tag} />
-                ))}
-            </footer>
-          ) : null}
-        </a>
-      </Link>
+      {article.tags ? (
+        <footer className="space-x-1">
+          {article.tags
+            .split(/\,\s?/)
+            .map((tag) => tag.toLowerCase())
+            .sort((a, b) => a.localeCompare(b))
+            .map((tag) => (
+              <Tag onClick={onTagClick} label={tag} key={tag} />
+            ))}
+        </footer>
+      ) : null}
     </article>
   );
 }

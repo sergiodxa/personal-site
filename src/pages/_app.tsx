@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ReactQueryDevtools } from "react-query-devtools";
 import "styles.css";
 
 export default function App({ Component, pageProps }) {
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }) {
         <meta name="twitter:creator" content="@sergiodxa" />
       </Head>
       <Component {...pageProps} />
+      <ReactQueryDevtools />
     </main>
   );
 }

@@ -1,20 +1,26 @@
 import { useQuery } from "react-query";
-import { Note } from "collected-notes";
-
-type SearchOutput = Note[];
+import { SearchResults } from "types";
 
 type SearchInput = { term: string; page?: number };
+
+type useSearchParams = SearchInput & {
+  initialData: SearchResults;
+};
 
 async function search(
   _key: string,
   { term, page }: SearchInput
-): Promise<SearchOutput> {
+): Promise<SearchResults> {
   const res = await fetch(`/api/search?page=${page}&term=${term}`);
   if (!res.ok) throw new Error(res.statusText);
-  const data: SearchOutput = await res.json();
+  const data: SearchResults = await res.json();
   return data;
 }
 
-export function useSearch(term: string, page: number = 1) {
-  return useQuery<SearchOutput, Error>(["search", { term, page }], search);
+export function useSearch({ term, page = 1, initialData }: useSearchParams) {
+  return useQuery<SearchResults, Error>(["search", { term, page }], search, {
+    initialData,
+    initialStale: true,
+    enabled: term !== "",
+  });
 }

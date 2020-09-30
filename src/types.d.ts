@@ -64,3 +64,5 @@ export type TILPageProps = {
   site: Site;
   notes: Array<{ meta: ReducedMeta } & Note>;
 };
+
+export type SearchResults = Array<{ meta: ReducedMeta } & Note>;
