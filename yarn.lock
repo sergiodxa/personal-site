@@ -5095,13 +5095,6 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-icons@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
-  integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
-  dependencies:
-    camelcase "^5.0.0"
-
 react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -5668,11 +5661,6 @@ snapdragon@^0.8.1:
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
     use "^3.1.0"
-
-sortbyfrequency@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.able.co/sortbyfrequency/-/sortbyfrequency-1.0.11.tgz#c23a94734de26b2e60a4b74e8fe5170b180dee26"
-  integrity sha512-jGpeSRCS3ggtrgWWSB1k7b/EwJOH4msVpEBmqAXC1ce/ykNTUfFNcWvUsQqVV7zXNEvszy3RTGxWzJRFlVEfnw==
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -6286,11 +6274,6 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
-
-use-safe-callback@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/use-safe-callback/-/use-safe-callback-1.0.2.tgz#1e112c144bccccb39d308ac983f4589ea113bed5"
-  integrity sha512-RVeoyxgjJNfu9baNwulBM+HuPQGlcE1MJtrA1w50B5Hd0tyeKvrBIPdCfRx4Trrrxe34M6qRTys/bfpqsKRcyA==
 
 use-subscription@1.4.1:
   version "1.4.1"
