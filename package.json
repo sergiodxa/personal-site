@@ -43,7 +43,7 @@
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-query": "^2.23.0",
+    "react-query": "^2.23.1",
     "react-query-devtools": "^2.5.1",
     "tailwindcss": "^1.8.10",
     "typescript": "^4.0.3"
@@ -51,7 +51,7 @@
   "devDependencies": {
     "@types/globby": "^9.1.0",
     "@types/node": "^14.11.2",
-    "@types/react": "^16.9.49",
+    "@types/react": "^16.9.50",
     "autoprefixer": "^9.7.6",
     "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
