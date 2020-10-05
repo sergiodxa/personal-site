@@ -50,7 +50,7 @@ function ErrorMessage({ code, message }) {
 }
 
 function Subscribe() {
-  const [email, setEmail] = React.useState("hello@sergiodxa.com");
+  const [email, setEmail] = React.useState("");
 
   const [subscribe, { status, error }] = useSubscribeToCourse();
 
@@ -70,7 +70,7 @@ function Subscribe() {
 
   return (
     <form
-      className="flex flex-col space-y-2 border-2 border-black rounded-lg p-8 shadow-md"
+      className="flex flex-col space-y-2 border-2 border-black rounded-lg py-8 px-16 shadow-md"
       onSubmit={handleSubmit}
     >
       <label className="text-lg">
@@ -78,7 +78,7 @@ function Subscribe() {
         {/* Dejame tu email para obtener las{" "} <strong>dos primeras clases totalmente gratis</strong>. */}
       </label>
 
-      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
+      <div className="flex flex-col space-y-2">
         <Input
           type="email"
           label="Ingresa tu email"
@@ -118,13 +118,13 @@ export function SWRLandingLayout() {
         <Container>
           <Navigation
             current="SWR"
-            title="Data-Fetching con React & SWR"
+            title="Data-Fetching con React y SWR"
             description="Aprende a usar SWR para optimizar la forma en que hacés
             data-fetching en tus aplicaciones de React."
             path="/courses/swr"
           />
 
-          <div className="space-y-20 max-w-prose mx-auto">
+          <section className="space-y-10 max-w-prose mx-auto">
             <div className="mt-10 space-y-4 sm:space-y-8 text-center items-center justify-between w-full">
               <svg viewBox="0 0 291 69" fill="none" className="h-10 inline">
                 {logoSWR}
@@ -137,7 +137,7 @@ export function SWRLandingLayout() {
                 <h1 className="leading-none tracking-tight text-3xl sm:text-4xl md:text-5xl font-black">
                   Data-Fetching
                   <br />
-                  con React & SWR
+                  con React y SWR
                 </h1>
                 <p className="text-xl text-gray-500 font-semibold mt-8">
                   Aprende a usar SWR para optimizar la forma en que hacés
@@ -147,7 +147,34 @@ export function SWRLandingLayout() {
             </div>
 
             <Subscribe />
-          </div>
+
+            <section className="mx-auto prose prose-xl">
+              <p>
+                Vengo usando SWR en producción desde que fue hecho Open Source, y soy el{" "}
+                <strong>segundo mayor contribuidor en GitHub</strong>, siendo el
+                autor de la capa de cache de la librería.
+              </p>
+              <p>
+                <strong>Data-Fetching con React y SWR</strong> es todo lo que sé
+                sobre como usar SWR en aplicaciones de React para hacerte la
+                vida más fácil como desarrollador al mismo tiempo que damos una
+                mejor UX a los usuarios de nuestras aplicaciones.
+              </p>
+              <p>El curso está dividido en tres tipos de contenido.</p>
+              <ul>
+                <li>
+                  Un eBook con el contenido escrito para quién prefiera leer en
+                  vez de ver videos.
+                </li>
+                <li>
+                  Un workshop en video que muestra los diferentes conceptos de SWR por separado.
+                </li>
+                <li>
+                  Una colección de videos donde muestro, paso a paso, como creo una aplicación estilo Trello usando React y SWR.
+                </li>
+              </ul>
+            </section>
+          </section>
         </Container>
       </section>
     </section>
