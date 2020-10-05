@@ -3,7 +3,12 @@ import * as React from "react";
 export function Spinner(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 2400 2400" width={16} height={16} {...props}>
-      <g strokeWidth={200} strokeLinecap="round" stroke="#000" fill="none">
+      <g
+        strokeWidth={200}
+        strokeLinecap="round"
+        stroke="currentColor"
+        fill="none"
+      >
         <path d="M1200 600V100" />
         <path opacity={0.5} d="M1200 2300v-500" />
         <path opacity={0.917} d="M900 680.4l-250-433" />

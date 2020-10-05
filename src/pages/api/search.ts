@@ -9,7 +9,7 @@ function unwrap<T>(value: T | T[]): T {
   return Array.isArray(value) ? value[0] : value;
 }
 
-export default async function search(
+export default async function searchListener(
   req: NextApiRequest,
   res: NextApiResponse<SearchResults>
 ) {

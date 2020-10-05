@@ -1,6 +1,15 @@
 import { Note, Site, Link, HTML } from "collected-notes";
 
+export type Courses = "swr" | "react-query";
+
 export type Bookmark = { title: string; url: string };
+
+export type CourseSubscription = {
+  id?: number;
+  email: string;
+  status: "subscribed" | "previewed" | "purchased";
+  createdAt?: string;
+};
 
 export type Meta = {
   slug: string;

@@ -1,6 +1,10 @@
 import * as React from "react";
 import { Navigation } from "components/navigation";
 import { Container } from "components/container";
+import { Button } from "components/button";
+import { Input } from "components/input";
+import { useSubscribeToCourse } from "mutations/use-subscribe-to-course";
+import { QueryStatus } from "react-query";
 
 const logoSWR = (
   <>
@@ -25,56 +29,127 @@ const logoSWR = (
   </>
 );
 
-function Title({ test }) {
-  if (test === "A") {
+function ErrorMessage({ code, message }) {
+  if (code === "disposable") {
     return (
-      <h1>
-        <small className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-none tracking-wide">Production-ready</small>
-        <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-wide block">
-          Data-Fetching con React & SWR
-        </span>
-      </h1>
+      <>
+        Si usas un email descartable no voy a poder contactarte cuando esté el
+        curso.
+      </>
     );
   }
+  if (code === "yup") return <>{message}</>;
   return (
-    <h1>
-      <small className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-none tracking-wide">Dominando el</small>
-      <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-wide block">
-        Server-State con React & SWR
-      </span>
-    </h1>
+    <>
+      Something went wrong! Try contacting me on{" "}
+      <a className="underline" href="https://twitter.com/sergiodxa">
+        Twitter
+      </a>
+    </>
   );
 }
 
-function Logo() {
+function Subscribe() {
+  const [email, setEmail] = React.useState("hello@sergiodxa.com");
+
+  const [subscribe, { status, error }] = useSubscribeToCourse();
+
+  const handleSubmit = React.useCallback<
+    React.FormEventHandler<HTMLFormElement>
+  >(function handleSubmit(event) {
+    event.preventDefault();
+    subscribe(
+      { email, course: "swr" },
+      {
+        onSuccess() {
+          setEmail("");
+        },
+      }
+    );
+  }, []);
+
   return (
-    <svg
-      viewBox="0 0 291 69"
-      fill="none"
-      className="my-4 h-8 sm:h-10 md:h-16 lg:h-20 inline"
+    <form
+      className="flex flex-col space-y-2 border-2 border-black rounded-lg p-8 shadow-md"
+      onSubmit={handleSubmit}
     >
-      {logoSWR}
-    </svg>
+      <label className="text-lg">
+        ¡Se el primero en enterarte cuando salga!
+        {/* Dejame tu email para obtener las{" "} <strong>dos primeras clases totalmente gratis</strong>. */}
+      </label>
+
+      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 sm:items-center">
+        <Input
+          type="email"
+          label="Ingresa tu email"
+          placeholder="Ingresa tu email"
+          value={email}
+          status={status}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <Button label="Suscribirse" status={status} />
+      </div>
+
+      {status === QueryStatus.Loading ? (
+        <p className="text-sm text-gray-700">
+          Estoy guardándo tu email, espera un poco 🙏
+        </p>
+      ) : null}
+
+      {status === QueryStatus.Success ? (
+        <p className="text-sm text-gray-700">
+          Listo! En cuanto tenga noticias te voy a mandar un email
+        </p>
+      ) : null}
+
+      {status === QueryStatus.Error ? (
+        <p className="text-sm text-red-600">
+          <ErrorMessage message={error.message} code={error.code} />
+        </p>
+      ) : null}
+    </form>
   );
 }
 
 export function SWRLandingLayout() {
   return (
     <section className="mb-12">
-      <header>
+      <section>
         <Container>
           <Navigation
             current="SWR"
-            title="Production-ready data-fetching en React con SWR"
-            description="Aprende a sacarle el 100% a SWR para crear aplicaciones web."
+            title="Data-Fetching con React & SWR"
+            description="Aprende a usar SWR para optimizar la forma en que hacés
+            data-fetching en tus aplicaciones de React."
             path="/courses/swr"
           />
 
-          <Logo />
+          <div className="space-y-20 max-w-prose mx-auto">
+            <div className="mt-10 space-y-4 sm:space-y-8 text-center items-center justify-between w-full">
+              <svg viewBox="0 0 291 69" fill="none" className="h-10 inline">
+                {logoSWR}
+              </svg>
 
-          <Title test="B" />
+              <header className="max-w-prose mx-auto">
+                <p className="text-xl text-gray-500 font-bold uppercase">
+                  Aprende
+                </p>
+                <h1 className="leading-none tracking-tight text-3xl sm:text-4xl md:text-5xl font-black">
+                  Data-Fetching
+                  <br />
+                  con React & SWR
+                </h1>
+                <p className="text-xl text-gray-500 font-semibold mt-8">
+                  Aprende a usar SWR para optimizar la forma en que hacés
+                  data-fetching en tus aplicaciones de React.
+                </p>
+              </header>
+            </div>
+
+            <Subscribe />
+          </div>
         </Container>
-      </header>
+      </section>
     </section>
   );
 }

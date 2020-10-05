@@ -7,7 +7,7 @@ const octokit = new Octokit({
 
 type Response = { status: "success" } | { status: "failure"; error: string };
 
-export default async function listener(
+export default async function submitQuestionListener(
   req: NextApiRequest,
   res: NextApiResponse<Response>
 ) {

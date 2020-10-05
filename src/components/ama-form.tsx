@@ -2,6 +2,8 @@ import * as React from "react";
 import { useSubmitQuestion } from "mutations/use-submit-question";
 import { Spacer } from "components/spacer";
 import { Button } from "components/button";
+import { Textarea } from "components/input";
+import { QueryStatus } from "react-query";
 
 type AMAFormProps = {
   initialValue?: string;
@@ -11,8 +13,6 @@ type AMAFormProps = {
 const noop = () => {};
 
 export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
-  // refs
-  const $textarea = React.useRef<HTMLTextAreaElement>();
   // states
   const [question, setQuestion] = React.useState(initialValue);
   // mutations
@@ -30,16 +30,6 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
     );
   }
   // effects
-  React.useEffect(
-    function autosizeTextarea() {
-      if ($textarea?.current) {
-        $textarea.current.style.height = "0px";
-        const newHeight = Math.max($textarea.current.scrollHeight, 47);
-        $textarea.current.style.height = newHeight + "px";
-      }
-    },
-    [$textarea, question]
-  );
   React.useEffect(
     function resetMutationOnClearInput() {
       if (onChange) onChange(question);
@@ -63,24 +53,15 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
           it here and I will try to write about that topic
         </label>
 
-        <textarea
-          ref={$textarea}
-          className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
-          rows={1}
-          id="ama"
-          minLength={1}
+        <Textarea
           placeholder="How can I..."
-          required
           onChange={(event) => setQuestion(event.target.value)}
           value={question}
-          disabled={status === "loading"}
-          aria-required
-          aria-multiline
-          aria-disabled={status === "loading"}
+          status={status}
         />
 
         <footer className="flex items-baseline w-full space-x-2">
-          {question.trim().length > 0 && status === "idle" ? (
+          {question.trim().length > 0 && status === QueryStatus.Idle ? (
             <p className="text-sm text-gray-700">
               Feel free to expand as much as you need. You can use Markdown and
               multiline!
@@ -89,14 +70,14 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
 
           <Spacer />
 
-          {status === "loading" ? (
+          {status === QueryStatus.Loading ? (
             <p className="text-sm text-gray-700">Sending your question</p>
           ) : null}
-          {status === "success" ? (
+          {status === QueryStatus.Success ? (
             <p className="text-sm text-gray-700">Question sent!</p>
           ) : null}
-          {status === "error" ? (
-            <p className="text-sm text-gray-700">
+          {status === QueryStatus.Error ? (
+            <p className="text-sm text-red-600">
               Something went wrong! Try asking me on{" "}
               <a className="underline" href="https://twitter.com/sergiodxa">
                 Twitter
@@ -104,7 +85,7 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
             </p>
           ) : null}
 
-          <Button label="Send Question" />
+          <Button label="Send Question" status={status} />
         </footer>
       </form>
     </>
