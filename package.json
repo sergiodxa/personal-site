@@ -33,7 +33,7 @@
     "@tailwindcss/typography": "^0.2.0",
     "@types/airtable": "^0.8.1",
     "@types/match-sorter": "^4.0.0",
-    "@types/yup": "^0.29.7",
+    "@types/yup": "^0.29.8",
     "airtable": "^0.10.0",
     "burner-email-providers": "^1.0.31",
     "clsx": "^1.1.1",
