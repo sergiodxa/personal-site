@@ -24,14 +24,18 @@ export function Button(props: ButtonProps) {
         "border  py-3 px-10 text-md rounded-lg font-semibold select-none flex-shrink-0 leading-none transition-colors ease-in-out duration-200",
         {
           "bg-black text-white border-black hover:bg-white hover:text-black":
-            props.status !== "loading",
-          "bg-gray-200 text-black border-gray-300": props.status === "loading",
+            props.status !== QueryStatus.Loading,
+          "bg-gray-200 text-black border-gray-300 text-center":
+            props.status === QueryStatus.Loading,
         }
       )}
       type={props.behave}
     >
-      {props.status === "loading" ? <Spinner /> : null}
-      {props.status !== "loading" ? props.label : null}
+      {props.status === QueryStatus.Loading ? (
+        <Spinner className="inline" />
+      ) : (
+        props.label
+      )}
     </button>
   );
 }
