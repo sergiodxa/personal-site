@@ -5,6 +5,7 @@ import { Button } from "components/button";
 import { Input } from "components/input";
 import { useSubscribeToCourse } from "mutations/use-subscribe-to-course";
 import { QueryStatus } from "react-query";
+import { Courses } from "types";
 
 const logoSWR = (
   <>
@@ -50,19 +51,20 @@ function ErrorMessage({ code, message }) {
 }
 
 function Subscribe() {
-  const [email, setEmail] = React.useState("");
-
   const [subscribe, { status, error }] = useSubscribeToCourse();
 
   const handleSubmit = React.useCallback<
     React.FormEventHandler<HTMLFormElement>
   >(function handleSubmit(event) {
     event.preventDefault();
+    const $form = event.currentTarget;
+    const formData = new FormData($form);
+    const email = formData.get("email") as string;
     subscribe(
       { email, course: "swr" },
       {
         onSuccess() {
-          setEmail("");
+          $form.reset();
         },
       }
     );
@@ -81,11 +83,10 @@ function Subscribe() {
       <div className="flex flex-col space-y-2">
         <Input
           type="email"
+          name="email"
           label="Ingresa tu email"
           placeholder="Ingresa tu email"
-          value={email}
           status={status}
-          onChange={(event) => setEmail(event.target.value)}
         />
         <Button label="Suscribirse" status={status} />
       </div>
