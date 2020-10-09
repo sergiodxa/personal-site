@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import * as yup from "yup";
 import Airtable from "airtable";
-import { CourseSubscription } from "types";
+import { CourseLeads } from "types";
 import { isEmailBurner } from "burner-email-providers";
 
 type Response =
@@ -17,7 +17,10 @@ const schema = yup.object().shape({
     .string()
     .email("Invalid email address.")
     .required("Email is required!"),
-  course: yup.string().oneOf(["swr", "react-query"]).required(),
+  course: yup
+    .string()
+    .oneOf<CourseLeads["course"]>(["swr", "react-query"])
+    .required(),
 });
 
 export default async function subscribeToCourseListener(
@@ -42,7 +45,6 @@ export default async function subscribeToCourseListener(
   }
 
   if (isEmailBurner(email)) {
-    console.log(email);
     return res.status(400).json({
       status: "failure",
       error: "The email is disposable",
@@ -50,10 +52,10 @@ export default async function subscribeToCourseListener(
     });
   }
 
-  const table = base(course) as Airtable.Table<CourseSubscription>;
+  const table = base("leads") as Airtable.Table<CourseLeads>;
 
   try {
-    await table.create({ email, status: "subscribed" });
+    await table.create({ email, status: "subscribed", course });
     return res.json({ status: "success" });
   } catch (error) {
     return res.status(400).json({

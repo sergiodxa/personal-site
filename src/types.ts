@@ -4,10 +4,11 @@ export type Courses = "swr" | "react-query";
 
 export type Bookmark = { title: string; url: string };
 
-export type CourseSubscription = {
+export type CourseLeads = {
   id?: number;
   email: string;
   status: "subscribed" | "previewed" | "purchased";
+  course: "swr" | "react-query";
   createdAt?: string;
 };
 
