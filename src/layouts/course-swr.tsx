@@ -125,7 +125,7 @@ export function SWRLandingLayout() {
           />
 
           <section className="space-y-10 max-w-prose mx-auto">
-            <div className="mt-10 space-y-4 sm:space-y-8 text-center items-center justify-between w-full">
+            <div className="mt-10 space-y-8 sm:space-y-16 text-center items-center justify-between w-full">
               <svg viewBox="0 0 291 69" fill="none" className="h-10 inline">
                 {logoSWR}
               </svg>
@@ -134,7 +134,7 @@ export function SWRLandingLayout() {
                 <p className="text-xl text-gray-500 font-bold uppercase">
                   Aprende
                 </p>
-                <h1 className="leading-none tracking-tight text-3xl sm:text-4xl md:text-5xl font-black">
+                <h1 className="leading-tight tracking-tight text-3xl sm:text-4xl md:text-5xl font-black">
                   Data-Fetching
                   <br />
                   con React y SWR
@@ -150,9 +150,9 @@ export function SWRLandingLayout() {
 
             <section className="mx-auto prose prose-xl">
               <p>
-                Vengo usando SWR en producción desde que fue hecho Open Source, y soy el{" "}
-                <strong>segundo mayor contribuidor en GitHub</strong>, siendo el
-                autor de la capa de cache de la librería.
+                Vengo usando SWR en producción desde que fue hecho Open Source,
+                y soy el <strong>segundo mayor contribuidor en GitHub</strong>,
+                siendo el autor de la capa de cache de la librería.
               </p>
               <p>
                 <strong>Data-Fetching con React y SWR</strong> es todo lo que sé
@@ -167,10 +167,12 @@ export function SWRLandingLayout() {
                   vez de ver videos.
                 </li>
                 <li>
-                  Un workshop en video que muestra los diferentes conceptos de SWR por separado.
+                  Un workshop en video que muestra los diferentes conceptos de
+                  SWR por separado.
                 </li>
                 <li>
-                  Una colección de videos donde muestro, paso a paso, como creo una aplicación estilo Trello usando React y SWR.
+                  Una colección de videos donde muestro, paso a paso, como creo
+                  una aplicación estilo Trello usando React y SWR.
                 </li>
               </ul>
             </section>
