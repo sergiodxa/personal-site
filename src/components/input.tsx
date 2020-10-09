@@ -1,12 +1,8 @@
 import * as React from "react";
 import { QueryStatus } from "react-query";
 
-type InputProps = {
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-  placeholder?: string;
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  type: HTMLInputElement["type"];
   status?: QueryStatus;
 };
 
@@ -59,23 +55,14 @@ export function Textarea({
   );
 }
 
-export function Input({
-  value,
-  onChange,
-  placeholder,
-  status,
-  label,
-  type,
-}: InputProps) {
+export function Input({ status, label, ...props }: InputProps) {
   return (
     <input
+      {...props}
       className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
       id="ama"
       minLength={3}
-      placeholder={placeholder}
       required
-      onChange={onChange}
-      value={value}
       disabled={status === "loading"}
       aria-required
       aria-multiline
