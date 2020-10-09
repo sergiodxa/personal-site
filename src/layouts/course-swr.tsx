@@ -5,7 +5,6 @@ import { Button } from "components/button";
 import { Input } from "components/input";
 import { useSubscribeToCourse } from "mutations/use-subscribe-to-course";
 import { QueryStatus } from "react-query";
-import { Courses } from "types";
 
 const logoSWR = (
   <>
@@ -127,7 +126,7 @@ export function SWRLandingLayout() {
 
           <section className="space-y-10 max-w-prose mx-auto">
             <div className="mt-10 space-y-8 sm:space-y-16 text-center items-center justify-between w-full">
-              <svg viewBox="0 0 291 69" fill="none" className="h-10 inline">
+              <svg viewBox="0 0 291 69" fill="none" className="h-16 mx-auto">
                 {logoSWR}
               </svg>
 
