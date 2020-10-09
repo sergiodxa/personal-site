@@ -32,7 +32,7 @@ export function Textarea({
     function autosizeTextarea() {
       if ($textarea?.current) {
         $textarea.current.style.height = "0px";
-        const newHeight = Math.max($textarea.current.scrollHeight, 46);
+        const newHeight = Math.max($textarea.current.scrollHeight, 48);
         $textarea.current.style.height = newHeight + "px";
       }
     },
