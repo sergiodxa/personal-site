@@ -35,7 +35,7 @@
     "@types/match-sorter": "^4.0.0",
     "@types/yup": "^0.29.8",
     "airtable": "^0.10.0",
-    "burner-email-providers": "^1.0.31",
+    "burner-email-providers": "^1.0.32",
     "clsx": "^1.1.1",
     "collected-notes": "^2.2.0",
     "globby": "^11.0.0",
