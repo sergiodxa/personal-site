@@ -12,9 +12,9 @@ function BookmarkItem({ link }: { link: Bookmark }) {
       <a
         href={link.url}
         rel="noopener noreferrer"
-        className="font-semibold underline hover:no-underline text-blue-600 visited:text-gray-600"
+        className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 text-xl"
       >
-        <h3 className="text-xl">{link.title}</h3>
+        {link.title}
       </a>
     </li>
   );
@@ -85,7 +85,7 @@ export function BookmarksLayout(props: BookmarksPageProps) {
         </section>
 
         <section>
-          <ul className="space-y-4 list-disc list-inside lg:list-outside">
+          <ul className="space-y-4 list-disc list-inside xl:list-outside">
             {filteredBookmarks.map((link) => (
               <BookmarkItem key={link.url} link={link} />
             ))}

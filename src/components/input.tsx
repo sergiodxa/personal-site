@@ -26,11 +26,10 @@ export function Textarea({
   // effects
   React.useEffect(
     function autosizeTextarea() {
-      if ($textarea?.current) {
-        $textarea.current.style.height = "0px";
-        const newHeight = Math.max($textarea.current.scrollHeight, 48);
-        $textarea.current.style.height = newHeight + "px";
-      }
+      if (!$textarea?.current) return;
+      $textarea.current.style.height = "0px";
+      const newHeight = Math.max($textarea.current.scrollHeight, 48);
+      $textarea.current.style.height = newHeight + "px";
     },
     [$textarea, value]
   );

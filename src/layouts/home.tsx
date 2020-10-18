@@ -4,7 +4,6 @@ import { Navigation } from "components/navigation";
 import { Container } from "components/container";
 import { AMAForm } from "components/ama-form";
 import { HomePageProps } from "types";
-import { Card } from "components/card";
 
 function ArticleItem({
   title,
@@ -20,7 +19,7 @@ function ArticleItem({
       <article>
         <a
           href={url}
-          className="text-blue-600 underline font-medium hover:no-underline visited:text-gray-600"
+          className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600"
           rel="noopener noreferrer"
         >
           <h3 className="text-md">{title}</h3>
@@ -32,7 +31,7 @@ function ArticleItem({
   return (
     <article>
       <Link as={url} href={path}>
-        <a className="text-blue-600 underline font-medium hover:no-underline visited:text-gray-600">
+        <a className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600">
           <h3 className="text-md">{title}</h3>
         </a>
       </Link>
@@ -46,8 +45,8 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
       <header>
         <Container>
           <Navigation current="home" />
-          <h1 className="text-7xl sm:text-8xl leading-none font-extrabold text-black md:text-center my-16">
-            Sergio Xalambrí
+          <h1 className="text-4xl sm:text-7xl md:text-8xl leading-none font-extrabold text-black text-center my-16">
+            @sergiodxa
           </h1>
           <div className="lg:px-4">
             <AMAForm />
