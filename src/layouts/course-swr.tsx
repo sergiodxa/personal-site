@@ -33,7 +33,7 @@ function ErrorMessage({ code, message }) {
   if (code === "disposable") {
     return (
       <>
-        Si usas un email descartable no voy a poder contactarte cuando esté el
+        Si usas un email desechable no voy a poder contactarte cuando esté el
         curso.
       </>
     );
@@ -41,7 +41,7 @@ function ErrorMessage({ code, message }) {
   if (code === "yup") return <>{message}</>;
   return (
     <>
-      Something went wrong! Try contacting me on{" "}
+      😱 Algo raro pasó. Mejor contactame por{" "}
       <a className="underline" href="https://twitter.com/sergiodxa">
         Twitter
       </a>
