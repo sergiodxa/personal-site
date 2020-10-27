@@ -1,5 +1,5 @@
 import * as React from "react";
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 import { Navigation } from "components/navigation";
 import { Container } from "components/container";
 import { Header } from "components/header";
