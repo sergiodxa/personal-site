@@ -22,7 +22,7 @@ export const getStaticProps: GetStaticProps<
 };
 
 export const getStaticPaths: GetStaticPaths<ArticlePageQuery> = async () => {
-  const { site, notes } = await cn.site(CN_SITE_PATH, 1, "public");
+  const { site, notes } = await cn.site(CN_SITE_PATH, 1, "public_site");
 
   // fetch all pages
   if (notes.length < site.total_notes) {
@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths<ArticlePageQuery> = async () => {
       (_, index) => index + 1
     )) {
       if (page === 1) continue;
-      const res = await cn.site(CN_SITE_PATH, page);
+      const res = await cn.site(CN_SITE_PATH, page, "public_site");
       notes.push(...res.notes);
     }
   }
