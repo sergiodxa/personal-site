@@ -38,7 +38,7 @@ export const getStaticPaths: GetStaticPaths<ArticlePageQuery> = async () => {
 
   return {
     paths: notes.map((note) => ({ params: { path: note.path.split("/") } })),
-    fallback: "unstable_blocking",
+    fallback: "blocking",
   };
 };
 
