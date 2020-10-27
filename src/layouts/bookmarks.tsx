@@ -3,7 +3,7 @@ import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { Spacer } from "components/spacer";
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 import { BookmarksPageProps, Bookmark } from "types";
 
 function BookmarkItem({ link }: { link: Bookmark }) {
