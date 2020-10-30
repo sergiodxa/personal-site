@@ -29,7 +29,7 @@
   },
   "homepage": "https://sergiodxa.com",
   "dependencies": {
-    "@octokit/rest": "^18.0.6",
+    "@octokit/rest": "^18.0.7",
     "@tailwindcss/typography": "^0.2.0",
     "@types/airtable": "^0.8.1",
     "@types/match-sorter": "5.0.0",
