@@ -57,13 +57,16 @@ export function TILLayout(props: TILPageProps) {
               onSubmit={handleSubmit}
               className="flex flex-col items-start space-y-2"
             >
-              <label htmlFor="ama" className="text-gray-600 text-lg">
+              <label
+                htmlFor="ama"
+                className="text-gray-600 dark:text-gray-400 text-lg"
+              >
                 What are you looking for? It will search by title, description,
                 or keywords.
               </label>
 
               <input
-                className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
+                className="bg-white text-gray-900 font-semibold border-2 border-gray-900 dark:border-gray-100 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
                 id="ama"
                 placeholder="React, SWR, Next..."
                 required
@@ -74,7 +77,7 @@ export function TILLayout(props: TILPageProps) {
 
               <footer className="flex items-baseline w-full space-x-2">
                 {filteredArticles.length === 0 ? (
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     <button
                       onClick={() => setShowAMA(true)}
                       className="underline text-left"
@@ -88,7 +91,7 @@ export function TILLayout(props: TILPageProps) {
                 <Spacer />
 
                 <p
-                  className="text-sm text-gray-700 flex-shrink-0"
+                  className="text-sm text-gray-700 dark:text-gray-300 flex-shrink-0"
                   style={{ lineHeight: "32px" }}
                 >
                   {filteredArticles.length} matching articles
@@ -100,7 +103,7 @@ export function TILLayout(props: TILPageProps) {
       </Container>
 
       <Container>
-        <section className="divide-y divide-gray-200">
+        <section className="divide-y divide-gray-200 dark:divide-gray-800">
           {filteredArticles.map((article) => (
             <ArticleItem key={article.id} article={article.meta} />
           ))}
