@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { Spacer } from "components/spacer";
@@ -12,7 +11,7 @@ function BookmarkItem({ link }: { link: Bookmark }) {
       <a
         href={link.url}
         rel="noopener noreferrer"
-        className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 text-xl"
+        className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400 text-xl"
       >
         {link.title}
       </a>
@@ -35,7 +34,7 @@ export function BookmarksLayout(props: BookmarksPageProps) {
   // render
   return (
     <section className="space-y-6 mb-12">
-      <Header>
+      <header>
         <Container>
           <Navigation
             current="bookmarks"
@@ -44,7 +43,7 @@ export function BookmarksLayout(props: BookmarksPageProps) {
             path="/bookmarks"
           />
         </Container>
-      </Header>
+      </header>
 
       <Container>
         <section className="mx-auto relative rounded-lg">
@@ -57,12 +56,12 @@ export function BookmarksLayout(props: BookmarksPageProps) {
             onSubmit={handleSubmit}
             className="flex flex-col items-start space-y-2"
           >
-            <label htmlFor="ama" className="text-gray-600 text-lg">
+            <label htmlFor="ama" className="text-gray-600 dark:text-gray-400 text-lg">
               Search a bookmark by title.
             </label>
 
             <input
-              className="bg-white text-black font-semibold border-2 border-gray-900 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
+              className="bg-white text-gray-900 font-semibold border-2 border-gray-900 dark:border-gray-100 w-full p-2 text-lg focus:border-blue-500 focus:outline-none resize-none rounded-lg placeholder-gray-500"
               id="ama"
               placeholder="React, SWR, Next..."
               required
@@ -75,7 +74,7 @@ export function BookmarksLayout(props: BookmarksPageProps) {
               <Spacer />
 
               <p
-                className="text-xs text-gray-500 flex-shrink-0"
+                className="text-xs text-gray-600 dark:text-gray-400 flex-shrink-0"
                 style={{ lineHeight: "32px" }}
               >
                 {filteredBookmarks.length} matching bookmarks

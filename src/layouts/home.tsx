@@ -19,7 +19,7 @@ function ArticleItem({
       <article>
         <a
           href={url}
-          className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600"
+          className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400"
           rel="noopener noreferrer"
         >
           <h3 className="text-md">{title}</h3>
@@ -31,7 +31,7 @@ function ArticleItem({
   return (
     <article>
       <Link as={url} href={path}>
-        <a className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600">
+        <a className="underline font-medium hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400">
           <h3 className="text-md">{title}</h3>
         </a>
       </Link>
@@ -45,7 +45,7 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
       <header>
         <Container>
           <Navigation current="home" />
-          <h1 className="text-4xl sm:text-7xl md:text-8xl leading-none font-extrabold text-black text-center my-16">
+          <h1 className="text-4xl sm:text-7xl md:text-8xl leading-none font-extrabold text-center my-16">
             @sergiodxa
           </h1>
           <div className="lg:px-4">
@@ -55,11 +55,11 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
       </header>
 
       <Container>
-        <div className="divide-y md:divide-y-0 md:divide-x divide-gray-200 md:flex">
+        <div className="divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-800 md:flex">
           <article className="px-0 py-6 md:px-6 md:py-2 md:w-1/2 space-y-2">
             <header id="articles">
               <h2 className="font-semibold text-xl">Latest Articles</h2>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 These are my latests articles.
               </p>
             </header>
@@ -75,7 +75,7 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
               ))}
             </section>
 
-            <p className="text-gray-700 text-xs">
+            <p className="text-gray-700 dark:text-gray-300 text-xs">
               Want to see them all?{" "}
               <Link href="/articles">
                 <a className="underline">Check full article list</a>
@@ -86,7 +86,7 @@ export function HomeLayout({ bookmarks, notes }: HomePageProps) {
           <article className="px-0 py-6 md:px-6 md:py-2 md:w-1/2 space-y-2">
             <header id="bookmarks">
               <h2 className="font-semibold text-xl">Recent Bookmarks</h2>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
                 The latests links I have bookmarked
               </p>
             </header>

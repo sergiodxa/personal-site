@@ -2,7 +2,6 @@ import * as React from "react";
 import { matchSorter } from "match-sorter";
 import { Navigation } from "components/navigation";
 import { Container } from "components/container";
-import { Header } from "components/header";
 import { TILPageProps } from "types";
 import { ArticleItem } from "components/article-item";
 import { AMAForm } from "components/ama-form";
@@ -23,7 +22,7 @@ export function TILLayout(props: TILPageProps) {
   }
   return (
     <section className="space-y-6 mb-12">
-      <Header>
+      <header>
         <Container>
           <Navigation
             current="TIL"
@@ -32,7 +31,7 @@ export function TILLayout(props: TILPageProps) {
             path="/til"
           />
         </Container>
-      </Header>
+      </header>
 
       <Container>
         {showAMA ? (
@@ -40,7 +39,7 @@ export function TILLayout(props: TILPageProps) {
             <AMAForm initialValue={filter} onChange={setFilter} />
             <p className="absolute top-0 right-0" style={{ margin: 0 }}>
               <button
-                className="text-sm text-gray-500 underline"
+                className="text-sm text-gray-600 dark:text-gray-400 underline"
                 onClick={() => setShowAMA(false)}
               >
                 Go back to search?

@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
         <meta name="twitter:creator" content="@sergiodxa" />
       </Head>
       <Component {...pageProps} />
-      <ReactQueryDevtools />
+      {/* <ReactQueryDevtools /> */}
     </main>
   );
 }

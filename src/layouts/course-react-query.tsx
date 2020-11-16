@@ -82,7 +82,7 @@ function Subscribe() {
 
   return (
     <form
-      className="flex flex-col space-y-2 border-2 border-black rounded-lg py-8 px-16 shadow-md"
+      className="flex flex-col space-y-2 border-2 border-gray-900 dark:border-gray-100 rounded-lg py-8 px-16 shadow-md"
       onSubmit={handleSubmit}
     >
       <label className="text-lg">
@@ -102,19 +102,19 @@ function Subscribe() {
       </div>
 
       {status === QueryStatus.Loading ? (
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 dark:text-gray-300">
           Estoy guardándo tu email, espera un poco 🙏
         </p>
       ) : null}
 
       {status === QueryStatus.Success ? (
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 dark:text-gray-300">
           Listo! En cuanto tenga noticias te voy a mandar un email
         </p>
       ) : null}
 
       {status === QueryStatus.Error ? (
-        <p className="text-sm text-red-600">
+        <p className="text-sm text-red-600 dark:text-red-400">
           <ErrorMessage message={error.message} code={error.code} />
         </p>
       ) : null}
@@ -158,7 +158,7 @@ export function RQLandingLayout() {
 
             <Subscribe />
 
-            <section className="mx-auto prose prose-xl">
+            <section className="mx-auto prose dark:prose-dark prose-xl">
               <p>
                 Manejar estado en React es complicado, si encima empezamos a
                 mezclar estado del cliente con estado del servidor, la cosa se

@@ -76,7 +76,7 @@ export function Navigation({
               aria-current={isHome ? "page" : "false"}
               className="flex-shrink-0"
             >
-              <span className="text-xl leading-none relative flex-shrink-0 font-extrabold text-black">
+              <span className="text-xl leading-none relative flex-shrink-0 font-extrabold text-gray-900 dark:text-gray-100">
                 Sergio Xalambrí
               </span>
             </a>
@@ -93,7 +93,7 @@ export function Navigation({
                 <Link href={link.href}>
                   <a
                     className={clsx(
-                      "text-blue-600 font-semibold",
+                      "text-blue-600 dark:text-blue-500 font-semibold",
                       {
                         "no-underline hover:underline": isActive,
                         "underline hover:no-underline": !isActive,

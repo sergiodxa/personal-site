@@ -27,7 +27,7 @@ export function AMALayout(props: AMAPageProps) {
       </Container>
 
       <Container>
-        <section className="divide-y divide-gray-200">
+        <section className="divide-y divide-gray-200 dark:divide-gray-800">
           {props.notes.map((article) => (
             <ArticleItem key={article.id} article={article.meta} />
           ))}

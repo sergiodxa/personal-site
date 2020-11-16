@@ -26,7 +26,7 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
       </Container>
 
       <Container>
-        <section className="divide-y divide-gray-200">
+        <section className="divide-y divide-gray-200 dark:divide-gray-800">
           {props.notes.map(function mapToArticleItem(article) {
             return <ArticleItem key={article.id} article={article.meta} />;
           })}

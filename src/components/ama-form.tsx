@@ -48,7 +48,10 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
         onSubmit={handleSubmit}
         className="flex flex-col items-start space-y-2"
       >
-        <label htmlFor="ama" className="text-gray-600 text-lg">
+        <label
+          htmlFor="ama"
+          className="text-gray-600 dark:text-gray-400 text-lg"
+        >
           Is there something you have always wanted me to write about? Ask about
           it here and I will try to write about that topic
         </label>
@@ -62,7 +65,7 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
 
         <footer className="flex items-baseline w-full space-x-2">
           {question.trim().length > 0 && status === QueryStatus.Idle ? (
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Feel free to expand as much as you need. You can use Markdown and
               multiline!
             </p>
@@ -71,13 +74,17 @@ export function AMAForm({ initialValue = "", onChange = noop }: AMAFormProps) {
           <Spacer />
 
           {status === QueryStatus.Loading ? (
-            <p className="text-sm text-gray-700">Sending your question</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Sending your question
+            </p>
           ) : null}
           {status === QueryStatus.Success ? (
-            <p className="text-sm text-gray-700">Question sent!</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              Question sent!
+            </p>
           ) : null}
           {status === QueryStatus.Error ? (
-            <p className="text-sm text-red-600">
+            <p className="text-sm text-red-600 dark:text-red-400">
               Something went wrong! Try asking me on{" "}
               <a className="underline" href="https://twitter.com/sergiodxa">
                 Twitter

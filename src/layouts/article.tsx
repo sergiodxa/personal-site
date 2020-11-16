@@ -26,7 +26,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
       <Container>
         <section className="space-y-10 relative">
           {hasNote ? (
-            <aside className="prose sm:prose-lg mx-auto">
+            <aside className="prose dark:prose-dark sm:prose-lg mx-auto">
               {isAMA ? (
                 <blockquote>
                   Note: This is an answer to an Ask Me Anything request I
@@ -54,7 +54,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
           ) : null}
 
           <article
-            className="prose sm:prose-lg mx-auto"
+            className="prose dark:prose-dark sm:prose-lg mx-auto"
             dangerouslySetInnerHTML={{
               __html: body,
             }}
@@ -62,7 +62,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
 
           {links?.length > 0 ? (
             <aside className="max-w-prose mx-auto border-t border-gray-500 py-6 mb-6">
-              <p className="text-gray-900 font-bold leading-normal">
+              <p className="text-gray-900 dark:text-gray-100 font-bold leading-normal">
                 Links on this note ↗
               </p>
 
@@ -73,14 +73,14 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
                   return (
                     <li key={link.id} className="mt-1 ml-4 truncate">
                       <a
-                        className="text-gray-900 font-semibold underline"
+                        className="text-gray-900 dark:text-gray-100 font-semibold underline"
                         href={link.url}
                         title={link.title}
                         rel="noopener noreferrer"
                       >
                         {link.host}
                       </a>
-                      <span className="text-gray-600">
+                      <span className="text-gray-600 dark:text-gray-400">
                         {format({
                           pathname: url.pathname,
                           query: url.query,
@@ -98,7 +98,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
 
       <Container>
         <footer className="mb-12">
-          <p className="text-gray-500 text-sm text-right">
+          <p className="text-gray-600 dark:text-gray-400 text-sm text-right">
             Powered by{" "}
             <a
               href="https://collectednotes.com"
