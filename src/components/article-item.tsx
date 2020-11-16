@@ -19,7 +19,7 @@ function Tag({ onClick, label }: TagProps) {
     return (
       <button
         onClick={() => onClick(label)}
-        className="text-xs bg-blue-50 text-blue-900 px-2 leading-relaxed inline-block"
+        className="text-xs bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-blue-100 px-2 leading-relaxed inline-block select-none"
       >
         {label}
       </button>
@@ -27,7 +27,7 @@ function Tag({ onClick, label }: TagProps) {
   }
 
   return (
-    <span className="text-xs bg-blue-50 text-blue-900 px-2 leading-relaxed inline-block">
+    <span className="text-xs bg-blue-50 dark:bg-blue-900 text-blue-900 dark:text-blue-100 px-2 leading-relaxed inline-block select-none">
       {label}
     </span>
   );
@@ -39,7 +39,7 @@ export function ArticleItem({ article, onTagClick }: ArticleItemProps) {
       <header>
         <h3 className="text-xl">
           <Link href={article.slug}>
-            <a className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 inline">
+            <a className="font-semibold underline hover:no-underline text-blue-600 dark:text-blue-500 visited:text-indigo-600 dark:visited:text-indigo-400 inline">
               {article.title}
             </a>
           </Link>
@@ -47,7 +47,7 @@ export function ArticleItem({ article, onTagClick }: ArticleItemProps) {
       </header>
 
       {article.description ? (
-        <p className="border-l-4 border-black pl-2 py-1 leading-normal text-md -ml-2 text-md">
+        <p className="border-l-4 border-gray-900 dark:border-gray-100 pl-2 py-1 leading-normal text-md -ml-2 text-md">
           {article.description}
         </p>
       ) : null}
