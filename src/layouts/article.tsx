@@ -7,13 +7,18 @@ import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
-export const components = {  };
+export const components = {};
 
 export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
   const isAMA = meta.tags?.includes("ama");
   const isDraft = meta.tags?.includes("draft");
   const hasNote = isAMA || isDraft;
-  const content = hydrate(body, { components });
+  const isMDX = meta.tags?.includes("mdx") ?? false;
+  const articleProps: React.HTMLAttributes<HTMLDivElement> = isMDX
+    ? { children: hydrate(body, { components }) }
+    : {
+        dangerouslySetInnerHTML: { __html: body },
+      };
   return (
     <section className="space-y-6 mb-12">
       <Header>
@@ -59,7 +64,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
 
           <article
             className="prose dark:prose-dark sm:prose-lg mx-auto"
-            children={content}
+            {...articleProps}
           />
 
           {links?.length > 0 ? (

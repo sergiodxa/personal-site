@@ -9,20 +9,42 @@ const cn = collectedNotes(process.env.CN_EMAIL, process.env.CN_TOKEN);
 
 const CN_SITE_PATH = process.env.CN_SITE_PATH;
 
+async function parseBody({
+  isMDX,
+  content,
+  notePath,
+}: {
+  isMDX: boolean;
+  content: string;
+  notePath: string;
+}): Promise<string> {
+  if (isMDX) {
+    return await renderToString(content, { components });
+  } else {
+    const { body } = await cn.body(CN_SITE_PATH, notePath);
+    return body;
+  }
+}
+
 export const getStaticProps: GetStaticProps<
   ArticlePageProps,
   ArticlePageQuery
 > = async ({ params }) => {
+  const notePath = params.path.join("/");
   const [{ site }, note, links] = await Promise.all([
     cn.site(CN_SITE_PATH),
-    cn.read(CN_SITE_PATH, params.path.join("/")),
-    cn.links(CN_SITE_PATH, params.path.join("/"), "json"),
+    cn.read(CN_SITE_PATH, notePath),
+    cn.links(CN_SITE_PATH, notePath, "json"),
   ]);
   const { content, data: meta } = (matter(note.body) as unknown) as {
     data: Meta;
     content: Markdown;
   };
-  const body = await renderToString(content, { components });
+  const body = await parseBody({
+    isMDX: meta.tags?.includes("mdx") ?? false,
+    content,
+    notePath,
+  });
   return { props: { note, site, body, links, meta }, revalidate: 1 };
 };
 
