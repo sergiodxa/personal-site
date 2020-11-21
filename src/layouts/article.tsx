@@ -1,15 +1,19 @@
 import * as React from "react";
 import Link from "next/link";
+import hydrate from "next-mdx-remote/hydrate";
 import { Header } from "components/header";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
 
+export const components = {  };
+
 export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
   const isAMA = meta.tags?.includes("ama");
   const isDraft = meta.tags?.includes("draft");
   const hasNote = isAMA || isDraft;
+  const content = hydrate(body, { components });
   return (
     <section className="space-y-6 mb-12">
       <Header>
@@ -55,9 +59,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
 
           <article
             className="prose dark:prose-dark sm:prose-lg mx-auto"
-            dangerouslySetInnerHTML={{
-              __html: body,
-            }}
+            children={content}
           />
 
           {links?.length > 0 ? (
