@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const memojis = {
   amazing: "Sergio with stars in his eyes",
   anger: "Sergio with anger",
@@ -40,14 +38,11 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export function Memoji({ name, style, ...props }: Props) {
   return (
-    <Image
+    <img
       {...props}
       src={`/static/avatar/${name}.png`}
       alt={memojis[name]}
-      layout="intrinsic"
-      width="421"
-      height="421"
-      // style={{ filter: "drop-shadow(0 0 5px #ED8936", ...style }}
+      style={{ filter: "drop-shadow(0 0 5px #ED8936", ...style }}
     />
   );
 }
