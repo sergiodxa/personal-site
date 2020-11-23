@@ -30,7 +30,7 @@
   "homepage": "https://sergiodxa.com",
   "dependencies": {
     "@octokit/rest": "^18.0.9",
-    "@tailwindcss/typography": "^0.2.0",
+    "@tailwindcss/typography": "^0.3.1",
     "@types/airtable": "^0.8.1",
     "@types/match-sorter": "5.0.0",
     "@types/yup": "^0.29.9",
