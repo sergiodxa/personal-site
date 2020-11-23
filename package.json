@@ -45,7 +45,7 @@
     "next": "^10.0.2",
     "next-mdx-remote": "^1.0.0",
     "node-fetch": "^2.6.1",
-    "postcss": "^8.1.9",
+    "postcss": "^8.1.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-query": "^2.26.3",
