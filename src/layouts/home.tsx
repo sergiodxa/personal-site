@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { Navigation } from "components/navigation";
 import { Container } from "components/container";
-import { AMAForm } from "components/ama-form";
 import { HomePageProps } from "types";
 
 function ArticleItem({
@@ -41,18 +40,15 @@ function ArticleItem({
 
 export function HomeLayout({ bookmarks, notes }: HomePageProps) {
   return (
-    <section className="space-y-12 mb-12">
-      <header>
-        <Container>
+    <section className="mb-12 space-y-8 md:space-y-32">
+      <Container>
+        <header className="space-y-8 md:space-y-32">
           <Navigation current="home" />
-          <h1 className="text-4xl sm:text-7xl md:text-8xl leading-none font-extrabold text-center my-16">
+          <h1 className="text-4xl sm:text-7xl md:text-8xl leading-none font-extrabold text-center">
             @sergiodxa
           </h1>
-          <div className="lg:px-4">
-            <AMAForm />
-          </div>
-        </Container>
-      </header>
+        </header>
+      </Container>
 
       <Container>
         <div className="divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-800 md:flex">
