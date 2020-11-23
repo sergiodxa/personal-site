@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['vercel.com'],
+  },
   async redirects() {
     return [
       {
