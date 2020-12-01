@@ -1239,10 +1239,12 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
 
-"@types/match-sorter@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/match-sorter/-/match-sorter-5.0.0.tgz#7a66f7f45d22621e79920b3919e5b3d3e746184d"
-  integrity sha512-25KmtRqBKBH5Uo5e6QAV+5zKuE+cksAJ9R8GMMYtt0+jV+HxQj1Yg8ciui/T4AaoCmq3D65m1tgNcabkOLHe1Q==
+"@types/match-sorter@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/match-sorter/-/match-sorter-6.0.0.tgz#434355915f5fb5bfb5f7e1224cd9c4399879179c"
+  integrity sha512-/B8BLck7dy+vQQedYvrTw2f+U02KghNCMLocjRSWtHhCKE1OeoAmOWiLGAPs96qacT9bSJF4HmJNyijiy5bycA==
+  dependencies:
+    match-sorter "*"
 
 "@types/mdast@^3.0.0":
   version "3.0.3"
@@ -4401,7 +4403,7 @@ markdown-escapes@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.4.tgz#c95415ef451499d7602b91095f3c8e8975f78535"
   integrity sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg==
 
-match-sorter@6.0.1:
+match-sorter@*, match-sorter@6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-6.0.1.tgz#ae6697296a212da75099dddd162c820cc9f73d6d"
   integrity sha512-BPKBIC0yffMAjymiY4D3EVwWraeBskyTZBY+JL7utOHk5V8I1BTUvqH0/gl8mZKKzSMG4fRmoMubzb++rBgY5Q==
