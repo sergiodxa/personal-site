@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: {
@@ -56,6 +56,7 @@ module.exports = {
               },
               h1: {
                 color: theme("colors.gray.100"),
+                textWeight: "bold",
               },
               h2: {
                 color: theme("colors.gray.100"),
@@ -96,8 +97,8 @@ module.exports = {
     extend: {
       padding: ["first", "last"],
       typography: ["dark"],
-    }
+    },
   },
 
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

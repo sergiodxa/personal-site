@@ -12,6 +12,13 @@ export type CourseLeads = {
   createdAt?: string;
 };
 
+export type Feedback = {
+  message: string;
+  email?: string;
+  twitter?: string;
+  createdAt?: string;
+}
+
 export type Meta = {
   slug: string;
   title: string;

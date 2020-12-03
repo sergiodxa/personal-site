@@ -6,6 +6,7 @@ import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { parse, format } from "url";
 import { ArticlePageProps } from "types";
+import { FeedbackForm } from "components/feedback-form";
 
 export const components = {};
 
@@ -102,6 +103,10 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
           ) : null}
         </section>
       </Container>
+
+      <section className="max-w-prose mx-auto">
+        <FeedbackForm />
+      </section>
 
       <Container>
         <footer className="mb-12">
