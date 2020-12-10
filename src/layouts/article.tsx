@@ -10,9 +10,8 @@ import { FeedbackForm } from "components/feedback-form";
 export const components = {};
 
 export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
-  const isAMA = meta.tags?.includes("ama");
   const isDraft = meta.tags?.includes("draft");
-  const hasNote = isAMA || isDraft;
+  const hasNote = isDraft;
   const isMDX = meta.tags?.includes("mdx") ?? false;
   const articleProps: React.HTMLAttributes<HTMLDivElement> = isMDX
     ? { children: hydrate(body, { components }) }
@@ -36,17 +35,6 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
         <section className="space-y-10 relative">
           {hasNote ? (
             <aside className="prose dark:prose-dark sm:prose-lg mx-auto">
-              {isAMA ? (
-                <blockquote>
-                  Note: This is an answer to an Ask Me Anything request I
-                  received, you can ask me anything going to{" "}
-                  <Link href="/ama">
-                    <a>sergiodxa.com/ama</a>
-                  </Link>
-                  .
-                </blockquote>
-              ) : null}
-
               {isDraft ? (
                 <blockquote>
                   Warning: You are reading a draft article, sentences may be
