@@ -13,8 +13,9 @@ export type CourseLeads = {
 };
 
 export type Feedback = {
-  message: string;
+  path: string;
   email?: string;
+  message: string;
   twitter?: string;
   createdAt?: string;
 }

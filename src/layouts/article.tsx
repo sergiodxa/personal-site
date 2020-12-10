@@ -1,5 +1,4 @@
 import * as React from "react";
-import Link from "next/link";
 import hydrate from "next-mdx-remote/hydrate";
 import { Header } from "components/header";
 import { Container } from "components/container";
@@ -105,7 +104,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
       </Container>
 
       <section className="max-w-prose mx-auto">
-        <FeedbackForm />
+        <FeedbackForm path={note.path} />
       </section>
 
       <Container>

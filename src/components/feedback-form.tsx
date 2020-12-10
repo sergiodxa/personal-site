@@ -5,9 +5,9 @@ import { Textarea, Input } from "./input";
 import { Spacer } from "./spacer";
 import { Button } from "./button";
 
-type FeedbackFormProps = { initialValue?: string };
+type FeedbackFormProps = { path: string; initialValue?: string };
 
-export function FeedbackForm({ initialValue = "" }: FeedbackFormProps) {
+export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
   // states
   const [message, setMessage] = React.useState(initialValue);
   const [email, setEmail] = React.useState("");
@@ -18,7 +18,7 @@ export function FeedbackForm({ initialValue = "" }: FeedbackFormProps) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     submitFeedback(
-      { message, email, twitter },
+      { message, email, twitter, path },
       {
         onSuccess() {
           setMessage("");
@@ -26,8 +26,6 @@ export function FeedbackForm({ initialValue = "" }: FeedbackFormProps) {
       }
     );
   }
-  // effects
-  console.log(status);
   // render
   return (
     <form

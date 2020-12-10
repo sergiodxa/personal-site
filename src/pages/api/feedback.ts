@@ -13,8 +13,9 @@ const base = new Airtable({
 }).base(process.env.AIRTABLE_BASE);
 
 const schema = yup.object().shape({
-  message: yup.string().required(),
+  path: yup.string().required(),
   email: yup .string() .email("Invalid email address."),
+  message: yup.string().required(),
   twitter: yup.string(),
 });
 
@@ -31,7 +32,7 @@ export default async function submitFeedbackListener(
   }
 
   try {
-    var { message, email, twitter } = await schema.validate(req.body);
+    var { message, email, twitter, path } = await schema.validate(req.body);
   } catch (error) {
     const err = error as yup.ValidationError;
     res
@@ -50,7 +51,7 @@ export default async function submitFeedbackListener(
   const table = base("feedback") as Airtable.Table<Feedback>;
 
   try {
-    await table.create({ message, email, twitter });
+    await table.create({ message, email, twitter, path });
     return res.json({ status: "success" });
   } catch (error) {
     return res.status(400).json({
