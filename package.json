@@ -42,7 +42,7 @@
     "globby": "^11.0.0",
     "gray-matter": "^4.0.2",
     "match-sorter": "6.0.2",
-    "next": "^10.0.3",
+    "next": "^10.0.4",
     "next-mdx-remote": "^1.0.1",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.1",
