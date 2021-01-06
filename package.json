@@ -39,7 +39,7 @@
     "burner-email-providers": "^1.0.36",
     "clsx": "^1.1.1",
     "collected-notes": "^2.2.0",
-    "globby": "^11.0.0",
+    "globby": "^11.0.2",
     "gray-matter": "^4.0.2",
     "match-sorter": "6.1.0",
     "next": "^10.0.4",
