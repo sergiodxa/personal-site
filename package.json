@@ -43,7 +43,7 @@
     "gray-matter": "^4.0.2",
     "match-sorter": "6.1.0",
     "next": "^10.0.4",
-    "next-mdx-remote": "^2.0.1",
+    "next-mdx-remote": "^2.1.0",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.2",
     "react": "^17.0.1",
