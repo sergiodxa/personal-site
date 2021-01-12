@@ -2187,10 +2187,10 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
-burner-email-providers@^1.0.37:
-  version "1.0.37"
-  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.37.tgz#3fd7fbbd71d323ab0eed5eb50a8de3b147af2940"
-  integrity sha512-LNK7YMKu6ZaNNJ1JsyEcwLVyTaMrrmGO0ndocL8P/oUTnoeWLnpcb5v9MPwKfqvsx68NVBDUQfKSSf85Cb71Dg==
+burner-email-providers@^1.0.38:
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/burner-email-providers/-/burner-email-providers-1.0.38.tgz#a08a9c464d0c74f31a699f6dad874d5f66d0851d"
+  integrity sha512-h8PI1NZkgYi2pYJmuaDytf6TWGFLaux3+uP/goneqXRq7SpNdfRP2MBCAfVXekJVORYPncMTCsZB9PjSqodjgQ==
 
 bytes@3.0.0:
   version "3.0.0"
