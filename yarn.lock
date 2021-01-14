@@ -255,7 +255,7 @@
   dependencies:
     "@babel/types" "^7.12.7"
 
-"@babel/helper-module-imports@^7.10.4", "@babel/helper-module-imports@^7.12.1", "@babel/helper-module-imports@^7.12.5":
+"@babel/helper-module-imports@^7.12.1", "@babel/helper-module-imports@^7.12.5":
   version "7.12.5"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.12.5.tgz#1bfc0229f794988f76ed0a4d4e90860850b54dfb"
   integrity sha512-SR713Ogqg6++uexFRORf/+nPXMmWIn80TALu0uaFb+iQIUoR7bOC7zBWyzBs5b3tBBJXuyD0cRu1F15GyzjOWA==
@@ -1916,12 +1916,12 @@ babel-plugin-extract-import-names@1.6.22:
   dependencies:
     "@babel/helper-plugin-utils" "7.10.4"
 
-babel-plugin-superjson-next@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.1.9.tgz#2cd4e43b321ad442819d903cb714a3ea2e6eceae"
-  integrity sha512-FSLREp49HRR1KmDa9nV9YEw3B0hNowl9W9YoIlUvh6FjgUAts9iPtXD8zlVddG6JNORZTimpz5uCOfduCkbqOg==
+babel-plugin-superjson-next@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.1.10.tgz#c3d1292938d0824b18da43d2a7d347a7bb640958"
+  integrity sha512-zMCG7kiMG8jisUL2B24vK+nXJEzqAznO1sxSpSewhhdNQKrIdEHjHVYdQ2cmmOwhX9aAbdf9qkeQcB5G/lTUcA==
   dependencies:
-    "@babel/helper-module-imports" "^7.10.4"
+    "@babel/helper-module-imports" "^7.12.5"
     hoist-non-react-statics "^3.3.2"
 
 babel-plugin-syntax-jsx@6.18.0:
