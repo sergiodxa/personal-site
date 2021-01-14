@@ -55,7 +55,11 @@ export default async function subscribeToCourseListener(
   const table = base("leads") as Airtable.Table<CourseLeads>;
 
   try {
-    await table.create({ email, status: "subscribed", course });
+    await table.create({
+      email,
+      status: "subscribed",
+      course: course as "swr" | "react-query",
+    });
     return res.json({ status: "success" });
   } catch (error) {
     return res.status(400).json({
