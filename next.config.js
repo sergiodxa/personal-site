@@ -14,6 +14,11 @@ module.exports = {
         destination: "/articles/about",
         permanent: true,
       },
+      {
+        source: "/oss",
+        destination: "https://github.com/sergiodxa",
+        permanent: false,
+      },
     ];
   },
 };

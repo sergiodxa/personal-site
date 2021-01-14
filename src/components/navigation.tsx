@@ -8,11 +8,12 @@ import { MemojiName, Memoji } from "./memoji";
 
 const links: Array<{ href: string; label: string; title: string }> = [
   { href: "/articles", label: "Articles", title: "My Articles" },
+  { href: "/about", label: "About", title: "About me" },
   { href: "/bookmarks", label: "Bookmarks", title: "Links I Read" },
   // { href: "/ama", label: "AMA", title: "Ask me Anything!" },
   { href: "/til", label: "TIL", title: "Today I Learned" },
   { href: "/uses", label: "Uses", title: "What I Use" },
-  // { href: "/oss", label: "Open Source" },
+  { href: "/oss", label: "OSS", title: "Open Source I wrote" },
   // { href: "/hire", label: "Hire me!" },
 ];
 
