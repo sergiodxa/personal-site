@@ -30,7 +30,7 @@ export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-start space-y-4 bg-gray-900 p-6 rounded-md"
+      className="flex flex-col items-start space-y-4 bg-gray-100 dark:bg-gray-900 p-6 rounded-md"
     >
       <h3 className="text-xl font-semibold">
         Do you have feedback or comments?
@@ -42,9 +42,7 @@ export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
           className="text-gray-700 dark:text-gray-300 leading-relaxed"
         >
           What should I know? Was something I said wrong or outdated? Let me
-          know so I can fix it.
-          <br />
-          Do you have some opinion about this topic? Let's start a discussion!
+          know so I can fix it. Do you have some opinion about this topic? Let's start a discussion!
         </label>
 
         <Textarea
@@ -52,7 +50,7 @@ export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
           label=""
           placeholder="What should I know?"
           onChange={(event) => {
-            setMessage(event.target.value)
+            setMessage(event.target.value);
             if (event.target.value.trim() === "") reset();
           }}
           value={message}
@@ -63,7 +61,7 @@ export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
       </div>
 
       {message.trim().length > 0 ? (
-        <div className="flex space-x-2 w-full">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-2 w-full">
           <div className="space-y-px">
             <label className="text-gray-700 dark:text-gray-300" htmlFor="email">
               Email (optional)
@@ -96,7 +94,7 @@ export function FeedbackForm({ path, initialValue = "" }: FeedbackFormProps) {
         </div>
       ) : null}
 
-      <footer className="flex items-baseline w-full space-x-2">
+      <footer className="flex sm:items-center flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full">
         {message.trim().length > 0 && status === QueryStatus.Idle ? (
           <p className="text-sm text-gray-700 dark:text-gray-300">
             Feel free to expand as much as you need. You can use Markdown and
