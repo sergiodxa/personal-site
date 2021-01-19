@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@types/globby": "^9.1.0",
-    "@types/node": "^14.14.21",
+    "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
     "autoprefixer": "^10.2.3",
     "concurrently": "^5.2.0",
