@@ -128,11 +128,10 @@ export function RQLandingLayout() {
       <section>
         <Container>
           <Navigation
-            current="SWR"
-            title="Data-Fetching con React y SWR"
-            description="Aprende a usar SWR para optimizar la forma en que hacés
-            data-fetching en tus aplicaciones de React."
-            path="/courses/swr"
+            current="React Query"
+            title="Data-Fetching con React Query"
+            description="Aprende a usar React Query para optimizar la forma en que hacés data-fetching en tus aplicaciones de React."
+            path="/courses/React Query"
           />
 
           <section className="space-y-10 max-w-prose mx-auto">
@@ -146,6 +145,8 @@ export function RQLandingLayout() {
                   Aprende
                 </p>
                 <h1 className="leading-tight tracking-tight text-3xl sm:text-4xl md:text-5xl font-black">
+                  Data-Fetching con
+                  <br />
                   React Query
                 </h1>
                 <p className="text-xl text-gray-500 font-semibold mt-8">
@@ -171,8 +172,8 @@ export function RQLandingLayout() {
               </p>
 
               <p>
-                Vengo usando <strong>React Query en producción</strong> desde
-                hace meses y atento a su desarrollo desde que fue liberado Open
+                Vengo usando <strong>React Query en producción</strong> desde la
+                versión dos y atento a su desarrollo desde que fue liberado Open
                 Source.
               </p>
               <p>
@@ -189,7 +190,7 @@ export function RQLandingLayout() {
                 </li>
                 <li>
                   Un workshop en video que muestra los diferentes conceptos de
-                  SWR por separado.
+                  React Query por separado.
                 </li>
                 <li>
                   Una colección de videos donde muestro, paso a paso, como creo
