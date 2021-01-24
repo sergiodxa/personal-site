@@ -19,6 +19,7 @@ async function parseBody({
   notePath: string;
 }): Promise<string> {
   if (isMDX) {
+    // @ts-expect-error
     return await renderToString(content, { components });
   } else {
     const { body } = await cn.body(CN_SITE_PATH, notePath);

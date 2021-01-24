@@ -14,6 +14,7 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
   const hasNote = isDraft;
   const isMDX = meta.tags?.includes("mdx") ?? false;
   const articleProps: React.HTMLAttributes<HTMLDivElement> = isMDX
+    // @ts-expect-error
     ? { children: hydrate(body, { components }) }
     : {
         dangerouslySetInnerHTML: { __html: body },
