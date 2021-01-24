@@ -135,8 +135,11 @@ export function SWRLandingLayout() {
             <section className="mx-auto prose dark:prose-dark prose-xl">
               <p>
                 Vengo usando SWR en producción desde que fue hecho Open Source,
-                y soy el <strong>segundo mayor contribuidor en GitHub</strong>,
-                siendo el autor de la capa de cache de la librería.
+                y soy{" "}
+                <a href="https://github.com/vercel/swr/graphs/contributors">
+                  <strong>contribuidor principal en GitHub</strong>
+                </a>
+                , siendo el autor de la capa de cache de la librería.
               </p>
               <p>
                 <strong>Data-Fetching con React y SWR</strong> es todo lo que sé
