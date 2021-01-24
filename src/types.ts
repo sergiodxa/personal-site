@@ -12,13 +12,15 @@ export type CourseLeads = {
   createdAt?: string;
 };
 
+export type ChannelVideo = { title: string; url: string };
+
 export type Feedback = {
   path: string;
   email?: string;
   message: string;
   twitter?: string;
   createdAt?: string;
-}
+};
 
 export type Meta = {
   slug: string;
@@ -71,6 +73,10 @@ export type HomePageProps = {
 
 export type BookmarksPageProps = {
   bookmarks: Bookmark[];
+};
+
+export type ChannelPageProps = {
+  channel: ChannelVideo[];
 };
 
 export type AMAPageProps = {
