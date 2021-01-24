@@ -56,7 +56,6 @@ module.exports = {
               },
               h1: {
                 color: theme("colors.gray.100"),
-                textWeight: "bold",
               },
               h2: {
                 color: theme("colors.gray.100"),
@@ -100,5 +99,9 @@ module.exports = {
     },
   },
 
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/aspect-ratio"),
+  ],
 };
