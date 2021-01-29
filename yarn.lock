@@ -1926,10 +1926,10 @@ babel-plugin-extract-import-names@1.6.22:
   dependencies:
     "@babel/helper-plugin-utils" "7.10.4"
 
-babel-plugin-superjson-next@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.2.0.tgz#64de48072f78d8ff740cce460f76981eb8475695"
-  integrity sha512-ZtXuwODQ3BiKYmY53++JycERtsZgG18EKJ/dAwt7UkcCd6FdtbbPCbjGNLfHz/5Rl0pmUU+CtpuYvxNKYHSXZg==
+babel-plugin-superjson-next@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.2.1.tgz#7a5834c78807e36820a326f4f5d8d02f5a06ee8a"
+  integrity sha512-6vBq2p2mFSa8Kq0AXtJ+3un+lkEymxHjpshk0J3Rx7klYBPiIUbfSw8ekwtinFcHOe+KnLpckOzrYEssD7XT1w==
   dependencies:
     "@babel/helper-module-imports" "^7.12.5"
     hoist-non-react-statics "^3.3.2"
