@@ -14,6 +14,12 @@ export type CourseLeads = {
 
 export type ChannelVideo = { title: string; url: string };
 
+export type RSSFeed = {
+  id: number;
+  url: string;
+  name: string;
+};
+
 export type Feedback = {
   path: string;
   email?: string;
@@ -90,3 +96,26 @@ export type TILPageProps = {
 };
 
 export type SearchResults = Array<{ meta: ReducedMeta } & Note>;
+
+export type ReaderProps = { feeds: RSSFeed[] };
+
+export type FeedPageProps = { feed: Feed; id: RSSFeed["id"] };
+
+export type FeedPageQuery = { feed: string };
+
+export type FeedItem = {
+  guid: string;
+  title: string;
+  link: string;
+  content: string;
+  contentSnippet: string;
+  isoDate: string;
+  pubDate: string;
+};
+
+export type Feed = {
+  title: string;
+  description: string;
+  lastBuildDate: string;
+  items: FeedItem[];
+};
