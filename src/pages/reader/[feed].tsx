@@ -11,11 +11,11 @@ export const getStaticProps: GetStaticProps<
   const id = Number(params.feed);
   const parser = new Parser();
   const feeds = await getRSSFeeds();
-  const { url } = feeds.find((feed) => feed.id === id);
+  const { url, name } = feeds.find((feed) => feed.id === id);
   const res = await fetch(url);
   const rss = await res.text();
   const feed = ((await parser.parseString(rss)) as unknown) as Feed;
-  return { props: { feed, id }, revalidate: 1 };
+  return { props: { feed, id, name }, revalidate: 1 };
 };
 
 export const getStaticPaths: GetStaticPaths<FeedPageQuery> = async () => {

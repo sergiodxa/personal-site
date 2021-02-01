@@ -99,7 +99,11 @@ export type SearchResults = Array<{ meta: ReducedMeta } & Note>;
 
 export type ReaderProps = { feeds: RSSFeed[] };
 
-export type FeedPageProps = { feed: Feed; id: RSSFeed["id"] };
+export type FeedPageProps = {
+  feed: Feed;
+  id: RSSFeed["id"];
+  name: RSSFeed["name"];
+};
 
 export type FeedPageQuery = { feed: string };
 

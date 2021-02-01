@@ -5,7 +5,13 @@ import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { FeedPageProps } from "types";
 
-export function FeedLayout({ feed, id }: FeedPageProps) {
+const { format } = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+export function FeedLayout({ feed, id, name }: FeedPageProps) {
   return (
     <section className="space-y-6 mb-12">
       <Head>
@@ -16,7 +22,7 @@ export function FeedLayout({ feed, id }: FeedPageProps) {
         <Container>
           <Navigation
             current="reader"
-            title={feed.title ?? "Reader Blog"}
+            title={name ?? feed.title ?? "Reader Blog"}
             description={feed.description}
             path={`/reader/${id}`}
           />
@@ -24,22 +30,41 @@ export function FeedLayout({ feed, id }: FeedPageProps) {
       </Header>
 
       <Container>
+        <header className="prose dark:prose-dark sm:prose-lg mx-auto">
+          <h1>{name ?? feed.title ?? "Reader Blog"}</h1>
+
+          {feed.lastBuildDate ? (
+            <blockquote>
+              <time dateTime={feed.lastBuildDate}>
+                Last updated on {format(new Date(feed.lastBuildDate))}
+              </time>
+            </blockquote>
+          ) : null}
+        </header>
+
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
           {feed.items.map((item) => {
             return (
               <section
                 key={item.guid}
-                className="py-12 px-4 space-y-2 max-w-prose mx-auto prose dark:prose-dark sm:prose-lg"
+                className="pb-6 px-4 space-y-2 max-w-prose mx-auto prose dark:prose-dark sm:prose-lg"
               >
                 <header>
-                  <h1 className="text-4xl">{item.title}</h1>
+                  <h2
+                    className="text-4xl"
+                    dangerouslySetInnerHTML={{ __html: item.title }}
+                  />
+                </header>
 
+                <article className="whitespace-pre-line line-clamp-3">
+                  {item.contentSnippet ?? item.content ?? ""}
+                </article>
+
+                <footer>
                   <blockquote>
                     Read full article on <a href={item.link}>{item.link}</a>
                   </blockquote>
-                </header>
-
-                <article dangerouslySetInnerHTML={{ __html: item.content }} />
+                </footer>
               </section>
             );
           })}
