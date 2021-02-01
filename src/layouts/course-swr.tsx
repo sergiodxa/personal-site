@@ -105,7 +105,6 @@ export function SWRLandingLayout() {
             title="Data-Fetching con React y SWR"
             description="Aprende a usar SWR para optimizar la forma en que hacés
             data-fetching en tus aplicaciones de React."
-            path="/courses/swr"
           />
 
           <section className="space-y-10 max-w-prose mx-auto">

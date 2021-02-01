@@ -13,7 +13,6 @@ export function ChannelLayout({ channel }: ChannelPageProps) {
             current="channel"
             title="Channel"
             description=""
-            path="/channel"
           />
         </Container>
       </header>

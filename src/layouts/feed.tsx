@@ -24,7 +24,6 @@ export function FeedLayout({ feed, id, name }: FeedPageProps) {
             current="reader"
             title={name ?? feed.title ?? "Reader Blog"}
             description={feed.description}
-            path={`/reader/${id}`}
           />
         </Container>
       </Header>

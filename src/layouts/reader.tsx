@@ -10,10 +10,7 @@ function FeedItem({ feed }: { feed: RSSFeed }) {
   return (
     <li>
       <Link href={`/reader/${feed.id}`}>
-        <a
-          rel="noopener noreferrer"
-          className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400 text-xl"
-        >
+        <a className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400 text-xl">
           {feed.name}
         </a>
       </Link>
@@ -42,7 +39,6 @@ export function ReaderLayout({ feeds }: ReaderProps) {
             current="reader"
             title="Reader"
             description="A RSS feed reader for the blogs I follow."
-            path="/reader"
           />
         </Container>
       </header>

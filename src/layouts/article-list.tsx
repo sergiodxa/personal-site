@@ -14,7 +14,6 @@ export function ArticlesListLayout(props: ArticleListPageProps) {
             current="articles"
             title="Articles"
             description="All the articles I have wrote in my career"
-            path="/articles"
           />
         </Container>
       </header>

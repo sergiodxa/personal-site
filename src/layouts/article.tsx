@@ -27,7 +27,6 @@ export function ArticleLayout({ note, body, links, meta }: ArticlePageProps) {
             current="articles"
             title={note.title ?? "Articles"}
             description={meta.description ?? note.headline}
-            path={`/articles/${meta.slug ?? note.path}`}
           />
         </Container>
       </Header>

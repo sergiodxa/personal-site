@@ -40,7 +40,6 @@ export function BookmarksLayout(props: BookmarksPageProps) {
             current="bookmarks"
             title="Bookmarks"
             description="A collection of links I have found interesting and worth saving them for the future."
-            path="/bookmarks"
           />
         </Container>
       </header>

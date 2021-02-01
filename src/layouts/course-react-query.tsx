@@ -131,7 +131,6 @@ export function RQLandingLayout() {
             current="React Query"
             title="Data-Fetching con React Query"
             description="Aprende a usar React Query para optimizar la forma en que hacés data-fetching en tus aplicaciones de React."
-            path="/courses/React Query"
           />
 
           <section className="space-y-10 max-w-prose mx-auto">

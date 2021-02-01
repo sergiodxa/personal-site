@@ -15,7 +15,6 @@ export function AMALayout(props: AMAPageProps) {
             current="Ask Me!"
             title="Ask me Anything!"
             description="Ask me any question, I will wrote an article about it."
-            path="/ama"
           />
         </Container>
       </Header>

@@ -28,7 +28,6 @@ export function TILLayout(props: TILPageProps) {
             current="TIL"
             title="Today I Learned"
             description="I share small notes on things I learn"
-            path="/til"
           />
         </Container>
       </header>
