@@ -1,10 +1,9 @@
 import * as React from "react";
-import { resolve } from "url";
 import clsx from "clsx";
 import Link from "next/link";
 import Head from "next/head";
 import { Spacer } from "./spacer";
-import { MemojiName, Memoji } from "./memoji";
+import { MemojiName } from "./memoji";
 
 const links: Array<{ href: string; label: string; title: string }> = [
   { href: "/articles", label: "Articles", title: "My Articles" },
@@ -28,14 +27,10 @@ export function Navigation({
   current,
   title,
   description = "T-Shaped Frontend Engineer",
-  path = "/",
-  memoji = "happy",
 }: {
   current: string;
   title?: string;
   description?: string;
-  path?: string;
-  memoji?: MemojiName;
 }) {
   const isHome = current.toLowerCase() === "home";
 
