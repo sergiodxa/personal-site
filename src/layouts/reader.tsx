@@ -85,7 +85,7 @@ export function ReaderLayout({ feeds }: ReaderProps) {
         </section>
 
         <section>
-          <ul className="space-y-4 list-disc list-inside xl:list-outside">
+          <ul className="list-disc list-inside xl:list-outside grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredFeeds.map((feed) => (
               <FeedItem key={feed.url} feed={feed} />
             ))}
