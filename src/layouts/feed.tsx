@@ -11,7 +11,7 @@ const { format } = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
 });
 
-export function FeedLayout({ feed, id, name }: FeedPageProps) {
+export function FeedLayout({ feed, url, name }: FeedPageProps) {
   return (
     <section className="space-y-6 mb-12">
       <Head>
@@ -31,6 +31,12 @@ export function FeedLayout({ feed, id, name }: FeedPageProps) {
       <Container>
         <header className="prose dark:prose-dark sm:prose-lg mx-auto">
           <h1>{name ?? feed.title ?? "Reader Blog"}</h1>
+
+          <blockquote>
+            <a href={url} rel="nofollow noreferrer">
+              Follow this blog
+            </a>
+          </blockquote>
 
           {feed.lastBuildDate ? (
             <blockquote>
@@ -61,7 +67,10 @@ export function FeedLayout({ feed, id, name }: FeedPageProps) {
 
                 <footer>
                   <blockquote>
-                    Read full article on <a href={item.link}>{item.link}</a>
+                    Read full article on{" "}
+                    <a href={item.link} rel="nofollow noreferrer">
+                      {item.link}
+                    </a>
                   </blockquote>
                 </footer>
               </section>
