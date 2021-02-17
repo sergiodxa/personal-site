@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gray: colors.trueGray,
+        gray: colors.warmGray,
       },
 
       maxWidth: {
@@ -83,6 +83,24 @@ module.exports = {
               "tbody tr": {
                 borderBottomColor: theme("colors.gray.800"),
               },
+              "h1 a": {
+                fontWeight: theme("fontWeight.bold"),
+              },
+              "h2 a": {
+                fontWeight: theme("fontWeight.bold"),
+              },
+              "h3 a": {
+                fontWeight: theme("fontWeight.bold"),
+              },
+              "h4 a": {
+                fontWeight: theme("fontWeight.bold"),
+              },
+              "h5 a": {
+                fontWeight: theme("fontWeight.bold"),
+              },
+              "h6 a": {
+                fontWeight: theme("fontWeight.bold"),
+              }
             },
           },
         };
