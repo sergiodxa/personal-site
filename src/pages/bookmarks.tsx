@@ -5,7 +5,7 @@ import { BookmarksLayout } from "layouts/bookmarks";
 
 export const getStaticProps: GetStaticProps<BookmarksPageProps> = async () => {
   const bookmarks = await getBookmarks();
-  return { props: { bookmarks }, revalidate: 1 };
+  return { props: { bookmarks }, revalidate: 1000 * 5 };
 };
 
 export default BookmarksLayout;

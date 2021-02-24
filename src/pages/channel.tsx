@@ -18,12 +18,12 @@ export const getStaticProps: GetStaticProps<ChannelPageProps> = async () => {
     })
     .firstPage();
 
-    const channel =  records.map((record) => ({
+  const channel = records.map((record) => ({
     title: record.fields.title,
     url: record.fields.url,
   }));
 
-  return { props: { channel }, revalidate: 1 };
+  return { props: { channel }, revalidate: 1000 * 5 };
 };
 
 export default ChannelLayout;

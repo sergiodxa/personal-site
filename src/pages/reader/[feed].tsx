@@ -15,7 +15,7 @@ export const getStaticProps: GetStaticProps<
   const res = await fetch(url);
   const rss = await res.text();
   const feed = ((await parser.parseString(rss)) as unknown) as Feed;
-  return { props: { feed, id, name, url }, revalidate: 1 };
+  return { props: { feed, id, name, url }, revalidate: 1000 * 5 };
 };
 
 export const getStaticPaths: GetStaticPaths<FeedPageQuery> = async () => {
