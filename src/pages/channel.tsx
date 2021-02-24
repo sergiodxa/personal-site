@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps<ChannelPageProps> = async () => {
     url: record.fields.url,
   }));
 
-  return { props: { channel }, revalidate: 1000 * 5 };
+  return { props: { channel }, revalidate: 5 };
 };
 
 export default ChannelLayout;

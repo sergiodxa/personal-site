@@ -5,7 +5,7 @@ import { getRSSFeeds } from "utils/get-rss-feeds";
 
 export const getStaticProps: GetStaticProps<ReaderProps> = async () => {
   const feeds = await getRSSFeeds();
-  return { props: { feeds }, revalidate: 1000 * 5 };
+  return { props: { feeds }, revalidate: 5 };
 };
 
 export default ReaderLayout;
