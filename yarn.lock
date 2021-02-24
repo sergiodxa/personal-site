@@ -1621,10 +1621,10 @@ babel-plugin-extract-import-names@1.6.22:
   dependencies:
     "@babel/helper-plugin-utils" "7.10.4"
 
-babel-plugin-superjson-next@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.2.2.tgz#7b2c8133c4c60260de3e83589e5d3707d8f1478a"
-  integrity sha512-baf+zAWlZrGfHIOsqef/HIuhBW0sN+bFaONvEfkSOZy2Ho/o3BM4lvVC53i9pqxnGUM922HFEAUpYaLop5SW4Q==
+babel-plugin-superjson-next@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-superjson-next/-/babel-plugin-superjson-next-0.2.3.tgz#9a3166a0540cf139fb93270276316776775f122d"
+  integrity sha512-eqcsWLims4qRAL4xGKZiB9GE38ByreslD2SeeDhC0FCnbt7jK7YVCWFYhYslVCniiG1Atstxf6w5ApfsuqwUoQ==
   dependencies:
     "@babel/helper-module-imports" "^7.12.13"
     "@babel/types" "^7.12.17"
