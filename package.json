@@ -55,7 +55,7 @@
     "rss-parser": "^3.12.0",
     "superjson": "^1.7.2",
     "tailwindcss": "^2.0.3",
-    "typescript": "^4.2.2",
+    "typescript": "^4.2.3",
     "upgrade": "^1.1.0",
     "yup": "^0.32.9"
   },
