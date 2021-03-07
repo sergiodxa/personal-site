@@ -20,7 +20,7 @@ const links: Array<{ href: string; label: string; title: string }> = [
 function formatOGURL(title: string, description: string) {
   const eTitle = encodeURIComponent(title);
   const eDescription = encodeURIComponent(description);
-  return `https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26title%3D$${eTitle}%26description%3D${eDescription}`;
+  return `https://i.microlink.io/https%3A%2F%2Fcards.microlink.io%2F%3Fpreset%3Dcontentz%26title%3D${eTitle}%26description%3D${eDescription}`;
 }
 
 export function Navigation({
