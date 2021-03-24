@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<AMAPageProps> = async () => {
         )
         .slice(0, 10),
     },
-    revalidate: 5,
+    revalidate: 120,
   };
 };
 export default AMALayout;
