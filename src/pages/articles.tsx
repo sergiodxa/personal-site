@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps<ArticleListPageProps> = async () => 
         }))
         .sort((a, b) => a.title.localeCompare(b.title)),
     },
-    revalidate: 5,
+    revalidate: 120,
   };
 };
 
