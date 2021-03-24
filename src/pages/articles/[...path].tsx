@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps<
     content,
     notePath,
   });
-  return { props: { note, site, body, links, meta }, revalidate: 5 };
+  return { props: { note, site, body, links, meta }, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths<ArticlePageQuery> = async () => {
