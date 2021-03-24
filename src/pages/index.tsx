@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
         )
         .slice(0, 10),
     },
-    revalidate: 1,
+    revalidate: 120,
   };
 };
 
