@@ -31,7 +31,7 @@
   "dependencies": {
     "@octokit/rest": "^18.5.0",
     "@tailwindcss/aspect-ratio": "^0.2.0",
-    "@tailwindcss/forms": "^0.3.0",
+    "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@tailwindcss/typography": "^0.4.0",
     "@types/airtable": "^0.8.1",
