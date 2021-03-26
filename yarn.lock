@@ -1227,10 +1227,10 @@
     once "^1.4.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/rest@^18.5.0":
-  version "18.5.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.5.0.tgz#b77677fc957377d953c9eff1087ec5c4390854d2"
-  integrity sha512-+4+u12KIw53R9+k6jBw6QL7xycKfEquk8CuStNNjdSPxCC7+FQiULG/woyqgJaGod6zBkYGSL0Zulk4JM8h2sQ==
+"@octokit/rest@^18.5.1":
+  version "18.5.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.5.1.tgz#c0650c4b37bd4a5c2e7a21aa16896fc684c36c0d"
+  integrity sha512-o7j53LHtOHXsNZxTH/0i18LdSVKwvTCztAE09uM1CVdcRc/CRj+zf3AM6IRT4kApB8UVXKUOkJgxZmZipK0cKw==
   dependencies:
     "@octokit/core" "^3.2.3"
     "@octokit/plugin-paginate-rest" "^2.6.2"
