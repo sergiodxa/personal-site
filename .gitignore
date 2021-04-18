@@ -12,3 +12,4 @@
 .env
 app/styles/inter.css
 app/styles/global.css
+app/styles/tailwind.css

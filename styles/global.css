@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   html {
     @apply bg-white text-black antialiased;

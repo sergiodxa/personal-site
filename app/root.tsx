@@ -2,11 +2,13 @@ import type { MetaFunction } from "@remix-run/node";
 import type { LinksFunction } from "@remix-run/react";
 import { Links, Meta, Scripts, useMatches } from "@remix-run/react";
 import { Outlet } from "react-router-dom";
+import tailwindCSS from "./styles/tailwind.css";
 import globalCSS from "./styles/global.css";
 import interCSS from "./styles/inter.css";
 
 export const links: LinksFunction = () => {
   return [
+    { rel: "stylesheet", href: tailwindCSS },
     { rel: "stylesheet", href: globalCSS },
     { rel: "stylesheet", href: interCSS },
     { rel: "icon", href: "/static/favicon@48.png" },
