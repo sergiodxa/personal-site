@@ -15,12 +15,7 @@ export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const body = new URLSearchParams(await request.text());
 
-  const url = new URL(request.url);
-  url.searchParams.delete("_data");
-  if (body.has("page")) {
-    url.searchParams.set("page", body.get("page") as string);
-  }
-  const redirectUrl = url.toString();
+  const redirectUrl = body.get("redirectTo") ?? "/articles";
 
   if (request.method.toUpperCase() !== "POST") {
     session.flash("errror", "Unsupported method.");
@@ -96,6 +91,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return json(
     {
+      url: url.toString(),
       page,
       totalPages: Math.ceil(site.total_notes / 40),
       error,
@@ -126,7 +122,7 @@ export const handle = {
 };
 
 export default function View() {
-  const { notes, page, totalPages, success, error } = useRouteData<ArticleListPageProps>();
+  const { notes, page, totalPages, success, error, url } = useRouteData<ArticleListPageProps>();
 
   return (
     <section className="space-y-6 mb-12">
@@ -142,7 +138,7 @@ export default function View() {
 
       <Container>
         <div className="mx-auto relative rounded-lg">
-          <AMAForm success={success} error={error} page={page} />
+          <AMAForm success={success} error={error} redirectTo={url} />
           <p>{success}</p>
           <p>{error}</p>
         </div>

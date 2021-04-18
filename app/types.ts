@@ -67,6 +67,7 @@ export type ArticlePageProps = {
 export type ArticlePageQuery = { path: string[] };
 
 export type ArticleListPageProps = {
+  url: string;
   page: number;
   totalPages: number;
   success?: string;

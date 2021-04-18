@@ -4,12 +4,12 @@ import { Button } from "./button";
 import { Spacer } from "./spacer";
 
 type Props = {
-  page?: number;
+  redirectTo: string;
   success?: string;
   error?: string;
 };
 
-export function AMAForm({ success, error, page }: Props) {
+export function AMAForm({ success, error, redirectTo }: Props) {
   const [question, setQuestion] = useState("");
   const isEmpty = question.trim().length === 0;
   const pendingForm = usePendingFormSubmit();
@@ -22,11 +22,8 @@ export function AMAForm({ success, error, page }: Props) {
         <h2 className="font-semibold text-2xl">Ask me Anything!</h2>
       </header>
 
-      <Form
-        method="post"
-        className="flex flex-col items-start space-y-2"
-      >
-        <input type="hidden" name="page" value={page} />
+      <Form method="post" className="flex flex-col items-start space-y-2">
+        <input type="hidden" name="redirectTo" value={redirectTo} />
 
         <label
           htmlFor="question"
