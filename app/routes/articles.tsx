@@ -15,9 +15,16 @@ export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const body = new URLSearchParams(await request.text());
 
+  const url = new URL(request.url);
+  url.searchParams.delete("_data");
+  if (body.has("page")) {
+    url.searchParams.set("page", body.get("page") as string);
+  }
+  const redirectUrl = url.toString();
+
   if (request.method.toUpperCase() !== "POST") {
     session.flash("errror", "Unsupported method.");
-    return redirect(request.url, {
+    return redirect(redirectUrl, {
       status: 405,
       headers: {
         "Set-Cookie": await commitSession(session),
@@ -29,7 +36,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (!question) {
     session.flash("error", "The question is required.");
-    return redirect(request.url, {
+    return redirect(redirectUrl, {
       status: 400,
       headers: {
         "Set-Cookie": await commitSession(session),
@@ -49,7 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
       assignees: [process.env.GH_USERNAME as string],
     });
     session.flash("success", "Question created");
-    return redirect(request.url, {
+    return redirect(redirectUrl, {
       status: 201,
       headers: {
         "Set-Cookie": await commitSession(session),
@@ -57,7 +64,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
   } catch (error) {
     session.flash("error", error.message);
-    return redirect(request.url, {
+    return redirect(redirectUrl, {
       status: 400,
       headers: {
         "Set-Cookie": await commitSession(session),
@@ -135,7 +142,7 @@ export default function View() {
 
       <Container>
         <div className="mx-auto relative rounded-lg">
-          <AMAForm success={success} error={error} />
+          <AMAForm success={success} error={error} page={page} />
           <p>{success}</p>
           <p>{error}</p>
         </div>

@@ -4,11 +4,12 @@ import { Button } from "./button";
 import { Spacer } from "./spacer";
 
 type Props = {
+  page?: number;
   success?: string;
   error?: string;
 };
 
-export function AMAForm({ success, error }: Props) {
+export function AMAForm({ success, error, page }: Props) {
   const [question, setQuestion] = useState("");
   const isEmpty = question.trim().length === 0;
   const pendingForm = usePendingFormSubmit();
@@ -25,6 +26,8 @@ export function AMAForm({ success, error }: Props) {
         method="post"
         className="flex flex-col items-start space-y-2"
       >
+        <input type="hidden" name="page" value={page} />
+
         <label
           htmlFor="question"
           className="text-gray-600 dark:text-gray-400 text-lg"
