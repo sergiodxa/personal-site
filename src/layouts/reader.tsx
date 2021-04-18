@@ -1,5 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Container } from "components/container";
 import { Navigation } from "components/navigation";
 import { Spacer } from "components/spacer";
@@ -9,7 +9,7 @@ import { ReaderProps, RSSFeed } from "types";
 function FeedItem({ feed }: { feed: RSSFeed }) {
   return (
     <li>
-      <Link href={`/reader/${feed.id}`}>
+      <Link to={`/reader/${feed.id}`}>
         <a className="font-semibold underline hover:no-underline text-blue-600 visited:text-indigo-600 dark:text-blue-500 dark:visited:text-indigo-400 text-xl">
           {feed.name}
         </a>

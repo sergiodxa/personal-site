@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-white text-black antialiased;
+    text-size-adjust: 100%;
+    font-size: 16px;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  /**
+    * makes the document full min-height
+  */
+  body {
+    @apply w-full font-normal h-full m-0;
+
+    /** This doesn't work for `height` in Firefox */
+    min-height: -moz-available;
+    /*
+    * This does work for `height` in Chrome and Safari,
+    * but Safari has some weird redraw issue
+    * (open and close devtools and you will see).
+    */
+    min-height: -webkit-fill-available;
+  }
+}

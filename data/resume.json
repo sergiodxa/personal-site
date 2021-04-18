@@ -1,0 +1,153 @@
+{
+  "basics": {
+    "name": "Sergio Xalambrí",
+    "label": "Software Engineer",
+    "email": "hello@sergiodxa.com",
+    "website": "https://sergiodxa.com",
+    "summary": "Tech Lead at Able, previously Vercel & Platzi. Core Contributor of SWR y contributor of Next.js and more OSS projects.\nSergio taught React, Redux, Next.js and Vercel in multiple online courses and workshops. He was part of the staff of Codeable, the first web development bootcamp in Lima, Perú.",
+    "location": {
+      "city": "Lima",
+      "region": "Perú"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "sergiodxa",
+        "url": "https://twitter.com/sergiodxa"
+      },
+      {
+        "network": "GitHub",
+        "username": "sergiodxa",
+        "url": "https://github..com/sergiodxa"
+      },
+      {
+        "network": "DEV",
+        "username": "sergiodxa",
+        "url": "https://dev.to/sergiodxa"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Able",
+      "position": "Tech Lead",
+      "summary": "After Codeable I joined back the Engineering department as Teach Lead on one of our internal products, there I lead the migration from a jQuery + React + Redux Frontend codebase to a Next.js + Tailwind CSS Frontend, while keeping the already built Rails monolith as an API.",
+      "website": "https://able.co",
+      "startDate": "2019-08-19"
+    },
+    {
+      "company": "Able",
+      "position": "Frontend Instructor",
+      "summary": "I teach Frontend for six months at our internal bootcamp Codeable, here I teach HTML, CSS, JS, animation, React, Redux, CSS in JS and more.",
+      "website": "https://able.co",
+      "startDate": "2019-02-01",
+      "endDate": "2019-08-19"
+    },
+    {
+      "company": "Able",
+      "position": "Software Engineer",
+      "summary": "I worked as Software Engineer in a partner project when I joined the company, there we used React and Styled Components.",
+      "website": "https://able.co",
+      "startDate": "2018-09-18",
+      "endDate": "2019-02-01"
+    },
+    {
+      "company": "Vercel",
+      "position": "Software Engineer",
+      "summary": "I migrated to a Software Engineer role after doing Support to help build the dashboard and the contribute with the Lead Designer to build the original documentation and components of the Geist Design System.",
+      "website": "https://zeit.co",
+      "startDate": "2018-07-01",
+      "endDate": "2018-09-11"
+    },
+    {
+      "company": "Vercel",
+      "position": "Lead Support Engineer",
+      "summary": "I joined Vercel to lead the Support efforts, while worked there I helped to resolve multiple bugs, revamp the API documentation including examples and missing and undocumented API endpoints, I also implemented feature required by the users of the platform. Additionally, I helped troubleshoot the user issues and some time debug their applications.",
+      "website": "https://zeit.co",
+      "startDate": "2017-07-01",
+      "endDate": "2018-07-01"
+    },
+    {
+      "company": "Platzi",
+      "position": "JavaScript Developer",
+      "summary": "After I migrated to a more JS focused role I worked on the backend and frontend part of our Live Streaming platform and chat, making a WebSocket server scalable to support the amount of traffic we received almost daily, I also built a video player with DRM and streaming support and automatically quality switch to work even on bad connections.",
+      "website": "https://platzi.com",
+      "startDate": "2016-05-01",
+      "endDate": "2017-07-01"
+    },
+    {
+      "company": "Platzi",
+      "position": "Frontend Developer",
+      "summary": "While I was Frontend Developer I worked on multiple projects for our education platform, including our custom blog engine, multiple landing pages, a subscription manager for users.",
+      "website": "https://platzi.com",
+      "startDate": "2015-08-01",
+      "endDate": "2016-05-01"
+    },
+    {
+      "company": "Promaker",
+      "position": "Frontend Developer",
+      "summary": "I worked mostly doing responsive landing pages, where I needed to built the mobile views myself, I also worked with PHP and CodeIgniter to build CMS for some of our websites, including eCommerce platforms",
+      "website": "https://promaker.com.ar",
+      "startDate": "2013-10-15",
+      "endDate": "2014-12-01"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Escuela Técnica Manuel Belgrano",
+      "area": "Electricity",
+      "studyType": "Technicature",
+      "startDate": "2006-03-01",
+      "endDate": "2011-12-01"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Frontend Development",
+      "keywords": [
+        "React",
+        "Next.js",
+        "CSS in JS",
+        "Emotion",
+        "Styled Components",
+        "DOM Testing Library",
+        "React Testing Library",
+        "Cypress",
+        "Redux",
+        "PWA",
+        "SWR",
+        "Tailwind",
+        "React Table"
+      ]
+    },
+    {
+      "name": "Backend Development",
+      "keywords": [
+        "Node.js",
+        "Serverless",
+        "WebSocket",
+        "Socket.io",
+        "Rails",
+        "Express",
+        "MongoDB",
+        "Redis"
+      ]
+    },
+    {
+      "name": "Languages",
+      "keywords": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "Python",
+        "Ruby",
+        "PHP"
+      ]
+    }
+  ],
+  "languages": [
+    { "language": "Spanish", "fluency": "Native speaker" },
+    { "language": "English", "fluency": "C1" }
+  ]
+}
