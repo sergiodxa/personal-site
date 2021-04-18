@@ -10,3 +10,5 @@
 
 .vercel
 .env
+app/styles/inter.css
+app/styles/global.css
