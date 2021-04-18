@@ -10,8 +10,10 @@ type TagProps = {
 
 type ArticleItemProps = {
   article: ReducedMeta;
-  onTagClick: TagClickHandler;
+  onTagClick?: TagClickHandler;
 };
+
+function noop() {}
 
 function Tag({ onClick, label }: TagProps) {
   if (onClick) {
@@ -59,7 +61,7 @@ export function ArticleItem({ article, onTagClick }: ArticleItemProps) {
             .map((tag) => tag.toLowerCase())
             .sort((a, b) => a.localeCompare(b))
             .map((tag) => (
-              <Tag onClick={onTagClick} label={tag} key={tag} />
+              <Tag onClick={onTagClick ?? noop} label={tag} key={tag} />
             ))}
         </footer>
       ) : null}
