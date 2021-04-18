@@ -135,7 +135,7 @@ export default function View() {
 
       <Container>
         <div className="mx-auto relative rounded-lg">
-          <AMAForm />
+          <AMAForm success={success} error={error} />
           <p>{success}</p>
           <p>{error}</p>
         </div>
