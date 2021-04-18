@@ -10,7 +10,7 @@ type TagProps = {
 
 type ArticleItemProps = {
   article: ReducedMeta;
-  onTagClick?: TagClickHandler;
+  onTagClick: TagClickHandler;
 };
 
 function Tag({ onClick, label }: TagProps) {
@@ -37,10 +37,11 @@ export function ArticleItem({ article, onTagClick }: ArticleItemProps) {
     <article className="py-6 px-4 space-y-2">
       <header>
         <h3 className="text-xl">
-          <Link to={article.slug}>
-            <a className="font-semibold underline hover:no-underline text-blue-600 dark:text-blue-500 visited:text-indigo-600 dark:visited:text-indigo-400 inline">
-              {article.title}
-            </a>
+          <Link
+            to={article.slug}
+            className="font-semibold underline hover:no-underline text-blue-600 dark:text-blue-500 visited:text-indigo-600 dark:visited:text-indigo-400 inline"
+          >
+            {article.title}
           </Link>
         </h3>
       </header>
