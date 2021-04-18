@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Head from "next/head";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Spacer } from "./spacer";
 
 const links: Array<{ href: string; label: string; title: string }> = [
@@ -66,16 +66,12 @@ export function Navigation({
 
       <nav className="flex py-4 items-center space-x-2">
         {!isHome ? (
-          <Link to="/">
-            <a
-              aria-current={isHome ? "page" : "false"}
-              className="flex-shrink-0"
-            >
-              <span className="text-xl leading-none relative flex-shrink-0 font-extrabold text-gray-900 dark:text-gray-100">
-                Sergio Xalambrí
-              </span>
-            </a>
-          </Link>
+          <NavLink
+            to="/"
+            className="text-xl leading-none relative flex-shrink-0 font-extrabold text-gray-900 dark:text-gray-100"
+          >
+            Sergio Xalambrí
+          </NavLink>
         ) : null}
 
         <Spacer />
@@ -85,7 +81,7 @@ export function Navigation({
             const isActive = current.toLowerCase() === link.label.toLowerCase();
             return (
               <li key={link.href} className="px-2 flex-shrink-0">
-                <Link
+                <NavLink
                   to={link.href}
                   className={clsx(
                     "text-blue-600 dark:text-blue-500 font-semibold",
@@ -97,7 +93,7 @@ export function Navigation({
                   title={link.title}
                 >
                   {link.label}
-                </Link>
+                </NavLink>
               </li>
             );
           })}
