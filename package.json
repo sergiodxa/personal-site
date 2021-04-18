@@ -10,7 +10,8 @@
     "build:css": "postcss styles --base styles --dir app/styles --env production",
     "build:remix": "remix build2",
     "clean": "del .cache build public/build app/styles",
-    "typecheck": "tsc --project app"
+    "typecheck": "tsc --project app",
+    "vercel-build": "yarn build:css && yarn build:remix"
   },
   "repository": {
     "type": "git",
