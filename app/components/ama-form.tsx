@@ -2,7 +2,12 @@ import { usePendingFormSubmit } from "@remix-run/react";
 import { Button } from "./button";
 import { Spacer } from "./spacer";
 
-export function AMAForm() {
+type Props = {
+  success?: string;
+  error?: string;
+}
+
+export function AMAForm({ success, error}: Props) {
   const pendingForm = usePendingFormSubmit();
   return (
     <>
@@ -10,10 +15,7 @@ export function AMAForm() {
         <h2 className="font-semibold text-2xl">Ask me Anything!</h2>
       </header>
 
-      <form
-        method="post"
-        className="flex flex-col items-start space-y-2"
-      >
+      <form method="post" className="flex flex-col items-start space-y-2">
         <label
           htmlFor="question"
           className="text-gray-600 dark:text-gray-400 text-lg"
@@ -41,19 +43,19 @@ export function AMAForm() {
               Sending your question...
             </p>
           ) : null}
-          {/* {status === QueryStatus.Success ? (
+          {success ? (
             <p className="text-sm text-gray-700 dark:text-gray-300">
               Question sent!
             </p>
           ) : null}
-          {status === QueryStatus.Error ? (
+          {error ? (
             <p className="text-sm text-red-600 dark:text-red-400">
               Something went wrong! Try asking me on{" "}
               <a className="underline" href="https://twitter.com/sergiodxa">
                 Twitter
               </a>
             </p>
-          ) : null} */}
+          ) : null}
 
           <Button label="Send Question" />
         </footer>
