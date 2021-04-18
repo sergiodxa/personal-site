@@ -1,4 +1,6 @@
 /node_modules
+/build
+/public/build
 /logs
 /.vscode
 /.cache
@@ -7,5 +9,4 @@
 .DS_Store
 
 .vercel
-.next
 .env
