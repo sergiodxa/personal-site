@@ -1,0 +1,26 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  assignees:
+  - sergiodxa
+  ignore:
+  - dependency-name: husky
+    versions:
+    - ">= 4.a, < 5"
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.39
+    - 14.14.41
+    - 15.0.0
+  - dependency-name: postcss
+    versions:
+    - 8.2.11
+    - 8.2.12
+  - dependency-name: "@types/airtable"
+    versions:
+    - 0.10.0
