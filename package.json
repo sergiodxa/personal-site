@@ -64,7 +64,7 @@
     "@types/node": "^15.0.2",
     "@types/react": "^17.0.1",
     "autoprefixer": "^10.2.5",
-    "concurrently": "^6.0.2",
+    "concurrently": "^6.1.0",
     "dotenv": "^9.0.0",
     "lint-staged": "11.0.0",
     "serve": "11.3.2",
