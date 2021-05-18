@@ -1305,10 +1305,12 @@
     lodash.merge "^4.6.2"
     lodash.uniq "^4.5.0"
 
-"@types/airtable@^0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@types/airtable/-/airtable-0.8.1.tgz#c142822041a059e384693b4e647816a666db4546"
-  integrity sha512-kYdqZHoie1KAw06QC4Pp+wEqsJKrc2ZTnIp5sMAjcF27YJ38d6tp+RctfZt4LZE98c90Kis8K/kSnyvKHbXdWg==
+"@types/airtable@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@types/airtable/-/airtable-0.10.1.tgz#d7575251c890cb9a93e92c59344f7b7c4f7d9ae0"
+  integrity sha512-ZwMU+ZztgmN1k12ist39+lDQAkeeaPLO5pgXdRodJecVTMo+zKHNn83dQcLY3eaD3BbUfEZ/6uJsqBTcM+UKuQ==
+  dependencies:
+    airtable "*"
 
 "@types/globby@^9.1.0":
   version "9.1.0"
@@ -1435,6 +1437,17 @@ aggregate-error@^3.0.0:
   dependencies:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
+
+airtable@*:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.11.0.tgz#43199e663f4f9b47a7e7cbe5d75ca0e2d5a8ddb6"
+  integrity sha512-PwFAFooF7MA9QzxbuhTOckkeLJ/O4Ro4Af0a696AVa4UAV+HAuuLwMiy6bsNRJwT6E1KR8FcsWGVB7CSCu7b0A==
+  dependencies:
+    "@types/node" ">=8.0.0 <15"
+    abort-controller "^3.0.0"
+    abortcontroller-polyfill "^1.4.0"
+    lodash "^4.17.19"
+    node-fetch "^2.6.1"
 
 airtable@^0.10.1:
   version "0.10.1"
