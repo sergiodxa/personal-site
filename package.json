@@ -45,7 +45,7 @@
     "gray-matter": "^4.0.3",
     "match-sorter": "6.3.0",
     "next": "^10.2.0",
-    "next-mdx-remote": "^2.1.4",
+    "next-mdx-remote": "^3.0.2",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.15",
     "react": "^17.0.2",
