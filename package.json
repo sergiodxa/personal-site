@@ -38,7 +38,7 @@
     "@types/yup": "^0.29.11",
     "airtable": "^0.10.1",
     "babel-plugin-superjson-next": "^0.3.0",
-    "burner-email-providers": "^1.0.43",
+    "burner-email-providers": "^1.0.44",
     "clsx": "^1.1.1",
     "collected-notes": "^2.2.0",
     "globby": "^11.0.3",
