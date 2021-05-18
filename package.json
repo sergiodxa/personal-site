@@ -36,7 +36,7 @@
     "@tailwindcss/typography": "^0.4.0",
     "@types/airtable": "^0.8.1",
     "@types/yup": "^0.29.11",
-    "airtable": "^0.10.1",
+    "airtable": "^0.11.0",
     "babel-plugin-superjson-next": "^0.3.0",
     "burner-email-providers": "^1.0.44",
     "clsx": "^1.1.1",
