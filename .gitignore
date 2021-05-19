@@ -1,11 +1,12 @@
-/node_modules
-/logs
-/.vscode
+node_modules
+
 /.cache
-/.tmp
+/server/build
+/public/build
+/logs
+
 *.log
-.DS_Store
 
 .vercel
-.next
+.DS_Store
 .env

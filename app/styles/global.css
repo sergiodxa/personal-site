@@ -1,0 +1,26 @@
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+body {
+  background-color: #c0c0c0;
+  color: black;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:active {
+  color: red;
+}
+
+.quote::before,
+.quote::after {
+  content: '"';
+}
