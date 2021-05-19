@@ -1,174 +1,120 @@
-import { Octokit } from "@octokit/rest";
-import { ActionFunction, json, redirect } from "@remix-run/node";
-import { LoaderFunction, useRouteData } from "@remix-run/react";
-import { collectedNotes } from "collected-notes";
-import { NavLink } from "react-router-dom";
-import { AMAForm } from "../components/ama-form";
-import { ArticleItem } from "../components/article-item";
-import { Container } from "../components/container";
-import { Navigation } from "../components/navigation";
-import { commitSession, getSession } from "../sessions";
-import { ArticleListPageProps, Meta } from "../types";
-import matter from "../utils/matter";
+import {
+  MetaFunction,
+  LoaderFunction,
+  Link,
+  useRouteData,
+  HeadersFunction,
+} from "remix";
+import type { Note } from "collected-notes";
+import { cn, sitePath } from "../cn.server";
+import { json } from "remix-utils";
+import { CacheControl } from "../cache-control";
 
-export const action: ActionFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const body = new URLSearchParams(await request.text());
+interface RouteData {
+  term: string;
+  page: number;
+  notes: Pick<Note, "id" | "path" | "title">[];
+}
 
-  const redirectUrl = body.get("redirectTo") ?? "/articles";
-
-  if (request.method.toUpperCase() !== "POST") {
-    session.flash("errror", "Unsupported method.");
-    return redirect(redirectUrl, {
-      status: 405,
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    });
-  }
-
-  const question = body.get("question");
-
-  if (!question) {
-    session.flash("error", "The question is required.");
-    return redirect(redirectUrl, {
-      status: 400,
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    });
-  }
-
-  const octokit = new Octokit({ auth: process.env.GH_TOKEN as string });
-  const title = question.length > 75 ? question.slice(0, 75) + "..." : question;
-
-  try {
-    await octokit.request("POST /repos/{owner}/{repo}/issues", {
-      owner: process.env.GH_USERNAME as string,
-      repo: process.env.GH_AMA_REPO as string,
-      title,
-      body: question,
-      assignees: [process.env.GH_USERNAME as string],
-    });
-    session.flash("success", "Question created");
-    return redirect(redirectUrl, {
-      status: 201,
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    });
-  } catch (error) {
-    session.flash("error", error.message);
-    return redirect(redirectUrl, {
-      status: 400,
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    });
-  }
+export let headers: HeadersFunction = () => {
+  return { "Cache-Control": new CacheControl("swr").toString() };
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const url = new URL(request.url);
+export let meta: MetaFunction = () => {
+  return { title: "Articles of Sergio Xalambrí" };
+};
 
-  const page = Number(url.searchParams.get("page") ?? 1);
-  const error = session.get("error");
-  const success = session.get("success");
+function getNotes(page = 1, term?: string) {
+  if (term) return cn.search(sitePath, term, page, "public_site");
+  return cn.latestNotes(sitePath, page, "public_site");
+}
 
-  console.log({ success, error });
-
-  const cn = collectedNotes(
-    process.env.CN_EMAIL as string,
-    process.env.CN_TOKEN as string
-  );
-
-  const { site, notes } = await cn.site(
-    process.env.CN_SITE_PATH as string,
+export let loader: LoaderFunction = async ({ request }) => {
+  let url = new URL(request.url);
+  let term = url.searchParams.get("q") ?? "";
+  let page = Number(url.searchParams.get("page") ?? 1);
+  let notes = await getNotes(page, term);
+  return json<RouteData>({
+    term,
     page,
-    "public_site"
-  );
-
-  return json(
-    {
-      url: url.toString(),
-      page,
-      totalPages: Math.ceil(site.total_notes / 40),
-      error,
-      success,
-      notes: notes
-        .map((note) => [note, matter(note.body).data as Meta] as const)
-        .map(([note, meta]) => ({
-          ...note,
-          meta: {
-            title: note.title,
-            description: meta.description ?? "",
-            date: new Date(meta.date).toJSON() ?? note.created_at,
-            slug: `/articles/${note.path}`,
-            tags: meta.tags ?? "",
-          },
-        })),
-    },
-    {
-      headers: {
-        "Set-Cookie": await commitSession(session),
-      },
-    }
-  );
+    notes: notes.map((note) => ({
+      title: note.title,
+      path: note.path,
+      id: note.id,
+    })),
+  });
 };
 
-export const handle = {
-  hydrate: true,
-};
+export default function Index() {
+  let { notes, page, term } = useRouteData<RouteData>();
 
-export default function View() {
-  const { notes, page, totalPages, success, error, url } = useRouteData<ArticleListPageProps>();
+  let count = notes.length;
+
+  if (count === 0) {
+    return (
+      <main className="space-y-4">
+        <h2 className="text-3xl font-bold">404 Not Found</h2>
+        <p>
+          The requested URL /articles?page={page} was not found on this server.
+        </p>
+      </main>
+    );
+  }
 
   return (
-    <section className="space-y-6 mb-12">
+    <section className="space-y-2">
       <header>
-        <Container>
-          <Navigation
-            current="articles"
-            title="Articles"
-            description="All the articles I have wrote in my career"
-          />
-        </Container>
+        <h2 className="font-bold text-3xl">Articles</h2>
+        {term ? (
+          <p className="text-gray-900 text-xl">
+            Showing {count} articles for the query{" "}
+            <em className="quote">{term}</em>.
+          </p>
+        ) : (
+          <p className="text-gray-900 text-xl">These are my articles.</p>
+        )}
       </header>
 
-      <Container>
-        <div className="mx-auto relative rounded-lg">
-          <AMAForm success={success} error={error} redirectTo={url} />
-          <p>{success}</p>
-          <p>{error}</p>
-        </div>
-      </Container>
+      <main className="space-y-4">
+        <form method="GET" role="search" className="p-4">
+          <label htmlFor="q" className="text-lg font-semibold pl-4 block">
+            Search
+          </label>
+          <div className="space-x-4 flex items-center">
+            <input
+              id="q"
+              type="search"
+              name="q"
+              defaultValue={term}
+              className="rounded-full flex-grow py-2 px-4"
+              placeholder="Remix, SWR, Next, Rails..."
+            />
+            <button
+              type="submit"
+              className="bg-gray-800 text-white border border-gray-900 px-4 py-2 rounded-full"
+            >
+              Search
+            </button>
+          </div>
+        </form>
 
-      <Container>
-        <section className="divide-y divide-gray-200 dark:divide-gray-800">
-          {notes.map(function mapToArticleItem(article) {
-            return <ArticleItem key={article.id} article={article.meta} />;
-          })}
-        </section>
-      </Container>
+        <ul className="space-y-2">
+          {notes.map((note) => (
+            <li key={note.id} className="list-disc list-inside">
+              <Link to={`/articles/${note.path}`}>{note.title}</Link>
+            </li>
+          ))}
+        </ul>
+      </main>
 
-      <Container>
-        <nav aria-label="Pagination" className="flex justify-evenly pb-8">
-          <NavLink
-            to={`/articles?page=${page + (page !== totalPages ? 1 : 0)}`}
-            className="text-blue-500 font-medium underline hover:no-underline"
-          >
-            Older
-          </NavLink>
-
-          <NavLink
-            to={`/articles?page=${page - (page !== 1 ? 1 : 0)}`}
-            className="text-blue-500 font-medium underline hover:no-underline"
-          >
-            Newer
-          </NavLink>
-        </nav>
-      </Container>
+      <footer className="flex justify-evenly w-full">
+        {page > 1 && (
+          <Link to={`/articles?page=${page - 1}`}>Previous page</Link>
+        )}
+        {count === 40 && (
+          <Link to={`/articles?page=${page + 1}`}>Next page</Link>
+        )}
+      </footer>
     </section>
   );
 }

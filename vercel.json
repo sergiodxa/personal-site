@@ -5,7 +5,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "index.js",
+      "src": "server/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -16,7 +16,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/server"
     }
   ],
   "redirects": [

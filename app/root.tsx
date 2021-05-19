@@ -1,19 +1,43 @@
-import type { MetaFunction } from "@remix-run/node";
-import type { LinksFunction } from "@remix-run/react";
-import { Links, Meta, Scripts, useMatches } from "@remix-run/react";
-import { Outlet } from "react-router-dom";
-import globalCSS from "./styles/global.css";
-import interCSS from "./styles/inter.css";
+import { NavLink, Outlet } from "react-router-dom";
+import type {
+  HeadersFunction,
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "remix";
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Scripts,
+  useMatches,
+  usePendingLocation,
+  useRouteData,
+} from "remix";
+import { json } from "remix-utils";
+import { CacheControl } from "./cache-control";
+import { cn, sitePath } from "./cn.server";
+import { Spinner } from "./components/spinner";
+import globalStyles from "./styles/global.css";
+import tailwindStyles from "./styles/tailwind.css";
 
-export const links: LinksFunction = () => {
+interface RouteData {
+  date: string;
+  name: string;
+}
+
+export let headers: HeadersFunction = () => {
+  return { "Cache-Control": new CacheControl("swr").toString() };
+};
+
+export let links: LinksFunction = () => {
   return [
-    { rel: "stylesheet", href: globalCSS },
-    { rel: "stylesheet", href: interCSS },
-    { rel: "icon", href: "/static/favicon@48.png" },
+    { rel: "stylesheet", href: tailwindStyles },
+    { rel: "stylesheet", href: globalStyles },
   ];
 };
 
-export const meta: MetaFunction = () => {
+export let meta: MetaFunction = () => {
   return {
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-transparent",
@@ -41,48 +65,84 @@ export const meta: MetaFunction = () => {
   };
 };
 
-export default function App() {
+export let loader: LoaderFunction = async () => {
+  let { site } = await cn.site(sitePath, 1, "public_site");
+  return json<RouteData>({
+    date: new Date().toJSON(),
+    name: site.name,
+  });
+};
+
+function Document({ children }: { children: React.ReactNode }) {
   const matches = useMatches();
   const includeScripts = matches.some((match) => match.handle?.hydrate);
-
+  const pendingLocation = usePendingLocation();
   return (
-    <html
-      lang="en"
-      className="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100"
-    >
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <Meta />
         <Links />
       </head>
-      <body className="mb-4">
-        <Outlet />
+      <body className="font-sans max-w-screen-xl mx-auto p-10">
+        {pendingLocation ? <Spinner className="fixed top-2 right-2" /> : null}
+
+        {children}
+
         {includeScripts && <Scripts />}
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
   );
 }
 
+export default function App() {
+  let { date, name } = useRouteData<RouteData>();
+
+  let dateTimeFormat = new Intl.DateTimeFormat("en", {
+    dateStyle: "full",
+    timeStyle: "medium",
+  });
+
+  return (
+    <Document>
+      <header className="mb-4">
+        <h1 className="text-4xl font-black leading-none">{name}</h1>
+      </header>
+
+      <nav className="mb-10 border-b border-black pb-1">
+        <ul className="flex space-x-4 text-lg">
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="/articles">Articles</NavLink>
+          </li>
+          <li>
+            <NavLink to="/bookmarks">Bookmarks</NavLink>
+          </li>
+        </ul>
+      </nav>
+
+      <Outlet />
+
+      <footer className="text-center mt-10 text-xs">
+        <p>This page was rendered at {dateTimeFormat.format(new Date(date))}</p>
+      </footer>
+    </Document>
+  );
+}
+
 export function ErrorBoundary({ error }: { error: Error }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <title>Oops!</title>
-        <Links />
-      </head>
-      <body>
-        <div>
-          <h1>App Error</h1>
-          <pre>{error.message}</pre>
-          <p>
-            Replace this UI with what you want users to see when your app throws
-            uncaught errors. The file is at <code>app/App.tsx</code>.
-          </p>
-        </div>
-
-        <Scripts />
-      </body>
-    </html>
+    <Document>
+      <h1>App Error</h1>
+      <pre>{error.message}</pre>
+      <p>
+        Replace this UI with what you want users to see when your app throws
+        uncaught errors.
+      </p>
+    </Document>
   );
 }

@@ -1,15 +1,11 @@
-/node_modules
-/build
+node_modules
+
+/.cache
+/server/build
 /public/build
 /logs
-/.vscode
-/.cache
-/.tmp
+
 *.log
-.DS_Store
 
 .vercel
-.env
-app/styles/inter.css
-app/styles/global.css
-app/styles/tailwind.css
+.DS_Store
