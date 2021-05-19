@@ -27,7 +27,9 @@
     "test:unit": "jest --config=config/jest.config.ts --passWithNoTests",
     "test:e2e:run": "cypress run --config-file config/cypress.json",
     "test:e2e:open": "cypress open --config-file config/cypress.json",
-    "test": "yarn test:unit && yarn test:e2e:run"
+    "test": "yarn test:unit && yarn test:e2e:run",
+    "deploy": "vercel",
+    "deploy:prod": "vercel --prod"
   },
   "dependencies": {
     "@remix-run/node": "^0.17.2",
