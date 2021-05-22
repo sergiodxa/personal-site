@@ -20,6 +20,7 @@ import { cn, sitePath } from "./cn.server";
 import { Spinner } from "./components/spinner";
 import globalStyles from "./styles/global.css";
 import tailwindStyles from "./styles/tailwind.css";
+import { env } from "./utils";
 
 interface RouteData {
   date: string;
@@ -66,7 +67,7 @@ export let meta: MetaFunction = () => {
 };
 
 export let loader: LoaderFunction = async () => {
-  let { site } = await cn.site(sitePath, 1, "public_site");
+  let { site } = await cn.site(sitePath, 1, "public");
   return json<RouteData>({
     date: new Date().toJSON(),
     name: site.name,
@@ -91,7 +92,25 @@ function Document({ children }: { children: React.ReactNode }) {
         {children}
 
         {includeScripts && <Scripts />}
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {env("production") && (
+          <>
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=UA-48432002-3"
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'UA-48432002-3');
+                `,
+              }}
+            />
+          </>
+        )}
+        {env("development") && <LiveReload />}
       </body>
     </html>
   );
