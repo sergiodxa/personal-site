@@ -41,7 +41,7 @@
     "@tailwindcss/typography": "^0.4.0",
     "@vercel/node": "^1.8.3",
     "airtable": "^0.11.0",
-    "collected-notes": "^2.2.0",
+    "collected-notes": "^2.3.0",
     "date-fns": "^2.21.3",
     "dotenv": "^9.0.2",
     "history": "^5.0.0",

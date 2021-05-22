@@ -2751,10 +2751,10 @@ collect-v8-coverage@^1.0.0:
   resolved "https://registry.yarnpkg.com/collect-v8-coverage/-/collect-v8-coverage-1.0.1.tgz#cc2c8e94fc18bbdffe64d6534570c8a673b27f59"
   integrity sha512-iBPtljfCNcTKNAto0KEtDfZ3qzjJvqE3aTGZsbhjSBlorqpXJlaWWtPO35D+ZImoC3KWejX64o+yPGxhWSTzfg==
 
-collected-notes@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-2.2.0.tgz#c70564809a662153eb77dfe56623efaafd6850a7"
-  integrity sha512-kQvx5/JdvA9veSMsrGWhbYHR/XFkKEdigk0CdhbbYFPa5HpbyOdS4PCVCKc9hSKMDsGRbZKBwPyiO+9kvtusQA==
+collected-notes@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/collected-notes/-/collected-notes-2.3.0.tgz#660b983dfb05318e2e25b2299770736b2b072825"
+  integrity sha512-ikQYLmJkfqPxHXKEJFdbSXF+VObZJEI5yr021YyYltc0YWalXMIeqFHy3PriwiiiIS1omy/mrQjtuSyyNfjNSQ==
 
 collection-visit@^1.0.0:
   version "1.0.0"
