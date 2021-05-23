@@ -1899,15 +1899,15 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-airtable@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.11.0.tgz#43199e663f4f9b47a7e7cbe5d75ca0e2d5a8ddb6"
-  integrity sha512-PwFAFooF7MA9QzxbuhTOckkeLJ/O4Ro4Af0a696AVa4UAV+HAuuLwMiy6bsNRJwT6E1KR8FcsWGVB7CSCu7b0A==
+airtable@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.11.1.tgz#2fda51da04f5e4be7092351ea7be3cfdcf308347"
+  integrity sha512-33zBuUDhLl+FWWAFxFjS1a+vJr/b+UK//EV943nuiimChWph6YykQjYPmu/GucQ30g7mgaqq+98uPD4rfDHOgg==
   dependencies:
     "@types/node" ">=8.0.0 <15"
     abort-controller "^3.0.0"
     abortcontroller-polyfill "^1.4.0"
-    lodash "^4.17.19"
+    lodash "^4.17.21"
     node-fetch "^2.6.1"
 
 ajv@^6.10.0, ajv@^6.12.3, ajv@^6.12.4:
