@@ -43,7 +43,7 @@
     "airtable": "^0.11.0",
     "collected-notes": "^2.3.0",
     "date-fns": "^2.21.3",
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "history": "^5.0.0",
     "inflected": "^2.1.0",
     "ms": "^2.1.3",
