@@ -4099,6 +4099,15 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+fs-extra@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
+  integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -7315,10 +7324,12 @@ remix-utils@^1.0.2:
   resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-1.0.2.tgz#f96129169ec43fc70f94bdc4885334d8d76d9d39"
   integrity sha512-nr5sgQfMX59GAQZJW0iUuwrdR9R07JscinxxB9HpN28kIUEQgksHosJvRUzaMbdIj0h6TXuAIKKqbBcM9iTYvA==
 
-remix@0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/remix/-/remix-0.17.0.tgz#dd30877bc0c4495184e00c9b12738099d27b8c96"
-  integrity sha512-O0OO8vfHzdOcMrYxaf/Bf31dX+CXc9Bdg2SfMYaVIDBczRp2SOR5n9WXc9yrbv/CVbOfZqDzu2LmI0vp6L/StQ==
+remix@0.17.3:
+  version "0.17.3"
+  resolved "https://registry.yarnpkg.com/remix/-/remix-0.17.3.tgz#74408e073524f07f4deaa9af7b8551a8cba225a8"
+  integrity sha512-MdNtsLwCGFifQRj5w3KeRtXe1GTbn5WnrtB2sWqvq2YWMtchqsXQQBYSjtPUOIkMF/TzLZrI4Zn+SM57MN1bBA==
+  dependencies:
+    fs-extra "^10.0.0"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
