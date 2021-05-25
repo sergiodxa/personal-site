@@ -35,7 +35,7 @@
     "@remix-run/node": "^0.17.2",
     "@remix-run/react": "^0.17.0",
     "@remix-run/vercel": "^0.17.0",
-    "@tailwindcss/aspect-ratio": "^0.2.0",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@tailwindcss/typography": "^0.4.0",
