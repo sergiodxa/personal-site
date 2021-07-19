@@ -21,8 +21,12 @@ export let meta: MetaFunction = ({ data }) => {
   };
 };
 
-export let loader: LoaderFunction = async ({ params }) => {
-  let { body, note } = await cn.body(sitePath, params.slug);
+export let loader: LoaderFunction = async ({ request }) => {
+  let { pathname } = new URL(request.url);
+  let slug = pathname.slice(
+    pathname.indexOf("/articles/") + "/articles/".length
+  );
+  let { body, note } = await cn.body(sitePath, slug);
 
   return json<RouteData>({ body, title: note.title });
 };
