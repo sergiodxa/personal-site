@@ -91,7 +91,7 @@
     "eslint-plugin-unicorn": "^34.0.1",
     "jest": "^27.0.6",
     "jest-fetch-mock": "^3.0.3",
-    "pm2": "^4.5.6",
+    "pm2": "^5.1.0",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
     "prettier": "^2.3.0",
