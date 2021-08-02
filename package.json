@@ -62,7 +62,7 @@
     "@testing-library/cypress": "^7.0.6",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.6",
+    "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.1.8",
     "@types/date-fns": "^2.6.0",
     "@types/inflected": "^1.1.29",
