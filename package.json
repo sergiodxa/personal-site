@@ -20,7 +20,7 @@
     "build:css": "NODE_ENV=production postcss styles --config config/postcss.config.js --base styles --dir app/styles --env production",
     "build:app": "remix build",
     "build": "yarn build:css && yarn build:app",
-    "start": "vercel dev",
+    "start": "remix-serve server/build",
     "lint": "eslint --ext .ts,.tsx app/",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --project app/tsconfig.json --noEmit",
@@ -32,9 +32,10 @@
     "deploy:prod": "vercel --prod"
   },
   "dependencies": {
-    "@remix-run/node": "^0.17.2",
-    "@remix-run/react": "^0.17.0",
-    "@remix-run/vercel": "^0.17.0",
+    "@remix-run/node": "^0.17.5",
+    "@remix-run/react": "^0.17.5",
+    "@remix-run/vercel": "^0.17.5",
+    "@remix-run/serve": "^0.17.5",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/line-clamp": "^0.2.1",
