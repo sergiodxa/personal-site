@@ -69,7 +69,7 @@
     "@types/inflected": "^1.1.29",
     "@types/jest": "^26.0.24",
     "@types/ms": "^0.7.31",
-    "@types/react": "^17.0.15",
+    "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
