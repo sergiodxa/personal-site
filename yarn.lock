@@ -1948,7 +1948,7 @@
     semver "^7.3.5"
     tsutils "^3.21.0"
 
-"@typescript-eslint/experimental-utils@4.30.0", "@typescript-eslint/experimental-utils@^4.0.1", "@typescript-eslint/experimental-utils@^4.24.0":
+"@typescript-eslint/experimental-utils@4.30.0", "@typescript-eslint/experimental-utils@^4.0.1", "@typescript-eslint/experimental-utils@^4.30.0":
   version "4.30.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/experimental-utils/-/experimental-utils-4.30.0.tgz#9e49704fef568432ae16fc0d6685c13d67db0fd5"
   integrity sha512-K8RNIX9GnBsv5v4TjtwkKtqMSzYpjqAQg/oSphtxf3xxdt6T0owqnpojztjjTcatSteH3hLj3t/kklKx87NPqw==
@@ -3749,12 +3749,12 @@ eslint-plugin-react@^7.25.1:
     resolve "^2.0.0-next.3"
     string.prototype.matchall "^4.0.5"
 
-eslint-plugin-testing-library@^4.12.0:
-  version "4.12.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-4.12.0.tgz#51a25a5897a88cfe4a2f61c7036944339103efa1"
-  integrity sha512-kQQlBDvtw5mZeb59QNoe85hz5HbQ2x1xw+IJIKQw4XoCcd/VHNXqiNIcp0XfItmxmfzFfcOAUiW9a2WCJ14Fvw==
+eslint-plugin-testing-library@^4.12.1:
+  version "4.12.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-4.12.1.tgz#133467e6f78b79cc55a567c021a3f962d93cdfa2"
+  integrity sha512-4RCUJ1MPjZPoOlYhVB5eOVzKjiq7FfiSp0j/JDUI4HGGEyLM9f01Zpk16fCOpITxS8qaFTex8xSH64vDUm8j7g==
   dependencies:
-    "@typescript-eslint/experimental-utils" "^4.24.0"
+    "@typescript-eslint/experimental-utils" "^4.30.0"
 
 eslint-plugin-unicorn@^35.0.0:
   version "35.0.0"
