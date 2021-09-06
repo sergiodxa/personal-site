@@ -7162,10 +7162,10 @@ remix-utils@^1.0.2:
   resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-1.0.2.tgz#f96129169ec43fc70f94bdc4885334d8d76d9d39"
   integrity sha512-nr5sgQfMX59GAQZJW0iUuwrdR9R07JscinxxB9HpN28kIUEQgksHosJvRUzaMbdIj0h6TXuAIKKqbBcM9iTYvA==
 
-remix@0.17.5:
-  version "0.17.5"
-  resolved "https://registry.yarnpkg.com/remix/-/remix-0.17.5.tgz#c0d50539aea64cba12b9418d03446c2a58d0ba3b"
-  integrity sha512-S/h5gI6YRjb6iDWTjvAmyf9oQrUbVcCFEzxf6s5uD+L3YacateAtmcri6rPuDVs+aqacNH0iBy04z7qIK+o5VA==
+remix@0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/remix/-/remix-0.18.0.tgz#ff8a420a7368a10d14dea33d5293f85162d977e3"
+  integrity sha512-PXNbIkFzPXoIdLmWM6zphb2eNQ6beX/gk+WJltSheVs76sN2jYeOym4Gtz1PrVDpqWhAlYjpFkNfxYa5G1Lgpg==
   dependencies:
     fs-extra "^10.0.0"
 
