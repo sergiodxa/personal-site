@@ -8102,10 +8102,10 @@ remix-utils@^1.0.2:
   resolved "https://registry.yarnpkg.com/remix-utils/-/remix-utils-1.0.2.tgz#f96129169ec43fc70f94bdc4885334d8d76d9d39"
   integrity sha512-nr5sgQfMX59GAQZJW0iUuwrdR9R07JscinxxB9HpN28kIUEQgksHosJvRUzaMbdIj0h6TXuAIKKqbBcM9iTYvA==
 
-remix@0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/remix/-/remix-0.18.0.tgz#ff8a420a7368a10d14dea33d5293f85162d977e3"
-  integrity sha512-PXNbIkFzPXoIdLmWM6zphb2eNQ6beX/gk+WJltSheVs76sN2jYeOym4Gtz1PrVDpqWhAlYjpFkNfxYa5G1Lgpg==
+remix@0.18.1:
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/remix/-/remix-0.18.1.tgz#b0d9cca884b8029419c98638642d18abffe19e09"
+  integrity sha512-3SZRz0lLncUVi2l3NHsOe2T4YejroyE/bhkW0eRaSQL3hVsxDKv/eeRD0KTjt+Mhhv4eDPVevjLaer0q1JszEQ==
   dependencies:
     fs-extra "^10.0.0"
 
