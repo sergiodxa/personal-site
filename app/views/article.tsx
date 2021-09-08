@@ -1,9 +1,15 @@
 import type { HTML } from "collected-notes";
-import type { HeadersFunction, LoaderFunction, MetaFunction } from "remix";
-import { useRouteData } from "remix";
+import {
+  HeadersFunction,
+  LinksFunction,
+  LoaderFunction,
+  MetaFunction,
+  useRouteData,
+} from "remix";
 import { json } from "remix-utils";
 import { CacheControl } from "../cache-control";
 import { cn, sitePath } from "../cn.server";
+import highlightStyles from "../styles/highlight.css";
 
 interface RouteData {
   body: HTML;
@@ -20,8 +26,13 @@ export let meta: MetaFunction = ({ data }) => {
     title: `${title} - Sergio Xalambrí`,
   };
 };
+export let links: LinksFunction = () => {
+  console.log("link");
+  return [{ rel: "stylesheet", href: highlightStyles }];
+};
 
 export let loader: LoaderFunction = async ({ request }) => {
+  console.log("link");
   let { pathname } = new URL(request.url);
   let slug = pathname.slice(
     pathname.indexOf("/articles/") + "/articles/".length

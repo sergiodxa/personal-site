@@ -29,13 +29,14 @@
     "test:e2e:open": "cypress open --config-file config/cypress.json",
     "test": "yarn test:unit && yarn test:e2e:run",
     "deploy": "vercel",
-    "deploy:prod": "vercel --prod"
+    "deploy:prod": "vercel --prod",
+    "postinstall": "remix setup"
   },
   "dependencies": {
-    "@remix-run/node": "^0.17.5",
-    "@remix-run/react": "^0.17.5",
-    "@remix-run/vercel": "^0.17.5",
-    "@remix-run/serve": "^0.17.5",
+    "@remix-run/node": "^0.18.0",
+    "@remix-run/react": "^0.18.0",
+    "@remix-run/vercel": "^0.18.0",
+    "@remix-run/serve": "^0.18.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -51,7 +52,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.0.0-beta.3",
-    "remix": "0.17.5",
+    "remix": "0.18.0",
     "remix-utils": "^1.0.2"
   },
   "devDependencies": {
@@ -59,7 +60,7 @@
     "@babel/preset-env": "^7.15.4",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
-    "@remix-run/dev": "0.17.0",
+    "@remix-run/dev": "^0.18.0",
     "@testing-library/cypress": "^8.0.1",
     "@testing-library/dom": "^8.3.0",
     "@testing-library/jest-dom": "^5.14.1",
