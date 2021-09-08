@@ -39,6 +39,9 @@ module.exports = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      typescript: {},
+    },
   },
   rules: {
     "react/button-has-type": "error",

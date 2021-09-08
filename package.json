@@ -35,8 +35,8 @@
   "dependencies": {
     "@remix-run/node": "^0.18.0",
     "@remix-run/react": "^0.18.0",
-    "@remix-run/vercel": "^0.18.0",
     "@remix-run/serve": "^0.18.0",
+    "@remix-run/vercel": "^0.18.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -80,6 +80,7 @@
     "cypress": "^8.3.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.0",

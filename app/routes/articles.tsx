@@ -1,14 +1,14 @@
-import {
-  MetaFunction,
-  LoaderFunction,
-  Link,
-  useRouteData,
-  HeadersFunction,
-} from "remix";
 import type { Note } from "collected-notes";
-import { cn, sitePath } from "../cn.server";
+import {
+  HeadersFunction,
+  Link,
+  LoaderFunction,
+  MetaFunction,
+  useRouteData,
+} from "remix";
 import { json } from "remix-utils";
-import { CacheControl } from "../cache-control";
+import { CacheControl } from "~/cache-control";
+import { cn, sitePath } from "~/cn.server";
 
 interface RouteData {
   term: string;

@@ -1,6 +1,5 @@
 import { camelize, underscore } from "inflected";
 import { useEffect, useState } from "react";
-import type { Request } from "remix";
 
 /**
  * Wrap a value in a resolved Promise returning it

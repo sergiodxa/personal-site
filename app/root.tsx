@@ -15,12 +15,12 @@ import {
   useRouteData,
 } from "remix";
 import { json } from "remix-utils";
-import { CacheControl } from "./cache-control";
-import { cn, sitePath } from "./cn.server";
-import { Spinner } from "./components/spinner";
-import globalStyles from "./styles/global.css";
-import tailwindStyles from "./styles/tailwind.css";
-import { env } from "./utils";
+import { CacheControl } from "~/cache-control";
+import { cn, sitePath } from "~/cn.server";
+import { Spinner } from "~/components/spinner";
+import globalStyles from "~/styles/global.css";
+import tailwindStyles from "~/styles/tailwind.css";
+import { env } from "~/utils";
 
 interface RouteData {
   date: string;

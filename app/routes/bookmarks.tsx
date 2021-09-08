@@ -5,8 +5,8 @@ import {
   useRouteData,
 } from "remix";
 import { json } from "remix-utils";
-import { Bookmark, getBookmarks } from "../airtable.server";
-import { CacheControl } from "../cache-control";
+import { Bookmark, getBookmarks } from "~/airtable.server";
+import { CacheControl } from "~/cache-control";
 
 interface RouteData {
   bookmarks: Bookmark[];

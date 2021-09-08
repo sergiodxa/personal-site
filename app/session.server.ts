@@ -1,5 +1,5 @@
 import { createCookieSessionStorage } from "remix";
-import { env } from "./utils";
+import { env } from "~/utils";
 
 export let { getSession, commitSession, destroySession } =
   createCookieSessionStorage({

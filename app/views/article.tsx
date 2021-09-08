@@ -7,9 +7,9 @@ import {
   useRouteData,
 } from "remix";
 import { json } from "remix-utils";
-import { CacheControl } from "../cache-control";
-import { cn, sitePath } from "../cn.server";
-import highlightStyles from "../styles/highlight.css";
+import { CacheControl } from "~/cache-control";
+import { cn, sitePath } from "~/cn.server";
+import highlightStyles from "~/styles/highlight.css";
 
 interface RouteData {
   body: HTML;
