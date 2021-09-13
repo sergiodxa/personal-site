@@ -93,7 +93,7 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^4.12.2",
-    "eslint-plugin-unicorn": "^35.0.0",
+    "eslint-plugin-unicorn": "^36.0.0",
     "jest": "^27.1.1",
     "jest-fetch-mock": "^3.0.3",
     "pm2": "^5.1.1",
