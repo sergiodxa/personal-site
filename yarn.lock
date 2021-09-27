@@ -7943,17 +7943,17 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-router-dom@^6.0.0-beta.0, react-router-dom@^6.0.0-beta.3:
-  version "6.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.0.0-beta.3.tgz#4f84a5e5717514d0a9aee9f6724d54b61cfd6387"
-  integrity sha512-F5HC/mEdZQvBNbxEFDfRfd1b+DPcNeHZgoreH98NJEJe3G1uonWatdtj+tVQ3VnUbg0TzCXa4mzKFZMey90v7A==
+react-router-dom@^6.0.0-beta.0, react-router-dom@^6.0.0-beta.5:
+  version "6.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.0.0-beta.5.tgz#7364ae41326ed7eb640c3da601ed9192be92f65e"
+  integrity sha512-l4LaL0WHiPUaLfVSMjZiGbV6uitfHTQWYVfHtmCo8dabhjTZ3gIKbAKGQVieZqi1avFVqj+s3i0Ul1ZalLr8Bw==
   dependencies:
-    react-router "6.0.0-beta.3"
+    react-router "6.0.0-beta.5"
 
-react-router@6.0.0-beta.3:
-  version "6.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.0.0-beta.3.tgz#d1276202eee8a0269c6d24fc9be72d5448cc63ae"
-  integrity sha512-5fSBKgb0VaUrMi1RJxeZZMyGkjGSd9HtoWtc2XIcBFc01l7y6jBg5mVkmifjhhdSlamE3y6E6RXpfzCWqEBPPA==
+react-router@6.0.0-beta.5:
+  version "6.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.0.0-beta.5.tgz#f86700a6a627b81cdb87e4b1cab7c20f75e230bc"
+  integrity sha512-czEOOTV0uAcK1U05EJXkCgL2X53jipBzmHAcWZ9SnKUBnLSNIxc/sdkcPNwdb99U4x8TzZyDY5BqVGGwif42qg==
 
 react@^17.0.1:
   version "17.0.2"
