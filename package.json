@@ -74,7 +74,7 @@
     "@types/ms": "^0.7.31",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
-    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.31.1",
     "autoprefixer": "^10.3.6",
     "babel-jest": "^27.2.0",
