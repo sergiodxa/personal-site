@@ -2,13 +2,13 @@ import {
   HeadersFunction,
   LoaderFunction,
   MetaFunction,
-  useRouteData,
+  useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
 import { Bookmark, getBookmarks } from "~/airtable.server";
 import { CacheControl } from "~/cache-control";
 
-interface RouteData {
+interface LoaderData {
   bookmarks: Bookmark[];
 }
 
@@ -22,11 +22,11 @@ export let meta: MetaFunction = () => {
 
 export let loader: LoaderFunction = async () => {
   let bookmarks = await getBookmarks();
-  return json<RouteData>({ bookmarks });
+  return json<LoaderData>({ bookmarks });
 };
 
 export default function Index() {
-  let { bookmarks } = useRouteData<RouteData>();
+  let { bookmarks } = useLoaderData<LoaderData>();
 
   return (
     <section className="space-y-2">

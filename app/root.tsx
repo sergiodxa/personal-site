@@ -1,4 +1,3 @@
-import { NavLink, Outlet } from "react-router-dom";
 import type {
   HeadersFunction,
   LinksFunction,
@@ -9,20 +8,20 @@ import {
   Links,
   LiveReload,
   Meta,
+  NavLink,
+  Outlet,
   Scripts,
+  useLoaderData,
   useMatches,
-  usePendingLocation,
-  useRouteData,
 } from "remix";
 import { json } from "remix-utils";
 import { CacheControl } from "~/cache-control";
 import { cn, sitePath } from "~/cn.server";
-import { Spinner } from "~/components/spinner";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import { env } from "~/utils";
 
-interface RouteData {
+interface LoaderData {
   date: string;
   name: string;
 }
@@ -68,7 +67,7 @@ export let meta: MetaFunction = () => {
 
 export let loader: LoaderFunction = async () => {
   let { site } = await cn.site(sitePath, 1, "public");
-  return json<RouteData>({
+  return json<LoaderData>({
     date: new Date().toJSON(),
     name: site.name,
   });
@@ -77,7 +76,6 @@ export let loader: LoaderFunction = async () => {
 function Document({ children }: { children: React.ReactNode }) {
   const matches = useMatches();
   const includeScripts = matches.some((match) => match.handle?.hydrate);
-  const pendingLocation = usePendingLocation();
   return (
     <html lang="en">
       <head>
@@ -87,8 +85,6 @@ function Document({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="font-sans max-w-screen-xl mx-auto p-10">
-        {pendingLocation ? <Spinner className="fixed top-2 right-2" /> : null}
-
         {children}
 
         {includeScripts && <Scripts />}
@@ -117,7 +113,7 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  let { date, name } = useRouteData<RouteData>();
+  let { date, name } = useLoaderData<LoaderData>();
 
   let dateTimeFormat = new Intl.DateTimeFormat("en", {
     dateStyle: "full",

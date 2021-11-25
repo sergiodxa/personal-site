@@ -4,14 +4,14 @@ import {
   Link,
   LoaderFunction,
   MetaFunction,
-  useRouteData,
+  useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
 import { Bookmark, getBookmarks } from "~/airtable.server";
 import { CacheControl } from "~/cache-control";
 import { cn, sitePath } from "~/cn.server";
 
-interface RouteData {
+interface LoaderData {
   notes: Pick<Note, "id" | "path" | "title">[];
   bookmarks: Bookmark[];
 }
@@ -27,7 +27,7 @@ export let meta: MetaFunction = () => {
 export let loader: LoaderFunction = async () => {
   let notes = await cn.latestNotes(sitePath, 1, "public_site");
   let bookmarks = await getBookmarks(10);
-  return json<RouteData>({
+  return json<LoaderData>({
     notes: notes
       .slice(0, 10)
       .map((note) => ({ title: note.title, path: note.path, id: note.id })),
@@ -36,7 +36,7 @@ export let loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-  let { notes, bookmarks } = useRouteData<RouteData>();
+  let { notes, bookmarks } = useLoaderData<LoaderData>();
 
   return (
     <div className="divide-y md:divide-y-0 md:divide-x divide-black md:flex">

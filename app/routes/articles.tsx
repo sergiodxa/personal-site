@@ -4,13 +4,13 @@ import {
   Link,
   LoaderFunction,
   MetaFunction,
-  useRouteData,
+  useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
 import { CacheControl } from "~/cache-control";
 import { cn, sitePath } from "~/cn.server";
 
-interface RouteData {
+interface LoaderData {
   term: string;
   page: number;
   notes: Pick<Note, "id" | "path" | "title">[];
@@ -34,7 +34,7 @@ export let loader: LoaderFunction = async ({ request }) => {
   let term = url.searchParams.get("q") ?? "";
   let page = Number(url.searchParams.get("page") ?? 1);
   let notes = await getNotes(page, term);
-  return json<RouteData>({
+  return json<LoaderData>({
     term,
     page,
     notes: notes.map((note) => ({
@@ -46,7 +46,7 @@ export let loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  let { notes, page, term } = useRouteData<RouteData>();
+  let { notes, page, term } = useLoaderData<LoaderData>();
 
   let count = notes.length;
 

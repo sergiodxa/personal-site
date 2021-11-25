@@ -1,7 +1,7 @@
-import { LoaderFunction, MetaFunction, useRouteData } from "remix";
+import { LoaderFunction, MetaFunction, useLoaderData } from "remix";
 import { json } from "remix-utils";
 
-interface RouteData {
+interface LoaderData {
   pathname: string;
 }
 
@@ -11,11 +11,11 @@ export let meta: MetaFunction = () => {
 
 export let loader: LoaderFunction = async ({ request }) => {
   let { pathname } = new URL(request.url);
-  return json<RouteData>({ pathname });
+  return json<LoaderData>({ pathname });
 };
 
 export default function FourOhFour() {
-  let { pathname } = useRouteData<RouteData>();
+  let { pathname } = useLoaderData<LoaderData>();
   return (
     <main className="space-y-4">
       <h2 className="text-3xl font-black">404 Not Found</h2>

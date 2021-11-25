@@ -4,14 +4,14 @@ import {
   LinksFunction,
   LoaderFunction,
   MetaFunction,
-  useRouteData,
+  useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
 import { CacheControl } from "~/cache-control";
 import { cn, sitePath } from "~/cn.server";
 import highlightStyles from "~/styles/highlight.css";
 
-interface RouteData {
+interface LoaderData {
   body: HTML;
   title: string;
 }
@@ -21,7 +21,7 @@ export let headers: HeadersFunction = () => {
 };
 
 export let meta: MetaFunction = ({ data }) => {
-  let { title } = data as RouteData;
+  let { title } = data as LoaderData;
   return {
     title: `${title} - Sergio Xalambrí`,
   };
@@ -39,11 +39,11 @@ export let loader: LoaderFunction = async ({ request }) => {
   );
   let { body, note } = await cn.body(sitePath, slug);
 
-  return json<RouteData>({ body, title: note.title });
+  return json<LoaderData>({ body, title: note.title });
 };
 
 export default function Index() {
-  let { body } = useRouteData<RouteData>();
+  let { body } = useLoaderData<LoaderData>();
 
   return (
     <section className="space-y-4">
