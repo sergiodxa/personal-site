@@ -1,4 +1,4 @@
-import Airtable from "airtable";
+import Airtable, { FieldSet } from "airtable";
 
 if (!process.env.AIRTABLE_API_KEY) {
   throw new Error("Missing AIRTABLE_API_KEY env variable");
@@ -8,7 +8,7 @@ if (!process.env.AIRTABLE_BASE) {
   throw new Error("Missing AIRTABLE_BASE env variable");
 }
 
-export interface Bookmark extends Airtable.FieldSet {
+export interface Bookmark extends FieldSet {
   title: string;
   url: string;
 }
