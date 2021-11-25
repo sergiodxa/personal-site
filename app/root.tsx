@@ -12,19 +12,17 @@ import {
   Outlet,
   Scripts,
   useLoaderData,
-  useMatches,
 } from "remix";
-import { json } from "remix-utils";
-import { CacheControl } from "~/cache-control";
-import { cn, sitePath } from "~/cn.server";
+import { json, useShouldHydrate } from "remix-utils";
+import { CacheControl } from "~/services/cache-control";
+import { cn, sitePath } from "~/services/cn.server";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import { env } from "~/utils";
 
-interface LoaderData {
-  date: string;
+type LoaderData = {
   name: string;
-}
+};
 
 export let headers: HeadersFunction = () => {
   return { "Cache-Control": new CacheControl("swr").toString() };
@@ -67,15 +65,10 @@ export let meta: MetaFunction = () => {
 
 export let loader: LoaderFunction = async () => {
   let { site } = await cn.site(sitePath, 1, "public");
-  return json<LoaderData>({
-    date: new Date().toJSON(),
-    name: site.name,
-  });
+  return json<LoaderData>({ name: site.name });
 };
 
 function Document({ children }: { children: React.ReactNode }) {
-  const matches = useMatches();
-  const includeScripts = matches.some((match) => match.handle?.hydrate);
   return (
     <html lang="en">
       <head>
@@ -87,7 +80,7 @@ function Document({ children }: { children: React.ReactNode }) {
       <body className="font-sans max-w-screen-xl mx-auto p-10">
         {children}
 
-        {includeScripts && <Scripts />}
+        {useShouldHydrate() && <Scripts />}
         {env("production") && (
           <>
             <script
@@ -113,12 +106,7 @@ function Document({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  let { date, name } = useLoaderData<LoaderData>();
-
-  let dateTimeFormat = new Intl.DateTimeFormat("en", {
-    dateStyle: "full",
-    timeStyle: "medium",
-  });
+  let { name } = useLoaderData<LoaderData>();
 
   return (
     <Document>
@@ -141,10 +129,6 @@ export default function App() {
       </nav>
 
       <Outlet />
-
-      <footer className="text-center mt-10 text-xs">
-        <p>This page was rendered at {dateTimeFormat.format(new Date(date))}</p>
-      </footer>
     </Document>
   );
 }

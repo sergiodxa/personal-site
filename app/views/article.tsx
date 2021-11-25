@@ -7,14 +7,14 @@ import {
   useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
-import { CacheControl } from "~/cache-control";
-import { cn, sitePath } from "~/cn.server";
+import { CacheControl } from "~/services/cache-control";
+import { cn, sitePath } from "~/services/cn.server";
 import highlightStyles from "~/styles/highlight.css";
 
-interface LoaderData {
+type LoaderData = {
   body: HTML;
   title: string;
-}
+};
 
 export let headers: HeadersFunction = () => {
   return { "Cache-Control": new CacheControl("swr").toString() };

@@ -1,4 +1,4 @@
-import { CacheControl } from "../app/cache-control";
+import { CacheControl } from "../app/services/cache-control";
 
 describe("Cache Control", () => {
   describe("strategies", () => {

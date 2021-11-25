@@ -8,10 +8,10 @@ if (!process.env.AIRTABLE_BASE) {
   throw new Error("Missing AIRTABLE_BASE env variable");
 }
 
-export interface Bookmark extends FieldSet {
+export type Bookmark = FieldSet & {
   title: string;
   url: string;
-}
+};
 
 export async function getBookmarks(limit = 100): Promise<Bookmark[]> {
   const base = new Airtable({

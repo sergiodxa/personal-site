@@ -1,26 +1,42 @@
 /* eslint-disable testing-library/render-result-naming-convention */
-import ReactDOMServer from "react-dom/server";
-import type { EntryContext } from "remix";
+import "dotenv/config";
+import etag from "etag";
+import { renderToString } from "react-dom/server";
+import type { EntryContext, HandleDataRequestFunction } from "remix";
 import { RemixServer } from "remix";
-import env from "dotenv";
-
-env.config();
 
 export default function handleRequest(
   request: Request,
-  responseStatusCode: number,
-  responseHeaders: Headers,
+  status: number,
+  headers: Headers,
   remixContext: EntryContext
 ) {
-  let markup = ReactDOMServer.renderToString(
+  let markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />
   );
 
-  return new Response("<!DOCTYPE html>" + markup, {
-    status: responseStatusCode,
-    headers: {
-      ...Object.fromEntries(responseHeaders),
-      "Content-Type": "text/html",
-    },
-  });
+  headers.set("Content-Type", "text/html");
+  headers.set("ETag", etag(markup));
+
+  if (request.headers.get("If-None-Match") && headers.get("ETag")) {
+    return new Response("", { status: 304, headers });
+  }
+
+  return new Response("<!DOCTYPE html>" + markup, { status, headers });
 }
+
+export let handleDataRequest: HandleDataRequestFunction = async (
+  response: Response,
+  { request }
+) => {
+  let body = await response.text();
+
+  if (request.method.toLowerCase() === "get") {
+    response.headers.set("etag", etag(body));
+    if (request.headers.get("If-None-Match") && response.headers.get("ETag")) {
+      return new Response("", { status: 304, headers: response.headers });
+    }
+  }
+
+  return response;
+};

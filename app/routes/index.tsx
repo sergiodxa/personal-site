@@ -7,14 +7,16 @@ import {
   useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
-import { Bookmark, getBookmarks } from "~/airtable.server";
-import { CacheControl } from "~/cache-control";
-import { cn, sitePath } from "~/cn.server";
+import { Bookmark, getBookmarks } from "~/services/airtable.server";
+import { CacheControl } from "~/services/cache-control";
+import { cn, sitePath } from "~/services/cn.server";
 
-interface LoaderData {
+type LoaderData = {
   notes: Pick<Note, "id" | "path" | "title">[];
   bookmarks: Bookmark[];
-}
+};
+
+export let handle = { hydrate: true };
 
 export let headers: HeadersFunction = () => {
   return { "Cache-Control": new CacheControl("swr").toString() };
@@ -25,8 +27,10 @@ export let meta: MetaFunction = () => {
 };
 
 export let loader: LoaderFunction = async () => {
-  let notes = await cn.latestNotes(sitePath, 1, "public_site");
-  let bookmarks = await getBookmarks(10);
+  let [notes, bookmarks] = await Promise.all([
+    cn.latestNotes(sitePath, 1, "public_site"),
+    getBookmarks(10),
+  ]);
   return json<LoaderData>({
     notes: notes
       .slice(0, 10)

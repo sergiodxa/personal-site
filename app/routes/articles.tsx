@@ -7,8 +7,8 @@ import {
   useLoaderData,
 } from "remix";
 import { json } from "remix-utils";
-import { CacheControl } from "~/cache-control";
-import { cn, sitePath } from "~/cn.server";
+import { CacheControl } from "~/services/cache-control";
+import { cn, sitePath } from "~/services/cn.server";
 
 interface LoaderData {
   term: string;
