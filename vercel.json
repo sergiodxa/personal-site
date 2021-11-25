@@ -1,14 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "public/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "server/index.js",
-      "use": "@vercel/node"
+  "build": {
+    "env": {
+      "ENABLE_FILE_SYSTEM_API": "1",
+      "VERCEL_BUILD_CLI_PACKAGE": "vercel@canary"
     }
-  ],
+  },
   "rewrites": [
     {
       "source": "/(.*)",
