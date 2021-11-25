@@ -18,7 +18,7 @@ export default function handleRequest(
   headers.set("Content-Type", "text/html");
   headers.set("ETag", etag(markup));
 
-  if (request.headers.get("If-None-Match") && headers.get("ETag")) {
+  if (request.headers.get("If-None-Match") === headers.get("ETag")) {
     return new Response("", { status: 304, headers });
   }
 
@@ -33,7 +33,7 @@ export let handleDataRequest: HandleDataRequestFunction = async (
 
   if (request.method.toLowerCase() === "get") {
     response.headers.set("etag", etag(body));
-    if (request.headers.get("If-None-Match") && response.headers.get("ETag")) {
+    if (request.headers.get("If-None-Match") === response.headers.get("ETag")) {
       return new Response("", { status: 304, headers: response.headers });
     }
   }
