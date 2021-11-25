@@ -4,6 +4,7 @@ import etag from "etag";
 import { renderToString } from "react-dom/server";
 import type { EntryContext, HandleDataRequestFunction } from "remix";
 import { RemixServer } from "remix";
+import { notModified } from "remix-utils";
 
 export default function handleRequest(
   request: Request,
@@ -19,7 +20,7 @@ export default function handleRequest(
   headers.set("ETag", etag(markup));
 
   if (request.headers.get("If-None-Match") === headers.get("ETag")) {
-    return new Response("", { status: 304, headers });
+    return notModified({ headers });
   }
 
   return new Response("<!DOCTYPE html>" + markup, { status, headers });
@@ -34,7 +35,7 @@ export let handleDataRequest: HandleDataRequestFunction = async (
   if (request.method.toLowerCase() === "get") {
     response.headers.set("etag", etag(body));
     if (request.headers.get("If-None-Match") === response.headers.get("ETag")) {
-      return new Response("", { status: 304, headers: response.headers });
+      return notModified({ headers: response.headers });
     }
   }
 
