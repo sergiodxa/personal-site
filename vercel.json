@@ -5,16 +5,6 @@
       "VERCEL_BUILD_CLI_PACKAGE": "vercel@canary"
     }
   },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/public/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/server"
-    }
-  ],
   "redirects": [
     { "source": "/essays(.*)", "destination": "/articles$1" },
     { "source": "/uses", "destination": "/articles/uses", "permanent": true },
