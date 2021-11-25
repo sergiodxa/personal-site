@@ -83,20 +83,8 @@ function Document({ children }: { children: React.ReactNode }) {
         {useShouldHydrate() && <Scripts />}
         {env("production") && (
           <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=UA-48432002-3"
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'UA-48432002-3');
-                `,
-              }}
-            />
+            <script src="https://www.googletagmanager.com/gtag/js?id=UA-48432002-3" />
+            <script src="/scripts/analytics" />
           </>
         )}
         {env("development") && <LiveReload />}
