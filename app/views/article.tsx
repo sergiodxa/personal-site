@@ -27,12 +27,10 @@ export let meta: MetaFunction = ({ data }) => {
   };
 };
 export let links: LinksFunction = () => {
-  console.log("link");
   return [{ rel: "stylesheet", href: highlightStyles }];
 };
 
 export let loader: LoaderFunction = async ({ request }) => {
-  console.log("link");
   let { pathname } = new URL(request.url);
   let slug = pathname.slice(
     pathname.indexOf("/articles/") + "/articles/".length
