@@ -16,8 +16,6 @@ type LoaderData = {
   bookmarks: Bookmark[];
 };
 
-export let handle = { hydrate: true };
-
 export let headers: HeadersFunction = () => {
   return { "Cache-Control": new CacheControl("swr").toString() };
 };
