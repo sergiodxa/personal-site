@@ -24,7 +24,7 @@
     "test": "jest --config=config/jest.config.ts --passWithNoTests",
     "deploy": "vercel",
     "deploy:prod": "vercel --prod",
-    "postinstall": "remix setup && metronome setup"
+    "postinstall": "remix setup node && metronome setup"
   },
   "dependencies": {
     "@metronome-sh/node": "^1.0.5",
