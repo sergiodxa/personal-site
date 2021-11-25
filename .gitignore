@@ -1,7 +1,7 @@
 node_modules
 
 /.cache
-/server/build
+/api/build
 /public/build
 /logs
 
