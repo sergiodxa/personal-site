@@ -46,7 +46,7 @@ export let loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-export default function Index() {
+export default function Screen() {
   let { notes, page, term } = useLoaderData<LoaderData>();
 
   let count = notes.length;

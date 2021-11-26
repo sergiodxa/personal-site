@@ -25,7 +25,7 @@ export let loader: LoaderFunction = async () => {
   return json<LoaderData>({ bookmarks });
 };
 
-export default function Index() {
+export default function Screen() {
   let { bookmarks } = useLoaderData<LoaderData>();
 
   return (

@@ -37,7 +37,7 @@ export let loader: LoaderFunction = async () => {
   });
 };
 
-export default function Index() {
+export default function Screen() {
   let { notes, bookmarks } = useLoaderData<LoaderData>();
 
   return (
