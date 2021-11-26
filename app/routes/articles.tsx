@@ -1,5 +1,6 @@
 import type { Note } from "collected-notes";
 import {
+  Form,
   HeadersFunction,
   Link,
   LoaderFunction,
@@ -10,11 +11,11 @@ import { json } from "remix-utils";
 import { CacheControl } from "~/services/cache-control";
 import { cn, sitePath } from "~/services/cn.server";
 
-interface LoaderData {
+type LoaderData = {
   term: string;
   page: number;
   notes: Pick<Note, "id" | "path" | "title">[];
-}
+};
 
 export let headers: HeadersFunction = () => {
   return { "Cache-Control": new CacheControl("swr").toString() };
@@ -76,7 +77,7 @@ export default function Index() {
       </header>
 
       <main className="space-y-4">
-        <form method="GET" role="search" className="p-4">
+        <Form method="get" role="search" className="p-4">
           <label htmlFor="q" className="text-lg font-semibold pl-4 block">
             Search
           </label>
@@ -96,7 +97,7 @@ export default function Index() {
               Search
             </button>
           </div>
-        </form>
+        </Form>
 
         <ul className="space-y-2">
           {notes.map((note) => (
