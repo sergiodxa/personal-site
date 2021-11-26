@@ -6,6 +6,7 @@ import {
   LoaderFunction,
   MetaFunction,
   useLoaderData,
+  useTransition,
 } from "remix";
 import { json } from "remix-utils";
 import { CacheControl } from "~/services/cache-control";
@@ -48,6 +49,7 @@ export let loader: LoaderFunction = async ({ request }) => {
 
 export default function Screen() {
   let { notes, page, term } = useLoaderData<LoaderData>();
+  let { submission } = useTransition();
 
   let count = notes.length;
 
@@ -94,7 +96,7 @@ export default function Screen() {
               type="submit"
               className="bg-gray-800 text-white border border-gray-900 px-4 py-2 rounded-full"
             >
-              Search
+              {submission ? "Searching..." : "Search"}
             </button>
           </div>
         </Form>
