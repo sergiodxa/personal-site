@@ -25,8 +25,7 @@ export class CacheControl {
       this.maxAge = 0;
     }
     if (strategy === "swr") {
-      this.maxAge = 60;
-      this.sMaxAge = 60;
+      this.sMaxAge = 1;
       this.staleWhileRevalidate = SECOND_PER_YEAR;
     }
     if (strategy === "forever") {
