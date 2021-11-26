@@ -1,3 +1,6 @@
+import NProgress from "nprogress";
+import nProgressStyles from "nprogress/nprogress.css";
+import { useEffect } from "react";
 import type {
   HeadersFunction,
   LinksFunction,
@@ -12,14 +15,14 @@ import {
   Outlet,
   Scripts,
   useLoaderData,
+  useTransition,
 } from "remix";
-import { json, useShouldHydrate } from "remix-utils";
+import { json } from "remix-utils";
 import { CacheControl } from "~/services/cache-control";
 import { cn, sitePath } from "~/services/cn.server";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import { env } from "~/utils";
-
 type LoaderData = {
   name: string;
 };
@@ -32,6 +35,7 @@ export let links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStyles },
     { rel: "stylesheet", href: globalStyles },
+    { rel: "stylesheet", href: nProgressStyles },
   ];
 };
 
@@ -80,7 +84,7 @@ function Document({ children }: { children: React.ReactNode }) {
       <body className="font-sans max-w-screen-xl mx-auto p-10">
         {children}
 
-        {useShouldHydrate() && <Scripts />}
+        <Scripts />
         {env("production") && (
           <>
             <script src="https://www.googletagmanager.com/gtag/js?id=UA-48432002-3" />
@@ -95,6 +99,15 @@ function Document({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   let { name } = useLoaderData<LoaderData>();
+
+  let transition = useTransition();
+  useEffect(() => {
+    // when the state is idle then we can to complete the progress bar
+    if (transition.state === "idle") NProgress.done();
+    // and when it's something else it means it's either submitting a form or
+    // waiting for the loaders of the next location so we start it
+    else NProgress.start();
+  }, [transition.state]);
 
   return (
     <Document>
