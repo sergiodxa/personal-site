@@ -102,7 +102,7 @@ export default function App() {
         <h1 className="text-4xl font-black leading-none">{name}</h1>
       </header>
 
-      <nav className="mb-10 border-b border-black pb-1">
+      <nav className="mb-10 border-b border-black pb-1 flex justify-between items-center">
         <ul className="flex space-x-4 text-lg">
           <li>
             <NavLink to="/">Home</NavLink>
@@ -114,6 +114,15 @@ export default function App() {
             <NavLink to="/bookmarks">Bookmarks</NavLink>
           </li>
         </ul>
+        <aside className="flex justify-end w-full">
+          <iframe
+            src="https://github.com/sponsors/sergiodxa/button"
+            title="Sponsor sergiodxa"
+            height="35"
+            width="116"
+            className="border-0"
+          />
+        </aside>
       </nav>
 
       <Outlet />
