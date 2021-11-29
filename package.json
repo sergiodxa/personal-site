@@ -27,7 +27,7 @@
     "postinstall": "remix setup node && metronome setup"
   },
   "dependencies": {
-    "@metronome-sh/node": "^1.0.5",
+    "@metronome-sh/node": "^1.0.9",
     "@metronome-sh/react": "^1.0.5",
     "@remix-run/react": "^1.0.5",
     "@remix-run/serve": "^1.0.5",
