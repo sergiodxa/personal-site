@@ -14,6 +14,7 @@ import {
   NavLink,
   Outlet,
   Scripts,
+  ScrollRestoration,
   useLoaderData,
   useTransition,
 } from "remix";
@@ -23,6 +24,7 @@ import { cn, sitePath } from "~/services/cn.server";
 import globalStyles from "~/styles/global.css";
 import tailwindStyles from "~/styles/tailwind.css";
 import { env } from "~/utils";
+
 type LoaderData = {
   name: string;
 };
@@ -84,6 +86,7 @@ function Document({ children }: { children: React.ReactNode }) {
       <body className="font-sans max-w-screen-xl mx-auto p-10">
         {children}
 
+        <ScrollRestoration />
         <Scripts />
         {env("production") && (
           <>
