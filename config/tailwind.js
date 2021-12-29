@@ -4,7 +4,7 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   mode: "jit",
 
-  purge: ["./app/**/*.{ts,tsx}"],
+  contents: ["./app/**/*.{ts,tsx}"],
 
   darkMode: "media",
 
@@ -119,7 +119,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
-    require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/line-clamp"),
   ],
 };
