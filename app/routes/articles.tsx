@@ -2,13 +2,13 @@ import type { Note } from "collected-notes";
 import {
   Form,
   HeadersFunction,
+  json,
   Link,
   LoaderFunction,
   MetaFunction,
   useLoaderData,
   useTransition,
 } from "remix";
-import { json } from "remix-utils";
 import { CacheControl } from "~/services/cache-control";
 import { cn, sitePath } from "~/services/cn.server";
 
@@ -36,15 +36,18 @@ export let loader: LoaderFunction = async ({ request }) => {
   let term = url.searchParams.get("q") ?? "";
   let page = Number(url.searchParams.get("page") ?? 1);
   let notes = await getNotes(page, term);
-  return json<LoaderData>({
-    term,
-    page,
-    notes: notes.map((note) => ({
-      title: note.title,
-      path: note.path,
-      id: note.id,
-    })),
-  });
+  return json<LoaderData>(
+    {
+      term,
+      page,
+      notes: notes.map((note) => ({
+        title: note.title,
+        path: note.path,
+        id: note.id,
+      })),
+    },
+    { headers: { "Cache-Control": new CacheControl("swr").toString() } }
+  );
 };
 
 export default function Screen() {
@@ -104,7 +107,9 @@ export default function Screen() {
         <ul className="space-y-2">
           {notes.map((note) => (
             <li key={note.id} className="list-disc list-inside">
-              <Link to={`/articles/${note.path}`}>{note.title}</Link>
+              <Link to={`/articles/${note.path}`} prefetch="intent">
+                {note.title}
+              </Link>
             </li>
           ))}
         </ul>
@@ -112,10 +117,14 @@ export default function Screen() {
 
       <footer className="flex justify-evenly w-full">
         {page > 1 && (
-          <Link to={`/articles?page=${page - 1}`}>Previous page</Link>
+          <Link to={`/articles?page=${page - 1}`} prefetch="intent">
+            Previous page
+          </Link>
         )}
         {count === 40 && (
-          <Link to={`/articles?page=${page + 1}`}>Next page</Link>
+          <Link to={`/articles?page=${page + 1}`} prefetch="intent">
+            Next page
+          </Link>
         )}
       </footer>
     </section>
