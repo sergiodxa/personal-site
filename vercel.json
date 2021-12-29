@@ -1,10 +1,5 @@
 {
-  "build": {
-    "env": {
-      "ENABLE_FILE_SYSTEM_API": "1",
-      "VERCEL_BUILD_CLI_PACKAGE": "vercel@canary"
-    }
-  },
+  "build": { "env": { "ENABLE_FILE_SYSTEM_API": "1" } },
   "redirects": [
     { "source": "/essays(.*)", "destination": "/articles$1" },
     { "source": "/uses", "destination": "/articles/uses", "permanent": true },
@@ -13,17 +8,6 @@
       "source": "/oss",
       "destination": "https://github.com/sergiodxa",
       "permanent": false
-    }
-  ],
-  "headers": [
-    {
-      "source": "/build/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000"
-        }
-      ]
     }
   ]
 }
