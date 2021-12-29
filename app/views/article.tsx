@@ -1,12 +1,12 @@
 import type { HTML } from "collected-notes";
 import {
   HeadersFunction,
+  json,
   LinksFunction,
   LoaderFunction,
   MetaFunction,
   useLoaderData,
 } from "remix";
-import { json } from "remix-utils";
 import { CacheControl } from "~/services/cache-control";
 import { cn, sitePath } from "~/services/cn.server";
 import highlightStyles from "~/styles/highlight.css";
@@ -37,7 +37,10 @@ export let loader: LoaderFunction = async ({ request }) => {
   );
   let { body, note } = await cn.body(sitePath, slug);
 
-  return json<LoaderData>({ body, title: note.title });
+  return json<LoaderData>(
+    { body, title: note.title },
+    { headers: { "Cache-Control": new CacheControl("swr").toString() } }
+  );
 };
 
 export default function Index() {
