@@ -22,11 +22,9 @@
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc --project app/tsconfig.json --noEmit",
     "test": "jest --config=config/jest.config.ts --passWithNoTests",
-    "postinstall": "remix setup node"
+    "postinstall": "remix setup node && metronome setup"
   },
   "dependencies": {
-    "@metronome-sh/node": "^1.0.9",
-    "@metronome-sh/react": "^1.0.9",
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "@remix-run/vercel": "^1.1.1",
@@ -41,6 +39,7 @@
     "etag": "^1.8.1",
     "history": "^5.2.0",
     "inflected": "^2.1.0",
+    "metronome-sh": "^1.0.0",
     "ms": "^2.1.3",
     "nprogress": "^0.2.0",
     "react": "^17.0.1",
