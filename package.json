@@ -60,7 +60,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/etag": "^1.8.1",
     "@types/inflected": "^1.1.29",
-    "@types/jest": "^27.0.3",
+    "@types/jest": "^27.4.0",
     "@types/ms": "^0.7.31",
     "@types/nprogress": "^0.2.0",
     "@types/react": "^17.0.38",
