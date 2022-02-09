@@ -82,7 +82,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-testing-library": "^5.0.5",
     "eslint-plugin-unicorn": "^40.1.0",
-    "jest": "^27.5.0",
+    "jest": "^27.5.1",
     "jest-fetch-mock": "^3.0.3",
     "pm2": "^5.1.2",
     "prettier": "^2.5.1",
