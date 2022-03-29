@@ -57,7 +57,7 @@
     "@testing-library/dom": "^8.12.0",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.0.0",
     "@types/etag": "^1.8.1",
     "@types/inflected": "^1.1.29",
     "@types/jest": "^27.4.1",
