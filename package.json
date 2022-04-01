@@ -80,7 +80,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "eslint-plugin-testing-library": "^5.1.0",
+    "eslint-plugin-testing-library": "^5.2.0",
     "eslint-plugin-unicorn": "^41.0.1",
     "jest": "^27.5.1",
     "jest-fetch-mock": "^3.0.3",
