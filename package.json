@@ -63,7 +63,7 @@
     "@types/jest": "^27.4.1",
     "@types/ms": "^0.7.31",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "^18.0.5",
+    "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.2",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
