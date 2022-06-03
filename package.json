@@ -51,7 +51,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.16.7",
     "@remix-run/dev": "^1.5.1",
     "@testing-library/dom": "^8.13.0",
